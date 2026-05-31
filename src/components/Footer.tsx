@@ -70,7 +70,7 @@ export default function Footer() {
               </span>
               Always grinding
             </div>
-            <div className="text-bone/80 mt-2">Q2 2026 onward</div>
+            <div className="text-bone/80 mt-2">Q3 2026 onward</div>
           </div>
         </div>
       </div>

@@ -158,9 +158,9 @@ via Finder).
 - Capabilities deck: linked in Footer's connect list as `/capabilities`
 
 ### Availability strip
-Currently reads `Q2 2026 onward / Retainer / Project / Fractional CD`.
+Currently reads `Q3 2026 onward / Retainer / Project / Fractional CD`.
 The pulsing green "Open for new work" indicator was removed (didn't want
-to sound desperate). Footer status reads "Always grinding" / "Q2 2026 onward".
+to sound desperate). Footer status reads "Always grinding" / "Q3 2026 onward".
 
 ### About stats
 - `20+` years of creative direction

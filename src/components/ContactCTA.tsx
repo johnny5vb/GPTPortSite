@@ -16,7 +16,7 @@ export default function ContactCTA() {
         transition={{ duration: 0.6 }}
         className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-16 md:mb-24 font-mono text-[10px] uppercase tracking-[0.22em]"
       >
-        <span className="text-bone/80">Q2 2026 onward</span>
+        <span className="text-bone/80">Q3 2026 onward</span>
         <span className="text-mute-2">/</span>
         <span className="text-bone/80">Retainer / Project / Fractional CD</span>
       </motion.div>
