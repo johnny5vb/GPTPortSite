@@ -57,7 +57,7 @@ export default function HeroMonogram({
       className="pointer-events-none absolute z-[1] hidden lg:flex items-center justify-center
                  right-[clamp(3rem,10vw,10rem)]
                  top-[clamp(9rem,27vh,17rem)]
-                 w-[clamp(12rem,18vw,18rem)] aspect-square"
+                 w-[clamp(10rem,15vw,15rem)] aspect-square"
     >
       {/* Soft brand glow — breathes slowly, the only motion at rest */}
       <motion.div
