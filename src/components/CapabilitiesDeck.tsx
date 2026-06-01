@@ -908,7 +908,6 @@ function Contact() {
           <p className="mt-8 text-bone/85 text-lg leading-relaxed max-w-[48ch]">
             Brand identity, web design, packaging, or an AI-powered creative
             system — start with a short note about what you&apos;re building.
-            I reply within a day.
           </p>
           <div className="mt-10 flex items-center flex-wrap gap-4">
             <a

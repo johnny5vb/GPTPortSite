@@ -53,7 +53,6 @@ export default function ContactCTA() {
             <p className="text-bone/85 text-lg leading-relaxed max-w-[46ch]">
               Brand identity, web design, packaging, or an AI-powered creative
               system — start with a short note about what you&apos;re building.
-              I reply within a day.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
