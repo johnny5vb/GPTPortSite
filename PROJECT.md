@@ -100,15 +100,14 @@ labels inside each section component.
 
 - **`Hero.tsx`** — Section 00. Long animated headline with rotator
   ("ship./lead./stand out./last.") on the last word. Renders `HeroMark`.
-- **`HeroContactSheet.tsx`** — The hero visual (replaced the old `HeroMark` CC
-  mark). A slow-drifting "contact sheet" of real project work. Default export
-  is the `lg+` panel: two vertical columns drifting in opposite directions in
-  the headline's right-side negative space, masked top/bottom, green frame,
-  light cursor parallax driven by the Hero's shared pointer MotionValues (no
-  extra mousemove listener). Named export `HeroContactStrip` is the mobile/
-  tablet treatment: a single horizontal filmstrip rendered in the hero flow
-  (`lg:hidden`). Drift is pure CSS (`drift-up`/`drift-down`/`drift-x` keyframes)
-  so it freezes under reduced motion. Decorative (`aria-hidden`).
+- **`HeroMonogram.tsx`** — The hero visual. A single calm CC monogram anchored
+  in the headline's right-side negative space (`lg+` only; the mobile hero is
+  pure typography). The mark is static after entrance; only a soft brand-green
+  glow breathes slowly behind it, plus a whisper of cursor parallax from the
+  Hero's shared pointer MotionValues. Decorative (`aria-hidden`). Reduced-motion
+  aware. (History: started as the animated `HeroMark`, briefly became a drifting
+  work "contact sheet" — `HeroContactSheet` — which read as too busy/floaty, then
+  settled here on a quiet monogram.)
 - **`Manifesto.tsx`** — Section 01. Compact interactive slider with
   auto-advance (5.5s), dot nav, prev/next/pause. Four principles.
 - **`Work.tsx`** — Section 02. Four project rows linking to `/work/[slug]`.

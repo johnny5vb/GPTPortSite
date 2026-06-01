@@ -11,7 +11,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import HeroContactSheet, { HeroContactStrip } from "./HeroContactSheet";
+import HeroMonogram from "./HeroMonogram";
 
 const ROTATORS = ["last.", "lead.", "ship.", "stand out."];
 
@@ -107,10 +107,9 @@ export default function Hero() {
         />
       </div>
 
-      {/* Hero visual — drifting contact sheet of real work. The lg+ panel sits
-          in the headline's right-side gap; the mobile filmstrip renders in the
-          flow below the copy. */}
-      <HeroContactSheet mx={mx} my={my} />
+      {/* Hero visual — a calm CC monogram anchoring the headline's right-side
+          gap (lg+ only; the mobile hero is pure typography). */}
+      <HeroMonogram mx={mx} my={my} />
 
       {/* Top meta strip */}
       <div className="flex items-end justify-between text-[10px] uppercase tracking-[0.22em] font-mono text-mute pt-2">
@@ -177,8 +176,6 @@ export default function Hero() {
             </motion.span>
           </span>
         </motion.h1>
-
-        <HeroContactStrip />
 
         <div className="mt-12 grid grid-cols-12 gap-6 items-start">
           <motion.div
