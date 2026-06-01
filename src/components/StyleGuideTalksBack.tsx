@@ -382,7 +382,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: phase === "done" ? 1 : 0.25, y: 0 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-3 gap-3 md:gap-4"
+                  className="flex gap-3 overflow-x-auto snap-x snap-mandatory -mx-1 px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0"
                 >
                   {[0, 1, 2].map((i) => (
                     <OutputCard
@@ -536,7 +536,7 @@ function OutputCard({
         border: `1px solid ${brand.ink}1a`,
         borderRadius: 10,
       }}
-      className="aspect-[3/4] p-3 md:p-4 flex flex-col justify-between overflow-hidden relative"
+      className="shrink-0 min-w-[64%] snap-center sm:min-w-0 aspect-[3/4] p-3 md:p-4 flex flex-col justify-between overflow-hidden relative"
     >
       <div className="flex items-center justify-between">
         <span

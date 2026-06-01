@@ -330,6 +330,14 @@ finer-grained detail.
     token. Added `@source not "../../**/*.md"`. Dev server (Turbopack) now runs
     clean; production build no longer warns.
 22. Bumped availability strip Q2 → Q3 2026 (Footer + ContactCTA).
+23. Mobile responsiveness audit (every route/section screenshotted at 375px).
+    Site was already responsive except two desktop-first lab mockups, now
+    fixed: (a) `StyleGuideTalksBack` V01/V02/V03 output cards were a 3-col grid
+    that clipped content on phones — now a horizontal snap-scroll below `sm`,
+    reverting to the 3-up grid at `sm`+; (b) `CampaignFactory` spec labels were
+    overlaid at `top-2` and collided with each composition's own labels — moved
+    to a caption above each mock (cleaner on desktop too). No horizontal page
+    scroll anywhere.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

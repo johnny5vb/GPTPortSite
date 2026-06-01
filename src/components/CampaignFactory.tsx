@@ -373,17 +373,11 @@ function FactoryCard({
       }}
       exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
       transition={{ layout: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
-      className={`${channel.span} relative overflow-hidden`}
-      style={{
-        background: campaign.surface,
-        border: `1px solid ${campaign.ink}1a`,
-        borderRadius: 10,
-        color: campaign.ink,
-        aspectRatio: aspect,
-      }}
+      className={channel.span}
     >
-      {/* Label */}
-      <div className="absolute top-2 left-2 right-2 flex items-center justify-between z-10">
+      {/* Spec caption — sits ABOVE the mock so it never overlaps the
+          composition's own labels (brand name, "NOW", etc.). */}
+      <div className="flex items-center justify-between mb-1.5 px-0.5">
         <span
           className="font-mono text-[8.5px] uppercase tracking-[0.18em]"
           style={{ color: campaign.mute }}
@@ -398,7 +392,18 @@ function FactoryCard({
         </span>
       </div>
 
-      <ChannelArt channel={channel} campaign={campaign} index={index} />
+      <div
+        className="relative overflow-hidden"
+        style={{
+          background: campaign.surface,
+          border: `1px solid ${campaign.ink}1a`,
+          borderRadius: 10,
+          color: campaign.ink,
+          aspectRatio: aspect,
+        }}
+      >
+        <ChannelArt channel={channel} campaign={campaign} index={index} />
+      </div>
     </motion.div>
   );
 }
