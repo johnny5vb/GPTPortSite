@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowUpLeft, ArrowUpRight, ArrowDown } from "lucide-react";
 import type { Project } from "@/lib/projects";
 
@@ -87,13 +87,12 @@ export default function ProjectDetail({ project, prev, next }: Props) {
         </motion.a>
       </header>
 
-      {/* Cover image */}
+      {/* Cover image — morph target for the Work thumbnail. No opacity gate so
+          it is fully painted when the View Transition snapshots it; the morph
+          itself is its entrance. */}
       <section id="cover" className="container-x">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        <div
+          style={{ viewTransitionName: `project-${project.slug}` }}
           className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2"
         >
           <Image
@@ -104,7 +103,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             className="object-cover object-top"
             priority
           />
-        </motion.div>
+        </div>
       </section>
 
       {/* Brief */}

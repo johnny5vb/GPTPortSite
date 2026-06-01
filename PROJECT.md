@@ -100,11 +100,15 @@ labels inside each section component.
 
 - **`Hero.tsx`** — Section 00. Long animated headline with rotator
   ("ship./lead./stand out./last.") on the last word. Renders `HeroMark`.
-- **`HeroMark.tsx`** — The animated CC mark on the right side of the hero.
-  Top-aligned with the headline letterforms, magnetic cursor pull, brightness
-  + glow ramp on proximity. `lg+` only. Decorative (`aria-hidden`,
-  `pointer-events-none`). Sized via clamps; tuned tight with `right-` /
-  `top-` to clear the section rail.
+- **`HeroContactSheet.tsx`** — The hero visual (replaced the old `HeroMark` CC
+  mark). A slow-drifting "contact sheet" of real project work. Default export
+  is the `lg+` panel: two vertical columns drifting in opposite directions in
+  the headline's right-side negative space, masked top/bottom, green frame,
+  light cursor parallax driven by the Hero's shared pointer MotionValues (no
+  extra mousemove listener). Named export `HeroContactStrip` is the mobile/
+  tablet treatment: a single horizontal filmstrip rendered in the hero flow
+  (`lg:hidden`). Drift is pure CSS (`drift-up`/`drift-down`/`drift-x` keyframes)
+  so it freezes under reduced motion. Decorative (`aria-hidden`).
 - **`Manifesto.tsx`** — Section 01. Compact interactive slider with
   auto-advance (5.5s), dot nav, prev/next/pause. Four principles.
 - **`Work.tsx`** — Section 02. Four project rows linking to `/work/[slug]`.
@@ -129,8 +133,21 @@ labels inside each section component.
   accessibility audit.
 - **`CustomCursor.tsx`** + **`RouteChrome.tsx`** — Cursor + route-aware
   global chrome (Nav, SectionRail, scroll progress).
-- **`PageTransition.tsx`** + **`src/app/template.tsx`** — Page-level fade +
-  slide-up entrance on every route change.
+- **Route transitions** — Handled by the browser View Transitions API, not
+  framer. Client navigations use `next-view-transitions` (`<ViewTransitions>`
+  provider in `layout.tsx`, and its `Link` swapped in for `next/link` across
+  Work, ProjectDetail, StyleGuideTalksBack, Showpiece, LabPage,
+  CapabilitiesDeck). Full-page `<a>` navigations (top nav, footer) get a free
+  cross-document crossfade from `@view-transition { navigation: auto }`. The
+  Work thumbnail and the case-study cover share `view-transition-name:
+  project-<slug>` so the thumbnail morphs into the cover. CSS for the root
+  crossfade + reduced-motion lives at the bottom of `globals.css`.
+  `src/app/template.tsx` is now a passthrough; the old framer `PageTransition`
+  was removed (it double-animated against the view transition).
+- **`SmoothScroll.tsx`** — Inertial smooth scrolling via Lenis, mounted once in
+  `layout.tsx`. Drives the real window scroll (so framer `useScroll` /
+  IntersectionObserver keep working) and routes in-page hash links through
+  `lenis.scrollTo`. Skipped entirely under `prefers-reduced-motion`.
 - **`LabPage.tsx`** — `/lab` shell. Sticky tab navigator + IntersectionObserver
   for scroll-spy. Stacks `DesignSystemLab`, `StyleGuideTalksBack`,
   `CampaignFactory`, `Atelier`.
@@ -224,11 +241,12 @@ npm run build         # local prod build into .next
 netlify deploy --prod --dir=.next
 ```
 
-Local CSS warnings about `min-h-[&!]` are harmless — Tailwind v4's CSS
-optimizer chokes on a corrupted class string somewhere, but the build still
-completes successfully both locally and on Netlify. The previous Netlify
-deploy errors were from concurrent deploys canceling each other, not from
-the CSS warning itself.
+The old `min-h-[&!]` CSS warning is **fixed**. Root cause: Tailwind v4
+auto-scans content including Markdown, and this very file documented the token
+in prose — so Tailwind generated a broken utility from it (a warning under
+`next build`, a hard parse error under the Turbopack dev server). Fix:
+`@source not "../../**/*.md"` in `globals.css` tells Tailwind not to scan docs
+for class names. (This sentence is now safe because md is excluded.)
 
 Don't run `netlify deploy` and a foreground build at the same time — start
 fresh.
@@ -290,6 +308,32 @@ finer-grained detail.
     orbital instrument with rings/ticks/dots/caption → simplified to just
     the mark → resized and repositioned to top-align with the headline
     letterforms while clearing the section rail).
+
+### Later session — hero visual + smoothness pass
+
+17. Replaced the hero CC mark (`HeroMark`) with `HeroContactSheet` — a drifting
+    contact sheet of real project work (vertical 2-column panel on `lg+`,
+    horizontal filmstrip on mobile/tablet). Verified composition at mobile /
+    tablet / desktop; no headline overlap. `HeroMark.tsx` deleted.
+18. Added Lenis inertial smooth scrolling (`SmoothScroll.tsx`), reduced-motion
+    aware, with smooth in-page anchor jumps.
+19. Replaced the framer page-fade with browser View Transitions:
+    `next-view-transitions` for client navs + `@view-transition navigation:auto`
+    for full-page links, and a shared-element morph from the Work thumbnail to
+    the case-study cover (`view-transition-name: project-<slug>`). Removed
+    `PageTransition.tsx`; `template.tsx` is now a passthrough.
+20. Tightened the hero entrance (total ~1.2s vs ~2s) and consolidated pointer
+    handling (one shared mousemove feeds both the headline tilt and the contact
+    sheet parallax).
+21. Fixed the long-standing `min-h-[&!]` CSS warning at the source — Tailwind v4
+    was scanning PROJECT.md and generating a broken utility from the documented
+    token. Added `@source not "../../**/*.md"`. Dev server (Turbopack) now runs
+    clean; production build no longer warns.
+22. Bumped availability strip Q2 → Q3 2026 (Footer + ContactCTA).
+
+Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
+`hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`
+(preview-server config). New dependencies: `lenis`, `next-view-transitions`.
 
 ---
 

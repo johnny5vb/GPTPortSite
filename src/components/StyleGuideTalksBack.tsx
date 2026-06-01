@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { Sparkles, Send, RotateCcw, MessageSquareQuote, Check, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { GradientMesh } from "./BrandArt";
 import CategoryImage from "./CategoryImage";
 import type { PhotoCategory } from "@/lib/photos";

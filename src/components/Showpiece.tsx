@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowUpRight } from "lucide-react";
 import { getProject } from "@/lib/projects";
 

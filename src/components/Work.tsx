@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { PROJECTS, type Project } from "@/lib/projects";
 import VelocityHeading from "./VelocityHeading";
 
@@ -110,8 +110,11 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           </p>
         </div>
 
-        {/* Image thumbnail */}
-        <div className="hidden md:block col-span-3 relative h-28 overflow-hidden rounded-md border border-line bg-ink-2">
+        {/* Image thumbnail — morphs into the case-study cover via View Transitions */}
+        <div
+          style={{ viewTransitionName: `project-${project.slug}` }}
+          className="hidden md:block col-span-3 relative h-28 overflow-hidden rounded-md border border-line bg-ink-2"
+        >
           <motion.div
             style={{ y: previewY }}
             className="absolute inset-0"

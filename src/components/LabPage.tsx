@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowUpLeft, ArrowDown } from "lucide-react";
 import DesignSystemLab from "./DesignSystemLab";
 import StyleGuideTalksBack from "./StyleGuideTalksBack";

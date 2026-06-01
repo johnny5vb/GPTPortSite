@@ -11,7 +11,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import HeroMark from "./HeroMark";
+import HeroContactSheet, { HeroContactStrip } from "./HeroContactSheet";
 
 const ROTATORS = ["last.", "lead.", "ship.", "stand out."];
 
@@ -38,8 +38,6 @@ export default function Hero() {
   });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -140]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.1]);
-  const decorY = useTransform(scrollYProgress, [0, 1], [0, 220]);
-  const decorRot = useTransform(scrollYProgress, [0, 1], [0, 70]);
 
   useEffect(() => {
     const tick = () => {
@@ -107,32 +105,19 @@ export default function Hero() {
             filter: "blur(40px)",
           }}
         />
-
-        {/* Decorative scroll-driven glyph — kept on md only; on lg+ the
-            CC mark takes over the right-side visual balance */}
-        <motion.div
-          aria-hidden
-          style={{ y: decorY, rotate: decorRot }}
-          className="absolute right-[4vw] top-[42%] hidden md:block lg:hidden opacity-15 select-none"
-        >
-          <div
-            className="font-display-wonk text-[clamp(8rem,16vw,18rem)] leading-none text-green"
-            style={{ filter: "blur(0.5px)" }}
-          >
-            ¶
-          </div>
-        </motion.div>
       </div>
 
-      {/* Animated CC mark — orbital instrument balancing the headline. lg+ only */}
-      <HeroMark />
+      {/* Hero visual — drifting contact sheet of real work. The lg+ panel sits
+          in the headline's right-side gap; the mobile filmstrip renders in the
+          flow below the copy. */}
+      <HeroContactSheet mx={mx} my={my} />
 
       {/* Top meta strip */}
       <div className="flex items-end justify-between text-[10px] uppercase tracking-[0.22em] font-mono text-mute pt-2">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.15 }}
           className="flex gap-6"
         >
           <span>
@@ -148,7 +133,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.2 }}
           className="flex gap-6"
         >
           <span className="hidden sm:inline text-bone/80">VA Beach</span>
@@ -168,7 +153,7 @@ export default function Hero() {
         <motion.p
           initial={{ x: -16 }}
           animate={{ x: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
           className="font-mono text-[11px] uppercase tracking-[0.28em] text-green mb-6"
         >
           // Hi, I&apos;m John Carman — Creative Director &amp; AI Strategist
@@ -178,14 +163,14 @@ export default function Hero() {
           style={{ rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
           className="font-display text-[clamp(2.4rem,7.4vw,7.4rem)] leading-[1.1] tracking-[-0.04em] text-bone"
         >
-          <Line delay={0.7}>I help brands launch</Line>
-          <Line delay={0.85}>with conviction,</Line>
-          <Line delay={1}>scale with intention,</Line>
+          <Line delay={0.1}>I help brands launch</Line>
+          <Line delay={0.2}>with conviction,</Line>
+          <Line delay={0.3}>scale with intention,</Line>
           <span className="block overflow-hidden">
             <motion.span
               initial={{ y: "110%" }}
               animate={{ y: "0%" }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 1.15 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
               className="inline-block"
             >
               and <RotatorBox idx={idx} />
@@ -193,11 +178,13 @@ export default function Hero() {
           </span>
         </motion.h1>
 
+        <HeroContactStrip />
+
         <div className="mt-12 grid grid-cols-12 gap-6 items-start">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
+            transition={{ duration: 0.7, delay: 0.55 }}
             className="col-span-12 md:col-span-6 md:col-start-7 max-w-[52ch] space-y-4"
           >
             <p className="text-bone/90 text-base md:text-lg leading-relaxed">
@@ -219,7 +206,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.7 }}
+          transition={{ delay: 0.6 }}
           className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute"
         >
           <div className="text-mute-2">// what I do</div>
@@ -232,7 +219,7 @@ export default function Hero() {
           href="#manifesto"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8 }}
+          transition={{ delay: 0.7 }}
           data-cursor="scroll"
           className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70 hover:text-green"
         >
@@ -305,9 +292,9 @@ function RotatorBox({ idx }: { idx: number }) {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{
-          duration: 1.2,
+          duration: 1,
           ease: [0.16, 1, 0.3, 1],
-          delay: 2,
+          delay: 0.95,
         }}
         className="absolute left-0 right-0 -bottom-2 h-[3px] bg-green origin-left"
       />

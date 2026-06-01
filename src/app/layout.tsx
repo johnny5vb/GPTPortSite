@@ -3,6 +3,8 @@ import { Fraunces, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import RouteChrome from "@/components/RouteChrome";
+import SmoothScroll from "@/components/SmoothScroll";
+import { ViewTransitions } from "next-view-transitions";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -64,12 +66,15 @@ export default function RootLayout({
       className={`${fraunces.variable} ${jetbrains.variable} ${geist.variable}`}
     >
       <body className="noise-fixed antialiased">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <CustomCursor />
-        <RouteChrome />
-        {children}
+        <ViewTransitions>
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <SmoothScroll />
+          <CustomCursor />
+          <RouteChrome />
+          {children}
+        </ViewTransitions>
       </body>
     </html>
   );
