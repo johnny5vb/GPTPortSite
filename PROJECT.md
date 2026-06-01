@@ -75,7 +75,7 @@ variable-font axis trick.
 | --- | --- | --- |
 | `/` | `Hero, Manifesto, Work, Showpiece, StyleGuideTalksBack (featured), Services, About, ContactCTA, Footer` | The main narrative |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | Showcase for AI-native design systems |
-| `/work/[slug]` | `ProjectDetail` | Case studies — `colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust` |
+| `/work/[slug]` | `ProjectDetail` | Case studies — `colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`, `beacon-van` |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (not currently linked from the home page; the link in Footer's connect list points to it for sharing) |
 
 Routes data is sourced from `src/data/projects.ts`. Section numbers on the
@@ -330,6 +330,12 @@ finer-grained detail.
     token. Added `@source not "../../**/*.md"`. Dev server (Turbopack) now runs
     clean; production build no longer warns.
 22. Bumped availability strip Q2 → Q3 2026 (Footer + ContactCTA).
+24. Migrated 3 more case studies from the legacy Framer site (content + images
+    pulled from the .framer.app build): `stamp-out-stigma` (Times Square mental-
+    health campaign), `spikes-k9-fund` (nonprofit web design), `beacon-van`
+    (vehicle wrap). Work list is now 7. Harry J. Brown (`hjb`) was deliberately
+    excluded per the owner. Images downloaded to `/public/work/<slug>/`.
+
 23. Mobile responsiveness audit (every route/section screenshotted at 375px).
     Site was already responsive except two desktop-first lab mockups, now
     fixed: (a) `StyleGuideTalksBack` V01/V02/V03 output cards were a 3-col grid

@@ -237,6 +237,152 @@ export const PROJECTS: Project[] = [
     ],
     externalUrl: "https://www.carmancreative.com/work/sft",
   },
+  {
+    slug: "stamp-out-stigma",
+    num: "05",
+    title: "Stamp Out Stigma",
+    client: "Stamp Out Stigma",
+    year: "2023",
+    category: "Advertising / Campaign",
+    duration: "6 weeks",
+    tags: ["Campaign", "OOH", "Advertising"],
+    blurb:
+      "A national mental-health awareness campaign staged in Times Square — built to spark honest conversation and cut the stigma around mental illness.",
+    oneLiner:
+      "Mental health is just as important as physical health.",
+    brief:
+      "A national mental health awareness initiative staged in Times Square, designed to spark conversation and reduce stigma around mental illness — reinforcing that mental health matters as much as physical health, and that sharing personal stories helps others feel seen and supported.",
+    process: [
+      {
+        label: "Research",
+        body: "Research focused on public attitudes toward mental health, stigma barriers, and how large-scale awareness campaigns create emotional resonance in high-visibility environments. Insights emphasized empathy, representation, and clear messaging that could connect instantly with a broad, diverse audience.",
+      },
+      {
+        label: "Concept",
+        body: "The concept centered on visibility and honesty — using real stories and human emotion to normalize conversations around mental health. Placing the message in one of the most public spaces in the world challenged silence and encouraged people to speak openly about their experiences.",
+      },
+      {
+        label: "Design",
+        body: "Design leveraged strong typography, restrained color, and emotionally grounded imagery to communicate urgency without sensationalism. The messaging was intentionally clear and direct — understood at a glance while still carrying emotional weight in a fast-moving environment.",
+      },
+      {
+        label: "Development",
+        body: "Displayed prominently in Times Square, the campaign amplified national awareness around mental health and reinforced the importance of open dialogue — supporting a broader effort to reduce stigma and promote understanding.",
+      },
+    ],
+    services: [
+      "Campaign concept",
+      "Out-of-home design",
+      "Messaging direction",
+      "Awareness strategy",
+    ],
+    palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
+    display: "STIGMA",
+    cover: "/work/stamp-out-stigma/cover.jpg",
+    gallery: [
+      { src: "/work/stamp-out-stigma/gallery-1.jpg", alt: "Stamp Out Stigma — Times Square activation" },
+      { src: "/work/stamp-out-stigma/gallery-2.png", alt: "Stamp Out Stigma — campaign creative" },
+      { src: "/work/stamp-out-stigma/gallery-3.png", alt: "Stamp Out Stigma — awareness messaging" },
+    ],
+    externalUrl: "https://www.carmancreative.com/work/sos",
+  },
+  {
+    slug: "spikes-k9-fund",
+    num: "06",
+    title: "Spike's K9 Fund",
+    client: "Spike's K9 Fund",
+    year: "2023",
+    category: "Nonprofit / Web Design",
+    duration: "12 weeks",
+    tags: ["Web", "Nonprofit", "UX"],
+    blurb:
+      "A redesigned home for a nonprofit equipping America's working dogs — clear programs and frictionless donation and application flows.",
+    oneLiner:
+      "Protecting the working dogs that protect us.",
+    brief:
+      "Spike's K9 Fund is a national nonprofit supporting America's working dogs with lifesaving equipment, medical care, training, and protective gear. The site was redesigned to communicate programs clearly, enable straightforward donation and application flows, and reflect the organization's commitment to canine safety and readiness.",
+    process: [
+      {
+        label: "Research",
+        body: "Research centered on the needs of working K9 units and their handlers, alongside the informational expectations of donors and advocates. This included evaluating how nonprofit audiences seek impact metrics, program descriptions, and ways to contribute.",
+      },
+      {
+        label: "Concept",
+        body: "The concept focused on a clear, organized digital experience that balances emotional connection with operational clarity — showcasing the mission and tangible impact while making critical actions like donating, applying for assistance, or learning about programs immediately visible.",
+      },
+      {
+        label: "Design",
+        body: "Design emphasized a structured layout, strong hierarchy, and an approachable visual language that reinforces trust and transparency. Program highlights help users quickly understand the five key campaign areas and how they can join the support community.",
+      },
+      {
+        label: "Development",
+        body: "The site was built to prioritize accessibility, performance, and easy content updates for the internal team. Donation and application paths were made intuitive on desktop and mobile, with scalable components that let the fund grow its campaigns over time.",
+      },
+    ],
+    services: [
+      "Web design",
+      "UX & information architecture",
+      "Donation & application flows",
+      "Nonprofit brand system",
+    ],
+    palette: ["#0c0c0c", "#b5302b", "#9aa3a0", "#f0ece3"],
+    display: "SPIKE'S",
+    cover: "/work/spikes-k9-fund/cover.png",
+    gallery: [
+      { src: "/work/spikes-k9-fund/gallery-1.png", alt: "Spike's K9 Fund — homepage" },
+      { src: "/work/spikes-k9-fund/gallery-2.png", alt: "Spike's K9 Fund — program page" },
+      { src: "/work/spikes-k9-fund/gallery-3.png", alt: "Spike's K9 Fund — donation flow" },
+    ],
+    externalUrl: "https://www.carmancreative.com/work/spikes",
+  },
+  {
+    slug: "beacon-van",
+    num: "07",
+    title: "Beacon Transit Van",
+    client: "Beacon Health Options",
+    year: "2024",
+    category: "Advertising / Vehicle Wrap",
+    duration: "6 weeks",
+    tags: ["Vehicle Wrap", "Brand", "Advertising"],
+    blurb:
+      "A full vehicle wrap that turns a transit van into a mobile, welcoming touchpoint for community health outreach.",
+    oneLiner:
+      "Care that travels — a brand built to move through the community.",
+    brief:
+      "Beacon Health Options needed a mobile presence that could travel directly into communities, providing access to care, education, and support at local events and outreach. The van wrap became a moving extension of the brand: clear, warm, and instantly recognizable at scale.",
+    process: [
+      {
+        label: "Research",
+        body: "Before designing the wrap, I researched vehicle advertising and fleet branding to understand how large-format graphics are read in motion and at a distance. This informed the layout, scale, and color blocking — ensuring the design stayed clear, welcoming, and instantly recognizable in real-world environments.",
+      },
+      {
+        label: "Concept",
+        body: "The concept was built around turning the van into a welcoming, mobile touchpoint for Beacon's outreach efforts — a moving presence that felt approachable, trustworthy, and easy to recognize in any neighborhood, functioning as both transportation and a visible symbol of care.",
+      },
+      {
+        label: "Design",
+        body: "The wrap was designed as a mobile extension of Beacon's brand — balancing bold visibility with warmth and approachability. Large color fields, high-contrast typography, and simplified graphic shapes kept the messaging legible at a distance while still feeling modern, friendly, and trustworthy.",
+      },
+      {
+        label: "Development",
+        body: "The final wrap was carefully prepared for large-format production, with precise layout scaling, bleed planning, and panel alignment across the vehicle's contours — each section built to maintain visual continuity across doors, seams, and curves so the design translated cleanly from screen to street.",
+      },
+    ],
+    services: [
+      "Vehicle wrap design",
+      "Large-format production",
+      "Brand application",
+      "Community activation",
+    ],
+    palette: ["#0e2a3f", "#2b8fb8", "#bcdcea", "#f2f1ec"],
+    display: "BEACON",
+    cover: "/work/beacon-van/cover.jpg",
+    gallery: [
+      { src: "/work/beacon-van/gallery-1.png", alt: "Beacon Transit Van — wrap design" },
+      { src: "/work/beacon-van/gallery-2.jpg", alt: "Beacon Transit Van — deployed in the community" },
+    ],
+    externalUrl: "https://www.carmancreative.com/work/beaconvan",
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
