@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import CapabilitiesDeck from "@/components/CapabilitiesDeck";
 
 export const metadata: Metadata = {
-  title: "Capabilities Deck — Carman Creative",
+  title: "Capabilities Deck | John Carman, Carman Creative",
   description:
-    "Creative direction, accelerated by AI. Brand identity, web design, packaging, and AI-powered creative systems. Studio in Virginia Beach, Philadelphia, and Brooklyn.",
+    "Creative leadership and creative-systems capabilities: brand, digital, campaigns, and AI-enabled workflow. Based in Virginia Beach; available for remote and select hybrid work.",
+  alternates: { canonical: "/capabilities" },
   openGraph: {
-    title: "Carman Creative — Capabilities Deck",
+    title: "Capabilities Deck | John Carman, Carman Creative",
     description:
-      "Creative direction, accelerated by AI. Studio in Virginia Beach, Philadelphia, and Brooklyn.",
+      "Creative leadership and creative-systems capabilities: brand, digital, campaigns, and AI-enabled workflow.",
+    url: "/capabilities",
     type: "website",
   },
 };

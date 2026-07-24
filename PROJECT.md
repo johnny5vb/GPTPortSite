@@ -7,20 +7,41 @@ when picking up the project in a new session. Update it as the site changes.
 
 ## What this is
 
-The personal portfolio + agency site for **John Carman**, a Creative Director
-and AI strategist working out of Virginia Beach, Philadelphia, and Brooklyn.
+The personal portfolio + career site for **John Carman**, a **Creative
+Director and Brand & Creative Operations Leader** based in Virginia Beach.
 Site lives at **https://www.carmancreative.com**.
 
-The product is a single-page narrative on `/` with deeper subpages: an AI Lab
-(`/lab`), a capabilities deck (`/capabilities`), and four project case studies
-(`/work/[slug]`). The home page is built as a long-scroll story with eight
-numbered sections, a sticky section rail, and orchestrated framer-motion
-choreography throughout.
+**Primary purpose (repositioned):** present John first as a senior creative
+leader available for **Director-level in-house employment**, and second as
+**Carman Creative**, a consulting/freelance offering. The employment path is
+more prominent than the consulting path everywhere on the site. The
+positioning hierarchy is: (1) Creative Director, (2) Brand & Creative
+Operations Leader, (3) AI-Enabled Creative Strategist — AI is a supporting
+advantage, never the lead.
 
-Voice and tone target: **quiet authority**. Not "swagger." Modern tools,
-classical taste. Specific things to avoid: sounding desperate ("Open for new
-work" was deliberately removed), drift back to the old `carman • creative`
-treatment (dots are out, slashes are in).
+The product is a single-page narrative on `/` plus deeper subpages: a
+**Leadership** page (`/leadership`), a print-friendly **Résumé** (`/resume`),
+an AI & Systems lab (`/lab`), a capabilities deck (`/capabilities`), and case
+studies at `/work/[slug]` (three enterprise **leadership** flagships +
+independent client work). The home page is a long-scroll story with a sticky
+section rail and framer-motion choreography.
+
+Voice and tone target: **quiet authority** — confident, senior, direct. Not
+"swagger," not hustle. Modern tools, classical taste. Specific things to
+avoid: sounding desperate or hustle-y ("Always grinding" was removed in favor
+of "Open to the right leadership opportunity"); the old `carman • creative`
+dot treatment (dots are out, slashes are in); leading with "AI Strategist";
+fabricated metrics (see the TODO discipline below).
+
+**Single source of truth for identity/contact:** `src/lib/profile.ts`
+(`PROFILE`) — name, title stack, email, socials, location, availability,
+résumé href. Import from it; don't hard-code contact/positioning again.
+
+**Honesty / TODO discipline:** never publish unverified metrics as facts.
+Numbers awaiting confirmation (e.g. ~1,500+ assets, ~70,000+ employees,
+~75+ projects/month, ~60% faster, ~30% engagement) live as visible
+`TODO: Confirm …` placeholders that render in a muted italic style — never as
+claims. The flagship leadership case studies are scaffolded this way.
 
 ---
 
@@ -73,25 +94,36 @@ variable-font axis trick.
 
 | Route | Component | Purpose |
 | --- | --- | --- |
-| `/` | `Hero, Manifesto, Work, Showpiece, StyleGuideTalksBack (featured), Services, About, ContactCTA, Footer` | The main narrative |
-| `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | Showcase for AI-native design systems |
-| `/work/[slug]` | `ProjectDetail` | Case studies — `colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`, `beacon-van` |
-| `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (not currently linked from the home page; the link in Footer's connect list points to it for sharing) |
+| `/` | `Hero, AudienceSplit, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative — leadership-first |
+| `/leadership` | `LeadershipPage` | Dedicated page for senior in-house readiness: experience, what John can lead, flagship case studies, leadership proof, philosophy, résumé/contact CTAs |
+| `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
+| `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation`, `creative-operations-marketing-bench`, `workfront-workflow-transformation`; independent — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`; secondary — `harrison-bounds`, `beacon-van` |
+| `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
-Routes data is sourced from `src/data/projects.ts`. Section numbers on the
-home page come from `SectionRail.tsx` and must stay in sync with the eyebrow
-labels inside each section component.
+Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
+`src/data/`). Each project carries a `tier` (`leadership` / `independent` /
+`secondary`); flagships add `flagship: true` + a `caseStudy` object (overview,
+challenge, mandate, context, role, team, decisions, outcomes, reflection) and
+have `cover: ""` (they render a branded gradient hero, no photo). Helpers:
+`LEADERSHIP_PROJECTS`, `INDEPENDENT_PROJECTS`, `SECONDARY_PROJECTS`,
+`projectsByTier`, `tierOf`. `getAdjacentProjects` stays within a tier.
+
+Section numbers come from `SectionRail.tsx` and must stay in sync with the
+eyebrow labels inside each section component.
 
 ### Home section numbering (eyebrows)
+`AudienceSplit` (Hiring John / Work With Carman Creative) and `ResumePreview`
+are un-numbered CTA bands between the numbered narrative sections.
 ```
-00  Intro       (Hero)
-01  Principles  (Manifesto)
-02  Work        (Work)
-03  In Focus    (Showpiece)
-04  AI Lab      (StyleGuideTalksBack — `featured` prop adds CTA → /lab)
-05  Services    (Services)
-06  About       (About)
-07  Contact     (ContactCTA)
+00  Intro        (Hero)
+01  How I Lead    (Manifesto — leadership philosophy, 4 principles)
+02  Work          (Work — Featured leadership work + Selected independent work + More work)
+03  In Focus      (Showpiece)
+04  AI & Systems  (AISystemsTeaser — compact, links → /lab; big demo removed from home)
+05  Consulting    (Services — reframed as the secondary Carman Creative offer)
+06  About         (About)
+07  Contact       (ContactCTA — split employment vs. project inquiry paths)
 ```
 
 ---
@@ -167,36 +199,60 @@ image folder under `/public/work/<slug>/`. Friends Rehab specifically uses
 real screenshots of the existing FRP WordPress site (the user provided them
 via Finder).
 
-### Contact info (kept consistent across Footer, ContactCTA, CapabilitiesDeck)
-- Email: `johnbcarman@gmail.com`
+### Contact info (now centralized in `src/lib/profile.ts` → `PROFILE`)
+- Email: `johnbcarman@gmail.com` (kept live because it works). **TODO:**
+  provision `john@carmancreative.com`, then set `PROFILE.contact.email` to it
+  and demote the Gmail address. Do **not** ship the custom-domain address
+  before the mailbox exists — a bouncing address is a credibility leak. The
+  target is recorded as `PROFILE.contact.emailPreferredTodo`.
 - LinkedIn: `https://www.linkedin.com/in/johncarman/`
 - Instagram: `https://www.instagram.com/jbcarms` (display `@jbcarms`)
-- Capabilities deck: linked in Footer's connect list as `/capabilities`
+- Capabilities deck: linked in Footer as `/capabilities`
 
-### Availability strip
-Currently reads `Q3 2026 onward / Retainer / Project / Fractional CD`.
-The pulsing green "Open for new work" indicator was removed (didn't want
-to sound desperate). Footer status reads "Always grinding" / "Q3 2026 onward".
+### Availability / positioning strips
+- Contact section strip: `Open to senior creative leadership roles / Remote /
+  Select hybrid / Select consulting via Carman Creative`.
+- Footer status: `Open to the right leadership opportunity` (replaced the old
+  hustle-y "Always grinding"), plus the secondary line "Carman Creative
+  provides selected brand, digital, and creative consulting engagements."
+- Contact has **two inquiry paths** (mailto-based, no backend): "Discuss a
+  Leadership Opportunity" (primary) and "Discuss a Creative Project"
+  (secondary). TODO: wire Netlify Forms if real forms are wanted.
 
-### About stats
-- `20+` years of creative direction
-- `175+` projects shipped
-- `∞` time spent exploring AI
+### About stats (leadership proof — only defensible numbers)
+- `20+` years leading creative & brand
+- `15+` years in enterprise healthcare creative (2010–present)
+- `3` designers managed as a creative lead
 
-The `Stat` component in `About.tsx` takes either `to={number}` (animated count
-via `CountUp`) or `display="∞"` (static value with `aria-label`).
+`CountUp` now renders the **final** value in server HTML (so screen readers,
+crawlers, and no-JS visitors never see `0+`), and only counts up once the stat
+scrolls into view. Enterprise-scale figures (asset counts, org headcount,
+monthly volume) live on `/leadership` and the flagship case studies as
+clearly-labeled `TODO: Confirm` placeholders — they are **not** published as
+facts here. The old vanity stat `175+ projects shipped` was dropped.
 
-### Current roles (About)
-- Carman Creative — Founder — 2020 — Present (live)
-- Jumping Fish — Creative Director — 2014 — Present (live)
-- Elevance Health — Creative Manager — 2010 — Present (live)
+### Employment history (About + Résumé) — corrected & non-defensive
+- **Elevance Health / Carelon — Creative Manager** — 2010 — Present, with the
+  sub-line **"Formerly Creative Director, Beacon Health Options."** The About
+  copy explains the Beacon → Carelon/Elevance transition once, plainly (title
+  moved from Creative Director to Creative Manager through the restructuring)
+  without sounding bitter. Listed **first** (enterprise experience leads).
+- Jumping Fish — Creative Director — 2014 — Present
+- Carman Creative — Founder — 2020 — Present
+
+Do not hide the current Manager title; do not erase the prior Creative
+Director title; keep the transition explanation sparse and forward-looking.
 
 ### Tools in rotation (About)
 `Adobe Creative Cloud · Framer · Claude · GPT-5 · Midjourney · VS Code · Next.js`
 
 ### Locations
-Virginia Beach / Philadelphia / Brooklyn. **Never** Newport Beach (early
-LLM hallucination; user corrected it). Separators are `/`, not `·` or `•`.
+**Repositioned:** "Based in Virginia Beach. Available for remote and select
+hybrid opportunities." The three-city (Virginia Beach / Philadelphia /
+Brooklyn) "studio" framing was removed as a proof point — it read as a
+freelance-agency flex. The hero meta strip now shows `Virginia Beach /
+Remote / Hybrid`. **Never** Newport Beach (early LLM hallucination). Separators
+are `/`, not `·` or `•`.
 
 ---
 
@@ -254,8 +310,19 @@ fresh.
 
 ## Critical "do not" list
 
-- **Do not** sound desperate in copy (no "Open for new work", no "I'm
-  available!"). Tone is confident understatement.
+- **Do not** demote the employment positioning below consulting. John is a
+  Creative Director seeking a senior in-house role first; Carman Creative
+  consulting is secondary. Keep the leadership path more prominent everywhere.
+- **Do not** lead with "AI Strategist." AI is the third descriptor, a
+  supporting advantage — never the headline.
+- **Do not** publish unverified metrics as facts. Gate them behind visible
+  `TODO: Confirm` placeholders (muted italic) until John confirms them.
+- **Do not** ship `john@carmancreative.com` until the mailbox is provisioned —
+  keep the working Gmail live; a bouncing address is a credibility leak.
+- **Do not** invent testimonials/quotes. `TODO` placeholders only, never
+  fake quotes on the live site.
+- **Do not** sound desperate or hustle-y (no "Always grinding", no "Open for
+  new work", no "I'm available!"). Tone is confident understatement.
 - **Do not** use `·` or `•` as separators. Use `/`.
 - **Do not** reintroduce h4/h5 inside decorative mockup cards.
 - **Do not** put `aria-label` on a bare `<span>` without a role.
@@ -344,9 +411,63 @@ finer-grained detail.
     to a caption above each mock (cleaner on desktop too). No horizontal page
     scroll anywhere.
 
-Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
-`hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`
-(preview-server config). New dependencies: `lenis`, `next-view-transitions`.
+### Later session — leadership repositioning (employment-first)
+
+25. Repositioned the whole site to present John primarily as a senior
+    **Creative Director / Brand & Creative Operations Leader** available for
+    Director-level in-house roles, with Carman Creative as the secondary
+    consulting offer. No redesign — same visual identity, type, motion.
+    - New `src/lib/profile.ts` (`PROFILE`) as the single source of truth for
+      identity/contact/positioning/availability/résumé.
+    - **Hero** rewritten leadership-first ("Creative leadership for complex
+      brands, teams, and [organizations/operations/systems/campaigns]"), kicker
+      "John Carman — Creative Director", CTAs: View Leadership Work + Download
+      Résumé (primary), Discuss a project (secondary). Positioning hierarchy in
+      the bottom strip. Monogram/rotator/tilt identity preserved.
+    - **Nav/IA:** Work / Leadership / AI & Systems / About / Contact + a visible
+      Résumé chip (desktop + mobile). Services → "Consulting". Active-route
+      underline generalized.
+    - **New pages:** `/leadership` (`LeadershipPage`) and `/resume`
+      (`ResumePage`, print-friendly with a print stylesheet in `globals.css`).
+    - **New home bands:** `AudienceSplit` (Hiring John / Work With Carman
+      Creative), `AISystemsTeaser` (compact — the big featured StyleGuide demo
+      was removed from home to reduce AI prominence; full demos still on /lab),
+      `ResumePreview`. `Manifesto` repurposed into "How I Lead" (4 leadership
+      principles). `Services` reframed as "Consulting."
+    - **Work hierarchy:** Featured leadership work (3 flagship gradient cards)
+      → Selected independent work → More work (secondary). `projects.ts` gained
+      `tier`, `flagship`, `caseStudy`, tier helpers; `ProjectDetail` branches to
+      an extended leadership case-study template (challenge/mandate/context/
+      role/team/decisions/outcome/reflection) with muted TODO placeholders.
+    - **Three flagship case studies** scaffolded (Beacon→Carelon, Marketing
+      Bench, Workfront) — real qualitative narrative, all unverified metrics as
+      visible `TODO: Confirm`.
+    - **Employment history corrected** (Elevance/Carelon Creative Manager,
+      formerly Creative Director at Beacon Health Options; transition explained
+      non-defensively).
+    - **Footer** rebuilt (professional positioning, "Open to the right
+      leadership opportunity", consulting secondary line). **Contact** split
+      into leadership vs. project mailto paths. "Always grinding" and the
+      three-city framing removed.
+    - **CountUp** fixed to render the real value in HTML (no more `0+`).
+    - **SEO:** leadership-forward titles/descriptions per page, `sitemap.ts`,
+      `robots.ts`, canonicals, Person JSON-LD in `layout.tsx` (rendered after
+      children), OG image tagline updated.
+
+    Known pre-existing issue (NOT introduced here, confirmed on a clean build
+    of `main`): framer-motion's explicit `useReducedMotion()` components
+    (`HeroMonogram`, `Showpiece`, `Reveal`, `VelocityHeading`, …) throw a
+    reduced-motion-only **hydration mismatch** in dev (server renders the
+    non-reduced `initial`, the client's first render reduces). React recovers
+    by regenerating client-side; production build is clean. A real fix means
+    mounted-guarding those components (deferred — invasive, touches the motion
+    identity). Don't reach for `<MotionConfig reducedMotion="never">`: it only
+    covers auto-reducing `whileInView` components, not the explicit-hook ones,
+    and changes reveal behavior for reduced-motion users.
+
+Scratch artifacts from earlier sessions (safe to delete): `hero-mockups.html`,
+`hero-mockups-2.html`, and `.claude/launch.json`. Dependencies unchanged this
+session (`framer-motion`, `lenis`, `next-view-transitions` already present).
 
 ---
 

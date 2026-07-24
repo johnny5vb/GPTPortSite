@@ -10,10 +10,12 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowUpRight, ArrowDownToLine } from "lucide-react";
+import { Link } from "next-view-transitions";
 import HeroMonogram from "./HeroMonogram";
+import { PROFILE } from "@/lib/profile";
 
-const ROTATORS = ["last.", "lead.", "ship.", "stand out."];
+const ROTATORS = ["organizations.", "operations.", "systems.", "campaigns."];
 
 export default function Hero() {
   const [now, setNow] = useState<string>("");
@@ -135,9 +137,8 @@ export default function Hero() {
           transition={{ delay: 0.2 }}
           className="flex gap-6"
         >
-          <span className="hidden sm:inline text-bone/80">VA Beach</span>
-          <span className="hidden md:inline text-bone/80">Philadelphia</span>
-          <span className="text-bone/80">Brooklyn</span>
+          <span className="hidden sm:inline text-bone/80">Virginia Beach</span>
+          <span className="hidden md:inline text-bone/80">Remote / Hybrid</span>
           <span className="text-green">{now} EST</span>
         </motion.div>
       </div>
@@ -155,16 +156,16 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="font-mono text-[11px] uppercase tracking-[0.28em] text-green mb-6"
         >
-          // Hi, I&apos;m John Carman — Creative Director &amp; AI Strategist
+          // John Carman — Creative Director
         </motion.p>
 
         <motion.h1
           style={{ rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
           className="font-display text-[clamp(2.4rem,7.4vw,7.4rem)] leading-[1.1] tracking-[-0.04em] text-bone"
         >
-          <Line delay={0.1}>I help brands launch</Line>
-          <Line delay={0.2}>with conviction,</Line>
-          <Line delay={0.3}>scale with intention,</Line>
+          <Line delay={0.1}>Creative leadership</Line>
+          <Line delay={0.2}>for complex brands,</Line>
+          <Line delay={0.3}>teams, and</Line>
           <span className="block overflow-hidden">
             <motion.span
               initial={{ y: "110%" }}
@@ -172,7 +173,7 @@ export default function Hero() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
               className="inline-block"
             >
-              and <RotatorBox idx={idx} />
+              <RotatorBox idx={idx} />
             </motion.span>
           </span>
         </motion.h1>
@@ -182,18 +183,47 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.55 }}
-            className="col-span-12 md:col-span-6 md:col-start-7 max-w-[52ch] space-y-4"
+            className="col-span-12 md:col-span-6 md:col-start-7 max-w-[54ch] space-y-4"
           >
             <p className="text-bone/90 text-base md:text-lg leading-relaxed">
-              <span className="text-green">Twenty years</span> of creative
-              direction across brand identity, web design, packaging, and
-              AI-powered creative — bringing modern tools to teams that care
-              about craft.
+              I&apos;m John Carman, a{" "}
+              <span className="text-green">Creative Director</span> with{" "}
+              {PROFILE.yearsExperience} years across enterprise brand
+              leadership, campaigns, digital experiences, and creative
+              operations.
             </p>
             <p className="text-mute text-sm md:text-base leading-relaxed">
-              I lead with clarity, ship with care, and build so the work keeps
-              working. Studio in Virginia Beach, Philadelphia, and Brooklyn.
+              I help organizations produce clearer, stronger, more effective
+              creative work — and build the systems that let teams keep
+              improving.
             </p>
+
+            {/* Primary path: employment. Secondary: consulting. */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <Link
+                href="/leadership"
+                data-cursor="leadership"
+                className="group inline-flex items-center gap-2 rounded-full bg-green text-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
+              >
+                View Leadership Work
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+              <Link
+                href="/resume"
+                data-cursor="resume"
+                className="inline-flex items-center gap-2 rounded-full border border-line-2 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
+              >
+                Download Résumé
+                <ArrowDownToLine className="h-3.5 w-3.5" />
+              </Link>
+              <a
+                href="#contact"
+                data-cursor="ask"
+                className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.2em] text-mute hover:text-bone transition-colors"
+              >
+                Discuss a project →
+              </a>
+            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -208,7 +238,8 @@ export default function Hero() {
         >
           <div className="text-mute-2">// what I do</div>
           <div className="mt-2 text-bone/80">
-            Brand identity / Web design / Packaging / AI-powered creative
+            Creative Director / Brand &amp; Creative Operations Leader /
+            AI-Enabled Strategist
           </div>
         </motion.div>
 
@@ -220,7 +251,7 @@ export default function Hero() {
           data-cursor="scroll"
           className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70 hover:text-green"
         >
-          <span>Scroll / How I work</span>
+          <span>Scroll / How I lead</span>
           <motion.span
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
@@ -264,7 +295,7 @@ function Line({
 function RotatorBox({ idx }: { idx: number }) {
   return (
     <span className="relative inline-block align-baseline">
-      <span className="invisible font-display-wonk">stand out.</span>
+      <span className="invisible font-display-wonk">organizations.</span>
       <span
         aria-hidden
         className="absolute left-0 right-0 bottom-0 overflow-hidden"

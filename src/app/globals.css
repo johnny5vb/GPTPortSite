@@ -273,3 +273,38 @@ html.lenis body {
     animation-delay: 0s !important;
   }
 }
+
+/* ─── Print (résumé save-as-PDF) ──────────────────────────────────────────
+   Strip site chrome and force a clean light document so the /resume page
+   prints as a proper one/two-page résumé. */
+@media print {
+  /* Hide global chrome + decorative overlays */
+  header,
+  aside,
+  .no-print,
+  .noise-fixed::before {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    overflow: visible !important;
+    cursor: auto !important;
+  }
+
+  .resume-doc,
+  .resume-doc * {
+    color: #111111 !important;
+    border-color: #d4d4d4 !important;
+  }
+  /* Keep the accent legible on white */
+  .resume-doc .text-green {
+    color: #0e6e57 !important;
+  }
+  .resume-doc {
+    max-width: none !important;
+    padding-top: 0 !important;
+  }
+}

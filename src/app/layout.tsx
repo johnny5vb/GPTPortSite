@@ -26,18 +26,24 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Carman Creative — Creative Direction, Accelerated by AI",
+  title: {
+    default:
+      "John Carman | Creative Director, Brand and Creative Operations Leader",
+    template: "%s",
+  },
   description:
-    "John Carman. Creative Director and AI Strategist with 20 years building brands, design systems, and product experiences. Studio in Virginia Beach, Philadelphia, and Brooklyn.",
+    "Portfolio of Creative Director John Carman — enterprise brand leadership, campaigns, creative operations, digital experiences, and AI-enabled creative systems. Based in Virginia Beach; available for remote and select hybrid roles.",
   metadataBase: new URL("https://www.carmancreative.com"),
   applicationName: "Carman Creative",
   authors: [{ name: "John Carman", url: "https://www.carmancreative.com" }],
   creator: "John Carman",
   publisher: "Carman Creative",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Carman Creative — Creative Direction, Accelerated by AI",
+    title:
+      "John Carman | Creative Director, Brand and Creative Operations Leader",
     description:
-      "John Carman. Creative Director and AI Strategist. Brands, design systems, and product made with conviction.",
+      "Enterprise brand leadership, campaigns, creative operations, and AI-enabled creative systems.",
     url: "https://www.carmancreative.com",
     siteName: "Carman Creative",
     type: "website",
@@ -45,14 +51,36 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Carman Creative — Creative Direction, Accelerated by AI",
+    title:
+      "John Carman | Creative Director, Brand and Creative Operations Leader",
     description:
-      "John Carman. Creative Director and AI Strategist. Brands, design systems, and product made with conviction.",
+      "Enterprise brand leadership, campaigns, creative operations, and AI-enabled creative systems.",
   },
 };
 
 export const viewport: Viewport = {
   themeColor: "#080808",
+};
+
+/** Person structured data for search — leadership-forward. */
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "John Carman",
+  jobTitle: "Creative Director",
+  description:
+    "Creative Director and Brand & Creative Operations Leader with 20 years across enterprise brand, campaigns, creative operations, and AI-enabled creative systems.",
+  url: "https://www.carmancreative.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Virginia Beach",
+    addressRegion: "VA",
+    addressCountry: "US",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/johncarman/",
+    "https://www.instagram.com/jbcarms",
+  ],
 };
 
 export default function RootLayout({
@@ -75,6 +103,12 @@ export default function RootLayout({
           <RouteChrome />
           {children}
         </ViewTransitions>
+        {/* Person JSON-LD. Rendered last so React 19 script handling can't
+            shift the interactive chrome above during hydration. Static data. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
+        />
       </body>
     </html>
   );

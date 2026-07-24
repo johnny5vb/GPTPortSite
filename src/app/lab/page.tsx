@@ -3,13 +3,15 @@ import LabPage from "@/components/LabPage";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "The AI Lab — Carman Creative",
+  title: "AI and Creative Systems | John Carman",
   description:
-    "Four AI-native design systems built by Carman Creative. Brand-in-a-Day OS, Style Guide That Talks Back, Campaign Factory, and Atelier — each interactive, each in production with real teams.",
+    "AI as a creative leadership and operations tool. Four interactive design-system concepts — Brand-in-a-Day OS, Style Guide That Talks Back, Campaign Factory, and Atelier — each clearly labeled by status.",
+  alternates: { canonical: "/lab" },
   openGraph: {
-    title: "Carman Creative — The AI Lab",
+    title: "AI and Creative Systems | John Carman",
     description:
-      "Four AI-native design systems. Interactive demos of each.",
+      "AI-enabled creative systems for exploration, operations, and brand governance. Interactive demos of each.",
+    url: "/lab",
     type: "website",
   },
 };

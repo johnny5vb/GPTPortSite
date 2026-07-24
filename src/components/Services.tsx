@@ -71,7 +71,7 @@ export default function Services() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 05 — Services
+            // 05 — Consulting
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">
@@ -82,12 +82,13 @@ export default function Services() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-[clamp(2.4rem,6.4vw,5.4rem)] leading-[1.08] tracking-[-0.04em] text-bone"
           >
-            How we work{" "}
-            <em className="font-display-wonk text-green">together.</em>
+            Work with{" "}
+            <em className="font-display-wonk text-green">Carman Creative.</em>
           </motion.h2>
-          <p className="mt-6 text-mute max-w-[52ch] leading-relaxed">
-            Four shapes the work usually takes. Most engagements pull from two
-            or three at once.
+          <p className="mt-6 text-mute max-w-[54ch] leading-relaxed">
+            Alongside in-house leadership, I take on selected brand, digital,
+            and creative-systems engagements. Four shapes the work usually
+            takes — most pull from two or three at once.
           </p>
         </div>
       </header>

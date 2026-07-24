@@ -18,13 +18,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return { title: "Project not found — Carman Creative" };
+  const title = `${project.title} — ${project.category} | John Carman`;
   return {
-    title: `${project.title} — Carman Creative`,
-    description: project.brief,
+    title,
+    description: project.blurb,
+    alternates: { canonical: `/work/${project.slug}` },
     openGraph: {
-      title: `${project.title} — Carman Creative`,
-      description: project.brief,
-      images: [project.cover],
+      title,
+      description: project.blurb,
+      url: `/work/${project.slug}`,
+      ...(project.cover ? { images: [project.cover] } : {}),
     },
   };
 }

@@ -13,6 +13,32 @@ export type ProjectImage = {
   aspect?: string;
 };
 
+/**
+ * Which shelf a project sits on. "leadership" work is enterprise, strategic,
+ * and leads the site; "independent" is selected client work; "secondary" is
+ * smaller production work kept in a compact gallery, not on the front line.
+ */
+export type ProjectTier = "leadership" | "independent" | "secondary";
+
+/**
+ * Extended, leadership-oriented case-study content. Present only on flagship
+ * projects. Fields may contain "TODO: …" strings where a fact/metric is not
+ * yet confirmed — those render as visible placeholders, never as claims.
+ */
+export type CaseStudy = {
+  overview: { label: string; value: string }[];
+  challenge: string;
+  mandate: string;
+  context: string;
+  /** What John personally did. */
+  role: string[];
+  /** Collaborators — so authorship reads honestly. */
+  team: string[];
+  decisions: { title: string; body: string }[];
+  outcomes: string[];
+  reflection: string;
+};
+
 export type Project = {
   slug: string;
   num: string;
@@ -33,16 +59,260 @@ export type Project = {
   services: string[];
   palette: string[];
   display: string;
-  /** Cover/hero image relative to /public */
+  /** Cover/hero image relative to /public. Empty on flagship (gradient hero). */
   cover: string;
   gallery: ProjectImage[];
   externalUrl?: string;
+  /** Defaults to "independent" when omitted. */
+  tier?: ProjectTier;
+  /** Enterprise leadership case study — renders the extended template. */
+  flagship?: boolean;
+  /** One-line "what John led" summary for leadership cards. */
+  roleSummary?: string;
+  caseStudy?: CaseStudy;
 };
 
 export const PROJECTS: Project[] = [
+  /* ── Featured leadership work ──────────────────────────────────────────
+     Enterprise, strategic, and leadership-forward. These are scaffolded from
+     John's own account of the work; specific metrics and named collaborators
+     are marked "TODO: Confirm" and must be verified before they read as facts.
+     ───────────────────────────────────────────────────────────────────── */
+  {
+    slug: "beacon-carelon-transformation",
+    num: "L01",
+    tier: "leadership",
+    flagship: true,
+    title: "Beacon Health Options → Carelon",
+    client: "Beacon Health Options / Carelon (Elevance Health)",
+    year: "2023",
+    category: "Enterprise Brand Transformation",
+    duration: "TODO: Confirm timeline",
+    tags: ["Enterprise", "Rebrand", "Governance"],
+    blurb:
+      "Leading creative through the acquisition and rebrand of a national behavioral-health organization — holding brand quality steady while the company itself changed.",
+    oneLiner:
+      "Transforming an enterprise brand through organizational change.",
+    brief:
+      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, thousands of brand touchpoints had to move to a new identity without disrupting the people who depend on them. I helped lead the creative side of that transition — setting standards, building the systems, and controlling quality as the work scaled.",
+    process: [],
+    services: [
+      "Creative direction",
+      "Brand governance",
+      "Design systems & templates",
+      "Stakeholder alignment",
+    ],
+    palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
+    display: "CARELON",
+    cover: "",
+    gallery: [],
+    roleSummary:
+      "Creative lead through an enterprise acquisition and rebrand.",
+    caseStudy: {
+      overview: [
+        { label: "Organization", value: "Beacon Health Options → Carelon / Elevance Health" },
+        { label: "Role", value: "Creative Director / Creative lead" },
+        { label: "Focus", value: "Brand transition, governance, quality control" },
+        { label: "Scale", value: "TODO: Confirm — ~1,500+ assets; ~70,000+ employees" },
+        { label: "Timeline", value: "TODO: Confirm" },
+      ],
+      challenge:
+        "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work — while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
+      mandate:
+        "I was responsible for leading the creative side of the transition: establishing what the migrated work should look like, how it would be produced at scale, and how quality would be held as volume ramped up.",
+      context:
+        "Enterprise healthcare adds real constraints — compliance and legal review, accessibility requirements, legacy templates and systems, many stakeholder groups, and tight timelines. Decisions had to survive executive review while staying usable for the teams producing day-to-day work.",
+      role: [
+        "Set creative direction and standards for the migrated brand",
+        "Built templates and reusable systems so teams could produce on-brand work at volume",
+        "Ran creative review and quality control across output",
+        "Aligned executive and cross-functional stakeholders on the approach",
+        "TODO: Confirm additional responsibilities and specific deliverables",
+      ],
+      team: [
+        "Design team (managed a small in-house group)",
+        "Marketing, brand, and compliance stakeholders",
+        "TODO: Confirm collaborators — writers, developers, PMs, agencies, vendors",
+      ],
+      decisions: [
+        {
+          title: "Systematize before scaling",
+          body: "TODO: Confirm the specific decision, the options weighed, the recommendation, and the tradeoff. (Framing: templates + governance first so quality was repeatable rather than re-litigated on every asset.)",
+        },
+        {
+          title: "Protect the work through executive review",
+          body: "TODO: Confirm a real example of navigating executive/compliance feedback while keeping the creative strategically focused.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: What option existed, what John recommended, why, and what changed as a result.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — assets migrated, adoption, consistency, stakeholder approval, reduced rework",
+      ],
+      reflection:
+        "TODO: Add an honest reflection — what worked, what you'd improve, and how leading this transition shaped how you approach brand governance and creative operations today.",
+    },
+  },
+  {
+    slug: "creative-operations-marketing-bench",
+    num: "L02",
+    tier: "leadership",
+    flagship: true,
+    title: "Creative Operations & Marketing Bench",
+    client: "Elevance Health / Carelon",
+    year: "2024",
+    category: "Creative Operations",
+    duration: "TODO: Confirm timeline",
+    tags: ["Creative Ops", "Systems", "Scale"],
+    blurb:
+      "Building a faster, more scalable creative support system so a high-demand marketing organization could get quality work without the bottlenecks.",
+    oneLiner:
+      "Building a faster, more scalable creative support system.",
+    brief:
+      "A large marketing organization was generating more creative demand than the existing process could absorb. I helped design and run a creative support model — the 'Marketing Bench' — that made intake, prioritization, and production more predictable and faster, without lowering the bar.",
+    process: [],
+    services: [
+      "Creative operations",
+      "Workflow & governance",
+      "Intake & prioritization",
+      "Team enablement",
+    ],
+    palette: ["#0e1a18", "#1cb791", "#1f8a6d", "#f3f1ea"],
+    display: "BENCH",
+    cover: "",
+    gallery: [],
+    roleSummary:
+      "Designed and ran a scalable creative-operations support model.",
+    caseStudy: {
+      overview: [
+        { label: "Organization", value: "Elevance Health / Carelon" },
+        { label: "Role", value: "Creative operations lead" },
+        { label: "Focus", value: "Intake, prioritization, production throughput" },
+        { label: "Impact", value: "TODO: Confirm — ~60% faster turnaround; ~30% higher engagement" },
+        { label: "Timeline", value: "TODO: Confirm" },
+      ],
+      challenge:
+        "Creative demand outpaced capacity. Requests arrived through inconsistent channels, priorities competed, and turnaround suffered — which pushed teams toward off-brand shortcuts.",
+      mandate:
+        "Design a support system that could absorb high volume, keep quality consistent, and give requesters a predictable path — then operate it.",
+      context:
+        "The work had to fit an enterprise environment: many internal clients, existing tooling, brand and compliance requirements, and no appetite for adding friction.",
+      role: [
+        "Defined the intake and prioritization model",
+        "Established governance and standards so quality was repeatable",
+        "Built templates and reusable components to speed production",
+        "Supported adoption across internal teams",
+        "TODO: Confirm additional responsibilities",
+      ],
+      team: [
+        "Design and production contributors",
+        "Marketing leads and internal requesters",
+        "TODO: Confirm collaborators and reporting structure",
+      ],
+      decisions: [
+        {
+          title: "Standardize intake",
+          body: "TODO: Confirm the intake decision — options, recommendation, tradeoff, and result.",
+        },
+        {
+          title: "Templatize the high-volume work",
+          body: "TODO: Confirm which work was systematized and the effect on speed and consistency.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: Detail the option, recommendation, and outcome.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — turnaround improvement, engagement, adoption, reduced rework",
+      ],
+      reflection:
+        "TODO: Add an honest reflection on building creative operations at scale — what held up, what you'd change.",
+    },
+  },
+  {
+    slug: "workfront-workflow-transformation",
+    num: "L03",
+    tier: "leadership",
+    flagship: true,
+    title: "Workfront Workflow Transformation",
+    client: "Elevance Health / Carelon",
+    year: "2024",
+    category: "Workflow & Production",
+    duration: "TODO: Confirm timeline",
+    tags: ["Workfront", "Workflow", "Ops"],
+    blurb:
+      "Improving how creative work moves through a high-volume organization — intake, reviews, approvals, and reporting in Workfront.",
+    oneLiner:
+      "Improving creative workflow across a high-volume organization.",
+    brief:
+      "A high-volume creative operation needed a more reliable way to route work: clearer intake, better prioritization, smoother reviews and approvals, and reporting leadership could trust. I helped shape how that ran in Workfront.",
+    process: [],
+    services: [
+      "Workflow design",
+      "Workfront ownership",
+      "Reviews & approvals",
+      "Reporting & templates",
+    ],
+    palette: ["#0a1729", "#1cb791", "#1f3a5c", "#e8ecf2"],
+    display: "WORKFRONT",
+    cover: "",
+    gallery: [],
+    roleSummary:
+      "Shaped intake, review, and approval workflow in Workfront at scale.",
+    caseStudy: {
+      overview: [
+        { label: "Organization", value: "Elevance Health / Carelon" },
+        { label: "Role", value: "Workflow / production lead" },
+        { label: "Platform", value: "Workfront" },
+        { label: "Volume", value: "TODO: Confirm — ~75+ projects monthly" },
+        { label: "Timeline", value: "TODO: Confirm" },
+      ],
+      challenge:
+        "At high monthly volume, unclear intake and inconsistent review paths created bottlenecks and rework. Work stalled in approvals, and leadership lacked a reliable view of throughput.",
+      mandate:
+        "Improve how work is requested, prioritized, reviewed, approved, and reported — so the operation runs faster with less friction.",
+      context:
+        "Enterprise scale, many stakeholders, established tooling, and the need to change process without disrupting active work.",
+      role: [
+        "Reworked intake and prioritization",
+        "Streamlined reviews and approvals",
+        "Improved reporting and templates",
+        "Supported training and adoption",
+        "TODO: Confirm additional responsibilities",
+      ],
+      team: [
+        "Creative and production teams",
+        "Project managers and stakeholders",
+        "TODO: Confirm collaborators",
+      ],
+      decisions: [
+        {
+          title: "Fix intake first",
+          body: "TODO: Confirm the intake changes, the options weighed, and the measured effect.",
+        },
+        {
+          title: "Shorten the approval path",
+          body: "TODO: Confirm how reviews/approvals were restructured and the result.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: Detail the option, recommendation, and outcome.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — reduced bottlenecks/rework, faster cycle time, reporting adoption",
+      ],
+      reflection:
+        "TODO: Add an honest reflection on operationalizing workflow in Workfront at scale.",
+    },
+  },
   {
     slug: "colony-coffee",
     num: "01",
+    tier: "independent",
     title: "Colony Coffee Co.",
     client: "Colony Coffee — Todd Mills",
     year: "2025",
@@ -88,6 +358,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "friends-rehab",
     num: "02",
+    tier: "independent",
     title: "Friends Rehabilitation Program",
     client: "Friends Rehabilitation Program (FRP)",
     year: "2025",
@@ -146,6 +417,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "harrison-bounds",
     num: "03",
+    tier: "secondary",
     title: "Harrison Bounds",
     client: "Harrison Bounds",
     year: "2024",
@@ -191,6 +463,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "special-forces-trust",
     num: "04",
+    tier: "independent",
     title: "Special Forces Trust",
     client: "Special Forces Trust",
     year: "2024",
@@ -240,6 +513,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "stamp-out-stigma",
     num: "05",
+    tier: "independent",
     title: "Stamp Out Stigma",
     client: "Stamp Out Stigma",
     year: "2023",
@@ -289,6 +563,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "spikes-k9-fund",
     num: "06",
+    tier: "independent",
     title: "Spike's K9 Fund",
     client: "Spike's K9 Fund",
     year: "2023",
@@ -338,6 +613,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "beacon-van",
     num: "07",
+    tier: "secondary",
     title: "Beacon Transit Van",
     client: "Beacon Health Options",
     year: "2024",
@@ -389,14 +665,33 @@ export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug);
 }
 
+export function tierOf(p: Project): ProjectTier {
+  return p.tier ?? "independent";
+}
+
+export function projectsByTier(tier: ProjectTier): Project[] {
+  return PROJECTS.filter((p) => tierOf(p) === tier);
+}
+
+export const LEADERSHIP_PROJECTS = projectsByTier("leadership");
+export const INDEPENDENT_PROJECTS = projectsByTier("independent");
+export const SECONDARY_PROJECTS = projectsByTier("secondary");
+
+/**
+ * Prev/next stay within the project's own tier so a leadership case study
+ * doesn't hand off to a coffee brand and vice-versa.
+ */
 export function getAdjacentProjects(slug: string): {
   prev: Project | null;
   next: Project | null;
 } {
-  const i = PROJECTS.findIndex((p) => p.slug === slug);
-  if (i === -1) return { prev: null, next: null };
+  const project = getProject(slug);
+  if (!project) return { prev: null, next: null };
+  const list = projectsByTier(tierOf(project));
+  const i = list.findIndex((p) => p.slug === slug);
+  if (i === -1 || list.length < 2) return { prev: null, next: null };
   return {
-    prev: PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length],
-    next: PROJECTS[(i + 1) % PROJECTS.length],
+    prev: list[(i - 1 + list.length) % list.length],
+    next: list[(i + 1) % list.length],
   };
 }

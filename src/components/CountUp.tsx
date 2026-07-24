@@ -42,7 +42,11 @@ export default function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const mv = useMotionValue(from);
-  const [display, setDisplay] = useState<string>(formatValue(from, decimals));
+  // Default to the FINAL value so the real number is present in server-rendered
+  // HTML and before the element scrolls into view. This means screen readers,
+  // search crawlers, and no-JS visitors always see e.g. "20+", never "0+".
+  // The count-up (0 → target) only kicks in once the stat is on screen.
+  const [display, setDisplay] = useState<string>(formatValue(to, decimals));
 
   useEffect(() => {
     if (!inView) return;
@@ -50,13 +54,14 @@ export default function CountUp({
       setDisplay(formatValue(to, decimals));
       return;
     }
+    setDisplay(formatValue(from, decimals));
     const controls = animate(mv, to, {
       duration,
       ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => setDisplay(formatValue(v, decimals)),
     });
     return () => controls.stop();
-  }, [inView, to, duration, mv, reduce, decimals]);
+  }, [inView, to, from, duration, mv, reduce, decimals]);
 
   return (
     <span

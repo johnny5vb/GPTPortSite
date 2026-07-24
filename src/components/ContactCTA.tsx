@@ -1,14 +1,40 @@
 "use client";
 
 import { motion } from "framer-motion";
-import MagneticButton from "./MagneticButton";
 import { ArrowUpRight } from "lucide-react";
 import VelocityHeading from "./VelocityHeading";
+import { PROFILE } from "@/lib/profile";
+
+/**
+ * Two inquiry paths, not one generic form. The leadership path is primary
+ * (green, listed first); the project path is the secondary consulting offer.
+ * Both use structured mailto links so they work with no backend and pre-fill
+ * a useful subject + prompt.
+ * TODO: If real forms are wanted, wire Netlify Forms (the site is on Netlify)
+ * and swap these mailto CTAs for posted forms with the fields noted below.
+ */
+
+const LEADERSHIP_MAILTO =
+  `mailto:${PROFILE.contact.email}` +
+  `?subject=${encodeURIComponent("Leadership opportunity")}` +
+  `&body=${encodeURIComponent(
+    "Name:\nCompany:\nRole / opportunity:\nJob description or link:\n\nMessage:\n",
+  )}`;
+
+const PROJECT_MAILTO =
+  `mailto:${PROFILE.contact.email}` +
+  `?subject=${encodeURIComponent("Project inquiry")}` +
+  `&body=${encodeURIComponent(
+    "Name:\nOrganization:\nProject type:\nEstimated timing:\n\nMessage:\n",
+  )}`;
 
 export default function ContactCTA() {
   return (
-    <section id="contact" className="relative py-28 md:py-40 container-x rule-top overflow-hidden">
-      {/* Availability strip — single line of information, not decoration */}
+    <section
+      id="contact"
+      className="relative py-28 md:py-40 container-x rule-top overflow-hidden"
+    >
+      {/* Availability strip — leadership-forward, no hustle language */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -16,9 +42,13 @@ export default function ContactCTA() {
         transition={{ duration: 0.6 }}
         className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-16 md:mb-24 font-mono text-[10px] uppercase tracking-[0.22em]"
       >
-        <span className="text-bone/80">Q3 2026 onward</span>
+        <span className="text-bone/80">
+          Open to senior creative leadership roles
+        </span>
         <span className="text-mute-2">/</span>
-        <span className="text-bone/80">Retainer / Project / Fractional CD</span>
+        <span className="text-bone/80">Remote / Select hybrid</span>
+        <span className="text-mute-2">/</span>
+        <span className="text-mute">Select consulting via Carman Creative</span>
       </motion.div>
 
       <div className="relative">
@@ -29,7 +59,7 @@ export default function ContactCTA() {
           transition={{ duration: 0.8 }}
           className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-8"
         >
-          // 07 — Let's build
+          // 07 — Let&apos;s talk
         </motion.p>
 
         <VelocityHeading className="origin-left" maxSkew={1}>
@@ -40,84 +70,90 @@ export default function ContactCTA() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-[clamp(2.8rem,8.4vw,8.4rem)] leading-[1.08] tracking-[-0.04em] text-bone"
           >
-            Let&apos;s design something
+            Let&apos;s make the work,
             <br />
-            <em className="font-display-wonk text-green">
-              that actually works.
-            </em>
+            <em className="font-display-wonk text-green">and the team, better.</em>
           </motion.h2>
         </VelocityHeading>
 
-        <div className="mt-14 grid grid-cols-12 gap-6 items-start">
-          <div className="col-span-12 md:col-span-6">
-            <p className="text-bone/85 text-lg leading-relaxed max-w-[46ch]">
-              Brand identity, web design, packaging, or an AI-powered creative
-              system — start with a short note about what you&apos;re building.
+        {/* Two paths */}
+        <div className="mt-14 grid grid-cols-12 gap-4 md:gap-6">
+          {/* Primary: employment */}
+          <div className="col-span-12 md:col-span-6 rounded-xl border border-green/40 bg-green/[0.05] p-7 md:p-9 flex flex-col">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-green mb-3">
+              // for hiring teams
             </p>
-
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <MagneticButton
-                href="mailto:johnbcarman@gmail.com?subject=Project%20inquiry"
-                className="group inline-flex items-center gap-3 rounded-full bg-green text-ink px-7 py-5 font-mono text-[12px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
-                ariaLabel="Email John"
+            <h3 className="font-display text-2xl md:text-3xl leading-[1.1] tracking-[-0.03em] text-bone">
+              Discuss a Leadership Opportunity
+            </h3>
+            <p className="mt-3 text-bone/80 leading-relaxed max-w-[40ch]">
+              Considering John for a senior in-house creative leadership role?
+              Share the team, the mandate, and a link to the role.
+            </p>
+            <div className="mt-6 pt-2">
+              <a
+                href={LEADERSHIP_MAILTO}
+                data-cursor="email"
+                className="group inline-flex items-center gap-3 rounded-full bg-green text-ink px-6 py-4 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
               >
-                johnbcarman@gmail.com
+                Start the conversation
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </MagneticButton>
-
+              </a>
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-5 md:col-start-8 grid grid-cols-2 gap-4">
-            <ContactBlock
-              label="Studio"
-              value={`Virginia Beach\nPhiladelphia\nBrooklyn`}
-            />
-            <ContactBlock label="Hours" value={`Mon–Fri\n9a–6p EST`} />
-            <ContactBlock
-              label="Social"
-              value={`@jbcarms\nlinkedin.com/in/johncarman`}
-            />
-            <ContactBlock
-              label="Open for"
-              value={`Retainer / Project\nFractional CD`}
-              highlight
-            />
+          {/* Secondary: project */}
+          <div className="col-span-12 md:col-span-6 rounded-xl border border-line bg-ink-2 p-7 md:p-9 flex flex-col">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute mb-3">
+              // for organizations
+            </p>
+            <h3 className="font-display text-2xl md:text-3xl leading-[1.1] tracking-[-0.03em] text-bone">
+              Discuss a Creative Project
+            </h3>
+            <p className="mt-3 text-bone/80 leading-relaxed max-w-[40ch]">
+              Brand, identity, campaigns, websites, or a creative-systems
+              engagement with Carman Creative. Tell me what you&apos;re building.
+            </p>
+            <div className="mt-6 pt-2">
+              <a
+                href={PROJECT_MAILTO}
+                data-cursor="email"
+                className="group inline-flex items-center gap-3 rounded-full border border-line-2 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
+              >
+                Send a project note
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
           </div>
+        </div>
+
+        {/* Contact meta */}
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <ContactBlock label="Email" value={PROFILE.contact.email} />
+          <ContactBlock label="Based in" value={PROFILE.location.base} />
+          <ContactBlock
+            label="Availability"
+            value={`Remote\nSelect hybrid`}
+          />
+          <ContactBlock
+            label="Social"
+            value={`${PROFILE.contact.instagramHandle}\nlinkedin.com/in/johncarman`}
+          />
         </div>
       </div>
     </section>
   );
 }
 
-function ContactBlock({
-  label,
-  value,
-  highlight,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
+function ContactBlock({ label, value }: { label: string; value: string }) {
   return (
-    <div
-      className={`p-4 rounded-md border ${
-        highlight
-          ? "border-green/40 bg-green/5"
-          : "border-line bg-ink-2"
-      }`}
-    >
+    <div className="p-4 rounded-md border border-line bg-ink-2">
       <div className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mute mb-2">
         {label}
       </div>
-      <div
-        className={`whitespace-pre-line text-sm leading-snug ${
-          highlight ? "text-green" : "text-bone"
-        }`}
-      >
+      <div className="whitespace-pre-line text-sm leading-snug text-bone">
         {value}
       </div>
     </div>
   );
 }
-

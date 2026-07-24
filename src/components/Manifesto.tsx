@@ -24,27 +24,27 @@ const bodyVariants: Variants = {
 const PRINCIPLES = [
   {
     mark: "I.",
-    title: "Understand the problem first.",
-    em: "Then design and technology can solve it.",
-    note: "Strategy before craft. Every project begins with a brief that earns its own scope.",
+    title: "Give clear direction.",
+    em: "Business goals become briefs teams can act on.",
+    note: "I translate strategy into focused briefs, useful feedback, and decisions people can move on — not vague reactions.",
   },
   {
     mark: "II.",
-    title: "Design systems, not screens.",
-    em: "Tokens, components, governance — work that scales without me.",
-    note: "I leave behind a system the team can run. Not a one-off Figma file.",
+    title: "Protect the idea.",
+    em: "Keep the work strategically focused under pressure.",
+    note: "Executive feedback, compliance, timelines, competing priorities — I keep the idea intact while navigating all of it.",
   },
   {
     mark: "III.",
-    title: "Use AI to expand judgment.",
-    em: "Not to replace it. Modern tools, classical taste.",
-    note: "AI for the 80%. Humans for the 20% that decides whether it's any good.",
+    title: "Build stronger teams.",
+    em: "Clear expectations, real critique, room to own the work.",
+    note: "Designers do their best work when they understand the standard, get honest feedback, and gain confidence and ownership.",
   },
   {
     mark: "IV.",
-    title: "Lead with clarity.",
-    em: "Thoughtful process, meticulous craft, on time.",
-    note: "I write the brief, run the critique, and answer the email. No mystery.",
+    title: "Improve the system.",
+    em: "Fix the friction that slows good work down.",
+    note: "Workflows, templates, governance, and tools that make quality repeatable and fast — so good work isn't heroic.",
   },
 ];
 
@@ -96,7 +96,7 @@ export default function Manifesto() {
       <header className="grid grid-cols-12 gap-6 mb-10 md:mb-12 items-baseline">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 01 — How I work
+            // 01 — How I Lead
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">
@@ -107,11 +107,13 @@ export default function Manifesto() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-[clamp(2.2rem,5.4vw,4.4rem)] leading-[1.08] tracking-[-0.035em] text-bone whitespace-nowrap"
           >
-            Four <em className="font-display-wonk text-green">principles.</em>
+            How I <em className="font-display-wonk text-green">lead.</em>
           </motion.h2>
-          <p className="mt-4 text-mute text-sm md:text-base leading-relaxed max-w-[44ch]">
-            Efficient &amp; intentional. The way I run every engagement, from
-            first call to launch.
+          <p className="mt-4 text-mute text-sm md:text-base leading-relaxed max-w-[52ch]">
+            Leadership isn&apos;t only good ideas. It&apos;s setting a clear
+            standard, helping people improve, aligning stakeholders, protecting
+            the work from unnecessary complexity, and building systems that make
+            quality repeatable.
           </p>
         </div>
       </header>

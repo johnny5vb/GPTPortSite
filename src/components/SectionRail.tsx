@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const SECTIONS = [
   { id: "top", label: "Intro", num: "00" },
-  { id: "manifesto", label: "Principles", num: "01" },
+  { id: "manifesto", label: "How I Lead", num: "01" },
   { id: "work", label: "Work", num: "02" },
   { id: "spotlight", label: "In Focus", num: "03" },
-  { id: "talks-back", label: "AI Lab", num: "04" },
-  { id: "services", label: "Services", num: "05" },
+  { id: "talks-back", label: "AI & Systems", num: "04" },
+  { id: "services", label: "Consulting", num: "05" },
   { id: "about", label: "About", num: "06" },
   { id: "contact", label: "Contact", num: "07" },
 ];

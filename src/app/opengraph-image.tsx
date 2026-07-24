@@ -16,7 +16,7 @@ import path from "node:path";
 
 export const runtime = "nodejs";
 export const alt =
-  "Carman Creative — Creative Direction, Accelerated by AI";
+  "John Carman — Creative Director, Brand and Creative Operations Leader";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -69,9 +69,9 @@ export default async function Image() {
             textAlign: "center",
           }}
         >
-          <span style={{ color: "#f5f3ef" }}>Creative direction,</span>
+          <span style={{ color: "#f5f3ef" }}>Creative Director /</span>
           <span style={{ color: "#1cb791", fontStyle: "italic" }}>
-            accelerated by AI.
+            creative operations leader.
           </span>
         </div>
       </div>

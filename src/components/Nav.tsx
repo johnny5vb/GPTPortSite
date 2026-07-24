@@ -8,15 +8,16 @@ import {
   useSpring,
 } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { ArrowDownToLine } from "lucide-react";
 import CCMark from "./CCMark";
 import CCWordmark from "./CCWordmark";
 
 const links = [
-  { href: "/#work", label: "Work", num: "02" },
-  { href: "/lab", label: "Lab", num: "03" },
-  { href: "/#services", label: "Services", num: "04" },
-  { href: "/#about", label: "About", num: "05" },
-  { href: "/#contact", label: "Contact", num: "06" },
+  { href: "/#work", label: "Work", num: "01" },
+  { href: "/leadership", label: "Leadership", num: "02" },
+  { href: "/lab", label: "AI & Systems", num: "03" },
+  { href: "/#about", label: "About", num: "04" },
+  { href: "/#contact", label: "Contact", num: "05" },
 ];
 
 export default function Nav() {
@@ -75,15 +76,12 @@ export default function Nav() {
             <MagneticNavLink key={l.href} {...l} />
           ))}
           <a
-            href="/#contact"
-            data-cursor="hire"
+            href="/resume"
+            data-cursor="resume"
             className="ml-3 inline-flex items-center gap-2 rounded-full border border-green/60 bg-green/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-green hover:bg-green hover:text-ink transition-colors"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inset-0 rounded-full bg-green animate-ping opacity-80" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green" />
-            </span>
-            Available
+            Résumé
+            <ArrowDownToLine className="h-3.5 w-3.5" />
           </a>
         </nav>
 
@@ -122,6 +120,17 @@ export default function Nav() {
                   <span className="text-mute">↗</span>
                 </a>
               ))}
+              <a
+                href="/resume"
+                onClick={() => setOpen(false)}
+                className="mt-2 flex items-center justify-between rounded-lg border border-green/50 bg-green/10 px-3 py-3 font-mono text-xs uppercase tracking-[0.18em] text-green"
+              >
+                <span>
+                  <span className="text-green/60 mr-3">06</span>
+                  Résumé
+                </span>
+                <ArrowDownToLine className="h-3.5 w-3.5" />
+              </a>
             </div>
           </motion.div>
         )}
@@ -150,10 +159,12 @@ function MagneticNavLink({
   const sx = useSpring(x, { stiffness: 260, damping: 22, mass: 0.5 });
   const sy = useSpring(y, { stiffness: 260, damping: 22, mass: 0.5 });
 
-  // Detect "current page" for /lab so we mark it active even on home anchor links
-  const isActive =
-    (href === "/lab" && pathname === "/lab") ||
-    (href.startsWith("/#") && pathname === "/");
+  // A route-link (e.g. /leadership, /lab) is "current" when its path matches.
+  // Anchor links (/#…) belong to the home page.
+  const isRoute = href.startsWith("/") && !href.startsWith("/#");
+  const isActive = isRoute
+    ? pathname === href
+    : pathname === "/";
 
   const handleMove = (e: React.MouseEvent) => {
     const el = ref.current;
@@ -183,7 +194,7 @@ function MagneticNavLink({
       {label}
       <span
         className={`pointer-events-none absolute left-4 right-4 bottom-2 h-px origin-left bg-green transition-transform duration-500 ${
-          isActive && href === "/lab"
+          isActive && isRoute
             ? "scale-x-100"
             : "scale-x-0 group-hover:scale-x-100"
         }`}
