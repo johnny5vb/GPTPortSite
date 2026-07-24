@@ -367,19 +367,20 @@ export const PROJECTS: Project[] = [
         { label: "Client", value: "Colony Coffee — Todd Mills" },
         { label: "Role", value: "Brand concept & label design (Carman Creative)" },
         { label: "Year", value: "2025" },
-        { label: "Scope", value: "Brand look & feel, label & packaging design" },
+        { label: "Scope", value: "Brand system, labels & packaging, business card" },
         { label: "Status", value: "First batch of labels in production" },
       ],
       challenge:
         "Todd Mills — a veteran, and genuinely passionate about coffee — wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
       mandate:
-        "Todd came to me for that creative edge — to shape the brand's look and feel and design the coffee labels themselves: the typography, the structure, and the historical direction of the artwork.",
+        "Todd came to me for a logo. But a brand this specific — built on history and authenticity — needed more than a mark. I shaped the look and feel and designed the labels themselves: the typography, the structure, and the historical direction of the artwork.",
       context:
         "A veteran-founded small business, a founder with a strong, specific vision and a real eye for detail, and a brand built on patriotism and history that had to feel authentic rather than costume.",
       role: [
         "Led ideation and concepting over a few rounds with Todd",
-        "Landed the overall look and feel",
+        "Landed the overall look and feel and the branding system",
         "Set the typography and the structure of the label itself",
+        "Designed the custom label artwork, packaging, and a business card",
         "Directed the historical, period-authentic artwork approach",
       ],
       team: [
@@ -387,6 +388,10 @@ export const PROJECTS: Project[] = [
         "A direct, hands-on collaboration between the two of us",
       ],
       decisions: [
+        {
+          title: "A logo wasn't enough",
+          body: "Colony came asking for a logo. A brand built this specifically on history and authenticity needed more than a mark — so we built the system: custom label artwork and packaging, plus a business card, to actually get the company off the ground.",
+        },
         {
           title: "Honor history without the clichés",
           body: "A genuinely period-authentic historical edge — not generic patriotic tropes. Todd's whole point was pride done right, so the artwork had to feel true to its era, not like a costume.",
@@ -401,11 +406,12 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "Direction locked; Todd moved into production",
-        "First batch of labels recently printed",
+        "What began as a logo request became a full brand system that launched the company",
+        "Direction locked; Todd moved into production — first batch of labels recently printed",
+        "The start of an ongoing relationship — more Colony work to come",
       ],
       reflection:
-        "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about.",
+        "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
     },
   },
   {
