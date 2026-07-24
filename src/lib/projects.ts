@@ -114,46 +114,49 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Creative Director / Creative lead" },
         { label: "Focus", value: "Brand transition, governance, quality control" },
         { label: "Scale", value: "~1,500+ assets / ~85,000+ employees" },
-        { label: "Timeline", value: "2018 — 2020" },
+        { label: "Team", value: "Scaled to ~20 (3 in-house + freelance)" },
+        { label: "Timeline", value: "2018 — 2020 (9-month rebrand)" },
       ],
       challenge:
         "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work — while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
       mandate:
-        "I was responsible for leading the creative side of the transition: establishing what the migrated work should look like, how it would be produced at scale, and how quality would be held as volume ramped up.",
+        "As Creative Director, I led every part of the rebrand: the new identity and brand guidelines, the design system and templates, vendor and partner direction, merchandise, and a print-on-demand platform that had to be rebuilt from scratch.",
       context:
         "Enterprise healthcare adds real constraints — compliance and legal review, accessibility requirements, legacy templates and systems, many stakeholder groups, and tight timelines. Decisions had to survive executive review while staying usable for the teams producing day-to-day work.",
       role: [
-        "Set creative direction and standards for the migrated brand",
-        "Built templates and reusable systems so teams could produce on-brand work at volume",
-        "Ran creative review and quality control across output",
-        "Aligned executive and cross-functional stakeholders on the approach",
-        "TODO: Confirm additional responsibilities and specific deliverables",
+        "Established the new brand identity and guidelines",
+        "Built the brand and design system first, then the templates the work would run on",
+        "Directed vendors and partners; rebuilt merchandise and the print-on-demand platform end to end",
+        "Managed 3 in-house designers, a video production artist, and a team of project managers and writers",
+        "Ran a near-daily cadence and a live progress dashboard to keep hundreds of deliverables on track",
       ],
       team: [
-        "Design team — managed five designers",
-        "Marketing, brand, and compliance stakeholders",
-        "TODO: Confirm collaborators — writers, developers, PMs, agencies, vendors",
+        "3 in-house designers",
+        "A video production artist",
+        "Project managers and writers",
+        "Creative Circle freelancers — the team scaled to ~20 people across the year",
       ],
       decisions: [
         {
-          title: "Systematize before scaling",
-          body: "TODO: Confirm the specific decision, the options weighed, the recommendation, and the tradeoff. (Framing: templates + governance first so quality was repeatable rather than re-litigated on every asset.)",
+          title: "Build the system before the assets",
+          body: "Rather than migrating piece by piece, I built the brand and design system first, then the templates — and produced against them. Slower to start, but it made ~1,500+ deliverables repeatable and consistent as volume spiked.",
         },
         {
-          title: "Protect the work through executive review",
-          body: "TODO: Confirm a real example of navigating executive/compliance feedback while keeping the creative strategically focused.",
+          title: "Batch the work to make it finishable",
+          body: "Hundreds of deliverables are overwhelming as one list, so we batched them by type of piece, client, and product and worked through them in waves — steady, measurable progress instead of drift.",
         },
         {
-          title: "TODO: Add a third key decision",
-          body: "TODO: What option existed, what John recommended, why, and what changed as a result.",
+          title: "Scale the team, and keep it in sync",
+          body: "We brought in Creative Circle freelancers, scaling to ~20 people, and held it together with near-daily check-ins and a shared progress dashboard so everyone could see exactly where things stood.",
         },
       ],
       outcomes: [
         "~1,500+ brand assets migrated to the new identity across the organization",
-        "TODO: Confirm further outcomes — adoption, consistency, stakeholder approval, reduced rework",
+        "Merchandise and the print-on-demand platform rebuilt end to end",
+        "The full rebrand delivered in ~9 months with a team that scaled to ~20",
       ],
       reflection:
-        "TODO: Add an honest reflection — what worked, what you'd improve, and how leading this transition shaped how you approach brand governance and creative operations today.",
+        "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of deliverables look overwhelming on paper, but with the right system and the right people, you chip away at it — and finishing something at that scale is its own reward. This is the project that changed how I lead.",
     },
   },
   {
