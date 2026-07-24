@@ -548,7 +548,11 @@ export default function Atelier() {
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute mb-3">
               // critique stream / {tone}
             </div>
-            <ul className="grid gap-2">
+            {/* Simulated, canned critique output — a decorative illustration of
+                the concept (it animates through a dimmed reveal and uses muted
+                severity colors). The section's real heading + description carry
+                the meaning for assistive tech, so the mock is aria-hidden. */}
+            <ul className="grid gap-2" aria-hidden="true">
               {draft.pins.map((pin, i) => {
                 const visible = i < revealed;
                 return (
@@ -556,7 +560,9 @@ export default function Atelier() {
                     key={`${draft.id}-${tone}-${i}`}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{
-                      opacity: visible ? 1 : 0.25,
+                      // Un-revealed pins are fully invisible (not a low-contrast
+                      // ghost) so they don't trip color-contrast while hidden.
+                      opacity: visible ? 1 : 0,
                       x: visible ? 0 : -10,
                     }}
                     transition={{

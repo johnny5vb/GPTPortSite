@@ -23,9 +23,10 @@ function Body({ text, className = "" }: { text: string; className?: string }) {
 }
 
 export default function ProjectDetail({ project, prev, next }: Props) {
-  const flagship = project.flagship && project.caseStudy;
-  const backHref = flagship ? "/leadership" : "/#work";
-  const backLabel = flagship ? "back to leadership" : "back to work";
+  const isCaseStudy = !!project.caseStudy;
+  const isFlagship = !!project.flagship && isCaseStudy;
+  const backHref = isFlagship ? "/leadership" : "/#work";
+  const backLabel = isFlagship ? "back to leadership" : "back to work";
 
   return (
     <article className="relative">
@@ -76,7 +77,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="col-span-12 md:col-span-4 mt-6 md:mt-0 md:pt-3 font-mono text-[11px] uppercase tracking-[0.22em] space-y-3"
           >
-            {flagship ? (
+            {isCaseStudy ? (
               project.caseStudy!.overview.map((o) => (
                 <Meta key={o.label} label={o.label} value={o.value} />
               ))
@@ -112,7 +113,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
       {/* Cover — real image for client work; branded gradient for flagships
           (no photo yet). Both morph from the Work thumbnail. */}
       <section id="cover" className="container-x">
-        {flagship ? (
+        {isFlagship ? (
           <div
             style={{
               viewTransitionName: `project-${project.slug}`,
@@ -120,8 +121,23 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             }}
             className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line flex items-end p-8 md:p-12"
           >
-            <span className="font-display text-[clamp(2.5rem,10vw,7rem)] tracking-[-0.04em] text-bone/90 mix-blend-screen">
+            <span
+              aria-hidden
+              className="font-display text-[clamp(2.5rem,10vw,7rem)] tracking-[-0.04em] text-bone/90 mix-blend-screen"
+            >
               {project.display}
+            </span>
+          </div>
+        ) : isCaseStudy ? (
+          <div
+            style={{ viewTransitionName: `project-${project.slug}` }}
+            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-dashed border-line-2 bg-ink-2 flex flex-col items-center justify-center gap-3 text-center px-6"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
+              // Visuals in progress
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute-2">
+              Final assets being gathered
             </span>
           </div>
         ) : (
@@ -141,7 +157,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
         )}
       </section>
 
-      {flagship ? (
+      {isCaseStudy ? (
         <CaseStudyBody project={project} />
       ) : (
         <StandardBody project={project} />
@@ -176,7 +192,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               data-cursor="all"
               className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-bone hover:text-green transition-colors"
             >
-              {flagship ? "All leadership work" : "All projects"}
+              {isFlagship ? "All leadership work" : "All projects"}
             </Link>
           </div>
 
@@ -271,6 +287,20 @@ function CaseStudyBody({ project }: { project: Project }) {
           ))}
         </div>
       </Block>
+
+      {!project.flagship && (
+        <Block eyebrow="The work">
+          <div className="rounded-lg border border-dashed border-line-2 bg-ink-2 p-10 md:p-14 text-center max-w-[62ch]">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
+              Visuals in progress
+            </p>
+            <p className="mt-3 text-mute-2 italic">
+              Final case-study images are being gathered and will land here with
+              captions explaining what each artifact demonstrates.
+            </p>
+          </div>
+        </Block>
+      )}
 
       <Block eyebrow="The outcome">
         <List items={cs.outcomes} />

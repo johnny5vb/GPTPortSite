@@ -354,6 +354,50 @@ export const PROJECTS: Project[] = [
       { src: "/work/colony-coffee/gallery-3.png", alt: "Colony Coffee — identity detail" },
     ],
     externalUrl: "https://www.carmancreative.com/work/colonycoffee",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Colony Coffee — Todd Mills" },
+        { label: "Role", value: "Brand, packaging & web lead (Carman Creative)" },
+        { label: "Year", value: "2025" },
+        { label: "Scope", value: "Identity, packaging system, digital foundation" },
+        { label: "Deliverables", value: "Logo, packaging, in-store toolkit, website" },
+      ],
+      challenge:
+        "A new craft-coffee brand needed to earn loyalty in a crowded specialty market without leaning on the usual category clichés — and it needed a system flexible enough to grow from a single roaster to a small chain.",
+      mandate:
+        "Carman Creative was brought in to build the visual and digital foundation end to end: brand, packaging, and a website the team could extend as they added SKUs, locations, and channels.",
+      context:
+        "An early-stage brand with limited existing assets and an owner-operator making the decisions directly. TODO: Confirm budget, timeline, and any category or supplier constraints.",
+      role: [
+        "Set the brand direction and built the identity system",
+        "Designed the packaging system to hold up across SKUs",
+        "Built the website as the brand's digital foundation",
+        "TODO: Confirm the split of work with any collaborators",
+      ],
+      team: [
+        "Todd Mills — owner / client",
+        "TODO: Confirm any writers, photographers, or production partners",
+      ],
+      decisions: [
+        {
+          title: "Earn loyalty without the clichés",
+          body: "Positioned the brand on quality, community, and tradition rather than the tropes the category defaults to, so it could stand on its own. TODO: Confirm the specific verbal and visual choices that carried it.",
+        },
+        {
+          title: "Design a system, not one-offs",
+          body: "Built packaging and web as a flexible, extendable system so new SKUs and locations stay on-brand as the business grows. TODO: Confirm the scope of the in-store toolkit.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: What options existed, what you recommended, the tradeoff, and what changed.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — launch, adoption, sales, or the client's read on the work",
+      ],
+      reflection:
+        "TODO: Add a short, honest reflection — what worked and what you'd refine next time.",
+    },
   },
   {
     slug: "friends-rehab",
@@ -413,6 +457,49 @@ export const PROJECTS: Project[] = [
       },
     ],
     externalUrl: "https://www.carmancreative.com/work/frp",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Friends Rehabilitation Program (FRP)" },
+        { label: "Role", value: "Web & content lead (Carman Creative)" },
+        { label: "Year", value: "2025" },
+        { label: "Scope", value: "Website refresh, content structure, CMS" },
+        { label: "Deliverables", value: "Redesigned site staff can maintain" },
+      ],
+      challenge:
+        "A long-running rehabilitation nonprofit needed a digital home that people in crisis — and the families and referral partners around them — could actually use: clear services, findable resources, and obvious next steps, all trustworthy at a glance.",
+      mandate:
+        "Rebuild the site around clarity and reassurance, and hand the organization something staff could update without a designer in the loop.",
+      context:
+        "A mission-driven organization with limited technical capacity and an audience that arrives under stress. Content had to be accessible and calm. TODO: Confirm stakeholders, timeline, and any compliance requirements.",
+      role: [
+        "Led the site refresh and information architecture",
+        "Shaped the content so services and next steps read plainly",
+        "Built it on a CMS staff can maintain themselves",
+        "TODO: Confirm collaborators (dev, content, photography)",
+      ],
+      team: [
+        "FRP staff / stakeholders",
+        "TODO: Confirm any developers or content partners",
+      ],
+      decisions: [
+        {
+          title: "Design for reassurance, not decoration",
+          body: "Chose readable typography and a restrained system so the experience reads calm and credible to someone seeking help. TODO: Confirm the specific accessibility and readability choices.",
+        },
+        {
+          title: "Independence over dependence",
+          body: "Built on a CMS so staff can keep content current without a designer — durability the organization needed. TODO: Confirm the platform and handoff/training.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: Option, recommendation, tradeoff, result.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — usage, staff adoption, or the organization's feedback",
+      ],
+      reflection: "TODO: Add a short, honest reflection.",
+    },
   },
   {
     slug: "harrison-bounds",
@@ -509,6 +596,48 @@ export const PROJECTS: Project[] = [
       { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT — brand application" },
     ],
     externalUrl: "https://www.carmancreative.com/work/sft",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Special Forces Trust" },
+        { label: "Role", value: "Brand & web lead (Carman Creative)" },
+        { label: "Year", value: "2024" },
+        { label: "Scope", value: "Brand refresh, website, donor UX" },
+        { label: "Deliverables", value: "Refreshed identity + donor platform" },
+      ],
+      challenge:
+        "A trust supporting Special Forces service members, veterans, and their families needed a digital presence that reflected the mission — strength, reliability, respect — while making it easy for donors and families to find help and give support.",
+      mandate:
+        "Refresh the brand and rebuild the site so the organization reads as serious and trustworthy, and so donation and program paths are frictionless.",
+      context:
+        "High-stakes audience, a mission that demands restraint over ceremony, and donor trust to protect. TODO: Confirm stakeholders, timeline, and platform constraints.",
+      role: [
+        "Led the brand refresh and its application online",
+        "Designed the site and donor experience for clarity under high stakes",
+        "TODO: Confirm personal contribution vs. collaborators",
+      ],
+      team: [
+        "Special Forces Trust stakeholders",
+        "TODO: Confirm developers, writers, or partners",
+      ],
+      decisions: [
+        {
+          title: "Restraint as respect",
+          body: "Chose strong hierarchy and quiet typography over ceremony, so the work reads reliable rather than performative. TODO: Confirm the specific direction.",
+        },
+        {
+          title: "Make the important actions obvious",
+          body: "Prioritized donate and program paths so the audiences who need them reach them fast. TODO: Confirm the flows and any measured effect.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: Option, recommendation, tradeoff, result.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — donations, engagement, or stakeholder feedback",
+      ],
+      reflection: "TODO: Add a short, honest reflection.",
+    },
   },
   {
     slug: "stamp-out-stigma",
@@ -559,6 +688,48 @@ export const PROJECTS: Project[] = [
       { src: "/work/stamp-out-stigma/gallery-3.png", alt: "Stamp Out Stigma — awareness messaging" },
     ],
     externalUrl: "https://www.carmancreative.com/work/sos",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Stamp Out Stigma" },
+        { label: "Role", value: "Campaign & OOH design (Carman Creative)" },
+        { label: "Year", value: "2023" },
+        { label: "Scope", value: "Awareness campaign, out-of-home creative" },
+        { label: "Deliverables", value: "Times Square activation creative" },
+      ],
+      challenge:
+        "A national mental-health awareness effort needed to cut through one of the busiest environments on earth — Times Square — and get people to treat mental health as seriously as physical health, without sensationalizing it.",
+      mandate:
+        "Create out-of-home creative that lands instantly in a fast-moving, high-noise space while carrying real emotional weight.",
+      context:
+        "A large-format, high-visibility placement with seconds to communicate, a sensitive subject, and a broad, diverse audience. TODO: Confirm the sponsoring organization, run dates, and any partners.",
+      role: [
+        "Directed the campaign concept and messaging",
+        "Designed the out-of-home creative for legibility at a glance",
+        "TODO: Confirm personal contribution vs. collaborators",
+      ],
+      team: [
+        "Campaign stakeholders",
+        "TODO: Confirm writers, media partners, or agencies",
+      ],
+      decisions: [
+        {
+          title: "Clarity over spectacle",
+          body: "Used strong typography, restrained color, and honest imagery so the message reads in seconds without sensationalism. TODO: Confirm the specific creative choices.",
+        },
+        {
+          title: "Put the message where silence usually wins",
+          body: "Placing an honest mental-health message in one of the most public spaces challenges the stigma directly. TODO: Confirm the strategy behind the placement.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: Option, recommendation, tradeoff, result.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — reach, response, or the campaign's measured impact",
+      ],
+      reflection: "TODO: Add a short, honest reflection.",
+    },
   },
   {
     slug: "spikes-k9-fund",
@@ -609,6 +780,49 @@ export const PROJECTS: Project[] = [
       { src: "/work/spikes-k9-fund/gallery-3.png", alt: "Spike's K9 Fund — donation flow" },
     ],
     externalUrl: "https://www.carmancreative.com/work/spikes",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Spike's K9 Fund" },
+        { label: "Role", value: "Web, UX & IA lead (Carman Creative)" },
+        { label: "Year", value: "2023" },
+        { label: "Scope", value: "Website redesign, donation & application flows" },
+        { label: "Deliverables", value: "Redesigned site + scalable components" },
+      ],
+      challenge:
+        "A national nonprofit equipping America's working dogs needed a site that communicated its programs clearly and made donating, applying for assistance, and learning about the mission immediately obvious — for both handlers and donors.",
+      mandate:
+        "Redesign the site around clear programs and frictionless donation and application flows, and leave the team a system they can grow their campaigns with.",
+      context:
+        "Two distinct audiences (working-K9 handlers and donors/advocates), a need for clear impact and program information, and an internal team maintaining content. TODO: Confirm stakeholders, timeline, and platform.",
+      role: [
+        "Led the redesign, information architecture, and UX",
+        "Designed the donation and application flows for desktop and mobile",
+        "Built scalable components the team can extend",
+        "TODO: Confirm collaborators (development, content)",
+      ],
+      team: [
+        "Spike's K9 Fund stakeholders",
+        "TODO: Confirm developers or content partners",
+      ],
+      decisions: [
+        {
+          title: "Balance emotion with operational clarity",
+          body: "Led with the mission's emotional pull while keeping donate/apply/learn paths immediately visible, so feeling converts to action. TODO: Confirm the specific structure.",
+        },
+        {
+          title: "Build for the team, not just the launch",
+          body: "Used scalable components and easy content updates so the fund can run new campaigns without a rebuild. TODO: Confirm the CMS and handoff.",
+        },
+        {
+          title: "TODO: Add a third key decision",
+          body: "TODO: Option, recommendation, tradeoff, result.",
+        },
+      ],
+      outcomes: [
+        "TODO: Confirm outcome — donations, applications, or engagement lift",
+      ],
+      reflection: "TODO: Add a short, honest reflection.",
+    },
   },
   {
     slug: "beacon-van",
