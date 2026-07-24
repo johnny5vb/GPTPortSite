@@ -85,7 +85,7 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Beacon Health Options → Carelon",
     client: "Beacon Health Options / Carelon (Elevance Health)",
-    year: "2023",
+    year: "2018 — 2020",
     category: "Enterprise Brand Transformation",
     duration: "TODO: Confirm timeline",
     tags: ["Enterprise", "Rebrand", "Governance"],
@@ -94,7 +94,7 @@ export const PROJECTS: Project[] = [
     oneLiner:
       "Transforming an enterprise brand through organizational change.",
     brief:
-      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, thousands of brand touchpoints had to move to a new identity without disrupting the people who depend on them. I helped lead the creative side of that transition — setting standards, building the systems, and controlling quality as the work scaled.",
+      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500+ brand assets had to move to a new identity across an ~85,000+ employee organization — without disrupting the people who depend on them. I helped lead the creative side of that transition — setting standards, building the systems, and controlling quality as the work scaled.",
     process: [],
     services: [
       "Creative direction",
@@ -113,8 +113,8 @@ export const PROJECTS: Project[] = [
         { label: "Organization", value: "Beacon Health Options → Carelon / Elevance Health" },
         { label: "Role", value: "Creative Director / Creative lead" },
         { label: "Focus", value: "Brand transition, governance, quality control" },
-        { label: "Scale", value: "TODO: Confirm — ~1,500+ assets; ~70,000+ employees" },
-        { label: "Timeline", value: "TODO: Confirm" },
+        { label: "Scale", value: "~1,500+ assets / ~85,000+ employees" },
+        { label: "Timeline", value: "2018 — 2020" },
       ],
       challenge:
         "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work — while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
         "TODO: Confirm additional responsibilities and specific deliverables",
       ],
       team: [
-        "Design team (managed a small in-house group)",
+        "Design team — managed five designers",
         "Marketing, brand, and compliance stakeholders",
         "TODO: Confirm collaborators — writers, developers, PMs, agencies, vendors",
       ],
@@ -149,7 +149,8 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — assets migrated, adoption, consistency, stakeholder approval, reduced rework",
+        "~1,500+ brand assets migrated to the new identity across the organization",
+        "TODO: Confirm further outcomes — adoption, consistency, stakeholder approval, reduced rework",
       ],
       reflection:
         "TODO: Add an honest reflection — what worked, what you'd improve, and how leading this transition shaped how you approach brand governance and creative operations today.",
@@ -162,7 +163,7 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Creative Operations & Marketing Bench",
     client: "Elevance Health / Carelon",
-    year: "2024",
+    year: "2020",
     category: "Creative Operations",
     duration: "TODO: Confirm timeline",
     tags: ["Creative Ops", "Systems", "Scale"],
@@ -190,8 +191,8 @@ export const PROJECTS: Project[] = [
         { label: "Organization", value: "Elevance Health / Carelon" },
         { label: "Role", value: "Creative operations lead" },
         { label: "Focus", value: "Intake, prioritization, production throughput" },
-        { label: "Impact", value: "TODO: Confirm — ~60% faster turnaround; ~30% higher engagement" },
-        { label: "Timeline", value: "TODO: Confirm" },
+        { label: "Impact", value: "~60% faster turnaround / ~30% higher engagement" },
+        { label: "Timeline", value: "2020" },
       ],
       challenge:
         "Creative demand outpaced capacity. Requests arrived through inconsistent channels, priorities competed, and turnaround suffered — which pushed teams toward off-brand shortcuts.",
@@ -226,7 +227,9 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — turnaround improvement, engagement, adoption, reduced rework",
+        "~60% faster turnaround on supported creative work",
+        "~30% higher engagement",
+        "TODO: Confirm further outcomes — adoption across teams, reduced rework",
       ],
       reflection:
         "TODO: Add an honest reflection on building creative operations at scale — what held up, what you'd change.",
@@ -239,7 +242,7 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Workfront Workflow Transformation",
     client: "Elevance Health / Carelon",
-    year: "2024",
+    year: "2025",
     category: "Workflow & Production",
     duration: "TODO: Confirm timeline",
     tags: ["Workfront", "Workflow", "Ops"],
@@ -267,11 +270,11 @@ export const PROJECTS: Project[] = [
         { label: "Organization", value: "Elevance Health / Carelon" },
         { label: "Role", value: "Workflow / production lead" },
         { label: "Platform", value: "Workfront" },
-        { label: "Volume", value: "TODO: Confirm — ~75+ projects monthly" },
-        { label: "Timeline", value: "TODO: Confirm" },
+        { label: "Volume", value: "~75+ projects monthly" },
+        { label: "Timeline", value: "2025" },
       ],
       challenge:
-        "At high monthly volume, unclear intake and inconsistent review paths created bottlenecks and rework. Work stalled in approvals, and leadership lacked a reliable view of throughput.",
+        "At ~75+ projects a month, unclear intake and inconsistent review paths created bottlenecks and rework. Work stalled in approvals, and leadership lacked a reliable view of throughput.",
       mandate:
         "Improve how work is requested, prioritized, reviewed, approved, and reported — so the operation runs faster with less friction.",
       context:

@@ -375,7 +375,7 @@ function Hello() {
           <div className="grid grid-cols-2 gap-6 mt-8 max-w-[60ch]">
             <Fact n="20+" label="years leading creative & brand" />
             <Fact n="15+" label="years in enterprise healthcare creative" />
-            <Fact n="3" label="designers managed as a creative lead" />
+            <Fact n="5" label="designers managed as a creative lead" />
             <Fact n="4" label="AI creative-systems explorations" />
           </div>
         </div>

@@ -10,7 +10,7 @@ import Testimonials from "./Testimonials";
 const EXPERIENCE = [
   "Creative Manager, Elevance Health / Carelon (current)",
   "Formerly Creative Director, Beacon Health Options",
-  "Managed a three-person design team",
+  "Managed a five-person design team",
   "Executive and cross-functional stakeholder collaboration",
   "Agency and vendor direction",
   "Workfront and production workflow ownership",
@@ -52,12 +52,12 @@ const PRINCIPLES = [
 // Verified, qualitative proof leads. Specific figures stay clearly labeled as
 // TODO until confirmed — they are not presented as facts.
 const PROOF = [
-  "Led creative through an enterprise acquisition and rebrand (Beacon Health Options → Carelon / Elevance Health)",
+  "Led creative through an enterprise acquisition and rebrand — Beacon Health Options → Carelon / Elevance Health (2018–2020)",
+  "Migrated ~1,500+ brand assets across an ~85,000+ employee organization",
+  "Built the Marketing Bench creative-support model — ~60% faster turnaround and ~30% higher engagement (2020)",
+  "Reworked Workfront intake, review, and approval across ~75+ projects a month (2025)",
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
-  "TODO: Confirm — ~1,500+ brand assets transitioned",
-  "TODO: Confirm — supported a ~70,000+ employee organization",
-  "TODO: Confirm — ~75+ creative projects managed monthly",
 ];
 
 const isTodo = (s: string) => s.trim().toUpperCase().startsWith("TODO");

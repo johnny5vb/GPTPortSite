@@ -135,7 +135,7 @@ export default function About() {
           <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8 border-t border-line pt-6">
             <Stat to={20} suffix="+" label="Years leading creative & brand" />
             <Stat to={15} suffix="+" label="Years in enterprise healthcare creative" />
-            <Stat to={3} label="Designers managed as a creative lead" />
+            <Stat to={5} label="Designers managed as a creative lead" />
           </div>
 
           <div className="mt-10 grid grid-cols-12 gap-6">
@@ -150,9 +150,9 @@ export default function About() {
               </p>
               <p>
                 I grew into creative direction leading brand, campaign, digital,
-                and creative-operations work, managing a small design team, and
-                serving as a creative lead through the transition of Beacon
-                Health Options into Carelon and Elevance Health. Following that
+                and creative-operations work, managing a five-person design
+                team, and serving as a creative lead through the transition of
+                Beacon Health Options into Carelon and Elevance Health. Following that
                 restructuring my title moved from Creative Director to Creative
                 Manager, while the work continued to span enterprise creative,
                 brand, workflow, and stakeholder leadership.

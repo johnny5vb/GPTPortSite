@@ -26,11 +26,12 @@ const JOBS: Job[] = [
     range: "2010 — Present",
     bullets: [
       "Lead brand, campaign, digital, and creative-operations work across a complex healthcare organization.",
-      "Served as a creative lead through the transition of Beacon Health Options into Carelon and Elevance Health; title moved from Creative Director to Creative Manager through the restructuring.",
-      "Managed a three-person design team and directed outside agencies and vendors.",
+      "Served as a creative lead through the Beacon Health Options → Carelon / Elevance Health transition (2018–2020); title moved from Creative Director to Creative Manager through the restructuring.",
+      "Migrated ~1,500+ brand assets to the new identity across an ~85,000+ employee organization.",
+      "Managed a five-person design team and directed outside agencies and vendors.",
+      "Built the Marketing Bench creative-support model (2020) — ~60% faster turnaround and ~30% higher engagement.",
+      "Reworked Workfront intake, review, and approval across ~75+ projects a month (2025).",
       "Own creative review and quality control; build templates, systems, and governance so quality scales.",
-      "Improved intake, review, and approval workflow in Workfront across high-volume production.",
-      "TODO: Confirm metrics — ~1,500+ assets transitioned; ~70,000+ employee org; ~75+ projects/month.",
     ],
   },
   {
@@ -204,8 +205,8 @@ export default function ResumePage() {
         </Section>
 
         <p className="mt-10 text-xs text-mute-2 italic">
-          TODO: Attach official PDF résumé (public/john-carman-resume.pdf) and
-          verify the metrics marked above before publishing them as facts.
+          TODO: Attach an official PDF résumé (public/john-carman-resume.pdf);
+          the Print / Save as PDF button covers it until then.
         </p>
       </article>
     </div>
