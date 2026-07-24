@@ -87,7 +87,7 @@ export const PROJECTS: Project[] = [
     client: "Beacon Health Options / Carelon (Elevance Health)",
     year: "2018 — 2020",
     category: "Enterprise Brand Transformation",
-    duration: "TODO: Confirm timeline",
+    duration: "~9 months (2018–2020)",
     tags: ["Enterprise", "Rebrand", "Governance"],
     blurb:
       "Leading creative through the acquisition and rebrand of a national behavioral-health organization — holding brand quality steady while the company itself changed.",
@@ -168,7 +168,7 @@ export const PROJECTS: Project[] = [
     client: "Elevance Health / Carelon",
     year: "2020",
     category: "Creative Operations",
-    duration: "TODO: Confirm timeline",
+    duration: "2020",
     tags: ["Print on Demand", "Creative Ops", "UI"],
     blurb:
       "Rebuilding Marketing Bench as a variable print-on-demand platform — self-serve materials that took designers out of routine production entirely.",
@@ -247,7 +247,7 @@ export const PROJECTS: Project[] = [
     client: "Elevance Health / Carelon",
     year: "2025",
     category: "Workflow & Production",
-    duration: "TODO: Confirm timeline",
+    duration: "2025",
     tags: ["Workfront", "Workflow", "Ops"],
     blurb:
       "Reworking how creative moves through Workfront at ~75+ projects a month — realistic phase timelines, smarter batching, and intake that finally made sense.",
