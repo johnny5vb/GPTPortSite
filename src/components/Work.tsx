@@ -226,7 +226,9 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             {project.title}
           </h4>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-mute">
-            {project.client}
+            {project.client && !project.client.startsWith("TODO")
+              ? project.client
+              : project.category}
             {project.year ? ` — ${project.year}` : ""}
           </p>
         </div>
