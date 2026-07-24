@@ -169,13 +169,13 @@ export const PROJECTS: Project[] = [
     year: "2020",
     category: "Creative Operations",
     duration: "TODO: Confirm timeline",
-    tags: ["Creative Ops", "Systems", "Scale"],
+    tags: ["Print on Demand", "Creative Ops", "UI"],
     blurb:
-      "Building a faster, more scalable creative support system so a high-demand marketing organization could get quality work without the bottlenecks.",
+      "Rebuilding Marketing Bench as a variable print-on-demand platform — self-serve materials that took designers out of routine production entirely.",
     oneLiner:
-      "Building a faster, more scalable creative support system.",
+      "Print-on-demand that runs without a designer in the loop.",
     brief:
-      "A large marketing organization was generating more creative demand than the existing process could absorb. I helped design and run a creative support model — the 'Marketing Bench' — that made intake, prioritization, and production more predictable and faster, without lowering the bar.",
+      "Marketing Bench let sales and leadership order branded materials and merchandise — but on the old platform every change ran through a designer and the print vendor first. As part of the Carelon rebrand, I rebuilt it as a variable print-on-demand site stakeholders could self-serve, taking designers out of routine production entirely.",
     process: [],
     services: [
       "Creative operations",
@@ -188,54 +188,54 @@ export const PROJECTS: Project[] = [
     cover: "",
     gallery: [],
     roleSummary:
-      "Designed and ran a scalable creative-operations support model.",
+      "Rebuilt Marketing Bench as a self-serve print-on-demand platform.",
     caseStudy: {
       overview: [
-        { label: "Organization", value: "Elevance Health / Carelon" },
-        { label: "Role", value: "Creative operations lead" },
-        { label: "Focus", value: "Intake, prioritization, production throughput" },
+        { label: "Organization", value: "Elevance Health / Carelon (with WebbMason)" },
+        { label: "Role", value: "Creative lead / UI design" },
+        { label: "Focus", value: "Variable print-on-demand, self-serve materials" },
         { label: "Impact", value: "~60% faster turnaround / ~30% higher engagement" },
         { label: "Timeline", value: "2020" },
       ],
       challenge:
-        "Creative demand outpaced capacity. Requests arrived through inconsistent channels, priorities competed, and turnaround suffered — which pushed teams toward off-brand shortcuts.",
+        "Marketing Bench let sales, leadership, and stakeholders order branded materials and merchandise — but the old platform routed every change through a designer: edit the layout, get it approved, hand it to the print vendor, wait for them to upload it. A designer sat in the critical path of routine production, and speed to market suffered.",
       mandate:
-        "Design a support system that could absorb high volume, keep quality consistent, and give requesters a predictable path — then operate it.",
+        "The Carelon rebrand was the opening to rebuild Marketing Bench as a proper variable print-on-demand site — materials intentionally designed with placeholder image and content areas that stakeholders could self-serve across clients, products, and purposes, with no designer in the loop.",
       context:
-        "The work had to fit an enterprise environment: many internal clients, existing tooling, brand and compliance requirements, and no appetite for adding friction.",
+        "An enterprise environment, an external print vendor (WebbMason) whose print-on-demand capability was still light, funding to secure with leadership, and a live audience of sales and leadership already relying on the tool.",
       role: [
-        "Defined the intake and prioritization model",
-        "Established governance and standards so quality was repeatable",
-        "Built templates and reusable components to speed production",
-        "Supported adoption across internal teams",
-        "TODO: Confirm additional responsibilities",
+        "Rebuilt Marketing Bench as a variable print-on-demand platform",
+        "Designed the site's interface (UI)",
+        "Led the designers producing the rebranded, templatized materials",
+        "Worked daily with the WebbMason print-vendor team and with leadership",
+        "Secured funding for the refresh with leadership and kept the work on track",
       ],
       team: [
-        "Design and production contributors",
-        "Marketing leads and internal requesters",
-        "TODO: Confirm collaborators and reporting structure",
+        "In-house designers — led the rebranding and production work",
+        "WebbMason — print-on-demand vendor",
+        "Leadership and stakeholders — funding and sponsorship",
       ],
       decisions: [
         {
-          title: "Standardize intake",
-          body: "TODO: Confirm the intake decision — options, recommendation, tradeoff, and result.",
+          title: "Design the designer out of the loop",
+          body: "Built materials with intentional placeholder image and content areas so stakeholders could self-serve across clients and products — replacing the edit → approve → hand-off → upload chain that used to need a designer for every change.",
         },
         {
-          title: "Templatize the high-volume work",
-          body: "TODO: Confirm which work was systematized and the effect on speed and consistency.",
+          title: "Free designers for the work that matters",
+          body: "The point wasn't more output from the team — it was removing routine production from designers' plates so their bandwidth went to projects that actually moved the business.",
         },
         {
-          title: "TODO: Add a third key decision",
-          body: "TODO: Detail the option, recommendation, and outcome.",
+          title: "Own the vendor relationship, don't hold it at arm's length",
+          body: "Worked daily with WebbMason and secured funding with leadership rather than treating the vendor as a hand-off. Their print-on-demand capability was light; we designed to what the platform could be, not what it had done before.",
         },
       ],
       outcomes: [
-        "~60% faster turnaround on supported creative work",
-        "~30% higher engagement",
-        "TODO: Confirm further outcomes — adoption across teams, reduced rework",
+        "Eliminated a designer bottleneck and production-level work, cutting turnaround ~60%",
+        "Adopted across the organization — sales, leadership, and stakeholders all used it (~30% higher engagement)",
+        "Became WebbMason's flagship print-on-demand case, used to sell their platform to other companies",
       ],
       reflection:
-        "TODO: Add an honest reflection on building creative operations at scale — what held up, what you'd change.",
+        "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials — exactly the kind of work AI is good at staying on top of.",
     },
   },
   {
