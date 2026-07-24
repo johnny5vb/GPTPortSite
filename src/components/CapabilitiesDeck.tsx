@@ -307,17 +307,17 @@ function Cover() {
             // Capabilities Deck — 2026
           </motion.div>
           <h1 className="font-display text-[clamp(3.4rem,9vw,9rem)] leading-[1.02] tracking-[-0.045em] text-bone">
-            Creative direction,
+            Creative leadership,
             <br />
             <em className="font-display-wonk text-green">
-              accelerated by AI.
+              built for complexity.
             </em>
           </h1>
           <p className="mt-10 font-mono text-[12px] uppercase tracking-[0.28em] text-mute">
-            John Carman / Carman Creative
+            John Carman / Creative Director
           </p>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-bone/85">
-            Virginia Beach / Philadelphia / Brooklyn
+            Virginia Beach / Remote / Select hybrid
           </p>
         </div>
         <div className="hidden md:block col-span-4">
@@ -358,7 +358,7 @@ function Hello() {
             />
           </motion.div>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-            John Carman / Creative Director &amp; AI Strategist
+            John Carman / Creative Director &amp; Brand Operations Leader
           </p>
         </div>
         <div className="col-span-12 md:col-span-8 space-y-5">
@@ -373,10 +373,10 @@ function Hello() {
             </em>
           </h2>
           <div className="grid grid-cols-2 gap-6 mt-8 max-w-[60ch]">
-            <Fact n="20+" label="years across brand, web, packaging, product" />
-            <Fact n="100+" label="projects shipped — agency, in-house, studio" />
-            <Fact n="3" label="cities — VA Beach, Philadelphia, Brooklyn" />
-            <Fact n="4" label="AI-native creative systems in production" />
+            <Fact n="20+" label="years leading creative & brand" />
+            <Fact n="15+" label="years in enterprise healthcare creative" />
+            <Fact n="3" label="designers managed as a creative lead" />
+            <Fact n="4" label="AI creative-systems explorations" />
           </div>
         </div>
       </div>
@@ -930,7 +930,7 @@ function Contact() {
         </div>
         <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-4">
           {[
-            { l: "Studio", v: "Virginia Beach\nPhiladelphia\nBrooklyn" },
+            { l: "Based in", v: "Virginia Beach\nRemote / Hybrid" },
             { l: "Hours", v: "Mon–Fri\n9a–6p EST" },
             { l: "Social", v: "@jbcarms\nlinkedin.com/in/johncarman" },
             {

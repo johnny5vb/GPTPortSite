@@ -7,7 +7,7 @@ import path from "node:path";
  * when previewing a shared link to the site root.
  *
  * Minimal layout: stacked Carman Creative wordmark centered above the
- * site's signature headline ("Creative direction, accelerated by AI.")
+ * positioning line ("Creative Director / creative operations leader.")
  * set in Fraunces to match the home page typography.
  *
  * Uses Node runtime so we can read the Fraunces TTFs from /public/fonts at

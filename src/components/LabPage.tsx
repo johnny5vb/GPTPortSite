@@ -15,14 +15,14 @@ const SYSTEMS = [
     num: "01",
     name: "Brand-in-a-Day OS",
     tagline: "Token-driven launch kit",
-    status: "Live demo",
+    status: "Prototype",
   },
   {
     id: "talks-back",
     num: "02",
     name: "Style Guide That Talks Back",
     tagline: "Brand bible as a conversation",
-    status: "In beta",
+    status: "Beta",
   },
   {
     id: "factory",
@@ -94,7 +94,7 @@ export default function LabPage() {
               transition={{ duration: 0.6 }}
               className="font-mono text-[11px] uppercase tracking-[0.22em] text-green"
             >
-              // The AI Lab
+              // AI &amp; Creative Systems
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -102,7 +102,7 @@ export default function LabPage() {
               transition={{ duration: 0.6, delay: 0.05 }}
               className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute"
             >
-              Four systems · Carman Creative
+              A leadership tool, not a substitute for judgment
             </motion.p>
           </div>
           <div className="col-span-12 md:col-span-8">
@@ -120,12 +120,41 @@ export default function LabPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[56ch]"
+              className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[58ch]"
             >
-              Four AI-native design systems for teams that ship brand
-              identity, design systems, and creative production at scale.
-              Each one is interactive — try them, see how the tokens flow.
+              I use AI as a creative-leadership and operations tool — to help
+              teams explore ideas faster, hold brand consistency, cut repetitive
+              production, and build better systems for critique and governance.
+              Human judgment still decides what&apos;s good.
             </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-4 text-mute leading-relaxed max-w-[58ch]"
+            >
+              These are working explorations across three areas — creative
+              exploration, creative operations, and brand governance — each
+              interactive and labeled by how far along it actually is.
+            </motion.p>
+
+            {/* Honest status legend */}
+            <motion.ul
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="mt-6 flex flex-wrap gap-2"
+            >
+              {SYSTEMS.map((s) => (
+                <li
+                  key={s.id}
+                  className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/80 border border-line rounded-full px-3 py-1.5"
+                >
+                  {s.name}
+                  <span className="text-green">{s.status}</span>
+                </li>
+              ))}
+            </motion.ul>
           </div>
         </div>
 
@@ -200,17 +229,18 @@ export default function LabPage() {
         <div className="grid grid-cols-12 gap-6 items-end">
           <div className="col-span-12 md:col-span-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-4">
-              // Pilot one
+              // Explore further
             </p>
             <h2 className="font-display text-[clamp(2.2rem,5.4vw,4.6rem)] leading-[1.08] tracking-[-0.04em] text-bone">
-              Want one of these
+              Curious where AI actually
               <br />
-              <em className="font-display-wonk text-green">running for your team?</em>
+              <em className="font-display-wonk text-green">helps a creative team?</em>
             </h2>
             <p className="mt-6 text-bone/85 leading-relaxed max-w-[52ch]">
-              All four systems are available as pilots. We&apos;ll scope
-              one to your brand, tokens, and workflow, and have it in your
-              designers&apos; hands within a few weeks.
+              These are working explorations, not off-the-shelf products. If
+              your team is weighing where AI genuinely earns its place —
+              exploration, operations, or brand governance — I&apos;m happy to
+              pressure-test the thinking with you.
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right">
@@ -219,7 +249,7 @@ export default function LabPage() {
               data-cursor="email"
               className="inline-flex items-center gap-3 rounded-full bg-green text-ink px-7 py-5 font-mono text-[12px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
             >
-              Get in touch
+              Start a conversation
             </Link>
           </div>
         </div>
