@@ -3,9 +3,9 @@ import LabPage from "@/components/LabPage";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "AI and Creative Systems | John Carman",
+  title: "The Lab — AI Playground | John Carman",
   description:
-    "AI as a creative leadership and operations tool. Four interactive design-system concepts — Brand-in-a-Day OS, Style Guide That Talks Back, Campaign Factory, and Atelier — each clearly labeled by status.",
+    "A playground of interactive AI tools and design-system experiments — Brand-in-a-Day OS, Style Guide That Talks Back, Campaign Factory, and Atelier — each labeled by how far along it is.",
   alternates: { canonical: "/lab" },
   openGraph: {
     title: "AI and Creative Systems | John Carman",

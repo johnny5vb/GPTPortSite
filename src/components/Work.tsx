@@ -226,24 +226,39 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             {project.title}
           </h4>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-mute">
-            {project.client} — {project.year}
+            {project.client}
+            {project.year ? ` — ${project.year}` : ""}
           </p>
         </div>
 
-        {/* Image thumbnail — morphs into the case-study cover via View Transitions */}
+        {/* Image thumbnail — morphs into the case-study cover via View Transitions.
+            Projects without a cover yet get a branded gradient placeholder. */}
         <div
           style={{ viewTransitionName: `project-${project.slug}` }}
           className="hidden md:block col-span-3 relative h-28 overflow-hidden rounded-md border border-line bg-ink-2"
         >
-          <motion.div style={{ y: previewY }} className="absolute inset-0">
-            <Image
-              src={project.cover}
-              alt={`${project.title} preview`}
-              fill
-              sizes="280px"
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-            />
-          </motion.div>
+          {project.cover ? (
+            <motion.div style={{ y: previewY }} className="absolute inset-0">
+              <Image
+                src={project.cover}
+                alt={`${project.title} preview`}
+                fill
+                sizes="280px"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+              />
+            </motion.div>
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
+              }}
+            >
+              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-bone/75">
+                visuals coming
+              </span>
+            </div>
+          )}
           <motion.div
             initial={false}
             animate={{ opacity: hover ? 1 : 0 }}

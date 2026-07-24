@@ -94,7 +94,7 @@ export default function LabPage() {
               transition={{ duration: 0.6 }}
               className="font-mono text-[11px] uppercase tracking-[0.22em] text-green"
             >
-              // AI &amp; Creative Systems
+              // The Lab — AI Playground
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -102,7 +102,7 @@ export default function LabPage() {
               transition={{ duration: 0.6, delay: 0.05 }}
               className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute"
             >
-              A leadership tool, not a substitute for judgment
+              A place to play, not a pitch
             </motion.p>
           </div>
           <div className="col-span-12 md:col-span-8">
@@ -122,10 +122,10 @@ export default function LabPage() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[58ch]"
             >
-              I use AI as a creative-leadership and operations tool — to help
-              teams explore ideas faster, hold brand consistency, cut repetitive
-              production, and build better systems for critique and governance.
-              Human judgment still decides what&apos;s good.
+              This is my playground — a corner of the site where AI tools and
+              agents live so I, and you, can actually play with them. Some are
+              genuinely useful, some are pure experiments. Human judgment still
+              decides what&apos;s any good.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -133,9 +133,9 @@ export default function LabPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mt-4 text-mute leading-relaxed max-w-[58ch]"
             >
-              These are working explorations across three areas — creative
-              exploration, creative operations, and brand governance — each
-              interactive and labeled by how far along it actually is.
+              Each one is interactive and labeled by how far along it actually
+              is — from concept to prototype to something I really use. Poke at
+              them; see how the tokens flow. More will move in over time.
             </motion.p>
 
             {/* Honest status legend */}
@@ -229,18 +229,17 @@ export default function LabPage() {
         <div className="grid grid-cols-12 gap-6 items-end">
           <div className="col-span-12 md:col-span-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-4">
-              // Explore further
+              // Say hi
             </p>
             <h2 className="font-display text-[clamp(2.2rem,5.4vw,4.6rem)] leading-[1.08] tracking-[-0.04em] text-bone">
-              Curious where AI actually
+              Poke around, break things,
               <br />
-              <em className="font-display-wonk text-green">helps a creative team?</em>
+              <em className="font-display-wonk text-green">tell me what to build next.</em>
             </h2>
             <p className="mt-6 text-bone/85 leading-relaxed max-w-[52ch]">
-              These are working explorations, not off-the-shelf products. If
-              your team is weighing where AI genuinely earns its place —
-              exploration, operations, or brand governance — I&apos;m happy to
-              pressure-test the thinking with you.
+              This corner is for experiments — mine, and more to come. If one
+              sparks an idea, or you want to see something live here, I&apos;d
+              love to hear it.
             </p>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right">
@@ -249,7 +248,7 @@ export default function LabPage() {
               data-cursor="email"
               className="inline-flex items-center gap-3 rounded-full bg-green text-ink px-7 py-5 font-mono text-[12px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
             >
-              Start a conversation
+              Get in touch
             </Link>
           </div>
         </div>
