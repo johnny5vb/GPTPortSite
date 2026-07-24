@@ -250,9 +250,9 @@ export const PROJECTS: Project[] = [
     duration: "TODO: Confirm timeline",
     tags: ["Workfront", "Workflow", "Ops"],
     blurb:
-      "Improving how creative work moves through a high-volume organization — intake, reviews, approvals, and reporting in Workfront.",
+      "Reworking how creative moves through Workfront at ~75+ projects a month — realistic phase timelines, smarter batching, and intake that finally made sense.",
     oneLiner:
-      "Improving creative workflow across a high-volume organization.",
+      "Realistic timelines, faster work, fewer rush jobs.",
     brief:
       "A high-volume creative operation needed a more reliable way to route work: clearer intake, better prioritization, smoother reviews and approvals, and reporting leadership could trust. I helped shape how that ran in Workfront.",
     process: [],
@@ -267,7 +267,7 @@ export const PROJECTS: Project[] = [
     cover: "",
     gallery: [],
     roleSummary:
-      "Shaped intake, review, and approval workflow in Workfront at scale.",
+      "Redrew Workfront phases, batching, and intake for the creative team.",
     caseStudy: {
       overview: [
         { label: "Organization", value: "Elevance Health / Carelon" },
@@ -277,42 +277,44 @@ export const PROJECTS: Project[] = [
         { label: "Timeline", value: "2025" },
       ],
       challenge:
-        "At ~75+ projects a month, unclear intake and inconsistent review paths created bottlenecks and rework. Work stalled in approvals, and leadership lacked a reliable view of throughput.",
+        "The old Workfront setup drew constant complaints from writers, designers, project managers, and requesters. Phase timing was the core issue: on paper, the timeline for each task ran so long that PMs and requesters balked the moment they saw it — and rushed, haphazard jobs filled the gap.",
       mandate:
-        "Improve how work is requested, prioritized, reviewed, approved, and reported — so the operation runs faster with less friction.",
+        "Rework how creative moves through Workfront at ~75+ projects a month — the phase timelines, batching, delegation, intake, and storage — so the timeline was realistic and the work actually moved faster.",
       context:
-        "Enterprise scale, many stakeholders, established tooling, and the need to change process without disrupting active work.",
+        "An enterprise environment with many stakeholders, a platform in daily use, and a workflow touching writers, designers, PMs, requesters, and the variable print-on-demand (Marketing Bench) materials — so changes had to hold across all of it.",
       role: [
-        "Reworked intake and prioritization",
-        "Streamlined reviews and approvals",
-        "Improved reporting and templates",
-        "Supported training and adoption",
-        "TODO: Confirm additional responsibilities",
+        "Served as the point person for the creative team",
+        "Sat on the workgroup committee implementing the changes and reporting to leadership",
+        "Redrew the phase strategy for every type of tactic and deliverable — and for shared pieces",
+        "Reworked how work was batched, delegated to designers and writers, and shared across tasks",
+        "Changed intake and what it captured, server file storage, and how VPOD (Marketing Bench) materials were handled",
       ],
       team: [
-        "Creative and production teams",
-        "Project managers and stakeholders",
-        "TODO: Confirm collaborators",
+        "Creative team — writers and designers",
+        "Project managers and requesters",
+        "Workgroup committee and leadership",
       ],
       decisions: [
         {
-          title: "Fix intake first",
-          body: "TODO: Confirm the intake changes, the options weighed, and the measured effect.",
+          title: "Fix the phase timelines that scared everyone off",
+          body: "The task-by-task timeline was so long on paper that PMs and requesters balked immediately. We analyzed the overall timeline for every tactic and deliverable and drew a new phase strategy per piece type — a realistic timeline people could actually trust.",
         },
         {
-          title: "Shorten the approval path",
-          body: "TODO: Confirm how reviews/approvals were restructured and the result.",
+          title: "Batch, delegate, and share tasks",
+          body: "Reworked how work was grouped and handed to designers and writers, creating shared tasks where it made sense, to cut duplicated effort and speed the whole workflow.",
         },
         {
-          title: "TODO: Add a third key decision",
-          body: "TODO: Detail the option, recommendation, and outcome.",
+          title: "Change everything the workflow touched",
+          body: "Not just the phases — intake and what it captured, how files were stored on the server, and how variable print-on-demand materials were handled, so the efficiency held end to end.",
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — reduced bottlenecks/rework, faster cycle time, reporting adoption",
+        "Faster speed to market and time savings the business felt and appreciated",
+        "Fewer haphazard 'rush' jobs coming through the queue",
+        "A realistic timeline PMs and requesters would actually trust",
       ],
       reflection:
-        "TODO: Add an honest reflection on operationalizing workflow in Workfront at scale.",
+        "TODO: Add a one-line reflection — what worked, and what you'd change next time.",
     },
   },
   {
