@@ -324,15 +324,15 @@ export const PROJECTS: Project[] = [
     title: "Colony Coffee Co.",
     client: "Colony Coffee — Todd Mills",
     year: "2025",
-    category: "Product / Brand Design",
-    duration: "8 weeks",
-    tags: ["Brand", "Packaging", "Product"],
+    category: "Coffee Brand / Packaging",
+    duration: "",
+    tags: ["Brand", "Packaging", "Label"],
     blurb:
-      "Brand identity and product design for a craft coffee company. Mark, packaging system, and an in-store toolkit built to scale from one roaster to a small chain.",
+      "Brand and label design for a veteran-founded coffee company built to honor American history — period-authentic label artwork, made with real attention to detail.",
     oneLiner:
-      "A craft coffee brand rooted in quality, community, and tradition.",
+      "A coffee brand that honors American history — authentically.",
     brief:
-      "Colony Coffee Co. is a craft coffee brand rooted in quality, community, and tradition. We were asked to build a flexible visual and digital foundation that could support branding, packaging, and future growth while maintaining a refined, approachable tone.",
+      "Colony Coffee is a veteran-founded brand built to honor America's history and the people who came before us. Founder Todd Mills wanted label artwork with a genuine historical edge — proud and patriotic, but authentic to its period, down to the smallest details.",
     process: [
       {
         label: "Research",
@@ -348,10 +348,10 @@ export const PROJECTS: Project[] = [
       },
     ],
     services: [
-      "Brand identity",
-      "Web design",
-      "Packaging",
-      "AI-powered creative systems",
+      "Brand concept",
+      "Label & packaging design",
+      "Typography",
+      "Art direction",
     ],
     palette: ["#1a120a", "#c98a4b", "#e8d6b3", "#f6efe2"],
     display: "COLONY",
@@ -365,46 +365,47 @@ export const PROJECTS: Project[] = [
     caseStudy: {
       overview: [
         { label: "Client", value: "Colony Coffee — Todd Mills" },
-        { label: "Role", value: "Brand, packaging & web lead (Carman Creative)" },
+        { label: "Role", value: "Brand concept & label design (Carman Creative)" },
         { label: "Year", value: "2025" },
-        { label: "Scope", value: "Identity, packaging system, digital foundation" },
-        { label: "Deliverables", value: "Logo, packaging, in-store toolkit, website" },
+        { label: "Scope", value: "Brand look & feel, label & packaging design" },
+        { label: "Status", value: "First batch of labels in production" },
       ],
       challenge:
-        "A new craft-coffee brand needed to earn loyalty in a crowded specialty market without leaning on the usual category clichés — and it needed a system flexible enough to grow from a single roaster to a small chain.",
+        "Todd Mills — a veteran, and genuinely passionate about coffee — wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
       mandate:
-        "Carman Creative was brought in to build the visual and digital foundation end to end: brand, packaging, and a website the team could extend as they added SKUs, locations, and channels.",
+        "Todd came to me for that creative edge — to shape the brand's look and feel and design the coffee labels themselves: the typography, the structure, and the historical direction of the artwork.",
       context:
-        "An early-stage brand with limited existing assets and an owner-operator making the decisions directly. TODO: Confirm budget, timeline, and any category or supplier constraints.",
+        "A veteran-founded small business, a founder with a strong, specific vision and a real eye for detail, and a brand built on patriotism and history that had to feel authentic rather than costume.",
       role: [
-        "Set the brand direction and built the identity system",
-        "Designed the packaging system to hold up across SKUs",
-        "Built the website as the brand's digital foundation",
-        "TODO: Confirm the split of work with any collaborators",
+        "Led ideation and concepting over a few rounds with Todd",
+        "Landed the overall look and feel",
+        "Set the typography and the structure of the label itself",
+        "Directed the historical, period-authentic artwork approach",
       ],
       team: [
-        "Todd Mills — owner / client",
-        "TODO: Confirm any writers, photographers, or production partners",
+        "Todd Mills — founder, veteran, and the vision behind it",
+        "A direct, hands-on collaboration between the two of us",
       ],
       decisions: [
         {
-          title: "Earn loyalty without the clichés",
-          body: "Positioned the brand on quality, community, and tradition rather than the tropes the category defaults to, so it could stand on its own. TODO: Confirm the specific verbal and visual choices that carried it.",
+          title: "Honor history without the clichés",
+          body: "A genuinely period-authentic historical edge — not generic patriotic tropes. Todd's whole point was pride done right, so the artwork had to feel true to its era, not like a costume.",
         },
         {
-          title: "Design a system, not one-offs",
-          body: "Built packaging and web as a flexible, extendable system so new SKUs and locations stay on-brand as the business grows. TODO: Confirm the scope of the in-store toolkit.",
+          title: "Land the direction, then lock the label",
+          body: "A few rounds of ideation to find the look and feel, then commit the typography and structure — so the label was resolved and production-ready rather than endlessly tweaked.",
         },
         {
-          title: "TODO: Add a third key decision",
-          body: "TODO: What options existed, what you recommended, the tradeoff, and what changed.",
+          title: "Sweat the details Todd cared about",
+          body: "He was specific about the detail, and that's where this brand earns its authenticity — so the small decisions got the same attention as the big ones.",
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — launch, adoption, sales, or the client's read on the work",
+        "Direction locked; Todd moved into production",
+        "First batch of labels recently printed",
       ],
       reflection:
-        "TODO: Add a short, honest reflection — what worked and what you'd refine next time.",
+        "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about.",
     },
   },
   {
