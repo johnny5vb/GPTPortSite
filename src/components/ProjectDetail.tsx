@@ -256,7 +256,9 @@ function CaseStudyBody({ project }: { project: Project }) {
 
       <Block eyebrow="The team">
         <p className="mb-4 text-sm text-mute max-w-[52ch]">
-          Enterprise creative is collaborative. This work involved:
+          {project.flagship
+            ? "Enterprise creative is collaborative. This work involved:"
+            : "The people behind the work:"}
         </p>
         <List items={cs.team} />
       </Block>
