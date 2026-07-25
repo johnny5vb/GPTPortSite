@@ -729,15 +729,15 @@ export const PROJECTS: Project[] = [
     title: "Special Forces Trust",
     client: "Special Forces Trust",
     year: "2024",
-    category: "Military Support / Web Design",
-    duration: "12 weeks",
-    tags: ["Platform", "Brand", "UX"],
+    category: "Nonprofit / Brand & Web",
+    duration: "",
+    tags: ["Brand", "Web", "Merch"],
     blurb:
-      "A digital platform for a veterans' trust — donor portal, program directory, and brand refresh. Built for clarity under high stakes.",
+      "A brand refresh, a better website, branded merchandise, and an events platform for Special Forces Trust — a fund supporting military spouses and veterans.",
     oneLiner:
-      "A calm, modern digital presence that reflects strength, reliability, and respect.",
+      "Giving back to the military community and their families.",
     brief:
-      "Special Forces Trust supports Special Forces service members, veterans, and their families through direct assistance and long-term care initiatives. The refresh aimed to reflect that mission: strength, reliability, and respect — without ceremony.",
+      "Special Forces Trust is a fund that supports military spouses and veterans through fundraising and events. I refreshed their logo and branding, rebuilt their website with a better approach, created branded merchandise, and built a better platform for veterans to engage with and get involved in the events they host.",
     process: [
       {
         label: "Research",
@@ -757,10 +757,10 @@ export const PROJECTS: Project[] = [
       },
     ],
     services: [
-      "Brand identity",
+      "Brand refresh",
       "Web design",
-      "Donor platform UX",
-      "AI-powered creative systems",
+      "Branded merchandise",
+      "Events platform",
     ],
     palette: ["#0a1729", "#1f3a5c", "#8a9bb0", "#e8ecf2"],
     display: "SFT",
@@ -774,44 +774,43 @@ export const PROJECTS: Project[] = [
     caseStudy: {
       overview: [
         { label: "Client", value: "Special Forces Trust" },
-        { label: "Role", value: "Brand & web lead (Carman Creative)" },
-        { label: "Year", value: "2024" },
-        { label: "Scope", value: "Brand refresh, website, donor UX" },
-        { label: "Deliverables", value: "Refreshed identity + donor platform" },
+        { label: "Role", value: "Brand refresh, website & merch (Carman Creative)" },
+        { label: "Serves", value: "Military spouses & veterans" },
+        { label: "Scope", value: "Logo/brand, website, merch, events platform" },
+        { label: "Status", value: "Delivered" },
       ],
       challenge:
-        "A trust supporting Special Forces service members, veterans, and their families needed a digital presence that reflected the mission — strength, reliability, respect — while making it easy for donors and families to find help and give support.",
+        "Special Forces Trust supports military spouses and veterans through fundraising and events. They needed a refreshed brand and a better website — and a clearer way for veterans to engage with and get involved in the events the fund hosts.",
       mandate:
-        "Refresh the brand and rebuild the site so the organization reads as serious and trustworthy, and so donation and program paths are frictionless.",
+        "Refresh the brand and rebuild the experience: a stronger logo and identity, a better website, branded merchandise, and a platform that makes it easy for veterans and supporters to take part.",
       context:
-        "High-stakes audience, a mission that demands restraint over ceremony, and donor trust to protect. TODO: Confirm stakeholders, timeline, and platform constraints.",
+        "A mission-driven fund serving the military community, where the work has to feel respectful and credible — and genuinely easy for people to show up for.",
       role: [
-        "Led the brand refresh and its application online",
-        "Designed the site and donor experience for clarity under high stakes",
-        "TODO: Confirm personal contribution vs. collaborators",
+        "Refreshed the logo and branding",
+        "Rebuilt the website with a better approach",
+        "Created branded merchandise",
+        "Built a better platform for veterans to engage and join the events",
       ],
       team: [
-        "Special Forces Trust stakeholders",
-        "TODO: Confirm developers, writers, or partners",
+        "Special Forces Trust — client",
+        "A direct client relationship",
       ],
       decisions: [
         {
-          title: "Restraint as respect",
-          body: "Chose strong hierarchy and quiet typography over ceremony, so the work reads reliable rather than performative. TODO: Confirm the specific direction.",
+          title: "Refresh, don't replace",
+          body: "Strengthened the existing identity rather than starting from scratch, keeping continuity with a brand the community already knows and trusts.",
         },
         {
-          title: "Make the important actions obvious",
-          body: "Prioritized donate and program paths so the audiences who need them reach them fast. TODO: Confirm the flows and any measured effect.",
-        },
-        {
-          title: "TODO: Add a third key decision",
-          body: "TODO: Option, recommendation, tradeoff, result.",
+          title: "Make getting involved the easy part",
+          body: "Built the platform around helping veterans engage with and get into the events — because participation is the whole point of the fund.",
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — donations, engagement, or stakeholder feedback",
+        "A refreshed brand, a better website, and branded merch",
+        "A clearer platform for veterans to engage with and join the events",
       ],
-      reflection: "TODO: Add a short, honest reflection.",
+      reflection:
+        "I was proud to work on something that gives back to the military community and their families.",
     },
   },
   {
