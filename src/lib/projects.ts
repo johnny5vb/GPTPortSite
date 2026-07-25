@@ -689,37 +689,36 @@ export const PROJECTS: Project[] = [
       mandate:
         "Rebuild the site around clarity and reassurance, and hand the organization something staff could update without a designer in the loop.",
       context:
-        "A mission-driven organization with limited technical capacity and an audience that arrives under stress. Content had to be accessible and calm. TODO: Confirm stakeholders, timeline, and any compliance requirements.",
+        "A mission-driven organization with limited technical capacity and an audience that often arrives under stress. The content had to be accessible and calm.",
       role: [
         "Led the site refresh and information architecture",
         "Shaped the content so services and next steps read plainly",
         "Built it on a CMS staff can maintain themselves",
-        "TODO: Confirm collaborators (dev, content, photography)",
       ],
       team: [
-        "FRP staff / stakeholders",
-        "TODO: Confirm any developers or content partners",
+        "FRP staff and stakeholders",
+        "A direct client relationship",
       ],
       decisions: [
         {
           title: "Design for reassurance, not decoration",
-          body: "Chose readable typography and a restrained system so the experience reads calm and credible to someone seeking help. TODO: Confirm the specific accessibility and readability choices.",
+          body: "Readable typography and a restrained system, so the experience reads calm and credible to someone seeking help rather than busy or clinical.",
         },
         {
           title: "Independence over dependence",
-          body: "Built on a CMS so staff can keep content current without a designer — durability the organization needed. TODO: Confirm the platform and handoff/training.",
+          body: "Built on a CMS so staff can keep content current without a designer in the loop — the durability a small nonprofit actually needs.",
         },
         {
-          title: "TODO: Add a third key decision",
-          body: "TODO: Option, recommendation, tradeoff, result.",
+          title: "Now: build toward giving",
+          body: "The current work takes it further — reworking the site into a more donation-friendly experience, because for a nonprofit, making it easy to give is the point.",
         },
       ],
       outcomes: [
-        "Stood up a refreshed website the staff can maintain",
+        "Stood up a refreshed website the staff can maintain themselves",
         "Currently rebuilding it into a more donation-friendly web experience",
-        "TODO: Confirm further outcome — usage, staff adoption, or organization feedback",
       ],
-      reflection: "TODO: Add a short, honest reflection.",
+      reflection:
+        "The first refresh gave FRP a calm, credible home they can run without a designer. Now I'm taking it further toward donations — because for a nonprofit, the easier it is to give, the more good the work does.",
     },
   },
   {
@@ -875,34 +874,35 @@ export const PROJECTS: Project[] = [
       mandate:
         "Create out-of-home creative that lands instantly in a fast-moving, high-noise space while carrying real emotional weight.",
       context:
-        "A large-format, high-visibility placement with seconds to communicate, a sensitive subject, and a broad, diverse audience. TODO: Confirm the sponsoring organization, run dates, and any partners.",
+        "A large-format, high-visibility placement with only seconds to communicate, a sensitive subject, and a broad, diverse audience moving fast.",
       role: [
         "Directed the campaign concept and messaging",
         "Designed the out-of-home creative for legibility at a glance",
-        "TODO: Confirm personal contribution vs. collaborators",
       ],
       team: [
-        "Campaign stakeholders",
-        "TODO: Confirm writers, media partners, or agencies",
+        "Stamp Out Stigma campaign stakeholders",
+        "A collaborative campaign effort",
       ],
       decisions: [
         {
           title: "Clarity over spectacle",
-          body: "Used strong typography, restrained color, and honest imagery so the message reads in seconds without sensationalism. TODO: Confirm the specific creative choices.",
+          body: "Strong typography, restrained color, and honest imagery so the message reads in seconds — without tipping into sensationalism on a sensitive subject.",
         },
         {
           title: "Put the message where silence usually wins",
-          body: "Placing an honest mental-health message in one of the most public spaces challenges the stigma directly. TODO: Confirm the strategy behind the placement.",
+          body: "Placing an honest mental-health message in one of the most public spaces on earth challenges the stigma directly, in front of everyone.",
         },
         {
-          title: "TODO: Add a third key decision",
-          body: "TODO: Option, recommendation, tradeoff, result.",
+          title: "Lead with human emotion",
+          body: "Real stories and grounded imagery over statistics — normalizing the conversation by making it human, not clinical.",
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — reach, response, or the campaign's measured impact",
+        "Amplified national mental-health awareness from one of the most public stages in the world — Times Square",
+        "Reinforced a simple, hard message: mental health matters as much as physical health",
       ],
-      reflection: "TODO: Add a short, honest reflection.",
+      reflection:
+        "Putting an honest mental-health message in Times Square was a reminder that clarity and empathy can cut through even the loudest room.",
     },
   },
   {
