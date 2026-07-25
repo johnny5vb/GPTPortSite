@@ -468,7 +468,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#1a120a", "#c98a4b", "#e8d6b3", "#f6efe2"],
     display: "COLONY",
-    cover: "/work/colony-coffee/cover.png",
+    cover: "/work/colony-coffee/gallery-2.png",
     gallery: [
       { src: "/work/colony-coffee/gallery-1.jpg", alt: "Colony Coffee — packaging system" },
       { src: "/work/colony-coffee/gallery-2.png", alt: "Colony Coffee — brand application" },
@@ -526,16 +526,6 @@ export const PROJECTS: Project[] = [
       reflection:
         "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
       work: [
-        {
-          kind: "full",
-          aspect: "3 / 2",
-          image: {
-            src: "/work/colony-coffee/gallery-2.png",
-            alt: "Colony Coffee — the three-roast label lineup, fireside",
-          },
-          caption:
-            "The label system in the world — Liberty, Colonial Hearth, and Founders Blend, each roast its own period-authentic scene.",
-        },
         {
           kind: "detail",
           image: {
@@ -932,15 +922,6 @@ export const PROJECTS: Project[] = [
       reflection:
         "The first refresh gave FRP a calm, credible home they can run without a designer. Now I'm taking it further toward donations — because for a nonprofit, the easier it is to give, the more good the work does.",
       work: [
-        {
-          kind: "browser",
-          image: {
-            src: "/work/friends-rehab/frp-hero.png",
-            alt: "Friends Rehabilitation Program — the refreshed home page",
-          },
-          caption:
-            "The refreshed home — calm, clear, and reassuring for someone arriving under stress.",
-        },
         {
           kind: "pair",
           a: {

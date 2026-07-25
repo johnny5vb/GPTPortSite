@@ -128,19 +128,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               {project.display}
             </span>
           </div>
-        ) : isCaseStudy ? (
-          <div
-            style={{ viewTransitionName: `project-${project.slug}` }}
-            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-dashed border-line-2 bg-ink-2 flex flex-col items-center justify-center gap-3 text-center px-6"
-          >
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
-              // Visuals in progress
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute-2">
-              Final assets being gathered
-            </span>
-          </div>
-        ) : (
+        ) : project.cover ? (
           <div
             style={{ viewTransitionName: `project-${project.slug}` }}
             className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2"
@@ -153,6 +141,18 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               className="object-cover object-top"
               priority
             />
+          </div>
+        ) : (
+          <div
+            style={{ viewTransitionName: `project-${project.slug}` }}
+            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-dashed border-line-2 bg-ink-2 flex flex-col items-center justify-center gap-3 text-center px-6"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
+              // Visuals in progress
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute-2">
+              Final assets being gathered
+            </span>
           </div>
         )}
       </section>
