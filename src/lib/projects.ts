@@ -35,7 +35,15 @@ export type WorkImage = { src: string; alt: string };
  * deliberate way to show a piece, with a caption on what it demonstrates.
  */
 export type WorkMoment =
-  | { kind: "full"; image: WorkImage; caption?: string; tall?: boolean }
+  | {
+      kind: "full";
+      image: WorkImage;
+      caption?: string;
+      tall?: boolean;
+      /** Override the frame aspect (e.g. "3 / 2") so a complete, self-contained
+       *  composition shows uncropped instead of being forced to 16:9. */
+      aspect?: string;
+    }
   | { kind: "browser"; image: WorkImage; caption?: string; url?: string }
   | {
       kind: "pair";
@@ -520,33 +528,42 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "full",
-          tall: true,
-          image: { src: "", alt: "Colony Coffee — the Founders Blend label" },
+          aspect: "3 / 2",
+          image: {
+            src: "/work/colony-coffee/gallery-2.png",
+            alt: "Colony Coffee — the three-roast label lineup, fireside",
+          },
           caption:
-            "The hero: the Founders Blend label — period-authentic artwork, typography, and structure.",
+            "The label system in the world — Liberty, Colonial Hearth, and Founders Blend, each roast its own period-authentic scene.",
         },
         {
           kind: "detail",
-          image: { src: "", alt: "Colony label artwork, detail" },
-          caption: "Detail — the historical linework and lettering, up close.",
-        },
-        {
-          kind: "pair",
-          a: { src: "", alt: "Colony label — front" },
-          b: { src: "", alt: "Colony label — back" },
-          labelA: "Front",
-          labelB: "Back",
-          caption: "The label system, front and back.",
-        },
-        {
-          kind: "gallery",
-          images: [
-            { src: "", alt: "Colony packaging" },
-            { src: "", alt: "Colony coffee bag" },
-            { src: "", alt: "Colony business card" },
-          ],
+          image: {
+            src: "/work/colony-coffee/cover.png",
+            alt: "Colony Coffee — the Founders Blend bag",
+          },
           caption:
-            "The system in the wild — packaging and the business card that helped launch the company.",
+            "Founders Blend, up close — “Balanced like the Constitution,” down to the detail Todd cared about.",
+        },
+        {
+          kind: "full",
+          aspect: "3 / 2",
+          image: {
+            src: "/work/colony-coffee/gallery-3.png",
+            alt: "Colony Coffee — the coffee-bag label design system across three roasts",
+          },
+          caption:
+            "One system, three roasts — heroic illustration meets colonial-era Americana: courage, balance, comfort.",
+        },
+        {
+          kind: "full",
+          aspect: "3 / 2",
+          image: {
+            src: "/work/colony-coffee/gallery-1.jpg",
+            alt: "Colony Coffee — brand direction and exploration board",
+          },
+          caption:
+            "Where it came from — a few rounds of direction: palettes, collateral, and the historical art the labels grew out of.",
         },
       ],
     },

@@ -602,7 +602,7 @@ function WorkMomentView({
         <Frame
           image={m.image}
           palette={palette}
-          aspect={m.tall ? "4 / 5" : "16 / 9"}
+          aspect={m.aspect ?? (m.tall ? "4 / 5" : "16 / 9")}
           sizes="(max-width: 1400px) 100vw, 1400px"
         />
         <Caption text={m.caption} />
