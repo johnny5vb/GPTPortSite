@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { ArrowUpLeft, ArrowUpRight, ArrowDown } from "lucide-react";
-import type { Project } from "@/lib/projects";
+import type { Project, WorkMoment, WorkImage } from "@/lib/projects";
 
 type Props = {
   project: Project;
@@ -290,7 +290,14 @@ function CaseStudyBody({ project }: { project: Project }) {
         </div>
       </Block>
 
-      {!project.flagship && (
+      {cs.work && cs.work.length > 0 ? (
+        <section className="container-x py-16 md:py-24 rule-top">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-8 md:mb-12">
+            // The work
+          </p>
+          <WorkMoments moments={cs.work} palette={project.palette} />
+        </section>
+      ) : !project.flagship ? (
         <Block eyebrow="The work">
           <div className="rounded-lg border border-dashed border-line-2 bg-ink-2 p-10 md:p-14 text-center max-w-[62ch]">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
@@ -302,7 +309,7 @@ function CaseStudyBody({ project }: { project: Project }) {
             </p>
           </div>
         </Block>
-      )}
+      ) : null}
 
       <Block eyebrow="The outcome">
         <List items={cs.outcomes} />
@@ -499,6 +506,205 @@ function StandardBody({ project }: { project: Project }) {
         </section>
       )}
     </>
+  );
+}
+
+/* ── "The work" — editorial image moments ────────────────────────────────
+   Each moment is a deliberate way to present a piece, with a caption on what
+   it demonstrates. An empty image src renders a labeled placeholder in the
+   correct frame, so the layout can be designed before assets arrive. */
+function WorkMoments({
+  moments,
+  palette,
+}: {
+  moments: WorkMoment[];
+  palette: string[];
+}) {
+  return (
+    <div className="space-y-12 md:space-y-20">
+      {moments.map((m, i) => (
+        <WorkMomentView key={i} m={m} palette={palette} />
+      ))}
+    </div>
+  );
+}
+
+function Caption({ text }: { text?: string }) {
+  if (!text) return null;
+  return (
+    <figcaption className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-mute max-w-[72ch] leading-relaxed">
+      {text}
+    </figcaption>
+  );
+}
+
+function Frame({
+  image,
+  palette,
+  aspect = "16 / 9",
+  rounded = "rounded-xl",
+  sizes = "(max-width: 1200px) 100vw, 1200px",
+}: {
+  image: WorkImage;
+  palette: string[];
+  aspect?: string;
+  rounded?: string;
+  sizes?: string;
+}) {
+  if (image.src) {
+    return (
+      <div
+        className={`relative overflow-hidden ${rounded} border border-line bg-ink-2`}
+        style={{ aspectRatio: aspect }}
+      >
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes={sizes}
+          className="object-cover object-top"
+        />
+      </div>
+    );
+  }
+  return (
+    <div
+      className={`relative overflow-hidden ${rounded} border border-dashed border-line-2 flex items-center justify-center p-6 text-center`}
+      style={{
+        aspectRatio: aspect,
+        background: `linear-gradient(135deg, ${palette[0]}, ${palette[1]})`,
+      }}
+    >
+      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone/75 leading-relaxed">
+        {image.alt}
+      </span>
+    </div>
+  );
+}
+
+const revealProps = {
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.25 },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+};
+
+function WorkMomentView({
+  m,
+  palette,
+}: {
+  m: WorkMoment;
+  palette: string[];
+}) {
+  if (m.kind === "full") {
+    return (
+      <motion.figure {...revealProps}>
+        <Frame
+          image={m.image}
+          palette={palette}
+          aspect={m.tall ? "4 / 5" : "16 / 9"}
+          sizes="(max-width: 1400px) 100vw, 1400px"
+        />
+        <Caption text={m.caption} />
+      </motion.figure>
+    );
+  }
+
+  if (m.kind === "browser") {
+    return (
+      <motion.figure {...revealProps}>
+        <div className="rounded-xl border border-line bg-ink-2 overflow-hidden shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)]">
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-ink">
+            <span className="h-2.5 w-2.5 rounded-full bg-line-2" />
+            <span className="h-2.5 w-2.5 rounded-full bg-line-2" />
+            <span className="h-2.5 w-2.5 rounded-full bg-line-2" />
+            {m.url && (
+              <span className="ml-3 font-mono text-[10px] tracking-[0.1em] text-mute truncate">
+                {m.url}
+              </span>
+            )}
+          </div>
+          <Frame
+            image={m.image}
+            palette={palette}
+            aspect="16 / 10"
+            rounded="rounded-none"
+            sizes="(max-width: 1400px) 100vw, 1400px"
+          />
+        </div>
+        <Caption text={m.caption} />
+      </motion.figure>
+    );
+  }
+
+  if (m.kind === "pair") {
+    const cols = [
+      { img: m.a, label: m.labelA },
+      { img: m.b, label: m.labelB },
+    ];
+    return (
+      <motion.figure {...revealProps}>
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+          {cols.map((c, i) => (
+            <div key={i}>
+              {c.label && (
+                <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
+                  {c.label}
+                </div>
+              )}
+              <Frame
+                image={c.img}
+                palette={palette}
+                aspect="4 / 3"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          ))}
+        </div>
+        <Caption text={m.caption} />
+      </motion.figure>
+    );
+  }
+
+  if (m.kind === "detail") {
+    return (
+      <motion.figure {...revealProps}>
+        <div
+          className="rounded-xl p-6 sm:p-12 md:p-20 flex items-center justify-center"
+          style={{
+            background: `linear-gradient(135deg, ${palette[0]}, ${palette[2] ?? palette[1]})`,
+          }}
+        >
+          <div className="w-full max-w-[38rem]">
+            <Frame
+              image={m.image}
+              palette={palette}
+              aspect="4 / 3"
+              sizes="(max-width: 768px) 100vw, 620px"
+            />
+          </div>
+        </div>
+        <Caption text={m.caption} />
+      </motion.figure>
+    );
+  }
+
+  // gallery
+  return (
+    <motion.figure {...revealProps}>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {m.images.map((img, i) => (
+          <Frame
+            key={i}
+            image={img}
+            palette={palette}
+            aspect="3 / 4"
+            sizes="(max-width: 768px) 50vw, 33vw"
+          />
+        ))}
+      </div>
+      <Caption text={m.caption} />
+    </motion.figure>
   );
 }
 

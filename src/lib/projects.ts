@@ -25,6 +25,29 @@ export type ProjectTier = "leadership" | "independent" | "secondary";
  * projects. Fields may contain "TODO: …" strings where a fact/metric is not
  * yet confirmed — those render as visible placeholders, never as claims.
  */
+/** One image inside a work moment. An empty `src` renders an elegant labeled
+ *  placeholder in the correct frame, so a case study's layout + captions can
+ *  be designed before the real assets arrive. */
+export type WorkImage = { src: string; alt: string };
+
+/**
+ * "The work" is composed of editorial *moments*, not a grid dump — each a
+ * deliberate way to show a piece, with a caption on what it demonstrates.
+ */
+export type WorkMoment =
+  | { kind: "full"; image: WorkImage; caption?: string; tall?: boolean }
+  | { kind: "browser"; image: WorkImage; caption?: string; url?: string }
+  | {
+      kind: "pair";
+      a: WorkImage;
+      b: WorkImage;
+      labelA?: string;
+      labelB?: string;
+      caption?: string;
+    }
+  | { kind: "detail"; image: WorkImage; caption?: string }
+  | { kind: "gallery"; images: WorkImage[]; caption?: string };
+
 export type CaseStudy = {
   overview: { label: string; value: string }[];
   challenge: string;
@@ -37,6 +60,8 @@ export type CaseStudy = {
   decisions: { title: string; body: string }[];
   outcomes: string[];
   reflection: string;
+  /** Curated "The work" moments. Omit until assets are chosen. */
+  work?: WorkMoment[];
 };
 
 export type Project = {
@@ -412,6 +437,38 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
+      work: [
+        {
+          kind: "full",
+          tall: true,
+          image: { src: "", alt: "Colony Coffee — the Founders Blend label" },
+          caption:
+            "The hero: the Founders Blend label — period-authentic artwork, typography, and structure.",
+        },
+        {
+          kind: "detail",
+          image: { src: "", alt: "Colony label artwork, detail" },
+          caption: "Detail — the historical linework and lettering, up close.",
+        },
+        {
+          kind: "pair",
+          a: { src: "", alt: "Colony label — front" },
+          b: { src: "", alt: "Colony label — back" },
+          labelA: "Front",
+          labelB: "Back",
+          caption: "The label system, front and back.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "", alt: "Colony packaging" },
+            { src: "", alt: "Colony coffee bag" },
+            { src: "", alt: "Colony business card" },
+          ],
+          caption:
+            "The system in the wild — packaging and the business card that helped launch the company.",
+        },
+      ],
     },
   },
   {
