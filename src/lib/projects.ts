@@ -182,6 +182,33 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of deliverables look overwhelming on paper, but with the right system and the right people, you chip away at it — and finishing something at that scale is its own reward. This is the project that changed how I lead.",
+      work: [
+        {
+          kind: "pair",
+          a: { src: "", alt: "Beacon Health Options identity" },
+          b: { src: "", alt: "Carelon identity" },
+          labelA: "Before — Beacon",
+          labelB: "After — Carelon",
+          caption:
+            "Migrating a national behavioral-health identity to a new parent brand — without breaking the materials members, providers, and staff rely on every day.",
+        },
+        {
+          kind: "full",
+          image: { src: "", alt: "The brand & design system and templates" },
+          caption:
+            "The system, built first: identity, guidelines, and the templates the whole migration ran on — what made ~1,500+ deliverables repeatable and consistent as volume spiked.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "", alt: "Brand guidelines" },
+            { src: "", alt: "Templated assets" },
+            { src: "", alt: "Merchandise" },
+          ],
+          caption:
+            "The system in production — guidelines, templatized assets, and merchandise, rolled out across an ~85,000-employee organization.",
+        },
+      ],
     },
   },
   {
@@ -261,6 +288,32 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials — exactly the kind of work AI is good at staying on top of.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "",
+            alt: "Marketing Bench — the variable print-on-demand platform",
+          },
+          caption:
+            "Marketing Bench, rebuilt — a self-serve variable print-on-demand site, with the interface designed so a designer never has to touch a routine order.",
+        },
+        {
+          kind: "pair",
+          a: { src: "", alt: "Before — designer in the critical path" },
+          b: { src: "", alt: "After — stakeholders self-serve" },
+          labelA: "Before",
+          labelB: "After",
+          caption:
+            "The old chain — edit, approve, hand to the vendor, wait for the upload — replaced by templates stakeholders drive themselves. Roughly 60% faster turnaround.",
+        },
+        {
+          kind: "detail",
+          image: { src: "", alt: "A template's placeholder image & content areas" },
+          caption:
+            "The trick: materials built with intentional placeholder image and content areas, reusable across clients, products, and purposes.",
+        },
+      ],
     },
   },
   {
@@ -340,6 +393,33 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "TODO: Add a one-line reflection — what worked, and what you'd change next time.",
+      work: [
+        {
+          kind: "pair",
+          a: { src: "", alt: "Before — timelines PMs balked at" },
+          b: { src: "", alt: "After — realistic phase strategy" },
+          labelA: "Before",
+          labelB: "After",
+          caption:
+            "The core fix: a phase strategy redrawn per tactic and deliverable, so the timeline was realistic enough that PMs and requesters would actually trust it.",
+        },
+        {
+          kind: "full",
+          image: { src: "", alt: "The reworked Workfront flow — intake to delivery" },
+          caption:
+            "The reworked flow across ~75+ projects a month — batching, delegation, and shared tasks that cut duplicated effort end to end.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "", alt: "New intake" },
+            { src: "", alt: "File storage" },
+            { src: "", alt: "VPOD handling" },
+          ],
+          caption:
+            "Everything the workflow touched — new intake and what it captured, server file storage, and how variable print-on-demand materials were handled.",
+        },
+      ],
     },
   },
   {
