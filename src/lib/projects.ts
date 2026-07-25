@@ -913,15 +913,15 @@ export const PROJECTS: Project[] = [
     title: "Spike's K9 Fund",
     client: "Spike's K9 Fund",
     year: "2023",
-    category: "Nonprofit / Web Design",
-    duration: "12 weeks",
-    tags: ["Web", "Nonprofit", "UX"],
+    category: "Nonprofit / Web",
+    duration: "",
+    tags: ["Web", "Nonprofit", "Collateral"],
     blurb:
-      "A redesigned home for a nonprofit equipping America's working dogs — clear programs and frictionless donation and application flows.",
+      "The website and collateral that got Spike's K9 Fund off the ground — a local Norfolk/VB nonprofit founded by a retired special-ops veteran on a mission to protect and rehome service dogs.",
     oneLiner:
-      "Protecting the working dogs that protect us.",
+      "A dog saved his life — now he's saving theirs.",
     brief:
-      "Spike's K9 Fund is a national nonprofit supporting America's working dogs with lifesaving equipment, medical care, training, and protective gear. The site was redesigned to communicate programs clearly, enable straightforward donation and application flows, and reflect the organization's commitment to canine safety and readiness.",
+      "Spike's K9 Fund is a Norfolk/Virginia Beach nonprofit founded by Jim Hatch — a retired special-ops veteran whose life was saved by a dog. He's on a mission to protect service dogs and help rehome them when they retire, and to build a space where dog lovers can support the work. I created their website and collateral and helped get them off the ground.",
     process: [
       {
         label: "Research",
@@ -942,9 +942,8 @@ export const PROJECTS: Project[] = [
     ],
     services: [
       "Web design",
-      "UX & information architecture",
-      "Donation & application flows",
-      "Nonprofit brand system",
+      "Collateral",
+      "Brand & launch",
     ],
     palette: ["#0c0c0c", "#b5302b", "#9aa3a0", "#f0ece3"],
     display: "SPIKE'S",
@@ -957,46 +956,43 @@ export const PROJECTS: Project[] = [
     externalUrl: "https://www.carmancreative.com/work/spikes",
     caseStudy: {
       overview: [
-        { label: "Client", value: "Spike's K9 Fund" },
-        { label: "Role", value: "Web, UX & IA lead (Carman Creative)" },
-        { label: "Year", value: "2023" },
-        { label: "Scope", value: "Website redesign, donation & application flows" },
-        { label: "Deliverables", value: "Redesigned site + scalable components" },
+        { label: "Client", value: "Spike's K9 Fund — Jim Hatch" },
+        { label: "Role", value: "Website & collateral (Carman Creative)" },
+        { label: "Location", value: "Norfolk / Virginia Beach" },
+        { label: "Scope", value: "Website, collateral, launch" },
+        { label: "Status", value: "Launched — off the ground" },
       ],
       challenge:
-        "A national nonprofit equipping America's working dogs needed a site that communicated its programs clearly and made donating, applying for assistance, and learning about the mission immediately obvious — for both handlers and donors.",
+        "Jim Hatch — a retired special-ops veteran whose life was saved by a dog — wanted to protect service dogs and help rehome them when they retire, and to give dog lovers a real place to support the mission. Spike's needed a home online and the materials to get off the ground.",
       mandate:
-        "Redesign the site around clear programs and frictionless donation and application flows, and leave the team a system they can grow their campaigns with.",
+        "Create the website and collateral to launch Spike's — a clear, welcoming platform that carries Jim's mission and makes it easy for supporters to show up.",
       context:
-        "Two distinct audiences (working-K9 handlers and donors/advocates), a need for clear impact and program information, and an internal team maintaining content. TODO: Confirm stakeholders, timeline, and platform.",
+        "A brand-new, founder-driven nonprofit with a deeply personal mission, local to the Norfolk/Virginia Beach area, that needed to look credible and established from day one.",
       role: [
-        "Led the redesign, information architecture, and UX",
-        "Designed the donation and application flows for desktop and mobile",
-        "Built scalable components the team can extend",
-        "TODO: Confirm collaborators (development, content)",
+        "Designed and built the Spike's website",
+        "Created the collateral to support the launch",
+        "Helped get the organization off the ground",
       ],
       team: [
-        "Spike's K9 Fund stakeholders",
-        "TODO: Confirm developers or content partners",
+        "Jim Hatch — founder, retired special ops",
+        "A direct client relationship",
       ],
       decisions: [
         {
-          title: "Balance emotion with operational clarity",
-          body: "Led with the mission's emotional pull while keeping donate/apply/learn paths immediately visible, so feeling converts to action. TODO: Confirm the specific structure.",
+          title: "Lead with the mission and the dogs",
+          body: "Jim's story — a dog saved his life — is the heart of it, so the platform puts the mission and the dogs front and center rather than burying them under nonprofit boilerplate.",
         },
         {
-          title: "Build for the team, not just the launch",
-          body: "Used scalable components and easy content updates so the fund can run new campaigns without a rebuild. TODO: Confirm the CMS and handoff.",
-        },
-        {
-          title: "TODO: Add a third key decision",
-          body: "TODO: Option, recommendation, tradeoff, result.",
+          title: "Make it easy for dog lovers to show up",
+          body: "A young, founder-driven nonprofit lives on how easily people can rally to it, so the site is built as a clear, welcoming place for supporters to get involved.",
         },
       ],
       outcomes: [
-        "TODO: Confirm outcome — donations, applications, or engagement lift",
+        "Launched Spike's and got the organization off the ground",
+        "A platform and space for dog lovers to support the mission",
       ],
-      reflection: "TODO: Add a short, honest reflection.",
+      reflection:
+        "I don't work with Spike's anymore, but I loved this one — a local mission with real heart, led by someone who lived it. I was stoked to help Jim get it started.",
     },
   },
 ];
