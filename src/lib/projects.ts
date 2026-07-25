@@ -536,6 +536,26 @@ export const PROJECTS: Project[] = [
         "TODO: Add outcomes as EverMark launches",
       ],
       reflection: "TODO: Add a reflection as the work ships.",
+      work: [
+        {
+          kind: "full",
+          tall: true,
+          image: { src: "", alt: "EverMark identity system" },
+          caption:
+            "The identity — built to feel genuinely premium in a category where names blur together.",
+        },
+        {
+          kind: "detail",
+          image: { src: "", alt: "The EverMark mark, up close" },
+          caption: "The mark and its details.",
+        },
+        {
+          kind: "browser",
+          image: { src: "", alt: "EverMark website — in development" },
+          caption:
+            "The website in development — the digital home, Google Business Profile, and collateral to follow.",
+        },
+      ],
     },
   },
   {
@@ -608,6 +628,26 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "This one came in as a referral from a completely unrelated client — proof the work travels. The Knowledge Hub is the piece I'm proudest of here, and the Andy Hill report was a good reminder of how much a well-made editorial booklet can land.",
+      work: [
+        {
+          kind: "browser",
+          image: { src: "", alt: "Atromitos — the refreshed website" },
+          caption:
+            "The refreshed site — interactive, modern, and unmistakably theirs.",
+        },
+        {
+          kind: "full",
+          image: { src: "", alt: "Atromitos — the Knowledge Hub" },
+          caption:
+            "The Knowledge Hub — the piece I'm proudest of here, built to put their expertise front and center.",
+        },
+        {
+          kind: "detail",
+          image: { src: "", alt: "The Andy Hill Care Fund report" },
+          caption:
+            "The Andy Hill Care Fund report — a full editorial booklet, and very well received.",
+        },
+      ],
     },
   },
   {
@@ -673,6 +713,24 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "TODO: Add a reflection once the campaign wraps — it ends with a video I plan to package here in a portfolio-worthy way.",
+      work: [
+        {
+          kind: "full",
+          image: { src: "", alt: "The IMPORTANT! wordmark" },
+          caption:
+            "The 'IMPORTANT!' wordmark — designed to work as a standalone mark and as a headline across pieces.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "", alt: "Print tactic" },
+            { src: "", alt: "Digital tactic" },
+            { src: "", alt: "Member mailer" },
+          ],
+          caption:
+            "The print and digital tactics it anchors — rolling out statewide through 2026.",
+        },
+      ],
     },
   },
   {
@@ -776,6 +834,41 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "The first refresh gave FRP a calm, credible home they can run without a designer. Now I'm taking it further toward donations — because for a nonprofit, the easier it is to give, the more good the work does.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/friends-rehab/frp-hero.png",
+            alt: "Friends Rehabilitation Program — the refreshed home page",
+          },
+          caption:
+            "The refreshed home — calm, clear, and reassuring for someone arriving under stress.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/friends-rehab/frp-purpose.png",
+            alt: "FRP — Our purpose and Our Programs",
+          },
+          b: {
+            src: "/work/friends-rehab/frp-homeless.png",
+            alt: "FRP — Homeless Services Program",
+          },
+          labelA: "Our purpose",
+          labelB: "Homeless Services",
+          caption:
+            "Programs and services, written to read plainly and be findable at a glance.",
+        },
+        {
+          kind: "full",
+          image: {
+            src: "/work/friends-rehab/frp-housewarming.png",
+            alt: "FRP — The Housewarming Fund page",
+          },
+          caption:
+            "The Housewarming Fund — a focused giving page, and the start of a more donation-friendly experience.",
+        },
+      ],
     },
   },
   {
@@ -867,6 +960,32 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "I was proud to work on something that gives back to the military community and their families.",
+      work: [
+        {
+          kind: "pair",
+          a: { src: "", alt: "Special Forces Trust logo — before" },
+          b: { src: "", alt: "Special Forces Trust logo — refreshed" },
+          labelA: "Before",
+          labelB: "Refreshed",
+          caption:
+            "The brand refresh — strengthened, not replaced, to keep continuity with a community that already trusts it.",
+        },
+        {
+          kind: "browser",
+          image: { src: "", alt: "Special Forces Trust — website and events platform" },
+          caption:
+            "The rebuilt website and events platform — built to make getting involved the easy part.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "", alt: "Branded merchandise" },
+            { src: "", alt: "Event apparel" },
+            { src: "", alt: "Branded goods" },
+          ],
+          caption: "Branded merchandise for the fund's events and supporters.",
+        },
+      ],
     },
   },
   {
@@ -960,6 +1079,21 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Putting an honest mental-health message in Times Square was a reminder that clarity and empathy can cut through even the loudest room.",
+      work: [
+        {
+          kind: "full",
+          tall: true,
+          image: { src: "", alt: "Stamp Out Stigma — the Times Square activation" },
+          caption:
+            "The message in Times Square — honest, human, and impossible to miss in one of the loudest rooms on earth.",
+        },
+        {
+          kind: "detail",
+          image: { src: "", alt: "Campaign creative — up close" },
+          caption:
+            "The creative up close — strong type, restrained color, understood at a glance.",
+        },
+      ],
     },
   },
   {
@@ -1049,6 +1183,24 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "I don't work with Spike's anymore, but I loved this one — a local mission with real heart, led by someone who lived it. I was stoked to help Jim get it started.",
+      work: [
+        {
+          kind: "browser",
+          image: { src: "", alt: "Spike's K9 Fund — the website" },
+          caption:
+            "The website that got Spike's off the ground — the mission and the dogs front and center.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "", alt: "Spike's collateral" },
+            { src: "", alt: "Program one-sheet" },
+            { src: "", alt: "Launch materials" },
+          ],
+          caption:
+            "Collateral and launch materials for a young, founder-driven nonprofit.",
+        },
+      ],
     },
   },
 ];
