@@ -545,8 +545,15 @@ finer-grained detail.
       commands will fail until those support files are added under
       `.claude/skills/ui-ux-pro-max/`. Inline guidance (priority table,
       checklists) still works.
-    - **`taste`** — NOT yet provided by the owner; still needs to be pasted or
-      pointed at a repo before it can be committed.
+    - **`taste`** — added from `github.com/Leonxlnx/taste-skill` (MIT), a
+      13-skill collection. Owner chose a **curated subset**, not the whole
+      plugin: vendored `design-taste-frontend` (the namesake taste skill),
+      `redesign-existing-projects` (audit-first upgrade), `high-end-visual-design`
+      (soft — "make it feel expensive"), and `brandkit` (brand-board imagegen).
+      Skipped the niche/overlapping ones (v1, brutalist, minimalist, stitch,
+      imagegen web/mobile, image-to-code, gpt-taste, output-enforcement). Each
+      vendored dir carries the MIT LICENSE. All are self-contained single
+      SKILL.md files (no scripts/DB), so unlike ui-ux-pro-max they're complete.
 
 Scratch artifacts from earlier sessions (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html`, and `.claude/launch.json`. Dependencies unchanged this
