@@ -524,6 +524,30 @@ finer-grained detail.
       enrichment for the now-wired three: SFT logo before/after + merch product
       shots; Spike's brand/collateral one-sheets.
 
+### Later session — design skills committed into the repo
+
+28. Committed the owner's design skills into the repo so they load in every web
+    session (the remote container has no local `~/.claude/skills`):
+    - `.gitignore` now keeps ignoring all of `.claude/` **except**
+      `.claude/skills/` (pattern: `.claude/*` + `!.claude/skills/`). Only the
+      skills are tracked; session state stays ignored.
+    - **`frontend-design`** — Anthropic's distinctive-visual-design skill,
+      self-contained SKILL.md. Committed as-is.
+    - **`impeccable`** — vendored the full tree from `github.com/pbakaus/impeccable`
+      (`.claude/skills/impeccable/`: SKILL.md + 35 `reference/*.md` + `scripts/*.mjs`
+      + LICENSE). Apache-2.0; LICENSE kept alongside. ~3 MB. Vendored (not
+      installed as a plugin) specifically so it loads in web sessions without a
+      marketplace step. Its scripts register hooks only if wired into
+      settings.json — vendoring the files alone does not activate anything.
+    - **`ui-ux-pro-max`** — only the SKILL.md was available, so that's what's
+      committed. **Incomplete:** the skill's `scripts/search.py`, its CSV
+      database, and `references/*.md` were NOT provided — its `python … search.py`
+      commands will fail until those support files are added under
+      `.claude/skills/ui-ux-pro-max/`. Inline guidance (priority table,
+      checklists) still works.
+    - **`taste`** — NOT yet provided by the owner; still needs to be pasted or
+      pointed at a repo before it can be committed.
+
 Scratch artifacts from earlier sessions (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html`, and `.claude/launch.json`. Dependencies unchanged this
 session (`framer-motion`, `lenis`, `next-view-transitions` already present).
