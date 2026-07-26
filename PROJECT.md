@@ -539,12 +539,16 @@ finer-grained detail.
       installed as a plugin) specifically so it loads in web sessions without a
       marketplace step. Its scripts register hooks only if wired into
       settings.json — vendoring the files alone does not activate anything.
-    - **`ui-ux-pro-max`** — only the SKILL.md was available, so that's what's
-      committed. **Incomplete:** the skill's `scripts/search.py`, its CSV
-      database, and `references/*.md` were NOT provided — its `python … search.py`
-      commands will fail until those support files are added under
-      `.claude/skills/ui-ux-pro-max/`. Inline guidance (priority table,
-      checklists) still works.
+    - **`ui-ux-pro-max`** — started as SKILL.md-only; **now complete.** The
+      engine (`scripts/` — search.py/core.py/design_system.py/validate_data.py +
+      tests, `data/` — 35 CSVs incl. ui-reasoning + 22 per-stack files,
+      `references/` — quick-reference + pro-rules) was vendored from
+      `github.com/nextlevelbuilder/ui-ux-pro-max-skill` (MIT, LICENSE kept). The
+      upstream SKILL.md was byte-identical to the owner's upload (same version:
+      84 styles / 192 palettes / 74 fonts / 22 stacks), so no reconciliation
+      needed. Verified in-container: `validate_data.py` OK, 16/16 unit tests
+      pass, `search.py --design-system` and `--domain` return real data.
+      Requires Python 3 (3.11 present here), no external deps.
     - **`taste`** — added from `github.com/Leonxlnx/taste-skill` (MIT), a
       13-skill collection. Owner chose a **curated subset**, not the whole
       plugin: vendored `design-taste-frontend` (the namesake taste skill),
