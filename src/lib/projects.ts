@@ -991,7 +991,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0a1729", "#1f3a5c", "#8a9bb0", "#e8ecf2"],
     display: "SFT",
-    cover: "/work/special-forces-trust/cover.png",
+    cover: "",
     gallery: [
       { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT — donor portal" },
       { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT — program page" },
@@ -1108,7 +1108,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
     display: "STIGMA",
-    cover: "/work/stamp-out-stigma/cover.jpg",
+    cover: "",
     gallery: [
       { src: "/work/stamp-out-stigma/gallery-1.jpg", alt: "Stamp Out Stigma — Times Square activation" },
       { src: "/work/stamp-out-stigma/gallery-2.png", alt: "Stamp Out Stigma — campaign creative" },
@@ -1215,7 +1215,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0c0c0c", "#b5302b", "#9aa3a0", "#f0ece3"],
     display: "SPIKE'S",
-    cover: "/work/spikes-k9-fund/cover.png",
+    cover: "",
     gallery: [
       { src: "/work/spikes-k9-fund/gallery-1.png", alt: "Spike's K9 Fund — homepage" },
       { src: "/work/spikes-k9-fund/gallery-2.png", alt: "Spike's K9 Fund — program page" },
