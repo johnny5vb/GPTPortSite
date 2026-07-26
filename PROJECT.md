@@ -496,6 +496,34 @@ finer-grained detail.
   their own machine with their GitHub-linked signing key configured; git signs
   there. This is an accepted property of the web container, not a defect.
 
+### Later session — Workfront reflection + real-asset wiring
+
+27. Filled in code-side content that had been waiting on the owner:
+    - **Workfront `reflection`** written from John's own words (team banded
+      together to name every pain point across intake/management/execution,
+      broke the process down and rebuilt it; team now more efficient and
+      communicating better post relaunch) — rendered in the site's first-person
+      quiet-authority voice. No more flagship-reflection TODOs.
+    - **Wired real assets for Special Forces Trust, Spike's K9 Fund, and Stamp
+      Out Stigma** — this **reverses the earlier conservative revert** (change
+      #25's "covers back to placeholder"), at the owner's explicit request to
+      wire real assets where we can. Verified each image by eye first: SFT and
+      Spike's are real screenshots of the delivered client sites; Stamp Out
+      Stigma is a real photo of the actual Times Square billboard plus the
+      campaign creative. Each got a real `cover` and a reworked `caseStudy.work`
+      (real `browser`/`full`/`detail` moments, truthful captions matched to
+      what each image actually shows). The un-fillable designed moments (SFT
+      before/after logo `pair`, merch product gallery) were dropped rather than
+      faked — they're on the hit list below.
+    - **Assets still needed (placeholder hit list):** flagships
+      (Beacon→Carelon, Marketing Bench, Workfront) — all `work` + covers are
+      placeholders, gated on NDA/what's shareable (redacted/abstracted OK);
+      **EverMark** (identity, mark detail, website — in progress); **Atromitos**
+      (site, Knowledge Hub, Andy Hill report booklet); **Important! Colorado**
+      (the IMPORTANT! wordmark + print/digital/mailer tactics). Optional
+      enrichment for the now-wired three: SFT logo before/after + merch product
+      shots; Spike's brand/collateral one-sheets.
+
 Scratch artifacts from earlier sessions (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html`, and `.claude/launch.json`. Dependencies unchanged this
 session (`framer-motion`, `lenis`, `next-view-transitions` already present).

@@ -400,7 +400,7 @@ export const PROJECTS: Project[] = [
         "A realistic timeline PMs and requesters would actually trust",
       ],
       reflection:
-        "TODO: Add a one-line reflection — what worked, and what you'd change next time.",
+        "What it taught me: the best process fixes come from the people doing the work. Our team banded together to name every pain point across intake, management, and execution, then broke the process down and rebuilt it — improving it tremendously. With Workfront redesigned and relaunched, the team is working far more efficiently and communicating more effectively. Make the system honest and the work and the people both move better.",
       work: [
         {
           kind: "pair",
@@ -991,11 +991,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0a1729", "#1f3a5c", "#8a9bb0", "#e8ecf2"],
     display: "SFT",
-    cover: "",
+    cover: "/work/special-forces-trust/cover.png",
     gallery: [
-      { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT — donor portal" },
-      { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT — program page" },
-      { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT — brand application" },
+      { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT — refreshed homepage" },
+      { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT — Supporting Our Quiet Professionals" },
+      { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT — ways to give back and branded gear" },
     ],
     externalUrl: "https://www.carmancreative.com/work/sft",
     caseStudy: {
@@ -1040,28 +1040,33 @@ export const PROJECTS: Project[] = [
         "I was proud to work on something that gives back to the military community and their families.",
       work: [
         {
-          kind: "pair",
-          a: { src: "", alt: "Special Forces Trust logo — before" },
-          b: { src: "", alt: "Special Forces Trust logo — refreshed" },
-          labelA: "Before",
-          labelB: "Refreshed",
-          caption:
-            "The brand refresh — strengthened, not replaced, to keep continuity with a community that already trusts it.",
-        },
-        {
           kind: "browser",
-          image: { src: "", alt: "Special Forces Trust — website and events platform" },
+          image: {
+            src: "/work/special-forces-trust/gallery-3.png",
+            alt: "Special Forces Trust website — Supporting Warriors and their Families, with a How We Help section",
+          },
           caption:
-            "The rebuilt website and events platform — built to make getting involved the easy part.",
+            "The refreshed site — “Supporting Warriors and their Families, Honoring Veterans,” with clear paths to donate, get involved, and request support.",
         },
         {
-          kind: "gallery",
-          images: [
-            { src: "", alt: "Branded merchandise" },
-            { src: "", alt: "Event apparel" },
-            { src: "", alt: "Branded goods" },
-          ],
-          caption: "Branded merchandise for the fund's events and supporters.",
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/special-forces-trust/gallery-2.png",
+            alt: "Special Forces Trust — the Supporting Our Quiet Professionals section",
+          },
+          caption:
+            "“Supporting Our Quiet Professionals” — the mission told plainly, carried by the community's own photography.",
+        },
+        {
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/special-forces-trust/gallery-1.png",
+            alt: "Special Forces Trust — Ways to give back, with branded SFT gear",
+          },
+          caption:
+            "Ways to give back — branded SFT gear, where every purchase helps fund the events and services the Trust provides.",
         },
       ],
     },
@@ -1108,11 +1113,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
     display: "STIGMA",
-    cover: "",
+    cover: "/work/stamp-out-stigma/cover.jpg",
     gallery: [
-      { src: "/work/stamp-out-stigma/gallery-1.jpg", alt: "Stamp Out Stigma — Times Square activation" },
-      { src: "/work/stamp-out-stigma/gallery-2.png", alt: "Stamp Out Stigma — campaign creative" },
-      { src: "/work/stamp-out-stigma/gallery-3.png", alt: "Stamp Out Stigma — awareness messaging" },
+      { src: "/work/stamp-out-stigma/gallery-2.png", alt: "Stamp Out Stigma — the campaign on the Times Square screens" },
+      { src: "/work/stamp-out-stigma/gallery-1.jpg", alt: "Stamp Out Stigma — the campaign creative up close" },
+      { src: "/work/stamp-out-stigma/gallery-3.png", alt: "Stamp Out Stigma — Times Square at dusk" },
     ],
     externalUrl: "https://www.carmancreative.com/work/sos",
     caseStudy: {
@@ -1160,16 +1165,22 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "full",
-          tall: true,
-          image: { src: "", alt: "Stamp Out Stigma — the Times Square activation" },
+          aspect: "4 / 3",
+          image: {
+            src: "/work/stamp-out-stigma/gallery-2.png",
+            alt: "Stamp Out Stigma — the campaign on the Times Square screens at dusk",
+          },
           caption:
-            "The message in Times Square — honest, human, and impossible to miss in one of the loudest rooms on earth.",
+            "The message on the Times Square screens — honest, human, and impossible to miss in one of the loudest rooms on earth.",
         },
         {
           kind: "detail",
-          image: { src: "", alt: "Campaign creative — up close" },
+          image: {
+            src: "/work/stamp-out-stigma/gallery-1.jpg",
+            alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
+          },
           caption:
-            "The creative up close — strong type, restrained color, understood at a glance.",
+            "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
         },
       ],
     },
@@ -1215,11 +1226,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0c0c0c", "#b5302b", "#9aa3a0", "#f0ece3"],
     display: "SPIKE'S",
-    cover: "",
+    cover: "/work/spikes-k9-fund/cover.png",
     gallery: [
-      { src: "/work/spikes-k9-fund/gallery-1.png", alt: "Spike's K9 Fund — homepage" },
-      { src: "/work/spikes-k9-fund/gallery-2.png", alt: "Spike's K9 Fund — program page" },
-      { src: "/work/spikes-k9-fund/gallery-3.png", alt: "Spike's K9 Fund — donation flow" },
+      { src: "/work/spikes-k9-fund/gallery-1.png", alt: "Spike's K9 Fund — About Spike's" },
+      { src: "/work/spikes-k9-fund/gallery-2.png", alt: "Spike's K9 Fund — the K9 Spike story" },
+      { src: "/work/spikes-k9-fund/gallery-3.png", alt: "Spike's K9 Fund — the online shop" },
     ],
     externalUrl: "https://www.carmancreative.com/work/spikes",
     caseStudy: {
@@ -1264,19 +1275,32 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "browser",
-          image: { src: "", alt: "Spike's K9 Fund — the website" },
+          image: {
+            src: "/work/spikes-k9-fund/gallery-1.png",
+            alt: "Spike's K9 Fund website — About Spike's, founder Jim Hatch's story and a working dog",
+          },
           caption:
-            "The website that got Spike's off the ground — the mission and the dogs front and center.",
+            "The site that got Spike's off the ground — Jim Hatch's story and the working dogs at the heart of it, mission front and center.",
         },
         {
-          kind: "gallery",
-          images: [
-            { src: "", alt: "Spike's collateral" },
-            { src: "", alt: "Program one-sheet" },
-            { src: "", alt: "Launch materials" },
-          ],
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/spikes-k9-fund/gallery-2.png",
+            alt: "Spike's K9 Fund — the K9 Spike story section",
+          },
           caption:
-            "Collateral and launch materials for a young, founder-driven nonprofit.",
+            "K9 Spike — the founder's first working dog, the partner who saved his life, and the fund's namesake.",
+        },
+        {
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/spikes-k9-fund/gallery-3.png",
+            alt: "Spike's K9 Fund — the online shop of branded products",
+          },
+          caption:
+            "The shop — branded collateral and merch that give supporters an easy way to show up for the mission.",
         },
       ],
     },
