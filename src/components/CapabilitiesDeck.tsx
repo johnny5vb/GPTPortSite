@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import CCMark from "./CCMark";
-import { PROJECTS } from "@/lib/projects";
+import { PUBLISHED_PROJECTS } from "@/lib/projects";
 
 const SLIDES = [
   { id: "cover", num: "01", title: "Cover" },
@@ -748,7 +748,7 @@ function Work() {
         Selected <em className="font-display-wonk text-green">work.</em>
       </h2>
       <div className="grid grid-cols-2 gap-3 md:gap-5 flex-1">
-        {PROJECTS.map((p) => (
+        {PUBLISHED_PROJECTS.map((p) => (
           <div
             key={p.slug}
             className="relative overflow-hidden rounded-md border border-line bg-ink-2"

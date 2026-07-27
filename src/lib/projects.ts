@@ -98,6 +98,14 @@ export type Project = {
   externalUrl?: string;
   /** Defaults to "independent" when omitted. */
   tier?: ProjectTier;
+  /**
+   * Written but deliberately unpublished — kept in the file, kept off the site.
+   * Draft projects are filtered out of every listing and no route is built for
+   * them, so nothing links to a page that doesn't exist. Use this for work that
+   * isn't cleared to show yet (an unsigned engagement, an NDA still in play)
+   * rather than deleting the case study. Flip it off to publish.
+   */
+  draft?: boolean;
   /** Enterprise leadership case study — renders the extended template. */
   flagship?: boolean;
   /** One-line "what John led" summary for leadership cards. */
@@ -636,6 +644,9 @@ export const PROJECTS: Project[] = [
     slug: "evermark",
     num: "02",
     tier: "independent",
+    // Held back: the proposal hasn't come back signed, so this isn't a client
+    // engagement to show yet. Copy is written and ready — flip this off to publish.
+    draft: true,
     title: "EverMark",
     client: "EverMark",
     year: "",
@@ -740,10 +751,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1b2a", "#2b8fb8", "#1f3a5c", "#eef2f6"],
     display: "ATRÓMITOS",
-    // Owner's call: lead with the Atrómitos homepage once the screenshot lands
-    // at /work/atromitos/site-home.jpg (the live site is unreachable from the
-    // build container, so it has to be supplied as a file).
-    cover: "",
+    cover: "/work/atromitos/site-home.jpg",
     gallery: [],
     roleSummary: "Website refresh + Knowledge Hub + the Andy Hill editorial report.",
     caseStudy: {
@@ -800,13 +808,20 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "browser",
-          image: { src: "", alt: "Atrómitos — the refreshed website, “Consulting Done Fearlessly”" },
+          image: {
+            src: "/work/atromitos/site-home.jpg",
+            alt: "The Atrómitos homepage — “Consulting Done Fearlessly” over a lioness at sunrise",
+          },
           caption:
             "The site, built to the client's own art direction — executed with sharper type, spacing, and finish than what came in.",
         },
         {
           kind: "full",
-          image: { src: "", alt: "Atrómitos — the consolidated Knowledge Hub" },
+          aspect: "16 / 10",
+          image: {
+            src: "/work/atromitos/knowledge-hub.jpg",
+            alt: "The Atrómitos Knowledge Hub — a What's New feature above cards for the podcast, articles, learning, and policy analysis",
+          },
           caption:
             "The Knowledge Hub — the contribution I'd point at. One home for the articles, policy analysis, podcast, webinars, and toolkits a firm this active keeps producing.",
         },
@@ -1426,16 +1441,23 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+/**
+ * Site-facing lookup: drafts are invisible here, so a held-back project can't
+ * be reached by typing its URL even though its data still lives in this file.
+ */
 export function getProject(slug: string): Project | undefined {
-  return PROJECTS.find((p) => p.slug === slug);
+  return PROJECTS.find((p) => p.slug === slug && !p.draft);
 }
 
 export function tierOf(p: Project): ProjectTier {
   return p.tier ?? "independent";
 }
 
+/** Everything cleared to appear on the site — drafts stay in the file only. */
+export const PUBLISHED_PROJECTS = PROJECTS.filter((p) => !p.draft);
+
 export function projectsByTier(tier: ProjectTier): Project[] {
-  return PROJECTS.filter((p) => tierOf(p) === tier);
+  return PUBLISHED_PROJECTS.filter((p) => tierOf(p) === tier);
 }
 
 export const LEADERSHIP_PROJECTS = projectsByTier("leadership");

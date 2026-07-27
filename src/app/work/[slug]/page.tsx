@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProjectDetail from "@/components/ProjectDetail";
 import Footer from "@/components/Footer";
-import { PROJECTS, getProject, getAdjacentProjects } from "@/lib/projects";
+import { PUBLISHED_PROJECTS, getProject, getAdjacentProjects } from "@/lib/projects";
 
 type Params = { slug: string };
 
+// Only the generated (published) slugs resolve; anything else 404s rather than
+// being rendered on demand.
+export const dynamicParams = false;
+
 export function generateStaticParams(): Params[] {
-  return PROJECTS.map((p) => ({ slug: p.slug }));
+  // Drafts get no route — nothing should link to a page that isn't cleared.
+  return PUBLISHED_PROJECTS.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
