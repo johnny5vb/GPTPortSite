@@ -646,6 +646,15 @@ finer-grained detail.
     md:40`. Audited all routes at 375px: no horizontal page scroll. The Lab tab
     strip still overflows *by design* (scrollable container).
 
+34. **Testimonials are live.** Four verified quotes published (Todd Mills /
+    Colony Coffee, Harry J. Brown / Brown Estate Planning, Josh H. / web
+    developer, Brenda W. / communications specialist). Stored verbatim in
+    `src/lib/testimonials.ts` — the `verified: true` gate and the "never invent
+    a testimonial" rule still stand, and names given as an initial stay that
+    way. `Testimonials.tsx` moved to a two-column layout; it was written for one
+    or two quotes at display size. The section renders on `/leadership` and had
+    correctly been returning `null` until now.
+
 Tooling note: PyMuPDF renders the source PDFs; LibreOffice fails on these PPTX
 files, so deck graphics are pulled straight from the OOXML zip (`ppt/media/`),
 filtering out logos and icons by size.
