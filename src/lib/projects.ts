@@ -137,7 +137,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
     display: "CARELON",
-    cover: "",
+    cover: "/work/beacon-carelon-transformation/cover.jpg",
     gallery: [],
     roleSummary:
       "Creative lead through an enterprise acquisition and rebrand.",
@@ -193,28 +193,62 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "pair",
-          a: { src: "", alt: "Beacon Health Options identity" },
-          b: { src: "", alt: "Carelon identity" },
+          a: {
+            src: "/work/beacon-carelon-transformation/before-beacon-guidelines.jpg",
+            alt: "Beacon Health Options brand guidelines cover, in the Beacon blue identity",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/brand-architecture.jpg",
+            alt: "Carelon logo architecture — the primary mark and every line-of-business lockup",
+          },
           labelA: "Before — Beacon",
           labelB: "After — Carelon",
           caption:
-            "Migrating a national behavioral-health identity to a new parent brand — without breaking the materials members, providers, and staff rely on every day.",
+            "The identity, before and after: Beacon's blue system on the left; on the right the Carelon architecture — the primary mark plus every line-of-business lockup that had to be governed.",
         },
         {
           kind: "full",
-          image: { src: "", alt: "The brand & design system and templates" },
+          aspect: "3 / 2",
+          image: {
+            src: "/work/beacon-carelon-transformation/cover.jpg",
+            alt: "Carelon poster: Our name has changed. Our commitment has not.",
+          },
           caption:
-            "The system, built first: identity, guidelines, and the templates the whole migration ran on — what made ~1,500+ deliverables repeatable and consistent as volume spiked.",
+            "The moment itself — “Our name has changed. Our commitment has not.” On March 1, 2023, Beacon Health Options became Carelon Behavioral Health; the job was making that legible to members, providers, and staff.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/beacon-carelon-transformation/before-beacon-flyer.jpg",
+            alt: "Beacon Care Services member flyer — “Not feeling like yourself?”",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/collateral-salessheet.jpg",
+            alt: "Carelon Behavioral Health sales sheet — “Help members reach their full potential”",
+          },
+          labelA: "Before — Beacon collateral",
+          labelB: "After — Carelon collateral",
+          caption:
+            "The same job, rebuilt in the new system: member- and market-facing collateral carried across without losing the plot — or the plain language people actually rely on.",
         },
         {
           kind: "gallery",
           images: [
-            { src: "", alt: "Brand guidelines" },
-            { src: "", alt: "Templated assets" },
-            { src: "", alt: "Merchandise" },
+            {
+              src: "/work/beacon-carelon-transformation/type-system.jpg",
+              alt: "Carelon Behavioral Health paragraph style guide",
+            },
+            {
+              src: "/work/beacon-carelon-transformation/collateral-crisis.jpg",
+              alt: "Carelon crisis care capability sheet for youth services",
+            },
+            {
+              src: "/work/beacon-carelon-transformation/collateral-folder.jpg",
+              alt: "Carelon Behavioral Health pocket folder design",
+            },
           ],
           caption:
-            "The system in production — guidelines, templatized assets, and merchandise, rolled out across an ~85,000-employee organization.",
+            "The system in production — paragraph styles, capability sheets, and printed collateral: the repeatable parts that made ~1,500+ deliverables consistent as volume spiked.",
         },
       ],
     },

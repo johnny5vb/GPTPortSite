@@ -121,12 +121,25 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             }}
             className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line flex items-end p-8 md:p-12"
           >
-            <span
-              aria-hidden
-              className="font-display text-[clamp(2.5rem,10vw,7rem)] tracking-[-0.04em] text-bone/90 mix-blend-screen"
-            >
-              {project.display}
-            </span>
+            {/* A flagship with a cleared cover features the piece itself, centered
+                and uncropped on the brand gradient; without one, the wordmark carries it. */}
+            {project.cover ? (
+              <Image
+                src={project.cover}
+                alt={`${project.title} — cover`}
+                fill
+                sizes="(max-width: 1400px) 100vw, 1400px"
+                className="object-contain p-6 md:p-10"
+                priority
+              />
+            ) : (
+              <span
+                aria-hidden
+                className="font-display text-[clamp(2.5rem,10vw,7rem)] tracking-[-0.04em] text-bone/90 mix-blend-screen"
+              >
+                {project.display}
+              </span>
+            )}
           </div>
         ) : project.cover ? (
           <div
