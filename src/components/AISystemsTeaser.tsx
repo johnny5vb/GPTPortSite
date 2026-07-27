@@ -25,7 +25,7 @@ const CATEGORIES = [
 
 export default function AISystemsTeaser() {
   return (
-    <section id="talks-back" className="relative container-x py-24 md:py-32 rule-top">
+    <section id="talks-back" className="relative container-x py-14 sm:py-20 md:py-32 rule-top">
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">

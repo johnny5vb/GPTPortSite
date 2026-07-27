@@ -40,7 +40,7 @@ export default function Showpiece({
   return (
     <section
       id="spotlight"
-      className="relative py-28 md:py-40 container-x rule-top"
+      className="relative py-16 sm:py-24 md:py-40 container-x rule-top"
     >
       {/* Section header — same grid as other sections */}
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">

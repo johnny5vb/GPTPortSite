@@ -32,7 +32,7 @@ export default function ContactCTA() {
   return (
     <section
       id="contact"
-      className="relative py-28 md:py-40 container-x rule-top overflow-hidden"
+      className="relative py-16 sm:py-24 md:py-40 container-x rule-top overflow-hidden"
     >
       {/* Availability strip — leadership-forward, no hustle language */}
       <motion.div
@@ -147,11 +147,13 @@ export default function ContactCTA() {
 
 function ContactBlock({ label, value }: { label: string; value: string }) {
   return (
-    <div className="p-4 rounded-md border border-line bg-ink-2">
+    // min-w-0: grid children default to min-width:auto and refuse to shrink,
+    // which is what let long values (an email, a profile URL) push past the card.
+    <div className="min-w-0 p-4 rounded-md border border-line bg-ink-2">
       <div className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mute mb-2">
         {label}
       </div>
-      <div className="whitespace-pre-line text-sm leading-snug text-bone">
+      <div className="whitespace-pre-line break-words [overflow-wrap:anywhere] text-sm leading-snug text-bone">
         {value}
       </div>
     </div>

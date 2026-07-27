@@ -329,7 +329,7 @@ export default function Atelier() {
   return (
     <section
       id="atelier"
-      className="relative py-28 md:py-40 container-x rule-top"
+      className="relative py-16 sm:py-24 md:py-40 container-x rule-top"
     >
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">

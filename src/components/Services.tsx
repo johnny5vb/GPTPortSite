@@ -67,7 +67,7 @@ const SERVICES: Service[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-28 md:py-40 container-x rule-top">
+    <section id="services" className="relative py-16 sm:py-24 md:py-40 container-x rule-top">
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">

@@ -132,7 +132,7 @@ export default function DesignSystemLab() {
   return (
     <section
       id="systems"
-      className="relative py-28 md:py-40 container-x rule-top"
+      className="relative py-16 sm:py-24 md:py-40 container-x rule-top"
     >
       {/* Header */}
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">

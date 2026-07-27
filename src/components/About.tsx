@@ -66,7 +66,7 @@ const STACK = [
 
 export default function About() {
   return (
-    <section id="about" className="relative py-28 md:py-40 container-x rule-top">
+    <section id="about" className="relative py-16 sm:py-24 md:py-40 container-x rule-top">
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">

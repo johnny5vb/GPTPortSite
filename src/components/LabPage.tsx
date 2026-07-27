@@ -225,7 +225,7 @@ export default function LabPage() {
       <Atelier />
 
       {/* Closing: contact CTA */}
-      <section className="container-x py-28 md:py-36 rule-top">
+      <section className="container-x py-16 sm:py-24 md:py-36 rule-top">
         <div className="grid grid-cols-12 gap-6 items-end">
           <div className="col-span-12 md:col-span-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-4">

@@ -242,7 +242,7 @@ export default function LeadershipPage() {
       </Block>
 
       {/* Closing CTA */}
-      <section className="container-x py-24 md:py-32 rule-top">
+      <section className="container-x py-14 sm:py-20 md:py-32 rule-top">
         <div className="grid grid-cols-12 gap-6 items-end">
           <div className="col-span-12 md:col-span-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-4">
@@ -287,7 +287,7 @@ function Block({
   children: React.ReactNode;
 }) {
   return (
-    <section className="container-x py-16 md:py-24 rule-top">
+    <section className="container-x py-16 md:py-14 sm:py-24 rule-top">
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
           <motion.p

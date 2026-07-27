@@ -88,7 +88,7 @@ export default function Manifesto() {
   return (
     <section
       id="manifesto"
-      className="relative rule-top container-x py-20 md:py-28"
+      className="relative rule-top container-x py-12 sm:py-16 md:py-28"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -177,7 +177,7 @@ export default function Manifesto() {
                   onClick={() => goTo(i)}
                   data-cursor={p.mark.toLowerCase().replace(".", "")}
                   aria-label={`Show principle ${p.mark}`}
-                  className="group inline-flex items-center gap-2 px-3 py-2 rounded-md font-mono text-[10px] uppercase tracking-[0.22em] transition-colors"
+                  className="group inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-md font-mono text-[10px] uppercase tracking-[0.22em] transition-colors"
                   style={{
                     color: active ? "var(--color-bone)" : "var(--color-mute)",
                   }}
@@ -187,7 +187,9 @@ export default function Manifesto() {
                       active ? "w-8 bg-green" : "w-3 bg-line-2 group-hover:bg-bone/40"
                     }`}
                   />
-                  <span>{p.mark}</span>
+                  {/* The numeral is a nicety, not the control — drop it on
+                      phones so the dot nav can't crowd out the transport buttons. */}
+                  <span className="hidden sm:inline">{p.mark}</span>
                 </button>
               );
             })}
