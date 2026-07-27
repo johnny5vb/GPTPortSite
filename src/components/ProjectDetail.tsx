@@ -574,7 +574,7 @@ function Frame({
           alt={image.alt}
           fill
           sizes={sizes}
-          className="object-cover object-top"
+          className="object-contain p-2 sm:p-3"
         />
       </div>
     );
@@ -664,7 +664,7 @@ function WorkMomentView({
               <Frame
                 image={c.img}
                 palette={palette}
-                aspect="4 / 3"
+                aspect="16 / 10"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -702,7 +702,7 @@ function WorkMomentView({
             key={i}
             image={img}
             palette={palette}
-            aspect="3 / 4"
+            aspect="1 / 1"
             sizes="(max-width: 768px) 50vw, 33vw"
           />
         ))}

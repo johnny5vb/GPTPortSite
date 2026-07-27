@@ -890,9 +890,9 @@ export const PROJECTS: Project[] = [
       "Campaign design",
       "Print & digital tactics",
     ],
-    palette: ["#2a140e", "#e0703a", "#7a3b22", "#f4ece6"],
+    palette: ["#78256F", "#0067AB", "#245D38", "#f4ecf3"],
     display: "IMPORTANT!",
-    cover: "",
+    cover: "/work/important-colorado/cover.jpg",
     gallery: [],
     roleSummary: "Created the 'IMPORTANT!' wordmark and campaign tactics for Health First Colorado.",
     caseStudy: {
@@ -911,6 +911,7 @@ export const PROJECTS: Project[] = [
         "A public-health message with real stakes for members' coverage, a wide statewide audience, and a multi-phase rollout (late 2025 through 2026) spanning Jumping Fish and the Health First Colorado team.",
       role: [
         "Created the 'IMPORTANT! Federal Changes to Colorado's Medicaid Program' wordmark — a logo that works as a standalone graphic and as a headline across pieces",
+        "Wrote the campaign brand system: mark architecture, colour, typography, imagery, and template anatomy",
         "Designing the print and digital tactics that communicate the change",
         "Working with Jumping Fish (agency of hire) and the Health First Colorado team",
       ],
@@ -924,32 +925,109 @@ export const PROJECTS: Project[] = [
           body: "Designed 'IMPORTANT!' to work two ways — as a singular graphic mark and as the headline on graphic and print pieces — so the campaign has one recognizable anchor everywhere it shows up.",
         },
         {
-          title: "TODO: Add decisions as the phases ship",
-          body: "TODO: Phase 2/3 tactics and the closing video, captured as they're made.",
+          title: "A mark that needs no translation",
+          body: "The audience is statewide and multilingual, so the hero mark is an oversized exclamation point — understood identically in English, Spanish, and every other language the campaign reaches. At large scale the vertical bar alone stops the eye; it works as architecture before it works as punctuation.",
+        },
+        {
+          title: "One system, 100+ partner organizations",
+          body: "Over a hundred partner organizations produce materials under this campaign. That only holds together with a governed system: three defined mark variants with rules for when each applies, so the campaign stays recognizable whether it's a state mailer or a county flyer.",
+        },
+        {
+          title: "Build accessibility into the palette, not onto it",
+          body: "Every colour pairing is specified with its contrast ratio and WCAG level, and the two brightest colours are restricted to graphic elements rather than body text. On a public-health message that people need to read under stress, legibility is the message.",
+        },
+        {
+          title: "Design for translation from the first layout",
+          body: "Spanish translation is handled downstream by the state, so templates had to be built translation-ready — copy blocks that tolerate expansion instead of layouts that break the moment the language changes.",
         },
       ],
       outcomes: [
+        "A full campaign brand system — mark architecture, palette, typography, imagery direction, and template anatomy — governing 100+ partner organizations",
+        "Phase 2 shipped: member-facing social carousels, immigrant-coverage slides, and a partner eligibility flowchart",
         "Rolling out statewide since late 2025; currently Phase 2 of 3, ending with a video",
-        "TODO: Add reach and response once the campaign completes",
+        "TODO: Confirm reach and response figures once the campaign completes",
       ],
       reflection:
         "TODO: Add a reflection once the campaign wraps — it ends with a video I plan to package here in a portfolio-worthy way.",
       work: [
         {
           kind: "full",
-          image: { src: "", alt: "The IMPORTANT! wordmark" },
+          aspect: "16 / 9",
+          image: {
+            src: "/work/important-colorado/wordmark-anatomy.jpg",
+            alt: "Wordmark anatomy — three lines, three jobs: IMPORTANT!, the federal-changes framing, and the program name",
+          },
           caption:
-            "The 'IMPORTANT!' wordmark — designed to work as a standalone mark and as a headline across pieces.",
+            "Three lines, three jobs — the dominant call, the framing beneath it, and the program name. The wordmark is the campaign's first touch on every partner-produced piece.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/important-colorado/exclamation-mark.jpg",
+            alt: "The exclamation point mark — rationale for a mark that needs no translation",
+          },
+          b: {
+            src: "/work/important-colorado/three-marks.jpg",
+            alt: "Three mark variants and the rules for when each is used",
+          },
+          labelA: "The hero mark",
+          labelB: "Right mark, right context",
+          caption:
+            "A mark that reads identically in every language the campaign reaches — then governed into three variants so a hundred-plus partner organizations stay recognizable.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/important-colorado/palette.jpg",
+            alt: "The campaign palette — deep plum, sky blue, mountain green, sunshine yellow, Colorado meadow",
+          },
+          b: {
+            src: "/work/important-colorado/accessibility.jpg",
+            alt: "Approved colour pairings with contrast ratios and WCAG levels",
+          },
+          labelA: "Built to be noticed",
+          labelB: "And built to be read",
+          caption:
+            "Every pairing carries its contrast ratio and WCAG level, and the brightest two colours are held back from body text — on a public-health message, legibility is the message.",
         },
         {
           kind: "gallery",
           images: [
-            { src: "", alt: "Print tactic" },
-            { src: "", alt: "Digital tactic" },
-            { src: "", alt: "Member mailer" },
+            {
+              src: "/work/important-colorado/carousel-1.jpg",
+              alt: "Social carousel slide one — federal changes may affect your coverage",
+            },
+            {
+              src: "/work/important-colorado/carousel-3.jpg",
+              alt: "Social carousel slide — watch your mail, email, and texts",
+            },
+            {
+              src: "/work/important-colorado/carousel-4.jpg",
+              alt: "Social carousel closing slide with the campaign wordmark and Health First Colorado lockup",
+            },
           ],
           caption:
-            "The print and digital tactics it anchors — rolling out statewide through 2026.",
+            "The member-facing end of it — a swipeable carousel that turns a federal policy change into three things you can do this week.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 9",
+          image: {
+            src: "/work/important-colorado/phase2-eligibility.jpg",
+            alt: "Phase 2 slide — an eligibility table showing which immigration statuses may qualify for coverage",
+          },
+          caption:
+            "Phase 2, on immigrant health coverage: the hardest information in the campaign, laid out so a reader can find their own situation in one pass.",
+        },
+        {
+          kind: "full",
+          aspect: "3 / 2",
+          image: {
+            src: "/work/important-colorado/flowchart.jpg",
+            alt: "Partner resource — an H.R. 1 eligibility decision flowchart for staff guiding members",
+          },
+          caption:
+            "And the partner-facing counterpart — a decision flowchart for the staff walking members through it, with the screen-reader-accessible version linked alongside.",
         },
       ],
     },
