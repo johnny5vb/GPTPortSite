@@ -279,7 +279,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1cb791", "#1f8a6d", "#f3f1ea"],
     display: "BENCH",
-    cover: "",
+    cover: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
     gallery: [],
     roleSummary:
       "Rebuilt Marketing Bench as a self-serve print-on-demand platform.",
@@ -332,28 +332,68 @@ export const PROJECTS: Project[] = [
         "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials — exactly the kind of work AI is good at staying on top of.",
       work: [
         {
-          kind: "browser",
+          kind: "full",
+          aspect: "3 / 2",
           image: {
-            src: "",
-            alt: "Marketing Bench — the variable print-on-demand platform",
+            src: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
+            alt: "The Marketing Hub homepage — Build a Marketing Folder, with quick links to the brand center, stationery store, print support, and promo items",
           },
           caption:
-            "Marketing Bench, rebuilt — a self-serve variable print-on-demand site, with the interface designed so a designer never has to touch a routine order.",
+            "The platform, annotated: “Build a Marketing Folder.” One front door to the brand center, stationery, print support, and promo items — so ordering never started with a request to a designer.",
+        },
+        {
+          kind: "full",
+          aspect: "3 / 2",
+          image: {
+            src: "/work/creative-operations-marketing-bench/configurable-templates.jpg",
+            alt: "Client inventory and configurable templates — a client-selection dropdown with View Proof and Create PDF controls",
+          },
+          caption:
+            "Where the designer left the critical path: pick the client, and logo, program name, phone number, and URL populate across every template — then View Proof and Create PDF, unattended.",
         },
         {
           kind: "pair",
-          a: { src: "", alt: "Before — designer in the critical path" },
-          b: { src: "", alt: "After — stakeholders self-serve" },
-          labelA: "Before",
-          labelB: "After",
+          a: {
+            src: "/work/creative-operations-marketing-bench/resource-center.jpg",
+            alt: "The Resource Center and Toolkits catalog — approved templates and branding assets with select-and-download",
+          },
+          b: {
+            src: "/work/creative-operations-marketing-bench/marketing-folder.jpg",
+            alt: "The Marketing Folder catalog — collated sales materials selected and added to cart",
+          },
+          labelA: "Find it",
+          labelB: "Build the folder",
           caption:
-            "The old chain — edit, approve, hand to the vendor, wait for the upload — replaced by templates stakeholders drive themselves. Roughly 60% faster turnaround.",
+            "The self-serve loop: search approved assets and toolkits, select what you need, and collate a folder that ships — the chain that used to be edit, approve, hand to the vendor, wait for the upload.",
         },
         {
-          kind: "detail",
-          image: { src: "", alt: "A template's placeholder image & content areas" },
+          kind: "gallery",
+          images: [
+            {
+              src: "/work/creative-operations-marketing-bench/output-pge.jpg",
+              alt: "A client-customized EAP brochure produced from the platform templates",
+            },
+            {
+              src: "/work/creative-operations-marketing-bench/output-unitedrentals.jpg",
+              alt: "A client-branded manager resources piece produced from the platform templates",
+            },
+            {
+              src: "/work/creative-operations-marketing-bench/output-jnj.jpg",
+              alt: "A client-branded wellbeing and EAP piece produced from the platform templates",
+            },
+          ],
           caption:
-            "The trick: materials built with intentional placeholder image and content areas, reusable across clients, products, and purposes.",
+            "What came out the other end — the same templates, configured per client, at a volume no designer-in-the-loop process could have carried.",
+        },
+        {
+          kind: "full",
+          aspect: "3 / 2",
+          image: {
+            src: "/work/creative-operations-marketing-bench/eap-templates.jpg",
+            alt: "The configurable EAP, MHSUD and MDLIVE template catalog, showing which fields update automatically and which are set by the user",
+          },
+          caption:
+            "The rule set behind it: which fields fill automatically the moment a client is selected, and which stay in the user's hands — the governance that keeps self-serve on-brand.",
         },
       ],
     },
