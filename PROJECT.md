@@ -590,6 +590,61 @@ finer-grained detail.
       OOXML zip (`ppt/media/`).
     - **Workfront is now the only flagship still on placeholders.**
 
+### Later session — every published project on real assets
+
+30. Cleared the remaining placeholder work and made several system-wide calls.
+    - **Atrómitos.** Rewritten honestly: the client arrived with their art
+      direction settled and didn't want a redesign, so the case study says so
+      plainly and puts the contribution where it was — craft inside their
+      system, real interactivity, and the consolidated Knowledge Hub. Wired the
+      homepage (cover + browser moment), the Knowledge Hub, and the 65-page
+      **Andy Hill CARE Fund** report. Name accented to match their own mark.
+    - **IMPORTANT! Colorado.** Wired the campaign brand system (wordmark
+      anatomy, hero-mark rationale, three mark variants, palette, the WCAG
+      contrast-pairing table), the member carousel, Phase 2 slides, and the
+      partner eligibility flowchart. Placeholder decisions replaced with real
+      ones drawn from the campaign's own documents; reach/response stays TODO.
+    - **Workfront.** The owner's context unlocked it: **Single Spine** was the
+      legacy instance (five Workfront systems consolidated into one); the
+      **Workfront Restart** was a new instance built from scratch around its
+      pain points. Both are now named in the copy. Wired the from/to process
+      model (cover), a Single-Spine-chaos vs Restart-phase-table pair, the
+      six-phase process, reviews/delegation, the everyday surface, and the
+      "Workfront That Works" adoption poster. Staged launch (MVP Jan 2026,
+      full launch Apr 2026) added as an outcome.
+    - **EverMark held back** via a new reversible `draft` flag — the proposal
+      isn't signed, so it isn't an engagement to show. Drafts are filtered from
+      every listing, get no route (`dynamicParams = false`), are unreachable via
+      `getProject`, and stay out of the sitemap and capabilities deck. Flip
+      `draft` off to publish. Independents renumbered 01–07 afterwards.
+
+31. **Thumbnail format — decided.** Covers range from 0.65 (a tall poster) to
+    2.00 (a wide screenshot), so no single crop served them; the old Work row
+    thumbnail was a 2.5:1 letterbox. Everything now presents the piece **whole**
+    (`object-contain`) in a 4:3 plate — Work rows, leadership cards, case-study
+    heroes, and the `pair`/`gallery`/`detail` frames inside "The work".
+    **Plates are neutral (`bg-ink-2`), not palette gradients** — the owner
+    rejected site colour behind the work; the only colour on screen comes from
+    the work itself. Thumbnail parallax tightened to ±8px so contained art
+    can't slide out of its plate.
+
+32. **Body typeface: Geist → Instrument Sans** (via `next/font`, self-hosted).
+    Geist reads as the AI/dev-tool default; Instrument Sans has editorial warmth
+    that sits with Fraunces. The four AI Lab theme presets referenced the removed
+    `--font-geist` and were repointed.
+
+33. **Mobile pass.** Contact values (email, profile URL) overflowed their cards —
+    grid children default to `min-width:auto`, so they got `min-w-0` plus
+    wrap-anywhere. Manifesto's dot-nav numerals pushed the transport buttons
+    off-screen at 375px (now hidden below `sm`). Section rhythm was `py-28`
+    (112px top and bottom) on phones across every section — now `16 / sm:24 /
+    md:40`. Audited all routes at 375px: no horizontal page scroll. The Lab tab
+    strip still overflows *by design* (scrollable container).
+
+Tooling note: PyMuPDF renders the source PDFs; LibreOffice fails on these PPTX
+files, so deck graphics are pulled straight from the OOXML zip (`ppt/media/`),
+filtering out logos and icons by size.
+
 Scratch artifacts from earlier sessions (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html`, and `.claude/launch.json`. Dependencies unchanged this
 session (`framer-motion`, `lenis`, `next-view-transitions` already present).
