@@ -110,19 +110,16 @@ export default function ProjectDetail({ project, prev, next }: Props) {
         </motion.a>
       </header>
 
-      {/* Cover — real image for client work; branded gradient for flagships
-          (no photo yet). Both morph from the Work thumbnail. */}
+      {/* Cover — the piece presented whole on a neutral plate, so the work
+          supplies the colour and the site stays out of its way. */}
       <section id="cover" className="container-x">
         {isFlagship ? (
           <div
-            style={{
-              viewTransitionName: `project-${project.slug}`,
-              background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
-            }}
-            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line flex items-end p-8 md:p-12"
+            style={{ viewTransitionName: `project-${project.slug}` }}
+            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2 flex items-end p-8 md:p-12"
           >
-            {/* A flagship with a cleared cover features the piece itself, centered
-                and uncropped on the brand gradient; without one, the wordmark carries it. */}
+            {/* A flagship with a cleared cover features the piece itself,
+                centered and uncropped; without one, the wordmark carries it. */}
             {project.cover ? (
               <Image
                 src={project.cover}
@@ -135,7 +132,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             ) : (
               <span
                 aria-hidden
-                className="font-display text-[clamp(2.5rem,10vw,7rem)] tracking-[-0.04em] text-bone/90 mix-blend-screen"
+                className="font-display text-[clamp(2.5rem,10vw,7rem)] tracking-[-0.04em] text-bone/25"
               >
                 {project.display}
               </span>
@@ -143,14 +140,10 @@ export default function ProjectDetail({ project, prev, next }: Props) {
           </div>
         ) : project.cover ? (
           // Covers range from tall documents to 2:1 screenshots, so the hero
-          // presents the piece whole on its brand panel rather than cropping
-          // everything to one ratio.
+          // presents the piece whole rather than cropping everything to one ratio.
           <div
-            style={{
-              viewTransitionName: `project-${project.slug}`,
-              background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
-            }}
-            className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-lg border border-line"
+            style={{ viewTransitionName: `project-${project.slug}` }}
+            className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2"
           >
             <Image
               src={project.cover}
@@ -588,13 +581,10 @@ function Frame({
   }
   return (
     <div
-      className={`relative overflow-hidden ${rounded} border border-dashed border-line-2 flex items-center justify-center p-6 text-center`}
-      style={{
-        aspectRatio: aspect,
-        background: `linear-gradient(135deg, ${palette[0]}, ${palette[1]})`,
-      }}
+      className={`relative overflow-hidden ${rounded} border border-dashed border-line-2 bg-ink-2 flex items-center justify-center p-6 text-center`}
+      style={{ aspectRatio: aspect }}
     >
-      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone/75 leading-relaxed">
+      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute leading-relaxed">
         {image.alt}
       </span>
     </div>
@@ -688,12 +678,7 @@ function WorkMomentView({
   if (m.kind === "detail") {
     return (
       <motion.figure {...revealProps}>
-        <div
-          className="rounded-xl p-6 sm:p-12 md:p-20 flex items-center justify-center"
-          style={{
-            background: `linear-gradient(135deg, ${palette[0]}, ${palette[2] ?? palette[1]})`,
-          }}
-        >
+        <div className="rounded-xl border border-line bg-ink-2 p-6 sm:p-12 md:p-20 flex items-center justify-center">
           <div className="w-full max-w-[38rem]">
             <Frame
               image={m.image}

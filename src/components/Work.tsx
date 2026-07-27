@@ -90,8 +90,8 @@ export default function Work() {
   );
 }
 
-/* ── Leadership card — no photo dependency; a branded gradient panel that
-      morphs into the case-study hero via a shared view-transition name. ── */
+/* ── Leadership card — a neutral plate that morphs into the case-study hero
+      via a shared view-transition name. ── */
 function LeadershipCard({
   project,
   index,
@@ -113,11 +113,8 @@ function LeadershipCard({
         className="block p-6 md:p-7 h-full"
       >
         <div
-          style={{
-            viewTransitionName: `project-${project.slug}`,
-            background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
-          }}
-          className="relative aspect-[4/3] rounded-lg border border-line/60 mb-6 overflow-hidden flex items-end p-3"
+          style={{ viewTransitionName: `project-${project.slug}` }}
+          className="relative aspect-[4/3] rounded-lg border border-line/60 mb-6 overflow-hidden flex items-end p-3 bg-ink-2"
         >
           {/* Flagships that have a cleared asset show it whole; the rest still
               carry the wordmark. */}
@@ -131,7 +128,7 @@ function LeadershipCard({
             />
           )}
           {!project.cover && (
-            <span className="font-display text-2xl tracking-[-0.03em] text-bone/90 mix-blend-screen">
+            <span className="font-display text-2xl tracking-[-0.03em] text-bone/70">
               {project.display}
             </span>
           )}
@@ -250,14 +247,11 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 
         {/* Image thumbnail — morphs into the case-study cover via View Transitions.
             The work runs from tall posters to 2:1 screenshots, so nothing is
-            cropped to a fixed ratio: each piece sits whole on its own brand
-            panel. Projects without a cover yet get the same panel, labelled. */}
+            cropped to a fixed ratio: each piece sits whole on a neutral plate,
+            which keeps the site's colour out of the work. */}
         <div
-          style={{
-            viewTransitionName: `project-${project.slug}`,
-            background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
-          }}
-          className="hidden md:block col-span-3 relative aspect-[4/3] overflow-hidden rounded-md border border-line"
+          style={{ viewTransitionName: `project-${project.slug}` }}
+          className="hidden md:block col-span-3 relative aspect-[4/3] overflow-hidden rounded-md border border-line bg-ink-2"
         >
           {project.cover ? (
             <motion.div style={{ y: previewY }} className="absolute inset-0">
@@ -270,13 +264,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
               />
             </motion.div>
           ) : (
-            <div
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
-              }}
-            >
-              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-bone/75">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-mute">
                 visuals coming
               </span>
             </div>
