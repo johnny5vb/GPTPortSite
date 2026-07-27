@@ -10,7 +10,7 @@ import { ArrowUpRight } from "lucide-react";
  */
 export default function AudienceSplit() {
   return (
-    <section id="paths" className="relative container-x py-16 md:py-14 sm:py-24 rule-top">
+    <section id="paths" className="relative container-x py-16 md:py-24 rule-top">
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         {/* Primary: hiring */}
         <motion.div

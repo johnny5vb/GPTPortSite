@@ -287,7 +287,7 @@ function Block({
   children: React.ReactNode;
 }) {
   return (
-    <section className="container-x py-16 md:py-14 sm:py-24 rule-top">
+    <section className="container-x py-16 md:py-24 rule-top">
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
           <motion.p

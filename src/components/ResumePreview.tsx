@@ -16,7 +16,7 @@ const SUMMARY = [
 
 export default function ResumePreview() {
   return (
-    <section className="relative container-x py-16 md:py-14 sm:py-24 rule-top">
+    <section className="relative container-x py-16 md:py-24 rule-top">
       <div className="rounded-2xl border border-line bg-ink-2 p-8 md:p-10">
         <div className="grid grid-cols-12 gap-6 md:gap-10 items-start">
           <div className="col-span-12 md:col-span-4">
