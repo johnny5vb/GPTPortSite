@@ -732,10 +732,10 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "atromitos",
-    num: "03",
+    num: "02",
     tier: "independent",
-    title: "Atromitos",
-    client: "Atromitos",
+    title: "Atrómitos",
+    client: "Atrómitos",
     year: "",
     category: "Website / Editorial",
     duration: "",
@@ -756,7 +756,7 @@ export const PROJECTS: Project[] = [
     roleSummary: "Website refresh + Knowledge Hub + the Andy Hill editorial report.",
     caseStudy: {
       overview: [
-        { label: "Client", value: "Atromitos (woman-owned consulting)" },
+        { label: "Client", value: "Atrómitos (woman-owned consulting)" },
         { label: "Role", value: "Web design & editorial (Carman Creative)" },
         { label: "How it came in", value: "Referral from another client" },
         { label: "Scope", value: "Website refresh, Knowledge Hub, Andy Hill report" },
@@ -873,7 +873,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "important-colorado",
-    num: "04",
+    num: "03",
     tier: "independent",
     title: "Important! Colorado",
     client: "Health First Colorado",
@@ -956,7 +956,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "friends-rehab",
-    num: "02",
+    num: "04",
     tier: "independent",
     title: "Friends Rehabilitation Program",
     client: "Friends Rehabilitation Program (FRP)",
@@ -1085,7 +1085,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "special-forces-trust",
-    num: "04",
+    num: "05",
     tier: "independent",
     title: "Special Forces Trust",
     client: "Special Forces Trust",
@@ -1207,7 +1207,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "stamp-out-stigma",
-    num: "05",
+    num: "06",
     tier: "independent",
     title: "Stamp Out Stigma",
     client: "Stamp Out Stigma",
@@ -1321,7 +1321,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "spikes-k9-fund",
-    num: "06",
+    num: "07",
     tier: "independent",
     title: "Spike's K9 Fund",
     client: "Spike's K9 Fund",

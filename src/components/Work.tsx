@@ -117,11 +117,24 @@ function LeadershipCard({
             viewTransitionName: `project-${project.slug}`,
             background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
           }}
-          className="relative h-28 rounded-lg border border-line/60 mb-6 overflow-hidden flex items-end p-3"
+          className="relative aspect-[4/3] rounded-lg border border-line/60 mb-6 overflow-hidden flex items-end p-3"
         >
-          <span className="font-display text-2xl tracking-[-0.03em] text-bone/90 mix-blend-screen">
-            {project.display}
-          </span>
+          {/* Flagships that have a cleared asset show it whole; the rest still
+              carry the wordmark. */}
+          {project.cover && (
+            <Image
+              src={project.cover}
+              alt={`${project.title} preview`}
+              fill
+              sizes="360px"
+              className="object-contain p-3 transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+          )}
+          {!project.cover && (
+            <span className="font-display text-2xl tracking-[-0.03em] text-bone/90 mix-blend-screen">
+              {project.display}
+            </span>
+          )}
           <span className="absolute top-3 right-3 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70">
             {project.num}
           </span>
@@ -186,7 +199,9 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const previewY = useTransform(scrollYProgress, [0, 1], [20, -20]);
+  // Kept inside the plate's padding: with object-contain the whole piece is
+  // visible, so a big parallax would visibly slide the artwork out of frame.
+  const previewY = useTransform(scrollYProgress, [0, 1], [8, -8]);
 
   return (
     <motion.article
@@ -234,10 +249,15 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
         </div>
 
         {/* Image thumbnail — morphs into the case-study cover via View Transitions.
-            Projects without a cover yet get a branded gradient placeholder. */}
+            The work runs from tall posters to 2:1 screenshots, so nothing is
+            cropped to a fixed ratio: each piece sits whole on its own brand
+            panel. Projects without a cover yet get the same panel, labelled. */}
         <div
-          style={{ viewTransitionName: `project-${project.slug}` }}
-          className="hidden md:block col-span-3 relative h-28 overflow-hidden rounded-md border border-line bg-ink-2"
+          style={{
+            viewTransitionName: `project-${project.slug}`,
+            background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
+          }}
+          className="hidden md:block col-span-3 relative aspect-[4/3] overflow-hidden rounded-md border border-line"
         >
           {project.cover ? (
             <motion.div style={{ y: previewY }} className="absolute inset-0">
@@ -245,8 +265,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                 src={project.cover}
                 alt={`${project.title} preview`}
                 fill
-                sizes="280px"
-                className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+                sizes="320px"
+                className="object-contain p-3 transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </motion.div>
           ) : (

@@ -142,16 +142,22 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             )}
           </div>
         ) : project.cover ? (
+          // Covers range from tall documents to 2:1 screenshots, so the hero
+          // presents the piece whole on its brand panel rather than cropping
+          // everything to one ratio.
           <div
-            style={{ viewTransitionName: `project-${project.slug}` }}
-            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2"
+            style={{
+              viewTransitionName: `project-${project.slug}`,
+              background: `linear-gradient(135deg, ${project.palette[0]}, ${project.palette[1]})`,
+            }}
+            className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-lg border border-line"
           >
             <Image
               src={project.cover}
               alt={`${project.title} — cover`}
               fill
               sizes="(max-width: 1400px) 100vw, 1400px"
-              className="object-cover object-top"
+              className="object-contain p-4 md:p-8"
               priority
             />
           </div>
