@@ -31,7 +31,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
   return (
     <article className="relative">
       {/* Hero */}
-      <header className="container-x pt-28 pb-12 md:pt-32 md:pb-16">
+      <header className="container-x pt-28 pb-8 md:pt-32 md:pb-10">
         <Link
           href={backHref}
           data-cursor="back"
@@ -41,7 +41,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
           {backLabel}
         </Link>
 
-        <div className="mt-10 grid grid-cols-12 gap-6">
+        <div className="mt-8 grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-8">
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -98,7 +98,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           data-cursor="scroll"
-          className="mt-16 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70 hover:text-green"
+          className="mt-10 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70 hover:text-green"
         >
           Scroll / Case study
           <motion.span
@@ -118,8 +118,11 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             style={{
               viewTransitionName: `project-${project.slug}`,
               aspectRatio: project.coverAspect ?? "16 / 9",
+              // A 4/3 plate across a 1400px container is a 1000px-tall hero.
+              // Capping it keeps the cover a statement, not a whole screenful.
+              maxHeight: "min(74vh, 760px)",
             }}
-            className="relative overflow-hidden rounded-lg border border-line bg-ink-2 flex items-end p-8 md:p-12"
+            className="relative overflow-hidden rounded-lg border border-line bg-ink-2 flex items-end p-6 md:p-8"
           >
             {/* A flagship with a cleared cover features the piece itself,
                 centered and uncropped; without one, the wordmark carries it. */}
@@ -129,7 +132,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
                 alt={`${project.title} — cover`}
                 fill
                 sizes="(max-width: 1400px) 100vw, 1400px"
-                className="object-contain p-6 md:p-10"
+                className="object-contain p-3 md:p-5"
                 priority
               />
             ) : (
@@ -148,6 +151,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             style={{
               viewTransitionName: `project-${project.slug}`,
               aspectRatio: project.coverAspect ?? "16 / 10",
+              maxHeight: "min(74vh, 760px)",
             }}
             className="relative overflow-hidden rounded-lg border border-line bg-ink-2"
           >
@@ -242,19 +246,51 @@ export default function ProjectDetail({ project, prev, next }: Props) {
 /* ── Leadership case-study body ──────────────────────────────────────────── */
 function CaseStudyBody({ project }: { project: Project }) {
   const cs = project.caseStudy!;
+
+  const workSection =
+    cs.work && cs.work.length > 0 ? (
+      <section className="container-x py-10 md:py-14 rule-top">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-6 md:mb-8">
+          // The work
+        </p>
+        <WorkMoments moments={cs.work} palette={project.palette} />
+      </section>
+    ) : !project.flagship ? (
+      <Block eyebrow="The work">
+        <div className="rounded-lg border border-dashed border-line-2 bg-ink-2 p-10 md:p-14 text-center max-w-[62ch]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
+            Visuals in progress
+          </p>
+          <p className="mt-3 text-mute-2 italic">
+            Final case-study images are being gathered and will land here with
+            captions explaining what each artifact demonstrates.
+          </p>
+        </div>
+      </Block>
+    ) : null;
+
   return (
     <>
       <Block eyebrow="The brief" wide>
-        <p className="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.25] tracking-[-0.02em] text-bone max-w-[44ch]">
+        <p className="font-display text-[clamp(1.35rem,2.4vw,1.95rem)] leading-[1.3] tracking-[-0.02em] text-bone max-w-[54ch]">
           {project.brief}
         </p>
       </Block>
 
+      {/* Challenge and context read as one problem statement. They were two
+          near-identical prose blocks, and splitting them only added scrolling. */}
       <Block eyebrow="The challenge">
         <Prose>
           <Body text={cs.challenge} />
         </Prose>
+        <Prose className="mt-4 !text-mute">
+          <Body text={cs.context} />
+        </Prose>
       </Block>
+
+      {/* The work sits here rather than after seven blocks of prose — a
+          portfolio should show before it explains. */}
+      {workSection}
 
       <Block eyebrow="The mandate">
         <Prose>
@@ -262,27 +298,17 @@ function CaseStudyBody({ project }: { project: Project }) {
         </Prose>
       </Block>
 
-      <Block eyebrow="The context">
-        <Prose>
-          <Body text={cs.context} />
-        </Prose>
-      </Block>
-
+      {/* Role and team together: what John did, and who he did it with. */}
       <Block eyebrow="John's role">
         <List items={cs.role} />
-      </Block>
-
-      <Block eyebrow="The team">
-        <p className="mb-4 text-sm text-mute max-w-[52ch]">
-          {project.flagship
-            ? "Enterprise creative is collaborative. This work involved:"
-            : "The people behind the work:"}
+        <p className="mt-6 mb-2 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
+          {project.flagship ? "Worked with" : "The people behind the work"}
         </p>
         <List items={cs.team} />
       </Block>
 
       <Block eyebrow="Key decisions">
-        <div className="space-y-8">
+        <div className="space-y-6">
           {cs.decisions.map((d, i) => (
             <motion.div
               key={i}
@@ -308,27 +334,6 @@ function CaseStudyBody({ project }: { project: Project }) {
         </div>
       </Block>
 
-      {cs.work && cs.work.length > 0 ? (
-        <section className="container-x py-16 md:py-24 rule-top">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-8 md:mb-12">
-            // The work
-          </p>
-          <WorkMoments moments={cs.work} palette={project.palette} />
-        </section>
-      ) : !project.flagship ? (
-        <Block eyebrow="The work">
-          <div className="rounded-lg border border-dashed border-line-2 bg-ink-2 p-10 md:p-14 text-center max-w-[62ch]">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
-              Visuals in progress
-            </p>
-            <p className="mt-3 text-mute-2 italic">
-              Final case-study images are being gathered and will land here with
-              captions explaining what each artifact demonstrates.
-            </p>
-          </div>
-        </Block>
-      ) : null}
-
       <Block eyebrow="The outcome">
         <List items={cs.outcomes} />
       </Block>
@@ -342,9 +347,15 @@ function CaseStudyBody({ project }: { project: Project }) {
   );
 }
 
-function Prose({ children }: { children: React.ReactNode }) {
+function Prose({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <p className="text-lg leading-relaxed text-bone/85 max-w-[62ch]">
+    <p className={`text-lg leading-relaxed text-bone/85 max-w-[62ch] ${className}`}>
       {children}
     </p>
   );
@@ -375,14 +386,16 @@ function Block({
   wide?: boolean;
 }) {
   return (
-    <section className="container-x py-16 md:py-24 rule-top">
-      <div className="grid grid-cols-12 gap-6 md:gap-10">
-        <div className="col-span-12 md:col-span-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
+    <section className="container-x py-10 md:py-14 rule-top">
+      <div className="grid grid-cols-12 gap-4 md:gap-8">
+        {/* Narrow label column: at col-span-4 a one-line eyebrow left a third of
+            every band empty, which read as the page having nothing to say. */}
+        <div className="col-span-12 md:col-span-3">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green md:sticky md:top-24">
             // {eyebrow}
           </p>
         </div>
-        <div className={wide ? "col-span-12 md:col-span-8" : "col-span-12 md:col-span-8"}>
+        <div className={wide ? "col-span-12 md:col-span-9" : "col-span-12 md:col-span-9"}>
           {children}
         </div>
       </div>
@@ -539,7 +552,7 @@ function WorkMoments({
   palette: string[];
 }) {
   return (
-    <div className="space-y-12 md:space-y-20">
+    <div className="space-y-10 md:space-y-14">
       {moments.map((m, i) => (
         <WorkMomentView key={i} m={m} palette={palette} />
       ))}
@@ -684,8 +697,8 @@ function WorkMomentView({
   if (m.kind === "detail") {
     return (
       <motion.figure {...revealProps}>
-        <div className="rounded-xl border border-line bg-ink-2 p-6 sm:p-12 md:p-20 flex items-center justify-center">
-          <div className="w-full max-w-[38rem]">
+        <div className="rounded-xl border border-line bg-ink-2 p-5 sm:p-8 md:p-12 flex items-center justify-center">
+          <div className="w-full max-w-[42rem]">
             <Frame
               image={m.image}
               palette={palette}
@@ -720,7 +733,7 @@ function WorkMomentView({
 
 function Meta({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid grid-cols-[6rem_1fr] gap-3 border-t border-line pt-3">
+    <div className="grid grid-cols-[7.5rem_1fr] gap-3 border-t border-line pt-3">
       <span className="text-mute">{label}</span>
       <span className={isTodo(value) ? "text-mute-2 italic normal-case" : "text-bone"}>
         {value}

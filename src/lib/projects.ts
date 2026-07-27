@@ -151,7 +151,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
     display: "CARELON REBRAND",
-    cover: "/work/beacon-carelon-transformation/brand-architecture.jpg",
+    // The logo-architecture spec page didn't sell the work. This cover is a
+    // composed spread of the real delivered Carelon pieces — report cover,
+    // member-facing crisis flyer, sales sheet, and print folder — so the
+    // rebrand reads as an applied system rather than a logo sheet.
+    cover: "/work/beacon-carelon-transformation/brand-at-a-glance.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
