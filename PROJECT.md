@@ -53,7 +53,7 @@ claims. The flagship leadership case studies are scaffolded this way.
 | Language | TypeScript |
 | Styling | Tailwind v4 (CSS-first, `@theme` block in `globals.css` — there is no `tailwind.config.js`) |
 | Motion | framer-motion |
-| Fonts | Fraunces (display, with SOFT + WONK axes), Geist (sans), JetBrains Mono — all via `next/font/google` |
+| Fonts | Fraunces (display, with SOFT + WONK axes), **Instrument Sans** (body — replaced Geist), JetBrains Mono — all via `next/font/google` |
 | Hosting | Netlify (`@netlify/plugin-nextjs`) |
 | Registrar / DNS | WordPress.com (domain `carmancreative.com`) |
 
@@ -83,7 +83,7 @@ green-bright #2ee5b3
 green-dim   #0e6e57
 ```
 
-Fonts via CSS vars: `--font-display` (Fraunces), `--font-sans` (Geist),
+Fonts via CSS vars: `--font-display` (Fraunces), `--font-sans` (Instrument Sans),
 `--font-mono` (JetBrains Mono). The italic "wonk" treatment used for accent
 words (`<em className="font-display-wonk text-green">…</em>`) is a Fraunces
 variable-font axis trick.
@@ -104,10 +104,15 @@ variable-font axis trick.
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
 `src/data/`). Each project carries a `tier` (`leadership` / `independent` /
 `secondary`); flagships add `flagship: true` + a `caseStudy` object (overview,
-challenge, mandate, context, role, team, decisions, outcomes, reflection) and
-have `cover: ""` (they render a branded gradient hero, no photo). Helpers:
-`LEADERSHIP_PROJECTS`, `INDEPENDENT_PROJECTS`, `SECONDARY_PROJECTS`,
-`projectsByTier`, `tierOf`. `getAdjacentProjects` stays within a tier.
+challenge, mandate, context, role, team, decisions, outcomes, reflection). All
+three flagships now carry a real `cover`; a flagship without one falls back to
+the `display` wordmark. Covers and thumbnails present the piece **whole**
+(`object-contain`) on a **neutral** plate — never cropped, never on a colour
+wash. A `draft: true` project is written but unpublished: filtered from every
+listing, no route, unreachable via `getProject`, out of the sitemap. Helpers:
+`PUBLISHED_PROJECTS`, `LEADERSHIP_PROJECTS`, `INDEPENDENT_PROJECTS`,
+`SECONDARY_PROJECTS`, `projectsByTier`, `tierOf`. `getAdjacentProjects` stays
+within a tier.
 
 Section numbers come from `SectionRail.tsx` and must stay in sync with the
 eyebrow labels inside each section component.
