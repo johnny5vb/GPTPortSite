@@ -464,7 +464,12 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0a1729", "#1cb791", "#1f3a5c", "#e8ecf2"],
     display: "WORKFRONT RESTART",
-    cover: "/work/workfront-workflow-transformation/platform-project.jpg",
+    // A single Workfront project screen didn't say much. This cover is a
+    // composed spread of the real pieces — the "Workfront That Works" adoption
+    // poster, the from/to process model, and the running My Work surface — so
+    // the rebuild reads as thinking, system, and adoption at once.
+    cover: "/work/workfront-workflow-transformation/restart-at-a-glance.jpg",
+    coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
       "Redrew Workfront phases, batching, and intake for the creative team.",
@@ -589,16 +594,7 @@ export const PROJECTS: Project[] = [
             },
           ],
           caption:
-            "The everyday surface: one place to see what's ready to start, templates carrying real durations and planned hours, and a staged launch the team could track — MVP in January, full launch in April.",
-        },
-        {
-          kind: "detail",
-          image: {
-            src: "/work/workfront-workflow-transformation/restart-poster.jpg",
-            alt: "Internal campaign poster — Workfront That Works",
-          },
-          caption:
-            "Adoption is a creative problem too. “Workfront That Works” gave a systems migration something people could rally to.",
+            "The everyday surface: one place to see what's ready to start, templates carrying real durations and planned hours, and a staged launch the team could track — MVP in January, full launch in April. Adoption is a creative problem too — “Workfront That Works” gave a systems migration something people could rally to.",
         },
       ],
     },
