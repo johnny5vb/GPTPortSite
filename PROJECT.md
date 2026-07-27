@@ -559,6 +559,37 @@ finer-grained detail.
       vendored dir carries the MIT LICENSE. All are self-contained single
       SKILL.md files (no scripts/DB), so unlike ui-ux-pro-max they're complete.
 
+### Later session — two flagships wired with real enterprise assets
+
+29. The owner supplied source files (PDF/PPTX) for the two NDA-gated flagships;
+    assets were rendered to web images with PyMuPDF and wired truthfully.
+    - **Beacon → Carelon.** Cover is the **name-change poster** ("Our name has
+      changed. Our commitment has not.") — the only piece that carries the whole
+      transition in one frame. `work` is now a real before/after: Beacon 2019
+      brand guidelines ↔ Carelon logo architecture; the transition poster; Beacon
+      Care Services member flyer ↔ Carelon sales sheet; then a production gallery
+      (paragraph styles, crisis capability sheet, pocket folder). NOTE: the first
+      upload was all Carelon (after); the true before/after only became possible
+      when the **Beacon** brand guidelines + collateral were uploaded separately.
+    - **Marketing Bench / Marketing Hub.** Source was a Beacon-era platform
+      (2019–20, pre-Carelon rebrand; sometimes called "SalesHub") — captions say
+      so rather than implying Carelon-era UI. The deck's raw platform screenshots
+      were too low-res (481×331), so screens came from the **user guide PDF** at
+      1700×2200. Cover/hero: the annotated "Build a Marketing Folder" homepage.
+      The key moment: **"Client inventory and configurable templates"** — select a
+      client and logo/program/phone/URL populate across templates, then View Proof
+      → Create PDF (the literal proof of "designer out of the critical path").
+      Plus a Resource Center ↔ Marketing Folder pair, real client-configured
+      output (PG&E, United Rentals, J&J), and the field-governance rules.
+    - **`ProjectDetail` change:** a flagship **with** a cleared `cover` now
+      features it centered and uncropped (`object-contain`) on the brand
+      gradient; without one it still falls back to the `display` wordmark. Before
+      this, flagships always rendered the gradient and ignored `cover`.
+    - Tooling note: PyMuPDF (`pip install pymupdf`) renders the PDFs; LibreOffice
+      failed on the PPTX files, so embedded media was pulled straight out of the
+      OOXML zip (`ppt/media/`).
+    - **Workfront is now the only flagship still on placeholders.**
+
 Scratch artifacts from earlier sessions (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html`, and `.claude/launch.json`. Dependencies unchanged this
 session (`framer-motion`, `lenis`, `next-view-transitions` already present).
