@@ -729,9 +729,9 @@ export const PROJECTS: Project[] = [
     category: "Website / Editorial",
     duration: "",
     tags: ["Web", "Editorial", "Knowledge Hub"],
-    blurb: "A website refresh and a new Knowledge Hub for Atromitos — a woman-owned consulting firm — plus an editorial booklet for the Andy Hill Care Fund.",
-    oneLiner: "A refreshed site, a Knowledge Hub, and an editorial report.",
-    brief: "Atromitos is a woman-owned consulting company. They'd been developing concepts for a website refresh and needed someone to bring it together — into an interactive, modern platform that highlights their services and who they are. The engagement came in as a referral, and grew to include a new Knowledge Hub and an editorial report for the Andy Hill Care Fund.",
+    blurb: "A website refresh and a new consolidated Knowledge Hub for Atrómitos — a woman-owned consulting firm — plus a 65-page editorial report for the Andy Hill CARE Fund.",
+    oneLiner: "Their art direction, elevated — and a Knowledge Hub that carries their expertise.",
+    brief: "Atrómitos is a woman-owned health and human services consulting firm. They came in through a referral with their own art direction already settled — they weren't looking for a redesign. So the job was to execute their direction faithfully, raise the craft inside it, and add the things that would actually move the business: real interactivity and a consolidated Knowledge Hub for their published work and webinars. The Andy Hill CARE Fund report was a separate commission.",
     process: [],
     services: [
       "Web design",
@@ -752,17 +752,17 @@ export const PROJECTS: Project[] = [
         { label: "Status", value: "Live — client very happy" },
       ],
       challenge:
-        "Atromitos, a woman-owned consulting company, had been developing concepts for a website refresh but needed someone to bring it together — into an interactive, modern experience that clearly showed their services and who they are as a business.",
+        "Atrómitos arrived with the site already laid out the way they wanted it. The art direction was theirs and it wasn't up for redesign — so the usual lever, rethinking the look, was off the table. The real problem was underneath it: their published work — articles, policy analysis, podcasts, webinars, toolkits — was scattered, and the site didn't do justice to how much expertise the firm actually produces.",
       mandate:
-        "Refresh the Atromitos site: resolve their in-progress concepts into a cohesive, current platform that stands apart — and, as a separate special project, design an editorial report for the Andy Hill Care Fund.",
+        "Execute their art direction faithfully, sharpen the craft within it, and build what the site was missing: genuine interactivity and one consolidated home for everything they publish. The Andy Hill CARE Fund report came in separately as its own commission.",
       context:
-        "The engagement came in as a referral from a completely unrelated client — a good sign the reputation was traveling. Atromitos already had concepts in motion; the job was to make them coherent, current, and genuinely theirs.",
+        "A referral from a completely unrelated client — a good sign the reputation travels. An active, engaged consulting firm that publishes constantly, with a settled visual direction of their own and clear opinions about it.",
       role: [
-        "Brought Atromitos's in-progress concepts together into a cohesive, modern site",
-        "Designed an interactive experience current with web trends",
-        "Built a new Knowledge Hub — the piece I most want to highlight",
-        "Added features throughout to showcase their services and identity",
-        "Designed the Andy Hill report — a lengthy editorial booklet for the Andy Hill Care Fund",
+        "Took the client's art direction as the brief and built the site to it",
+        "Raised the execution — typography, spacing, and finish — inside their direction",
+        "Added interactivity the original layout didn't have",
+        "Designed and built the Knowledge Hub — one consolidated home for their articles, policy analysis, podcast, webinars, and toolkits",
+        "Designed the Andy Hill CARE Fund report — a 65-page editorial document, commissioned separately",
       ],
       team: [
         "Atromitos — woman-owned consulting client",
@@ -770,43 +770,85 @@ export const PROJECTS: Project[] = [
       ],
       decisions: [
         {
-          title: "Resolve their concepts, don't restart",
-          body: "Atromitos had been developing ideas already. The move was to bring those together into something coherent and current, rather than throw the work out and start over.",
+          title: "Serve their direction — then raise it",
+          body: "The client had settled the art direction and didn't want it reopened. I took that as the brief rather than a fight, and spent the effort where it was still mine to spend: sharper typography, better spacing and hierarchy, and a level of finish above what came in.",
         },
         {
-          title: "Make the Knowledge Hub the centerpiece",
-          body: "Built a new Knowledge Hub to put their expertise front and center — the feature I'm proudest of on this build, and the one I most want to highlight.",
+          title: "Put the value where the direction wasn't",
+          body: "If the look was fixed, the contribution had to come from what the site could do. That meant real interactivity and, above all, the Knowledge Hub — the piece that changed what the site is actually for.",
+        },
+        {
+          title: "Consolidate the expertise into one place",
+          body: "A firm that publishes this much was spreading it across formats and corners of the site. The Knowledge Hub pulls the articles, policy analysis, podcast, webinars, and practical toolkits into one home, so the depth reads at a glance instead of having to be hunted for.",
         },
         {
           title: "Treat the report as real editorial",
-          body: "The Andy Hill Care Fund piece got the full editorial treatment — a lengthy, considered booklet rather than a quick document.",
+          body: "The Andy Hill CARE Fund piece got the full treatment — 65 pages of structured findings, numbered takeaways, section openers, and a tiered recommendation framework. A considered document, not a long memo.",
         },
       ],
       outcomes: [
-        "A site meaningfully better than before — the client is very happy with the platform",
-        "A new Knowledge Hub (a portfolio highlight)",
-        "The Andy Hill editorial booklet was very well received",
+        "A site built to the client's own direction, executed at a higher level of craft than what came in",
+        "The Knowledge Hub — one consolidated home for the firm's articles, policy analysis, podcast, webinars, and toolkits",
+        "The Andy Hill CARE Fund report delivered and very well received",
+        "An ongoing relationship with an active, engaged client — more work expected",
       ],
       reflection:
-        "This one came in as a referral from a completely unrelated client — proof the work travels. The Knowledge Hub is the piece I'm proudest of here, and the Andy Hill report was a good reminder of how much a well-made editorial booklet can land.",
+        "Not every engagement hands you the visual direction, and this one didn't: the layout was theirs and staying. The useful lesson was where to put the effort when the look is settled — into craft inside their system, and into the Knowledge Hub, which is the piece I'd point at. It came in as a referral from an unrelated client, which tells me the work travels, and it's a relationship I expect to keep building on.",
       work: [
         {
           kind: "browser",
-          image: { src: "", alt: "Atromitos — the refreshed website" },
+          image: { src: "", alt: "Atrómitos — the refreshed website, “Consulting Done Fearlessly”" },
           caption:
-            "The refreshed site — interactive, modern, and unmistakably theirs.",
+            "The site, built to the client's own art direction — executed with sharper type, spacing, and finish than what came in.",
         },
         {
           kind: "full",
-          image: { src: "", alt: "Atromitos — the Knowledge Hub" },
+          image: { src: "", alt: "Atrómitos — the consolidated Knowledge Hub" },
           caption:
-            "The Knowledge Hub — the piece I'm proudest of here, built to put their expertise front and center.",
+            "The Knowledge Hub — the contribution I'd point at. One home for the articles, policy analysis, podcast, webinars, and toolkits a firm this active keeps producing.",
         },
         {
           kind: "detail",
-          image: { src: "", alt: "The Andy Hill Care Fund report" },
+          image: {
+            src: "/work/atromitos/andyhill-cover.jpg",
+            alt: "Findings and Recommendations for the Andy Hill CARE Fund — report cover",
+          },
           caption:
-            "The Andy Hill Care Fund report — a full editorial booklet, and very well received.",
+            "A separate commission: “Findings and Recommendations for the Andy Hill CARE Fund” — 65 pages on community-based organizations and diversity in cancer clinical trials.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/atromitos/andyhill-findings.jpg",
+            alt: "Key Findings at a Glance — numbered findings with supporting detail",
+          },
+          b: {
+            src: "/work/atromitos/andyhill-divider.jpg",
+            alt: "Executive Summary section opener with photography and a colour panel",
+          },
+          labelA: "Findings at a glance",
+          labelB: "Section openers",
+          caption:
+            "Editorial structure doing the work: numbered findings a reader can scan, and section openers that give a 65-page document a rhythm.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            {
+              src: "/work/atromitos/andyhill-voices.jpg",
+              alt: "Community Voices section — themed qualitative findings",
+            },
+            {
+              src: "/work/atromitos/andyhill-framework.jpg",
+              alt: "Program design and tiered recommendation framework pages",
+            },
+            {
+              src: "/work/atromitos/andyhill-cover.jpg",
+              alt: "The Andy Hill CARE Fund report cover",
+            },
+          ],
+          caption:
+            "Inside the report — community voices, a tiered recommendation framework, and the design system holding 65 pages of dense research together.",
         },
       ],
     },
