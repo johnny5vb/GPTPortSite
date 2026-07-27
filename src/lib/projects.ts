@@ -739,7 +739,10 @@ export const PROJECTS: Project[] = [
       "Editorial / booklet design",
     ],
     palette: ["#0e1b2a", "#2b8fb8", "#1f3a5c", "#eef2f6"],
-    display: "ATROMITOS",
+    display: "ATRÓMITOS",
+    // Owner's call: lead with the Atrómitos homepage once the screenshot lands
+    // at /work/atromitos/site-home.jpg (the live site is unreachable from the
+    // build container, so it has to be supplied as a file).
     cover: "",
     gallery: [],
     roleSummary: "Website refresh + Knowledge Hub + the Andy Hill editorial report.",
