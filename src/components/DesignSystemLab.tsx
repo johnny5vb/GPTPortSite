@@ -157,10 +157,10 @@ export default function DesignSystemLab() {
             <em className="font-display-wonk text-green">A hundred screens.</em>
           </motion.h2>
           <p className="mt-6 text-mute max-w-[58ch] leading-relaxed">
-            Brand-in-a-Day OS is a token-driven launch kit. Start with a brief,
-            end the same day with a tokens file, type system, mark sketches,
-            component library, and on-brand social cuts. Drag the controls
-            below — every component you see is downstream of one tokens file.
+            Brand-in-a-Day OS turns one brand file into everything else. Start with
+            a brief, end the same day with that file, a type system, mark
+            sketches, a component library, and on-brand social cuts. Drag the
+            controls below — every component you see comes off that one file.
             That&apos;s the leverage.
           </p>
         </div>
@@ -169,7 +169,7 @@ export default function DesignSystemLab() {
       <div className="grid grid-cols-12 gap-6 md:gap-8">
         {/* Controls */}
         <div className="col-span-12 lg:col-span-4 space-y-6">
-          <ControlGroup label="Theme tokens" hint="Palette + typographic mood">
+          <ControlGroup label="Theme" hint="Palette + typographic mood">
             <div className="grid grid-cols-2 gap-2">
               {THEMES.map((t) => (
                 <button
@@ -223,7 +223,7 @@ export default function DesignSystemLab() {
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="h-3.5 w-3.5 text-green" />
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone/80">
-                Live tokens
+                Live brand rules
               </span>
             </div>
             <pre className="font-mono text-[10.5px] leading-relaxed text-mute overflow-x-auto">
@@ -335,9 +335,9 @@ export default function DesignSystemLab() {
                 <p
                   style={{ marginTop: "0.75rem", fontSize: "1.05rem", lineHeight: 1.5 }}
                 >
-                  Body / 17. Designed for confidence and clarity. Tokens flow
+                  Body / 17. Designed for confidence and clarity. Every rule flows
                   from a single source — palette, type, radii, spacing — and
-                  every component snaps to them.
+                  every component snaps to it.
                 </p>
                 <p
                   style={{
@@ -414,7 +414,7 @@ export default function DesignSystemLab() {
                   }}
                   className="col-span-12 md:col-span-5 flex flex-wrap gap-2 items-center"
                 >
-                  {["Tokens", "A11y", "Motion", "Docs"].map((c, i) => (
+                  {["Rules", "A11y", "Motion", "Docs"].map((c, i) => (
                     <span
                       key={c}
                       style={{
@@ -485,8 +485,8 @@ export default function DesignSystemLab() {
                       lineHeight: 1.55,
                     }}
                   >
-                    Tokens here cascade into every component — buttons, type,
-                    spacing, even motion. Change one variable, the brand stays
+                    Rules here cascade into every component — buttons, type,
+                    spacing, even motion. Change one value, the brand stays
                     intact across 200 screens.
                   </p>
                 </div>
@@ -523,13 +523,13 @@ export default function DesignSystemLab() {
                 </div>
               </div>
 
-              {/* Sample applications — real product mockups using the active tokens */}
+              {/* Sample applications — real product mockups on the active brand rules */}
               <div className="mt-5 pt-5" style={{ borderTop: `1px solid ${theme.ink}14` }}>
                 <div
                   style={{ color: theme.mute }}
                   className="font-mono text-[10px] uppercase tracking-[0.2em] mb-3 flex items-center justify-between"
                 >
-                  <span>Sample applications / on tokens</span>
+                  <span>Sample applications / on-brand</span>
                   <span style={{ color: theme.accent }}>● live</span>
                 </div>
                 <div className="grid grid-cols-12 gap-3 md:gap-4">
@@ -650,7 +650,7 @@ function Sparkline({ color, muted }: { color: string; muted: string }) {
 }
 
 /* ────────────────────────────────────────────────────────────────────── */
-/* Sample applications — small, realistic UI mockups using brand tokens   */
+/* Sample applications — small, realistic UI mockups on the brand rules  */
 /* ────────────────────────────────────────────────────────────────────── */
 
 type SampleProps = {

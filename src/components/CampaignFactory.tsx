@@ -164,7 +164,7 @@ export default function CampaignFactory() {
           </motion.h2>
           <p className="mt-6 text-mute max-w-[60ch] leading-relaxed">
             One campaign idea fans out to social, print, motion, and web — all
-            on tokens, all in voice, all production-ready. Pick a campaign and
+            on-brand, all in voice, all production-ready. Pick a campaign and
             watch a single concept resolve across six channels.
           </p>
         </div>
@@ -281,7 +281,7 @@ export default function CampaignFactory() {
               </span>
             </div>
             <p className="text-[12.5px] leading-snug text-bone/90">
-              All variants share one token file. Switch the brand and the
+              All variants share one brand file. Switch the brand and the
               entire factory re-skins in 500ms.
             </p>
           </div>
@@ -336,7 +336,7 @@ export default function CampaignFactory() {
 
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
             // brand: <span className="text-green">{camp.brand}</span> / 6
-            channels / one tokens file — production-ready exports in Figma,
+            channels / one brand file — production-ready exports in Figma,
             After Effects, and code.
           </p>
         </div>

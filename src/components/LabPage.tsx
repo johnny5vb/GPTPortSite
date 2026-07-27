@@ -14,7 +14,7 @@ const SYSTEMS = [
     id: "systems",
     num: "01",
     name: "Brand-in-a-Day OS",
-    tagline: "Token-driven launch kit",
+    tagline: "One brand file, everywhere",
     status: "Prototype",
   },
   {
@@ -135,7 +135,7 @@ export default function LabPage() {
             >
               Each one is interactive and labeled by how far along it actually
               is — from concept to prototype to something I really use. Poke at
-              them; see how the tokens flow. More will move in over time.
+              them; see how the brand rules flow. More will move in over time.
             </motion.p>
 
             {/* Honest status legend */}

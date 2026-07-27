@@ -392,7 +392,7 @@ function Services() {
     },
     {
       label: "Web Design",
-      lines: ["UX + UI", "Tokens + Components", "A11y baked in", "Storybook + Docs"],
+      lines: ["UX + UI", "Brand rules + Components", "A11y baked in", "Storybook + Docs"],
     },
     {
       label: "Packaging",
@@ -457,17 +457,17 @@ function BIAD() {
             <em className="font-display-wonk text-green">OS.</em>
           </h2>
           <p className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[52ch]">
-            A token-driven launch kit. Start with a brief, end the same day
-            with a tokens file, type system, mark sketches, component
+            One brand file turns into everything else. Start with a brief, end the
+            same day with that file, a type system, mark sketches, a component
             library, and on-brand social cuts.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4 max-w-[48ch]">
             {[
-              "Color + Type tokens",
+              "Color + Type rules",
               "Component library",
               "Mark + Identity sketches",
               "Social cut templates",
-              "Web shell + tokens",
+              "Web shell + brand rules",
               "Brand bible v0",
             ].map((it) => (
               <div
@@ -484,7 +484,7 @@ function BIAD() {
           <div className="rounded-lg border border-line bg-ink-2 overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b border-line">
               <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute">
-                tokens / live
+                brand rules / live
               </div>
               <div className="inline-flex items-center gap-1 font-mono text-[10px] text-green">
                 <Zap className="h-3 w-3" />
@@ -538,7 +538,7 @@ function TalksBack() {
           </h2>
           <p className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[52ch]">
             An AI-native brand bible. Designers ask, &ldquo;show me a hero in
-            this voice&rdquo; — and get on-system outputs in your tokens,
+            this voice&rdquo; — and get on-system outputs in your colors and type,
             every time.
           </p>
         </div>
@@ -560,7 +560,7 @@ function TalksBack() {
                   </span>
                 </div>
                 <p className="text-[13px] leading-snug text-bone/90">
-                  Three options — all on tokens, all in voice.
+                  Three options — all on-brand, all in voice.
                 </p>
                 <div className="mt-2 grid grid-cols-3 gap-1.5">
                   {[0, 1, 2].map((i) => (
@@ -600,7 +600,7 @@ function Factory() {
           </h2>
           <p className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[52ch]">
             One campaign idea fans out to social, print, motion, and web —
-            all on tokens, all in voice, all production-ready.
+            all on-brand, all in voice, all production-ready.
           </p>
           <div className="mt-6 flex items-center gap-2 flex-wrap font-mono text-[10px] uppercase tracking-[0.22em]">
             {[
@@ -789,7 +789,7 @@ function Process() {
     {
       num: "II.",
       title: "Design systems, not screens.",
-      body: "Tokens, components, governance — work that scales without me.",
+      body: "Brand rules, components, governance — work that scales without me.",
     },
     {
       num: "III.",

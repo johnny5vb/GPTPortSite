@@ -15,9 +15,9 @@ const SERVICES: Service[] = [
     num: "S/01",
     title: "Design Systems",
     pitch:
-      "Tokenized, documented, governed. The system that lets your team ship for years without losing the plot.",
+      "Defined, documented, governed. The system that lets your team ship for years without losing the plot.",
     bullets: [
-      "Tokens (color, type, space, motion)",
+      "Set rules for color, type, space, and motion",
       "Component library + Storybook",
       "Figma → code parity",
       "A11y baked in, not bolted on",

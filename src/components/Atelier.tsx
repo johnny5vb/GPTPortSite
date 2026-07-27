@@ -86,10 +86,10 @@ const DRAFTS: Draft[] = [
         category: "Display weight",
         notes: {
           house:
-            "Display feels 50 weight too heavy at this size. Tokens have a Light cut — try it.",
+            "Display feels 50 weight too heavy at this size. The type scale has a Light cut — try it.",
           encouraging:
-            "Headline lands. One small note: try the Light variant of the display token here — it'll breathe more at this scale.",
-          tough: "Too heavy. Use the Light cut. The token exists for this exact size.",
+            "Headline lands. One small note: try the Light variant of the display face here — it'll breathe more at this scale.",
+          tough: "Too heavy. Use the Light cut. It exists for this exact size.",
         },
       },
       {
@@ -211,9 +211,9 @@ const DRAFTS: Draft[] = [
         category: "Mark proportion",
         notes: {
           house:
-            "Mark is set at 1.2x — system spec is 1x at this surface area. Re-snap to token.",
+            "Mark is set at 1.2x — system spec is 1x at this surface area. Re-snap to spec.",
           encouraging:
-            "Strong layout. The mark is just slightly oversized — snap to 1x token.",
+            "Strong layout. The mark is just slightly oversized — snap to 1x.",
           tough: "Mark scale is wrong. Use 1x.",
         },
       },

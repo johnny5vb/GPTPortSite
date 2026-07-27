@@ -86,13 +86,13 @@ const PROMPTS: Prompt[] = [
     id: "hero",
     user: "Show me a homepage hero in this voice.",
     reply:
-      "Three composition options — all on tokens, all in voice. Picked typography, layout, and accent placement that match your brand.",
+      "Three composition options — all on-brand, all in voice. Picked typography, layout, and accent placement that match your brand.",
   },
   {
     id: "social",
     user: "Draft three Instagram cards announcing a launch.",
     reply:
-      "Same launch message, three composition variants. Locked to your color tokens and display type.",
+      "Same launch message, three composition variants. Locked to your brand colors and display type.",
   },
   {
     id: "typeset",
@@ -197,7 +197,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
           <p className="mt-6 text-mute max-w-[58ch] leading-relaxed">
             A brand bible designers can talk to. Ask for a hero, a social card,
             or a typeset headline — get on-system outputs in seconds. Every
-            answer is constrained to your tokens, your voice, your rules.
+            answer is constrained to your colors, your type, your voice.
           </p>
         </div>
       </header>
@@ -364,7 +364,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
           <div className="rounded-lg border border-line overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 bg-ink-2 border-b border-line">
               <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-                output / on-brand outputs / locked to tokens
+                output / on-brand outputs / locked to the system
               </div>
               <div className="inline-flex items-center gap-1 font-mono text-[10px] text-green">
                 <MessageSquareQuote className="h-3 w-3" />
@@ -396,13 +396,13 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Token strip */}
+              {/* Brand-rule strip */}
               <div className="mt-5 flex flex-wrap items-center gap-2">
                 <span
                   className="font-mono text-[10px] uppercase tracking-[0.22em]"
                   style={{ color: brand.mute }}
                 >
-                  Tokens applied
+                  Brand rules applied
                 </span>
                 {[
                   { label: "bg", value: brand.bg },
