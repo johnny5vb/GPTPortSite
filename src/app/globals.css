@@ -22,7 +22,7 @@
   --color-green-dim: #0e6e57;
 
   --font-display: var(--font-fraunces);
-  --font-sans: var(--font-geist);
+  --font-sans: var(--font-instrument-sans);
   --font-mono: var(--font-jetbrains);
 }
 

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, JetBrains_Mono, Geist } from "next/font/google";
+import { Fraunces, JetBrains_Mono, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import RouteChrome from "@/components/RouteChrome";
@@ -19,9 +19,9 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const geist = Geist({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: "--font-geist",
+  variable: "--font-instrument-sans",
   display: "swap",
 });
 
@@ -91,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${jetbrains.variable} ${geist.variable}`}
+      className={`${fraunces.variable} ${jetbrains.variable} ${instrumentSans.variable}`}
     >
       <body className="noise-fixed antialiased">
         <ViewTransitions>

@@ -34,7 +34,7 @@ const THEMES: Theme[] = [
     mute: "#8a8a8a",
     accent: "#1cb791",
     accent2: "#2ee5b3",
-    font: "var(--font-geist)",
+    font: "var(--font-instrument-sans)",
     display: "var(--font-fraunces)",
   },
   {
@@ -48,7 +48,7 @@ const THEMES: Theme[] = [
     mute: "#7a6c5d",
     accent: "#d24a1f",
     accent2: "#f7b4a3",
-    font: "var(--font-geist)",
+    font: "var(--font-instrument-sans)",
     display: "var(--font-fraunces)",
   },
   {
@@ -62,7 +62,7 @@ const THEMES: Theme[] = [
     mute: "#7d93ad",
     accent: "#2ee5b3",
     accent2: "#7ad7ff",
-    font: "var(--font-geist)",
+    font: "var(--font-instrument-sans)",
     display: "var(--font-fraunces)",
   },
   {
@@ -76,7 +76,7 @@ const THEMES: Theme[] = [
     mute: "#a39c8a",
     accent: "#e7ff52",
     accent2: "#a3b62c",
-    font: "var(--font-geist)",
+    font: "var(--font-instrument-sans)",
     display: "var(--font-fraunces)",
   },
 ];
