@@ -432,7 +432,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0a1729", "#1cb791", "#1f3a5c", "#e8ecf2"],
     display: "WORKFRONT",
-    cover: "",
+    cover: "/work/workfront-workflow-transformation/legacy-model-change.jpg",
     gallery: [],
     roleSummary:
       "Redrew Workfront phases, batching, and intake for the creative team.",
@@ -445,12 +445,13 @@ export const PROJECTS: Project[] = [
         { label: "Timeline", value: "2025" },
       ],
       challenge:
-        "The old Workfront setup drew constant complaints from writers, designers, project managers, and requesters. Phase timing was the core issue: on paper, the timeline for each task ran so long that PMs and requesters balked the moment they saw it — and rushed, haphazard jobs filled the gap.",
+        "The legacy instance — “Single Spine,” the consolidation of five separate Workfront systems into one — drew constant complaints from writers, designers, project managers, and requesters. Phase timing was the core issue: on paper, the timeline for each task ran so long that PMs and requesters balked the moment they saw it, and rushed, haphazard jobs filled the gap. Work sat buried under numeric job codes and nested folders, and the process no longer matched how creative actually worked.",
       mandate:
-        "Rework how creative moves through Workfront at ~75+ projects a month — the phase timelines, batching, delegation, intake, and storage — so the timeline was realistic and the work actually moved faster.",
+        "Rather than keep patching Single Spine, stand up a new instance from scratch — “Workfront Restart” — built around every pain point the old one had exposed. Rework how creative moves through it at ~75+ projects a month: phase timelines, batching, delegation, intake, and storage, so the timeline was realistic and the work actually moved faster.",
       context:
-        "An enterprise environment with many stakeholders, a platform in daily use, and a workflow touching writers, designers, PMs, requesters, and the variable print-on-demand (Marketing Bench) materials — so changes had to hold across all of it.",
+        "An enterprise environment with many stakeholders and a platform in daily use — the migration had to land without stopping the work. A large cross-functional effort with many people involved; I led the creative side through both the legacy instance and the rebuild.",
       role: [
+        "Led the creative side through both instances — Single Spine and the Workfront Restart rebuild",
         "Served as the point person for the creative team",
         "Sat on the workgroup committee implementing the changes and reporting to leadership",
         "Redrew the phase strategy for every type of tactic and deliverable — and for shared pieces",
@@ -472,6 +473,10 @@ export const PROJECTS: Project[] = [
           body: "Reworked how work was grouped and handed to designers and writers, creating shared tasks where it made sense, to cut duplicated effort and speed the whole workflow.",
         },
         {
+          title: "Restart rather than keep patching",
+          body: "Single Spine had consolidated five Workfront systems into one, but the problems ran deeper than configuration. We captured every pain point across intake, management, and execution, then stood up a new instance from scratch built around them — a restart rather than another round of fixes on a foundation nobody trusted.",
+        },
+        {
           title: "Change everything the workflow touched",
           body: "Not just the phases — intake and what it captured, how files were stored on the server, and how variable print-on-demand materials were handled, so the efficiency held end to end.",
         },
@@ -480,34 +485,88 @@ export const PROJECTS: Project[] = [
         "Faster speed to market and time savings the business felt and appreciated",
         "Fewer haphazard 'rush' jobs coming through the queue",
         "A realistic timeline PMs and requesters would actually trust",
+        "Shipped as a staged launch — MVP in January 2026, full launch that April",
       ],
       reflection:
         "What it taught me: the best process fixes come from the people doing the work. Our team banded together to name every pain point across intake, management, and execution, then broke the process down and rebuilt it — improving it tremendously. With Workfront redesigned and relaunched, the team is working far more efficiently and communicating more effectively. Make the system honest and the work and the people both move better.",
       work: [
         {
-          kind: "pair",
-          a: { src: "", alt: "Before — timelines PMs balked at" },
-          b: { src: "", alt: "After — realistic phase strategy" },
-          labelA: "Before",
-          labelB: "After",
+          kind: "full",
+          aspect: "4 / 3",
+          image: {
+            src: "/work/workfront-workflow-transformation/legacy-model-change.jpg",
+            alt: "Process model change — from independent planning and development to coordinated planning and development",
+          },
           caption:
-            "The core fix: a phase strategy redrawn per tactic and deliverable, so the timeline was realistic enough that PMs and requesters would actually trust it.",
+            "The transformation in one frame: from an “attack and fend for self” model, where every team planned independently, to coordinated planning against shared resources.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/workfront-workflow-transformation/legacy-file-chaos.jpg",
+            alt: "Single Spine file management — deeply nested folders under numeric job codes",
+          },
+          b: {
+            src: "/work/workfront-workflow-transformation/restart-phases.jpg",
+            alt: "Workfront Restart — a task template with per-phase durations, ready-to-start flags, and staged reviewers",
+          },
+          labelA: "Single Spine",
+          labelB: "Workfront Restart",
+          caption:
+            "What we were actually fixing: work buried under numeric job codes and nested folders, replaced by phases with real durations, ready-to-start flags, and named reviewers at each stage.",
         },
         {
           kind: "full",
-          image: { src: "", alt: "The reworked Workfront flow — intake to delivery" },
+          aspect: "4 / 3",
+          image: {
+            src: "/work/workfront-workflow-transformation/legacy-process-flow.jpg",
+            alt: "The six-phase creative process — portfolio planning through reporting and optimization",
+          },
           caption:
-            "The reworked flow across ~75+ projects a month — batching, delegation, and shared tasks that cut duplicated effort end to end.",
+            "The spine of it — six phases from portfolio planning to reporting, with creative carrying a role in almost every one. Redrawing where creative actually belonged is what made the timelines honest.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/workfront-workflow-transformation/restart-proof-flow.jpg",
+            alt: "Proof workflow with three review stages and assigned reviewers",
+          },
+          b: {
+            src: "/work/workfront-workflow-transformation/restart-roles.jpg",
+            alt: "Task detail showing work assigned to designer, writer, or both",
+          },
+          labelA: "Reviews & approvals",
+          labelB: "Batching & delegation",
+          caption:
+            "Reviews became staged and visible instead of a mystery, and tasks could be pointed at a designer, a writer, or both — which is where the duplicated effort had been hiding.",
         },
         {
           kind: "gallery",
           images: [
-            { src: "", alt: "New intake" },
-            { src: "", alt: "File storage" },
-            { src: "", alt: "VPOD handling" },
+            {
+              src: "/work/workfront-workflow-transformation/restart-mywork.jpg",
+              alt: "My Work dashboard showing tasks ready to start and outstanding proofs",
+            },
+            {
+              src: "/work/workfront-workflow-transformation/restart-statuses.jpg",
+              alt: "Shared status definitions — new, in progress, complete, awaiting feedback",
+            },
+            {
+              src: "/work/workfront-workflow-transformation/restart-timeline.jpg",
+              alt: "Launch milestone graphic — MVP launched January 2026, full launch April 2026",
+            },
           ],
           caption:
-            "Everything the workflow touched — new intake and what it captured, server file storage, and how variable print-on-demand materials were handled.",
+            "The everyday surface: one place to see what's ready to start, status language everyone reads the same way, and a launch the team could track — MVP in January, full launch in April.",
+        },
+        {
+          kind: "detail",
+          image: {
+            src: "/work/workfront-workflow-transformation/restart-poster.jpg",
+            alt: "Internal campaign poster — Workfront That Works",
+          },
+          caption:
+            "Adoption is a creative problem too. “Workfront That Works” gave a systems migration something people could rally to.",
         },
       ],
     },
