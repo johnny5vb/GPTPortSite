@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { ArrowUpLeft, ArrowUpRight, ArrowDownToLine } from "lucide-react";
 import { LEADERSHIP_PROJECTS } from "@/lib/projects";
@@ -178,15 +179,23 @@ export default function LeadershipPage() {
               data-cursor="open case"
               className="group rounded-xl border border-line bg-ink-2 p-6 hover:border-line-2 transition-colors flex flex-col"
             >
-              <div
-                style={{
-                  background: `linear-gradient(135deg, ${p.palette[0]}, ${p.palette[1]})`,
-                }}
-                className="h-24 rounded-lg border border-line/60 mb-5 flex items-end p-3"
-              >
-                <span className="font-display text-xl tracking-[-0.03em] text-bone/90 mix-blend-screen">
-                  {p.display}
-                </span>
+              {/* The piece itself, whole on a neutral plate, with the project
+                  name over a scrim so it stays legible on any artwork. */}
+              <div className="relative aspect-[4/3] rounded-lg border border-line/60 bg-ink-2 mb-5 overflow-hidden">
+                {p.cover ? (
+                  <Image
+                    src={p.cover}
+                    alt={`${p.title} preview`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-contain p-2"
+                  />
+                ) : null}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-3 pt-8">
+                  <span className="font-display text-lg leading-none tracking-[-0.03em] text-bone">
+                    {p.display}
+                  </span>
+                </div>
               </div>
               <h3 className="font-display text-xl leading-[1.1] tracking-[-0.03em] text-bone group-hover:text-green transition-colors">
                 {p.title}

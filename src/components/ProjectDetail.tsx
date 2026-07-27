@@ -115,8 +115,11 @@ export default function ProjectDetail({ project, prev, next }: Props) {
       <section id="cover" className="container-x">
         {isFlagship ? (
           <div
-            style={{ viewTransitionName: `project-${project.slug}` }}
-            className="relative aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2 flex items-end p-8 md:p-12"
+            style={{
+              viewTransitionName: `project-${project.slug}`,
+              aspectRatio: project.coverAspect ?? "16 / 9",
+            }}
+            className="relative overflow-hidden rounded-lg border border-line bg-ink-2 flex items-end p-8 md:p-12"
           >
             {/* A flagship with a cleared cover features the piece itself,
                 centered and uncropped; without one, the wordmark carries it. */}
@@ -142,8 +145,11 @@ export default function ProjectDetail({ project, prev, next }: Props) {
           // Covers range from tall documents to 2:1 screenshots, so the hero
           // presents the piece whole rather than cropping everything to one ratio.
           <div
-            style={{ viewTransitionName: `project-${project.slug}` }}
-            className="relative aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-lg border border-line bg-ink-2"
+            style={{
+              viewTransitionName: `project-${project.slug}`,
+              aspectRatio: project.coverAspect ?? "16 / 10",
+            }}
+            className="relative overflow-hidden rounded-lg border border-line bg-ink-2"
           >
             <Image
               src={project.cover}

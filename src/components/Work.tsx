@@ -124,14 +124,15 @@ function LeadershipCard({
               alt={`${project.title} preview`}
               fill
               sizes="360px"
-              className="object-contain p-3 transition-transform duration-700 group-hover:scale-[1.04]"
+              className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
             />
           )}
-          {!project.cover && (
-            <span className="font-display text-2xl tracking-[-0.03em] text-bone/70">
+          {/* Name over a scrim so it reads on any artwork underneath. */}
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-3 pt-10">
+            <span className="font-display text-xl leading-none tracking-[-0.03em] text-bone">
               {project.display}
             </span>
-          )}
+          </div>
           <span className="absolute top-3 right-3 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70">
             {project.num}
           </span>
@@ -260,7 +261,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                 alt={`${project.title} preview`}
                 fill
                 sizes="320px"
-                className="object-contain p-3 transition-transform duration-700 group-hover:scale-[1.04]"
+                className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </motion.div>
           ) : (

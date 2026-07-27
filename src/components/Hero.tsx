@@ -161,19 +161,21 @@ export default function Hero() {
 
         <motion.h1
           style={{ rotateX: rx, rotateY: ry, transformPerspective: 1200 }}
-          className="font-display text-[clamp(2.4rem,7.4vw,7.4rem)] leading-[1.1] tracking-[-0.04em] text-bone"
+          className="font-display text-[clamp(2.2rem,5.9vw,5.9rem)] leading-[1.1] tracking-[-0.04em] text-bone"
         >
           <Line delay={0.1}>Creative leadership</Line>
           <Line delay={0.2}>for complex brands,</Line>
-          <Line delay={0.3}>teams, and</Line>
+          {/* The rotator sits on line three rather than taking a fourth of its
+              own, so the headline holds at three lines on desktop. On narrow
+              screens it simply wraps, which is the one place four is fine. */}
           <span className="block overflow-hidden">
             <motion.span
               initial={{ y: "110%" }}
               animate={{ y: "0%" }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
               className="inline-block"
             >
-              <RotatorBox idx={idx} />
+              teams, and <RotatorBox idx={idx} />
             </motion.span>
           </span>
         </motion.h1>

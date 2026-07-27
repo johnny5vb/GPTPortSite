@@ -94,6 +94,12 @@ export type Project = {
   display: string;
   /** Cover/hero image relative to /public. Empty on flagship (gradient hero). */
   cover: string;
+  /**
+   * Shape of the hero frame. Covers range from tall documents to wide
+   * screenshots, and forcing a portrait piece into 16:9 leaves acres of dead
+   * space either side. Set this to match the artwork; defaults to 16/9.
+   */
+  coverAspect?: string;
   gallery: ProjectImage[];
   externalUrl?: string;
   /** Defaults to "independent" when omitted. */
@@ -124,7 +130,7 @@ export const PROJECTS: Project[] = [
     num: "L01",
     tier: "leadership",
     flagship: true,
-    title: "Beacon Health Options → Carelon",
+    title: "Carelon Rebrand",
     client: "Beacon Health Options / Carelon (Elevance Health)",
     year: "2018 — 2020",
     category: "Enterprise Brand Transformation",
@@ -144,8 +150,9 @@ export const PROJECTS: Project[] = [
       "Stakeholder alignment",
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
-    display: "CARELON",
-    cover: "/work/beacon-carelon-transformation/cover.jpg",
+    display: "CARELON REBRAND",
+    cover: "/work/beacon-carelon-transformation/brand-architecture.jpg",
+    coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
       "Creative lead through an enterprise acquisition and rebrand.",
@@ -212,17 +219,32 @@ export const PROJECTS: Project[] = [
           labelA: "Before — Beacon",
           labelB: "After — Carelon",
           caption:
-            "The identity, before and after: Beacon's blue system on the left; on the right the Carelon architecture — the primary mark plus every line-of-business lockup that had to be governed.",
+            "One identity replaced by an architecture: not a single mark, but a governed family of lockups — Behavioral Health, Digital Platforms, Global Solutions, Health Solutions, Insights, Rx.",
         },
         {
           kind: "full",
           aspect: "3 / 2",
           image: {
-            src: "/work/beacon-carelon-transformation/cover.jpg",
-            alt: "Carelon poster: Our name has changed. Our commitment has not.",
+            src: "/work/beacon-carelon-transformation/system-graphic-language.jpg",
+            alt: "The brand's graphic language — focus, progress, and connection built from the mark's geometry",
           },
           caption:
-            "The moment itself — “Our name has changed. Our commitment has not.” On March 1, 2023, Beacon Health Options became Carelon Behavioral Health; the job was making that legible to members, providers, and staff.",
+            "The graphic language underneath it. Focus, progress, connection — each drawn from the mark's own geometry, so a background is never decoration.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/beacon-carelon-transformation/system-photo-mask.jpg",
+            alt: "A cover template with photography masked into the shape of the Carelon mark",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/system-dark-cover.jpg",
+            alt: "A dark cover template using the brand's data-network imagery",
+          },
+          labelA: "Photography, in the mark",
+          labelB: "The dark end of the range",
+          caption:
+            "The move that made it recognizable at a glance: photography masked into the mark itself — and the same system stretched to a darker, data-led register for enterprise material.",
         },
         {
           kind: "pair",
@@ -237,18 +259,18 @@ export const PROJECTS: Project[] = [
           labelA: "Before — Beacon collateral",
           labelB: "After — Carelon collateral",
           caption:
-            "The same job, rebuilt in the new system: member- and market-facing collateral carried across without losing the plot — or the plain language people actually rely on.",
+            "The same job, rebuilt in the new system: member- and market-facing collateral carried across without losing the plain language people rely on.",
         },
         {
           kind: "gallery",
           images: [
             {
-              src: "/work/beacon-carelon-transformation/type-system.jpg",
-              alt: "Carelon Behavioral Health paragraph style guide",
+              src: "/work/beacon-carelon-transformation/system-dataviz.jpg",
+              alt: "A data-visualisation layout with statistics, a US map, and charts",
             },
             {
-              src: "/work/beacon-carelon-transformation/collateral-crisis.jpg",
-              alt: "Carelon crisis care capability sheet for youth services",
+              src: "/work/beacon-carelon-transformation/type-system.jpg",
+              alt: "Carelon Behavioral Health paragraph style guide",
             },
             {
               src: "/work/beacon-carelon-transformation/collateral-folder.jpg",
@@ -256,7 +278,7 @@ export const PROJECTS: Project[] = [
             },
           ],
           caption:
-            "The system in production — paragraph styles, capability sheets, and printed collateral: the repeatable parts that made ~1,500+ deliverables consistent as volume spiked.",
+            "What made ~1,500+ deliverables repeatable — data layouts, paragraph styles, and print specs that a team of twenty could all build against.",
         },
       ],
     },
@@ -266,7 +288,7 @@ export const PROJECTS: Project[] = [
     num: "L02",
     tier: "leadership",
     flagship: true,
-    title: "Creative Operations & Marketing Bench",
+    title: "Marketing Bench",
     client: "Elevance Health / Carelon",
     year: "2020",
     category: "Creative Operations",
@@ -286,8 +308,9 @@ export const PROJECTS: Project[] = [
       "Team enablement",
     ],
     palette: ["#0e1a18", "#1cb791", "#1f8a6d", "#f3f1ea"],
-    display: "BENCH",
+    display: "MARKETING BENCH",
     cover: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
+    coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
       "Rebuilt Marketing Bench as a self-serve print-on-demand platform.",
@@ -343,36 +366,51 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "3 / 2",
           image: {
-            src: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
-            alt: "The Marketing Hub homepage — Build a Marketing Folder, with quick links to the brand center, stationery store, print support, and promo items",
+            src: "/work/creative-operations-marketing-bench/client-catalog.jpg",
+            alt: "The customized client materials catalog, with logos for Amtrak, Baltimore City Public Schools, California, Catholic Health Initiatives and CenturyLink",
           },
           caption:
-            "The platform, annotated: “Build a Marketing Folder.” One front door to the brand center, stationery, print support, and promo items — so ordering never started with a request to a designer.",
+            "The scale it had to hold: a live catalog of client-specific material — Amtrak, CVS, CenturyLink, Baltimore City Public Schools, whole states — orderable without a designer opening a file.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/creative-operations-marketing-bench/configure-client.jpg",
+            alt: "Selecting a client from the inventory dropdown, which auto-fills logo, program name, phone and URL",
+          },
+          b: {
+            src: "/work/creative-operations-marketing-bench/proof-and-pdf.jpg",
+            alt: "The View Proof and Create PDF step, ending in a downloadable finished file",
+          },
+          labelA: "Pick the client",
+          labelB: "Proof, then PDF",
+          caption:
+            "The whole bottleneck, replaced by two steps. Choose a client and the logo, program name, phone number and URL populate across the template; view the proof, create the PDF, download a production file.",
         },
         {
           kind: "full",
           aspect: "3 / 2",
           image: {
-            src: "/work/creative-operations-marketing-bench/configurable-templates.jpg",
-            alt: "Client inventory and configurable templates — a client-selection dropdown with View Proof and Create PDF controls",
+            src: "/work/creative-operations-marketing-bench/output-annotated.jpg",
+            alt: "A finished branded piece annotated to show which fields fill automatically and which the user sets",
           },
           caption:
-            "Where the designer left the critical path: pick the client, and logo, program name, phone number, and URL populate across every template — then View Proof and Create PDF, unattended.",
+            "And the piece that comes out, annotated: logo, program name, hero image, session count, contact block — every field marked as either automatic or the requester's to set. That map is what let non-designers self-serve safely.",
         },
         {
           kind: "pair",
           a: {
-            src: "/work/creative-operations-marketing-bench/resource-center.jpg",
-            alt: "The Resource Center and Toolkits catalog — approved templates and branding assets with select-and-download",
+            src: "/work/creative-operations-marketing-bench/template-picker.jpg",
+            alt: "Choosing a format — digital messages, postcards, brochures, kick-it pieces",
           },
           b: {
             src: "/work/creative-operations-marketing-bench/marketing-folder.jpg",
             alt: "The Marketing Folder catalog — collated sales materials selected and added to cart",
           },
-          labelA: "Find it",
-          labelB: "Build the folder",
+          labelA: "Any format",
+          labelB: "Collated and shipped",
           caption:
-            "The self-serve loop: search approved assets and toolkits, select what you need, and collate a folder that ships — the chain that used to be edit, approve, hand to the vendor, wait for the upload.",
+            "Formats ran the range — digital messages, postcards, brochures, tip sheets — and a folder of them could be collated and shipped the next business day.",
         },
         {
           kind: "gallery",
@@ -391,17 +429,7 @@ export const PROJECTS: Project[] = [
             },
           ],
           caption:
-            "What came out the other end — the same templates, configured per client, at a volume no designer-in-the-loop process could have carried.",
-        },
-        {
-          kind: "full",
-          aspect: "3 / 2",
-          image: {
-            src: "/work/creative-operations-marketing-bench/eap-templates.jpg",
-            alt: "The configurable EAP, MHSUD and MDLIVE template catalog, showing which fields update automatically and which are set by the user",
-          },
-          caption:
-            "The rule set behind it: which fields fill automatically the moment a client is selected, and which stay in the user's hands — the governance that keeps self-serve on-brand.",
+            "Real output, one system: the same templates configured per client, at a volume no designer-in-the-loop process could have carried.",
         },
       ],
     },
@@ -411,7 +439,7 @@ export const PROJECTS: Project[] = [
     num: "L03",
     tier: "leadership",
     flagship: true,
-    title: "Workfront Workflow Transformation",
+    title: "Workfront Restart",
     client: "Elevance Health / Carelon",
     year: "2025",
     category: "Workflow & Production",
@@ -431,8 +459,8 @@ export const PROJECTS: Project[] = [
       "Reporting & templates",
     ],
     palette: ["#0a1729", "#1cb791", "#1f3a5c", "#e8ecf2"],
-    display: "WORKFRONT",
-    cover: "/work/workfront-workflow-transformation/legacy-model-change.jpg",
+    display: "WORKFRONT RESTART",
+    cover: "/work/workfront-workflow-transformation/platform-project.jpg",
     gallery: [],
     roleSummary:
       "Redrew Workfront phases, batching, and intake for the creative team.",
@@ -528,17 +556,17 @@ export const PROJECTS: Project[] = [
         {
           kind: "pair",
           a: {
+            src: "/work/workfront-workflow-transformation/platform-roles-annotated.jpg",
+            alt: "A live Workfront project with the designer, writer, or both assignment field called out",
+          },
+          b: {
             src: "/work/workfront-workflow-transformation/restart-proof-flow.jpg",
             alt: "Proof workflow with three review stages and assigned reviewers",
           },
-          b: {
-            src: "/work/workfront-workflow-transformation/restart-roles.jpg",
-            alt: "Task detail showing work assigned to designer, writer, or both",
-          },
-          labelA: "Reviews & approvals",
-          labelB: "Batching & delegation",
+          labelA: "Who picks it up",
+          labelB: "Who signs it off",
           caption:
-            "Reviews became staged and visible instead of a mystery, and tasks could be pointed at a designer, a writer, or both — which is where the duplicated effort had been hiding.",
+            "In the running system: a task can be pointed at a designer, a writer, or both — and review became three visible stages with named approvers instead of a thread nobody could track.",
         },
         {
           kind: "gallery",
@@ -548,8 +576,8 @@ export const PROJECTS: Project[] = [
               alt: "My Work dashboard showing tasks ready to start and outstanding proofs",
             },
             {
-              src: "/work/workfront-workflow-transformation/restart-statuses.jpg",
-              alt: "Shared status definitions — new, in progress, complete, awaiting feedback",
+              src: "/work/workfront-workflow-transformation/template-structure.jpg",
+              alt: "A creative development template with phases, durations, and planned hours",
             },
             {
               src: "/work/workfront-workflow-transformation/restart-timeline.jpg",
@@ -557,7 +585,7 @@ export const PROJECTS: Project[] = [
             },
           ],
           caption:
-            "The everyday surface: one place to see what's ready to start, status language everyone reads the same way, and a launch the team could track — MVP in January, full launch in April.",
+            "The everyday surface: one place to see what's ready to start, templates carrying real durations and planned hours, and a staged launch the team could track — MVP in January, full launch in April.",
         },
         {
           kind: "detail",
