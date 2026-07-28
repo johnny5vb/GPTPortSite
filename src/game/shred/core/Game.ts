@@ -1106,7 +1106,13 @@ export class Game {
     h.chain = this.tricks.chain;
     h.chainFraction = this.tricks.comboFraction;
     h.pendingScore = this.tricks.pending;
-    h.trickName = p.grounded ? "" : this.tricks.pendingName;
+    // On the ground the only live "trick" is a grind, and it reads exactly the
+    // same way — the name of what you are doing right now, while you do it.
+    h.trickName = p.grounded
+      ? this.tricks.grinding > 0.3
+        ? this.tricks.grindName
+        : ""
+      : this.tricks.pendingName;
     h.airTime = p.airTime;
     h.airHeight = p.airHeight;
     h.bigAir = p.bigAir;

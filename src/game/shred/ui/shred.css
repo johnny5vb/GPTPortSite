@@ -359,22 +359,37 @@
   text-shadow: 0 2px 26px rgba(0, 0, 0, 0.55);
 }
 
+/* The combo builds. Chains are the loop the whole scoring system turns on, so
+   the pill grows and heats up as it climbs rather than just counting: white is
+   a chain, amber is a run, pink is a run you will remember. `--heat` is set
+   from the HUD loop, not from React — this thing changes several times a
+   second. */
 .hud-combo {
   margin-top: 0.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.28rem 0.65rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255, 61, 129, 0.24), rgba(255, 196, 107, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 61, 129, calc(0.1 + var(--heat, 0) * 0.34)),
+    rgba(255, 196, 107, calc(0.08 + var(--heat, 0) * 0.26))
+  );
+  border: 1px solid rgba(255, 255, 255, calc(0.18 + var(--heat, 0) * 0.4));
+  box-shadow: 0 0 calc(var(--heat, 0) * 26px) rgba(255, 61, 129, calc(var(--heat, 0) * 0.5));
   font-family: var(--sh-mono);
+  font-weight: 500;
   font-size: 0.74rem;
   letter-spacing: 0.12em;
+  transform-origin: right center;
 }
 .hud-combo b {
-  font-size: 1rem;
-  font-weight: 700;
+  font-family: var(--sh-display);
+  font-size: calc(1rem + var(--heat, 0) * 0.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 .hud-combo-bar {
   width: 46px;
@@ -442,22 +457,105 @@
 .hud-pop {
   position: absolute;
   left: 50%;
-  top: 44%;
+  /* Below the mid-screen banner, which owns 50%. Two things shouting from the
+     same spot is how you end up reading neither. */
+  top: 60%;
   transform: translateX(-50%);
   text-align: center;
   pointer-events: none;
 }
 
+/* ── landing feedback ──────────────────────────────────────────────────────
+   A landing should get louder the more you earned, and the tiers are far apart
+   on purpose: if every trick arrives at full volume then nothing does. Tier 0
+   is a note, tier 3 fills the middle of the screen and throws light behind
+   itself. `data-tier` comes from the score, so the escalation is earned rather
+   than decorative. */
 .pop-item {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
   font-family: var(--sh-display);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
   white-space: nowrap;
 }
+.pop-head {
+  display: flex;
+  align-items: center;
+  gap: 0.34em;
+  font-family: var(--sh-mono);
+  font-weight: 500;
+  font-size: 0.42em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.pop-icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+}
+.pop-score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+  line-height: 1;
+}
+.pop-chain {
+  font-family: var(--sh-mono);
+  font-weight: 500;
+  font-size: 0.48em;
+  letter-spacing: 0;
+  padding: 0.16em 0.44em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+.pop-stomp {
+  font-family: var(--sh-mono);
+  font-weight: 500;
+  font-size: 0.36em;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--sh-green);
+}
+
+.pop-item[data-tier="0"] { font-size: clamp(1.05rem, 2.2vw, 1.6rem); }
+.pop-item[data-tier="1"] { font-size: clamp(1.35rem, 3vw, 2.2rem); }
+.pop-item[data-tier="2"] { font-size: clamp(1.75rem, 4vw, 3rem); }
+.pop-item[data-tier="3"] { font-size: clamp(2.2rem, 5.4vw, 4rem); }
+
+/* The glow behind the big ones. Sized off the type, so it grows with it. */
+.pop-item[data-tier="2"]::before,
+.pop-item[data-tier="3"]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9em;
+  height: 4.4em;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, currentColor, transparent 72%);
+  opacity: 0.16;
+  pointer-events: none;
+}
+.pop-item[data-tier="3"]::before {
+  opacity: 0.26;
+}
+.pop-item[data-tier="3"] .pop-chain {
+  background: rgba(255, 61, 129, 0.34);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
 .pop-item[data-q="perfect"] { color: var(--sh-green); }
 .pop-item[data-q="good"] { color: #ffffff; }
 .pop-item[data-q="sketchy"] { color: var(--sh-amber); }
+/* Past a certain size a white number is just a white number: the top tier
+   takes the heat colours so a big one is recognisable at a glance. */
+.pop-item[data-tier="3"][data-q="good"] { color: var(--sh-amber); }
 
 /* Controls used to be seven separate pills with seven separate borders, which
    at the bottom of a moving screen reads as clutter rather than as a legend.

@@ -26,6 +26,8 @@ const HINTS: [string[], string][] = [
   [["esc"], "pause"],
 ];
 
+export type PopupIcon = "perfect" | "stomp" | "air" | "spin" | "grind";
+
 export interface Popup {
   id: number;
   name: string;
@@ -33,6 +35,67 @@ export interface Popup {
   chain: number;
   quality: TrickResult["quality"];
   stomped: boolean;
+  icons: PopupIcon[];
+}
+
+/**
+ * How loud a landing is allowed to be.
+ *
+ * Four tiers, and they are deliberately far apart: if every trick arrives at
+ * full volume then nothing does. A tap off a roller and a corked 900 have to
+ * look like different events, and the only way the top tier means anything is
+ * if most landings aren't it.
+ */
+/** Roughly how tall each tier renders, for stacking. */
+const POP_HEIGHT = [40, 52, 68, 86];
+
+function tierOf(total: number) {
+  return total >= 12000 ? 3 : total >= 4500 ? 2 : total >= 1600 ? 1 : 0;
+}
+
+/**
+ * Marks, not emoji. Each one says something the number can't: which part of
+ * that was hard. They're drawn rather than written so they hold up at the size
+ * a score popup actually appears at.
+ */
+function Icon({ kind }: { kind: PopupIcon }) {
+  const paths: Record<PopupIcon, React.ReactNode> = {
+    perfect: <path d="M8 1.4l1.9 4.2 4.6.5-3.4 3.1.9 4.5L8 11.5 4 13.7l.9-4.5L1.5 6.1l4.6-.5z" />,
+    stomp: (
+      <>
+        <path d="M3 6.4L8 11l5-4.6" fill="none" strokeWidth="2" stroke="currentColor" />
+        <path d="M3 1.9L8 6.5l5-4.6" fill="none" strokeWidth="2" stroke="currentColor" opacity=".5" />
+        <rect x="2.5" y="13" width="11" height="1.8" rx="0.9" />
+      </>
+    ),
+    air: (
+      <>
+        <path d="M8 1.6l4.6 5.2h-2.7v4.1H6.1V6.8H3.4z" />
+        <rect x="3.4" y="13" width="9.2" height="1.7" rx="0.85" opacity=".5" />
+      </>
+    ),
+    spin: (
+      <path
+        d="M13 8a5 5 0 1 1-1.9-3.9"
+        fill="none"
+        strokeWidth="1.9"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+    ),
+    grind: (
+      <>
+        <rect x="1.4" y="6.6" width="13.2" height="1.9" rx="0.95" />
+        <rect x="3" y="8.5" width="1.5" height="5" rx="0.7" opacity=".55" />
+        <rect x="11.5" y="8.5" width="1.5" height="5" rx="0.7" opacity=".55" />
+      </>
+    ),
+  };
+  return (
+    <svg className="pop-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      {paths[kind]}
+    </svg>
+  );
 }
 
 interface Props {
@@ -88,13 +151,20 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
       if (comboRef.current) {
         const live = s.chain > 1;
         comboRef.current.style.opacity = live ? "1" : "0";
-        comboRef.current.style.transform = live
-          ? "translateY(0) scale(1)"
-          : "translateY(6px) scale(0.94)";
+        if (!live) comboRef.current.style.transform = "translateY(6px) scale(0.94)";
         if (live) {
           if (comboNumRef.current) comboNumRef.current.textContent = `${s.chain}×`;
           if (comboBarRef.current)
             comboBarRef.current.style.width = `${s.chainFraction * 100}%`;
+          // Heat ramps to full over the first eight links, which is about where
+          // a chain stops being luck.
+          comboRef.current.style.setProperty(
+            "--heat",
+            String(Math.min(1, (s.chain - 1) / 7)),
+          );
+          comboRef.current.style.transform = `translateY(0) scale(${
+            1 + Math.min(0.22, (s.chain - 1) * 0.03)
+          })`;
         }
       }
 
@@ -244,30 +314,40 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
       {/* landed trick popups */}
       <div className="hud-pop">
         <AnimatePresence>
-          {popups.map((p, i) => (
+          {popups.map((p, i) => {
+            // Stack upward from the newest, spaced by how tall each one
+            // actually is. A fixed gap was fine when every popup was the same
+            // size; now that a big landing is three times the height of a small
+            // one, they have to be measured or they overlap.
+            let lift = 0;
+            for (let k = i + 1; k < popups.length; k++) {
+              lift += POP_HEIGHT[tierOf(popups[k].total)];
+            }
+            return (
             <motion.div
               key={p.id}
-              initial={{ opacity: 0, y: 22, scale: 0.82 }}
-              animate={{ opacity: 1, y: -i * 34, scale: 1 }}
-              exit={{ opacity: 0, y: -i * 34 - 26, scale: 0.94 }}
-              transition={{ type: "spring", stiffness: 420, damping: 26 }}
+              initial={{ opacity: 0, y: 26, scale: 0.7 }}
+              animate={{ opacity: 1, y: -lift, scale: 1 }}
+              exit={{ opacity: 0, y: -lift - 30, scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 460, damping: 24 }}
               className="pop-item"
               data-q={p.quality}
-              style={{ fontSize: `clamp(1.1rem, ${1.4 + Math.min(1.6, p.total / 9000)}vw, 2.4rem)` }}
+              data-tier={tierOf(p.total)}
             >
-              <span style={{ opacity: 0.85, fontSize: "0.7em", letterSpacing: "0.1em" }}>
-                {p.name.toUpperCase()}
-              </span>
-              <br />
-              +{formatScore(p.total)}
-              {p.chain > 1 && (
-                <span style={{ opacity: 0.7, fontSize: "0.6em" }}> ×{p.chain}</span>
-              )}
-              {p.stomped && (
-                <span style={{ color: "var(--sh-green)", fontSize: "0.55em" }}> STOMPED</span>
-              )}
+              <div className="pop-head">
+                {p.icons.map((k) => (
+                  <Icon key={k} kind={k} />
+                ))}
+                <span className="pop-name">{p.name}</span>
+              </div>
+              <div className="pop-score">
+                +{formatScore(p.total)}
+                {p.chain > 1 && <b className="pop-chain">×{p.chain}</b>}
+              </div>
+              {p.stomped && <div className="pop-stomp">Stomped</div>}
             </motion.div>
-          ))}
+            );
+          })}
         </AnimatePresence>
       </div>
 

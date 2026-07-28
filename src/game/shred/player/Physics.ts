@@ -143,6 +143,8 @@ export class RiderPhysics {
     rock: 0,
     groom: 0,
     steep: 0,
+    rail: 0,
+    railDx: 0,
   };
 
   stats: RideStats = {
@@ -369,6 +371,19 @@ export class RiderPhysics {
       );
     }
 
+    // ── rail snap ─────────────────────────────────────────────────────────
+    // A rail is 40cm wide and you arrive at 15 m/s. Without help the target is
+    // a few centimetres and nobody ever lands a grind; with too much help the
+    // rail drives the board and you are a passenger. So: a spring toward the
+    // centre line, strong enough to hold you once you are on and to gather you
+    // in from just off the edge, and a damper so it settles instead of
+    // oscillating. Steering still wins — hold an edge and you ride off it.
+    if (s.rail > 0.01) {
+      const pull = s.rail * 26 * dt;
+      this.vel.x -= s.railDx * pull;
+      this.vel.x -= this.vel.x * Math.min(1, s.rail * 6 * dt);
+    }
+
     // ── integrate along the slope ─────────────────────────────────────────
     this.vel.addScaledVector(n, -this.vel.dot(n));
     this.pos.addScaledVector(this.vel, dt);
@@ -376,7 +391,10 @@ export class RiderPhysics {
 
     // ── stay on / leave the surface ───────────────────────────────────────
     const gen = this.gen;
-    const nh = gen.heightAt(this.pos.x, this.pos.z);
+    // The ride surface, not the snow: standing on a rail is a metre of air by
+    // the terrain's reckoning, and using it here launched the rider off every
+    // box they touched.
+    const nh = gen.rideHeightAt(this.pos.x, this.pos.z);
     const gap = this.pos.y - nh;
 
     // Compression: landing back into a concavity should feel like it loads up.
@@ -457,7 +475,7 @@ export class RiderPhysics {
     this.pos.addScaledVector(this.vel, dt);
     this.distance += Math.hypot(this.vel.x, this.vel.z) * dt;
 
-    const nh = this.gen.heightAt(this.pos.x, this.pos.z);
+    const nh = this.gen.rideHeightAt(this.pos.x, this.pos.z);
     this.airHeight = this.pos.y - nh;
     if (this.airHeight > this.peakAir) this.peakAir = this.airHeight;
 

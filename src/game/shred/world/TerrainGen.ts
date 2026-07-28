@@ -22,6 +22,9 @@ import { hash2, hash2v } from "../core/rng";
 
 export const SEGMENT_LENGTH = 150;
 
+/** Shared "no jib here" result, so the hot path allocates nothing. */
+const ZERO_JIB = { lift: 0, grip: 0, dx: 0 };
+
 /**
  * Pitch modulation. A + B must stay comfortably under 1 or the run flattens
  * out, and a flat section on a snowboard is a dead section.
@@ -48,7 +51,8 @@ export type FeatureKind =
   | "shortcut"
   | "ramps"
   | "gap"
-  | "tunnel";
+  | "tunnel"
+  | "jibs";
 
 export interface Kicker {
   x: number;
@@ -60,12 +64,36 @@ export interface Kicker {
   kick: number;
 }
 
+/**
+ * A rail or a box.
+ *
+ * Jibs are deliberately **not** part of `height()`. A rail is 40cm wide and the
+ * terrain mesh is tessellated far coarser than that, so a rail in the
+ * heightfield would be a surface the physics could feel and the renderer could
+ * not draw. Instead the prop mesh is built from these numbers and the physics
+ * reads them back through `sample()` — same source, so the board still sits
+ * exactly on the thing you can see, which is the whole point of the analytic
+ * mountain.
+ */
+export interface Jib {
+  x: number;
+  /** Centre of the jib along the run. */
+  z: number;
+  length: number;
+  /** Half the rideable width. A rail is ~0.2, a box ~0.8. */
+  halfWidth: number;
+  /** How far it stands off the snow. */
+  height: number;
+  kind: "rail" | "box";
+}
+
 export interface Feature {
   seg: number;
   kind: FeatureKind;
   z0: number;
   z1: number;
   kickers: Kicker[];
+  jibs: Jib[];
   /** Per-feature scratch parameters (meaning depends on `kind`). */
   a: number;
   b: number;
@@ -118,6 +146,7 @@ const DEFAULT_WEIGHTS: Record<FeatureKind, number> = {
   ramps: 10,
   gap: 6,
   tunnel: 5,
+  jibs: 9,
 };
 
 export interface Surface {
@@ -133,6 +162,10 @@ export interface Surface {
   groom: number;
   /** Slope in radians (0 = flat). */
   steep: number;
+  /** 0..1 — how squarely the point sits on a rail or box. */
+  rail: number;
+  /** Signed metres from the centre line of that jib. Drives the snap. */
+  railDx: number;
 }
 
 export class TerrainGen {
@@ -228,6 +261,7 @@ export class TerrainGen {
       z0,
       z1,
       kickers: [],
+      jibs: [],
       a: r1,
       b: r2,
       c: hash2(seg, 4231, this.seed ^ 0xabcdef),
@@ -249,9 +283,11 @@ export class TerrainGen {
         });
       }
     } else if (kind === "park") {
-      // A park is a rhythm section: three evenly spaced hits down the middle.
+      // A park is a rhythm section: three evenly spaced hits down the middle,
+      // with a rail or a box tucked to one side of each so there is always a
+      // second line through it.
       for (let i = 0; i < 3; i++) {
-        const [k0, k1] = hash2v(seg * 57 + i, 13, this.seed);
+        const [k0, k1, k2] = hash2v(seg * 57 + i, 13, this.seed);
         f.kickers.push({
           x: cx + (i - 1) * hw * 0.42 + (k0 * 2 - 1) * 4,
           z: z0 + 34 + i * 38,
@@ -260,7 +296,57 @@ export class TerrainGen {
           height: lerp(3.2, 5.4, k1),
           kick: 0.85,
         });
+        if (k2 > 0.35) {
+          const box = k2 > 0.72;
+          f.jibs.push({
+            x: cx + (i - 1) * hw * 0.42 + (k0 < 0.5 ? -1 : 1) * 15,
+            z: z0 + 34 + i * 38 + 6,
+            length: lerp(13, 21, k1),
+            halfWidth: box ? 0.8 : 0.22,
+            height: box ? lerp(0.5, 0.8, k0) : lerp(0.8, 1.25, k0),
+            kind: box ? "box" : "rail",
+          });
+        }
       }
+    } else if (kind === "jibs") {
+      // A jib line. Small hits and a lot of metal: the section you session
+      // rather than survive. Two lanes so there's a choice at every step, and
+      // the kickers are deliberately little — this is not where you go big.
+      for (let i = 0; i < 5; i++) {
+        const [k0, k1, k2] = hash2v(seg * 71 + i, 29, this.seed);
+        const lane = (i % 2 === 0 ? -1 : 1) * hw * lerp(0.16, 0.36, k0);
+        const z = z0 + 24 + i * 25;
+        const box = k2 > 0.55;
+        f.jibs.push({
+          x: cx + lane,
+          z,
+          length: lerp(12, 22, k1),
+          halfWidth: box ? lerp(0.62, 1.0, k1) : lerp(0.18, 0.26, k1),
+          height: box ? lerp(0.45, 0.75, k2) : lerp(0.75, 1.3, k2),
+          kind: box ? "box" : "rail",
+        });
+        // A tap in front of the metal, because a rail you have to ollie onto
+        // is a rail most people ride past.
+        if (k1 > 0.4) {
+          f.kickers.push({
+            x: cx + lane,
+            z: z - lerp(12, 20, k1),
+            width: 8,
+            length: 9,
+            height: lerp(1.1, 2.1, k2),
+            kick: 0.55,
+          });
+        }
+      }
+      // One bigger hit to finish the line.
+      f.kickers.push({
+        x: cx + (r1 * 2 - 1) * hw * 0.2,
+        z: z0 + 132,
+        width: 15,
+        length: 18,
+        height: lerp(3.6, 5.2, r2),
+        kick: 0.85,
+      });
     } else if (kind === "ramps") {
       // A jump line: four hits that step up from a tap to a real booter, so
       // the section teaches you its own timing before it asks for commitment.
@@ -384,6 +470,7 @@ export class TerrainGen {
       halfpipe: "Halfpipe",
       park: "Terrain park",
       ramps: "Jump line",
+      jibs: "Jib line",
       gap: "Gap jump",
       tunnel: "Ice tunnel",
       lake: "Frozen lake",
@@ -452,9 +539,11 @@ export class TerrainGen {
     switch (f.kind) {
       case "kickers":
       case "ramps":
+      case "jibs":
       case "park": {
         let h = 0;
         for (const k of f.kickers) h += this.kickerHeight(k, x, z);
+        for (const j of f.jibs) h += this.jibRampHeight(j, x, z);
         return h;
       }
       case "gap": {
@@ -606,6 +695,29 @@ export class TerrainGen {
     );
   }
 
+  /**
+   * The snow ramp built up to a rail.
+   *
+   * This one *is* terrain — unlike the jib itself it is metres wide, so the
+   * renderer can draw it. Without it a rail is a kerb: you arrive at speed and
+   * hit a vertical 1.2m step. With it you roll up and on, which is the whole
+   * difference between a rail people ride and a rail people ride past.
+   */
+  private jibRampHeight(j: Jib, x: number, z: number) {
+    const half = j.length * 0.5;
+    const rampLen = Math.max(5, j.height * 6.5);
+    const dz = z - (j.z - half);
+    if (dz < -rampLen || dz > j.length * 0.45) return 0;
+    const w = Math.max(1.8, j.halfWidth * 2.4);
+    const across = 1 - smoothstep(w * 0.5, w, Math.abs(x - j.x));
+    if (across <= 0) return 0;
+    const up = smoothstep(-rampLen, -0.4, dz);
+    // Falls away under the first stretch of the rail, so the metal is proud
+    // for most of its length rather than half buried.
+    const fade = 1 - smoothstep(0, j.length * 0.4, Math.max(0, dz));
+    return across * up * fade * j.height;
+  }
+
   private kickerHeight(k: Kicker, x: number, z: number) {
     const dx = Math.abs(x - k.x);
     if (dx > k.width) return 0;
@@ -625,6 +737,78 @@ export class TerrainGen {
     return fall * k.height * across;
   }
 
+  // ────────────────────────────────────────────────────────────────── jibs ────
+
+  /**
+   * How far a jib stands above the snow at this point, and how squarely you are
+   * on it.
+   *
+   * The top is a platform parallel to the slope, with short ramps at each end so
+   * you can ride on rather than having to ollie. The sides fall away over a
+   * fraction of a metre: on a rail that is the difference between riding it and
+   * not, and making it any softer turns every rail into a mogul.
+   */
+  private jibProfile(
+    j: Jib,
+    x: number,
+    z: number,
+  ): { lift: number; grip: number; dx: number } {
+    const dz = z - j.z;
+    const half = j.length * 0.5;
+    if (dz < -half || dz > half) return ZERO_JIB;
+    const off = x - j.x;
+    const dx = Math.abs(off);
+    const edge = j.halfWidth + 0.45;
+    if (dx > edge) return ZERO_JIB;
+
+    // Only the exit is bevelled. There is deliberately no entry bevel: the
+    // snow ramp already rises to the full standing height, and the `max(0, …)`
+    // below means the metal simply fills whatever the ramp stops providing as
+    // it fades out under the rail. The two curves add to a constant, so the
+    // surface you ride is flat from the top of the ramp to the end of the rail
+    // — and the snow being packed level with the first stretch of metal is
+    // what a park rail entrance looks like anyway.
+    const ends = 1 - smoothstep(half - 0.5, half, dz);
+    const across = 1 - smoothstep(j.halfWidth * 0.5, edge, dx);
+    // The metal only stands as proud as the snow under it leaves it. Its
+    // approach ramp *is* terrain and is already in `height()`, so adding the
+    // full standing height on top of it would build a hump at the entrance —
+    // the one place a rail has to be smooth.
+    const lift = Math.max(0, j.height * ends * across - this.jibRampHeight(j, x, z));
+    // Grip is what the trick system reads. It used to demand the dead centre,
+    // which on a 40cm rail meant a nine-centimetre target at 15 m/s — nobody
+    // was ever going to hit that, so nobody ever saw a grind. Anywhere on the
+    // thing counts; the snap below is what makes riding it possible.
+    const grip = lift > 0.001 ? ends * (1 - smoothstep(j.halfWidth, edge, dx)) : 0;
+    return { lift, grip, dx: off };
+  }
+
+  /**
+   * The highest jib surface at a point, if any.
+   *
+   * Only `sample()` calls this — `height()` is the terrain and stays the
+   * terrain, because a 40cm rail is far below the tessellation the renderer
+   * works at. The prop mesh is built from the same `Jib` records, so the thing
+   * the physics can feel and the thing you can see are the same object.
+   */
+  jibAt(x: number, z: number): { lift: number; grip: number; dx: number } {
+    const seg = Math.floor(z / SEGMENT_LENGTH);
+    let best = ZERO_JIB;
+    for (let s = seg - 1; s <= seg + 1; s++) {
+      const f = this.featureForSegment(s);
+      for (const j of f.jibs) {
+        const p = this.jibProfile(j, x, z);
+        if (p.lift > best.lift) best = p;
+      }
+    }
+    return best;
+  }
+
+  /** Every jib near a segment, for the prop builder. */
+  jibsForSegment(seg: number): Jib[] {
+    return this.featureForSegment(seg).jibs;
+  }
+
   // ─────────────────────────────────────────────────────────────── sample ────
 
   /** Full surface description at a point: height, normal and material blend. */
@@ -641,6 +825,8 @@ export class TerrainGen {
         rock: 0,
         groom: 0,
         steep: 0,
+        rail: 0,
+        railDx: 0,
       } as Surface);
 
     const e = 0.75;
@@ -663,12 +849,40 @@ export class TerrainGen {
     o.steep = Math.acos(clamp(ny, -1, 1));
 
     this.materialAt(x, z, o);
+
+    // Jibs sit on top of all of that. The normal is left alone deliberately: a
+    // rail's top is parallel to the slope, and taking a finite difference
+    // across a 40cm-wide object with a 75cm epsilon would report a cliff and
+    // fire the rider sideways off every box they touched.
+    const jib = this.jibAt(x, z);
+    if (jib.lift > 0.001) {
+      o.h += jib.lift;
+      o.rail = jib.grip;
+      o.railDx = jib.dx;
+      // Metal and waxed ply: fast, and nothing to carve into.
+      o.ice = Math.max(o.ice, jib.grip * 0.85);
+      o.powder *= 1 - jib.grip;
+      o.groom = Math.max(o.groom, jib.grip);
+    } else {
+      o.rail = 0;
+      o.railDx = 0;
+    }
     return o;
   }
 
   /** Cheap height-only query for physics probes and scatter placement. */
   heightAt(x: number, z: number) {
     return this.height(x, z);
+  }
+
+  /**
+   * The height of the surface a board actually rides on: the terrain, plus any
+   * rail or box standing on it. Anything deciding whether the rider is on the
+   * ground has to use this one — `heightAt` is the snow, and a rider standing
+   * on a rail is a metre above the snow.
+   */
+  rideHeightAt(x: number, z: number) {
+    return this.height(x, z) + this.jibAt(x, z).lift;
   }
 
   materialAt(x: number, z: number, o: Surface) {

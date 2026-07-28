@@ -15,7 +15,7 @@
  */
 
 import { RiderPhysics, LandingInfo, LandingQuality } from "./Physics";
-import { clamp01, damp, lerp, smoothstep, DEG, snapTo } from "../core/math";
+import { clamp01, damp, lerp, smoothstep, DEG, snapTo, angleDelta } from "../core/math";
 import type { Rider } from "../data/riders";
 
 export interface GrabDef {
@@ -117,6 +117,13 @@ export class TrickSystem {
   /** 0..1 — how hard the landing assist is currently working. Drives the HUD. */
   assist = 0;
 
+  /** Live grind state, for the rig and the HUD. */
+  grinding = 0;
+  grindName = "";
+  private grindTime = 0;
+  private grindPoints = 0;
+  private grindBest = "";
+
   /** Unlockable: rider signature trick (Shift + A + F). */
   specialsUnlocked = false;
   private signatureArmed = false;
@@ -154,6 +161,8 @@ export class TrickSystem {
     this.currentGrab = null;
     this.grabAmount = 0;
     this.corkAmount = 0;
+    this.grinding = 0;
+    this.resetGrind();
   }
 
   update(dt: number, input: TrickInput, phys: RiderPhysics) {
@@ -163,6 +172,8 @@ export class TrickSystem {
     }
 
     if (phys.crashed) {
+      this.resetGrind();
+      this.grinding = 0;
       this.currentGrab = null;
       this.grabAmount = damp(this.grabAmount, 0, 0.0001, dt);
       this.spinSpeed = 0;
@@ -182,7 +193,83 @@ export class TrickSystem {
       this.assist = damp(this.assist, 0, 0.0005, dt);
       if (this.grabs.length) this.grabs.length = 0;
       this.grabHold = 0;
+      this.grindUpdate(dt, phys);
     }
+  }
+
+  /**
+   * Grinding.
+   *
+   * Same idea as the air tricks: the name is *derived*, not chosen. How far the
+   * board is turned across the rail is the whole vocabulary — square is a
+   * 50-50, sideways is a boardslide, and the awkward angle in between is a
+   * feeble, which is exactly what it looks like. Points accrue per second and
+   * bank when you come off, so a rail you ride the length of is worth more than
+   * one you tap, and one you fall off is worth nothing.
+   */
+  private grindUpdate(dt: number, phys: RiderPhysics) {
+    const on = phys.surface.rail;
+    if (on > 0.45 && phys.speed > 2) {
+      this.grindTime += dt;
+      this.grinding = Math.min(1, this.grinding + dt * 6);
+
+      // Angle between the board and the way it is actually travelling.
+      const travel = Math.atan2(phys.vel.x, phys.vel.z);
+      const across = Math.abs(angleDelta(phys.yaw, travel)) / DEG;
+      const skew = across > 90 ? 180 - across : across;
+      const name = skew > 62 ? "Boardslide" : skew > 28 ? "Feeble" : "50-50";
+      const rate = skew > 62 ? 340 : skew > 28 ? 260 : 180;
+      this.grindPoints += rate * dt * on * (0.6 + Math.min(1, phys.speed / 18));
+      if (name !== this.grindName) {
+        this.grindName = name;
+        this.onGrab?.(name);
+      }
+      // The name that sticks is the hardest one you held.
+      if (!this.grindBest || rate > (this.grindBest === "Boardslide" ? 340 : this.grindBest === "Feeble" ? 260 : 180)) {
+        this.grindBest = name;
+      }
+      return;
+    }
+
+    this.grinding = damp(this.grinding, 0, 0.0002, dt);
+    if (this.grindTime > 0.28 && this.grindPoints > 30) this.bankGrind();
+    else this.resetGrind();
+  }
+
+  private resetGrind() {
+    this.grindTime = 0;
+    this.grindPoints = 0;
+    this.grindName = "";
+    this.grindBest = "";
+  }
+
+  /** Cash in a completed grind. Chains with air tricks — that is the point. */
+  private bankGrind() {
+    const name = this.grindBest || "50-50";
+    const raw = Math.round(this.grindPoints);
+    this.resetGrind();
+
+    this.chain = Math.min(this.chain + 1, 24);
+    this.chainTimer = 2.8;
+    const multiplier = 1 + (this.chain - 1) * 0.5;
+    const total = Math.round(raw * multiplier);
+    this.score += total;
+    this.totalTricks++;
+    if (total > this.bestTrick) this.bestTrick = total;
+
+    this.onTrick?.({
+      name,
+      points: raw,
+      multiplier,
+      chain: this.chain,
+      quality: "good",
+      stomped: false,
+      airTime: 0,
+      spin: 0,
+      flips: 0,
+      grabs: [],
+      total,
+    });
   }
 
   private airUpdate(dt: number, input: TrickInput, phys: RiderPhysics) {

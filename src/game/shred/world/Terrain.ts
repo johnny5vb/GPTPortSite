@@ -62,6 +62,8 @@ export class Terrain {
     rock: 0,
     groom: 0,
     steep: 0,
+    rail: 0,
+    railDx: 0,
   };
 
   /** Chunks built per frame once the run is live. */

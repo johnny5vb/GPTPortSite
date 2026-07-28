@@ -197,7 +197,8 @@ export class Props {
         this.buildSeracs(g, f);
         break;
       case "park":
-        this.buildParkRails(g, f);
+      case "jibs":
+        this.buildJibs(g, f);
         break;
       case "shortcut":
         this.buildMarkers(g, f);
@@ -396,40 +397,71 @@ export class Props {
 
   // ────────────────────────────────────────────────────────── park rails ────
 
-  private buildParkRails(g: THREE.Group, f: Feature) {
+  /**
+   * Rails and boxes.
+   *
+   * These used to be decoration: metal tubes placed wherever the prop builder
+   * felt like, with nothing underneath them, so you rode straight through the
+   * one thing in the park that looked rideable. They are now built from the
+   * feature's own `Jib` records — the same numbers `TerrainGen.sample` reads —
+   * so the surface the physics puts you on is this geometry, to the centimetre.
+   *
+   * The tube is sunk by its own radius and the box top sits flush, because the
+   * rideable height is the *top* of the thing, not its centre.
+   */
+  private buildJibs(g: THREE.Group, f: Feature) {
     const metal: THREE.BufferGeometry[] = [];
     const wood: THREE.BufferGeometry[] = [];
-    for (let i = 0; i < 2; i++) {
-      const [a0, a1] = hash2v(f.seg * 17 + i, 3, this.gen.seed);
-      const z = f.z0 + 60 + i * 46;
-      const cx = this.gen.corridorCenter(z);
-      const hw = this.gen.corridorHalfWidth(z);
-      const x = cx + (a0 < 0.5 ? -1 : 1) * hw * 0.62;
-      const y = this.gen.heightAt(x, z);
-      const len = lerp(14, 22, a1);
 
-      const tube = new THREE.CylinderGeometry(0.18, 0.18, len, 8);
-      tube.rotateX(Math.PI / 2);
-      tube.translate(x, y + 1.15, z);
-      metal.push(tube);
-
-      for (let k = 0; k < 3; k++) {
-        const t = k / 2;
-        const pz = z + (t - 0.5) * len * 0.82;
-        const py = this.gen.heightAt(x, pz);
-        const leg = new THREE.CylinderGeometry(0.09, 0.09, 1.25, 6);
-        leg.translate(x, py + 0.62, pz);
-        metal.push(leg);
+    for (const j of f.jibs) {
+      const legs = Math.max(2, Math.round(j.length / 6));
+      if (j.kind === "rail") {
+        const r = j.halfWidth;
+        const tube = new THREE.CylinderGeometry(r, r, j.length, 10);
+        tube.rotateX(Math.PI / 2);
+        // Follow the slope: a rail is set level with the snow at both ends.
+        const y0 = this.gen.heightAt(j.x, j.z - j.length / 2) + j.height;
+        const y1 = this.gen.heightAt(j.x, j.z + j.length / 2) + j.height;
+        tube.rotateX(Math.atan2(y1 - y0, j.length));
+        tube.translate(j.x, (y0 + y1) / 2 - r, j.z);
+        metal.push(tube);
+      } else {
+        const y0 = this.gen.heightAt(j.x, j.z - j.length / 2) + j.height;
+        const y1 = this.gen.heightAt(j.x, j.z + j.length / 2) + j.height;
+        const deck = new THREE.BoxGeometry(j.halfWidth * 2, 0.16, j.length);
+        deck.rotateX(Math.atan2(y1 - y0, j.length));
+        deck.translate(j.x, (y0 + y1) / 2 - 0.08, j.z);
+        wood.push(deck);
+        // A steel lip along each edge, which is what you actually see catching
+        // the light as you come up on a box.
+        for (const side of [-1, 1]) {
+          const lip = new THREE.BoxGeometry(0.06, 0.1, j.length);
+          lip.rotateX(Math.atan2(y1 - y0, j.length));
+          lip.translate(j.x + side * j.halfWidth, (y0 + y1) / 2 - 0.03, j.z);
+          metal.push(lip);
+        }
       }
 
-      const box = new THREE.BoxGeometry(1.5, 0.7, len * 0.7);
-      const bx = cx - (x - cx) * 0.35;
-      const bz = z + 8;
-      box.translate(bx, this.gen.heightAt(bx, bz) + 0.35, bz);
-      wood.push(box);
+      // Legs, each planted on the actual snow under it.
+      for (let k = 0; k < legs; k++) {
+        const t = legs === 1 ? 0.5 : k / (legs - 1);
+        const pz = j.z + (t - 0.5) * j.length * 0.86;
+        const ground = this.gen.heightAt(j.x, pz);
+        const top = this.gen.heightAt(j.x, pz) + j.height;
+        const h = Math.max(0.2, top - ground);
+        const leg = new THREE.CylinderGeometry(0.055, 0.075, h, 6);
+        leg.translate(j.x, ground + h / 2, pz);
+        metal.push(leg);
+        if (j.kind === "box") {
+          const foot = new THREE.BoxGeometry(j.halfWidth * 1.9, 0.09, 0.34);
+          foot.translate(j.x, ground + 0.05, pz);
+          wood.push(foot);
+        }
+      }
     }
-    g.add(this.mesh(metal, this.mats.metal, 0, 0, 0, true));
-    g.add(this.mesh(wood, this.mats.wood, 0, 0, 0, true));
+
+    if (metal.length) g.add(this.mesh(metal, this.mats.metal, 0, 0, 0, true));
+    if (wood.length) g.add(this.mesh(wood, this.mats.wood, 0, 0, 0, true));
   }
 
   // ──────────────────────────────────────────────────────── trail markers ────

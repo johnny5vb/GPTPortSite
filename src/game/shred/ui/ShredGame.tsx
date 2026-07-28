@@ -22,7 +22,7 @@ import {
   type SaveData,
   type UnlockDef,
 } from "../core/save";
-import Hud, { type Popup } from "./Hud";
+import Hud, { type Popup, type PopupIcon } from "./Hud";
 import {
   Garage,
   HowTo,
@@ -167,6 +167,15 @@ export default function ShredGame() {
       switch (e.type) {
         case "trick": {
           const id = popupId.current++;
+          // What was hard about it, in the order it happened. A landing with
+          // three marks on it reads as a bigger deal than one with none, before
+          // the player has read a single digit.
+          const icons: PopupIcon[] = [];
+          if (e.result.airTime === 0) icons.push("grind");
+          if (e.result.airTime > 1.15) icons.push("air");
+          if (e.result.spin >= 360) icons.push("spin");
+          if (e.result.stomped) icons.push("stomp");
+          if (e.result.quality === "perfect") icons.push("perfect");
           const p: Popup = {
             id,
             name: e.result.name,
@@ -174,6 +183,7 @@ export default function ShredGame() {
             chain: e.result.chain,
             quality: e.result.quality,
             stomped: e.result.stomped,
+            icons,
           };
           setPopups((prev) => [...prev.slice(-4), p]);
           window.setTimeout(
