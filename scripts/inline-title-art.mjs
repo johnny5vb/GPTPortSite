@@ -33,10 +33,16 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const ASSETS = path.join(ROOT, "assets");
 const OUT = path.join(ROOT, "src/game/shred/ui/title-art.ts");
 
-/** Widths chosen so the whole thing stays a sane share of the bundle. */
-const LOGO_WIDTH = 1400;
-const BG_WIDTH = 2000;
-const BG_QUALITY = 82;
+/**
+ * Sizes chosen so the artwork stays a sane share of the bundle. The logo goes
+ * out as WebP rather than PNG: it is photographic — chrome, spray, a rendered
+ * mountain — and PNG is the wrong compressor for that, by about 6×. WebP has
+ * carried alpha in every browser that can run WebGL2 for years.
+ */
+const LOGO_WIDTH = 1280;
+const LOGO_QUALITY = 88;
+const BG_WIDTH = 1920;
+const BG_QUALITY = 80;
 
 async function find(base) {
   if (!existsSync(ASSETS)) return null;
@@ -91,9 +97,9 @@ async function main() {
     const out = await sharp(keyed)
       .trim({ threshold: 1 })
       .resize({ width: LOGO_WIDTH, withoutEnlargement: true })
-      .png({ compressionLevel: 9, palette: false })
+      .webp({ quality: LOGO_QUALITY, alphaQuality: 92, effort: 6 })
       .toBuffer({ resolveWithObject: true });
-    logo = `data:image/png;base64,${out.data.toString("base64")}`;
+    logo = `data:image/webp;base64,${out.data.toString("base64")}`;
     logoAspect = out.info.width / out.info.height;
     console.log(
       `logo   ${path.basename(logoPath)} → ${out.info.width}×${out.info.height}, ` +

@@ -57,19 +57,50 @@ const QUAD_VERT = /* glsl */ `
   }
 `;
 
+/**
+ * Keep non-finite values out of the post chain.
+ *
+ * The bloom targets are half-float, which tops out at 65504, and the god-ray
+ * pass sums 24 taps of the blurred bright buffer. One pixel bright enough to
+ * saturate that sum is Inf; ACES then computes Inf/Inf and returns NaN, and a
+ * NaN pixel is black. Because the blur runs on downsampled mips and spreads
+ * each texel across its neighbours, one bad texel does not come back as one
+ * bad pixel — it comes back as a *square*, flickering wherever the scene
+ * happens to be brightest that frame.
+ *
+ * NaN fails every comparison, so `!(x > -1.0)` is true for NaN and false for
+ * every real number: that one test catches NaN, and the min() catches Inf and
+ * anything merely absurd. Bloom has no use for values above the ceiling —
+ * after blurring and weighting, 48 and 48000 are the same white.
+ */
+const SAFE = /* glsl */ `
+  const float SH_MAX = 48.0;
+  float shSafe(float x) {
+    if (!(x > -1.0)) return 0.0;
+    return min(x, SH_MAX);
+  }
+  vec3 shSafe(vec3 c) {
+    return vec3(shSafe(c.r), shSafe(c.g), shSafe(c.b));
+  }
+`;
+
 const BRIGHT_FRAG = /* glsl */ `
   precision highp float;
   varying vec2 vUv;
   uniform sampler2D tDiffuse;
   uniform float uThreshold;
   uniform float uKnee;
+  ${SAFE}
   void main() {
-    vec3 c = texture2D(tDiffuse, vUv).rgb;
+    // Everything downstream of here is a weighted sum of this value, so this
+    // is the one place worth clamping: nothing can overflow later if nothing
+    // is out of range now.
+    vec3 c = shSafe(texture2D(tDiffuse, vUv).rgb);
     float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
     float soft = clamp(l - uThreshold + uKnee, 0.0, 2.0 * uKnee);
     soft = soft * soft / (4.0 * uKnee + 1e-5);
     float contrib = max(soft, l - uThreshold) / max(l, 1e-5);
-    gl_FragColor = vec4(c * contrib, 1.0);
+    gl_FragColor = vec4(shSafe(c * contrib), 1.0);
   }
 `;
 
@@ -78,6 +109,7 @@ const BLUR_FRAG = /* glsl */ `
   varying vec2 vUv;
   uniform sampler2D tDiffuse;
   uniform vec2 uDir;
+  ${SAFE}
   void main() {
     vec3 sum = vec3(0.0);
     sum += texture2D(tDiffuse, vUv - uDir * 4.0).rgb * 0.0162;
@@ -89,13 +121,14 @@ const BLUR_FRAG = /* glsl */ `
     sum += texture2D(tDiffuse, vUv + uDir * 2.0).rgb * 0.1216;
     sum += texture2D(tDiffuse, vUv + uDir * 3.0).rgb * 0.0540;
     sum += texture2D(tDiffuse, vUv + uDir * 4.0).rgb * 0.0162;
-    gl_FragColor = vec4(sum, 1.0);
+    gl_FragColor = vec4(shSafe(sum), 1.0);
   }
 `;
 
 const COMPOSITE_FRAG = /* glsl */ `
   precision highp float;
   varying vec2 vUv;
+  ${SAFE}
 
   uniform sampler2D tScene;
   uniform sampler2D tBloom0;
@@ -203,6 +236,7 @@ const COMPOSITE_FRAG = /* glsl */ `
     } else {
       scene = texture2D(tScene, uv).rgb;
     }
+    scene = shSafe(scene);
 
     // ── chromatic aberration ──────────────────────────────────────────────
     if (uChroma > 0.0005) {
@@ -243,7 +277,9 @@ const COMPOSITE_FRAG = /* glsl */ `
     }
 
     // ── exposure + tonemap + grade ────────────────────────────────────────
-    col *= uExposure;
+    // Last line of defence before the tonemap, which is where a non-finite
+    // value stops being bright and starts being black.
+    col = shSafe(col * uExposure);
     col = aces(col);
     col = grade(col, uFilter);
 

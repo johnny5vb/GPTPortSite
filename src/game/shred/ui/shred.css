@@ -692,13 +692,14 @@
    clear enough through the middle that you can see what you're looking at. */
 .sh-backdrop--art .sh-backdrop__fade {
   background:
-    radial-gradient(78% 58% at 50% 34%, rgba(5, 7, 12, 0.34), transparent 76%),
+    radial-gradient(74% 54% at 50% 32%, rgba(5, 7, 12, 0.42), transparent 74%),
     linear-gradient(
       180deg,
-      rgba(5, 7, 12, 0.5),
-      rgba(5, 7, 12, 0.18) 30%,
-      rgba(5, 7, 12, 0.62) 68%,
-      rgba(5, 7, 12, 0.88)
+      rgba(5, 7, 12, 0.42),
+      rgba(5, 7, 12, 0.12) 26%,
+      rgba(5, 7, 12, 0.55) 55%,
+      rgba(5, 7, 12, 0.86) 78%,
+      rgba(5, 7, 12, 0.95)
     );
 }
 
@@ -799,14 +800,18 @@
   gap: 0.4rem;
   padding: clamp(1rem, 2.4vh, 1.75rem) 0.7rem clamp(0.9rem, 2vh, 1.4rem);
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  /* Dark, not just translucent. A glass tile over the game's own dusk reads
+     fine; over a bright photograph it turns into a smear and the label goes
+     with it. */
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.075),
-    rgba(255, 255, 255, 0.022)
+    rgba(9, 13, 22, 0.62),
+    rgba(9, 13, 22, 0.78)
   );
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.25);
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  box-shadow: 0 16px 40px -28px rgba(0, 0, 0, 0.9);
   color: var(--sh-white);
   text-align: center;
   transition:
@@ -847,8 +852,8 @@
   border-color: rgba(110, 231, 255, 0.75);
   background: linear-gradient(
     180deg,
-    rgba(110, 231, 255, 0.2),
-    rgba(110, 231, 255, 0.05)
+    rgba(24, 84, 106, 0.82),
+    rgba(12, 40, 54, 0.86)
   );
   box-shadow:
     0 0 0 1px rgba(110, 231, 255, 0.35),
@@ -863,11 +868,11 @@
 
 /* The primary action carries the brand colour whether it's selected or not. */
 .sh-tile[data-primary] {
-  border-color: rgba(46, 229, 179, 0.45);
+  border-color: rgba(46, 229, 179, 0.5);
   background: linear-gradient(
     180deg,
-    rgba(46, 229, 179, 0.18),
-    rgba(46, 229, 179, 0.04)
+    rgba(11, 58, 47, 0.74),
+    rgba(8, 34, 29, 0.84)
   );
 }
 .sh-tile[data-primary] .sh-tile__icon {
@@ -877,8 +882,8 @@
   border-color: rgba(46, 229, 179, 0.95);
   background: linear-gradient(
     180deg,
-    rgba(46, 229, 179, 0.34),
-    rgba(46, 229, 179, 0.09)
+    rgba(17, 96, 78, 0.88),
+    rgba(9, 48, 41, 0.9)
   );
   box-shadow:
     0 0 0 1px rgba(46, 229, 179, 0.5),
