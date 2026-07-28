@@ -43,7 +43,7 @@ function acquirePreviewRenderer() {
 }
 
 /** The game is already drawing behind this panel; 30fps is plenty here. */
-const PREVIEW_INTERVAL = 1 / 30;
+const PREVIEW_INTERVAL = 1000 / 30;
 
 export function RiderPreview({
   appearance,
@@ -95,8 +95,12 @@ export function RiderPreview({
 
     let raf = 0;
     let t = 0;
-    let acc = 0;
     let last = performance.now();
+    // A deadline rather than an accumulator of clamped deltas. The accumulator
+    // version could never reach its threshold when frames were long enough for
+    // `dt` to be clamped in a way that fought the sum, and a preview that draws
+    // nothing at all is a far worse failure than one that draws too often.
+    let nextDraw = 0;
     const resize = () => {
       const w = host.clientWidth || 260;
       const h = host.clientHeight || height;
@@ -113,17 +117,16 @@ export function RiderPreview({
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       t += dt;
-      acc += dt;
-      if (acc < PREVIEW_INTERVAL) return;
-      acc = 0;
+      if (now < nextDraw) return;
+      nextDraw = now + PREVIEW_INTERVAL;
       // A slow sweep rather than a full spin. The rig is built facing +X, so
       // -PI/2 is head-on; staying either side of that keeps the face — the part
       // you are actually editing — visible the whole time.
       pivot.rotation.y = -Math.PI / 2 + Math.sin(t * 0.45) * 0.6;
       rigRef.current?.poseStatic(t);
       const head = framingRef.current === "head";
-      cam.position.set(0, head ? 1.56 : 1.02, head ? 1.05 : 3.25);
-      cam.lookAt(0, head ? 1.53 : 0.84, 0);
+      cam.position.set(0, head ? 1.58 : 1.02, head ? 1.5 : 3.25);
+      cam.lookAt(0, head ? 1.5 : 0.84, 0);
       renderer.render(scene, cam);
     };
     raf = requestAnimationFrame(loop);
