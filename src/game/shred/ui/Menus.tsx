@@ -825,7 +825,7 @@ export function Garage({
           >
             <div className="sh-card sh-card--action">
               <div className="sh-eyebrow">Character creator</div>
-              <div style={{ fontSize: "1.05rem", marginTop: 4 }}>Build a rider</div>
+              <div className="sh-card__name">Build a rider</div>
               <p
                 style={{
                   marginTop: "0.6rem",
@@ -856,7 +856,7 @@ export function Garage({
                   onClick={() => onChange({ rider: r.id })}
                 >
                   <div className="sh-eyebrow">{r.handle}</div>
-                  <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{r.name}</div>
+                  <div className="sh-card__name">{r.name}</div>
                   <Thumb
                     className="sh-thumb sh-thumb--rider"
                     alt=""
@@ -916,7 +916,7 @@ export function Garage({
                   onClick={() => onChange({ rider: r.id })}
                 >
                   <div className="sh-eyebrow">{r.handle}</div>
-                  <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{r.name}</div>
+                  <div className="sh-card__name">{r.name}</div>
                   <Thumb
                     className="sh-thumb sh-thumb--rider"
                     alt=""
@@ -965,7 +965,7 @@ export function Garage({
                   onClick={() => onChange({ board: b.id })}
                 >
                   <div className="sh-eyebrow">{b.maker}</div>
-                  <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{b.name}</div>
+                  <div className="sh-card__name">{b.name}</div>
                   <Thumb
                     className="sh-thumb sh-thumb--board"
                     alt=""
@@ -1011,7 +1011,7 @@ export function Garage({
                   <div className="sh-eyebrow">
                     {Math.round(Math.atan(m.slope) * (180 / Math.PI))}° avg pitch
                   </div>
-                  <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{m.name}</div>
+                  <div className="sh-card__name">{m.name}</div>
                   <p
                     style={{
                       marginTop: "0.6rem",
@@ -1094,7 +1094,7 @@ export function Garage({
                   onClick={() => onChange({ track: t.id })}
                 >
                   <div className="sh-eyebrow">{t.bpm} BPM / {t.mood}</div>
-                  <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{t.name}</div>
+                  <div className="sh-card__name">{t.name}</div>
                   {!owned && <div className="sh-eyebrow" style={{ marginTop: 8 }}>{req(key)}</div>}
                 </button>
               );

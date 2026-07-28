@@ -24,6 +24,7 @@ import type { Board } from "../data/boards";
 import { makeBoardTexture } from "../player/BoardArt";
 import { RiderRig } from "../player/RiderRig";
 import { createWorldUniforms } from "../world/SnowMaterial";
+import { RIDER_ART } from "./rider-art";
 
 const riderCache = new Map<string, string>();
 const boardCache = new Map<string, string>();
@@ -71,8 +72,19 @@ function setup() {
   return { renderer, scene, camera, uniforms };
 }
 
-/** A posed rider on their board, three-quarter view. Cached by rider id. */
+/**
+ * The rider's card image.
+ *
+ * A roster rider has a painted portrait, and that is what goes on the card —
+ * it says who they are in a way a 26mm render of the rig never will. Custom
+ * riders have no portrait and never will, so they fall through to the rig,
+ * which is also the right answer for them: the whole point of the creator is
+ * seeing the thing you actually built. Cached by rider id.
+ */
 export function riderThumb(rider: Rider, board: Board): string {
+  const portrait = RIDER_ART[rider.id];
+  if (portrait) return portrait;
+
   const key = `${rider.id}:${board.id}`;
   const hit = riderCache.get(key);
   if (hit) return hit;

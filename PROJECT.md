@@ -634,6 +634,24 @@ block with a position and its own icon. Identical icons across a list are worse
 than none. Rows (`.sh-btn`) survive only where a screen is a list of *settings*
 rather than actions, because a value on the right is what a row is for.
 
+**Rider portraits** live in `assets/<Name>.png` and are inlined by
+`scripts/inline-rider-art.mjs` into `ui/rider-art.ts` — same reason as the fonts
+and the title art. The file name is matched to a rider id by lowercasing and
+dropping punctuation (`NULL-9.png` → `null9`), checked against `data/riders.ts`,
+and cropped to the card's aspect from the top. `riderThumb` returns the portrait
+when there is one and falls back to rendering the rig otherwise, which is what
+every custom rider gets — and is the right answer for them, since the point of
+the creator is seeing the thing you built.
+
+**The game owns its own CSS reset.** `.shred-root *` sets `box-sizing:
+border-box`. This is not belt-and-braces: every `.sh-card` is a `<button>`,
+which the UA stylesheet already makes border-box, *except* the character-creator
+card, which is a `<div>` — so `width: 100%` plus padding made it 25px wider than
+its grid track and it sat on top of the next card. Invisible on the site, which
+inherits Tailwind's preflight; obvious in the standalone build and the artifact,
+which have no reset at all. Anything that ships to all three has to own its
+reset rather than borrow the host page's.
+
 **Title artwork** lives in `assets/` and is inlined by
 `scripts/inline-title-art.mjs` into `ui/title-art.ts` as data URIs — same
 reason as the fonts. The script keys a white card out from behind a wordmark

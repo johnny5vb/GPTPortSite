@@ -25,6 +25,20 @@
    whose CSP blocks every external host. */
 @import "./shred-fonts.css";
 
+/* The game ships into three environments and only one of them has a CSS reset:
+   the site route inherits Tailwind's preflight, while the standalone build and
+   the published artifact have nothing. Every `.sh-card` is a <button>, which
+   the UA stylesheet already makes border-box — except the character-creator
+   card, which is a <div>, so `width: 100%` plus padding made it 25px wider than
+   its grid track and it sat on top of the next card. Invisible on the site,
+   obvious everywhere else. Own the reset rather than borrow it. */
+.shred-root,
+.shred-root *,
+.shred-root *::before,
+.shred-root *::after {
+  box-sizing: border-box;
+}
+
 .shred-root {
   --sh-white: #ffffff;
   --sh-dim: rgba(255, 255, 255, 0.62);
@@ -1001,6 +1015,22 @@
   gap: 0.6rem;
 }
 
+/* A rider, a board or a mountain is a proper noun on a card — the same job the
+   mountain tiles do on the drop-in screen, so it takes the same voice: Oxanium
+   semibold, uppercase, tracked out. In Inter it read as body copy with a bigger
+   font-size, which is how a name ends up looking like a paragraph heading in an
+   app rather than a name on a game card. */
+.sh-card__name {
+  margin-top: 5px;
+  font-family: var(--sh-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  color: var(--sh-white);
+}
+
 .sh-card {
   padding: 0.9rem 1rem;
   border-radius: 14px;
@@ -1578,14 +1608,22 @@
   position: sticky;
   bottom: 0;
   margin-top: 1.4rem;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
   border-top: 1px solid var(--sh-line);
-  background: linear-gradient(180deg, transparent, var(--sh-glass) 40%);
+  /* Fades in at the top so it isn't a hard bar, but is genuinely opaque by the
+     time it reaches its own text — at 52% the card names scrolling underneath
+     read straight through the loadout line. */
+  background: linear-gradient(
+    180deg,
+    rgba(14, 16, 22, 0) 0%,
+    rgba(14, 16, 22, 0.88) 38%,
+    rgba(14, 16, 22, 0.97) 100%
+  );
   backdrop-filter: blur(10px);
 }
 .sh-garage-loadout {
