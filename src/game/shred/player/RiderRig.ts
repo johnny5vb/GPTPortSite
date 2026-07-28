@@ -28,7 +28,8 @@ import * as THREE from "three";
 import type { Rider } from "../data/riders";
 import type { Board } from "../data/boards";
 import type { Appearance } from "../data/appearance";
-import { makeBoardTexture, boardFinish } from "./BoardArt";
+import { makeBoardTexture, makeBaseTexture, boardFinish } from "./BoardArt";
+import { buildBoard, type BoardParts } from "./BoardBuild";
 import { RiderPhysics } from "./Physics";
 import { TrickSystem } from "./TrickSystem";
 import { clamp01, damp, lerp } from "../core/math";
@@ -138,7 +139,7 @@ export class RiderRig {
   readonly group = new THREE.Group();
   private p!: Parts;
   private mats: THREE.Material[] = [];
-  private boardTex?: THREE.CanvasTexture;
+  private deck?: BoardParts;
   private scarfCloth?: Cloth;
   private scarfGeo?: THREE.BufferGeometry;
   private uniforms: WorldUniforms;
@@ -248,62 +249,6 @@ export class RiderRig {
     };
   }
 
-  /**
-   * One section of the deck: a rounded, side-cut plate rather than a slab.
-   * Built as a 2D outline and extruded, so the nose and tail actually taper
-   * and the edges catch a highlight.
-   */
-  private deckPlate(
-    lengthZ: number,
-    widthBack: number,
-    widthFront: number,
-    thickness: number,
-    tipRound: number,
-  ) {
-    const shape = new THREE.Shape();
-    const hb = widthBack / 2;
-    const hf = widthFront / 2;
-    // Waist is narrower than either end — that's the sidecut a board turns on.
-    const waist = Math.min(hb, hf) * 0.88;
-
-    shape.moveTo(-hb, 0);
-    shape.quadraticCurveTo(-waist, lengthZ * 0.5, -hf, lengthZ - tipRound);
-    if (tipRound > 0.001) {
-      shape.quadraticCurveTo(-hf, lengthZ, 0, lengthZ);
-      shape.quadraticCurveTo(hf, lengthZ, hf, lengthZ - tipRound);
-    } else {
-      shape.lineTo(hf, lengthZ);
-    }
-    shape.quadraticCurveTo(waist, lengthZ * 0.5, hb, 0);
-    shape.lineTo(-hb, 0);
-
-    const geo = new THREE.ExtrudeGeometry(shape, {
-      depth: thickness,
-      bevelEnabled: true,
-      bevelThickness: 0.005,
-      bevelSize: 0.005,
-      bevelSegments: 2,
-      curveSegments: 14,
-    });
-    geo.rotateX(Math.PI / 2);
-    geo.translate(0, thickness, 0);
-
-    // Re-map UVs from the bounding box so the topsheet artwork lands square.
-    geo.computeBoundingBox();
-    const bb = geo.boundingBox!;
-    const sx = Math.max(1e-4, bb.max.x - bb.min.x);
-    const sz = Math.max(1e-4, bb.max.z - bb.min.z);
-    const pos = geo.getAttribute("position");
-    const uv = new Float32Array(pos.count * 2);
-    for (let i = 0; i < pos.count; i++) {
-      uv[i * 2] = (pos.getX(i) - bb.min.x) / sx;
-      uv[i * 2 + 1] = (pos.getZ(i) - bb.min.z) / sz;
-    }
-    geo.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
-    geo.computeVertexNormals();
-    return geo;
-  }
-
   // ─────────────────────────────────────────────────────────────── build ────
 
   private build() {
@@ -312,48 +257,18 @@ export class RiderRig {
     const s = buildScale(a.build);
 
     const skin = this.mat(a.skin, { roughness: 0.74, flatShading: false });
-    const accent = this.mat(a.accent, { roughness: 0.6, flatShading: false });
     const pantsMat = this.cloth(a.pantsColor, { roughness: 0.93 });
 
     const root = new THREE.Group();
 
     // ── board ────────────────────────────────────────────────────────────
-    this.boardTex = makeBoardTexture(this.board);
-    const deck = stylizeMaterial(
-      new THREE.MeshStandardMaterial({
-        map: this.boardTex,
-        ...boardFinish(this.board.art),
-      }),
-      this.uniforms,
-      { snow: false, sparkle: false, detail: false },
-    );
-    this.mats.push(deck);
-
-    const boardRoot = new THREE.Group();
-    const midLen = 0.78;
-    const tipLen = 0.34;
-    const thick = 0.026;
-
-    const midGeo = this.deckPlate(midLen, 0.256, 0.256, thick, 0);
-    midGeo.translate(0, 0, -midLen / 2);
-    const boardMid = this.mesh(midGeo, deck);
-
-    const mkTip = (sign: number) => {
-      const g = this.deckPlate(tipLen, 0.256, 0.215, thick, 0.1);
-      if (sign < 0) g.scale(1, 1, -1);
-      const m = this.mesh(g, deck);
-      m.position.z = (sign * midLen) / 2;
-      return m;
-    };
-    const boardNose = mkTip(1);
-    const boardTail = mkTip(-1);
-    boardRoot.add(boardMid, boardNose, boardTail);
-
-    // Binding baseplates — the boots carry their own straps and highbacks.
-    for (const z of [0.2, -0.2]) {
-      const base = this.mesh(new THREE.BoxGeometry(0.2, 0.018, 0.26), accent, 0, thick + 0.008, z);
-      boardRoot.add(base);
-    }
+    // Built in its own module: it is four materials, a sidecut and a pair of
+    // bindings, and it has nothing to do with what the rider is wearing.
+    this.deck = buildBoard(kit, this.board);
+    const boardRoot = this.deck.root;
+    const boardMid = this.deck.mid;
+    const boardNose = this.deck.nose;
+    const boardTail = this.deck.tail;
     root.add(boardRoot);
 
     // ── body ─────────────────────────────────────────────────────────────
@@ -676,13 +591,18 @@ export class RiderRig {
   /** Swap the deck without rebuilding the rig. */
   setBoard(board: Board) {
     this.board = board;
-    const tex = makeBoardTexture(board);
-    const deck = this.p.boardMid.material as THREE.MeshStandardMaterial;
-    this.boardTex?.dispose();
-    this.boardTex = tex;
-    deck.map = tex;
-    Object.assign(deck, boardFinish(board.art));
-    deck.needsUpdate = true;
+    if (!this.deck) return;
+    const top = makeBoardTexture(board);
+    const base = makeBaseTexture(board);
+    this.deck.topTex.dispose();
+    this.deck.baseTex.dispose();
+    this.deck.topTex = top;
+    this.deck.baseTex = base;
+    this.deck.topMat.map = top;
+    Object.assign(this.deck.topMat, boardFinish(board.art));
+    this.deck.topMat.needsUpdate = true;
+    this.deck.baseMat.map = base;
+    this.deck.baseMat.needsUpdate = true;
   }
 
   /**
@@ -1092,7 +1012,8 @@ export class RiderRig {
       if (m.isMesh) m.geometry.dispose();
     });
     for (const m of this.mats) m.dispose();
-    this.boardTex?.dispose();
+    this.deck?.topTex.dispose();
+    this.deck?.baseTex.dispose();
     this.scarfGeo?.dispose();
     this.group.clear();
   }

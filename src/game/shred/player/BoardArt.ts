@@ -309,3 +309,76 @@ export function makeBoardTexture(board: Board): THREE.CanvasTexture {
   tex.anisotropy = 4;
   return tex;
 }
+
+/**
+ * The underside.
+ *
+ * Worth painting properly: every grab, every tweak and every crash turns the
+ * board over, so the base is on screen nearly as often as the topsheet — and
+ * a black rectangle down there undoes whatever the deck graphic earned.
+ *
+ * A real sintered base is near-black with the graphic *sublimated* into it, so
+ * everything here is low-contrast on purpose. The maker's name runs the length
+ * of it, big, the way it does on a real board.
+ */
+export function makeBaseTexture(board: Board): THREE.CanvasTexture {
+  const c = document.createElement("canvas");
+  c.width = W;
+  c.height = H;
+  const g = c.getContext("2d")!;
+  const rng = makeRng(
+    board.id.split("").reduce((a, ch) => a + ch.charCodeAt(0) * 17, 3),
+  );
+
+  // Sintered graphite, slightly warmer down the middle where it's waxed most.
+  const ground = g.createLinearGradient(0, 0, W, 0);
+  ground.addColorStop(0, "#101318");
+  ground.addColorStop(0.5, "#1b1f26");
+  ground.addColorStop(1, "#101318");
+  g.fillStyle = ground;
+  g.fillRect(0, 0, W, H);
+
+  // Structure: the fine longitudinal grind that makes a base shed water.
+  for (let i = 0; i < 150; i++) {
+    g.globalAlpha = 0.05 + rng() * 0.07;
+    g.fillStyle = rng() < 0.5 ? "#ffffff" : "#05070a";
+    g.fillRect(rng() * W, 0, 0.6 + rng() * 1.4, H);
+  }
+  g.globalAlpha = 1;
+
+  // A single stripe in the board's own edge colour, running tip to tail.
+  g.fillStyle = board.colors.edge;
+  g.globalAlpha = 0.5;
+  g.fillRect(W * 0.5 - 2.5, H * 0.08, 5, H * 0.84);
+  g.globalAlpha = 1;
+
+  // Maker, sublimated: rotated to run along the board, low contrast.
+  g.save();
+  g.translate(W / 2, H / 2);
+  g.rotate(-Math.PI / 2);
+  g.textAlign = "center";
+  g.textBaseline = "middle";
+  g.fillStyle = board.colors.accent;
+  g.globalAlpha = 0.32;
+  g.font = `700 34px ui-sans-serif, system-ui, sans-serif`;
+  g.fillText(board.maker, 0, -2);
+  g.globalAlpha = 0.5;
+  g.font = `600 13px ui-monospace, monospace`;
+  g.fillText(board.name.toUpperCase(), 0, 26);
+  g.restore();
+
+  // Contact points: the two darker patches under the bindings, where the base
+  // sits hardest on the snow.
+  for (const t of [0.32, 0.68]) {
+    const shade = g.createRadialGradient(W / 2, H * t, 2, W / 2, H * t, W * 0.7);
+    shade.addColorStop(0, "rgba(0,0,0,0.34)");
+    shade.addColorStop(1, "rgba(0,0,0,0)");
+    g.fillStyle = shade;
+    g.fillRect(0, H * t - W * 0.7, W, W * 1.4);
+  }
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 4;
+  return tex;
+}
