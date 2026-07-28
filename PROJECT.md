@@ -542,23 +542,45 @@ means adding a case to `BoardArt.ts` and, if the finish differs, an entry in
 `boardFinish()`; adding a rider accessory means a case in `RiderRig.ts`.
 
 **Type.** Three roles and no more, all inlined as base64 woff2 in
-`ui/shred-fonts.css`: **Archivo Black** for the wordmark and any number the
-player is chasing, **Poppins** for everything read as language, **JetBrains
-Mono** for anything read as an instrument (clock, labels, key caps). The faces
-are inlined rather than fetched because the game has to look identical on the
-site, in a standalone build, and inside a published artifact whose CSP blocks
-every external host — a webfont that fails in one of those falls back silently.
+`ui/shred-fonts.css`:
 
-Headings are two voices, and the split is load-bearing: `.sh-title` is sentence
-case in the UI face and has to hold a real sentence; `.sh-shout` is uppercase
-display and is reserved for the wordmark, the trick name, the banner and the
-final score. Putting a panel heading in `.sh-shout` shouts an error message at
-the player.
+- **Oxanium** — the interface. Menu items, screen titles, buttons, event and
+  mountain names, status tags. Set uppercase; it is a squared face drawn for
+  exactly that, and it is what makes the UI read as a game rather than an app.
+- **Inter** — everything read as prose. Descriptions, tooltips, help. Sentence
+  case, always: prose set uppercase stops being read and starts being shouted.
+- **IBM Plex Mono** — anything read as an instrument. Score, speed, clock,
+  distance, key caps, labels — anything that sits still in a column while its
+  digits change.
 
-The wordmark is SHRED over 1999 — no slashes — with the year as a wide-tracked
-rule sized to the word, and one offset copy of the word behind itself in cyan.
-That misregistration is deliberate: it is what makes it read as a snowboard
-graphic instead of a software logo.
+Inlined rather than fetched because the game has to look identical on the site,
+in a standalone build, and inside a published artifact whose CSP blocks every
+external host — a webfont that fails in one of those falls back silently.
+
+**The logo carries all the ice this interface needs.** Everything else stays
+flat, and the glow is spent only where it means something: the selected item, a
+landing worth celebrating, a run's final score. An interface that is all logo
+has no logo.
+
+Two heading voices, and the split is load-bearing: `.sh-title` is Oxanium Bold
+uppercase for screen titles, with `.sh-title--prose` as the deliberate
+exception for a title that is a *sentence* (an error message shouted at someone
+who already has a problem is worse than no styling at all). `.sh-shout` is
+reserved for achievement moments — the trick name, the banner, the final score.
+
+**One menu language everywhere.** Tiles with icons: title screen, pause, mode
+select. A console menu is read as shapes first and words second — you learn
+where "Garage" *is* on the screen — and that only works if each entry is a
+block with a position and its own icon. Identical icons across a list are worse
+than none. Rows (`.sh-btn`) survive only where a screen is a list of *settings*
+rather than actions, because a value on the right is what a row is for.
+
+**Title artwork** lives in `assets/` and is inlined by
+`scripts/inline-title-art.mjs` into `ui/title-art.ts` as data URIs — same
+reason as the fonts. The script keys a white card out from behind a wordmark
+and trims the transparent margin so centring centres the artwork. Absent
+artwork is not a failure state: the title screen falls back to a drawn
+typographic lockup, which the loading screen uses too.
 
 **Units.** The simulation is metric; everything the player reads is imperial,
 converted through `MPH` / `FEET` / `MILES` in `core/math.ts` so a speedo and a

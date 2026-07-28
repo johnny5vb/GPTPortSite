@@ -2,10 +2,23 @@
    Minimal, white, glass. Everything is scoped under .shred-root so none of it
    can leak into the rest of the site.
 
-   Type is three roles and no more. Archivo Black is the voice: the wordmark
-   and any number the player is actually chasing. Poppins is everything you
-   read as language. JetBrains Mono is everything you read as an instrument —
-   labels, timers, key caps, anything that has to sit still in a column.
+   Type is three roles and no more:
+
+     Oxanium        the interface. Menu items, screen titles, buttons, event
+                    and mountain names, status tags. Set uppercase — it is a
+                    squared-off face drawn for exactly that, and it is what
+                    makes the UI read as a game rather than as an app.
+     Inter          everything read as prose. Descriptions, tooltips, help
+                    text. Sentence case, always: the moment prose goes
+                    uppercase it stops being readable and starts being shouted.
+     IBM Plex Mono  anything read as an instrument. Score, speed, the clock,
+                    distance, key caps, labels — anything that has to sit still
+                    in a column while its digits change.
+
+   The logo carries all the ice and bevel this interface needs. Everything else
+   stays flat, and the glow is spent only where it means something: the
+   selected item, a landing worth celebrating, a run's final score. An
+   interface that is all logo has no logo.
 
    The faces are inlined in `shred-fonts.css` rather than fetched, so the game
    looks the same on the site, in a standalone build, and inside an artifact
@@ -25,9 +38,9 @@
   --sh-green: #2ee5b3;
   --sh-red: #ff6b6b;
 
-  --sh-display: "Archivo Black", "Helvetica Neue", Impact, sans-serif;
-  --sh-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --sh-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sh-display: "Oxanium", "Eurostile", "Helvetica Neue", sans-serif;
+  --sh-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --sh-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   position: fixed;
   inset: 0;
@@ -111,25 +124,34 @@
   color: var(--sh-faint);
 }
 
-/* Two heading voices, and the split matters.
-   `.sh-title` is the quiet one: panel and section headings, sentence case, set
-   in the UI face. It has to hold a sentence like "Something went wrong on this
-   device" without shouting it.
-   `.sh-shout` is the loud one: the wordmark, the trick name, the banner, the
-   final score. Uppercase display face, used only where volume is the point. */
+/* Screen titles. Oxanium Bold, uppercase, tracked open a little because a
+   squared face set solid closes up. */
 .sh-title {
-  font-family: var(--sh-sans);
-  font-weight: 600;
-  letter-spacing: -0.022em;
+  font-family: var(--sh-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
   line-height: 1.06;
 }
 
+/* The exception, and it is a real one: a title that is a *sentence* stays
+   prose. "SOMETHING WENT WRONG ON THIS DEVICE" is an error shouted at someone
+   who already has a problem. */
+.sh-title--prose {
+  font-family: var(--sh-sans);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.015em;
+}
+
+/* Achievement moments only: the trick name, the banner, the final score. This
+   is the one place the interface is allowed to look like the logo. */
 .sh-shout {
   font-family: var(--sh-display);
-  font-weight: 400; /* Archivo Black only has one, and it is the point */
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 0.86;
+  letter-spacing: 0.005em;
+  line-height: 0.92;
 }
 
 .sh-title-screen .sh-shout {
@@ -177,10 +199,8 @@
 }
 /* The year: a rule, the number, a rule — one line wide enough to sit under
    the word without competing with it. */
-/* The year gets its own face. Michroma is wide and mechanical in a way that
-   is specifically late-nineties, and setting it against Archivo Black's
-   density is most of what dates the lockup — one face doing two jobs would
-   just look like a subtitle. */
+/* Only ever seen when no logo has been supplied, so it stays inside the
+   system rather than dragging in a fourth face for one line. */
 .sh-year {
   display: flex;
   width: 100%;
@@ -188,11 +208,11 @@
   justify-content: center;
   gap: 0.9rem;
   margin-top: 0.7rem;
-  font-family: "Michroma", var(--sh-mono);
-  font-weight: 400;
-  font-size: clamp(1.15rem, 3.4vw, 2.5rem);
-  letter-spacing: 0.3em;
-  text-indent: 0.3em;
+  font-family: var(--sh-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 3.4vw, 2.4rem);
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
   color: var(--sh-white);
   text-shadow: 0 2px 30px rgba(0, 0, 0, 0.7);
 }
@@ -209,6 +229,10 @@
 
 /* ─────────────────────────────────────────────────────────────── buttons ── */
 
+/* Rows, for the screens that are lists of *settings* rather than lists of
+   actions — a value on the right is what a row is for, and a tile has nowhere
+   to put one. Same body, same border, same selection as the tiles, so moving
+   between screens doesn't feel like moving between apps. */
 .sh-btn {
   position: relative;
   display: flex;
@@ -218,8 +242,8 @@
   width: 100%;
   padding: 0.85rem 1.15rem;
   border-radius: 12px;
-  border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(9, 13, 22, 0.5), rgba(9, 13, 22, 0.66));
   color: var(--sh-white);
   text-align: left;
   transition:
@@ -229,39 +253,47 @@
 }
 .sh-btn:hover:not(:disabled),
 .sh-btn[data-focus="true"] {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(110, 231, 255, 0.8);
+  background: linear-gradient(180deg, rgba(24, 84, 106, 0.8), rgba(12, 40, 54, 0.86));
   transform: translateX(4px);
 }
 .sh-btn:disabled {
-  opacity: 0.34;
+  opacity: 0.36;
+  border-style: dashed;
 }
 .sh-btn__label {
-  font-size: 0.98rem;
-  letter-spacing: -0.01em;
+  font-family: var(--sh-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 .sh-btn__meta {
   font-family: var(--sh-mono);
+  font-weight: 500;
   font-size: 0.66rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--sh-faint);
   text-align: right;
   min-width: 0;
 }
 
+/* Status tags — NEW, LOCKED, COMPLETE, and the run counters. Oxanium Bold:
+   short, uppercase, meant to be recognised rather than read. */
 .sh-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.3rem 0.6rem;
+  padding: 0.32rem 0.65rem;
   border-radius: 999px;
   border: 1px solid var(--sh-line);
   background: rgba(255, 255, 255, 0.05);
-  font-family: var(--sh-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
+  font-family: var(--sh-display);
+  font-weight: 700;
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--sh-dim);
 }
@@ -314,11 +346,12 @@
    mono: a speedo is a broadcast graphic, not a terminal. The unit stays mono
    and small, which is what keeps the pair from reading as one word. */
 .hud-speed {
-  font-family: var(--sh-display);
+  font-family: var(--sh-mono);
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
-  font-size: clamp(2.7rem, 6.2vw, 4.6rem);
-  line-height: 0.8;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.5rem, 5.8vw, 4.2rem);
+  line-height: 0.82;
+  letter-spacing: -0.045em;
   text-shadow: 0 2px 26px rgba(0, 0, 0, 0.55);
 }
 .hud-speed small {
@@ -352,10 +385,11 @@
 }
 
 .hud-score {
-  font-family: var(--sh-display);
+  font-family: var(--sh-mono);
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
-  font-size: clamp(1.7rem, 3.6vw, 2.7rem);
-  letter-spacing: -0.025em;
+  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+  letter-spacing: -0.03em;
   text-shadow: 0 2px 26px rgba(0, 0, 0, 0.55);
 }
 
@@ -398,8 +432,8 @@
 .hud-combo b {
   font-family: var(--sh-display);
   font-size: calc(1rem + var(--heat, 0) * 0.5rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: 0;
   line-height: 1;
 }
 .hud-combo-bar {
@@ -444,9 +478,10 @@
   position: relative;
   display: block;
   font-family: var(--sh-display);
-  font-size: clamp(1.7rem, 4.6vw, 3.3rem);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4.4vw, 3.1rem);
   text-transform: uppercase;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.01em;
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.6),
     0 4px 18px rgba(0, 0, 0, 0.75),
@@ -488,8 +523,9 @@
   justify-items: center;
   gap: 0.1rem;
   font-family: var(--sh-display);
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.005em;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
   white-space: nowrap;
 }
@@ -827,10 +863,11 @@
   opacity: 0.9;
 }
 .sh-tile__label {
-  font-family: var(--sh-sans);
+  font-family: var(--sh-display);
   font-weight: 600;
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(0.88rem, 1.45vw, 1.02rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1.15;
 }
 .sh-tile__meta {
@@ -849,7 +886,7 @@
    thing, and there is only ever one selection. */
 .sh-tile[data-focus="true"] {
   transform: translateY(-6px) scale(1.04);
-  border-color: rgba(110, 231, 255, 0.75);
+  border-color: rgba(110, 231, 255, 0.8);
   background: linear-gradient(
     180deg,
     rgba(24, 84, 106, 0.82),
@@ -866,13 +903,16 @@
   color: var(--sh-dim);
 }
 
-/* The primary action carries the brand colour whether it's selected or not. */
+/* The primary action is marked, not lit. A border and a tinted icon are enough
+   to say "start here"; filling it and glowing it at rest spends the emphasis
+   before the player has chosen anything, and then the selection has nothing
+   left to say. */
 .sh-tile[data-primary] {
   border-color: rgba(46, 229, 179, 0.5);
   background: linear-gradient(
     180deg,
-    rgba(11, 58, 47, 0.74),
-    rgba(8, 34, 29, 0.84)
+    rgba(10, 24, 24, 0.66),
+    rgba(9, 16, 18, 0.8)
   );
 }
 .sh-tile[data-primary] .sh-tile__icon {
@@ -912,6 +952,30 @@
   .sh-tile__meta {
     display: none;
   }
+}
+
+/* The same tile language inside a panel: pause, mode select, anywhere a screen
+   is a short list of things you *do*. Auto-fit rather than a fixed count, so
+   four pause actions and eight modes both lay out sensibly without either
+   knowing about the other. */
+.sh-tiles--sheet,
+.sh-tiles--modes {
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  max-width: none;
+}
+.sh-tiles--sheet .sh-tile,
+.sh-tiles--modes .sh-tile {
+  padding: 1rem 0.7rem 0.9rem;
+}
+.sh-tiles--modes {
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+.sh-tile:disabled {
+  opacity: 0.4;
+  border-style: dashed;
+}
+.sh-tile:disabled .sh-tile__icon {
+  opacity: 0.5;
 }
 
 /* Narrow: the row becomes two rows rather than five slivers. */

@@ -362,8 +362,112 @@ function TitleBackdrop() {
  * "garage" is on the screen, not what it says. Each one is the object it opens:
  * a fall line, a board, a padlock, a key cap, a slider.
  */
-function MenuIcon({ kind }: { kind: "drop" | "garage" | "unlocks" | "howto" | "settings" }) {
+export type IconKind =
+  | "drop"
+  | "garage"
+  | "unlocks"
+  | "howto"
+  | "settings"
+  | "resume"
+  | "restart"
+  | "photo"
+  | "quit"
+  | "mode"
+  | "freeride"
+  | "timetrial"
+  | "trickattack"
+  | "bigair"
+  | "slalom"
+  | "endless"
+  | "zen"
+  | "daily";
+
+function MenuIcon({ kind }: { kind: IconKind }) {
   const art: Record<string, React.ReactNode> = {
+    resume: (
+      <>
+        <path d="M9 6.5l8.5 5.5L9 17.5z" strokeWidth="2" strokeLinejoin="round" />
+      </>
+    ),
+    restart: (
+      <>
+        <path d="M19.5 12a7.5 7.5 0 1 1-2.6-5.7" strokeWidth="2" strokeLinecap="round" />
+        <path d="M18.4 3.6v3.4h-3.4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+    photo: (
+      <>
+        <rect x="3" y="7" width="18" height="12.5" rx="2.4" strokeWidth="2" />
+        <circle cx="12" cy="13.2" r="3.4" strokeWidth="2" />
+        <path d="M8.6 7l1.3-2.4h4.2L15.4 7" strokeWidth="2" strokeLinejoin="round" />
+      </>
+    ),
+    quit: (
+      <>
+        <path d="M14.5 3.5H6.2c-1 0-1.7.8-1.7 1.8v13.4c0 1 .8 1.8 1.7 1.8h8.3" strokeWidth="2" strokeLinecap="round" />
+        <path d="M18 12H9.4M15 8.6l3.4 3.4-3.4 3.4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+    mode: (
+      <>
+        <path d="M3.5 17.5c3.4 0 4.6-5 8.5-5s5.1 5 8.5 5" strokeWidth="2" strokeLinecap="round" />
+        <path d="M6.6 9.4l4-4.6 4.2 4.6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+    // One shape per mode. Identical icons across a list are worse than none —
+    // they take the space that tells you where you are and give nothing back.
+    freeride: (
+      <>
+        <path d="M2.5 19L9 7.6l4.2 6.4 2.4-3.2L21.5 19z" strokeWidth="2" strokeLinejoin="round" />
+      </>
+    ),
+    timetrial: (
+      <>
+        <circle cx="12" cy="13.4" r="7.4" strokeWidth="2" />
+        <path d="M12 9.6v4h3M9.4 3.2h5.2" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ),
+    trickattack: (
+      <>
+        <path d="M12 2.8l2.3 5.4 5.8.5-4.4 3.9 1.3 5.7L12 15.3 6.9 18.3l1.3-5.7-4.4-3.9 5.9-.5z" strokeWidth="2" strokeLinejoin="round" />
+      </>
+    ),
+    bigair: (
+      <>
+        <path d="M3 19.5c5.4 0 8.8-4.4 11.2-9.4" strokeWidth="2" strokeLinecap="round" />
+        <path d="M11 8.6l4-2.6 1.4 4.6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M18.5 18.5h3" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ),
+    slalom: (
+      // Two race gates, which is what a slalom actually looks like from the
+      // start hut. The earlier weaving line read as a letter N.
+      <>
+        <path d="M6.5 20.5V4.2l5.4 2.4-5.4 2.6" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        <path d="M17.5 20.5V9.2l-4.9 2.3 4.9 2.3" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+      </>
+    ),
+    endless: (
+      // Two overlapping rings. A drawn infinity at 24px turns to mush; this
+      // says the same thing and survives the size.
+      <>
+        <circle cx="8.6" cy="12" r="4.6" strokeWidth="2" />
+        <circle cx="15.4" cy="12" r="4.6" strokeWidth="2" />
+      </>
+    ),
+    zen: (
+      <>
+        <circle cx="12" cy="12" r="8.2" strokeWidth="2" />
+        <path d="M12 3.8c2.6 2.4 2.6 5.8 0 8.2s-2.6 5.8 0 8.2" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ),
+    daily: (
+      <>
+        <rect x="3.4" y="5.2" width="17.2" height="15.4" rx="2.4" strokeWidth="2" />
+        <path d="M3.4 10h17.2M8.4 3.4v3.6M15.6 3.4v3.6" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="12" cy="15.2" r="1.7" strokeWidth="2" />
+      </>
+    ),
     drop: (
       <>
         <path d="M12 3v14" strokeWidth="3" strokeLinecap="round" />
@@ -430,25 +534,27 @@ export function ModeSelect({
     <div className="sh-overlay">
       <Sheet eyebrow="Select a mode" title="What kind of run?" wide>
         <div className="sh-split">
-          <div className="sh-grid">
+          <div className="sh-tiles sh-tiles--modes">
             {available.map((m, i) => (
               <button
                 key={m.id}
-                className="sh-btn"
+                type="button"
+                className="sh-tile"
                 data-focus={i === index}
                 onMouseEnter={() => setIndex(i)}
                 onClick={() => onPick(m.id)}
               >
-                <span className="sh-btn__label">{m.name}</span>
-                <span className="sh-btn__meta">{m.tagline}</span>
+                <MenuIcon kind={m.id as IconKind} />
+                <span className="sh-tile__label">{m.name}</span>
               </button>
             ))}
             {locked.map((m) => {
               const req = unlockTable().find((u) => u.key === `mode:${m.id}`);
               return (
-                <button key={m.id} className="sh-btn" disabled>
-                  <span className="sh-btn__label">{m.name}</span>
-                  <span className="sh-btn__meta">
+                <button key={m.id} type="button" className="sh-tile" disabled>
+                  <MenuIcon kind="unlocks" />
+                  <span className="sh-tile__label">{m.name}</span>
+                  <span className="sh-tile__meta">
                     {req?.requirement.label ?? "Locked"}
                   </span>
                 </button>
@@ -1317,11 +1423,12 @@ export function PauseMenu({
 }) {
   const actions = useMemo(() => {
     const a = [
-      { label: "Resume", meta: "Esc", fn: onResume },
-      { label: "Restart run", meta: "R", fn: onRestart },
+      { label: "Resume", meta: "Esc", icon: "resume" as IconKind, fn: onResume },
+      { label: "Restart run", meta: "R", icon: "restart" as IconKind, fn: onRestart },
     ];
-    if (photoUnlocked) a.push({ label: "Photo mode", meta: "P", fn: onPhoto });
-    a.push({ label: "Quit to menu", meta: "", fn: onQuit });
+    if (photoUnlocked)
+      a.push({ label: "Photo mode", meta: "P", icon: "photo" as IconKind, fn: onPhoto });
+    a.push({ label: "Quit to menu", meta: "", icon: "quit" as IconKind, fn: onQuit });
     return a;
   }, [onResume, onRestart, onQuit, onPhoto, photoUnlocked]);
 
@@ -1330,17 +1437,20 @@ export function PauseMenu({
   return (
     <div className="sh-overlay">
       <Sheet eyebrow="Paused" title="Take a breath">
-        <div style={{ display: "grid", gap: "0.5rem", minWidth: 320 }}>
+        <div className="sh-tiles sh-tiles--sheet">
           {actions.map((a, i) => (
             <button
               key={a.label}
-              className="sh-btn"
+              type="button"
+              className="sh-tile"
               data-focus={i === index}
+              data-primary={a.label === "Resume" ? "true" : undefined}
               onMouseEnter={() => setIndex(i)}
               onClick={a.fn}
             >
-              <span className="sh-btn__label">{a.label}</span>
-              <span className="sh-btn__meta">{a.meta}</span>
+              <MenuIcon kind={a.icon} />
+              <span className="sh-tile__label">{a.label}</span>
+              {a.meta && <span className="sh-tile__meta">{a.meta}</span>}
             </button>
           ))}
         </div>

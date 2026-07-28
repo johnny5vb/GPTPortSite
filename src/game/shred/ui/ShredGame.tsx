@@ -773,8 +773,8 @@ export default function ShredGame() {
             <div className="sh-panel sh-sheet" style={{ maxWidth: 560 }}>
               <div className="sh-eyebrow">Couldn&rsquo;t start the game</div>
               <h2
-                className="sh-title"
-                style={{ fontSize: "clamp(1.6rem,4vw,2.4rem)", margin: "0.4rem 0 1rem" }}
+                className="sh-title sh-title--prose"
+                style={{ fontSize: "clamp(1.5rem,3.6vw,2.1rem)", margin: "0.4rem 0 1rem" }}
               >
                 Something went wrong on this device
               </h2>
