@@ -279,10 +279,11 @@ export class TerrainGen {
       }
     } else if (kind === "gap") {
       // A launch lip, a hole, and a landing ramp on the far side. Unlike the
-      // bridge there is no way across — you clear it or you don't.
+      // bridge there is no way *across* — you clear it or you don't — but there
+      // is always a way *out*: see the runout ramp in `singleFeatureHeight`.
       f.a = z0 + SEGMENT_LENGTH * 0.5; // chasm centre Z
       f.b = lerp(20, 34, r1); // chasm half length
-      f.c = lerp(22, 40, r2); // chasm depth
+      f.c = lerp(13, 21, r2); // chasm depth
       f.kickers.push({
         x: cx,
         z: f.a - f.b - 12,
@@ -459,15 +460,35 @@ export class TerrainGen {
       case "gap": {
         let h = 0;
         for (const k of f.kickers) h += this.kickerHeight(k, x, z);
-        // The hole itself, walled across the whole corridor.
-        const dz = Math.abs(z - f.a);
-        const chasm = 1 - smoothstep(f.b * 0.6, f.b, dz);
-        h -= chasm * f.c;
-        // A landing ramp on the far lip so a cleared gap ends in a transition
-        // rather than a wall.
-        const land = 1 - smoothstep(0, 26, z - (f.a + f.b));
+        const near = f.a - f.b;
+        const far = f.a + f.b;
+
+        // The near lip is sheer. That is the gap: you clear it or you don't.
+        const enter = smoothstep(near - 2, near + 5, z);
+
+        // The far end is not a wall the whole way across — it is a diagonal.
+        // Down the middle, where you land if you cleared it, the floor comes
+        // back up inside 13m and you touch down on solid ground. Out at one
+        // edge it runs out over several times the depth instead, so a rider who
+        // *didn't* clear it has somewhere to go. The mountain keeps dropping the
+        // whole length of that runout, so its net grade is downhill: missing the
+        // gap costs a few seconds and every bit of speed, which is the right
+        // price, rather than costing the run.
+        const sideNorm = clamp01(0.5 + (0.5 * f.side * (x - cx)) / hw);
+        const runout = 6 + smoothstep(0.6, 0.95, sideNorm) * f.c * 6.8;
+        const inside = Math.min(enter, 1 - smoothstep(far - 2, far + runout, z));
+        h -= inside * f.c;
+
+        // And the floor drains toward that side. Without the tilt the trench is
+        // flat, the wall is straight ahead, and a rider at the bottom has to
+        // guess which way the opening is; with it, gravity answers.
+        h -= inside * clamp((f.side * (x - cx)) / (hw * 0.55), -1, 1) * 3.6;
+
+        // A landing transition on the far lip so clearing the gap ends in a
+        // ramp rather than a kerb.
+        const land = 1 - smoothstep(0, 26, z - far);
         const inRun = 1 - smoothstep(hw * 0.55, hw * 0.9, Math.abs(x - cx));
-        h += land * inRun * Math.max(0, 1 - dz / (f.b + 26)) * 3.4;
+        h += land * inRun * Math.max(0, 1 - Math.abs(z - f.a) / (f.b + 26)) * 3.4;
         return h;
       }
       case "tunnel": {
