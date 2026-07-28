@@ -265,7 +265,6 @@ export class Scatter {
         vertexColors: true,
         roughness: 0.95,
         metalness: 0,
-        flatShading: true,
       }),
       uniforms,
       { snow: false, sparkle: false },

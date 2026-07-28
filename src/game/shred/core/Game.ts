@@ -26,7 +26,13 @@ import { Terrain } from "../world/Terrain";
 import { Scatter } from "../world/Scatter";
 import { Props } from "../world/Props";
 import { Environment, skyById, SkyPreset } from "../world/Sky";
-import { createWorldUniforms, WorldUniforms, stylizeMaterial, ensureMatAttribute } from "../world/SnowMaterial";
+import {
+  attachSurfaceMaps,
+  createWorldUniforms,
+  WorldUniforms,
+  stylizeMaterial,
+  ensureMatAttribute,
+} from "../world/SnowMaterial";
 import { RiderPhysics, LandingInfo } from "../player/Physics";
 import { TrickSystem, TrickResult } from "../player/TrickSystem";
 import { RiderRig } from "../player/RiderRig";
@@ -129,14 +135,16 @@ const QUALITY: Record<
     snow: number;
     shadows: boolean;
     detail: number;
+    /** Strength of the procedural surface relief. 0 turns it off. */
+    relief: number;
     /** MSAA samples on the scene target. 0 disables it. */
     samples: number;
   }
 > = {
-  low: { pr: 1, scale: 0.8, shadow: 512, particles: 0.45, snow: 3500, shadows: false, detail: 0.62, samples: 0 },
-  medium: { pr: 1.5, scale: 1, shadow: 1024, particles: 0.7, snow: 7000, shadows: true, detail: 0.8, samples: 2 },
-  high: { pr: 2, scale: 1, shadow: 2048, particles: 1, snow: 11000, shadows: true, detail: 1, samples: 4 },
-  ultra: { pr: 2, scale: 1, shadow: 4096, particles: 1.35, snow: 16000, shadows: true, detail: 1, samples: 8 },
+  low: { pr: 1, scale: 0.8, shadow: 512, particles: 0.45, snow: 3500, shadows: false, detail: 0.62, relief: 0, samples: 0 },
+  medium: { pr: 1.5, scale: 1, shadow: 1024, particles: 0.7, snow: 7000, shadows: true, detail: 0.8, relief: 0.75, samples: 2 },
+  high: { pr: 2, scale: 1, shadow: 2048, particles: 1, snow: 11000, shadows: true, detail: 1, relief: 1, samples: 4 },
+  ultra: { pr: 2, scale: 1, shadow: 4096, particles: 1.35, snow: 16000, shadows: true, detail: 1, relief: 1.15, samples: 8 },
 };
 
 export class Game {
@@ -262,6 +270,9 @@ export class Game {
     this.caps = probeCaps(this.renderer);
 
     this.uniforms = createWorldUniforms();
+    // Procedural detail maps. Built once per page, then shared by every
+    // material that goes through `stylizeMaterial`.
+    attachSurfaceMaps(this.uniforms);
     this.post = new PostFX(this.renderer);
     this.pmrem = new THREE.PMREMGenerator(this.renderer);
 
@@ -1115,6 +1126,7 @@ export class Game {
     const q = QUALITY[this.saveData.settings.quality];
     this.qualityScale = q.scale;
     this.terrain.setDetail(q.detail);
+    this.uniforms.uDetail.value = q.relief;
     // Never ask for more MSAA than the driver proved it can give us; on Safari
     // that is regularly zero, and an incomplete framebuffer renders black.
     this.post.samples = Math.min(q.samples, this.caps.maxSamples);

@@ -15,6 +15,7 @@
  */
 
 import * as THREE from "three";
+import { surfaceMaps } from "./Textures";
 
 export interface WorldUniforms {
   uTime: { value: number };
@@ -28,6 +29,12 @@ export interface WorldUniforms {
   uRetro: { value: number };
   uRetroRes: { value: number };
   uPlayer: { value: THREE.Vector3 };
+  /** Detail normal / mask maps — see Textures.ts. */
+  uSnowN: { value: THREE.Texture | null };
+  uRockN: { value: THREE.Texture | null };
+  uMask: { value: THREE.Texture | null };
+  /** Global multiplier on surface relief, 0 disables it entirely. */
+  uDetail: { value: number };
 }
 
 export function createWorldUniforms(): WorldUniforms {
@@ -43,7 +50,22 @@ export function createWorldUniforms(): WorldUniforms {
     uRetro: { value: 0 },
     uRetroRes: { value: 160 },
     uPlayer: { value: new THREE.Vector3() },
+    uSnowN: { value: null },
+    uRockN: { value: null },
+    uMask: { value: null },
+    uDetail: { value: 1 },
   };
+}
+
+/**
+ * Attach the procedural surface maps. Separate from `createWorldUniforms` so
+ * the uniform object can exist before there is a document to build canvases in.
+ */
+export function attachSurfaceMaps(u: WorldUniforms) {
+  const m = surfaceMaps();
+  u.uSnowN.value = m.snow;
+  u.uRockN.value = m.rock;
+  u.uMask.value = m.mask;
 }
 
 const NOISE_GLSL = /* glsl */ `
@@ -109,7 +131,53 @@ const FRAGMENT_PARS = /* glsl */ `
   uniform float uSparkle;
   uniform float uRetro;
   uniform vec3 uPlayer;
+  uniform sampler2D uSnowN;
+  uniform sampler2D uRockN;
+  uniform sampler2D uMask;
+  uniform float uDetail;
   ${NOISE_GLSL}
+
+  /**
+   * World-space detail normal.
+   *
+   * The terrain is a streamed heightfield with no meaningful UVs, so the maps
+   * are projected from world space: XZ for anything roughly horizontal, and a
+   * triplanar blend onto the vertical planes as the surface tips up, which is
+   * what stops cliff faces from showing a smeared version of the snow grain.
+   *
+   * Two octaves at deliberately non-harmonic scales — a single projection at
+   * one scale shows its tile from the air within a few seconds of riding.
+   */
+  vec3 shDetailNormal(vec3 wp, vec3 N, float rockAmt, float strength) {
+    if (strength < 0.001) return N;
+
+    // Relief fades out with distance. Normal maps alias badly at grazing
+    // angles, and a snowfield two hundred metres away has no business showing
+    // individual wind ripples anyway — mip bias alone doesn't get there.
+    strength *= 1.0 - smoothstep(55.0, 240.0, length(cameraPosition - wp));
+    if (strength < 0.001) return N;
+
+    vec3 an = abs(N);
+    float up = smoothstep(0.35, 0.85, an.y);
+
+    vec2 uvA = wp.xz * 0.36;
+    vec2 uvB = wp.xz * 0.0815 + 21.7;
+    vec3 snowA = texture2D(uSnowN, uvA).xyz * 2.0 - 1.0;
+    vec3 snowB = texture2D(uSnowN, uvB).xyz * 2.0 - 1.0;
+    vec2 flat2 = snowA.xy * 0.55 + snowB.xy * 0.9;
+
+    // Vertical projection for the steeps, picking whichever wall faces us.
+    vec2 uvW = (an.x > an.z ? wp.zy : wp.xy) * 0.14;
+    vec3 wall = texture2D(uRockN, uvW).xyz * 2.0 - 1.0;
+    vec3 rockD = texture2D(uRockN, wp.xz * 0.11).xyz * 2.0 - 1.0;
+
+    vec2 d = mix(wall.xy * 1.35, mix(flat2, rockD.xy * 1.15, rockAmt), up);
+
+    // Build a frame around the geometric normal and lean it.
+    vec3 T = normalize(cross(vec3(0.0, 1.0, 0.0), N) + vec3(1e-4, 0.0, 0.0));
+    vec3 B = cross(N, T);
+    return normalize(N + (T * d.x + B * d.y) * strength);
+  }
 `;
 
 /** Albedo mix for the terrain. Runs in place of the usual map lookup. */
@@ -182,6 +250,15 @@ interface StylizeOptions {
   snow?: boolean;
   /** Props still want cloud shadows + rim, but no sparkle. */
   sparkle?: boolean;
+  /**
+   * Procedural surface relief, projected from **world space**.
+   *
+   * That projection is free and seamless for anything bolted to the mountain,
+   * and completely wrong for anything that moves through it: the pattern would
+   * slide across a rider's jacket as they descend. Anything that moves must
+   * pass `detail: false` and bring its own map.
+   */
+  detail?: boolean;
 }
 
 export function stylizeMaterial(
@@ -191,6 +268,7 @@ export function stylizeMaterial(
 ) {
   const snow = opts.snow ?? false;
   const sparkle = opts.sparkle ?? snow;
+  const detail = opts.detail ?? true;
 
   mat.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, uniforms);
@@ -213,6 +291,30 @@ export function stylizeMaterial(
         `#include <color_fragment>\n${snow ? FRAGMENT_SNOW_ALBEDO : ""}`,
       )
       .replace(
+        "#include <normal_fragment_begin>",
+        `#include <normal_fragment_begin>
+        ${detail ? `{` : `if (false) {`}
+          vec3 wN = normalize(vWorldNormal);
+          vec3 wD = shDetailNormal(vWorldPos, wN, ${snow ? "clamp(vMat.z, 0.0, 1.0)" : "0.35"}, uDetail * ${snow ? "0.75" : "0.55"});
+          normal = normalize((viewMatrix * vec4(wD, 0.0)).xyz);
+        }`,
+      )
+      .replace(
+        "#include <roughnessmap_fragment>",
+        `#include <roughnessmap_fragment>
+        ${
+          snow
+            ? `{
+          // Ice is polished, powder is not, and wind crust sits between them.
+          float crust = texture2D(uMask, vWorldPos.xz * 0.021).b;
+          roughnessFactor *= mix(1.0, 0.34, clamp(vMat.x, 0.0, 1.0));
+          roughnessFactor *= mix(1.0, 1.22, clamp(vMat.y, 0.0, 1.0));
+          roughnessFactor = clamp(roughnessFactor * mix(0.9, 1.12, crust), 0.04, 1.0);
+        }`
+            : ""
+        }`,
+      )
+      .replace(
         "#include <opaque_fragment>",
         `${FRAGMENT_STYLIZE.replace(
           "if (uSparkle > 0.001)",
@@ -221,7 +323,7 @@ export function stylizeMaterial(
       );
   };
   // Force a recompile if the material was already used.
-  mat.customProgramCacheKey = () => `shred-${snow ? "snow" : "prop"}`;
+  mat.customProgramCacheKey = () => `shred-${snow ? "snow" : "prop"}-${detail ? "d" : "n"}`;
   mat.needsUpdate = true;
   return mat;
 }

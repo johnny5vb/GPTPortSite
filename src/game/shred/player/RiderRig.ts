@@ -175,7 +175,7 @@ export class RiderRig {
         ...opts,
       }),
       this.uniforms,
-      { snow: false, sparkle: false },
+      { snow: false, sparkle: false, detail: false },
     );
     this.mats.push(m);
     return m;
@@ -296,7 +296,7 @@ export class RiderRig {
         ...boardFinish(this.board.art),
       }),
       this.uniforms,
-      { snow: false, sparkle: false },
+      { snow: false, sparkle: false, detail: false },
     );
     this.mats.push(deck);
 

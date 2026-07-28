@@ -346,6 +346,26 @@ already drawing behind it.
   Building two chunks during an already-long frame is what turns a slow frame
   into a visible hitch.
 
+**Surface detail.** `world/Textures.ts` generates seamless normal and mask maps
+at runtime (value/ridged noise evaluated on a torus, Sobel to tangent-space
+normals) — snow grain and sastrugi, rock strata and fracture, plus a packed
+mask for roughness break-up. `SnowMaterial.shDetailNormal` projects them from
+**world space**: XZ for anything roughly horizontal, blending to a vertical
+projection as the surface tips up, at two non-harmonic scales so the tile never
+announces itself. Relief fades out past ~55m because normal maps alias badly at
+grazing angles.
+
+Two things that are easy to get wrong here:
+- Anything that **moves through the world** must pass `detail: false` to
+  `stylizeMaterial` — a world-space projection slides across a moving rider's
+  jacket. The rig brings its own fabric bump map instead.
+- Relief is a per-pixel cost and lives on the quality preset (`relief`), off
+  entirely at low.
+
+Generating rather than shipping images was a deliberate call: snow, ice and
+rock are what noise is good at, the maps are seamless by construction, and the
+game keeps zero binary assets, zero download weight and no licence tracking.
+
 **Terrain pacing.** The fall line is no longer one constant grade. `pitchAt(z)`
 modulates steepness with two sines and `gradeDrop(z)` is its closed-form
 integral — that antiderivative is the whole reason the pitch can vary at all,
