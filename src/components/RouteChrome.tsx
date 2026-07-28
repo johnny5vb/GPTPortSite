@@ -16,9 +16,12 @@ import ScrollBackdrop from "./ScrollBackdrop";
 export default function RouteChrome() {
   const pathname = usePathname() ?? "/";
   const isDeck = pathname.startsWith("/capabilities");
+  // The game is a full-screen canvas app with its own HUD and pause menu —
+  // the site nav, rail and scroll progress have nothing to do there.
+  const isGame = pathname.startsWith("/shred");
   const isHome = pathname === "/";
 
-  if (isDeck) return null;
+  if (isDeck || isGame) return null;
 
   return (
     <>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
@@ -9,11 +10,16 @@ export default function CustomCursor() {
   const ringX = useSpring(x, { stiffness: 220, damping: 24, mass: 0.4 });
   const ringY = useSpring(y, { stiffness: 220, damping: 24, mass: 0.4 });
 
+  const pathname = usePathname() ?? "/";
+  // The game canvas hides the pointer itself and its menus want the real one.
+  const suppressed = pathname.startsWith("/shred");
+
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState<string | null>(null);
   const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
+    if (suppressed) return;
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!fine) return;
     setEnabled(true);
@@ -46,9 +52,9 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", up);
       window.removeEventListener("mouseleave", leave);
     };
-  }, [x, y]);
+  }, [x, y, suppressed]);
 
-  if (!enabled) return null;
+  if (!enabled || suppressed) return null;
 
   const isLabel = hovering && hovering !== "hover" && hovering !== "true";
   const isHover = !!hovering;

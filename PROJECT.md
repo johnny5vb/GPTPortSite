@@ -77,6 +77,7 @@ variable-font axis trick.
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | Showcase for AI-native design systems |
 | `/work/[slug]` | `ProjectDetail` | Case studies — `colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`, `beacon-van` |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (not currently linked from the home page; the link in Footer's connect list points to it for sharing) |
+| `/shred` | `ShredGame` (client-only) | **SHRED // 1999** — a full arcade snowboard game built on Three.js. Standalone: site nav, section rail, custom cursor and Lenis are all suppressed on this route. |
 
 Routes data is sourced from `src/data/projects.ts`. Section numbers on the
 home page come from `SectionRail.tsx` and must stay in sync with the eyebrow
@@ -197,6 +198,80 @@ via `CountUp`) or `display="∞"` (static value with `aria-label`).
 ### Locations
 Virginia Beach / Philadelphia / Brooklyn. **Never** Newport Beach (early
 LLM hallucination; user corrected it). Separators are `/`, not `·` or `•`.
+
+---
+
+## SHRED // 1999 (`/shred`)
+
+A complete browser snowboard game living inside the portfolio — the kind of
+thing the Lab pages talk about, actually shipped. It shares the site's fonts
+and build, and nothing else: it mounts its own WebGL canvas, its own HUD and
+its own keyboard handling.
+
+**Stack.** Three.js (`three@0.180`), one client component, no game assets at
+all — terrain, riders, boards, textures, music and sound effects are generated
+at runtime, so the whole game is JavaScript.
+
+**Where it lives.** `src/game/shred/`, organised so each system can be worked on
+without reading the others:
+
+```
+core/     math, seeded rng, simplex noise, keyboard input,
+          save/progression, and Game.ts (the loop + mode rules)
+world/    TerrainGen (the analytic mountain), Terrain (chunk streaming),
+          Scatter (instanced forest), Props (bridges/lifts/villages), Sky
+player/   Physics (carving + air + landings), TrickSystem (naming + scoring),
+          RiderRig (procedural character), BoardArt (canvas topsheets)
+camera/   ChaseCamera
+fx/       Particles, Trails, Weather, PostFX
+audio/    Audio (synthesised soundtrack + ride bed)
+data/     riders, boards, modes
+ui/       ShredGame (shell), Hud, Menus, shred.css
+```
+
+**The load-bearing ideas**, in case any of this needs changing later:
+
+- **The mountain is one function.** `TerrainGen.height(x, z)` is analytic, so
+  the renderer and the physics sample exactly the same surface — the board can
+  never drift off the visible ground. Features (kickers, halfpipes, lakes,
+  bridges…) are assigned per 150m segment from a hash of the segment index, so
+  a whole mountain is reproducible from one seed and any point can be evaluated
+  without generating its neighbours. The daily challenge is just
+  `hashString(YYYY-MM-DD)`.
+- **Carving adds energy.** Velocity is split into forward and lateral
+  components; grip decides how fast the lateral part bleeds off, and a loaded
+  edge converts some of it into drive. Chasing speed *through* a turn is the
+  whole feedback loop.
+- **Landings are the payoff.** Grade is computed from heading error, flip
+  alignment and impact. Tapping Space in the last 0.3s before touchdown
+  "stomps" — upgrades the grade and hands you a free re-pop, which is how
+  combos chain.
+- **Tricks are derived, not memorised.** The name comes from what you actually
+  did (spin + flip + grabs), so a first-timer can throw a Cork 720 Melon by
+  accident.
+- **Time is not linear.** `timeScale` bends for freeze frames on perfect
+  landings and slow motion on big air, and every system reads the scaled dt so
+  the world, camera and audio bend together.
+- **The HUD writes to the DOM, not to React state.** Anything that moves at
+  60fps is set from a rAF loop through refs; React only handles popups and
+  menus. Read a value at React-render time and it goes stale the moment a run
+  is rebuilt — that bug has been fixed once already.
+
+**Rendering.** Terrain and props are `MeshStandardMaterial`s patched via
+`onBeforeCompile` (keeps three's shadows and fog, adds the stylised snow
+albedo, cloud shadows, sparkle and rim). Post-processing is hand-rolled:
+bright pass → 3 blurred mips → composite with radial motion blur, bloom, god
+rays, chromatic aberration, ACES tonemap, colour grade, vignette, grain and an
+optional CRT pass. Quality presets plus adaptive resolution keep it at 60fps.
+
+**Progression** lives in `localStorage` under `shred1999.save.v1`. Everything
+unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
+re-evaluated both on boot and at the end of every run.
+
+**Accessibility note.** The route's `<main>` carries the only `<h1>` (visually
+hidden); the title screen headline is an `<h2>` so heading order stays clean.
+The site's global `cursor: none` is overridden inside `.shred-root` so the
+menus have a real pointer, and re-hidden while riding.
 
 ---
 
@@ -343,6 +418,27 @@ finer-grained detail.
     overlaid at `top-2` and collided with each composition's own labels — moved
     to a caption above each mock (cleaner on desktop too). No horizontal page
     scroll anywhere.
+
+### Later session — SHRED // 1999
+
+25. Built a complete arcade snowboard game at `/shred` (see the section above).
+    Three.js, ~7k lines across `src/game/shred/`, zero binary assets. Endless
+    procedural mountains with 14 feature types, 7 riders, 7 boards, 5 mountains,
+    6 light presets, 8 game modes, 8 camera filters, a synthesised reactive
+    soundtrack, photo mode and a 50-entry unlock table.
+26. Suppressed the site chrome on `/shred`: `RouteChrome` returns null,
+    `CustomCursor` and `SmoothScroll` bail on the route (Lenis would otherwise
+    keep a RAF loop running against the game loop).
+27. Bugs found and fixed during playtesting, worth remembering:
+    - menu selections ran their side effect inside a `setState` updater, so on a
+      screen where nothing else re-rendered the first Enter did nothing;
+    - `AnimatePresence mode="wait"` between screens made every transition wait
+      on the previous screen's exit, which swallowed fast input and could wedge
+      after repeated swaps — screens now render directly;
+    - `mergeGeometries` refuses to mix indexed and non-indexed sources, which
+      broke the cave set-piece (`IcosahedronGeometry` is non-indexed);
+    - HUD labels read from the snapshot at React-render time went stale when a
+      run was rebuilt.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

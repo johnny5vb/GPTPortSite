@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { useReducedMotion } from "framer-motion";
 
@@ -20,9 +21,13 @@ import { useReducedMotion } from "framer-motion";
  */
 export default function SmoothScroll() {
   const reduce = useReducedMotion();
+  const pathname = usePathname() ?? "/";
+  // /shred is a fixed full-screen canvas — there is nothing to scroll, and
+  // Lenis would keep a RAF loop alive competing with the game loop.
+  const suppressed = pathname.startsWith("/shred");
 
   useEffect(() => {
-    if (reduce) return;
+    if (reduce || suppressed) return;
 
     const lenis = new Lenis({
       lerp: 0.1,
@@ -59,7 +64,7 @@ export default function SmoothScroll() {
       document.removeEventListener("click", onClick);
       lenis.destroy();
     };
-  }, [reduce]);
+  }, [reduce, suppressed]);
 
   return null;
 }
