@@ -352,22 +352,53 @@ shared offscreen renderer — which needs `preserveDrawingBuffer: true`, or
 rotated to landscape. Thumbnails are cached by id and built one per frame at
 the call site so opening the garage doesn't stall on twenty rig builds.
 
-**The "black cubes" defect — fixed, and worth remembering how.** Pale flat
-quads flickered across open snow for three rounds of hunting. Elimination ruled
-out particles, snowfall, wind streaks, trails, props, scatter and the detail
-normals, which pointed at the terrain layer and got the wrong answer twice. The
-detail that cracked it came from the player: *they flicker while the game is
-paused.* With `dt = 0` the only things still moving are the ones driven by
-`uTime` — which is the sparkle field in `SnowMaterial`, and nothing else. Its
-cells were `floor(vWorldPos * 7.0)`: 14cm across, so a few metres in front of
-the camera each "glint" was a dinner-plate of blown-out white. Now ~1cm cells, a
-rarer and sharper twinkle, lower intensity, and a distance window that fades it
-in past 3m and out by 85m.
+**The "black cubes" defect — four rounds, three bugs, one cause.** Worth
+keeping in full, because the process went wrong twice before it went right.
 
-Two process notes, since both cost time: `uSparkle` is written every frame by
-`Sky.ts`, so setting it in `createWorldUniforms` to test a theory proves
-nothing; and "which systems can animate while paused" is a much smaller search
-space than "which system draws quads" — ask that question first.
+What the player reported: black squares, flickering, appearing in random places
+while riding *and while paused*.
+
+Three separate defects were found and fixed along the way. Only the last one
+was what they were seeing:
+
+1. **The snow sparkle field.** Cells were `floor(vWorldPos * 7.0)` — 14cm
+   across, so a few metres in front of the camera each "glint" was a
+   dinner-plate of blown-out white. Real, fixed (~1cm cells, rarer, dimmer, with
+   a distance window). Not it.
+2. **The scarf.** Its verlet chain is simulated in world space and the mesh
+   hangs off the rig root, which carries the rider's full world transform, so
+   writing world coordinates into its vertex buffer applied that transform
+   twice and drew the scarf as far from the rider as the rider was from the
+   origin — measured at 52.5m mid-run, now 0.1m. Frustum culling was off, so it
+   was submitted every frame wherever it landed. Real, fixed. Also not it.
+3. **The bloom chain overflowing.** This was it.
+
+The bloom targets are half-float, which tops out at 65504, and the god-ray pass
+sums 24 taps of the blurred bright buffer. One pixel bright enough to saturate
+that sum is Inf; ACES then computes Inf/Inf and returns NaN, and a NaN pixel is
+black. The blur runs on **downsampled mips** and spreads each texel across its
+neighbours, so one bad texel does not come back as one bad pixel — it comes
+back as a *square*. It flickers wherever the scene is brightest that frame, it
+survives a pause because the post chain never stops, and it is invisible on
+some GPUs and obvious on others, which is why it never once appeared in a
+local screenshot.
+
+`SAFE` in `PostFX.ts` sanitises every stage. NaN fails every comparison, so
+`!(x > -1.0)` is true for NaN and false for every real number; a `min()` takes
+Inf and anything merely absurd. Nothing is lost: after blurring and weighting,
+48 and 48000 are the same white.
+
+**The process lesson, which cost more than the bug did.** Two fixes were
+shipped as "found it" on the strength of a plausible mechanism plus a clean
+local screenshot. A clean screenshot on this machine proves nothing — it runs
+SwiftShader, and this defect is driver-dependent by construction. What finally
+worked was, in order: (a) a scene-graph audit that walks every object every
+frame looking for non-finite matrices, NaN vertices, NaN bounding spheres and
+anything drawn far from the camera with culling off — which came back clean and
+so ruled out geometry entirely; then (b) reading the post chain for arithmetic
+that *can* produce a non-finite value, rather than looking for something that
+draws a quad. Ask "what could make a black square" before "which system draws
+squares".
 
 **Limbs are solved, not posed.** `RiderRig.reachLimb` is a two-bone analytic IK
 solver — law of cosines, no iteration — and both the legs and a grabbing arm go
@@ -800,15 +831,14 @@ finer-grained detail.
     geometry numerically instead of by eye.
 
 
-35. The black cubes, finally. Not the sparkle after all — or not only. The
-    scarf's verlet chain is simulated in world space and the mesh hangs off the
-    rig root, which carries the rider's full world transform, so writing world
-    coordinates into its vertex buffer applied that transform twice and drew
-    the scarf as far from the rider as the rider was from the origin. Frustum
-    culling was off, so it was submitted every frame wherever it landed: a thin
-    double-sided ribbon flickering across the mountain, paused or not. Measured
-    52.5m of error mid-run; now 0.1m. Two of the ten riders wear one and one of
-    them is a starter, which is why so many players saw it.
+35. The black cubes, resolved — after two wrong answers. The sparkle field and
+    the scarf were both genuine bugs and both got fixed, but neither was what
+    the player was seeing. It was the bloom chain: half-float targets, a
+    god-ray pass that sums 24 taps, one over-bright pixel saturating that sum
+    to Inf, and ACES turning Inf/Inf into NaN — which is black, and which the
+    downsampled blur spreads into a *square*. Every stage of the post chain
+    sanitises now. See the SHRED section for the full account, including why
+    two clean local screenshots proved nothing.
 
 36. Design system pass: the wordmark, the three-role type system, one-bar
     control legend, imperial units. See the SHRED section.
