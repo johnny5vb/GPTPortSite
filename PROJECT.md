@@ -346,6 +346,27 @@ already drawing behind it.
   Building two chunks during an already-long frame is what turns a slow frame
   into a visible hitch.
 
+**Terrain pacing.** The fall line is no longer one constant grade. `pitchAt(z)`
+modulates steepness with two sines and `gradeDrop(z)` is its closed-form
+integral — that antiderivative is the whole reason the pitch can vary at all,
+since `height(x, z)` has to be evaluable at any point without walking the run
+from the top. Amplitudes (`PITCH_A`, `PITCH_B`) must stay well under 1: a flat
+spot on a snowboard means walking. Feature kinds are up to 17, including
+`ramps` (a jump line that steps up from a tap to a booter), `gap` (launch lip,
+hole, landing ramp — no way across) and `tunnel` (terrain carves the trench,
+`Props.buildTunnel` arches an ice roof over it, because a heightfield can only
+describe one surface per point). `sectionAt(z)` names the current stretch for
+the HUD, which is what makes the variety legible rather than just felt.
+
+**Every mountain has a bottom.** `MountainPreset.length` sets it, `Props`
+builds a finish gate into whichever segment straddles it, and `Game.finishZ`
+ends the run there. Endless mode is the deliberate exception.
+
+**Steering sign.** The chase camera looks down +Z, which puts world +X on the
+*left* of the screen — so a positive steer axis has to *decrease* yaw. This was
+backwards until it was reported; if steering ever feels mirrored again, that
+sign in `Game.stepGameplay` is the place to look, not the input layer.
+
 **Progression** lives in `localStorage` under `shred1999.save.v1`. Everything
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
 re-evaluated both on boot and at the end of every run.

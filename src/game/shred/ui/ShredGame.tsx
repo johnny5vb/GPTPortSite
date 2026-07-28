@@ -101,6 +101,7 @@ const EMPTY_HUD: HudSnapshot = {
   surface: "groom",
   mountainName: "",
   modeName: "",
+  section: "",
   hud: "full",
   fps: 60,
 };
@@ -628,6 +629,10 @@ export default function ShredGame() {
               onBack={leaveGarage}
               onCreate={openCreator}
               onDeleteCustom={deleteCustomRider}
+              onRide={() => {
+                leaveGarage();
+                setScreen("modes");
+              }}
             />
           </div>
         )}

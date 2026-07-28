@@ -71,6 +71,11 @@ export class Props {
       this.segments.set(s, placeholder);
       try {
         const g = this.buildSegment(this.gen.featureForSegment(s));
+        // The finish gate belongs to whichever segment straddles the bottom.
+        const finishZ = this.gen.preset.length;
+        if (finishZ > 0 && finishZ >= s * SEGMENT_LENGTH && finishZ < (s + 1) * SEGMENT_LENGTH) {
+          this.buildFinish(g, finishZ);
+        }
         this.segments.set(s, g);
         if (g.children.length) this.group.add(g);
       } catch (err) {
@@ -82,6 +87,95 @@ export class Props {
         this.group.remove(g);
         disposeGroup(g);
         this.segments.delete(s);
+      }
+    }
+  }
+
+  /**
+   * The finish line, built once into whichever segment contains it.
+   *
+   * A banner across the corridor plus a pair of towers — the point is that you
+   * can see it coming from a long way up, so the last few hundred metres of a
+   * run have somewhere to be going.
+   */
+  private buildFinish(g: THREE.Group, z: number) {
+    const gen = this.gen;
+    const cx = gen.corridorCenter(z);
+    const hw = Math.min(46, gen.corridorHalfWidth(z) * 0.7);
+    const h = gen.heightAt(cx, z);
+
+    for (const side of [-1, 1]) {
+      const px = cx + side * hw;
+      const py = gen.heightAt(px, z);
+      const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.85, 11, 8), this.mats.metal);
+      tower.position.set(px, py + 5.5, z);
+      tower.castShadow = true;
+      g.add(tower);
+      // A flag on each tower so the gate reads at distance and in flat light.
+      for (let i = 0; i < 3; i++) {
+        const flag = new THREE.Mesh(new THREE.BoxGeometry(2.6, 1.7, 0.12), this.mats.paint);
+        flag.position.set(px + side * 1.6, py + 8.2 - i * 2.1, z);
+        g.add(flag);
+      }
+    }
+
+    const span = new THREE.Mesh(new THREE.BoxGeometry(hw * 2, 2.6, 0.5), this.mats.paint);
+    span.position.set(cx, h + 10.4, z);
+    g.add(span);
+    // Chequered banding under the banner.
+    const n = Math.max(6, Math.round(hw / 3));
+    for (let i = 0; i < n; i++) {
+      const blk = new THREE.Mesh(
+        new THREE.BoxGeometry((hw * 2) / n, 1.1, 0.56),
+        i % 2 ? this.mats.snow : this.mats.rock,
+      );
+      blk.position.set(cx - hw + ((i + 0.5) * hw * 2) / n, h + 8.7, z);
+      g.add(blk);
+    }
+
+    // Painted line on the snow, so the moment of crossing is unambiguous.
+    const line = new THREE.Mesh(new THREE.BoxGeometry(hw * 2, 0.08, 2.2), this.mats.paint);
+    line.position.set(cx, h + 0.1, z);
+    g.add(line);
+  }
+
+  /**
+   * Ice tunnel roof.
+   *
+   * The heightfield can only describe one surface per (x, z), so the trench is
+   * terrain and the roof over it has to be a prop. Physics never touches it —
+   * you ride the carved floor and the arch passes overhead.
+   */
+  private buildTunnel(g: THREE.Group, f: Feature) {
+    const gen = this.gen;
+    const step = 12;
+    for (let z = f.z0 + 14; z < f.z1 - 14; z += step) {
+      const cx = gen.corridorCenter(z);
+      const floor = gen.heightAt(cx, z);
+      // Half-torus ribs: an arch reads as a tunnel from inside and out, and
+      // costs a fraction of a swept tube.
+      const rib = new THREE.Mesh(
+        new THREE.TorusGeometry(f.a * 1.05, 1.5, 6, 14, Math.PI),
+        this.mats.ice,
+      );
+      rib.position.set(cx, floor + 1.2, z);
+      rib.castShadow = true;
+      g.add(rib);
+
+      // Icicles hanging off alternate ribs.
+      if (((z / step) | 0) % 2 === 0) {
+        for (let i = -2; i <= 2; i++) {
+          if (i === 0) continue;
+          const len = 1.1 + Math.abs(i) * 0.5;
+          const ice = new THREE.Mesh(new THREE.ConeGeometry(0.3, len, 5), this.mats.ice);
+          ice.position.set(
+            cx + i * f.a * 0.38,
+            floor + f.a * 0.92 - len * 0.5 - Math.abs(i) * 1.1,
+            z,
+          );
+          ice.rotation.x = Math.PI;
+          g.add(ice);
+        }
       }
     }
   }
@@ -113,6 +207,9 @@ export class Props {
         break;
       case "forest":
         this.buildLift(g, f);
+        break;
+      case "tunnel":
+        this.buildTunnel(g, f);
         break;
       case "open":
       case "kickers":

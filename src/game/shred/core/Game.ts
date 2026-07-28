@@ -70,6 +70,8 @@ export interface HudSnapshot {
   surface: string;
   mountainName: string;
   modeName: string;
+  /** What the terrain is doing right now — "Steep", "Ice tunnel", "Gap jump". */
+  section: string;
   hud: ModeDef["hud"];
   fps: number;
 }
@@ -238,6 +240,7 @@ export class Game {
     surface: "groom",
     mountainName: "",
     modeName: "",
+    section: "",
     hud: "full",
     fps: 60,
   };
@@ -799,7 +802,10 @@ export class Game {
   }
 
   private stepGameplay(dt: number, rawDt: number) {
-    const inv = this.saveData.settings.invertSteer ? -1 : 1;
+    // The chase camera looks down +Z, which puts world +X on the *left* of the
+    // screen — so a positive steer axis has to decrease yaw for the right arrow
+    // to actually send you right. This sign was backwards.
+    const inv = this.saveData.settings.invertSteer ? 1 : -1;
     const steer = this.input.steer() * inv;
 
     this.phys.step(dt, {
@@ -876,6 +882,17 @@ export class Game {
     const m = this.mode;
     if (m.duration > 0 && this.runTime >= m.duration) this.finish();
     if (m.distance > 0 && this.phys.pos.z >= m.distance) this.finish();
+    // Every mountain has a bottom. Endless is the deliberate exception.
+    if (this.finishZ > 0 && this.phys.pos.z >= this.finishZ) this.finish();
+  }
+
+  /** Z of the finish line for this run, or 0 if the run has no bottom. */
+  private get finishZ() {
+    if (this.mode.id === "endless") return 0;
+    const len = this.gen.preset.length;
+    // A mode with its own shorter distance target still owns the ending.
+    if (this.mode.distance > 0 && this.mode.distance < len) return 0;
+    return len;
   }
 
   // ────────────────────────────────────────────────────────────── visuals ────
@@ -1072,7 +1089,14 @@ export class Game {
     h.time = this.runTime + this.penalty;
     h.timeLeft = m.duration > 0 ? Math.max(0, m.duration - this.runTime) : 0;
     h.distance = p.distance;
-    h.distanceLeft = m.distance > 0 ? Math.max(0, m.distance - p.pos.z) : 0;
+    const fz = this.finishZ;
+    h.distanceLeft =
+      m.distance > 0
+        ? Math.max(0, m.distance - p.pos.z)
+        : fz > 0
+          ? Math.max(0, fz - p.pos.z)
+          : 0;
+    h.section = this.gen.sectionAt(p.pos.z);
     h.crashes = this.crashCount;
     h.gatesPassed = this.gatesPassed;
     h.gatesMissed = this.gatesMissed;

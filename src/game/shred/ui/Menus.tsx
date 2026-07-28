@@ -390,6 +390,7 @@ export function Garage({
   onBack,
   onCreate,
   onDeleteCustom,
+  onRide,
 }: {
   save: SaveData;
   onChange: (patch: Partial<SaveData["selected"]>) => void;
@@ -397,6 +398,8 @@ export function Garage({
   /** Open the creator — with a rider to edit, or null for a new one. */
   onCreate: (editing: CustomRider | null) => void;
   onDeleteCustom: (id: string) => void;
+  /** Straight from the garage into a run — otherwise there is no way forward. */
+  onRide: () => void;
 }) {
   const customs = useMemo(
     () => save.customRiders.map(customToRider),
@@ -748,11 +751,24 @@ export function Garage({
           </div>
         )}
 
-        <div style={{ marginTop: "1.6rem" }}>
-          <button className="sh-btn" style={{ width: "auto" }} onClick={onBack}>
-            <span className="sh-btn__label">Back</span>
-            <span className="sh-btn__meta">Esc</span>
-          </button>
+        <div className="sh-garage-actions">
+          <div className="sh-garage-loadout">
+            <span className="sh-eyebrow">Riding as</span>
+            <span>
+              {riderById(save.selected.rider, customs).name} / {boardById(save.selected.board).name}{" "}
+              / {MOUNTAINS.find((m) => m.id === save.selected.mountain)?.name}
+            </span>
+          </div>
+          <div className="sh-field__row">
+            <button className="sh-btn" style={{ width: "auto" }} onClick={onRide}>
+              <span className="sh-btn__label">Drop in</span>
+              <span className="sh-btn__meta">Enter</span>
+            </button>
+            <button className="sh-btn" style={{ width: "auto" }} onClick={onBack}>
+              <span className="sh-btn__label">Back</span>
+              <span className="sh-btn__meta">Esc</span>
+            </button>
+          </div>
         </div>
       </Sheet>
     </div>

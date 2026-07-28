@@ -1030,3 +1030,26 @@
 .sh-card-tools .sh-chip {
   flex: 1;
 }
+
+/* Garage: a persistent action row, so selecting a rider is never a dead end. */
+.sh-garage-actions {
+  position: sticky;
+  bottom: 0;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  border-top: 1px solid var(--sh-line);
+  background: linear-gradient(180deg, transparent, var(--sh-glass) 40%);
+  backdrop-filter: blur(10px);
+}
+.sh-garage-loadout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  min-width: 0;
+}

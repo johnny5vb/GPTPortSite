@@ -22,6 +22,15 @@ import { hash2, hash2v } from "../core/rng";
 
 export const SEGMENT_LENGTH = 150;
 
+/**
+ * Pitch modulation. A + B must stay comfortably under 1 or the run flattens
+ * out, and a flat section on a snowboard is a dead section.
+ */
+const PITCH_A = 0.28;
+const PITCH_L1 = 260;
+const PITCH_B = 0.13;
+const PITCH_L2 = 95;
+
 export type FeatureKind =
   | "open"
   | "kickers"
@@ -36,7 +45,10 @@ export type FeatureKind =
   | "village"
   | "bridge"
   | "cave"
-  | "shortcut";
+  | "shortcut"
+  | "ramps"
+  | "gap"
+  | "tunnel";
 
 export interface Kicker {
   x: number;
@@ -69,6 +81,12 @@ export interface MountainPreset {
   blurb: string;
   /** Vertical drop per metre travelled. 0.22 mellow, 0.42 steep. */
   slope: number;
+  /**
+   * Where the bottom of the mountain is, in metres. Every run has an end and a
+   * finish line at it — a descent with no bottom is a screensaver. Endless mode
+   * is the deliberate exception and ignores this.
+   */
+  length: number;
   /** Corridor half-width in metres. */
   corridor: number;
   /** Large-scale terrain roughness multiplier. */
@@ -97,6 +115,9 @@ const DEFAULT_WEIGHTS: Record<FeatureKind, number> = {
   bridge: 4,
   cave: 3,
   shortcut: 4,
+  ramps: 10,
+  gap: 6,
+  tunnel: 5,
 };
 
 export interface Surface {
@@ -127,6 +148,9 @@ export class TerrainGen {
   private featureCache = new Map<number, Feature>();
   private weights: Record<FeatureKind, number>;
   private weightTotal: number;
+  /** Phase of the two pitch-modulation sines — per seed, so runs differ. */
+  private ph1: number;
+  private ph2: number;
 
   constructor(seed: number, preset: MountainPreset) {
     this.seed = seed >>> 0;
@@ -136,6 +160,8 @@ export class TerrainGen {
     this.nWall = new Noise2D(this.seed ^ 0x9f0b21);
     this.nSnow = new Noise2D(this.seed ^ 0x33cc55);
     this.nPath = new Noise2D(this.seed ^ 0x7ab019);
+    this.ph1 = hash2(1, 17, this.seed) * Math.PI * 2;
+    this.ph2 = hash2(2, 29, this.seed) * Math.PI * 2;
 
     this.weights = { ...DEFAULT_WEIGHTS, ...preset.featureWeights } as Record<
       FeatureKind,
@@ -235,6 +261,41 @@ export class TerrainGen {
           kick: 0.85,
         });
       }
+    } else if (kind === "ramps") {
+      // A jump line: four hits that step up from a tap to a real booter, so
+      // the section teaches you its own timing before it asks for commitment.
+      const n = 4;
+      for (let i = 0; i < n; i++) {
+        const [k0, k1] = hash2v(seg * 83 + i, 41, this.seed);
+        const t = i / (n - 1);
+        f.kickers.push({
+          x: cx + (k0 * 2 - 1) * hw * 0.2,
+          z: z0 + 26 + i * 31,
+          width: lerp(12, 20, t),
+          length: lerp(11, 22, t),
+          height: lerp(1.9, 7.6, t) * lerp(0.9, 1.1, k1),
+          kick: lerp(0.45, 0.95, t),
+        });
+      }
+    } else if (kind === "gap") {
+      // A launch lip, a hole, and a landing ramp on the far side. Unlike the
+      // bridge there is no way across — you clear it or you don't.
+      f.a = z0 + SEGMENT_LENGTH * 0.5; // chasm centre Z
+      f.b = lerp(20, 34, r1); // chasm half length
+      f.c = lerp(22, 40, r2); // chasm depth
+      f.kickers.push({
+        x: cx,
+        z: f.a - f.b - 12,
+        width: 34,
+        length: 20,
+        height: lerp(4.2, 6.8, r1),
+        kick: 0.95,
+      });
+    } else if (kind === "tunnel") {
+      // A narrow ice channel. The roof is a prop; the terrain just carves the
+      // trench and turns the surface to hard ice inside it.
+      f.a = lerp(11, 16, r1); // half width
+      f.b = lerp(4.5, 7.5, r2); // depth
     } else if (kind === "shortcut") {
       // A tight chute off to one side. Faster, tighter, rewards commitment.
       f.a = lerp(26, 44, r1); // chute width
@@ -279,9 +340,70 @@ export class TerrainGen {
 
   // ────────────────────────────────────────────────────────────── height ────
 
+  /**
+   * Steepness of the fall line at `z`.
+   *
+   * A run at one constant grade is the reason a mountain reads as a treadmill:
+   * every second feels like the last. The pitch is modulated by two sines — a
+   * long one that gives the run its movements (a steep pitch, then somewhere
+   * to breathe) and a short one that keeps individual rolls from being flat.
+   * Amplitudes are chosen so the grade never approaches zero, because a flat
+   * spot on a snowboard means walking.
+   */
+  pitchAt(z: number): number {
+    const p = this.preset;
+    return (
+      p.slope *
+      (1 + PITCH_A * Math.sin(z / PITCH_L1 + this.ph1) + PITCH_B * Math.sin(z / PITCH_L2 + this.ph2))
+    );
+  }
+
+  /**
+   * The integral of `pitchAt` from 0 to z, in closed form.
+   *
+   * This is the whole reason the pitch can vary at all: the renderer and the
+   * physics both need `height(x, z)` to be evaluable at any point without
+   * walking the run from the top, so the fall line has to be something with an
+   * antiderivative rather than a per-segment accumulation.
+   */
+  private gradeDrop(z: number): number {
+    const p = this.preset;
+    return (
+      p.slope *
+      (z -
+        PITCH_A * PITCH_L1 * (Math.cos(z / PITCH_L1 + this.ph1) - Math.cos(this.ph1)) -
+        PITCH_B * PITCH_L2 * (Math.cos(z / PITCH_L2 + this.ph2) - Math.cos(this.ph2)))
+    );
+  }
+
+  /** What this stretch of mountain is doing, for the HUD. */
+  sectionAt(z: number): string {
+    const kind = this.featureAtZ(z).kind;
+    const named: Partial<Record<FeatureKind, string>> = {
+      halfpipe: "Halfpipe",
+      park: "Terrain park",
+      ramps: "Jump line",
+      gap: "Gap jump",
+      tunnel: "Ice tunnel",
+      lake: "Frozen lake",
+      glacier: "Glacier",
+      village: "Village",
+      bridge: "Bridge",
+      cave: "Cave",
+      shortcut: "Shortcut",
+      moguls: "Moguls",
+      gully: "Gully",
+      cliff: "Cliff band",
+      forest: "Trees",
+    };
+    if (named[kind]) return named[kind]!;
+    const rel = this.pitchAt(z) / this.preset.slope;
+    return rel > 1.22 ? "Steep" : rel < 0.82 ? "Mellow" : "Open";
+  }
+
   height(x: number, z: number): number {
     const p = this.preset;
-    let h = -z * p.slope;
+    let h = -this.gradeDrop(z);
 
     // Rolling shape of the mountain face.
     h +=
@@ -328,10 +450,34 @@ export class TerrainGen {
   ): number {
     switch (f.kind) {
       case "kickers":
+      case "ramps":
       case "park": {
         let h = 0;
         for (const k of f.kickers) h += this.kickerHeight(k, x, z);
         return h;
+      }
+      case "gap": {
+        let h = 0;
+        for (const k of f.kickers) h += this.kickerHeight(k, x, z);
+        // The hole itself, walled across the whole corridor.
+        const dz = Math.abs(z - f.a);
+        const chasm = 1 - smoothstep(f.b * 0.6, f.b, dz);
+        h -= chasm * f.c;
+        // A landing ramp on the far lip so a cleared gap ends in a transition
+        // rather than a wall.
+        const land = 1 - smoothstep(0, 26, z - (f.a + f.b));
+        const inRun = 1 - smoothstep(hw * 0.55, hw * 0.9, Math.abs(x - cx));
+        h += land * inRun * Math.max(0, 1 - dz / (f.b + 26)) * 3.4;
+        return h;
+      }
+      case "tunnel": {
+        const env = TerrainGen.envelope(z, f.z0, f.z1, 26);
+        if (env <= 0) return 0;
+        const d = (x - cx) / f.a;
+        // A U-shaped trench: flat-ish floor, walls that climb steeply.
+        const inside = Math.exp(-d * d * 1.9);
+        const walls = smoothstep(0.75, 1.5, Math.abs(d)) * 16;
+        return env * (walls - inside * f.b);
       }
       case "halfpipe": {
         const env = TerrainGen.envelope(z, f.z0, f.z1, 34);
@@ -366,7 +512,7 @@ export class TerrainGen {
         if (inField <= 0) return 0;
         // Flatten toward a plane through the segment mid-point.
         const zc = (f.z0 + f.z1) * 0.5;
-        const planeH = -zc * this.preset.slope + 1.0;
+        const planeH = -this.gradeDrop(zc) + 1.0;
         const raw = this.rawGrade(x, z);
         return env * inField * (planeH - raw);
       }
@@ -398,7 +544,7 @@ export class TerrainGen {
         const inShelf = 1 - smoothstep(20, 42, d);
         if (inShelf <= 0) return 0;
         const zc = (f.z0 + f.z1) * 0.5;
-        const planeH = -zc * this.preset.slope + 2.5;
+        const planeH = -this.gradeDrop(zc) + 2.5;
         return env * inShelf * (planeH - this.rawGrade(x, z));
       }
       case "bridge": {
@@ -432,7 +578,7 @@ export class TerrainGen {
   private rawGrade(x: number, z: number) {
     const p = this.preset;
     return (
-      -z * p.slope +
+      -this.gradeDrop(z) +
       this.nBase.fbm(x * 0.0032, z * 0.0032, 4) * 26 * p.roughness +
       this.nBase.noise(x * 0.011, z * 0.011) * 4.2 * p.roughness +
       this.nDetail.fbm(x * 0.045, z * 0.045, 3) * 1.15
@@ -574,7 +720,7 @@ export class TerrainGen {
 
     // Treeline: above a certain absolute height relative to the fall line the
     // trees give out and it's all rock and ice.
-    const rel = h + z * p.slope;
+    const rel = h + this.gradeDrop(z);
     const line = 1 - smoothstep(46, 84, rel);
 
     const clump = this.nSnow.fbm(x * 0.008 + 40, z * 0.008 - 21, 3) * 0.5 + 0.5;
@@ -589,6 +735,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Hollow Ridge",
     blurb:
       "Wide, treed, forgiving. Natural hits everywhere and a park hidden in the middle.",
+    length: 2600,
     slope: 0.3,
     corridor: 78,
     roughness: 1,
@@ -602,6 +749,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Long Meadow",
     blurb:
       "The mellow one. Groomed corduroy, big lazy rollers and room to get a trick wrong.",
+    length: 2200,
     slope: 0.22,
     corridor: 110,
     roughness: 0.6,
@@ -615,6 +763,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Ember Pass",
     blurb:
       "Deep trees, a sleeping village and old bridges. Softest snow you'll find.",
+    length: 2800,
     slope: 0.28,
     corridor: 86,
     roughness: 0.9,
@@ -628,6 +777,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Glass Basin",
     blurb:
       "Frozen lakes and glacier steps. Fast and slick — carve early, or don't carve at all.",
+    length: 3000,
     slope: 0.26,
     corridor: 96,
     roughness: 0.75,
@@ -641,6 +791,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Sawtooth Spine",
     blurb:
       "A ridge that never flattens out. Ribs, gullies and a bridge over most of them.",
+    length: 3200,
     slope: 0.34,
     corridor: 64,
     roughness: 1.5,
@@ -653,6 +804,7 @@ export const MOUNTAINS: MountainPreset[] = [
     id: "north-cirque",
     name: "North Cirque",
     blurb: "Above the treeline. Ice, seracs and long, cold, empty pitches.",
+    length: 3400,
     slope: 0.36,
     corridor: 70,
     roughness: 1.2,
@@ -666,6 +818,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Midnight Mile",
     blurb:
       "The last run of the night, lit end to end. Village rails, a pipe and hard old snow.",
+    length: 2900,
     slope: 0.31,
     corridor: 74,
     roughness: 0.85,
@@ -679,6 +832,7 @@ export const MOUNTAINS: MountainPreset[] = [
     name: "Wolf Couloir",
     blurb:
       "Steep, narrow, mean. Cliff bands, gullies and the best shortcuts on the mountain.",
+    length: 3600,
     slope: 0.42,
     corridor: 58,
     roughness: 1.35,

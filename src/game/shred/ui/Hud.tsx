@@ -107,7 +107,11 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
       }
 
       if (labelRef.current) {
-        const label = s.modeName ? `${s.modeName} / ${s.mountainName}` : "";
+        // The section name is the cheapest way to make the terrain variety
+        // legible — otherwise a steep pitch and a mellow one are just "snow".
+        const label = s.modeName
+          ? `${s.modeName} / ${s.mountainName}${s.section ? ` / ${s.section}` : ""}`
+          : "";
         if (labelRef.current.textContent !== label)
           labelRef.current.textContent = label;
       }
