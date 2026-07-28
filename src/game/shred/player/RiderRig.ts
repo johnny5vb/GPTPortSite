@@ -33,6 +33,7 @@ import { RiderPhysics } from "./Physics";
 import { TrickSystem } from "./TrickSystem";
 import { clamp01, damp, lerp } from "../core/math";
 import { WorldUniforms, stylizeMaterial, ensureMatAttribute } from "../world/SnowMaterial";
+import { bindLimbs, buildLimb } from "./RiderMesh";
 import {
   buildBoot,
   buildEyewear,
@@ -102,14 +103,17 @@ interface Parts {
   body: THREE.Group;
   hips: THREE.Group;
   stance: THREE.Group;
-  legF: THREE.Group;
-  legB: THREE.Group;
-  kneeF: THREE.Group;
-  kneeB: THREE.Group;
+  /** Limb joints are Bones, so one skinned tube can span each of them. */
+  legF: THREE.Bone;
+  legB: THREE.Bone;
+  kneeF: THREE.Bone;
+  kneeB: THREE.Bone;
   torso: THREE.Group;
   head: THREE.Group;
-  armF: THREE.Group;
-  armB: THREE.Group;
+  armF: THREE.Bone;
+  armB: THREE.Bone;
+  elbowF: THREE.Bone;
+  elbowB: THREE.Bone;
   /** Long hair hangs off this and lags behind the head. */
   hairTail?: THREE.Group;
   scarf?: THREE.Mesh;
@@ -337,46 +341,62 @@ export class RiderRig {
     // Thigh and shin are separate nodes so the knee can actually bend as the
     // rider compresses — straight legs are the tell that a rig is fake.
     const prof = pantsProfile(a.pants);
-    const knees: THREE.Group[] = [];
+    const limbs: THREE.SkinnedMesh[] = [];
+
+    /**
+     * A leg: one continuous tube from hip to ankle, skinned across the knee.
+     * The thigh and shin used to be separate capsules that slid through each
+     * other whenever the rider compressed — the crease is the whole point.
+     */
+    const knees: THREE.Bone[] = [];
+    const thighLen = 0.36;
+    const shinLen = 0.36;
     const leg = (z: number) => {
-      const g = new THREE.Group();
-      g.position.set(0, 0, z);
-      const thigh = this.capsule(prof.thigh * s.girth, 0.2, pantsMat, 0, -0.19, 0);
-      thigh.scale.set(prof.flare, 1, prof.flare);
-      g.add(thigh);
+      const hip = new THREE.Bone();
+      hip.position.set(0, 0, z);
+      const knee = new THREE.Bone();
+      knee.position.set(0, -thighLen, 0);
+      hip.add(knee);
+      knees.push(knee);
+
+      const rTop = prof.thigh * s.girth * 1.12;
+      const rKnee = prof.thigh * s.girth * 0.78;
+      const rAnkle = prof.shin * s.girth * 0.8;
+      const mesh = buildLimb(
+        [
+          { bone: hip, length: thighLen, r0: rTop, r1: rKnee },
+          { bone: knee, length: shinLen, r0: rKnee, r1: rAnkle },
+        ],
+        pantsMat,
+        { radial: 12, rings: 5, squash: prof.flare, capEnd: false },
+      );
+      mesh.position.set(0, 0, z);
+      limbs.push(mesh);
 
       if (a.pants === "cargo") {
         // Thigh pockets. Small, but they break up the leg and read instantly.
         const pocket = this.mesh(
           new THREE.BoxGeometry(0.018, 0.09, 0.075),
           pantsMat,
-          prof.thigh * s.girth * 1.05,
+          prof.thigh * s.girth * 1.2,
           -0.21,
           0,
         );
-        g.add(pocket);
+        hip.add(pocket);
       }
-
-      const knee = new THREE.Group();
-      knee.position.set(0, -0.36, 0);
-      const shin = this.capsule(prof.shin * s.girth, 0.22, pantsMat, 0, -0.17, 0);
-      shin.scale.set(prof.flare, 1, prof.flare);
-      knee.add(shin);
       // The cuff of a baggy pant sits over the boot.
       if (a.pants !== "slim") {
         const cuff = this.mesh(
-          new THREE.CylinderGeometry(prof.shin * 1.35, prof.shin * 1.5, 0.09, 14, 1, true),
+          new THREE.CylinderGeometry(prof.shin * 1.4, prof.shin * 1.6, 0.1, 14, 1, true),
           pantsMat,
           0,
-          -0.285,
+          -0.29,
           0,
         );
         knee.add(cuff);
       }
       knee.add(buildBoot(kit, a.bootColor, a.accent));
-      knees.push(knee);
-      g.add(knee);
-      return g;
+      return hip;
     };
     const legF = leg(0.21);
     const legB = leg(-0.21);
@@ -429,28 +449,63 @@ export class RiderRig {
     const sleeve = this.cloth(a.jacket === "vest" ? a.jacketAlt : a.jacketColor, {
       roughness: 0.88,
     });
+    const elbows: THREE.Bone[] = [];
+    const upperLen = 0.29;
+    const foreLen = 0.28;
     const arm = (z: number) => {
-      const g = new THREE.Group();
-      g.position.set(0, 0.44 * s.height, z * s.shoulder);
-      const upper = this.capsule(0.058 * s.girth, 0.19, sleeve, 0, -0.155, 0);
-      g.add(upper);
-      const fore = this.capsule(0.05 * s.girth, 0.17, sleeve, 0, -0.38, 0);
-      g.add(fore);
+      const shoulder = new THREE.Bone();
+      shoulder.position.set(0, 0.44 * s.height, z * s.shoulder);
+      const elbow = new THREE.Bone();
+      elbow.position.set(0, -upperLen, 0);
+      shoulder.add(elbow);
+      elbows.push(elbow);
+
+      const rShoulder = 0.062 * s.girth;
+      const rElbow = 0.046 * s.girth;
+      const rWrist = 0.037 * s.girth;
+      const mesh = buildLimb(
+        [
+          { bone: shoulder, length: upperLen, r0: rShoulder, r1: rElbow },
+          { bone: elbow, length: foreLen, r0: rElbow, r1: rWrist },
+        ],
+        sleeve,
+        { radial: 12, rings: 5 },
+      );
+      mesh.position.copy(shoulder.position);
+      limbs.push(mesh);
+
       if (a.jacket === "puffy" || a.jacket === "vest") {
         // Sleeve baffles, matching the torso.
-        for (const y of [-0.1, -0.23, -0.36]) {
-          const band = this.capsule(0.06 * s.girth, 0.03, sleeve, 0, y, 0);
-          band.rotation.x = Math.PI / 2;
-          g.add(band);
+        for (const [node, y] of [
+          [shoulder, -0.1],
+          [shoulder, -0.23],
+          [elbow, -0.12],
+        ] as [THREE.Bone, number][]) {
+          const band = this.mesh(new THREE.SphereGeometry(1, 16, 12), sleeve, 0, y, 0);
+          band.scale.set(0.066 * s.girth, 0.026, 0.066 * s.girth);
+          node.add(band);
         }
       }
-      g.add(buildHand(kit, a.hands, a.handsColor, a.jacketAlt));
-      return g;
+      // buildHand's geometry is authored in the arm-root frame; the elbow sits
+      // one upper-arm below it, so the group has to be lifted back up by that
+      // much or the mitts float at knee height.
+      const hand = buildHand(kit, a.hands, a.handsColor, a.jacketAlt);
+      hand.position.y = upperLen;
+      elbow.add(hand);
+      return shoulder;
     };
     const armF = arm(0.165);
     const armB = arm(-0.165);
+    const elbowF = elbows[0];
+    const elbowB = elbows[1];
 
     torso.add(head, armF, armB);
+    // Skinned meshes are siblings of the chain root, not children — their
+    // geometry lives in the chain root's frame and the skeleton does the rest.
+    for (const m of limbs) {
+      if (m.userData.limbBones[0] === armF || m.userData.limbBones[0] === armB) torso.add(m);
+      else hips.add(m);
+    }
     stance.add(torso);
     hips.add(legF, legB, stance);
     body.add(hips);
@@ -482,6 +537,9 @@ export class RiderRig {
     if (accessory) torso.add(accessory);
 
     this.group.add(root);
+    // Bind last: `bind()` snapshots bone world matrices to build their
+    // inverses, so it needs the finished hierarchy in its rest pose.
+    bindLimbs(this.group, limbs);
 
     this.p = {
       root,
@@ -500,6 +558,8 @@ export class RiderRig {
       head,
       armF,
       armB,
+      elbowF,
+      elbowB,
       hairTail: hair.tail,
       scarf: scarfMesh,
       accessory,
@@ -612,6 +672,8 @@ export class RiderRig {
 
     p.armF.rotation.set(-0.24, 0, -0.3 - breathe * 0.02);
     p.armB.rotation.set(-0.18, 0, 0.3 + breathe * 0.02);
+    p.elbowF.rotation.set(-0.46, 0, 0);
+    p.elbowB.rotation.set(-0.4, 0, 0);
   }
 
   // ────────────────────────────────────────────────────────────── update ────
@@ -663,9 +725,9 @@ export class RiderRig {
     // Legs compress: the hips drop, the thighs pitch forward and the knees
     // fold. Scaling alone reads as a squashed cylinder; a folded knee reads as
     // a rider absorbing the terrain.
-    const legScale = lerp(1, 0.86, this.sCrouch);
-    p.legF.scale.y = legScale;
-    p.legB.scale.y = legScale;
+    // No scaling here any more: squashing a bone squashes everything skinned
+    // to it. The knee bend does the compressing, which is what actually reads
+    // as a rider absorbing terrain.
     p.hips.position.y = lerp(0.9, 0.63, this.sCrouch);
     const bend = lerp(0.22, 1.15, this.sCrouch);
     p.legF.rotation.x = bend * 0.45;
@@ -721,6 +783,11 @@ export class RiderRig {
       armA.rotation.y = lerp(0, tx, g);
       armB.rotation.x = lerp(-0.2, -0.9, g);
       armB.rotation.z = lerp(-0.15, 0.85, g);
+      // The reaching arm straightens; the other stays tucked.
+      const elbowA = front ? p.elbowF : p.elbowB;
+      const elbowB2 = front ? p.elbowB : p.elbowF;
+      elbowA.rotation.x = damp(elbowA.rotation.x, lerp(-0.5, -0.16, g), 0.0004, dt);
+      elbowB2.rotation.x = damp(elbowB2.rotation.x, -0.95, 0.0004, dt);
       // Tweak the board out with the grab.
       p.boardRoot.rotation.z += tz * g * 0.55 * this.rider.style.tweak;
       p.boardRoot.rotation.x = tx * g * 0.6 * this.rider.style.tweak;
@@ -731,6 +798,11 @@ export class RiderRig {
       p.armF.rotation.z = damp(p.armF.rotation.z, -spread - this.sLean * 0.4, 0.0006, dt);
       p.armB.rotation.x = damp(p.armB.rotation.x, -0.25 - flap, 0.0006, dt);
       p.armB.rotation.z = damp(p.armB.rotation.z, spread - this.sLean * 0.4, 0.0006, dt);
+      // Arms are never straight at rest — a slight carry is most of what makes
+      // a riding stance look relaxed instead of mannequin-like.
+      const rest = -0.42 - this.sCrouch * 0.3;
+      p.elbowF.rotation.x = damp(p.elbowF.rotation.x, rest + flap * 0.5, 0.0006, dt);
+      p.elbowB.rotation.x = damp(p.elbowB.rotation.x, rest - flap * 0.5, 0.0006, dt);
       p.boardRoot.rotation.x = damp(p.boardRoot.rotation.x, 0, 0.0006, dt);
     }
 

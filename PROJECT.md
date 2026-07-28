@@ -330,6 +330,30 @@ min-maxing. `RiderPreview` shares **one page-lifetime renderer** for the same
 iOS reason `core/renderer.ts` does, and runs at 30fps because the game is
 already drawing behind it.
 
+**Skinned limbs.** Arms and legs are `SkinnedMesh` tubes over two-bone chains
+(`player/RiderMesh.ts`), not stacked capsules. The old rigid pairs visibly
+interpenetrated at every elbow and knee and nothing deformed when a joint bent
+— that, not polygon count, is what read as "blocky". Three traps here:
+
+- `bind()` snapshots bone world matrices to build their inverses, so it can
+  only run once the chain is parented **and** world matrices are current.
+  `bindLimbs` is called last in `build()` for exactly this reason.
+- A limb mesh must be a **sibling** of its chain root at the chain root's rest
+  offset, because its geometry is authored in that frame.
+- Gear authored in the arm-root frame (`buildHand`) has to be lifted by
+  `upperLen` when parented to the elbow, or the mitts float at knee height.
+
+Do not scale a limb bone to fake compression — it scales everything skinned to
+it. The knee bend does the compressing.
+
+**Why the characters aren't imported meshes.** Rigged humanoids *are* reachable
+(three.js examples, Khronos samples), and all of them are the wrong answer:
+Xbot and Soldier are Mixamo-derived so redistribution is a licence problem,
+CesiumMan is lower quality than this rig, RobotExpressive is a cartoon robot.
+None is a snowboarder, so each would still need the whole gear system on top —
+and the gear is what sells a snowboarder. Revisit only with a rigged model
+that is actually wearing snow kit.
+
 **Smoothness.** Four things, all worth keeping:
 - `RiderPhysics.renderPos` is `pos` advanced by the un-simulated remainder of
   the fixed 1/120s accumulator. The rig and the chase camera read it; the
