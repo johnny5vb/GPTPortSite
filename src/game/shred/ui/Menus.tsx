@@ -50,7 +50,24 @@ export function useMenuKeys(
     setIndex(next);
   }, []);
 
-  const select = useCallback((i: number) => {
+  /**
+   * Hover moves the keyboard cursor — but only once the pointer has actually
+   * moved. Without this, the mouse position left over from the *previous*
+   * screen silently pre-selects whatever now sits under it, so clicking
+   * "Drop In" and pressing Enter without touching the mouse could start a
+   * different mode than the one at the top of the list.
+   */
+  const pointerMoved = useRef(false);
+  useEffect(() => {
+    const onMove = () => {
+      pointerMoved.current = true;
+    };
+    window.addEventListener("pointermove", onMove);
+    return () => window.removeEventListener("pointermove", onMove);
+  }, []);
+
+  const hover = useCallback((i: number) => {
+    if (!pointerMoved.current) return;
     indexRef.current = i;
     setIndex(i);
   }, []);
@@ -77,7 +94,7 @@ export function useMenuKeys(
     return () => window.removeEventListener("keydown", onKey);
   }, [horizontal, move]);
 
-  return [index, select] as const;
+  return [index, hover] as const;
 }
 
 function Sheet({
