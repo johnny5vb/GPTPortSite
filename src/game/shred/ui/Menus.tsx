@@ -26,6 +26,7 @@ import { TRICK_INDEX } from "../player/TrickSystem";
 import { unlockTable, type SaveData } from "../core/save";
 import { formatScore, formatTime } from "../core/math";
 import type { RunSummary } from "../core/Game";
+import { boardThumb, riderThumb } from "./Thumbs";
 
 // ─────────────────────────────────────────────────────────────── plumbing ────
 
@@ -136,6 +137,44 @@ export function Sheet({
       )}
       {children}
     </motion.div>
+  );
+}
+
+function Thumb({
+  make,
+  alt,
+  className,
+  delay,
+}: {
+  make: () => string;
+  alt: string;
+  className: string;
+  delay: number;
+}) {
+  const [src, setSrc] = useState<string | null>(null);
+  useEffect(() => {
+    // Staggered: each card waits its turn rather than all of them building a
+    // rig in the same frame, which would freeze the panel for half a second.
+    let raf = 0;
+    const t = window.setTimeout(() => {
+      raf = requestAnimationFrame(() => {
+        try {
+          setSrc(make());
+        } catch {
+          /* a thumbnail is never worth breaking the menu over */
+        }
+      });
+    }, delay);
+    return () => {
+      window.clearTimeout(t);
+      cancelAnimationFrame(raf);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <div className={className}>
+      {src && <img src={src} alt={alt} />}
+    </div>
   );
 }
 
@@ -485,7 +524,7 @@ export function Garage({
               </button>
             </div>
 
-            {customs.map((r) => (
+            {customs.map((r, ci) => (
               <div key={r.id} className="sh-card-wrap">
                 <button
                   className="sh-card"
@@ -494,9 +533,15 @@ export function Garage({
                 >
                   <div className="sh-eyebrow">{r.handle}</div>
                   <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{r.name}</div>
+                  <Thumb
+                    className="sh-thumb sh-thumb--rider"
+                    alt=""
+                    delay={ci * 45}
+                    make={() => riderThumb(r, boardById(save.selected.board))}
+                  />
                   <div className="sh-swatches">
-                    {riderSwatches(r).map((c, i) => (
-                      <span key={i} className="sh-swatch" style={{ background: c }} />
+                    {riderSwatches(r).map((c, k) => (
+                      <span key={k} className="sh-swatch" style={{ background: c }} />
                     ))}
                   </div>
                   <p
@@ -535,7 +580,7 @@ export function Garage({
               </div>
             ))}
 
-            {RIDERS.map((r) => {
+            {RIDERS.map((r, i) => {
               const key = `rider:${r.id}`;
               const owned = has(key);
               return (
@@ -548,9 +593,15 @@ export function Garage({
                 >
                   <div className="sh-eyebrow">{r.handle}</div>
                   <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{r.name}</div>
+                  <Thumb
+                    className="sh-thumb sh-thumb--rider"
+                    alt=""
+                    delay={i * 45}
+                    make={() => riderThumb(r, boardById(save.selected.board))}
+                  />
                   <div className="sh-swatches">
-                    {riderSwatches(r).map((c, i) => (
-                      <span key={i} className="sh-swatch" style={{ background: c }} />
+                    {riderSwatches(r).map((c, k) => (
+                      <span key={k} className="sh-swatch" style={{ background: c }} />
                     ))}
                   </div>
                   <p
@@ -578,7 +629,7 @@ export function Garage({
             className="sh-grid"
             style={{ gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))" }}
           >
-            {BOARDS.map((b) => {
+            {BOARDS.map((b, i) => {
               const key = `board:${b.id}`;
               const owned = has(key);
               return (
@@ -591,14 +642,11 @@ export function Garage({
                 >
                   <div className="sh-eyebrow">{b.maker}</div>
                   <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{b.name}</div>
-                  <div
-                    style={{
-                      marginTop: "0.6rem",
-                      height: 34,
-                      borderRadius: 8,
-                      background: `linear-gradient(100deg, ${b.colors.base}, ${b.colors.accent} 55%, ${b.colors.accent2})`,
-                      border: `1px solid ${b.colors.edge}55`,
-                    }}
+                  <Thumb
+                    className="sh-thumb sh-thumb--board"
+                    alt=""
+                    delay={i * 25}
+                    make={() => boardThumb(b)}
                   />
                   <p
                     style={{

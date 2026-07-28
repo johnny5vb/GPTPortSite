@@ -31,6 +31,22 @@ export interface LimbSegment {
 }
 
 interface LimbOptions {
+  /**
+   * Lateral offset of a ring, by segment and position along it.
+   *
+   * Legs need this: a snowboarder's feet are bolted to the bindings but the
+   * thighs come off a narrow pelvis, so a leg is an A, not a post. Drifting the
+   * top rings inward is what removes the goal-post read without touching the
+   * bones — which matters, because the pose code overwrites their rotation
+   * every frame.
+   */
+  drift?: (segment: number, t: number) => number;
+  /**
+   * Multiplier on the ring radius. Sleeve baffles used to be separate rings
+   * stuck around the arm, which defeated the point of making the limb one
+   * surface — rolling the ripple into the radius keeps it continuous.
+   */
+  swell?: (segment: number, t: number) => number;
   radial?: number;
   /** Rings per segment. More rings = a smoother crease at the joint. */
   rings?: number;
@@ -57,6 +73,8 @@ export function buildLimb(
   const rings = opts.rings ?? 5;
   const squash = opts.squash ?? 1;
   const capEnd = opts.capEnd ?? true;
+  const drift = opts.drift ?? (() => 0);
+  const swell = opts.swell ?? (() => 1);
 
   const positions: number[] = [];
   const normals: number[] = [];
@@ -84,11 +102,12 @@ export function buildLimb(
     boneB: number,
     blend: number,
     v: number,
+    dz = 0,
   ) => {
     for (let s = 0; s <= radial; s++) {
       const a = (s / radial) * Math.PI * 2;
       const cx = Math.cos(a) * r;
-      const cz = Math.sin(a) * r * squash;
+      const cz = Math.sin(a) * r * squash + dz;
       positions.push(cx, y, cz);
       const n = new THREE.Vector3(cx, 0, cz / (squash * squash || 1));
       if (n.lengthSq() < 1e-8) n.set(1, 0, 0);
@@ -109,7 +128,7 @@ export function buildLimb(
     for (let k = startRing; k <= rings; k++) {
       const t = k / rings;
       const y = originY[i] - seg.length * t;
-      const r = seg.r0 + (seg.r1 - seg.r0) * t;
+      const r = (seg.r0 + (seg.r1 - seg.r0) * t) * swell(i, t);
 
       // Blend toward the *next* bone as we approach the joint, and toward the
       // previous one just past it.
@@ -126,7 +145,7 @@ export function buildLimb(
         boneB = i - 1;
         blend = (1 - t / JOINT) * 0.5;
       }
-      pushRing(y, r, boneA, boneB, blend, -y / totalLen);
+      pushRing(y, r, boneA, boneB, blend, -y / totalLen, drift(i, t));
       made++;
     }
     ringCount.push(made);
@@ -141,7 +160,7 @@ export function buildLimb(
       const a = (k / capRings) * (Math.PI / 2);
       const r = last.r1 * Math.cos(a);
       const y = baseY - last.r1 * Math.sin(a) * 0.9;
-      pushRing(y, Math.max(r, 0.0015), segments.length - 1, segments.length - 1, 0, 1);
+      pushRing(y, Math.max(r, 0.0015), segments.length - 1, segments.length - 1, 0, 1, drift(segments.length - 1, 1));
     }
   }
 

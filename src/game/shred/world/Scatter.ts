@@ -19,7 +19,7 @@ const RADIUS_X = 9; // ± cells in X  → ±216m
 const AHEAD = 26; // cells ahead      → 624m
 const BEHIND = 4;
 
-const MAX_ROCKS = 900;
+const MAX_ROCKS = 260; // per variant, three variants
 
 /**
  * Organic noise on a surface of revolution.
@@ -199,7 +199,9 @@ function rockGeometry(kind: number): THREE.BufferGeometry {
     pos.setXYZ(i, x * n * shape[0], y * n * shape[1], z * n * shape[2]);
   }
   geo.computeVertexNormals();
-  paint(geo, new THREE.Color("#1b1e26"), new THREE.Color("#8b97a8"));
+  // On a snow-covered mountain, exposed rock is grey-blue and wears a cap of
+  // snow. The old near-black read as a hole punched in the hillside.
+  paint(geo, new THREE.Color("#4a5260"), new THREE.Color("#cfdae8"));
   return geo;
 }
 
@@ -326,6 +328,19 @@ export class Scatter {
     this.rebuild(cx, cz);
   }
 
+  /**
+   * How much of an instance to draw, given where its cell sits in the window.
+   *
+   * The window is rebuilt every time the rider crosses a 24m cell boundary,
+   * which used to mean anything at the edge blinked in or out. Scaling to zero
+   * over the last couple of cells turns that pop into a shrink nobody notices.
+   */
+  private edgeFade(dx: number, dz: number) {
+    const fx = Math.min(1, (RADIUS_X - Math.abs(dx)) / 2.5);
+    const fz = Math.min(1, (AHEAD - dz) / 3);
+    return Math.max(0, Math.min(fx, fz));
+  }
+
   private rebuild(cx: number, cz: number) {
     this.treeCount.fill(0);
     this.rockCount.fill(0);
@@ -339,6 +354,8 @@ export class Scatter {
         const xi = cx + dx;
         const [r0, r1, r2] = hash2v(xi, zi, gen.seed);
         if (far && r0 > 0.55) continue;
+        const fade = this.edgeFade(dx, dz);
+        if (fade <= 0.001) continue;
 
         const wx = xi * CELL + r0 * CELL;
         const wz = zi * CELL + r1 * CELL;
@@ -359,7 +376,7 @@ export class Scatter {
             const tx = wx + (a0 - 0.5) * CELL * 0.9;
             const tz = wz + (a1 - 0.5) * CELL * 0.9;
             const ty = gen.heightAt(tx, tz);
-            const scale = lerp(0.75, 1.55, a2);
+            const scale = lerp(0.75, 1.55, a2) * fade;
             this.euler.set((a0 - 0.5) * 0.14, a1 * Math.PI * 2, (a1 - 0.5) * 0.14);
             this.q.setFromEuler(this.euler);
             this.v.set(tx, ty - 0.4, tz);
@@ -377,8 +394,9 @@ export class Scatter {
         }
 
         // Rocks: exposed on the steeps and along the corridor walls.
-        if (steep > 0.5 && r2 > 0.72) {
-          const scale = lerp(0.8, 4.2, r1);
+        // Rocks want a genuinely steep, wind-scoured face — not every roll.
+        if (steep > 0.72 && r2 > 0.86) {
+          const scale = lerp(0.9, 3.4, r1) * fade;
           this.euler.set(r0 * 0.6, r1 * 6.28, r2 * 0.6);
           this.q.setFromEuler(this.euler);
           this.v.set(wx, h - scale * 0.35, wz);

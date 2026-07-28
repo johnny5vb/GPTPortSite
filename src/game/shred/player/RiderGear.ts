@@ -663,129 +663,213 @@ export function buildHand(
  * single most recognisable shape in snow kit, and it breaks the torso's
  * outline into bands so it stops reading as one extruded blob.
  */
+/**
+ * The torso, as **one continuous lofted surface** from hip to shoulder.
+ *
+ * This used to be a stack of separate spheres — a hem blob, a chest blob, a
+ * collar blob — and no amount of colour hid the fact that you could see where
+ * each one ended. A body is one skin; the jacket style changes its *profile*,
+ * not how many objects it is made of.
+ *
+ * Rings are elliptical (a torso is deeper than it is wide is wrong — it is
+ * wider than it is deep) and their radius is modulated along the body: puffy
+ * gets baffle ribs rolled into the surface, a shell stays smooth, an anorak
+ * swells at the pouch. Colour is baked per-vertex so a contrast yoke or a belt
+ * is a band in the same mesh rather than another object stuck on top.
+ */
+function torsoSurface(
+  app: Appearance,
+  s: BuildScale,
+  main: THREE.Color,
+  alt: THREE.Color,
+): THREE.BufferGeometry {
+  const RINGS = 46;
+  const RADIAL = 22;
+  const y0 = -0.06;
+  const y1 = 0.5;
+  const w = s.girth;
+
+  // Half-depth (front-back) and half-width (shoulder-shoulder) up the body.
+  const shape = (t: number): [number, number] => {
+    const y = y0 + (y1 - y0) * t;
+    // Waist in, chest out, shoulders wide — the base silhouette every cut shares.
+    const base =
+      0.088 + 0.03 * Math.sin(t * Math.PI * 0.92) + 0.022 * smoothstep01((t - 0.55) / 0.35);
+    const taper = 1 - smoothstep01((t - 0.86) / 0.14) * 0.42; // neck
+    let depth = base * taper;
+    let width = (base * 1.24 + 0.012) * taper;
+
+    switch (app.jacket) {
+      case "puffy": {
+        // Baffles: a ripple rolled into the radius. Continuous surface, ribbed
+        // profile — which is what a down jacket actually is.
+        const rib = Math.sin(t * Math.PI * 9.5) * 0.5 + 0.5;
+        depth *= 1.06 + rib * 0.1;
+        width *= 1.04 + rib * 0.07;
+        break;
+      }
+      case "vest": {
+        // Slab-sided over the chest, cut away at the shoulders for sleeves.
+        const body = 1 - smoothstep01((t - 0.66) / 0.16);
+        const rib = Math.sin(t * Math.PI * 7.5) * 0.5 + 0.5;
+        depth *= 1 + body * (0.1 + rib * 0.09);
+        width *= 1 + body * (0.05 + rib * 0.05);
+        break;
+      }
+      case "anorak": {
+        const pouch = Math.exp(-Math.pow((t - 0.3) / 0.13, 2));
+        depth *= 1.03 + pouch * 0.16;
+        width *= 1.02;
+        break;
+      }
+      case "onesie":
+        depth *= 0.99;
+        width *= 0.99;
+        break;
+      default: // shell
+        depth *= 1.0;
+        width *= 1.0;
+        break;
+    }
+    void y;
+    return [depth * w, width * w];
+  };
+
+  // Where the second colour lands, per cut.
+  const bandAt = (t: number) => {
+    switch (app.jacket) {
+      case "puffy":
+        return t > 0.46 && t < 0.58 ? 1 : t > 0.9 ? 1 : 0;
+      case "shell":
+        return t > 0.6 && t < 0.7 ? 1 : t > 0.9 ? 1 : 0;
+      case "anorak":
+        return t > 0.66 ? 1 : 0;
+      case "vest":
+        return t > 0.66 ? 1 : 0;
+      default:
+        return t > 0.34 && t < 0.42 ? 1 : t > 0.9 ? 1 : 0;
+    }
+  };
+
+  const pos: number[] = [];
+  const col: number[] = [];
+  const uv: number[] = [];
+  const idx: number[] = [];
+  const c = new THREE.Color();
+
+  for (let r = 0; r <= RINGS; r++) {
+    const t = r / RINGS;
+    const y = y0 + (y1 - y0) * t;
+    const [depth, width] = shape(t);
+    const band = bandAt(t);
+    for (let a = 0; a <= RADIAL; a++) {
+      const ang = (a / RADIAL) * Math.PI * 2;
+      const cx = Math.cos(ang) * depth;
+      const cz = Math.sin(ang) * width;
+      pos.push(cx, y, cz);
+      uv.push(a / RADIAL, t);
+      c.copy(band ? alt : main);
+      // Cheap ambient occlusion into the ribs and under the arms.
+      const shade = 0.86 + 0.14 * Math.abs(Math.cos(ang * 1.0));
+      col.push(c.r * shade, c.g * shade, c.b * shade);
+    }
+  }
+  const per = RADIAL + 1;
+  for (let r = 0; r < RINGS; r++) {
+    for (let a = 0; a < RADIAL; a++) {
+      const i0 = r * per + a;
+      idx.push(i0, i0 + per, i0 + 1, i0 + 1, i0 + per, i0 + per + 1);
+    }
+  }
+  // Cap the top so the neck opening isn't a hole.
+  const capCentre = pos.length / 3;
+  pos.push(0, y1, 0);
+  uv.push(0.5, 1);
+  c.copy(alt);
+  col.push(c.r, c.g, c.b);
+  for (let a = 0; a < RADIAL; a++) {
+    const i0 = RINGS * per + a;
+    idx.push(i0, capCentre, i0 + 1);
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+  geo.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+  return geo;
+}
+
+const smoothstep01 = (x: number) => {
+  const t = Math.max(0, Math.min(1, x));
+  return t * t * (3 - 2 * t);
+};
+
+/**
+ * The torso. Anchors are unchanged so the pose code doesn't care which cut is
+ * on: the surface spans the pelvis to the collar, and only the small hard
+ * pieces (buckles, pockets, a hood lump) are separate objects.
+ */
 export function buildJacket(
   kit: GearKit,
   app: Appearance,
   s: BuildScale,
 ): THREE.Group {
   const g = new THREE.Group();
-  const main = kit.cloth(app.jacketColor, { roughness: 0.88, flatShading: false });
-  const alt = kit.cloth(app.jacketAlt, { roughness: 0.86, flatShading: false });
+  const main = new THREE.Color(app.jacketColor);
+  const alt = new THREE.Color(app.jacketAlt);
   const trim = kit.mat(app.accent, { roughness: 0.6, flatShading: false });
   const w = s.girth;
 
-  /**
-   * A body volume as an explicit box of dimensions rather than a rotated
-   * capsule. Depth is front-to-back (+X is the face), width is shoulder to
-   * shoulder (±Z). Getting this the wrong way round buries the arms inside the
-   * torso, which is exactly what a rotated capsule did here first time.
-   */
-  const blob = (
-    mat: THREE.Material,
-    y: number,
-    depth: number,
-    height: number,
-    width: number,
-  ) => {
-    const m = kit.mesh(new THREE.SphereGeometry(1, 22, 16), mat, 0, y, 0);
-    m.scale.set(depth, height, width);
-    g.add(m);
-    return m;
-  };
+  const skin = kit.cloth("#ffffff", { roughness: 0.88, vertexColors: true });
+  g.add(kit.mesh(torsoSurface(app, s, main, alt), skin));
 
-  // Arms hang at |z| = 0.165, so nothing on the torso may exceed that.
-  const HALF_W = 0.152;
+  // Shoulder caps: where the sleeve meets the body, so the join isn't a seam.
+  const capMat = kit.cloth(app.jacket === "vest" ? app.jacketAlt : app.jacketColor, {
+    roughness: 0.88,
+  });
+  for (const z of [-1, 1]) {
+    const cap = kit.mesh(new THREE.SphereGeometry(1, 16, 12), capMat, 0, 0.44 * s.height, z * 0.15 * s.shoulder);
+    cap.scale.set(0.062 * w, 0.07, 0.07 * w);
+    g.add(cap);
+  }
 
-  // Shoulders are shared by every style — the sleeves hang off them.
-  const shoulders = kit.capsule(0.092 * s.shoulder, 0.24 * s.shoulder, main, 0, 0.44, 0);
-  shoulders.rotation.x = Math.PI / 2;
-  g.add(shoulders);
-
-  const collar = kit.mesh(new THREE.SphereGeometry(1, 18, 12), alt, 0, 0.495, 0);
-  collar.scale.set(0.084 * w, 0.036, 0.096 * w);
-  g.add(collar);
+  if (app.jacket !== "onesie") {
+    const zip = kit.mesh(
+      new THREE.BoxGeometry(0.012, app.jacket === "anorak" ? 0.16 : 0.34, 0.018),
+      trim,
+      0.112 * w,
+      app.jacket === "anorak" ? 0.38 : 0.28,
+      0,
+    );
+    g.add(zip);
+  }
 
   switch (app.jacket) {
-    case "puffy": {
-      // Five baffles, widest at the chest, tapering to the hem. Each one is a
-      // squashed sphere, so the depth and width are stated rather than implied.
-      const bands: [number, number, number][] = [
-        [0.105, 0.116, 0.052],
-        [0.195, 0.122, 0.05],
-        [0.28, 0.126, 0.05],
-        [0.36, 0.121, 0.046],
-        [0.428, 0.106, 0.04],
-      ];
-      bands.forEach(([y, depth, height], i) => {
-        const width = Math.min(HALF_W, depth * 1.24) * w;
-        blob(i === 2 ? alt : main, y, depth * w, height, width);
-      });
-      // A vertical zip placket so the bands read as a garment, not as rings.
-      const zip = kit.mesh(new THREE.BoxGeometry(0.022, 0.35, 0.026), trim, 0.108 * w, 0.27, 0);
-      g.add(zip);
-      break;
-    }
-    case "shell": {
-      blob(main, 0.29, 0.118 * w, 0.15, 0.146 * w);
-      blob(main, 0.14, 0.124 * w, 0.075, 0.15 * w);
-      blob(alt, 0.345, 0.12 * w, 0.036, 0.146 * w);
-      // Chest pocket + hem drawcord: small, but they scale the figure.
-      const pocket = kit.mesh(new THREE.BoxGeometry(0.016, 0.05, 0.07), alt, 0.112 * w, 0.35, 0.05);
-      g.add(pocket);
-      const cord = kit.mesh(new THREE.TorusGeometry(0.128 * w, 0.008, 6, 22), trim, 0, 0.086, 0);
-      cord.rotation.x = Math.PI / 2;
-      cord.scale.set(1, 1, 1.16);
-      g.add(cord);
-      break;
-    }
-    case "anorak": {
-      blob(main, 0.29, 0.12 * w, 0.16, 0.148 * w);
-      blob(main, 0.14, 0.126 * w, 0.07, 0.152 * w);
-      // Kangaroo pocket across the belly — a flattened patch, not a lump.
-      const pouch = kit.mesh(new THREE.SphereGeometry(1, 18, 14), alt, 0.062 * w, 0.185, 0);
-      pouch.scale.set(0.072 * w, 0.056, 0.118 * w);
-      g.add(pouch);
-      // Contrast yoke across the chest and a half zip down to it.
-      blob(alt, 0.395, 0.117 * w, 0.045, 0.145 * w);
-      const zip = kit.mesh(new THREE.BoxGeometry(0.018, 0.16, 0.024), trim, 0.11 * w, 0.35, 0);
-      g.add(zip);
-      break;
-    }
     case "vest": {
-      // A hoodie underneath in the alt colour...
-      blob(alt, 0.29, 0.108 * w, 0.16, 0.132 * w);
-      const hoodLump = kit.mesh(new THREE.SphereGeometry(0.082, 16, 12), alt, -0.082 * w, 0.47, 0);
-      hoodLump.scale.set(0.8, 0.85, 1.05);
+      const hoodLump = kit.mesh(new THREE.SphereGeometry(0.084, 16, 12), capMat, -0.088 * w, 0.46, 0);
+      hoodLump.scale.set(0.82, 0.86, 1.06);
       g.add(hoodLump);
-      // ...with a sleeveless puffy over the top, narrower so the sleeves show.
-      const bands: [number, number][] = [
-        [0.165, 0.122],
-        [0.25, 0.126],
-        [0.335, 0.12],
-      ];
-      bands.forEach(([y, depth]) => {
-        blob(main, y, depth * w, 0.05, Math.min(0.138, depth * 1.14) * w);
-      });
-      const zip = kit.mesh(new THREE.BoxGeometry(0.022, 0.24, 0.024), trim, 0.108 * w, 0.25, 0);
-      g.add(zip);
       break;
     }
     case "onesie": {
-      // One continuous volume from chest to hip, with a belt and a chevron —
-      // the '90s one-piece read.
-      blob(main, 0.3, 0.116 * w, 0.17, 0.144 * w);
-      blob(main, 0.13, 0.118 * w, 0.09, 0.14 * w);
-      blob(alt, 0.165, 0.12 * w, 0.022, 0.142 * w);
-      const buckle = kit.mesh(new THREE.BoxGeometry(0.022, 0.036, 0.05), trim, 0.112 * w, 0.165, 0);
+      const buckle = kit.mesh(new THREE.BoxGeometry(0.02, 0.034, 0.05), trim, 0.108 * w, 0.15, 0);
       g.add(buckle);
-      // Chevron across the chest.
       for (const dir of [-1, 1]) {
-        const bar = kit.mesh(new THREE.BoxGeometry(0.02, 0.032, 0.11), alt, 0.104 * w, 0.34, dir * 0.05);
+        const bar = kit.mesh(new THREE.BoxGeometry(0.018, 0.03, 0.1), trim, 0.1 * w, 0.33, dir * 0.05);
         bar.rotation.x = dir * 0.5;
         g.add(bar);
       }
       break;
     }
+    case "shell": {
+      const pocket = kit.mesh(new THREE.BoxGeometry(0.014, 0.048, 0.066), trim, 0.108 * w, 0.32, 0.05);
+      g.add(pocket);
+      break;
+    }
+    default:
+      break;
   }
   return g;
 }

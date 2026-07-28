@@ -359,16 +359,23 @@ export class RiderRig {
       hip.add(knee);
       knees.push(knee);
 
-      const rTop = prof.thigh * s.girth * 1.12;
-      const rKnee = prof.thigh * s.girth * 0.78;
-      const rAnkle = prof.shin * s.girth * 0.8;
+      const rTop = prof.thigh * s.girth * 1.2;
+      const rKnee = prof.thigh * s.girth * 0.72;
+      const rAnkle = prof.shin * s.girth * 0.78;
       const mesh = buildLimb(
         [
           { bone: hip, length: thighLen, r0: rTop, r1: rKnee },
           { bone: knee, length: shinLen, r0: rKnee, r1: rAnkle },
         ],
         pantsMat,
-        { radial: 12, rings: 5, squash: prof.flare, capEnd: false },
+        {
+          radial: 14,
+          rings: 6,
+          squash: prof.flare,
+          capEnd: false,
+          // Thighs converge on the pelvis; the shin stays over the binding.
+          drift: (seg, t) => (seg === 0 ? -Math.sign(z) * 0.12 * (1 - t) * (1 - t) : 0),
+        },
       );
       mesh.position.set(0, 0, z);
       limbs.push(mesh);
@@ -469,23 +476,19 @@ export class RiderRig {
           { bone: elbow, length: foreLen, r0: rElbow, r1: rWrist },
         ],
         sleeve,
-        { radial: 12, rings: 5 },
+        {
+          radial: 14,
+          rings: 8,
+          // A puffy sleeve is ribbed, not smooth — but it is still one surface.
+          swell:
+            a.jacket === "puffy" || a.jacket === "vest"
+              ? (seg, t) => 1 + (Math.sin((seg + t) * Math.PI * 3.4) * 0.5 + 0.5) * 0.16
+              : undefined,
+        },
       );
       mesh.position.copy(shoulder.position);
       limbs.push(mesh);
 
-      if (a.jacket === "puffy" || a.jacket === "vest") {
-        // Sleeve baffles, matching the torso.
-        for (const [node, y] of [
-          [shoulder, -0.1],
-          [shoulder, -0.23],
-          [elbow, -0.12],
-        ] as [THREE.Bone, number][]) {
-          const band = this.mesh(new THREE.SphereGeometry(1, 16, 12), sleeve, 0, y, 0);
-          band.scale.set(0.066 * s.girth, 0.026, 0.066 * s.girth);
-          node.add(band);
-        }
-      }
       // buildHand's geometry is authored in the arm-root frame; the elbow sits
       // one upper-arm below it, so the group has to be lifted back up by that
       // much or the mitts float at knee height.

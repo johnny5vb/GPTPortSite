@@ -330,6 +330,35 @@ min-maxing. `RiderPreview` shares **one page-lifetime renderer** for the same
 iOS reason `core/renderer.ts` does, and runs at 30fps because the game is
 already drawing behind it.
 
+**The torso is one lofted surface**, not a stack of blobs (`torsoSurface` in
+`RiderGear.ts`). Jacket cut changes its *profile* — puffy rolls baffle ribs
+into the radius, an anorak swells at the pouch — and colour bands are baked
+per-vertex, so a contrast yoke is part of the same mesh. Sleeve ribs are a
+radius `swell` on the limb tube for the same reason. Anything added as a
+separate blob here undoes the point of it.
+
+Vertex colour bleeds across a whole quad either side of the boundary, so a
+narrow stripe (a zip) has to be geometry, not paint — as a vertex colour it
+came out as a fat cross on the chest.
+
+**Legs are an A, not two posts.** The thigh rings drift toward the pelvis via
+the `drift` option; the bones stay over the bindings because the pose code
+overwrites their rotation every frame, so the convergence has to live in the
+geometry.
+
+**Garage cards render the real thing** (`ui/Thumbs.ts`). Riders go through one
+shared offscreen renderer — which needs `preserveDrawingBuffer: true`, or
+`toDataURL` returns a blank image — and boards are just the topsheet canvas
+rotated to landscape. Thumbnails are cached by id and built one per frame at
+the call site so opening the garage doesn't stall on twenty rig builds.
+
+**Known defect: pale flat quads scattered on open snow.** Reproducible with a
+pinned seed. Ruled out by elimination: particles, snowfall, glints, wind
+streaks, trails, props, scatter, and the detail-normal work — all disabled
+individually and the artifact persisted. It is in the terrain layer and it
+predates the texture pass. Root cause not yet found; start by dumping a chunk's
+vertex heights and `aMat` against `materialAt` for the same coordinates.
+
 **Skinned limbs.** Arms and legs are `SkinnedMesh` tubes over two-bone chains
 (`player/RiderMesh.ts`), not stacked capsules. The old rigid pairs visibly
 interpenetrated at every elbow and knee and nothing deformed when a joint bent
