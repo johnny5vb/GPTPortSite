@@ -13,7 +13,18 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { HudSnapshot } from "../core/Game";
 import type { TrickResult } from "../player/TrickSystem";
-import { formatScore, formatTime } from "../core/math";
+import { formatScore, formatTime, FEET, MILES } from "../core/math";
+
+/** The control legend, as key caps and the verb each one performs. */
+const HINTS: [string[], string][] = [
+  [["←", "→"], "steer"],
+  [["↑"], "tuck"],
+  [["↓"], "brake"],
+  [["space"], "jump"],
+  [["A", "S", "D", "F"], "grab"],
+  [["shift"], "tweak"],
+  [["esc"], "pause"],
+];
 
 export interface Popup {
   id: number;
@@ -61,7 +72,7 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
       if (s.hud === "none") return;
 
       if (speedRef.current)
-        speedRef.current.firstChild!.textContent = String(Math.round(s.speedKmh));
+        speedRef.current.firstChild!.textContent = String(Math.round(s.speedMph));
       if (speedBarRef.current)
         speedBarRef.current.style.width = `${Math.min(100, s.speed01 * 100)}%`;
       if (speedMeterRef.current)
@@ -102,8 +113,8 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
         airRef.current.style.opacity = show ? "1" : "0";
         if (show)
           airRef.current.textContent = `${s.airTime.toFixed(1)}s  /  ${Math.round(
-            s.airHeight,
-          )}m`;
+            s.airHeight * FEET,
+          )} FT`;
       }
 
       if (labelRef.current) {
@@ -132,8 +143,8 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
       if (distRef.current) {
         distRef.current.textContent =
           s.distanceLeft > 0
-            ? `${Math.round(s.distanceLeft)} M TO GO`
-            : `${(s.distance / 1000).toFixed(2)} KM`;
+            ? `${formatScore(s.distanceLeft * FEET)} FT TO GO`
+            : `${(s.distance * MILES).toFixed(2)} MI`;
       }
     };
     raf = requestAnimationFrame(tick);
@@ -157,8 +168,8 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
       {/* speed */}
       <div className="hud-corner hud-bl">
         <div className="hud-speed" ref={speedRef}>
-          {Math.round(s0.speedKmh)}
-          <small>KM/H</small>
+          {Math.round(s0.speedMph)}
+          <small>MPH</small>
         </div>
         <div className="hud-meter" ref={speedMeterRef}>
           <i ref={speedBarRef} style={{ width: "0%" }} />
@@ -207,23 +218,11 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
 
       {/* timer / distance */}
       <div className="hud-corner hud-tl">
-        <div
-          className="shred-mono"
-          ref={timerRef}
-          style={{
-            fontSize: "clamp(1.1rem,2.4vw,1.7rem)",
-            fontWeight: 600,
-            letterSpacing: "-0.02em",
-          }}
-        >
+        <div className="hud-clock" ref={timerRef}>
           0:00.00
         </div>
-        <div
-          className="sh-eyebrow"
-          ref={distRef}
-          style={{ marginTop: 4 }}
-        >
-          0.00 KM
+        <div className="sh-eyebrow" ref={distRef} style={{ marginTop: 5 }}>
+          0.00 MI
         </div>
         <div className="sh-eyebrow" ref={statusRef} style={{ marginTop: 6 }} />
       </div>
@@ -291,7 +290,7 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
             }}
           >
             <div
-              className="sh-title"
+              className="sh-shout"
               style={{
                 fontSize: "clamp(2.4rem,7vw,5.5rem)",
                 textShadow: "0 6px 60px rgba(0,0,0,.8)",
@@ -305,27 +304,16 @@ export default function Hud({ getSnapshot, popups, banner, showHints }: Props) {
 
       {showHints && (
         <div className="hud-hints">
-          <span className="hud-key">
-            <b>← →</b> steer
-          </span>
-          <span className="hud-key">
-            <b>↑</b> tuck
-          </span>
-          <span className="hud-key">
-            <b>↓</b> brake
-          </span>
-          <span className="hud-key">
-            <b>Space</b> jump / stomp
-          </span>
-          <span className="hud-key">
-            <b>A S D F</b> grab
-          </span>
-          <span className="hud-key">
-            <b>Shift</b> tweak
-          </span>
-          <span className="hud-key">
-            <b>Esc</b> pause
-          </span>
+          {HINTS.map(([keys, label]) => (
+            <span className="hud-key" key={label}>
+              <b>
+                {keys.map((k) => (
+                  <kbd key={k}>{k}</kbd>
+                ))}
+              </b>
+              {label}
+            </span>
+          ))}
         </div>
       )}
     </div>

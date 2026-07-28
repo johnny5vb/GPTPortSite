@@ -1,5 +1,5 @@
 /**
- * SHRED // 1999 — procedural mountain.
+ * SHRED 1999 — procedural mountain.
  *
  * The whole world is one analytic function, `height(x, z)`. The renderer
  * tessellates it into chunks and the physics samples it directly, so the board

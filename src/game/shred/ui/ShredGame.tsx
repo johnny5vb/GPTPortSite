@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * SHRED // 1999 — React shell.
+ * SHRED 1999 — React shell.
  *
  * Owns the canvas, the save file and which screen is up. The engine runs
  * continuously behind the menus (the title screen is a live run on autopilot),
@@ -77,7 +77,7 @@ type Screen =
 
 const EMPTY_HUD: HudSnapshot = {
   status: "loading",
-  speedKmh: 0,
+  speedMph: 0,
   speed01: 0,
   score: 0,
   chain: 0,
@@ -826,11 +826,16 @@ export default function ShredGame() {
             }}
           >
             <div style={{ textAlign: "center" }}>
-              <div
-                className="sh-title"
-                style={{ fontSize: "clamp(2rem,6vw,3.6rem)", letterSpacing: "-0.03em" }}
-              >
-                SHRED <span style={{ opacity: 0.35 }}>{"//"}</span> 1999
+              <div className="sh-lockup" style={{ margin: "0 auto" }}>
+                <div className="sh-shout" style={{ fontSize: "clamp(2rem,6vw,3.6rem)" }}>
+                  <span className="sh-wordmark">
+                    <span className="sh-wordmark__ghost" aria-hidden="true">
+                      SHRED
+                    </span>
+                    <span className="sh-wordmark__ink">SHRED</span>
+                  </span>
+                </div>
+                <div className="sh-year">1999</div>
               </div>
               <div className="sh-eyebrow" style={{ marginTop: "0.8rem" }}>
                 Building the mountain…

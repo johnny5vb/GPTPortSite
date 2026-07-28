@@ -1,5 +1,5 @@
 /**
- * SHRED // 1999 — game orchestrator.
+ * SHRED 1999 — game orchestrator.
  *
  * Owns the renderer, the world, the rider and the loop. Everything else is a
  * system it drives. The React layer never touches three.js: it calls
@@ -52,7 +52,7 @@ export type RunStatus = "loading" | "ready" | "riding" | "paused" | "photo" | "f
 
 export interface HudSnapshot {
   status: RunStatus;
-  speedKmh: number;
+  speedMph: number;
   speed01: number;
   score: number;
   chain: number;
@@ -224,7 +224,7 @@ export class Game {
 
   private hud: HudSnapshot = {
     status: "loading",
-    speedKmh: 0,
+    speedMph: 0,
     speed01: 0,
     score: 0,
     chain: 0,
@@ -1100,7 +1100,7 @@ export class Game {
     const m = this.mode;
     const h = this.hud;
     h.status = this.status;
-    h.speedKmh = p.kmh;
+    h.speedMph = p.mph;
     h.speed01 = clamp01(p.speed / 46);
     h.score = Math.round(this.tricks.score);
     h.chain = this.tricks.chain;

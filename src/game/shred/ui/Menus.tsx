@@ -24,7 +24,7 @@ import { FILTERS } from "../fx/PostFX";
 import { MODES, type ModeId } from "../data/modes";
 import { TRICK_INDEX } from "../player/TrickSystem";
 import { unlockTable, type SaveData } from "../core/save";
-import { formatScore, formatTime } from "../core/math";
+import { formatScore, formatTime, FEET, MILES, MPH } from "../core/math";
 import type { RunSummary } from "../core/Game";
 import { boardThumb, riderThumb } from "./Thumbs";
 
@@ -243,27 +243,25 @@ export function TitleScreen({
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="sh-eyebrow">A snowboard game</div>
-          <h2
-            className="sh-title"
-            style={{
-              fontSize: "clamp(3.4rem, 12vw, 9rem)",
-              margin: "0.4rem 0 0",
-              lineHeight: 0.85,
-            }}
-          >
-            SHRED
-            <span style={{ opacity: 0.35 }}>{" // "}</span>
-            <span
+          <div className="sh-lockup">
+            <h2
+              className="sh-shout"
               style={{
-                background: "linear-gradient(92deg,#6ee7ff,#ff3d81 60%,#ffc46b)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
+                fontSize: "clamp(3.4rem, 12vw, 9rem)",
+                margin: "0.4rem 0 0",
               }}
             >
-              1999
-            </span>
-          </h2>
+              <span className="sh-wordmark">
+                {/* The offset copy is decoration, and a screen reader hitting
+                    "SHRED SHRED" would be worse than no wordmark at all. */}
+                <span className="sh-wordmark__ghost" aria-hidden="true">
+                  SHRED
+                </span>
+                <span className="sh-wordmark__ink">SHRED</span>
+              </span>
+            </h2>
+            <div className="sh-year">1999</div>
+          </div>
           <p className="sh-title-blurb">
             Endless procedural mountains, big stupid airs, and a landing that
             actually feels like something. Late-afternoon light, all the way down.
@@ -295,7 +293,7 @@ export function TitleScreen({
         <div className="sh-title-stats">
           <span className="sh-chip">{save.totals.runs} runs</span>
           <span className="sh-chip">
-            {(save.totals.distance / 1000).toFixed(1)} km ridden
+            {(save.totals.distance * MILES).toFixed(1)} mi ridden
           </span>
           <span className="sh-chip">{save.totals.tricks} tricks</span>
           <span className="sh-chip">best {formatScore(save.totals.bestScore)}</span>
@@ -385,7 +383,7 @@ export function ModeSelect({
                     <span className="sh-chip">{current.duration}s</span>
                   )}
                   {current.distance > 0 && (
-                    <span className="sh-chip">{current.distance} m</span>
+                    <span className="sh-chip">{formatScore(current.distance * FEET)} ft</span>
                   )}
                   {current.crashLimit > 0 && (
                     <span className="sh-chip">{current.crashLimit} crashes</span>
@@ -1276,18 +1274,18 @@ export function Results({
     metric === "time"
       ? formatTime(summary.time)
       : metric === "distance"
-        ? `${(summary.distance / 1000).toFixed(2)} km`
+        ? `${(summary.distance * MILES).toFixed(2)} mi`
         : formatScore(summary.score);
 
   const stats: [string, string][] = [
     ["Score", formatScore(summary.score)],
     ["Time", formatTime(summary.time)],
-    ["Distance", `${(summary.distance / 1000).toFixed(2)} km`],
+    ["Distance", `${(summary.distance * MILES).toFixed(2)} mi`],
     ["Tricks", String(summary.tricks)],
     ["Perfect landings", String(summary.perfects)],
     ["Best trick", formatScore(summary.bestTrick)],
     ["Longest air", `${summary.longestAir.toFixed(2)}s`],
-    ["Top speed", `${Math.round(summary.topSpeed * 3.6)} km/h`],
+    ["Top speed", `${Math.round(summary.topSpeed * MPH)} mph`],
     ["Crashes", String(summary.crashes)],
   ];
   if (summary.gatesPassed + summary.gatesMissed > 0) {
@@ -1304,7 +1302,7 @@ export function Results({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
-          className="sh-title"
+          className="sh-shout"
           style={{
             fontSize: "clamp(3rem,10vw,7rem)",
             marginBottom: "0.4rem",

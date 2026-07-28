@@ -1,5 +1,5 @@
 /**
- * SHRED // 1999 — math helpers.
+ * SHRED 1999 — math helpers.
  *
  * Everything here is frame-rate independent. `damp` is the workhorse: it is an
  * exponential smoothing that behaves identically at 30fps and 240fps, which is
@@ -154,6 +154,18 @@ export const formatScore = (n: number) => {
   }
   return out;
 };
+
+/**
+ * Units.
+ *
+ * The simulation is metric throughout — metres, m/s, radians — because the
+ * physics is easier to reason about that way. Everything the *player* reads is
+ * imperial, and it converts here rather than at each call site, so a speedo in
+ * mph can't drift out of step with a distance in metres.
+ */
+export const MPH = 2.2369363; // m/s → mph
+export const FEET = 3.2808399; // m → ft
+export const MILES = 0.000621371; // m → mi
 
 export const formatTime = (seconds: number) => {
   const s = Math.max(0, seconds);

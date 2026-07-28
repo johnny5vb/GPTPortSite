@@ -56,9 +56,9 @@ export const MODES: ModeDef[] = [
   {
     id: "timetrial",
     name: "Time Trial",
-    tagline: "2 km. Straight down.",
+    tagline: "A mile and a quarter. Straight down.",
     blurb:
-      "Two kilometres to the finish. Tuck the straights, carve the transitions, and never scrub a turn you could have held.",
+      "A mile and a quarter to the finish. Tuck the straights, carve the transitions, and never scrub a turn you could have held.",
     duration: 0,
     distance: 2000,
     crashLimit: 0,
@@ -160,7 +160,7 @@ export const MODES: ModeDef[] = [
     name: "Daily Challenge",
     tagline: "One mountain. Everybody.",
     blurb:
-      "The same seed for everyone, every day. Fixed mountain, fixed light, 1.5 km. One attempt is never enough.",
+      "The same seed for everyone, every day. Fixed mountain, fixed light, just under a mile. One attempt is never enough.",
     duration: 0,
     distance: 1500,
     crashLimit: 0,

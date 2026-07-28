@@ -29,6 +29,7 @@ import {
   smoothstep,
   wrapAngle,
   DEG,
+  MPH,
 } from "../core/math";
 
 export type LandingQuality = "perfect" | "good" | "sketchy" | "crash";
@@ -677,8 +678,8 @@ export class RiderPhysics {
     return clamp01((this.airTime - 0.65) / 1.5) * clamp01(this.peakAir / 6);
   }
 
-  get kmh() {
-    return this.speed * 3.6;
+  get mph() {
+    return this.speed * MPH;
   }
 
   /** Where the board's contact patch is, for spray and trails. */
