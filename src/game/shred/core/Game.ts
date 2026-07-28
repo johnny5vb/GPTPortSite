@@ -645,6 +645,7 @@ export class Game {
       this.hud.status = "riding";
       this.input.enabled = true;
       this.audio.resume();
+      this.audio.setPaused(false);
     }
   }
 
@@ -653,12 +654,15 @@ export class Game {
     this.status = "paused";
     this.hud.status = "paused";
     this.input.releaseAll();
+    // The world stops, so the soundtrack and the ride bed stop with it.
+    this.audio.setPaused(true);
   }
 
   resume() {
     if (this.status !== "paused") return;
     this.status = "riding";
     this.hud.status = "riding";
+    this.audio.setPaused(false);
   }
 
   togglePhoto() {
@@ -670,6 +674,9 @@ export class Game {
     } else if (this.status === "riding" || this.status === "paused") {
       this.status = "photo";
       this.hud.status = "photo";
+      // Photo mode orbits a live world, so it gets its sound back even when it
+      // was entered from the pause menu.
+      this.audio.setPaused(false);
       this.chase.mode = "photo";
       this.chase.orbitYaw = this.chase.currentYaw + Math.PI;
       this.chase.orbitPitch = 0.22;
@@ -692,6 +699,12 @@ export class Game {
     this.status = "finished";
     this.hud.status = "finished";
     this.audio.setComboIntensity(0);
+    // Nothing steps the physics now, so the bed would hold whatever speed the
+    // run ended at. Zero its inputs and let it fall away under the summary.
+    this.audio.speed01 = 0;
+    this.audio.slip01 = 0;
+    this.audio.airborne = false;
+    this.audio.slowmo = 0;
     this.onEvent?.({ type: "finish", summary: this.summary() });
   }
 

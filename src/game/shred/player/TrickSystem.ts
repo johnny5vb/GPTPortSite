@@ -22,20 +22,32 @@ export interface GrabDef {
   key: "A" | "S" | "D" | "F";
   shift: boolean;
   name: string;
-  /** Visual: how far the rear/front hand reaches and which way the board tweaks. */
-  reach: number;
+  /** Which way the grab pulls the board — [nose/tail, lift, edge]. */
   tweak: [number, number, number];
+  /**
+   * Where on the deck the hand actually goes, in board-local space
+   * (X = toe/heel edge, Z = tail/nose). The arm is solved onto this point, so
+   * a grab grips the board instead of miming at it.
+   */
+  grip: [number, number, number];
+  /**
+   * Which hand takes it. Not cosmetic — it's most of what distinguishes the
+   * grabs from each other: a Melon and a Stalefish are both the heel edge, and
+   * the hand is the difference.
+   */
+  front: boolean;
 }
 
+// prettier-ignore
 export const GRABS: GrabDef[] = [
-  { key: "A", shift: false, name: "Indy", reach: 0.55, tweak: [0.1, 0, -0.25] },
-  { key: "S", shift: false, name: "Melon", reach: 0.6, tweak: [-0.1, 0, 0.3] },
-  { key: "D", shift: false, name: "Nose", reach: 0.85, tweak: [0.45, 0, 0] },
-  { key: "F", shift: false, name: "Tail", reach: 0.85, tweak: [-0.5, 0, 0] },
-  { key: "A", shift: true, name: "Japan", reach: 0.95, tweak: [0.35, 0.2, -0.45] },
-  { key: "S", shift: true, name: "Method", reach: 1.0, tweak: [-0.2, 0.1, 0.65] },
-  { key: "D", shift: true, name: "Mute", reach: 0.7, tweak: [0.25, 0, -0.4] },
-  { key: "F", shift: true, name: "Stalefish", reach: 0.8, tweak: [-0.3, 0.1, 0.5] },
+  { key: "A", shift: false, name: "Indy",      tweak: [ 0.1,  0,   -0.25], grip: [ 0.14, 0.05, -0.08], front: false },
+  { key: "S", shift: false, name: "Melon",     tweak: [-0.1,  0,    0.3 ], grip: [-0.14, 0.05,  0.06], front: true  },
+  { key: "D", shift: false, name: "Nose",      tweak: [ 0.45, 0,    0   ], grip: [ 0,    0.06,  0.44], front: true  },
+  { key: "F", shift: false, name: "Tail",      tweak: [-0.5,  0,    0   ], grip: [ 0,    0.06, -0.5 ], front: false },
+  { key: "A", shift: true,  name: "Japan",     tweak: [ 0.35, 0.2, -0.45], grip: [ 0.15, 0.05,  0.3 ], front: true  },
+  { key: "S", shift: true,  name: "Method",    tweak: [-0.2,  0.1,  0.65], grip: [-0.15, 0.05, -0.02], front: true  },
+  { key: "D", shift: true,  name: "Mute",      tweak: [ 0.25, 0,   -0.4 ], grip: [ 0.15, 0.05,  0.12], front: true  },
+  { key: "F", shift: true,  name: "Stalefish", tweak: [-0.3,  0.1,  0.5 ], grip: [-0.15, 0.05, -0.26], front: false },
 ];
 
 export function findGrab(key: "A" | "S" | "D" | "F", shift: boolean) {

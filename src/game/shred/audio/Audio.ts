@@ -122,6 +122,8 @@ export class AudioEngine {
   musicVolume = 0.55;
   sfxVolume = 0.85;
   muted = false;
+  /** True while the run is paused — see `setPaused`. */
+  paused = false;
 
   // Live inputs from the game.
   speed01 = 0;
@@ -256,7 +258,7 @@ export class AudioEngine {
   // ────────────────────────────────────────────────────────────── ride bed ──
 
   update(dt: number) {
-    if (!this.ctx || !this.started) return;
+    if (!this.ctx || !this.started || this.paused) return;
     const t = this.ctx.currentTime;
     const smooth = 0.08;
 
@@ -529,6 +531,14 @@ export class AudioEngine {
   private startScheduler() {
     const tick = () => {
       if (!this.ctx) return;
+      // Paused: keep the timer alive but stop laying down notes, and drag the
+      // playhead along with the clock. Without that second part the scheduler
+      // would fire a burst of catch-up 16ths the moment the run resumes.
+      if (this.paused) {
+        this.nextNoteTime = this.ctx.currentTime + 0.1;
+        this.schedulerTimer = window.setTimeout(tick, 60);
+        return;
+      }
       const ahead = 0.12;
       const spb = 60 / this.track.bpm;
       const stepDur = spb / 4; // 16ths
@@ -656,13 +666,52 @@ export class AudioEngine {
 
   setMusicVolume(v: number) {
     this.musicVolume = v;
-    if (this.musicBus) this.musicBus.gain.value = v;
+    // Don't let a slider drag inside the pause menu un-mute the mix.
+    if (this.musicBus && !this.paused) this.musicBus.gain.value = v;
   }
 
   setSfxVolume(v: number) {
     this.sfxVolume = v;
     if (this.sfxBus) this.sfxBus.gain.value = v;
-    if (this.rideBus) this.rideBus.gain.value = v;
+    if (this.rideBus && !this.paused) this.rideBus.gain.value = v;
+  }
+
+  /**
+   * Pause the *world*, not the whole engine.
+   *
+   * The soundtrack and the ride bed are the run — they stop dead. Menu blips
+   * are feedback for what you're doing right now, so the sfx bus stays live;
+   * suspending the whole AudioContext would take those with it and leave the
+   * pause menu clicking silently.
+   *
+   * The ramp is short but not instant: stepping a gain on a running oscillator
+   * is an audible click.
+   */
+  setPaused(p: boolean) {
+    if (this.paused === p) return;
+    this.paused = p;
+    if (!this.ctx || !this.started) return;
+    const t = this.ctx.currentTime;
+    const ramp = (g: GainNode, to: number) => {
+      g.gain.cancelScheduledValues(t);
+      g.gain.setValueAtTime(g.gain.value, t);
+      g.gain.linearRampToValueAtTime(to, t + 0.09);
+    };
+    ramp(this.musicBus, p ? 0 : this.musicVolume);
+    ramp(this.rideBus, p ? 0 : this.sfxVolume);
+    if (p) {
+      // The ride bed's own gains are driven per frame from speed, and `update`
+      // stops running while paused — so park them at zero here or the first
+      // frame back would still be holding 40mph of wind.
+      for (const g of [this.windGain, this.scrapeGain, this.powderGain]) {
+        if (!g) continue;
+        g.gain.cancelScheduledValues(t);
+        g.gain.setValueAtTime(g.gain.value, t);
+        g.gain.linearRampToValueAtTime(0, t + 0.09);
+      }
+      this.lowpass.frequency.cancelScheduledValues(t);
+      this.lowpass.frequency.setValueAtTime(20000, t);
+    }
   }
 
   suspend() {

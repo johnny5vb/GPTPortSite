@@ -238,6 +238,13 @@ export default function ShredGame() {
             onEvent: handleEvent,
           });
           gameRef.current = g;
+          // Dev-only handle. Everything interesting in here happens inside a
+          // rAF loop that React can't see, so without a way to reach in and
+          // read the live state, "verifying" a change means squinting at a
+          // screenshot. Stripped from production builds.
+          if (process.env.NODE_ENV !== "production") {
+            (window as unknown as { __shred?: Game }).__shred = g;
+          }
           g.resize();
           g.run();
           if (audioStarted.current) {

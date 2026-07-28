@@ -352,12 +352,48 @@ shared offscreen renderer — which needs `preserveDrawingBuffer: true`, or
 rotated to landscape. Thumbnails are cached by id and built one per frame at
 the call site so opening the garage doesn't stall on twenty rig builds.
 
-**Known defect: pale flat quads scattered on open snow.** Reproducible with a
-pinned seed. Ruled out by elimination: particles, snowfall, glints, wind
-streaks, trails, props, scatter, and the detail-normal work — all disabled
-individually and the artifact persisted. It is in the terrain layer and it
-predates the texture pass. Root cause not yet found; start by dumping a chunk's
-vertex heights and `aMat` against `materialAt` for the same coordinates.
+**The "black cubes" defect — fixed, and worth remembering how.** Pale flat
+quads flickered across open snow for three rounds of hunting. Elimination ruled
+out particles, snowfall, wind streaks, trails, props, scatter and the detail
+normals, which pointed at the terrain layer and got the wrong answer twice. The
+detail that cracked it came from the player: *they flicker while the game is
+paused.* With `dt = 0` the only things still moving are the ones driven by
+`uTime` — which is the sparkle field in `SnowMaterial`, and nothing else. Its
+cells were `floor(vWorldPos * 7.0)`: 14cm across, so a few metres in front of
+the camera each "glint" was a dinner-plate of blown-out white. Now ~1cm cells, a
+rarer and sharper twinkle, lower intensity, and a distance window that fades it
+in past 3m and out by 85m.
+
+Two process notes, since both cost time: `uSparkle` is written every frame by
+`Sky.ts`, so setting it in `createWorldUniforms` to test a theory proves
+nothing; and "which systems can animate while paused" is a much smaller search
+space than "which system draws quads" — ask that question first.
+
+**Limbs are solved, not posed.** `RiderRig.reachLimb` is a two-bone analytic IK
+solver — law of cosines, no iteration — and both the legs and a grabbing arm go
+through it. The legs aim at fixed ankle points in **board-local** space, so the
+boots stay in the bindings through every crouch, carve and tuck for free, and
+the boot hangs off an ankle node that is re-aligned to the deck each frame
+(rotating the knee alone points the sole at the sky once it folds past 90°).
+
+**A grab is a whole-body move.** The arms are 0.57m and the deck is 1.3m below
+the shoulder, so an arm alone can never reach it — which is exactly what the
+old grabs looked like. The tuck is: the board comes up (~0.3m), the rider folds
+sideways over the grabbed edge, the torso pitches along the board toward a nose
+or tail grab, and then a servo step measures whatever the solver would still
+fall short by and lifts the deck by that much, capped at 0.42m — past that the
+knees fold further than a knee does. The arm is finally solved to the
+*fingers*, not the wrist (forearm + `HAND`), so the mitt lands on the deck.
+Every grab now lands within a glove's width of its grip point; verified
+numerically through the dev-only `window.__shred` handle rather than by
+squinting at screenshots.
+
+Three things that fall out of this and are easy to undo by accident: the board
+tweak must be applied *before* the hands are solved, since the grip point lives
+in the board's frame; a tweak has to roll the grabbed edge *up*, toward the hand
+(it was rolling away, fighting the reach); and the pelvis is parented to the
+stance node, not the torso — on the torso it swings away from the legs the
+moment the rider folds and opens a gap at the waist.
 
 **Skinned limbs.** Arms and legs are `SkinnedMesh` tubes over two-bone chains
 (`player/RiderMesh.ts`), not stacked capsules. The old rigid pairs visibly
@@ -439,6 +475,13 @@ ends the run there. Endless mode is the deliberate exception.
 *left* of the screen — so a positive steer axis has to *decrease* yaw. This was
 backwards until it was reported; if steering ever feels mirrored again, that
 sign in `Game.stepGameplay` is the place to look, not the input layer.
+
+**Pausing stops the world, not the engine.** `AudioEngine.setPaused` ramps the
+music and ride buses to zero and parks the ride bed's own gains, and the
+scheduler drags its playhead along with the clock so resuming doesn't fire a
+burst of catch-up 16ths. The sfx bus deliberately stays live — suspending the
+whole `AudioContext` would silence the pause menu's own blips. Finishing a run
+zeroes the bed's inputs instead, so the music carries on under the summary.
 
 **Progression** lives in `localStorage` under `shred1999.save.v1`. Everything
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
@@ -691,6 +734,17 @@ finer-grained detail.
       an allocation-free `RiderRig.update`, ramped keyboard steering (with the
       trick system reading the raw axes so air spin stays sharp), and a
       frame-rate-adaptive terrain chunk budget.
+
+34. Grabs, legs and the sparkle defect. The long-hunted flickering quads turned
+    out to be the snow sparkle field (see the SHRED section) — found from the
+    player's own observation that they flickered while paused. Grabs became a
+    whole-body move solved with two-bone IK instead of an arm waved near the
+    board, and the legs went onto the same solver so the boots track the deck
+    through crouches, carves and tucks. Pausing now silences the soundtrack and
+    the ride bed while leaving menu sounds alive. Added a dev-only
+    `window.__shred` handle, which is what made it possible to verify the grab
+    geometry numerically instead of by eye.
+
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

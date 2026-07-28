@@ -69,13 +69,30 @@ export function attachSurfaceMaps(u: WorldUniforms) {
 }
 
 const NOISE_GLSL = /* glsl */ `
+  /**
+   * Wrap before hashing.
+   *
+   * These hashes end in fract(), and fract() of a large float has almost no
+   * mantissa left to work with. The run descends thousands of metres, so by
+   * halfway down a mountain the sparkle hash was returning the same value for
+   * whole blocks of neighbouring cells — which is what produced flat quads of
+   * blown-out white twinkling in unison across the snow. They kept flickering
+   * while paused because the twinkle rides on uTime, not on the simulation.
+   *
+   * 289 is the usual choice: big enough that the repeat is invisible (the
+   * glint field is 1/7m cells, so it wraps every ~41m) and small enough that
+   * every hash keeps its precision.
+   */
+  vec2 shWrap(vec2 p){ return mod(p, 289.0); }
+  vec3 shWrap(vec3 p){ return mod(p, 289.0); }
+
   float shHash(vec2 p){
-    p = fract(p * vec2(233.34, 851.73));
+    p = fract(shWrap(p) * vec2(233.34, 851.73));
     p += dot(p, p + 23.45);
     return fract(p.x * p.y);
   }
   float shHash3(vec3 p){
-    p = fract(p * 0.3183099 + vec3(0.1, 0.71, 0.42));
+    p = fract(shWrap(p) * 0.3183099 + vec3(0.1, 0.71, 0.42));
     p *= 17.0;
     return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
   }
@@ -227,15 +244,29 @@ const FRAGMENT_STYLIZE = /* glsl */ `
   float sheen = pow(max(dot(N, H), 0.0), mix(28.0, 220.0, vMat.x));
   outgoingLight += uSunColor * sheen * (vMat.x * 0.85 + vMat.w * 0.22) * cloudMul;
 
-  // Sparkle: a world-anchored glint field that twinkles as you move past it.
+  /**
+   * Sparkle: a world-anchored glint field that twinkles as you move past it.
+   *
+   * The cell size is the whole ballgame. At 1/7 m a "glint" is a 14cm patch,
+   * which two metres in front of the camera is a dinner-plate of blown-out
+   * white — that is what read as black/white cubes flickering across the snow,
+   * and why they kept flickering while paused: the twinkle rides on uTime, not
+   * on the simulation. Real glitter is a sub-pixel highlight, so the cells are
+   * now ~1cm and the field is windowed to the middle distance: too close and a
+   * cell is a visible patch, too far and it aliases into shimmer.
+   */
   if (uSparkle > 0.001) {
-    vec3 cell = floor(vWorldPos * 7.0);
-    float s = shHash3(cell);
-    float tw = sin(uTime * 6.0 + s * 62.83) * 0.5 + 0.5;
-    float glint = step(0.955, s) * pow(tw, 22.0);
-    float facing = pow(max(dot(N, uSunDir), 0.0), 1.5);
-    outgoingLight += uSunColor * glint * facing * 2.6 * uSparkle *
-      (0.35 + vMat.y) * (1.0 - clamp(vMat.z, 0.0, 1.0)) * cloudMul;
+    float gd = length(cameraPosition - vWorldPos);
+    float gWin = smoothstep(3.0, 9.0, gd) * (1.0 - smoothstep(38.0, 85.0, gd));
+    if (gWin > 0.001) {
+      vec3 cell = floor(vWorldPos * 86.0);
+      float s = shHash3(cell);
+      float tw = sin(uTime * 6.0 + s * 62.83) * 0.5 + 0.5;
+      float glint = step(0.978, s) * pow(tw, 26.0);
+      float facing = pow(max(dot(N, uSunDir), 0.0), 1.5);
+      outgoingLight += uSunColor * glint * facing * 1.15 * uSparkle * gWin *
+        (0.35 + vMat.y) * (1.0 - clamp(vMat.z, 0.0, 1.0)) * cloudMul;
+    }
   }
 
   // 1999 mode: posterise and dither.
