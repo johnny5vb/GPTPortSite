@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     num: "L01",
     tier: "leadership",
     flagship: true,
-    title: "Carelon Rebrand",
+    title: "Beacon Health Options → Carelon",
     client: "Beacon Health Options / Carelon (Elevance Health)",
     year: "2018 — 2020",
     category: "Enterprise Brand Transformation",
@@ -292,7 +292,7 @@ export const PROJECTS: Project[] = [
     num: "L02",
     tier: "leadership",
     flagship: true,
-    title: "Marketing Bench",
+    title: "Creative Operations & Marketing Bench",
     client: "Elevance Health / Carelon",
     year: "2020",
     category: "Creative Operations",
@@ -443,7 +443,7 @@ export const PROJECTS: Project[] = [
     num: "L03",
     tier: "leadership",
     flagship: true,
-    title: "Workfront Restart",
+    title: "Workfront Workflow Transformation",
     client: "Elevance Health / Carelon",
     year: "2025",
     category: "Workflow & Production",
@@ -464,7 +464,10 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0a1729", "#1cb791", "#1f3a5c", "#e8ecf2"],
     display: "WORKFRONT RESTART",
-    cover: "/work/workfront-workflow-transformation/platform-project.jpg",
+    // The future-state model — planning, execution, reporting — says what was
+    // rebuilt in one frame, which a screenshot of the tool never could.
+    cover: "/work/workfront-workflow-transformation/future-state.jpg",
+    coverAspect: "16 / 9",
     gallery: [],
     roleSummary:
       "Redrew Workfront phases, batching, and intake for the creative team.",
@@ -558,6 +561,16 @@ export const PROJECTS: Project[] = [
             "The spine of it — six phases from portfolio planning to reporting, with creative carrying a role in almost every one. Redrawing where creative actually belonged is what made the timelines honest.",
         },
         {
+          kind: "full",
+          aspect: "16 / 9",
+          image: {
+            src: "/work/workfront-workflow-transformation/process-enablers.jpg",
+            alt: "Process and system enablers — marketing map, standard operating procedures, and microlearning videos, beside an end-to-end workflow map with per-role hours",
+          },
+          caption:
+            "A new instance is only half of it. The end-to-end marketing map put every phase, duration, and role in one view — down to the hours each role carries — with desk-level SOPs and short microlearning videos so the process could be taught, not just published.",
+        },
+        {
           kind: "pair",
           a: {
             src: "/work/workfront-workflow-transformation/platform-roles-annotated.jpg",
@@ -571,6 +584,16 @@ export const PROJECTS: Project[] = [
           labelB: "Who signs it off",
           caption:
             "In the running system: a task can be pointed at a designer, a writer, or both — and review became three visible stages with named approvers instead of a thread nobody could track.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 9",
+          image: {
+            src: "/work/workfront-workflow-transformation/task-reviews-training.jpg",
+            alt: "Training page — how to complete Workfront tasks with reviews, including the percent-complete convention tied to review stages",
+          },
+          caption:
+            "The rule people actually needed: percent complete tied to review stages, not to how someone felt about their progress. Tasks that start when work starts and close when it ends are what make duration data honest enough to plan against.",
         },
         {
           kind: "gallery",
@@ -590,6 +613,16 @@ export const PROJECTS: Project[] = [
           ],
           caption:
             "The everyday surface: one place to see what's ready to start, templates carrying real durations and planned hours, and a staged launch the team could track — MVP in January, full launch in April.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 9",
+          image: {
+            src: "/work/workfront-workflow-transformation/restart-roadmap.jpg",
+            alt: "Restart milestones and Q3 planning work on a timeline, beside a list of the challenges still ahead",
+          },
+          caption:
+            "Run as a change program, not a software install: business process mapping, technical build, user testing, training, and a communications arc feeding two launches — with the hard parts named out loud rather than buried.",
         },
         {
           kind: "detail",
