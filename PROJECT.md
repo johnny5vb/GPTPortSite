@@ -307,6 +307,43 @@ and a baffled puffy takes the torso. What's left — silhouette, layering, colou
 is either a piece of kit or a way of breaking up the outline; there is no face
 sculptor and there shouldn't be one.
 
+**But a bare head still needs a face.** `buildFace` draws brow, cheekbone, lids,
+eyes, nose and a closed mouth for the riders wearing nothing over them, and
+every piece is skipped the moment goggles or a gaiter cover it, so a rider in
+kit pays for none of it. This is the same rule applied honestly rather than an
+exception to it: a blank ball is *worse* than a plain face, because the eye goes
+looking for the features it knows are there. What's built is **structure** —
+brow, socket, bridge, cheekbone — and never expression, because structure
+survives being made of spheres and expression does not. Nothing in there can
+animate, deliberately.
+
+The numbers matter more than the geometry does. Features are sized to sit
+*inside* the skull and show only as a swell through it — the first pass placed
+them on the surface at full size, and a nose on a sphere is a beak, a brow bar
+across both eyes is a pair of sunglasses. The skull front is x ≈ 0.088 in
+head-local space and every offset in `buildFace` is set against it.
+
+**A hairline is not one height.** The hair cap used to be a sphere segment, whose
+lower edge is at one angle all the way round — that is a swim cap, and at the
+sweep needed to cover the nape it buried the entire face under a fringe. It is
+now a parametric shell whose cut angle varies with azimuth (`HAIRLINE`): high
+across the forehead, lower past the ear, down the nape at the back. Two things
+that went wrong building it and would go wrong again: blending front→side with
+`|sin φ|` puts a corner at the front and gives everyone a widow's peak (use
+`sin²φ`), and the ring/segment winding has to be `(i0, i0+per, i0+1)` — the
+other way round culls the whole cap and leaves a bald rider wearing the inside
+of their own hair.
+
+**Beards share `hairColor`** and are only ever drawn on a bare jaw, since a
+gaiter or balaclava covers them. Stubble is a *tint of the skin* with a faint
+strand normal, not a shell in hair colour — at half hair colour it read as a
+short beard, which is a different option in the same list.
+
+**Builds differ by distribution, not by scale.** `BuildScale` carries `waist`
+and `chest`, which reshape the torso profile, plus `head` and `neck`, which
+deliberately barely move: three uniform scale factors read as one rider at three
+zoom levels, and a head that tracks girth turns a stocky character into a child.
+
 Things that were got wrong once and are easy to get wrong again:
 - Torso volumes are **scaled spheres with stated depth/height/width**, not
   rotated capsules. A capsule rotated to lie across the body extends along its

@@ -184,6 +184,18 @@ export function fabricRoughness(): THREE.CanvasTexture {
 
 // ───────────────────────────────────────────────────────────────── build ────
 
+/**
+ * Builds differ by *distribution*, not by scale.
+ *
+ * Three uniform scale factors was the first attempt and it read as one rider at
+ * three zoom levels: a bigger person was simply a bigger version of the same
+ * outline. What actually separates a slim rider from a stocky one is where the
+ * mass sits — a slim build pulls in hard at the waist and drops away below the
+ * ribs, a stocky one barely tapers at all and carries its width low. So `waist`
+ * and `chest` reshape the torso profile, and `head` / `neck` keep the head from
+ * scaling with the body (heads vary far less than bodies do, and a head that
+ * tracks girth is what makes a stocky character read as a child).
+ */
 export interface BuildScale {
   /** Torso and limb girth. */
   girth: number;
@@ -191,16 +203,48 @@ export interface BuildScale {
   shoulder: number;
   /** Overall height. */
   height: number;
+  /** How far the waist pulls in below the ribs. 0 = a straight tube. */
+  waist: number;
+  /** Extra fullness across the chest and shoulders. */
+  chest: number;
+  /** Head size, deliberately near-constant across builds. */
+  head: number;
+  /** Neck thickness — the one place a stocky build reads immediately. */
+  neck: number;
 }
 
 export function buildScale(b: Appearance["build"]): BuildScale {
   switch (b) {
     case "slim":
-      return { girth: 0.9, shoulder: 0.93, height: 1.03 };
+      return {
+        girth: 0.88,
+        shoulder: 0.94,
+        height: 1.03,
+        waist: 1.35,
+        chest: 0.86,
+        head: 1.02,
+        neck: 0.9,
+      };
     case "stocky":
-      return { girth: 1.14, shoulder: 1.1, height: 0.96 };
+      return {
+        girth: 1.15,
+        shoulder: 1.12,
+        height: 0.96,
+        waist: 0.42,
+        chest: 1.2,
+        head: 0.98,
+        neck: 1.18,
+      };
     default:
-      return { girth: 1, shoulder: 1, height: 1 };
+      return {
+        girth: 1,
+        shoulder: 1,
+        height: 1,
+        waist: 1,
+        chest: 1,
+        head: 1,
+        neck: 1,
+      };
   }
 }
 
@@ -294,6 +338,18 @@ export function hairRoughness(): THREE.CanvasTexture {
   return hairRoughTex!;
 }
 
+/**
+ * Where the hair stops, per style, as polar angles from the crown. Front is
+ * across the forehead, side runs past the ear, back runs down the nape — real
+ * hairlines are all three, and they are nowhere near equal.
+ */
+const HAIRLINE = {
+  /** Buzzed: barely a hairline at all, but still not a swim cap. */
+  close: { front: 1.28, side: 1.72, back: 2.15 },
+  short: { front: 1.15, side: 1.62, back: 2.1 },
+  long: { front: 1.18, side: 1.95, back: 2.35 },
+};
+
 export function buildHair(
   kit: GearKit,
   style: HairStyle,
@@ -310,16 +366,63 @@ export function buildHair(
     roughnessMap: hairRoughness(),
   });
 
-  /** The part that sits on the skull. Skipped entirely under a hat. */
-  const crown = (r: number, yScale = 1) => {
-    const m = kit.mesh(
-      new THREE.SphereGeometry(r, 20, 14, 0, Math.PI * 2, 0, Math.PI * 0.62),
-      hair,
-      -0.004,
-      0.045,
-      0,
-    );
-    m.scale.set(0.92, 1.04 * yScale, 1.0);
+  /**
+   * The part that sits on the skull. Skipped entirely under a hat.
+   *
+   * A plain sphere segment can't do this: its lower edge is at one height all
+   * the way round, which is a swim cap, not a hairline. A real hairline is high
+   * across the forehead, drops past the ear and runs down the nape — so the cut
+   * angle here varies with azimuth. Getting this wrong is what buried the whole
+   * face under a fringe.
+   */
+  const crown = (
+    r: number,
+    cut: { front: number; side: number; back: number },
+    yScale = 1,
+  ) => {
+    const RINGS = 15;
+    const RADIAL = 26;
+    const pos: number[] = [];
+    const nor: number[] = [];
+    const uvs: number[] = [];
+    const idx: number[] = [];
+    for (let a = 0; a <= RADIAL; a++) {
+      const phi = (a / RADIAL) * Math.PI * 2; // 0 = +X = the face
+      const towardFace = Math.cos(phi);
+      // sin², not |sin| — |sin| has a corner at the front, and the corner is a
+      // widow's peak whether the character wanted one or not.
+      const sideness = Math.sin(phi) * Math.sin(phi);
+      const lim =
+        towardFace >= 0
+          ? cut.front + (cut.side - cut.front) * sideness
+          : cut.back + (cut.side - cut.back) * sideness;
+      for (let t = 0; t <= RINGS; t++) {
+        const th = (t / RINGS) * lim;
+        const sx = Math.sin(th) * Math.cos(phi);
+        const sy = Math.cos(th);
+        const sz = Math.sin(th) * Math.sin(phi);
+        pos.push(sx * r, sy * r * yScale, sz * r);
+        nor.push(sx, sy, sz);
+        uvs.push(a / RADIAL, 1 - t / RINGS);
+      }
+    }
+    const per = RINGS + 1;
+    for (let a = 0; a < RADIAL; a++) {
+      for (let t = 0; t < RINGS; t++) {
+        const i0 = a * per + t;
+        // Wound so the *outside* is the front face. Getting this backwards
+        // culls the whole cap and leaves a bald rider wearing the inside of
+        // their own hair.
+        idx.push(i0, i0 + per, i0 + 1, i0 + 1, i0 + per, i0 + per + 1);
+      }
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    geo.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+    geo.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
+    geo.setIndex(idx);
+    const m = kit.mesh(geo, hair, -0.004, 0.045, 0);
+    m.scale.set(0.92, 1.04, 1.0);
     group.add(m);
     return m;
   };
@@ -339,8 +442,11 @@ export function buildHair(
       const h1 = Math.abs(Math.sin((i + seed) * 12.9898) * 43758.5453) % 1;
       const h2 = Math.abs(Math.sin((i + seed) * 78.233) * 12345.6789) % 1;
       const yaw = t * Math.PI * 2 + (h1 - 0.5) * 0.5;
-      const tilt = 0.5 + h2 * spread;
-      const l = len * (0.72 + h1 * 0.55);
+      // Strands that hang down at the back have to lie flat at the front, or
+      // they sweep forward off the forehead and hang over the eyes.
+      const backness = 0.32 + 0.68 * ((1 - Math.cos(yaw)) * 0.5);
+      const tilt = (0.5 + h2 * spread) * backness;
+      const l = len * (0.72 + h1 * 0.55) * (0.55 + 0.45 * backness);
 
       const geo = new THREE.CylinderGeometry(0.02, 0.006, l, 5, 1);
       geo.translate(0, -l * 0.5, 0);
@@ -377,18 +483,18 @@ export function buildHair(
 
   switch (style) {
     case "buzz":
-      if (!covered) crown(0.101, 0.94);
+      if (!covered) crown(0.101, HAIRLINE.close, 0.94);
       break;
     case "short":
       if (!covered) {
-        crown(0.106);
+        crown(0.106, HAIRLINE.short);
         strands(11, 0.075, 0.5, 3);
       } else fringe();
       nape();
       break;
     case "shag": {
       if (!covered) {
-        crown(0.112);
+        crown(0.112, HAIRLINE.long);
         strands(16, 0.13, 0.75, 7);
       } else fringe();
       nape(0.09);
@@ -410,7 +516,7 @@ export function buildHair(
     }
     case "ponytail": {
       if (!covered) {
-        crown(0.104);
+        crown(0.104, HAIRLINE.short);
         strands(9, 0.06, 0.4, 11);
       } else fringe();
       tail = new THREE.Group();
@@ -433,7 +539,7 @@ export function buildHair(
       break;
     }
     case "braids": {
-      if (!covered) crown(0.104);
+      if (!covered) crown(0.104, HAIRLINE.long);
       else fringe();
       tail = new THREE.Group();
       tail.position.set(-0.05, 0.02, 0);
@@ -458,7 +564,7 @@ export function buildHair(
     }
     case "locs": {
       if (!covered) {
-        crown(0.108);
+        crown(0.108, HAIRLINE.long);
         strands(13, 0.1, 0.7, 17);
       } else fringe();
       tail = new THREE.Group();
@@ -482,7 +588,7 @@ export function buildHair(
     }
     case "bun": {
       if (!covered) {
-        crown(0.102);
+        crown(0.102, HAIRLINE.short);
         const bun = kit.mesh(new THREE.SphereGeometry(0.05, 14, 12), hair, -0.03, 0.15, 0);
         bun.scale.set(1, 0.9, 1);
         group.add(bun);
@@ -669,6 +775,139 @@ export function buildHeadwear(
 }
 
 // ────────────────────────────────────────────────────────────── face gear ────
+
+// ────────────────────────────────────────────────────────────────── face ────
+
+/**
+ * The face, for the riders who aren't wearing anything over it.
+ *
+ * This does not contradict the rule that there is no face sculptor here — it
+ * *is* the rule, applied honestly. The rig's answer to faces is equipment, and
+ * that works for the eight riders in goggles and a gaiter. But a bare head with
+ * no goggles was a blank ball, and a blank ball is worse than a plain face: the
+ * eye goes looking for the features it knows are there and finds nothing.
+ *
+ * So this builds the *structure* of a face and not its expression — brow, nose,
+ * cheekbone, lids, a closed mouth. Structure survives being made of spheres;
+ * expression does not, which is why there is nothing here that could animate.
+ * Every piece is skipped the moment something is worn over it, so a rider in
+ * goggles pays for none of it.
+ */
+export function buildFace(
+  kit: GearKit,
+  app: Appearance,
+  skin: THREE.Material,
+): THREE.Group {
+  const g = new THREE.Group();
+  // A balaclava replaces the head; a visor is a sheet of plastic over all of it.
+  if (app.face === "balaclava" || app.headwear === "visor-helmet") return g;
+
+  const covered = app.face !== "none"; // gaiter or bandana: nose and mouth gone
+  const blind = app.eyewear !== "none"; // goggles or shades: eyes gone
+
+  const blob = (
+    mat: THREE.Material,
+    x: number,
+    y: number,
+    z: number,
+    sx: number,
+    sy: number,
+    sz: number,
+  ) => {
+    const m = kit.mesh(new THREE.SphereGeometry(1, 14, 10), mat, x, y, z);
+    m.scale.set(sx, sy, sz);
+    g.add(m);
+    return m;
+  };
+
+  // Every feature below is sized to sit *inside* the skull and show only as a
+  // swell through it. The first attempt placed them on the surface at full
+  // size, and a nose sitting on a sphere is a beak; a brow sitting on a sphere
+  // is a shelf. The skull front is at x≈0.088 and these numbers are all
+  // relative to that.
+  if (!blind) {
+    for (const z of [-1, 1]) {
+      // Brow ridge, one over each eye — a single bar across both is a pair of
+      // sunglasses, which is exactly what it looked like.
+      blob(skin, 0.070, 0.070, z * 0.031, 0.016, 0.0065, 0.024);
+      // Cheekbone: carries light down from the brow instead of letting the
+      // whole side of the head fall away as one gradient.
+      blob(skin, 0.0615, 0.0355, z * 0.0455, 0.0105, 0.0115, 0.0200);
+    }
+  }
+
+  // Eyes, set into the socket. The ball is mostly buried; what shows is an
+  // almond of white with an iris in it.
+  if (!blind) {
+    const white = kit.mat("#efece6", { roughness: 0.28, flatShading: false });
+    const iris = kit.mat("#3a2a1c", { roughness: 0.18, flatShading: false });
+    for (const z of [-1, 1]) {
+      blob(white, 0.0705, 0.0525, z * 0.032, 0.0125, 0.0100, 0.0150);
+      blob(iris, 0.0785, 0.0520, z * 0.0325, 0.0048, 0.0060, 0.0060);
+      // The lid crease, barely proud — enough to catch a shadow.
+      blob(skin, 0.0735, 0.0605, z * 0.032, 0.0105, 0.0038, 0.0158);
+    }
+  }
+
+  // Nose: a bridge that barely leaves the face and a tip that does.
+  if (!covered) {
+    blob(skin, 0.0790, 0.0455, 0, 0.0100, 0.0200, 0.0080);
+    blob(skin, 0.0855, 0.0265, 0, 0.0112, 0.0098, 0.0112);
+  }
+
+  const beard = app.beard ?? "none";
+
+  // Mouth: a closed line, just proud of the jaw so a beard can't swallow it.
+  // Nothing here opens — a mouth that can't animate is better shut.
+  if (!covered) {
+    const lipSkin = new THREE.Color(app.skin).multiplyScalar(0.68);
+    const lip = kit.mat(`#${lipSkin.getHexString()}`, { roughness: 0.55, flatShading: false });
+    blob(lip, 0.0865, -0.0130, 0, 0.0045, 0.0042, 0.0165);
+  }
+
+  // ── beard ────────────────────────────────────────────────────────────────
+  // Only ever drawn on a bare jaw, and always in the hair colour: a rider with
+  // black hair and a ginger beard reads as a bug.
+  if (!covered && beard !== "none") {
+    const hairMat = kit.mat(app.hairColor, {
+      roughness: 0.78,
+      flatShading: false,
+      normalMap: hairNormal(),
+      normalScale: new THREE.Vector2(0.9, 0.9),
+      roughnessMap: hairRoughness(),
+    });
+    // Stubble isn't hair you can see, it's a jaw that went darker — so it's a
+    // tint of the skin, not a shell of hair colour.
+    const stubbleCol = new THREE.Color(app.skin).lerp(new THREE.Color(app.hairColor), 0.3);
+    const stubbleMat = kit.mat(`#${stubbleCol.getHexString()}`, {
+      roughness: 0.94,
+      flatShading: false,
+      normalMap: hairNormal(),
+      normalScale: new THREE.Vector2(0.28, 0.28),
+    });
+
+    if (beard === "stubble") {
+      const m = blob(stubbleMat, 0.0295, -0.0080, 0, 0.0672, 0.0492, 0.0672);
+      m.renderOrder = 1;
+    }
+    if (beard === "moustache" || beard === "goatee" || beard === "full") {
+      blob(hairMat, 0.0825, 0.0080, 0, 0.0110, 0.0045, 0.0205);
+    }
+    if (beard === "goatee") {
+      blob(hairMat, 0.0665, -0.0345, 0, 0.0205, 0.0195, 0.0200);
+    }
+    if (beard === "full") {
+      // The mass under the jaw, plus the two strips that run up to the ears —
+      // without those the beard is a bib stuck to the chin.
+      blob(hairMat, 0.0275, -0.0300, 0, 0.0690, 0.0455, 0.0680);
+      for (const z of [-1, 1]) {
+        blob(hairMat, 0.0175, 0.0080, z * 0.0715, 0.0350, 0.0380, 0.0140);
+      }
+    }
+  }
+
+  return g;
+}
 
 export function buildFaceGear(kit: GearKit, kind: FaceGear, color: string): THREE.Group {
   const g = new THREE.Group();
@@ -915,9 +1154,16 @@ function torsoSurface(
   // Half-depth (front-back) and half-width (shoulder-shoulder) up the body.
   const shape = (t: number): [number, number] => {
     const y = y0 + (y1 - y0) * t;
-    // Waist in, chest out, shoulders wide — the base silhouette every cut shares.
+    // Waist in, chest out, shoulders wide — the base silhouette every cut
+    // shares. The two build terms are what make the three builds different
+    // *shapes* rather than three sizes of one shape: `waist` scales the dip
+    // below the ribs, `chest` scales the swell above them.
+    const dip = 0.014 * Math.exp(-Math.pow((t - 0.3) / 0.2, 2)) * s.waist;
     const base =
-      0.088 + 0.03 * Math.sin(t * Math.PI * 0.92) + 0.022 * smoothstep01((t - 0.55) / 0.35);
+      0.09 +
+      0.03 * Math.sin(t * Math.PI * 0.92) +
+      0.022 * smoothstep01((t - 0.55) / 0.35) * s.chest -
+      dip;
     const taper = 1 - smoothstep01((t - 0.86) / 0.14) * 0.42; // neck
     let depth = base * taper;
     let width = (base * 1.24 + 0.012) * taper;

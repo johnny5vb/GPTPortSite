@@ -38,6 +38,7 @@ import { bindLimbs, buildLimb } from "./RiderMesh";
 import {
   buildBoot,
   buildEyewear,
+  buildFace,
   buildFaceGear,
   buildHair,
   buildHand,
@@ -380,11 +381,15 @@ export class RiderRig {
     torso.add(buildJacket(kit, a, s));
 
     // ── head ─────────────────────────────────────────────────────────────
-    // Neck, or the head floats.
-    torso.add(this.capsule(0.052, 0.06, skin, 0, 0.53, 0));
+    // Neck, or the head floats. A stocky rider's neck is the first thing that
+    // reads as heavy-set, so it takes the build scale where the head doesn't.
+    torso.add(this.capsule(0.052 * s.neck, 0.06, skin, 0, 0.53, 0));
 
     const head = new THREE.Group();
     head.position.y = 0.63;
+    // Heads vary far less between people than bodies do — scaling one with
+    // girth is what turns a stocky character into a child.
+    head.scale.setScalar(s.head);
 
     // The skin underneath. A balaclava covers all of it, so skip it entirely
     // rather than z-fighting a second shell against it.
@@ -404,6 +409,8 @@ export class RiderRig {
           head.add(ear);
         }
       }
+      // Features, but only the ones nothing is worn over.
+      head.add(buildFace(kit, a, skin));
     }
 
     // Layered in the order they'd actually be worn.

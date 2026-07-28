@@ -33,6 +33,8 @@ export type Headwear =
   | "cap"
   | "bucket";
 export type FaceGear = "none" | "gaiter" | "bandana" | "balaclava";
+/** Only ever visible when nothing is covering the jaw. */
+export type Beard = "none" | "stubble" | "moustache" | "goatee" | "full";
 export type Eyewear = "none" | "sport" | "oversize" | "retro" | "shades";
 export type JacketStyle = "puffy" | "shell" | "anorak" | "vest" | "onesie";
 export type PantsStyle = "baggy" | "cargo" | "bib" | "slim";
@@ -51,6 +53,10 @@ export interface Appearance {
 
   hair: HairStyle;
   hairColor: string;
+
+  /** Shares `hairColor` — a rider with black hair and a ginger beard reads as
+   *  a bug rather than as a choice. */
+  beard: Beard;
 
   headwear: Headwear;
   headwearColor: string;
@@ -86,6 +92,7 @@ export const DEFAULT_LOOK: Appearance = {
   skin: "#c98d61",
   hair: "short",
   hairColor: "#2b1d14",
+  beard: "none",
   headwear: "helmet",
   headwearColor: "#f7f3ec",
   face: "none",
@@ -147,6 +154,14 @@ export const HEADWEAR: Option<Headwear>[] = [
   { id: "cap", label: "Cap" },
   { id: "bucket", label: "Bucket hat" },
   { id: "none", label: "Bare head" },
+];
+
+export const BEARDS: Option<Beard>[] = [
+  { id: "none", label: "Clean" },
+  { id: "stubble", label: "Stubble" },
+  { id: "moustache", label: "Moustache" },
+  { id: "goatee", label: "Goatee" },
+  { id: "full", label: "Full beard" },
 ];
 
 export const FACE: Option<FaceGear>[] = [
@@ -280,15 +295,18 @@ export function randomAppearance(rand: () => number = Math.random): Appearance {
   ];
   const [main, alt, accent] = pick(schemes, rand);
   const headwear = pick(HEADWEAR, rand).id;
+  // Cover the face more often than not — it flatters the rig.
+  const face = rand() < 0.62 ? pick(FACE.slice(1), rand).id : "none";
   return {
     build: pick(BUILDS, rand).id,
     skin: pick(SKIN_TONES, rand),
     hair: pick(HAIR, rand).id,
     hairColor: pick(HAIR_COLORS, rand),
+    // Anything over the jaw hides it, so don't spend the roll there.
+    beard: face === "none" && rand() < 0.45 ? pick(BEARDS.slice(1), rand).id : "none",
     headwear,
     headwearColor: rand() < 0.5 ? main : alt,
-    // Cover the face more often than not — it flatters the rig.
-    face: rand() < 0.62 ? pick(FACE.slice(1), rand).id : "none",
+    face,
     faceColor: rand() < 0.5 ? "#1f2329" : accent,
     eyewear: headwear === "visor-helmet" ? "none" : pick(EYEWEAR.slice(0, 4), rand).id,
     lensColor: pick(LENS_COLORS, rand),

@@ -18,6 +18,7 @@ import {
   ACCESSORIES,
   BUILDS,
   EYEWEAR,
+  BEARDS,
   FACE,
   GEAR_COLORS,
   HAIR,
@@ -246,6 +247,12 @@ export function Creator({
                     colors={HAIR_COLORS}
                     value={look.hairColor}
                     onChange={(v) => set("hairColor", v)}
+                  />
+                  <Choice
+                    label="Beard"
+                    options={BEARDS}
+                    value={look.beard}
+                    onChange={(v) => set("beard", v)}
                   />
                   <Choice
                     label="Face"
