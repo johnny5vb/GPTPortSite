@@ -95,13 +95,13 @@ export class ChaseCamera {
   reset(phys: RiderPhysics) {
     this.yaw = phys.yaw;
     this.pos
-      .copy(phys.pos)
+      .copy(phys.renderPos)
       .addScaledVector(
         this.tmp.set(Math.sin(this.yaw), 0, Math.cos(this.yaw)),
         -this.tuning.distance,
       );
     this.pos.y += this.tuning.height;
-    this.look.copy(phys.pos);
+    this.look.copy(phys.renderPos);
     this.camera.position.copy(this.pos);
     this.camera.lookAt(this.look);
     this.trauma = 0;
@@ -159,17 +159,17 @@ export class ChaseCamera {
     // ── desired position ─────────────────────────────────────────────────
     const back = this.tmp.set(Math.sin(this.yaw), 0, Math.cos(this.yaw));
     const desired = this.tmp2
-      .copy(phys.pos)
+      .copy(phys.renderPos)
       .addScaledVector(back, -this.boom);
-    desired.y = phys.pos.y + this.height;
+    desired.y = phys.renderPos.y + this.height;
 
     // Follow the terrain grade so the camera doesn't dig into the hill on the
     // steeps or fly off the back on a rollover.
     const gradeAhead = this.gen.heightAt(
-      phys.pos.x + back.x * 14,
-      phys.pos.z + back.z * 14,
+      phys.renderPos.x + back.x * 14,
+      phys.renderPos.z + back.z * 14,
     );
-    desired.y += clamp((gradeAhead - phys.pos.y) * 0.28, -3.5, 5.5);
+    desired.y += clamp((gradeAhead - phys.renderPos.y) * 0.28, -3.5, 5.5);
 
     // Position spring — tighter vertically than horizontally.
     this.pos.x = damp(this.pos.x, desired.x, 0.0009, dt);
@@ -184,20 +184,20 @@ export class ChaseCamera {
     // camera and the rider lifts us over instead of eating the shot.
     for (let i = 1; i <= 3; i++) {
       const f = i / 4;
-      const sx = lerp(this.pos.x, phys.pos.x, f);
-      const sz = lerp(this.pos.z, phys.pos.z, f);
+      const sx = lerp(this.pos.x, phys.renderPos.x, f);
+      const sz = lerp(this.pos.z, phys.renderPos.z, f);
       const h = this.gen.heightAt(sx, sz) + 0.9;
-      const lineY = lerp(this.pos.y, phys.pos.y + 1.2, f);
+      const lineY = lerp(this.pos.y, phys.renderPos.y + 1.2, f);
       if (lineY < h) this.pos.y += (h - lineY) * 0.8;
     }
 
     // ── look target ──────────────────────────────────────────────────────
     const fwd = this.tmp.set(Math.sin(this.yaw), 0, Math.cos(this.yaw));
     this.targetLook
-      .copy(phys.pos)
+      .copy(phys.renderPos)
       .addScaledVector(fwd, t.lookAhead * (0.6 + speed01 * 0.8));
     this.targetLook.y =
-      phys.pos.y + t.lookHeight - this.tallBias * 2.6 + air * 1.1;
+      phys.renderPos.y + t.lookHeight - this.tallBias * 2.6 + air * 1.1;
     // Bias toward where the rider will be, not where they are.
     this.targetLook.addScaledVector(phys.vel, 0.06);
     this.look.lerp(this.targetLook, 1 - Math.pow(0.002, dt));
@@ -263,7 +263,8 @@ export class ChaseCamera {
 
   private updateOrbit(dt: number, phys: RiderPhysics) {
     const cam = this.camera;
-    const target = this.tmp.copy(phys.pos).add(new THREE.Vector3(0, 1.1, 0));
+    const target = this.tmp.copy(phys.renderPos);
+    target.y += 1.1;
     const cp = Math.cos(this.orbitPitch);
     this.pos.set(
       target.x + Math.sin(this.orbitYaw) * cp * this.orbitDist,

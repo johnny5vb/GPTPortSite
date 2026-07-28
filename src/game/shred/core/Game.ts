@@ -36,7 +36,7 @@ import { Trails } from "../fx/Trails";
 import { Snowfall, WindStreaks } from "../fx/Weather";
 import { PostFX, FilterId, FILTERS } from "../fx/PostFX";
 import { AudioEngine } from "../audio/Audio";
-import { riderById } from "../data/riders";
+import { customToRider, riderById } from "../data/riders";
 import { boardById } from "../data/boards";
 import { ModeDef, modeById, ModeId } from "../data/modes";
 import type { SaveData } from "./save";
@@ -290,7 +290,8 @@ export class Game {
     this.scene.add(this.gateGroup);
 
     this.phys = new RiderPhysics(this.gen);
-    const rider = riderById(s.selected.rider);
+    // Riders you built yourself live in the save file, not in the roster.
+    const rider = riderById(s.selected.rider, s.customRiders.map(customToRider));
     const board = boardById(s.selected.board);
     this.phys.stats = {
       spin: rider.stats.spin,
@@ -734,6 +735,10 @@ export class Game {
         this.qualityScale = Math.min(base, this.qualityScale + 0.06);
         this.resize();
       }
+      // Chunk building is the one piece of per-frame work whose cost we can
+      // choose. When frames are already long, building two chunks in one of
+      // them is what turns a slow frame into a visible hitch.
+      this.terrain.budgetPerFrame = this.fpsAvg < 45 ? 1 : this.fpsAvg > 56 ? 3 : 2;
     }
 
     // ── global input that works in any state ─────────────────────────────
@@ -807,8 +812,8 @@ export class Game {
     });
 
     this.tricks.update(dt, {
-      steer: this.phys.grounded ? 0 : steer,
-      pitch: this.phys.grounded ? 0 : this.input.pitch(),
+      steer: this.phys.grounded ? 0 : this.input.steerRaw() * inv,
+      pitch: this.phys.grounded ? 0 : this.input.pitchRaw(),
       grabKey: this.phys.grounded ? null : this.input.anyTrickHeld(),
       shift: this.input.held("grab"),
     }, this.phys);

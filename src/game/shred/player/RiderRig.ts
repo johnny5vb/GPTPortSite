@@ -1,26 +1,53 @@
 /**
  * The rider rig.
  *
- * Everything is procedural: boxes and capsules assembled into a hierarchy, then
- * posed every frame from the physics state. No skeletal animation, no assets —
- * which means the pose can respond continuously to speed, edge angle, crouch,
- * grab and rotation instead of blending between canned clips.
+ * Everything is procedural: capsules and shells assembled into a hierarchy,
+ * then posed every frame from the physics state. No skeletal animation, no
+ * assets — which means the pose can respond continuously to speed, edge angle,
+ * crouch, grab and rotation instead of blending between canned clips.
  *
- * The parts that sell it:
+ * The look is driven entirely by an `Appearance` (see `data/appearance.ts`),
+ * and the gear itself is built in `RiderGear.ts`. The design principle there is
+ * worth repeating here: the rig cannot sell a face, so it puts a helmet, a pair
+ * of goggles and a neck gaiter in front of one instead. What remains is
+ * silhouette, layering and colour.
+ *
+ * The parts that sell the motion:
  *   - the board flexes (nose and tail hinge) under compression and pop;
  *   - the rider counter-rotates into the carve and leans out of it;
- *   - the jacket tail and scarf are verlet chains driven by the airflow;
+ *   - the jacket tail, scarf and any long hair are driven by the airflow;
  *   - grabs reach with the correct hand and tweak the board with it.
+ *
+ * `update` runs at frame rate and is deliberately allocation-free — every
+ * vector and quaternion it needs is preallocated on the instance. Allocating
+ * per frame here is not a correctness problem, it is a smoothness problem: the
+ * collections it causes land as visible hitches.
  */
 
 import * as THREE from "three";
 import type { Rider } from "../data/riders";
 import type { Board } from "../data/boards";
+import type { Appearance } from "../data/appearance";
 import { makeBoardTexture, boardFinish } from "./BoardArt";
 import { RiderPhysics } from "./Physics";
 import { TrickSystem } from "./TrickSystem";
-import { clamp, clamp01, damp, lerp, smoothstep } from "../core/math";
+import { clamp01, damp, lerp } from "../core/math";
 import { WorldUniforms, stylizeMaterial, ensureMatAttribute } from "../world/SnowMaterial";
+import {
+  buildBoot,
+  buildEyewear,
+  buildFaceGear,
+  buildHair,
+  buildHand,
+  buildHeadwear,
+  buildJacket,
+  buildPelvis,
+  buildScale,
+  coversCrown,
+  fabricTexture,
+  pantsProfile,
+  type GearKit,
+} from "./RiderGear";
 
 /** A short verlet chain used for the scarf and the jacket tail. */
 class Cloth {
@@ -72,8 +99,6 @@ interface Parts {
   boardMid: THREE.Mesh;
   boardNose: THREE.Mesh;
   boardTail: THREE.Mesh;
-  bindingF: THREE.Mesh;
-  bindingB: THREE.Mesh;
   body: THREE.Group;
   hips: THREE.Group;
   stance: THREE.Group;
@@ -85,6 +110,8 @@ interface Parts {
   head: THREE.Group;
   armF: THREE.Group;
   armB: THREE.Group;
+  /** Long hair hangs off this and lags behind the head. */
+  hairTail?: THREE.Group;
   scarf?: THREE.Mesh;
   accessory?: THREE.Object3D;
 }
@@ -96,14 +123,11 @@ export class RiderRig {
   private boardTex?: THREE.CanvasTexture;
   private scarfCloth?: Cloth;
   private scarfGeo?: THREE.BufferGeometry;
-  private wind = new THREE.Vector3();
-  private tmp = new THREE.Vector3();
-  private tmpQ = new THREE.Quaternion();
-  private tmpM = new THREE.Matrix4();
   private uniforms: WorldUniforms;
 
   private rider: Rider;
   private board: Board;
+  private look: Appearance;
 
   // Smoothed pose values.
   private sCrouch = 0;
@@ -112,13 +136,34 @@ export class RiderRig {
   private sFlex = 0;
   private sTilt = 0;
   private bob = 0;
+  private hairSwingY = 0;
+  private hairSwingX = 0;
+  private lastHeadYaw = 0;
+
+  // Preallocated scratch — see the note at the top of the file.
+  private wind = new THREE.Vector3();
+  private tmp = new THREE.Vector3();
+  private up = new THREE.Vector3(0, 1, 0);
+  private axisX = new THREE.Vector3(1, 0, 0);
+  private axisY = new THREE.Vector3(0, 1, 0);
+  private axisZ = new THREE.Vector3(0, 0, 1);
+  private qAlign = new THREE.Quaternion();
+  private qYaw = new THREE.Quaternion();
+  private qPitch = new THREE.Quaternion();
+  private qRoll = new THREE.Quaternion();
+  private qTarget = new THREE.Quaternion();
+  private clothDir = new THREE.Vector3();
+  private clothSide = new THREE.Vector3();
 
   constructor(rider: Rider, board: Board, uniforms: WorldUniforms) {
     this.rider = rider;
     this.board = board;
+    this.look = rider.appearance;
     this.uniforms = uniforms;
     this.build();
   }
+
+  // ─────────────────────────────────────────────────────────── materials ────
 
   private mat(color: string, opts: THREE.MeshStandardMaterialParameters = {}) {
     const m = stylizeMaterial(
@@ -136,22 +181,19 @@ export class RiderRig {
     return m;
   }
 
-  private box(
-    w: number,
-    h: number,
-    d: number,
-    mat: THREE.Material,
-    x = 0,
-    y = 0,
-    z = 0,
-  ) {
-    const g = new THREE.BoxGeometry(w, h, d);
-    ensureMatAttribute(g);
-    const m = new THREE.Mesh(g, mat);
-    m.position.set(x, y, z);
-    m.castShadow = true;
-    m.receiveShadow = false;
-    return m;
+  /**
+   * Cloth gets a woven bump map. It costs one shared 128px canvas and lifts
+   * every soft-goods surface out of the flat-plastic look that plain vertex
+   * colour gives you.
+   */
+  private cloth(color: string, opts: THREE.MeshStandardMaterialParameters = {}) {
+    return this.mat(color, {
+      roughness: 0.9,
+      flatShading: false,
+      bumpMap: fabricTexture(),
+      bumpScale: 0.6,
+      ...opts,
+    });
   }
 
   private mesh(geo: THREE.BufferGeometry, mat: THREE.Material, x = 0, y = 0, z = 0) {
@@ -164,15 +206,17 @@ export class RiderRig {
   }
 
   /** Limb / torso volume. Capsules read as a body; boxes read as a toy. */
-  private capsule(
-    radius: number,
-    length: number,
-    mat: THREE.Material,
-    x = 0,
-    y = 0,
-    z = 0,
-  ) {
-    return this.mesh(new THREE.CapsuleGeometry(radius, length, 6, 12), mat, x, y, z);
+  private capsule(radius: number, length: number, mat: THREE.Material, x = 0, y = 0, z = 0) {
+    return this.mesh(new THREE.CapsuleGeometry(radius, length, 6, 14), mat, x, y, z);
+  }
+
+  private get kit(): GearKit {
+    return {
+      mat: (c, o) => this.mat(c, o),
+      cloth: (c, o) => this.cloth(c, o),
+      mesh: (g, m, x, y, z) => this.mesh(g, m, x, y, z),
+      capsule: (r, l, m, x, y, z) => this.capsule(r, l, m, x, y, z),
+    };
   }
 
   /**
@@ -231,22 +275,16 @@ export class RiderRig {
     return geo;
   }
 
+  // ─────────────────────────────────────────────────────────────── build ────
+
   private build() {
-    const c = this.rider.colors;
-    const jacket = this.mat(c.jacket, { roughness: 0.86, flatShading: false });
-    const jacketAlt = this.mat(c.jacketAlt, { roughness: 0.84, flatShading: false });
-    const pants = this.mat(c.pants, { roughness: 0.92, flatShading: false });
-    const accent = this.mat(c.accent, { roughness: 0.6, flatShading: false });
-    const skin = this.mat(c.skin, { roughness: 0.72, flatShading: false });
-    const helmetMat = this.mat(c.helmet, { roughness: 0.34, flatShading: false });
-    const goggles = this.mat(c.goggles, {
-      roughness: 0.08,
-      metalness: 0.8,
-      envMapIntensity: 2.2,
-      emissive: new THREE.Color(c.goggles).multiplyScalar(0.12),
-      flatShading: false,
-    });
-    const boot = this.mat("#191a1e", { roughness: 0.7, flatShading: false });
+    const a = this.look;
+    const kit = this.kit;
+    const s = buildScale(a.build);
+
+    const skin = this.mat(a.skin, { roughness: 0.74, flatShading: false });
+    const accent = this.mat(a.accent, { roughness: 0.6, flatShading: false });
+    const pantsMat = this.cloth(a.pantsColor, { roughness: 0.93 });
 
     const root = new THREE.Group();
 
@@ -280,39 +318,62 @@ export class RiderRig {
     };
     const boardNose = mkTip(1);
     const boardTail = mkTip(-1);
-
     boardRoot.add(boardMid, boardNose, boardTail);
 
-    const bindingGeo = new THREE.CapsuleGeometry(0.028, 0.2, 4, 8);
-    bindingGeo.rotateZ(Math.PI / 2);
-    const bindingF = this.mesh(bindingGeo, accent, 0, thick + 0.05, 0.2);
-    const bindingB = this.mesh(bindingGeo.clone(), accent, 0, thick + 0.05, -0.2);
-    const baseF = this.mesh(new THREE.BoxGeometry(0.2, 0.02, 0.26), boot, 0, thick + 0.01, 0.2);
-    const baseB = this.mesh(new THREE.BoxGeometry(0.2, 0.02, 0.26), boot, 0, thick + 0.01, -0.2);
-    boardRoot.add(bindingF, bindingB, baseF, baseB);
+    // Binding baseplates — the boots carry their own straps and highbacks.
+    for (const z of [0.2, -0.2]) {
+      const base = this.mesh(new THREE.BoxGeometry(0.2, 0.018, 0.26), accent, 0, thick + 0.008, z);
+      boardRoot.add(base);
+    }
     root.add(boardRoot);
 
     // ── body ─────────────────────────────────────────────────────────────
     const body = new THREE.Group();
     const hips = new THREE.Group();
-    hips.position.y = 0.92;
+    hips.position.y = 0.92 * s.height;
 
     // Legs hang along the board, NOT rotated with the stance — a snowboarder's
     // feet are bolted to the deck; only the upper body opens up.
     // Thigh and shin are separate nodes so the knee can actually bend as the
     // rider compresses — straight legs are the tell that a rig is fake.
+    const prof = pantsProfile(a.pants);
     const knees: THREE.Group[] = [];
     const leg = (z: number) => {
       const g = new THREE.Group();
       g.position.set(0, 0, z);
-      g.add(this.capsule(0.088, 0.2, pants, 0, -0.19, 0));
+      const thigh = this.capsule(prof.thigh * s.girth, 0.2, pantsMat, 0, -0.19, 0);
+      thigh.scale.set(prof.flare, 1, prof.flare);
+      g.add(thigh);
+
+      if (a.pants === "cargo") {
+        // Thigh pockets. Small, but they break up the leg and read instantly.
+        const pocket = this.mesh(
+          new THREE.BoxGeometry(0.018, 0.09, 0.075),
+          pantsMat,
+          prof.thigh * s.girth * 1.05,
+          -0.21,
+          0,
+        );
+        g.add(pocket);
+      }
 
       const knee = new THREE.Group();
       knee.position.set(0, -0.36, 0);
-      knee.add(this.capsule(0.072, 0.22, pants, 0, -0.17, 0));
-      const bootMesh = this.mesh(new THREE.CapsuleGeometry(0.078, 0.09, 4, 10), boot, 0, -0.34, 0.015);
-      bootMesh.scale.set(1, 1, 1.3);
-      knee.add(bootMesh);
+      const shin = this.capsule(prof.shin * s.girth, 0.22, pantsMat, 0, -0.17, 0);
+      shin.scale.set(prof.flare, 1, prof.flare);
+      knee.add(shin);
+      // The cuff of a baggy pant sits over the boot.
+      if (a.pants !== "slim") {
+        const cuff = this.mesh(
+          new THREE.CylinderGeometry(prof.shin * 1.35, prof.shin * 1.5, 0.09, 14, 1, true),
+          pantsMat,
+          0,
+          -0.285,
+          0,
+        );
+        knee.add(cuff);
+      }
+      knee.add(buildBoot(kit, a.bootColor, a.accent));
       knees.push(knee);
       g.add(knee);
       return g;
@@ -327,32 +388,8 @@ export class RiderRig {
     const stance = new THREE.Group();
     const torso = new THREE.Group();
 
-    // Pelvis overlaps the jacket hem so the two never separate as the torso
-    // pitches — a visible gap at the waist is the fastest way to look unfinished.
-    const pelvis = this.capsule(0.128, 0.1, pants, 0, 0.0, 0);
-    pelvis.scale.set(1.02, 1, 0.86);
-    torso.add(pelvis);
-
-    const chest = this.capsule(0.142, 0.2, jacket, 0, 0.28, 0);
-    chest.scale.set(0.98, 1, 0.82);
-    torso.add(chest);
-
-    const shoulders = this.capsule(0.092, 0.24, jacket, 0, 0.44, 0);
-    shoulders.rotation.x = Math.PI / 2;
-    torso.add(shoulders);
-
-    // A jacket skirt that sits *over* the pelvis, plus a colour break at the
-    // chest. Both follow the body's curve instead of being flat slabs stuck on.
-    const hem = this.capsule(0.148, 0.09, jacket, 0, 0.13, 0);
-    hem.scale.set(1.0, 1, 0.84);
-    torso.add(hem);
-    const chestBand = this.capsule(0.144, 0.05, jacketAlt, 0, 0.33, 0);
-    chestBand.scale.set(0.99, 1, 0.83);
-    torso.add(chestBand);
-    // Collar.
-    const collar = this.capsule(0.088, 0.04, jacketAlt, 0, 0.5, 0);
-    collar.scale.set(1, 1, 0.9);
-    torso.add(collar);
+    torso.add(buildPelvis(kit, a, s));
+    torso.add(buildJacket(kit, a, s));
 
     // ── head ─────────────────────────────────────────────────────────────
     // Neck, or the head floats.
@@ -360,50 +397,54 @@ export class RiderRig {
 
     const head = new THREE.Group();
     head.position.y = 0.63;
-    const skull = this.mesh(new THREE.SphereGeometry(0.098, 22, 18), skin, 0, 0.05, 0);
-    skull.scale.set(0.9, 1.06, 0.98);
-    head.add(skull);
-    // A jaw wedge keeps the profile from reading as a ball.
-    const jaw = this.mesh(new THREE.SphereGeometry(0.072, 16, 12), skin, 0.028, 0.008, 0);
-    jaw.scale.set(0.9, 0.8, 0.9);
-    head.add(jaw);
 
-    // Helmet is a cap, not a shell — cover the crown and leave the face.
-    const helmetShell = this.mesh(
-      new THREE.SphereGeometry(0.112, 24, 16, 0, Math.PI * 2, 0, Math.PI * 0.58),
-      helmetMat,
-      0,
-      0.045,
-      0,
-    );
-    helmetShell.scale.set(0.98, 1.12, 1.02);
-    head.add(helmetShell);
-    // Ear pads.
-    for (const z of [-1, 1]) {
-      const pad = this.mesh(new THREE.SphereGeometry(0.042, 12, 10), helmetMat, -0.005, 0.048, z * 0.093);
-      pad.scale.set(0.75, 1.15, 0.6);
-      head.add(pad);
+    // The skin underneath. A balaclava covers all of it, so skip it entirely
+    // rather than z-fighting a second shell against it.
+    if (a.face !== "balaclava") {
+      const skull = this.mesh(new THREE.SphereGeometry(0.098, 24, 18), skin, 0, 0.05, 0);
+      skull.scale.set(0.9, 1.06, 0.98);
+      head.add(skull);
+      // A jaw wedge keeps the profile from reading as a ball.
+      const jaw = this.mesh(new THREE.SphereGeometry(0.072, 18, 14), skin, 0.028, 0.008, 0);
+      jaw.scale.set(0.9, 0.8, 0.9);
+      head.add(jaw);
+      // Ears, but only when nothing is over them.
+      if (a.headwear === "none" || a.headwear === "cap") {
+        for (const z of [-1, 1]) {
+          const ear = this.mesh(new THREE.SphereGeometry(0.026, 10, 8), skin, -0.012, 0.04, z * 0.088);
+          ear.scale.set(0.5, 1.1, 0.7);
+          head.add(ear);
+        }
+      }
     }
 
-    // Goggles: a wide lens across the eyes plus a strap round the back, so the
-    // most recognisable piece of snowboard kit actually reads as itself.
-    const lens = this.mesh(new THREE.SphereGeometry(0.088, 24, 16), goggles, 0.042, 0.055, 0);
-    lens.scale.set(0.85, 0.62, 1.28);
-    head.add(lens);
-    const strap = this.mesh(new THREE.TorusGeometry(0.101, 0.017, 8, 22), accent, 0, 0.055, 0);
-    strap.rotation.y = Math.PI / 2;
-    strap.scale.set(1, 0.78, 1);
-    head.add(strap);
+    // Layered in the order they'd actually be worn.
+    const hair = buildHair(kit, a.hair, a.hairColor, coversCrown(a.headwear));
+    head.add(hair.group);
+    head.add(buildFaceGear(kit, a.face, a.faceColor));
+    head.add(buildHeadwear(kit, a.headwear, a.headwearColor, a.accent));
+    head.add(buildEyewear(kit, a.eyewear, a.lensColor, a.frameColor));
 
+    // ── arms ─────────────────────────────────────────────────────────────
+    const sleeve = this.cloth(a.jacket === "vest" ? a.jacketAlt : a.jacketColor, {
+      roughness: 0.88,
+    });
     const arm = (z: number) => {
       const g = new THREE.Group();
-      g.position.set(0, 0.44, z);
-      g.add(this.capsule(0.058, 0.19, jacket, 0, -0.155, 0));
-      g.add(this.capsule(0.05, 0.17, jacket, 0, -0.38, 0));
-      g.add(this.capsule(0.056, 0.03, jacketAlt, 0, -0.5, 0));
-      const glove = this.mesh(new THREE.SphereGeometry(0.058, 14, 12), accent, 0, -0.555, 0.01);
-      glove.scale.set(0.85, 1, 1.15);
-      g.add(glove);
+      g.position.set(0, 0.44 * s.height, z * s.shoulder);
+      const upper = this.capsule(0.058 * s.girth, 0.19, sleeve, 0, -0.155, 0);
+      g.add(upper);
+      const fore = this.capsule(0.05 * s.girth, 0.17, sleeve, 0, -0.38, 0);
+      g.add(fore);
+      if (a.jacket === "puffy" || a.jacket === "vest") {
+        // Sleeve baffles, matching the torso.
+        for (const y of [-0.1, -0.23, -0.36]) {
+          const band = this.capsule(0.06 * s.girth, 0.03, sleeve, 0, y, 0);
+          band.rotation.x = Math.PI / 2;
+          g.add(band);
+        }
+      }
+      g.add(buildHand(kit, a.hands, a.handsColor, a.jacketAlt));
       return g;
     };
     const armF = arm(0.165);
@@ -416,98 +457,38 @@ export class RiderRig {
     root.add(body);
 
     // ── cloth ────────────────────────────────────────────────────────────
-    if (this.rider.accessory === "scarf") {
+    let scarfMesh: THREE.Mesh | undefined;
+    if (a.accessory === "scarf") {
       this.scarfCloth = new Cloth(7, 0.13, new THREE.Vector3());
       this.scarfGeo = new THREE.BufferGeometry();
       const verts = new Float32Array(7 * 2 * 3);
       const idx: number[] = [];
       for (let i = 0; i < 6; i++) {
-        const a = i * 2;
-        idx.push(a, a + 1, a + 2, a + 2, a + 1, a + 3);
+        const q = i * 2;
+        idx.push(q, q + 1, q + 2, q + 2, q + 1, q + 3);
       }
       this.scarfGeo.setAttribute("position", new THREE.BufferAttribute(verts, 3));
       this.scarfGeo.setIndex(idx);
       this.scarfGeo.computeVertexNormals();
       ensureMatAttribute(this.scarfGeo);
-      const scarfMat = this.mat(c.accent, { side: THREE.DoubleSide, roughness: 0.9 });
-      const scarf = new THREE.Mesh(this.scarfGeo, scarfMat);
-      scarf.frustumCulled = false;
-      scarf.castShadow = true;
-      this.group.add(scarf);
-      this.p = { scarf } as unknown as Parts;
+      const scarfMat = this.cloth(a.accent, { side: THREE.DoubleSide, roughness: 0.94 });
+      scarfMesh = new THREE.Mesh(this.scarfGeo, scarfMat);
+      scarfMesh.frustumCulled = false;
+      scarfMesh.castShadow = true;
+      this.group.add(scarfMesh);
     }
 
-    // ── accessory ────────────────────────────────────────────────────────
-    let accessory: THREE.Object3D | undefined;
-    switch (this.rider.accessory) {
-      case "backpack": {
-        const g = new THREE.Group();
-        const pack = this.capsule(0.1, 0.2, jacketAlt, -0.14, 0.3, 0);
-        pack.scale.set(0.75, 1, 1.5);
-        g.add(pack);
-        g.add(this.mesh(new THREE.BoxGeometry(0.04, 0.03, 0.3), accent, -0.14, 0.2, 0));
-        accessory = g;
-        break;
-      }
-      case "camera": {
-        const g = new THREE.Group();
-        g.add(this.mesh(new THREE.BoxGeometry(0.13, 0.09, 0.08), this.mat("#1c2026"), 0.14, 0.3, 0));
-        g.add(
-          this.mesh(
-            new THREE.CylinderGeometry(0.035, 0.035, 0.06, 12),
-            this.mat("#c9d4dd", { metalness: 0.7, roughness: 0.2 }),
-            0.2,
-            0.3,
-            0,
-          ),
-        );
-        accessory = g;
-        break;
-      }
-      case "fanny": {
-        // Slung across the front of the hips, so it sits below the torso node
-        // and rides with the crouch rather than the shoulders.
-        const g = new THREE.Group();
-        const pouch = this.capsule(0.05, 0.12, accent, 0.11, -0.05, 0);
-        pouch.rotation.z = Math.PI / 2;
-        pouch.scale.set(1, 1, 0.62);
-        g.add(pouch);
-        const belt = this.mesh(
-          new THREE.TorusGeometry(0.135, 0.011, 6, 18),
-          jacketAlt,
-          0.01,
-          -0.05,
-          0,
-        );
-        belt.rotation.x = Math.PI / 2;
-        belt.scale.set(1, 0.72, 1);
-        g.add(belt);
-        accessory = g;
-        break;
-      }
-      case "antenna": {
-        const g = new THREE.Group();
-        g.add(this.mesh(new THREE.CylinderGeometry(0.006, 0.01, 0.4, 6), accent, -0.06, 0.78, 0.09));
-        g.add(this.mesh(new THREE.SphereGeometry(0.022, 10, 8), accent, -0.06, 0.99, 0.09));
-        accessory = g;
-        break;
-      }
-      default:
-        break;
-    }
+    const accessory = this.buildAccessory(a);
     if (accessory) torso.add(accessory);
 
     this.group.add(root);
 
-    const scarfMesh = this.p?.scarf;
     this.p = {
       root,
       boardRoot,
       boardMid,
       boardNose,
       boardTail,
-      bindingF,
-      bindingB,
       body,
       hips,
       stance,
@@ -519,9 +500,74 @@ export class RiderRig {
       head,
       armF,
       armB,
+      hairTail: hair.tail,
       scarf: scarfMesh,
       accessory,
     };
+  }
+
+  private buildAccessory(a: Appearance): THREE.Object3D | undefined {
+    const accent = this.mat(a.accent, { roughness: 0.6, flatShading: false });
+    const alt = this.cloth(a.jacketAlt, { roughness: 0.86 });
+
+    switch (a.accessory) {
+      case "backpack": {
+        const g = new THREE.Group();
+        const pack = this.capsule(0.082, 0.16, alt, -0.14, 0.3, 0);
+        pack.scale.set(0.66, 1, 1.3);
+        g.add(pack);
+        // Compression straps and a lid buckle — a bag, not a lump.
+        for (const y of [0.23, 0.35]) {
+          const strapMesh = this.mesh(new THREE.BoxGeometry(0.026, 0.018, 0.21), accent, -0.152, y, 0);
+          g.add(strapMesh);
+        }
+        for (const z of [-1, 1]) {
+          const shoulderStrap = this.mesh(new THREE.BoxGeometry(0.05, 0.26, 0.03), alt, -0.045, 0.32, z * 0.1);
+          shoulderStrap.rotation.z = 0.24;
+          g.add(shoulderStrap);
+        }
+        return g;
+      }
+      case "camera": {
+        const g = new THREE.Group();
+        // Hanging against the chest, not floating in front of it.
+        g.add(this.mesh(new THREE.BoxGeometry(0.075, 0.075, 0.11), this.mat("#1c2026"), 0.115, 0.29, 0));
+        const barrel = this.mesh(
+          new THREE.CylinderGeometry(0.03, 0.03, 0.055, 14),
+          this.mat("#c9d4dd", { metalness: 0.7, roughness: 0.2 }),
+          0.165,
+          0.29,
+          0,
+        );
+        barrel.rotation.z = Math.PI / 2;
+        g.add(barrel);
+        const neckStrap = this.mesh(new THREE.TorusGeometry(0.1, 0.008, 6, 20), alt, 0.04, 0.42, 0);
+        neckStrap.rotation.x = Math.PI / 2;
+        neckStrap.scale.set(0.8, 1, 1);
+        g.add(neckStrap);
+        return g;
+      }
+      case "fanny": {
+        const g = new THREE.Group();
+        const pouch = this.capsule(0.05, 0.12, accent, 0.11, -0.05, 0);
+        pouch.rotation.z = Math.PI / 2;
+        pouch.scale.set(1, 1, 0.62);
+        g.add(pouch);
+        const belt = this.mesh(new THREE.TorusGeometry(0.135, 0.011, 6, 18), alt, 0.01, -0.05, 0);
+        belt.rotation.x = Math.PI / 2;
+        belt.scale.set(1, 0.72, 1);
+        g.add(belt);
+        return g;
+      }
+      case "antenna": {
+        const g = new THREE.Group();
+        g.add(this.mesh(new THREE.CylinderGeometry(0.006, 0.01, 0.4, 6), accent, -0.06, 0.78, 0.09));
+        g.add(this.mesh(new THREE.SphereGeometry(0.022, 10, 8), accent, -0.06, 0.99, 0.09));
+        return g;
+      }
+      default:
+        return undefined;
+    }
   }
 
   /** Swap the deck without rebuilding the rig. */
@@ -536,43 +582,66 @@ export class RiderRig {
     deck.needsUpdate = true;
   }
 
-  update(
-    dt: number,
-    phys: RiderPhysics,
-    tricks: TrickSystem,
-    time: number,
-  ) {
+  /**
+   * A neutral standing pose for menus, where there is no physics to read from.
+   *
+   * The riding pose turns the head down the fall line and opens the shoulders
+   * to the stance angle — correct on the mountain, wrong in a character
+   * creator, where you want the rider squared up and looking at you. This is
+   * that: knees slightly bent, weight settled, a slow breath.
+   */
+  poseStatic(t = 0) {
+    const p = this.p;
+    const breathe = Math.sin(t * 0.9) * 0.5 + 0.5;
+
+    p.boardRoot.position.y = 0.055;
+    p.boardRoot.rotation.set(0, 0, 0);
+    p.boardNose.rotation.x = -0.04;
+    p.boardTail.rotation.x = 0.04;
+
+    p.hips.position.y = 0.86 + breathe * 0.008;
+    p.legF.rotation.x = 0.2;
+    p.legB.rotation.x = 0.2;
+    p.kneeF.rotation.x = -0.34;
+    p.kneeB.rotation.x = -0.34;
+
+    // Squared up to the camera rather than open to the fall line.
+    p.stance.rotation.y = 0.18;
+    p.torso.rotation.set(0.06, 0, 0);
+    p.head.rotation.set(-0.04, -0.18 + Math.sin(t * 0.31) * 0.22, 0);
+
+    p.armF.rotation.set(-0.24, 0, -0.3 - breathe * 0.02);
+    p.armB.rotation.set(-0.18, 0, 0.3 + breathe * 0.02);
+  }
+
+  // ────────────────────────────────────────────────────────────── update ────
+
+  update(dt: number, phys: RiderPhysics, tricks: TrickSystem, time: number) {
     const p = this.p;
     const speed = phys.speed;
 
     // ── root transform ───────────────────────────────────────────────────
-    this.group.position.copy(phys.pos);
+    // `renderPos` is the physics position advanced by whatever fraction of a
+    // substep is left over this frame. Using it instead of `pos` is what stops
+    // the rider stepping in 120Hz quanta under a variable frame rate.
+    this.group.position.copy(phys.renderPos);
 
     // Align to the surface while grounded; hold the last alignment in the air
     // so a spin doesn't wobble with whatever is passing underneath.
     const s = phys.surface;
-    const upTarget = this.tmp.set(s.nx, s.ny, s.nz);
-    if (!phys.grounded) upTarget.set(0, 1, 0);
-    const align = this.tmpQ.setFromUnitVectors(
-      new THREE.Vector3(0, 1, 0),
-      upTarget.normalize(),
-    );
+    if (phys.grounded) this.tmp.set(s.nx, s.ny, s.nz).normalize();
+    else this.tmp.set(0, 1, 0);
+    this.qAlign.setFromUnitVectors(this.up, this.tmp);
 
-    const yawQ = new THREE.Quaternion().setFromAxisAngle(
-      new THREE.Vector3(0, 1, 0),
-      phys.yaw,
-    );
-    const pitchQ = new THREE.Quaternion().setFromAxisAngle(
-      new THREE.Vector3(1, 0, 0),
-      phys.pitch,
-    );
-    const rollQ = new THREE.Quaternion().setFromAxisAngle(
-      new THREE.Vector3(0, 0, 1),
-      phys.roll,
-    );
-
-    const q = align.clone().multiply(yawQ).multiply(pitchQ).multiply(rollQ);
-    this.group.quaternion.slerp(q, 1 - Math.pow(0.00002, dt));
+    this.qYaw.setFromAxisAngle(this.axisY, phys.yaw);
+    this.qPitch.setFromAxisAngle(this.axisX, phys.pitch);
+    this.qRoll.setFromAxisAngle(this.axisZ, phys.roll);
+    this.qTarget
+      .copy(this.qAlign)
+      .multiply(this.qYaw)
+      .multiply(this.qPitch)
+      .multiply(this.qRoll);
+    this.group.quaternion.slerp(this.qTarget, 1 - Math.pow(0.00002, dt));
 
     // ── pose ─────────────────────────────────────────────────────────────
     const crouchTarget = phys.crashed ? 1 : phys.crouch;
@@ -621,8 +690,22 @@ export class RiderRig {
     p.torso.rotation.y = -this.sLean * 0.3 + tricks.spinSpeed * 0.02;
     // Built facing the toe edge, so it needs a quarter turn to look down the
     // fall line — then a little more when leaning into a turn.
-    p.head.rotation.y = -1.15 - stanceYaw + this.sLean * 0.45;
+    const headYaw = -1.15 - stanceYaw + this.sLean * 0.45;
+    p.head.rotation.y = headYaw;
     p.head.rotation.x = -p.torso.rotation.x * 0.6;
+
+    // ── hair ─────────────────────────────────────────────────────────────
+    // A ponytail that stays welded to the skull is worse than no ponytail, so
+    // it lags the head's rotation and gets blown back by speed.
+    if (p.hairTail) {
+      const dYaw = headYaw - this.lastHeadYaw;
+      this.lastHeadYaw = headYaw;
+      const drag = clamp01(speed / 30) * 0.5 + (phys.grounded ? 0 : 0.2);
+      this.hairSwingY = damp(this.hairSwingY - dYaw * 2.2, 0, 0.002, dt);
+      this.hairSwingX = damp(this.hairSwingX, drag + Math.sin(time * 5.5) * 0.06, 0.004, dt);
+      p.hairTail.rotation.y = clamp01(Math.abs(this.hairSwingY)) * Math.sign(this.hairSwingY) * 0.8;
+      p.hairTail.rotation.z = -this.hairSwingX;
+    }
 
     // ── arms ─────────────────────────────────────────────────────────────
     const grab = tricks.currentGrab;
@@ -676,40 +759,45 @@ export class RiderRig {
 
     // ── cloth ────────────────────────────────────────────────────────────
     this.updateCloth(dt, phys);
-
-    void smoothstep;
-    void clamp;
-    void this.tmpM;
   }
 
   private updateCloth(dt: number, phys: RiderPhysics) {
+    if (!this.scarfCloth || !this.scarfGeo || !this.p.scarf) return;
+
     // Airflow is the rider's velocity reversed, in world space.
     this.wind.copy(phys.vel).multiplyScalar(-2.6);
     this.wind.y += 3.2;
 
-    if (this.scarfCloth && this.scarfGeo && this.p.scarf) {
-      const anchor = this.tmp.set(0, 1.34, 0);
-      this.p.torso.localToWorld(anchor);
-      this.scarfCloth.step(Math.min(dt, 1 / 60), anchor, this.wind, 0.62);
+    const anchor = this.tmp.set(0, 1.34, 0);
+    this.p.torso.localToWorld(anchor);
+    this.scarfCloth.step(Math.min(dt, 1 / 60), anchor, this.wind, 0.62);
 
-      const pos = this.scarfGeo.getAttribute("position") as THREE.BufferAttribute;
-      const side = new THREE.Vector3();
-      const dir = new THREE.Vector3();
-      for (let i = 0; i < this.scarfCloth.pts.length; i++) {
-        const a = this.scarfCloth.pts[i];
-        const b = this.scarfCloth.pts[Math.min(i + 1, this.scarfCloth.pts.length - 1)];
-        dir.subVectors(b, a);
-        if (dir.lengthSq() < 1e-6) dir.set(0, -1, 0);
-        side.crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize();
-        if (side.lengthSq() < 1e-6) side.set(1, 0, 0);
-        const w = 0.075 * (1 - i / this.scarfCloth.pts.length) + 0.02;
-        pos.setXYZ(i * 2, a.x - side.x * w, a.y - side.y * w, a.z - side.z * w);
-        pos.setXYZ(i * 2 + 1, a.x + side.x * w, a.y + side.y * w, a.z + side.z * w);
-      }
-      pos.needsUpdate = true;
-      this.scarfGeo.computeVertexNormals();
-      this.scarfGeo.computeBoundingSphere();
+    const pos = this.scarfGeo.getAttribute("position") as THREE.BufferAttribute;
+    const pts = this.scarfCloth.pts;
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i];
+      const b = pts[Math.min(i + 1, pts.length - 1)];
+      this.clothDir.subVectors(b, a);
+      if (this.clothDir.lengthSq() < 1e-6) this.clothDir.set(0, -1, 0);
+      this.clothSide.crossVectors(this.clothDir, this.up).normalize();
+      if (this.clothSide.lengthSq() < 1e-6) this.clothSide.set(1, 0, 0);
+      const w = 0.075 * (1 - i / pts.length) + 0.02;
+      pos.setXYZ(
+        i * 2,
+        a.x - this.clothSide.x * w,
+        a.y - this.clothSide.y * w,
+        a.z - this.clothSide.z * w,
+      );
+      pos.setXYZ(
+        i * 2 + 1,
+        a.x + this.clothSide.x * w,
+        a.y + this.clothSide.y * w,
+        a.z + this.clothSide.z * w,
+      );
     }
+    pos.needsUpdate = true;
+    this.scarfGeo.computeVertexNormals();
+    this.scarfGeo.computeBoundingSphere();
   }
 
   dispose() {

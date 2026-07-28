@@ -38,6 +38,8 @@ import {
 import { FILTERS, type FilterId } from "../fx/PostFX";
 import { webglBlocker } from "../core/renderer";
 import TouchControls, { TouchPhotoPad } from "./TouchControls";
+import { Creator } from "./Creator";
+import type { CustomRider } from "../data/riders";
 
 /**
  * Best-effort fullscreen + landscape lock. Every browser draws the line
@@ -67,6 +69,7 @@ type Screen =
   | "title"
   | "modes"
   | "garage"
+  | "creator"
   | "unlocks"
   | "settings"
   | "howto"
@@ -520,6 +523,41 @@ export default function ShredGame() {
     }
   }, []);
 
+  // ── character creator ──────────────────────────────────────────────────
+  const [editingRider, setEditingRider] = useState<CustomRider | null>(null);
+
+  const openCreator = useCallback((editing: CustomRider | null) => {
+    setEditingRider(editing);
+    setScreen("creator");
+  }, []);
+
+  const saveCustomRider = useCallback((rider: CustomRider) => {
+    const data = saveRef.current;
+    if (!data) return;
+    const i = data.customRiders.findIndex((c) => c.id === rider.id);
+    if (i >= 0) data.customRiders[i] = rider;
+    else data.customRiders.push(rider);
+    // Selecting the rider you just built is the only sane default; anything
+    // else means making one and then hunting for it.
+    data.selected.rider = rider.id;
+    persist(data);
+    setSaveData({ ...data });
+    garageDirty.current = true;
+    setScreen("garage");
+  }, []);
+
+  const deleteCustomRider = useCallback((id: string) => {
+    const data = saveRef.current;
+    if (!data) return;
+    data.customRiders = data.customRiders.filter((c) => c.id !== id);
+    if (data.selected.rider === id) {
+      data.selected.rider = "kaz";
+      garageDirty.current = true;
+    }
+    persist(data);
+    setSaveData({ ...data });
+  }, []);
+
   const leaveGarage = useCallback(() => {
     setScreen("title");
     if (garageDirty.current) {
@@ -584,8 +622,25 @@ export default function ShredGame() {
 
         {screen === "garage" && (
           <div className="shred-layer">
-            <Garage save={saveData} onChange={patchSelected} onBack={leaveGarage} />
+            <Garage
+              save={saveData}
+              onChange={patchSelected}
+              onBack={leaveGarage}
+              onCreate={openCreator}
+              onDeleteCustom={deleteCustomRider}
+            />
           </div>
+        )}
+
+        {screen === "creator" && (
+          <motion.div key="creator">
+            <Creator
+              save={saveData}
+              editing={editingRider}
+              onSave={saveCustomRider}
+              onBack={() => setScreen("garage")}
+            />
+          </motion.div>
         )}
 
         {screen === "unlocks" && (

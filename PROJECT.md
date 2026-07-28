@@ -221,7 +221,8 @@ core/     math, seeded rng, simplex noise, keyboard input,
 world/    TerrainGen (the analytic mountain), Terrain (chunk streaming),
           Scatter (instanced forest), Props (bridges/lifts/villages), Sky
 player/   Physics (carving + air + landings), TrickSystem (naming + scoring),
-          RiderRig (procedural character), BoardArt (canvas topsheets)
+          RiderRig (procedural character), RiderGear (helmets/hair/goggles/
+          jackets/boots), BoardArt (canvas topsheets)
 camera/   ChaseCamera
 fx/       Particles, Trails, Weather, PostFX
 audio/    Audio (synthesised soundtrack + ride bed)
@@ -291,6 +292,59 @@ children have `pointer-events: auto`, so every readout needs it explicitly
 turned back off or it eats thumbs aimed at the stick underneath; and the
 `.sh-overlay` menus use `align-content: safe center` so a short landscape
 phone can still scroll to the bottom of a panel that doesn't fit.
+
+**Characters.** A rider's look is an `Appearance` (`data/appearance.ts`) —
+build, skin, hair, headwear, face gear, eyewear, jacket cut, pants cut, gloves,
+colours, accessory — and nothing else in the game reads anything else about how
+they look. `RiderGear.ts` turns each field into geometry; `RiderRig` assembles
+and poses it.
+
+The governing idea, and the one to keep if this is ever reworked: **the rig
+cannot sell a human face, so it puts equipment in front of one.** A helmet takes
+the skull, goggles take the eyes, a gaiter or balaclava takes the mouth and jaw,
+and a baffled puffy takes the torso. What's left — silhouette, layering, colour
+— is what procedural geometry is actually good at. Every option in the creator
+is either a piece of kit or a way of breaking up the outline; there is no face
+sculptor and there shouldn't be one.
+
+Things that were got wrong once and are easy to get wrong again:
+- Torso volumes are **scaled spheres with stated depth/height/width**, not
+  rotated capsules. A capsule rotated to lie across the body extends along its
+  length axis, which buried the arms inside the jacket first time round.
+  Nothing on the torso may exceed |z| = 0.152; the arms hang at 0.165.
+- Anything worn under a jacket (bib straps, bib panel) is only drawn when the
+  jacket doesn't cover it — otherwise it pokes out through the baffles.
+- Goggles are worn **over** headwear, so the strap radius (0.119) is larger
+  than any hat brim, and brims sit on the forehead above the goggle band.
+- Cloth materials carry a shared 128px procedural weave as a bump map. It is
+  one canvas for the whole game and it does more for perceived quality than any
+  amount of extra geometry.
+
+The **character creator** (`ui/Creator.tsx` + `ui/RiderPreview.tsx`) writes one
+`Appearance` and a riding archetype into `save.customRiders`. Custom riders are
+never locked, appear at the head of the Riders tab with edit/delete, and are
+resolved by `riderById(id, extra)` in `Game.build`. Archetypes (`ARCHETYPES` in
+`data/riders.ts`) exist so a home-made rider sits inside the same balance
+envelope as the roster — the creator is about looking like yourself, not about
+min-maxing. `RiderPreview` shares **one page-lifetime renderer** for the same
+iOS reason `core/renderer.ts` does, and runs at 30fps because the game is
+already drawing behind it.
+
+**Smoothness.** Four things, all worth keeping:
+- `RiderPhysics.renderPos` is `pos` advanced by the un-simulated remainder of
+  the fixed 1/120s accumulator. The rig and the chase camera read it; the
+  simulation reads `pos`. Without it the rider steps in 120Hz quanta whenever
+  the frame rate drifts against the substep rate.
+- `RiderRig.update` is allocation-free. Every vector and quaternion it needs is
+  preallocated on the instance — per-frame allocation here shows up as GC
+  hitches, not as a correctness bug.
+- Keyboard steering is **ramped** (`Input.steer`), fast on and faster off, so a
+  tap gives a light lean and a hold gives a full edge. The trick system reads
+  `steerRaw`/`pitchRaw` instead, because it already does its own spin easing
+  and smoothing it twice makes air rotation feel late.
+- `Terrain.budgetPerFrame` adapts to the measured frame rate (1/2/3 chunks).
+  Building two chunks during an already-long frame is what turns a slow frame
+  into a visible hitch.
 
 **Progression** lives in `localStorage` under `shred1999.save.v1`. Everything
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
@@ -521,6 +575,28 @@ finer-grained detail.
     the original complaint was really that first boot showed one of everything.
     Garage tabs now show "4/10" style counts and the title screen shows the
     current loadout.
+
+33. Character system + smoothness pass, in response to "we should be able to
+    create characters… give them attributes or clothing that helps conceal
+    [the lack of realistic features]… better looking characters and smoother
+    game play".
+    - New `data/appearance.ts` + `player/RiderGear.ts`: build, skin, 9 hair
+      styles, 8 headwear pieces (helmet, visor helmet, beanie, pom beanie,
+      hood, cap, bucket, bare), 4 face coverings, 5 eyewear types, 5 jacket
+      cuts, 4 pants cuts, 3 glove types, accessories — all procedural, still
+      zero assets. Riders lost their flat `colors` block in favour of an
+      `Appearance`, and `riderSwatches()` derives the garage swatches from it.
+    - Geometry upgrades that did the most work: baffled puffy jackets, real
+      boots with highbacks and two binding straps, proper goggle frames and
+      straps, hair that escapes from under a hat and swings on the head's
+      rotation, and a shared procedural weave used as a bump map on all cloth.
+    - Character creator at Garage → Riders → New rider: live turntable preview
+      plus option rows, saved into `save.customRiders`, never locked, editable
+      and deletable, selected automatically once built.
+    - Smoothness: `renderPos` interpolation off the fixed-timestep remainder,
+      an allocation-free `RiderRig.update`, ramped keyboard steering (with the
+      trick system reading the raw axes so air spin stays sharp), and a
+      frame-rate-adaptive terrain chunk budget.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

@@ -6,7 +6,7 @@
  * the run itself went badly.
  */
 
-import { RIDERS, type Unlock } from "../data/riders";
+import { RIDERS, type CustomRider, type Unlock } from "../data/riders";
 import { BOARDS } from "../data/boards";
 import { MOUNTAINS } from "../world/TerrainGen";
 import { TRACKS } from "../audio/Audio";
@@ -76,6 +76,8 @@ export interface SaveData {
     filter: string;
   };
   settings: Settings;
+  /** Riders built in the character creator. Always available — you made them. */
+  customRiders: CustomRider[];
   best: Record<string, number>;
   bestTime: Record<string, number>;
   dailySeed: string;
@@ -145,6 +147,7 @@ const DEFAULT: SaveData = {
     showHints: true,
     touch: "auto",
   },
+  customRiders: [],
   best: {},
   bestTime: {},
   dailySeed: "",
@@ -314,6 +317,7 @@ export function load(): SaveData {
       unlocked: Array.from(
         new Set([...DEFAULT.unlocked, ...(parsed.unlocked ?? [])]),
       ),
+      customRiders: parsed.customRiders ?? [],
       best: { ...(parsed.best ?? {}) },
       bestTime: { ...(parsed.bestTime ?? {}) },
     };

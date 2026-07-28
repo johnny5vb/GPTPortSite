@@ -9,7 +9,13 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { RIDERS, riderById } from "../data/riders";
+import {
+  RIDERS,
+  customToRider,
+  riderById,
+  riderSwatches,
+  type CustomRider,
+} from "../data/riders";
 import { BOARDS, boardById } from "../data/boards";
 import { MOUNTAINS } from "../world/TerrainGen";
 import { SKY_PRESETS } from "../world/Sky";
@@ -97,7 +103,7 @@ export function useMenuKeys(
   return [index, hover] as const;
 }
 
-function Sheet({
+export function Sheet({
   children,
   title,
   eyebrow,
@@ -382,11 +388,20 @@ export function Garage({
   save,
   onChange,
   onBack,
+  onCreate,
+  onDeleteCustom,
 }: {
   save: SaveData;
   onChange: (patch: Partial<SaveData["selected"]>) => void;
   onBack: () => void;
+  /** Open the creator — with a rider to edit, or null for a new one. */
+  onCreate: (editing: CustomRider | null) => void;
+  onDeleteCustom: (id: string) => void;
 }) {
+  const customs = useMemo(
+    () => save.customRiders.map(customToRider),
+    [save.customRiders],
+  );
   const [tab, setTab] = useState<GarageTab>("riders");
   const has = useCallback((k: string) => save.unlocked.includes(k), [save.unlocked]);
   const table = useMemo(() => unlockTable(), []);
@@ -406,7 +421,11 @@ export function Garage({
     `${ids.filter((x) => has(`${prefix}:${x.id}`)).length}/${ids.length}`;
 
   const tabs: { id: GarageTab; label: string; count: string }[] = [
-    { id: "riders", label: "Riders", count: count("rider", RIDERS) },
+    {
+      id: "riders",
+      label: "Riders",
+      count: `${RIDERS.filter((r) => has(`rider:${r.id}`)).length + customs.length}/${RIDERS.length + customs.length}`,
+    },
     { id: "boards", label: "Boards", count: count("board", BOARDS) },
     { id: "mountains", label: "Mountains", count: count("mountain", MOUNTAINS) },
     { id: "light", label: "Light", count: count("sky", SKY_PRESETS) },
@@ -438,6 +457,81 @@ export function Garage({
             className="sh-grid"
             style={{ gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))" }}
           >
+            <div className="sh-card sh-card--action">
+              <div className="sh-eyebrow">Character creator</div>
+              <div style={{ fontSize: "1.05rem", marginTop: 4 }}>Build a rider</div>
+              <p
+                style={{
+                  marginTop: "0.6rem",
+                  fontSize: "0.8rem",
+                  color: "var(--sh-dim)",
+                  lineHeight: 1.5,
+                }}
+              >
+                Helmets, hair, goggles, gaiters, jackets, pants and gloves. Yours
+                from the first run — nothing here is locked.
+              </p>
+              <button
+                type="button"
+                className="sh-btn"
+                style={{ width: "100%", marginTop: "0.9rem" }}
+                onClick={() => onCreate(null)}
+              >
+                <span className="sh-btn__label">New rider</span>
+                <span className="sh-btn__meta">+</span>
+              </button>
+            </div>
+
+            {customs.map((r) => (
+              <div key={r.id} className="sh-card-wrap">
+                <button
+                  className="sh-card"
+                  data-selected={save.selected.rider === r.id}
+                  onClick={() => onChange({ rider: r.id })}
+                >
+                  <div className="sh-eyebrow">{r.handle}</div>
+                  <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{r.name}</div>
+                  <div className="sh-swatches">
+                    {riderSwatches(r).map((c, i) => (
+                      <span key={i} className="sh-swatch" style={{ background: c }} />
+                    ))}
+                  </div>
+                  <p
+                    style={{
+                      marginTop: "0.6rem",
+                      fontSize: "0.8rem",
+                      color: "var(--sh-dim)",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {r.blurb}
+                  </p>
+                  <StatBar label="Spin" value={r.stats.spin} />
+                  <StatBar label="Pop" value={r.stats.pop} />
+                  <StatBar label="Balance" value={r.stats.balance} />
+                  <StatBar label="Speed" value={r.stats.speed} />
+                </button>
+                <div className="sh-card-tools">
+                  <button
+                    type="button"
+                    className="sh-chip"
+                    onClick={() =>
+                      onCreate(save.customRiders.find((c) => c.id === r.id) ?? null)
+                    }
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="sh-chip"
+                    onClick={() => onDeleteCustom(r.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+
             {RIDERS.map((r) => {
               const key = `rider:${r.id}`;
               const owned = has(key);
@@ -452,11 +546,9 @@ export function Garage({
                   <div className="sh-eyebrow">{r.handle}</div>
                   <div style={{ fontSize: "1.05rem", marginTop: 4 }}>{r.name}</div>
                   <div className="sh-swatches">
-                    {[r.colors.jacket, r.colors.pants, r.colors.accent, r.colors.goggles].map(
-                      (c, i) => (
-                        <span key={i} className="sh-swatch" style={{ background: c }} />
-                      ),
-                    )}
+                    {riderSwatches(r).map((c, i) => (
+                      <span key={i} className="sh-swatch" style={{ background: c }} />
+                    ))}
                   </div>
                   <p
                     style={{

@@ -889,3 +889,144 @@
   .hud-corner { padding: 0.9rem 1rem; }
   .hud-meter { width: 40vw; }
 }
+
+/* ─────────────────────────────────────────────────── character creator ──── */
+
+.sh-creator {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.sh-creator__preview {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sh-preview {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(120% 90% at 50% 12%, rgba(120, 160, 220, 0.22), transparent 70%),
+    linear-gradient(180deg, #1a1f27, #0e1116);
+  overflow: hidden;
+}
+
+.sh-creator__options {
+  min-width: 0;
+}
+
+/* The option list scrolls on its own so the preview stays put while you work
+   through it — and so a short laptop screen doesn't push the buttons away. */
+.sh-creator__scroll {
+  max-height: 42vh;
+  overflow-y: auto;
+  padding-right: 0.6rem;
+  overscroll-behavior: contain;
+}
+
+.sh-field {
+  margin-bottom: 1.05rem;
+}
+.sh-field__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.45rem;
+}
+.sh-field__note {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--sh-dim);
+}
+.sh-field__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.sh-swatch-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.sh-swatch-btn:hover {
+  transform: translateY(-1px);
+}
+.sh-swatch-btn[data-active="true"] {
+  box-shadow:
+    0 0 0 2px #0e1116,
+    0 0 0 4px rgba(255, 255, 255, 0.85);
+}
+
+.sh-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  color: inherit;
+  font: inherit;
+  font-size: 0.95rem;
+}
+.sh-input:focus-visible {
+  outline: 2px solid rgba(110, 231, 255, 0.7);
+  outline-offset: 1px;
+}
+
+@media (max-width: 860px) {
+  .sh-creator {
+    grid-template-columns: 1fr;
+  }
+  .sh-creator__preview {
+    position: static;
+  }
+  .sh-creator__scroll {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+}
+
+@media (pointer: coarse) {
+  .sh-swatch-btn { width: 32px; height: 32px; }
+}
+
+/* A card that is a call to action rather than a selectable item. */
+.sh-card--action {
+  border-style: dashed;
+  display: flex;
+  flex-direction: column;
+}
+.sh-card--action .sh-btn {
+  margin-top: auto;
+}
+
+/* Custom riders carry edit/delete alongside the card itself, because the card
+   is already a button and nesting a button inside one is invalid. */
+.sh-card-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.sh-card-wrap .sh-card {
+  width: 100%;
+  flex: 1;
+}
+.sh-card-tools {
+  display: flex;
+  gap: 0.35rem;
+}
+.sh-card-tools .sh-chip {
+  flex: 1;
+}

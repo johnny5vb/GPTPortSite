@@ -92,6 +92,8 @@ export class Input {
   /** Analog stick, -1..1. Left/right steers, up/down tucks and brakes. */
   private axisX = 0;
   private axisY = 0;
+  private keySteer = 0;
+  private keyPitch = 0;
 
   /** Seconds remaining on a buffered jump press. */
   jumpBuffer = 0;
@@ -213,18 +215,42 @@ export class Input {
     return null;
   }
 
-  /** -1 .. 1 steering axis. */
+  /**
+   * -1 .. 1 steering axis.
+   *
+   * A key is either down or it isn't, so a raw keyboard axis snaps between
+   * -1, 0 and 1 — which is why a stick felt better than a keyboard here even
+   * though the physics is identical. The key contribution is ramped instead
+   * (fast on, faster off), giving a tap a light lean and a hold a full edge.
+   * Touch already supplies a real analog value and is added on top untouched.
+   */
   steer() {
-    const keys =
-      (this.down.has("right") ? 1 : 0) - (this.down.has("left") ? 1 : 0);
-    return clampAxis(keys + this.axisX);
+    return clampAxis(this.keySteer + this.axisX);
   }
 
   /** -1 .. 1 pitch axis (up = tuck / frontflip, down = brake / backflip). */
   pitch() {
-    const keys =
-      (this.down.has("brake") ? 1 : 0) - (this.down.has("tuck") ? 1 : 0);
-    return clampAxis(keys + this.axisY);
+    return clampAxis(this.keyPitch + this.axisY);
+  }
+
+  /**
+   * The un-ramped axes. The trick system runs its own spin easing, so feeding
+   * it a pre-smoothed value would smooth it twice and make air rotation feel
+   * late. Ground carving wants the ramp; the air does not.
+   */
+  steerRaw() {
+    return clampAxis(this.steerTarget() + this.axisX);
+  }
+  pitchRaw() {
+    return clampAxis(this.pitchTarget() + this.axisY);
+  }
+
+  /** Where the ramped keyboard axes are heading. */
+  private steerTarget() {
+    return (this.down.has("right") ? 1 : 0) - (this.down.has("left") ? 1 : 0);
+  }
+  private pitchTarget() {
+    return (this.down.has("brake") ? 1 : 0) - (this.down.has("tuck") ? 1 : 0);
   }
 
   consumeJump() {
@@ -235,6 +261,10 @@ export class Input {
 
   /** Call once per frame *after* all systems have read the edge state. */
   endFrame(dt: number) {
+    // Releasing has to be quicker than engaging or the board keeps turning
+    // after you have let go, which reads as lag rather than as weight.
+    this.keySteer = ramp(this.keySteer, this.steerTarget(), dt, 7.5, 15);
+    this.keyPitch = ramp(this.keyPitch, this.pitchTarget(), dt, 9, 16);
     this.pressedThisFrame.clear();
     this.releasedThisFrame.clear();
     if (this.jumpBuffer > 0) this.jumpBuffer -= dt;
@@ -248,9 +278,23 @@ export class Input {
     this.jumpBuffer = 0;
     this.axisX = 0;
     this.axisY = 0;
+    this.keySteer = 0;
+    this.keyPitch = 0;
   }
 
   static actions() {
     return ALL_ACTIONS;
   }
+}
+
+/**
+ * Move `v` toward `target` at a rate that depends on which way it's going.
+ * Frame-rate independent: the per-second rate is converted with an exponential
+ * so a 30fps frame and two 60fps frames land in the same place.
+ */
+function ramp(v: number, target: number, dt: number, onRate: number, offRate: number) {
+  const rate = Math.abs(target) > Math.abs(v) ? onRate : offRate;
+  const k = 1 - Math.exp(-rate * dt);
+  const next = v + (target - v) * k;
+  return Math.abs(next - target) < 0.002 ? target : next;
 }

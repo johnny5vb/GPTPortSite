@@ -73,6 +73,18 @@ export class RiderPhysics {
   readonly pos = new THREE.Vector3();
   readonly vel = new THREE.Vector3();
 
+  /**
+   * `pos` advanced by the fraction of a substep that hasn't been simulated yet.
+   *
+   * The simulation runs in fixed 1/120s slices so the feel is frame-rate
+   * independent, but that leaves up to 8ms of un-simulated time on any given
+   * frame — and at 40 m/s that is a third of a metre of position that pops in
+   * and out as the frame rate drifts against the substep rate. Everything that
+   * *draws* the rider (the rig, the chase camera) reads this instead of `pos`;
+   * everything that simulates keeps using `pos`.
+   */
+  readonly renderPos = new THREE.Vector3();
+
   /** Board heading. 0 points down the fall line (+Z). */
   yaw = 0;
   /** Flip rotation about the board's lateral axis (radians, accumulates). */
@@ -165,6 +177,7 @@ export class RiderPhysics {
   reset(x: number, z: number) {
     this.gen.sample(x, z, this.surface);
     this.pos.set(x, this.surface.h, z);
+    this.renderPos.copy(this.pos);
     this.vel.set(0, 0, 12);
     this.yaw = 0;
     this.pitch = 0;
@@ -208,6 +221,7 @@ export class RiderPhysics {
       };
     }
     this.speed = this.vel.length();
+    this.renderPos.copy(this.pos).addScaledVector(this.vel, this.accum);
   }
 
   private substep(dt: number, input: PhysicsInput) {
