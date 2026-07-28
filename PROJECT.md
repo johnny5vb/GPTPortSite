@@ -483,6 +483,12 @@ burst of catch-up 16ths. The sfx bus deliberately stays live — suspending the
 whole `AudioContext` would silence the pause menu's own blips. Finishing a run
 zeroes the bed's inputs instead, so the music carries on under the summary.
 
+**Landing feedback escalates in four tiers** (`tierOf` in `Hud.tsx`), set far
+apart on purpose: if every landing arrives at full volume then none of them
+does. Marks are drawn SVG, one per thing that was hard about it — air, spin,
+stomp, perfect, grind. The combo pill heats and grows with the chain, driven
+from the rAF loop through a CSS custom property rather than React state.
+
 **Progression** lives in `localStorage` under `shred1999.save.v1`. Everything
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
 re-evaluated both on boot and at the end of every run.
@@ -503,6 +509,54 @@ requirements live on the board; **mountain** requirements are the one exception
 and still live in `mountainReq` inside `core/save.ts`. Adding a board art kind
 means adding a case to `BoardArt.ts` and, if the finish differs, an entry in
 `boardFinish()`; adding a rider accessory means a case in `RiderRig.ts`.
+
+**Type.** Three roles and no more, all inlined as base64 woff2 in
+`ui/shred-fonts.css`: **Archivo Black** for the wordmark and any number the
+player is chasing, **Poppins** for everything read as language, **JetBrains
+Mono** for anything read as an instrument (clock, labels, key caps). The faces
+are inlined rather than fetched because the game has to look identical on the
+site, in a standalone build, and inside a published artifact whose CSP blocks
+every external host — a webfont that fails in one of those falls back silently.
+
+Headings are two voices, and the split is load-bearing: `.sh-title` is sentence
+case in the UI face and has to hold a real sentence; `.sh-shout` is uppercase
+display and is reserved for the wordmark, the trick name, the banner and the
+final score. Putting a panel heading in `.sh-shout` shouts an error message at
+the player.
+
+The wordmark is SHRED over 1999 — no slashes — with the year as a wide-tracked
+rule sized to the word, and one offset copy of the word behind itself in cyan.
+That misregistration is deliberate: it is what makes it read as a snowboard
+graphic instead of a software logo.
+
+**Units.** The simulation is metric; everything the player reads is imperial,
+converted through `MPH` / `FEET` / `MILES` in `core/math.ts` so a speedo and a
+distance can't drift out of step.
+
+**Rails and boxes** (`Jib` in `TerrainGen.ts`) are deliberately **not** part of
+`height()`. A 40cm rail is far below the tessellation the terrain mesh works
+at, so a rail in the heightfield is a surface the physics can feel and the
+renderer cannot draw. `Props.buildJibs` builds the geometry from the same `Jib`
+records that `sample()` reads back, so the two agree by construction.
+
+Three things had to be true before rails were fun, and all three are easy to
+undo:
+- **Getting on.** Each jib has a snow approach ramp that *is* terrain
+  (`jibRampHeight`), and the metal only stands as proud as the ramp leaves it
+  (`max(0, height − ramp)`), so the two curves add to a constant. Give the
+  metal its own entry bevel as well and you rebuild the hump.
+- **Staying on.** The rail snap in `Physics` is a spring to the centre line.
+  Without it the target is a few centimetres at 15 m/s and nobody ever lands a
+  grind; with too much of it the rail drives the board.
+- **The ground checks.** They must use `rideHeightAt`, not `heightAt`. `heightAt`
+  is the snow, and a rider standing on a rail is a metre above the snow — using
+  it launched the rider off every box they touched.
+
+**Every gap has a way out.** A crevasse with no exit isn't a hazard, it's the
+end of the run. The far end of a `gap` is a diagonal: down the middle it's a
+wall, so clearing it lands you on solid ground, and out at one edge it runs out
+over several times the depth. The floor drains toward that side so gravity
+answers "which way is the opening" instead of the player guessing.
 
 **Accessibility note.** The route's `<main>` carries the only `<h1>` (visually
 hidden); the title screen headline is an `<h2>` so heading order stays clean.
@@ -745,6 +799,33 @@ finer-grained detail.
     `window.__shred` handle, which is what made it possible to verify the grab
     geometry numerically instead of by eye.
 
+
+35. The black cubes, finally. Not the sparkle after all — or not only. The
+    scarf's verlet chain is simulated in world space and the mesh hangs off the
+    rig root, which carries the rider's full world transform, so writing world
+    coordinates into its vertex buffer applied that transform twice and drew
+    the scarf as far from the rider as the rider was from the origin. Frustum
+    culling was off, so it was submitted every frame wherever it landed: a thin
+    double-sided ribbon flickering across the mountain, paused or not. Measured
+    52.5m of error mid-run; now 0.1m. Two of the ten riders wear one and one of
+    them is a starter, which is why so many players saw it.
+
+36. Design system pass: the wordmark, the three-role type system, one-bar
+    control legend, imperial units. See the SHRED section.
+
+37. The board rebuilt as four layers off one extrusion — topsheet, sidewall,
+    steel edge, sintered base with its own graphic — plus real bindings, and a
+    deck graphic that runs once tail-to-nose instead of repeating at every
+    hinge.
+
+38. Terrain: gap runouts (every crevasse is escapable, verified with a
+    least-climb puck from the worst spot in all 15 across 8 mountains), a new
+    `jibs` feature kind, and rails and boxes that are actually rideable — 175
+    of them across the eight mountains, with snow approach ramps, a centre-line
+    snap, and grinds that derive their names the way the air tricks do.
+
+39. Landings escalate: four tiers, drawn marks for what was hard, a combo pill
+    that heats as the chain climbs.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`
