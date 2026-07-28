@@ -510,6 +510,123 @@ function MenuIcon({ kind }: { kind: IconKind }) {
   );
 }
 
+/**
+ * Which mountain.
+ *
+ * This used to live only in the garage, three taps away and behind a tab
+ * labelled with something else. The result is that the drop-in flow never asks
+ * which mountain you want, so most players ride the same one until they get
+ * bored and conclude the game has one level. Picking the hill is part of
+ * deciding to ride, so it happens here, between the mode and the run.
+ */
+export function MountainSelect({
+  save,
+  mode,
+  onPick,
+  onBack,
+}: {
+  save: SaveData;
+  mode: ModeId;
+  onPick: (id: string) => void;
+  onBack: () => void;
+}) {
+  const owned = MOUNTAINS.filter((m) => save.unlocked.includes(`mountain:${m.id}`));
+  const locked = MOUNTAINS.filter((m) => !save.unlocked.includes(`mountain:${m.id}`));
+  // Open on the one you rode last, so "same again" is one key.
+  const start = Math.max(0, owned.findIndex((m) => m.id === save.selected.mountain));
+  const [index, setIndex] = useMenuKeys(owned.length, (i) => onPick(owned[i].id), onBack);
+  const [seeded, setSeeded] = useState(false);
+  useEffect(() => {
+    if (!seeded && start > 0) {
+      setIndex(start);
+      setSeeded(true);
+    }
+  }, [seeded, start, setIndex]);
+
+  const current = owned[Math.min(index, owned.length - 1)];
+  const modeName = MODES.find((m) => m.id === mode)?.name ?? "";
+
+  return (
+    <div className="sh-overlay">
+      <Sheet eyebrow={`${modeName} / pick a mountain`} title="Where are we riding?" wide>
+        <div className="sh-split">
+          <div className="sh-tiles sh-tiles--modes">
+            {owned.map((m, i) => (
+              <button
+                key={m.id}
+                type="button"
+                className="sh-tile"
+                data-focus={i === index}
+                onMouseEnter={() => setIndex(i)}
+                onClick={() => onPick(m.id)}
+              >
+                <MenuIcon kind="freeride" />
+                <span className="sh-tile__label">{m.name}</span>
+                <span className="sh-tile__meta">
+                  {Math.round(Math.atan(m.slope) * (180 / Math.PI))}° / {(m.length * MILES).toFixed(1)} mi
+                </span>
+              </button>
+            ))}
+            {locked.map((m) => {
+              const req = unlockTable().find((u) => u.key === `mountain:${m.id}`);
+              return (
+                <button key={m.id} type="button" className="sh-tile" disabled>
+                  <MenuIcon kind="unlocks" />
+                  <span className="sh-tile__label">{m.name}</span>
+                  <span className="sh-tile__meta">
+                    {req?.requirement.label ?? "Locked"}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {current && (
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.22 }}
+              style={{
+                border: "1px solid var(--sh-line)",
+                borderRadius: 16,
+                padding: "1.4rem",
+                background: "rgba(255,255,255,0.035)",
+              }}
+            >
+              <div className="sh-eyebrow">
+                {Math.round(Math.atan(current.slope) * (180 / Math.PI))}° average pitch
+              </div>
+              <h3 className="sh-title" style={{ fontSize: "1.9rem", margin: "0.4rem 0 0.8rem" }}>
+                {current.name}
+              </h3>
+              <p style={{ color: "var(--sh-dim)", lineHeight: 1.6, fontSize: "0.95rem" }}>
+                {current.blurb}
+              </p>
+              <div style={{ display: "flex", gap: "0.4rem", marginTop: "1.1rem", flexWrap: "wrap" }}>
+                <span className="sh-chip">{(current.length * MILES).toFixed(1)} mi</span>
+                <span className="sh-chip">
+                  {current.treeDensity > 0.55 ? "Treed" : "Open"}
+                </span>
+                <span className="sh-chip">
+                  {current.iceBias > 0.5 ? "Icy" : current.powderBias > 0.5 ? "Deep" : "Groomed"}
+                </span>
+              </div>
+            </motion.div>
+          )}
+        </div>
+
+        <div style={{ marginTop: "1.4rem", display: "flex", gap: "0.5rem" }}>
+          <button className="sh-btn" style={{ width: "auto" }} onClick={onBack}>
+            <span className="sh-btn__label">Back</span>
+            <span className="sh-btn__meta">Esc</span>
+          </button>
+        </div>
+      </Sheet>
+    </div>
+  );
+}
+
 // ────────────────────────────────────────────────────────── mode select ────
 
 export function ModeSelect({

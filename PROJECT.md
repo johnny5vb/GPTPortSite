@@ -316,9 +316,25 @@ Things that were got wrong once and are easy to get wrong again:
   jacket doesn't cover it — otherwise it pokes out through the baffles.
 - Goggles are worn **over** headwear, so the strap radius (0.119) is larger
   than any hat brim, and brims sit on the forehead above the goggle band.
-- Cloth materials carry a shared 128px procedural weave as a bump map. It is
-  one canvas for the whole game and it does more for perceived quality than any
-  amount of extra geometry.
+- Cloth carries a shared procedural **normal + roughness pair**, not a bump
+  map. The old 128px greyscale bump of two sines was invisible at any distance
+  you could actually see a rider from, which is what made jackets read as
+  painted plastic. What sells snow gear is not the weave — far too fine to
+  resolve — but the **ripstop grid**, the coarse reinforcement squares that
+  catch light along their edges, so that is drawn at a scale you can see. The
+  roughness map is half the job: uniform roughness is the other half of the
+  plastic look, and a highlight has to travel across fabric rather than sit on
+  it. Keep the repeat square — the torso UV runs 0..1 around and 0..1 up, and
+  an uneven repeat turns ripstop into corduroy.
+- Hair gets its own normal + roughness pair with the grain running root to tip,
+  plus a sheen band. Hair is one of the few everyday materials with a visibly
+  anisotropic highlight, and a matte dome is unmistakably not it. Uncovered
+  styles also carry tapered strand slabs over the crown: a dome is a dome
+  however it is shaded, and what stops it reading as a swim cap is an outline
+  with pieces in it.
+- A jacket needs a hem, a collar and a cuff. Those are the three places real
+  outerwear doubles its fabric, and they are what the eye uses to tell a coat
+  from a shell of colour.
 
 The **character creator** (`ui/Creator.tsx` + `ui/RiderPreview.tsx`) writes one
 `Appearance` and a riding archetype into `save.customRiders`. Custom riders are
@@ -524,7 +540,13 @@ from the rAF loop through a CSS custom property rather than React state.
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
 re-evaluated both on boot and at the end of every run.
 
-The starter set is deliberately generous: **4 riders, 5 boards, 3 mountains**
+**Picking the hill is part of deciding to ride.** Mountain selection used to
+live only in the garage, behind a tab, three taps from the title — so the
+drop-in flow never asked, and players rode the same hill until they concluded
+the game had one level. It is now a step in the flow: mode → mountain → run,
+opening on the one you rode last so "same again" is one key.
+
+The starter set is deliberately generous: **4 riders, 5 boards, 5 mountains**
 plus 3 light presets are already unlocked on first boot. This was originally
 1/1/1, which made a game whose whole pitch is a quiver read as a game with one
 board. `DEFAULT.unlocked` in `core/save.ts` is the list; `load()` unions it with

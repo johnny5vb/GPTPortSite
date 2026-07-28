@@ -114,9 +114,15 @@ const DEFAULT: SaveData = {
     "board:checker",
     "board:blackout",
     "board:painted",
+    // Five starters, not three. The mountain is the thing a player gets sick
+    // of first, and the unlock ladder was gating variety behind exactly the
+    // repetition it causes. If you add a mountain, decide explicitly whether
+    // it is a starter or a reward — the default should not be to lock it.
     "mountain:hollow-ridge",
     "mountain:long-meadow",
     "mountain:ember-pass",
+    "mountain:glass-basin",
+    "mountain:sawtooth",
     "sky:golden",
     "sky:bluebird",
     "sky:dusk",
@@ -183,11 +189,11 @@ export function unlockTable(): UnlockDef[] {
     "hollow-ridge": { kind: "default", value: 0, label: "Starter" },
     "long-meadow": { kind: "default", value: 0, label: "Starter" },
     "ember-pass": { kind: "default", value: 0, label: "Starter" },
-    "glass-basin": { kind: "runs", value: 2, label: "Finish 2 runs" },
-    sawtooth: { kind: "distance", value: 2500, label: "Ride 2.5 km total" },
-    "north-cirque": { kind: "runs", value: 6, label: "Finish 6 runs" },
-    "midnight-mile": { kind: "tricks", value: 50, label: "Land 50 tricks" },
-    "wolf-couloir": { kind: "score", value: 60000, label: "Score 60,000 in a run" },
+    "glass-basin": { kind: "default", value: 0, label: "Starter" },
+    sawtooth: { kind: "default", value: 0, label: "Starter" },
+    "north-cirque": { kind: "runs", value: 3, label: "Finish 3 runs" },
+    "midnight-mile": { kind: "tricks", value: 30, label: "Land 30 tricks" },
+    "wolf-couloir": { kind: "score", value: 40000, label: "Score 40,000 in a run" },
   };
   for (const m of MOUNTAINS)
     out.push({

@@ -45,43 +45,141 @@ export interface GearKit {
 
 // ───────────────────────────────────────────────────────── fabric texture ────
 
-let fabricTex: THREE.CanvasTexture | null = null;
 
 /**
  * A tiling weave. Used as a bump map on cloth so a jacket stops reading as a
  * solid-colour plastic shape — it is a small change that does more for
  * perceived quality than any amount of extra geometry.
  */
-export function fabricTexture(): THREE.CanvasTexture {
-  if (fabricTex) return fabricTex;
-  const S = 128;
-  const c = document.createElement("canvas");
-  c.width = c.height = S;
-  const g = c.getContext("2d")!;
-  g.fillStyle = "#808080";
-  g.fillRect(0, 0, S, S);
+/**
+ * Technical fabric, as a normal map and a roughness map.
+ *
+ * The old version was a 128px greyscale bump of two sine waves. At any distance
+ * you could actually see a rider from, it was invisible — which is what makes a
+ * jacket read as painted plastic rather than as cloth.
+ *
+ * What sells snow gear specifically is not the weave, which is far too fine to
+ * resolve: it is the **ripstop grid**, the coarse reinforcement squares every
+ * few millimetres that catch light along their edges. So that is drawn at a
+ * scale you can see, with the weave and fibre noise underneath it for the
+ * surface to sit on.
+ *
+ * A roughness map comes out of the same pass. Uniform roughness is the other
+ * half of the plastic look: real shell fabric is duller in the weave and
+ * shinier along the ripstop threads, and that variation is what makes a
+ * highlight travel across it instead of sitting on it.
+ *
+ * Both are seamless — the grids divide the tile exactly and the noise is
+ * generated on a torus — so `RepeatWrapping` can't show a seam.
+ */
+let fabricNormalTex: THREE.CanvasTexture | null = null;
+let fabricRoughTex: THREE.CanvasTexture | null = null;
 
-  // Weave: alternating warp and weft, then noise on top for the fibres.
-  const img = g.getImageData(0, 0, S, S);
-  const d = img.data;
+function buildFabricMaps() {
+  const S = 512;
+  /** Ripstop squares per tile, and weave threads per tile. Both divide S. */
+  const RIP = 16;
+  const WEAVE = 128;
+
+  // Height field first; the normal map is its gradient.
+  const h = new Float32Array(S * S);
+  const rough = new Float32Array(S * S);
+  const hash = (x: number, y: number) => {
+    const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+    return n - Math.floor(n);
+  };
+
+  for (let y = 0; y < S; y++) {
+    for (let x = 0; x < S; x++) {
+      const i = y * S + x;
+
+      // Weave: over-under, which is two half-phase-offset square-ish waves.
+      const wx = Math.sin((x / S) * Math.PI * 2 * WEAVE);
+      const wy = Math.sin((y / S) * Math.PI * 2 * WEAVE + Math.PI * 0.5);
+      let v = (wx + wy) * 0.16;
+
+      // Ripstop: a raised thread every RIP squares, in both directions. The
+      // thread is a couple of texels wide and stands proud of the weave.
+      const px = ((x % (S / RIP)) / (S / RIP)) * 2 - 1;
+      const py = ((y % (S / RIP)) / (S / RIP)) * 2 - 1;
+      const ripX = Math.exp(-px * px * 220);
+      const ripY = Math.exp(-py * py * 220);
+      const rip = Math.max(ripX, ripY);
+      v += rip * 0.85;
+
+      // Fibre noise, wrapped so the tile stays seamless.
+      v += (hash(x % S, y % S) - 0.5) * 0.16;
+
+      h[i] = v;
+      // Duller in the weave, brighter along the ripstop threads, with a slow
+      // wander so a highlight has something to break up on.
+      const wander = Math.sin((x / S) * Math.PI * 2 * 3 + (y / S) * Math.PI * 2 * 2) * 0.5 + 0.5;
+      rough[i] = 0.94 - rip * 0.3 - wander * 0.07;
+    }
+  }
+
+  const nc = document.createElement("canvas");
+  nc.width = nc.height = S;
+  const ng = nc.getContext("2d")!;
+  const nimg = ng.createImageData(S, S);
+  const rc = document.createElement("canvas");
+  rc.width = rc.height = S;
+  const rg = rc.getContext("2d")!;
+  const rimg = rg.createImageData(S, S);
+
+  const at = (x: number, y: number) => h[((y + S) % S) * S + ((x + S) % S)];
+  const STRENGTH = 2.6;
   for (let y = 0; y < S; y++) {
     for (let x = 0; x < S; x++) {
       const i = (y * S + x) * 4;
-      const warp = Math.sin((x / S) * Math.PI * 2 * 32) * 6;
-      const weft = Math.sin((y / S) * Math.PI * 2 * 32) * 6;
-      const grain = (Math.random() - 0.5) * 22;
-      const v = 128 + warp + weft + grain;
-      d[i] = d[i + 1] = d[i + 2] = Math.max(0, Math.min(255, v));
-      d[i + 3] = 255;
+      // Sobel, wrapped — the same reason the terrain maps use one.
+      const dx =
+        at(x + 1, y - 1) + 2 * at(x + 1, y) + at(x + 1, y + 1) -
+        (at(x - 1, y - 1) + 2 * at(x - 1, y) + at(x - 1, y + 1));
+      const dy =
+        at(x - 1, y + 1) + 2 * at(x, y + 1) + at(x + 1, y + 1) -
+        (at(x - 1, y - 1) + 2 * at(x, y - 1) + at(x + 1, y - 1));
+      let nx = -dx * STRENGTH;
+      let ny = -dy * STRENGTH;
+      const nz = 1;
+      const inv = 1 / Math.hypot(nx, ny, nz);
+      nx *= inv;
+      ny *= inv;
+      nimg.data[i] = (nx * 0.5 + 0.5) * 255;
+      nimg.data[i + 1] = (ny * 0.5 + 0.5) * 255;
+      nimg.data[i + 2] = nz * inv * 255;
+      nimg.data[i + 3] = 255;
+
+      const r = Math.max(0, Math.min(1, rough[y * S + x])) * 255;
+      rimg.data[i] = rimg.data[i + 1] = rimg.data[i + 2] = r;
+      rimg.data[i + 3] = 255;
     }
   }
-  g.putImageData(img, 0, 0);
+  ng.putImageData(nimg, 0, 0);
+  rg.putImageData(rimg, 0, 0);
 
-  fabricTex = new THREE.CanvasTexture(c);
-  fabricTex.wrapS = fabricTex.wrapT = THREE.RepeatWrapping;
-  fabricTex.repeat.set(3, 3);
-  fabricTex.anisotropy = 4;
-  return fabricTex;
+  const mk = (canvas: HTMLCanvasElement) => {
+    const t = new THREE.CanvasTexture(canvas);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    // Roughly square on the body: the torso UV runs 0..1 around the ring and
+    // 0..1 up, over surfaces of similar size, so an even repeat keeps the
+    // ripstop grid square. Uneven repeats turn it into corduroy.
+    t.repeat.set(6, 6);
+    t.anisotropy = 8;
+    return t;
+  };
+  fabricNormalTex = mk(nc);
+  fabricRoughTex = mk(rc);
+}
+
+export function fabricNormal(): THREE.CanvasTexture {
+  if (!fabricNormalTex) buildFabricMaps();
+  return fabricNormalTex!;
+}
+
+export function fabricRoughness(): THREE.CanvasTexture {
+  if (!fabricRoughTex) buildFabricMaps();
+  return fabricRoughTex!;
 }
 
 // ───────────────────────────────────────────────────────────────── build ────
@@ -119,6 +217,83 @@ export interface HairParts {
   tail?: THREE.Group;
 }
 
+/**
+ * Hair, as a surface.
+ *
+ * Hair on a procedural rig is never going to be strands, so the job is to make
+ * a *shell* read as hair rather than as a painted scalp. Two things do that and
+ * nothing else really does: a strong directional grain running root-to-tip, and
+ * a sheen band — hair is one of the few everyday materials with a visibly
+ * anisotropic highlight, and a uniform matte dome is unmistakably not it.
+ *
+ * So: a normal map of fine strands, and a roughness map that runs a brighter
+ * band through the middle of them. Same trick as the fabric, different axis.
+ */
+let hairNormalTex: THREE.CanvasTexture | null = null;
+let hairRoughTex: THREE.CanvasTexture | null = null;
+
+function buildHairMaps() {
+  const S = 256;
+  const nc = document.createElement("canvas");
+  nc.width = nc.height = S;
+  const rc = document.createElement("canvas");
+  rc.width = rc.height = S;
+  const ng = nc.getContext("2d")!;
+  const rg = rc.getContext("2d")!;
+  const nimg = ng.createImageData(S, S);
+  const rimg = rg.createImageData(S, S);
+
+  // Strand centres, wrapped so the tile is seamless across u.
+  const STRANDS = 46;
+  for (let y = 0; y < S; y++) {
+    for (let x = 0; x < S; x++) {
+      const i = (y * S + x) * 4;
+      // Where we sit across the nearest strand, -1..1. A little wander down
+      // the length so strands aren't dead straight.
+      const wander = Math.sin((y / S) * Math.PI * 2 * 2.3 + x * 0.11) * 1.4;
+      const u = ((x + wander) / S) * STRANDS;
+      const across = (u - Math.floor(u)) * 2 - 1;
+      // A rounded strand: the normal sweeps across it.
+      const nx = across * Math.sqrt(Math.max(0, 1 - across * across)) * 1.9;
+      const inv = 1 / Math.hypot(nx, 0, 1);
+      nimg.data[i] = (nx * inv * 0.5 + 0.5) * 255;
+      nimg.data[i + 1] = 0.5 * 255;
+      nimg.data[i + 2] = inv * 255;
+      nimg.data[i + 3] = 255;
+
+      // Sheen: smoother along the crest of each strand, and a slow band down
+      // the length so the highlight travels rather than covering everything.
+      const crest = 1 - Math.min(1, Math.abs(across) * 2.2);
+      const band = Math.sin((y / S) * Math.PI * 2 + 1.2) * 0.5 + 0.5;
+      const r = 0.86 - crest * 0.34 - band * 0.1;
+      rimg.data[i] = rimg.data[i + 1] = rimg.data[i + 2] = Math.max(0, Math.min(1, r)) * 255;
+      rimg.data[i + 3] = 255;
+    }
+  }
+  ng.putImageData(nimg, 0, 0);
+  rg.putImageData(rimg, 0, 0);
+
+  const mk = (canvas: HTMLCanvasElement) => {
+    const t = new THREE.CanvasTexture(canvas);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(2, 2);
+    t.anisotropy = 8;
+    return t;
+  };
+  hairNormalTex = mk(nc);
+  hairRoughTex = mk(rc);
+}
+
+export function hairNormal(): THREE.CanvasTexture {
+  if (!hairNormalTex) buildHairMaps();
+  return hairNormalTex!;
+}
+
+export function hairRoughness(): THREE.CanvasTexture {
+  if (!hairRoughTex) buildHairMaps();
+  return hairRoughTex!;
+}
+
 export function buildHair(
   kit: GearKit,
   style: HairStyle,
@@ -127,7 +302,13 @@ export function buildHair(
 ): HairParts {
   const group = new THREE.Group();
   if (style === "none") return { group };
-  const hair = kit.mat(color, { roughness: 0.92, flatShading: false });
+  const hair = kit.mat(color, {
+    roughness: 0.74,
+    flatShading: false,
+    normalMap: hairNormal(),
+    normalScale: new THREE.Vector2(1.1, 1.1),
+    roughnessMap: hairRoughness(),
+  });
 
   /** The part that sits on the skull. Skipped entirely under a hat. */
   const crown = (r: number, yScale = 1) => {
@@ -141,6 +322,40 @@ export function buildHair(
     m.scale.set(0.92, 1.04 * yScale, 1.0);
     group.add(m);
     return m;
+  };
+
+  /**
+   * Strands over the crown.
+   *
+   * A dome is a dome however it's shaded — what stops it reading as a swim cap
+   * is an outline with pieces in it. These are tapered slabs laid over the
+   * skull, each rotated a little differently, so the silhouette breaks up and
+   * the light has edges to catch.
+   */
+  const strands = (count: number, len: number, spread: number, seed = 1) => {
+    for (let i = 0; i < count; i++) {
+      const t = i / count;
+      // Deterministic scatter — the same rider must build the same head twice.
+      const h1 = Math.abs(Math.sin((i + seed) * 12.9898) * 43758.5453) % 1;
+      const h2 = Math.abs(Math.sin((i + seed) * 78.233) * 12345.6789) % 1;
+      const yaw = t * Math.PI * 2 + (h1 - 0.5) * 0.5;
+      const tilt = 0.5 + h2 * spread;
+      const l = len * (0.72 + h1 * 0.55);
+
+      const geo = new THREE.CylinderGeometry(0.02, 0.006, l, 5, 1);
+      geo.translate(0, -l * 0.5, 0);
+      const m = kit.mesh(geo, hair, 0, 0.1, 0);
+      m.scale.set(1, 1, 2.1);
+      m.rotation.order = "YXZ";
+      m.rotation.y = yaw;
+      m.rotation.x = tilt;
+      m.position.set(
+        Math.cos(yaw) * 0.052 * Math.sin(tilt),
+        0.095 - Math.cos(tilt) * 0.02,
+        Math.sin(yaw) * 0.052 * Math.sin(tilt),
+      );
+      group.add(m);
+    }
   };
 
   /** Hair escaping under the front brim of a hat — the detail that makes
@@ -165,13 +380,17 @@ export function buildHair(
       if (!covered) crown(0.101, 0.94);
       break;
     case "short":
-      if (!covered) crown(0.106);
-      else fringe();
+      if (!covered) {
+        crown(0.106);
+        strands(11, 0.075, 0.5, 3);
+      } else fringe();
       nape();
       break;
     case "shag": {
-      if (!covered) crown(0.112);
-      else fringe();
+      if (!covered) {
+        crown(0.112);
+        strands(16, 0.13, 0.75, 7);
+      } else fringe();
       nape(0.09);
       // Uneven flicks so the outline isn't a clean dome.
       for (let i = 0; i < 6; i++) {
@@ -190,8 +409,10 @@ export function buildHair(
       break;
     }
     case "ponytail": {
-      if (!covered) crown(0.104);
-      else fringe();
+      if (!covered) {
+        crown(0.104);
+        strands(9, 0.06, 0.4, 11);
+      } else fringe();
       tail = new THREE.Group();
       tail.position.set(-0.082, 0.03, 0);
       const band = kit.mesh(new THREE.TorusGeometry(0.024, 0.008, 6, 12), hair, 0, 0, 0);
@@ -236,8 +457,10 @@ export function buildHair(
       break;
     }
     case "locs": {
-      if (!covered) crown(0.108);
-      else fringe();
+      if (!covered) {
+        crown(0.108);
+        strands(13, 0.1, 0.7, 17);
+      } else fringe();
       tail = new THREE.Group();
       tail.position.set(-0.035, 0.035, 0);
       for (let i = 0; i < 7; i++) {
@@ -834,6 +1057,38 @@ export function buildJacket(
     cap.scale.set(0.062 * w, 0.07, 0.07 * w);
     g.add(cap);
   }
+
+  // ── the edges of the garment ──────────────────────────────────────────────
+  // A jacket that simply stops reads as a shape; a jacket with a hem, a collar
+  // and a cuff reads as something someone put on. These are the three places
+  // fabric is doubled over in real outerwear, and they are what the eye uses to
+  // tell a coat from a shell of colour.
+  const edge = kit.cloth(app.jacketAlt, { roughness: 0.86, flatShading: false });
+
+  // Hem: a band around the bottom, slightly proud of the body.
+  const hemProfile = app.jacket === "anorak" ? 0.098 : 0.104;
+  const hem = kit.mesh(
+    new THREE.CylinderGeometry(hemProfile * w * 1.3, hemProfile * w * 1.28, 0.032, 26, 1, true),
+    edge,
+    0,
+    -0.028,
+    0,
+  );
+  hem.scale.set(1, 1, 0.84);
+  g.add(hem);
+
+  // Collar: a short stand at the neck, open at the front so it doesn't read as
+  // a ring floating under the chin.
+  const collar = kit.mesh(
+    new THREE.CylinderGeometry(0.072 * w, 0.079 * w, 0.062, 20, 1, true, Math.PI * 0.22, Math.PI * 1.56),
+    edge,
+    0,
+    0.5,
+    0,
+  );
+  collar.scale.set(1, 1, 0.9);
+  g.add(collar);
+
 
   if (app.jacket !== "onesie") {
     const zip = kit.mesh(

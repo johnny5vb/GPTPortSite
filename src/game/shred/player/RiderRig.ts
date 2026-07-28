@@ -46,7 +46,8 @@ import {
   buildPelvis,
   buildScale,
   coversCrown,
-  fabricTexture,
+  fabricNormal,
+  fabricRoughness,
   pantsProfile,
   type GearKit,
 } from "./RiderGear";
@@ -214,16 +215,21 @@ export class RiderRig {
   }
 
   /**
-   * Cloth gets a woven bump map. It costs one shared 128px canvas and lifts
-   * every soft-goods surface out of the flat-plastic look that plain vertex
-   * colour gives you.
+   * Cloth. One shared normal + roughness pair for every soft-goods surface in
+   * the game, and between them they do more for how a rider reads at close
+   * range than any amount of extra geometry would.
    */
   private cloth(color: string, opts: THREE.MeshStandardMaterialParameters = {}) {
     return this.mat(color, {
-      roughness: 0.9,
+      roughness: 0.92,
       flatShading: false,
-      bumpMap: fabricTexture(),
-      bumpScale: 0.6,
+      // A real normal map, not a bump: a bump map has no direction to it, and
+      // the thing that reads as fabric is the ripstop grid catching light along
+      // one axis and not the other. The roughness map matters just as much —
+      // uniform roughness is half of what made this look like painted plastic.
+      normalMap: fabricNormal(),
+      normalScale: new THREE.Vector2(0.5, 0.5),
+      roughnessMap: fabricRoughness(),
       ...opts,
     });
   }

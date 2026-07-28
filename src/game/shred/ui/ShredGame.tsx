@@ -27,6 +27,7 @@ import {
   Garage,
   HowTo,
   ModeSelect,
+  MountainSelect,
   PauseMenu,
   PhotoBar,
   Results,
@@ -68,6 +69,7 @@ async function goImmersive() {
 type Screen =
   | "title"
   | "modes"
+  | "mountains"
   | "garage"
   | "creator"
   | "unlocks"
@@ -452,6 +454,9 @@ export default function ShredGame() {
 
   // ───────────────────────────────────────────────────────────── actions ────
 
+  /** Chosen mode, held while the player picks the hill. */
+  const pendingMode = useRef<ModeId>("freeride");
+
   const startMode = useCallback(
     (id: ModeId) => {
       // Touch devices get the full screen and, where the browser allows it, a
@@ -632,8 +637,36 @@ export default function ShredGame() {
           <div className="shred-layer">
             <ModeSelect
               save={saveData}
-              onPick={startMode}
+              onPick={(id) => {
+                pendingMode.current = id;
+                gameRef.current?.audio.ui("select");
+                setScreen("mountains");
+              }}
               onBack={() => setScreen("title")}
+            />
+          </div>
+        )}
+
+        {screen === "mountains" && (
+          <div className="shred-layer">
+            <MountainSelect
+              save={saveData}
+              mode={pendingMode.current}
+              onPick={(mountain) => {
+                // Built and stored *before* setState, not inside its updater.
+                // `rebuild` reads `saveRef` on the next frame, and a ref written
+                // from inside an updater isn't there yet — which is how the run
+                // ended up on the mountain you didn't pick. Same trap as the
+                // menu-selection bug in `useMenuKeys`.
+                const prev = saveRef.current;
+                if (!prev) return;
+                const next = { ...prev, selected: { ...prev.selected, mountain } };
+                saveRef.current = next;
+                persist(next);
+                setSaveData(next);
+                startMode(pendingMode.current);
+              }}
+              onBack={() => setScreen("modes")}
             />
           </div>
         )}
