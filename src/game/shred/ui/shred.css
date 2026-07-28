@@ -23,6 +23,22 @@
   font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   user-select: none;
   -webkit-user-select: none;
+  /* No pull-to-refresh, no double-tap zoom, no rubber-banding under the game. */
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+
+  /* Safe-area aware insets used by the HUD corners and the touch controls. */
+  --sh-safe-t: env(safe-area-inset-top, 0px);
+  --sh-safe-b: env(safe-area-inset-bottom, 0px);
+  --sh-safe-l: env(safe-area-inset-left, 0px);
+  --sh-safe-r: env(safe-area-inset-right, 0px);
+}
+
+/* Menus need to scroll on short screens; the game itself never does. */
+.shred-root .sh-sheet {
+  touch-action: pan-y;
 }
 
 /* The site hides the native cursor globally; the game needs it back in menus. */
@@ -88,6 +104,10 @@
   line-height: 0.92;
 }
 
+.sh-title-screen .sh-title {
+  font-size: clamp(2.1rem, min(11vw, 15vh), 9rem) !important;
+}
+
 /* ─────────────────────────────────────────────────────────────── buttons ── */
 
 .sh-btn {
@@ -120,6 +140,7 @@
 .sh-btn__label {
   font-size: 0.98rem;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 .sh-btn__meta {
   font-family: var(--font-jetbrains), ui-monospace, monospace;
@@ -127,6 +148,8 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--sh-faint);
+  text-align: right;
+  min-width: 0;
 }
 
 .sh-chip {
@@ -151,14 +174,42 @@
 
 /* ────────────────────────────────────────────────────────────────── HUD ── */
 
+/* Readouts only. `.shred-layer > *` turns pointer events back on, which would
+   otherwise let a corner of the HUD eat a thumb aimed at the stick beneath it. */
+.hud-corner,
+.hud-trick,
+.hud-air,
+.hud-pop,
+.hud-hints,
+.sh-vignette {
+  pointer-events: none;
+}
+
 .hud-corner {
   position: absolute;
-  padding: 1.4rem 1.6rem;
+  padding: calc(1.4rem + var(--sh-safe-t)) calc(1.6rem + var(--sh-safe-r))
+    calc(1.4rem + var(--sh-safe-b)) calc(1.6rem + var(--sh-safe-l));
 }
 .hud-tl { top: 0; left: 0; }
 .hud-tr { top: 0; right: 0; text-align: right; }
 .hud-bl { bottom: 0; left: 0; }
 .hud-br { bottom: 0; right: 0; text-align: right; }
+
+/* With touch controls up, the bottom corners belong to thumbs — the speedo
+   moves to the bottom centre where nothing is covering it. */
+.shred-root[data-touch="true"] .hud-bl {
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  padding-bottom: calc(0.5rem + var(--sh-safe-b));
+}
+.shred-root[data-touch="true"] .hud-bl .hud-meter {
+  margin-left: auto;
+  margin-right: auto;
+}
+.shred-root[data-touch="true"] .hud-hints {
+  display: none;
+}
 
 .hud-speed {
   font-family: var(--font-jetbrains), ui-monospace, monospace;
@@ -343,10 +394,56 @@
   position: absolute;
   inset: 0;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  /* `safe center` keeps the panel centred when it fits and pins it to the top
+     when it doesn't, so a short landscape phone can still scroll to the end. */
+  align-content: safe center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  padding: 1rem 0;
   background:
     radial-gradient(120% 90% at 50% 0%, rgba(5, 7, 12, 0.2), rgba(5, 7, 12, 0.86));
   backdrop-filter: blur(3px);
+}
+
+/* ─────────────────────────────────────────────────────── title screen ── */
+
+.sh-title-screen {
+  width: min(1100px, 92vw);
+  display: grid;
+  gap: 2.2rem;
+}
+.sh-title-actions {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 420px;
+}
+.sh-title-stats {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.sh-title-blurb {
+  margin-top: 0.9rem;
+  max-width: 44ch;
+  color: var(--sh-dim);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* Short screens — mostly landscape phones. The wordmark is sized off the
+   smaller dimension so it can never push the menu off the bottom. */
+@media (max-height: 520px) {
+  .sh-title-screen {
+    gap: 1rem;
+  }
+  .sh-title-blurb {
+    display: none;
+  }
+  .sh-title-stats {
+    display: none;
+  }
 }
 
 .sh-sheet {
@@ -483,6 +580,302 @@
   inset: 0;
   pointer-events: none;
   background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.45));
+}
+
+/* ────────────────────────────────────────────────────── touch controls ── */
+
+.touch-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  touch-action: none;
+}
+.touch-layer > * {
+  pointer-events: auto;
+}
+
+.touch-stick-zone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 46%;
+  touch-action: none;
+}
+
+.touch-stick-base,
+.touch-stick-knob {
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  transition: opacity 0.16s ease;
+}
+.touch-stick-base {
+  width: 148px;
+  height: 148px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.015) 70%,
+    transparent
+  );
+  backdrop-filter: blur(6px);
+}
+.touch-stick-knob {
+  width: 62px;
+  height: 62px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 24px -8px rgba(0, 0, 0, 0.8);
+}
+.touch-stick-hint {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.45);
+}
+.touch-stick-hint--up { top: 8px; }
+.touch-stick-hint--down { bottom: 8px; }
+
+.touch-right {
+  position: absolute;
+  right: calc(0.9rem + var(--sh-safe-r));
+  bottom: calc(0.9rem + var(--sh-safe-b));
+  width: 258px;
+  height: 218px;
+  pointer-events: none;
+}
+.touch-right > * {
+  pointer-events: auto;
+}
+
+.touch-jump,
+.touch-grab,
+.touch-tweak,
+.touch-pause {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  gap: 1px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(12, 15, 21, 0.42);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  letter-spacing: 0.1em;
+  text-align: center;
+  transition: transform 0.09s ease, background 0.09s ease, border-color 0.09s ease;
+  touch-action: none;
+}
+.touch-jump[data-on="true"],
+.touch-grab[data-on="true"],
+.touch-tweak[data-on="true"] {
+  transform: scale(0.93);
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
+.touch-jump {
+  right: 0;
+  bottom: 0;
+  width: 104px;
+  height: 104px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border-color: rgba(110, 231, 255, 0.55);
+  background: rgba(110, 231, 255, 0.16);
+}
+.touch-jump em {
+  display: block;
+  font-style: normal;
+  font-size: 0.46rem;
+  letter-spacing: 0.14em;
+  opacity: 0.6;
+  margin-top: 3px;
+}
+.touch-jump[data-on="true"] {
+  background: rgba(110, 231, 255, 0.4);
+}
+
+.touch-tweak {
+  right: 0;
+  bottom: 114px;
+  width: 104px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 0.6rem;
+  border-color: rgba(255, 196, 107, 0.5);
+  background: rgba(255, 196, 107, 0.14);
+}
+.touch-tweak[data-on="true"] {
+  background: rgba(255, 196, 107, 0.42);
+}
+
+.touch-diamond {
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 132px;
+  height: 132px;
+}
+.touch-grab {
+  width: 56px;
+  height: 56px;
+  font-size: 0.48rem;
+}
+.touch-grab--n { left: 38px; top: 0; }
+.touch-grab--s { left: 38px; bottom: 0; }
+.touch-grab--w { left: 0; top: 38px; }
+.touch-grab--e { right: 0; top: 38px; }
+
+.touch-pause {
+  top: calc(0.7rem + var(--sh-safe-t));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 46px;
+  grid-auto-flow: column;
+  gap: 5px;
+}
+.touch-pause span {
+  display: block;
+  width: 4px;
+  height: 15px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.touch-photo-pad {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+
+@media (orientation: portrait) {
+  .shred-root[data-touch="true"] .hud-bl {
+    top: calc(4.4rem + var(--sh-safe-t));
+    bottom: auto;
+    left: calc(1rem + var(--sh-safe-l));
+    transform: none;
+    text-align: left;
+  }
+  .shred-root[data-touch="true"] .hud-bl .hud-meter {
+    margin-left: 0;
+    margin-right: 0;
+    width: 46vw;
+  }
+  /* Narrower cluster and stick zone so the two can't overlap on a phone. */
+  .touch-right { width: 214px; height: 194px; }
+  .touch-jump { width: 92px; height: 92px; }
+  .touch-tweak { width: 92px; height: 42px; bottom: 102px; }
+  .touch-diamond { width: 112px; height: 112px; }
+  .touch-grab { width: 50px; height: 50px; }
+  .touch-grab--n, .touch-grab--s { left: 31px; }
+  .touch-grab--w, .touch-grab--e { top: 31px; }
+  .touch-stick-zone { width: 40%; }
+}
+
+/* The mode / mountain label is a reminder, not a readout — it's the first
+   thing to go when the top bar gets crowded. */
+@media (max-width: 560px) {
+  .shred-root[data-touch="true"] .hud-tr .sh-eyebrow {
+    display: none;
+  }
+}
+
+/* Short landscape phones: shrink the cluster so it can't eat the view. */
+@media (max-height: 460px) {
+  .sh-title-screen { gap: 0.7rem; }
+  .sh-title-screen .sh-title {
+    font-size: clamp(1.8rem, min(9vw, 13vh), 9rem) !important;
+  }
+  .sh-title-actions { gap: 0.35rem; }
+  .sh-overlay .sh-btn { min-height: 44px; padding: 0.6rem 1rem; }
+  .sh-sheet { padding: 1rem 1.1rem; max-height: 90vh; }
+
+  .touch-right { width: 210px; height: 186px; }
+  .touch-jump { width: 86px; height: 86px; }
+  .touch-tweak { width: 86px; bottom: 96px; height: 40px; }
+  .touch-diamond { width: 116px; height: 116px; }
+  .touch-grab { width: 48px; height: 48px; }
+  .touch-grab--n, .touch-grab--s { left: 34px; }
+  .touch-grab--w, .touch-grab--e { top: 34px; }
+  .touch-stick-base { width: 118px; height: 118px; }
+  .touch-stick-knob { width: 50px; height: 50px; }
+}
+
+/* ─────────────────────────────────────────────── responsive menu layout ── */
+
+.sh-split {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 1.15fr;
+  gap: 1.6rem;
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .sh-split {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+  /* The detail panel is a hover affordance. On touch there is no hover, and
+     each row already carries its tagline — so it just makes the list longer. */
+  .sh-split > :nth-child(2) {
+    display: none;
+  }
+}
+
+.sh-rotate-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(1rem + var(--sh-safe-b));
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .sh-sheet {
+    max-height: 84vh;
+    border-radius: 16px;
+  }
+  .sh-btn {
+    padding: 0.95rem 1rem;
+    min-height: 52px;
+  }
+  .sh-btn:hover:not(:disabled) {
+    transform: none;
+  }
+  .sh-chip {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.66rem;
+  }
+  .sh-card {
+    min-height: 56px;
+  }
+  .hud-trick span {
+    font-size: clamp(1.5rem, 7vw, 2.6rem);
+  }
+  .hud-speed {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+}
+
+/* Pointer-coarse devices get bigger targets everywhere, not just narrow ones. */
+@media (pointer: coarse) {
+  .sh-btn { min-height: 52px; }
+  .sh-chip { min-height: 38px; }
+  .sh-range { height: 6px; width: 180px; }
+  .sh-range::-webkit-slider-thumb { width: 22px; height: 22px; }
+  .sh-range::-moz-range-thumb { width: 22px; height: 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,11 @@
 /**
- * Keyboard input.
+ * Input.
+ *
+ * Keyboard and touch feed the same action set, so nothing downstream knows or
+ * cares which one is driving. Touch additionally supplies an analog stick: the
+ * axes are folded into `steer()` / `pitch()` and also satisfy `held()` for the
+ * digital actions, which means an analog lean gives finer control than the
+ * keyboard rather than merely emulating it.
  *
  * Two things matter for feel here:
  *  1. `pressed()` is edge-triggered and *consumed by the frame*, so a tap that
@@ -75,11 +81,17 @@ const SWALLOW = new Set([
 
 export const JUMP_BUFFER = 0.16;
 
+const clampAxis = (v: number) => (v < -1 ? -1 : v > 1 ? 1 : v);
+
 export class Input {
   private down = new Set<Action>();
   private pressedThisFrame = new Set<Action>();
   private releasedThisFrame = new Set<Action>();
   private holdTime: Record<string, number> = {};
+
+  /** Analog stick, -1..1. Left/right steers, up/down tucks and brakes. */
+  private axisX = 0;
+  private axisY = 0;
 
   /** Seconds remaining on a buffered jump press. */
   jumpBuffer = 0;
@@ -130,8 +142,47 @@ export class Input {
     window.removeEventListener("blur", this.onBlur);
   }
 
+  /** Press an action from a source other than the keyboard (touch controls). */
+  press(a: Action) {
+    if (this.down.has(a)) return;
+    this.down.add(a);
+    this.pressedThisFrame.add(a);
+    this.holdTime[a] = 0;
+    if (a === "jump") this.jumpBuffer = JUMP_BUFFER;
+  }
+
+  release(a: Action) {
+    if (!this.down.has(a)) return;
+    this.down.delete(a);
+    this.releasedThisFrame.add(a);
+  }
+
+  /** Analog stick from the touch layer. Zero it on release. */
+  setAxis(x: number, y: number) {
+    this.axisX = clampAxis(x);
+    this.axisY = clampAxis(y);
+  }
+
+  get axis() {
+    return { x: this.axisX, y: this.axisY };
+  }
+
   held(a: Action) {
-    return this.down.has(a);
+    if (this.down.has(a)) return true;
+    // The stick satisfies the digital actions too, so systems that only ask
+    // "is the player tucking?" work identically on both input methods.
+    switch (a) {
+      case "left":
+        return this.axisX < -0.35;
+      case "right":
+        return this.axisX > 0.35;
+      case "tuck":
+        return this.axisY < -0.4;
+      case "brake":
+        return this.axisY > 0.4;
+      default:
+        return false;
+    }
   }
 
   pressed(a: Action) {
@@ -164,12 +215,16 @@ export class Input {
 
   /** -1 .. 1 steering axis. */
   steer() {
-    return (this.down.has("right") ? 1 : 0) - (this.down.has("left") ? 1 : 0);
+    const keys =
+      (this.down.has("right") ? 1 : 0) - (this.down.has("left") ? 1 : 0);
+    return clampAxis(keys + this.axisX);
   }
 
   /** -1 .. 1 pitch axis (up = tuck / frontflip, down = brake / backflip). */
   pitch() {
-    return (this.down.has("brake") ? 1 : 0) - (this.down.has("tuck") ? 1 : 0);
+    const keys =
+      (this.down.has("brake") ? 1 : 0) - (this.down.has("tuck") ? 1 : 0);
+    return clampAxis(keys + this.axisY);
   }
 
   consumeJump() {
@@ -191,6 +246,8 @@ export class Input {
     this.pressedThisFrame.clear();
     this.releasedThisFrame.clear();
     this.jumpBuffer = 0;
+    this.axisX = 0;
+    this.axisY = 0;
   }
 
   static actions() {

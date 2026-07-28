@@ -264,6 +264,34 @@ bright pass → 3 blurred mips → composite with radial motion blur, bloom, god
 rays, chromatic aberration, ACES tonemap, colour grade, vignette, grain and an
 optional CRT pass. Quality presets plus adaptive resolution keep it at 60fps.
 
+**Mobile.** The game is playable on a phone with no keyboard at all:
+
+- **Left half is a floating analog stick.** It appears wherever the thumb lands
+  rather than at a fixed spot. Left/right steers (and spins in the air), up
+  tucks (front flip), down brakes (back flip). It is genuinely analog, so a
+  phone gets *finer* control over edge angle than a keyboard does.
+- **Bottom right is JUMP, a four-way grab diamond, and a TWEAK modifier** that
+  turns each grab into its tweaked variant — exactly what Shift does.
+- Both feed the same `Input` the keyboard uses, so the physics has no idea
+  which is driving, and a laptop with a touchscreen can use either. Settings →
+  *On-screen controls* forces them on or off.
+- Quality is guessed on first run from pointer type, core count and device
+  memory; the chunk window (`Terrain.setDetail`) shrinks with it, so a phone
+  streams less terrain rather than just rendering it smaller.
+- Portrait works but is the lesser view: the camera pitches down to trade
+  useless sky for terrain, the speedo moves to the top-left away from the
+  thumbs, and the menus collapse to one column. There's a nudge to turn the
+  phone sideways.
+- Dropping in asks for fullscreen and a landscape lock — both best-effort,
+  neither required.
+- Backgrounding the tab pauses the run and releases every held control.
+
+Two mobile-specific traps worth remembering: the HUD sits in a layer whose
+children have `pointer-events: auto`, so every readout needs it explicitly
+turned back off or it eats thumbs aimed at the stick underneath; and the
+`.sh-overlay` menus use `align-content: safe center` so a short landscape
+phone can still scroll to the bottom of a panel that doesn't fit.
+
 **Progression** lives in `localStorage` under `shred1999.save.v1`. Everything
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
 re-evaluated both on boot and at the end of every run.
@@ -429,7 +457,11 @@ finer-grained detail.
 26. Suppressed the site chrome on `/shred`: `RouteChrome` returns null,
     `CustomCursor` and `SmoothScroll` bail on the route (Lenis would otherwise
     keep a RAF loop running against the game loop).
-27. Bugs found and fixed during playtesting, worth remembering:
+27. Mobile pass: analog touch stick + grab cluster, device-aware quality
+    defaults, portrait camera bias, safe-area insets, fullscreen/orientation
+    request, background pause, and responsive menus. Verified touch-only (no
+    keyboard events at all) at 844×390 and 390×844.
+28. Bugs found and fixed during playtesting, worth remembering:
     - menu selections ran their side effect inside a `setState` updater, so on a
       screen where nothing else re-rendered the first Enter did nothing;
     - `AnimatePresence mode="wait"` between screens made every transition wait

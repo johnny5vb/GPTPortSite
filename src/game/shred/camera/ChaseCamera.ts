@@ -73,6 +73,13 @@ export class ChaseCamera {
   private tmp = new THREE.Vector3();
   private tmp2 = new THREE.Vector3();
   private up = new THREE.Vector3(0, 1, 0);
+  /**
+   * 0 on a wide screen, 1 on a tall one. A portrait frame shows far less of
+   * the mountain sideways and far more sky, so we widen slightly and — much
+   * more importantly — aim down, which trades useless sky for the terrain you
+   * are about to ride into.
+   */
+  private tallBias = 0;
 
   // Photo / orbit mode state.
   orbitYaw = 0;
@@ -141,6 +148,7 @@ export class ChaseCamera {
       Math.abs(phys.edge) * 0.5;
     const targetHeight =
       t.height +
+      this.tallBias * 1.5 +
       bigAir * 2.3 +
       clamp01(phys.airHeight / 14) * 2.2 +
       (phys.crashed ? 1.8 : 0);
@@ -188,7 +196,8 @@ export class ChaseCamera {
     this.targetLook
       .copy(phys.pos)
       .addScaledVector(fwd, t.lookAhead * (0.6 + speed01 * 0.8));
-    this.targetLook.y = phys.pos.y + t.lookHeight + air * 1.1;
+    this.targetLook.y =
+      phys.pos.y + t.lookHeight - this.tallBias * 2.6 + air * 1.1;
     // Bias toward where the rider will be, not where they are.
     this.targetLook.addScaledVector(phys.vel, 0.06);
     this.look.lerp(this.targetLook, 1 - Math.pow(0.002, dt));
@@ -209,7 +218,7 @@ export class ChaseCamera {
 
     // ── fov ──────────────────────────────────────────────────────────────
     const targetFov =
-      t.fov +
+      t.fov * (1 + this.tallBias * 0.14) +
       speed01 * t.fovSpeedGain +
       (phys.boost > 0.5 ? 5 : 0) -
       bigAir * 7 +
@@ -272,6 +281,7 @@ export class ChaseCamera {
 
   setAspect(aspect: number) {
     this.camera.aspect = aspect;
+    this.tallBias = clamp01((1.35 - aspect) / 0.85);
     this.camera.updateProjectionMatrix();
   }
 

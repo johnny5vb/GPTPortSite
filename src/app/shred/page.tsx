@@ -15,6 +15,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#05070c",
+  // The game owns the whole screen: no pinch-zoom to fight the touch controls,
+  // and `cover` so the canvas runs under the notch with the HUD inset by the
+  // safe-area variables instead.
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function ShredPage() {

@@ -30,6 +30,9 @@ const COLS = 3; // ± chunks in X
 const ROWS_BEHIND = 2;
 const ROWS_AHEAD = 8;
 
+/** How far the chunk window reaches, as a fraction of the full budget. */
+export type TerrainDetail = number;
+
 interface Chunk {
   xi: number;
   zi: number;
@@ -64,6 +67,18 @@ export class Terrain {
   /** Chunks built per frame once the run is live. */
   budgetPerFrame = 2;
 
+  /**
+   * 0.5 .. 1 — scales the chunk window. Phones don't need 800m of terrain
+   * behind a wall of fog, and every chunk dropped is a draw call saved.
+   */
+  private cols = COLS;
+  private rowsAhead = ROWS_AHEAD;
+
+  setDetail(detail: TerrainDetail) {
+    this.cols = Math.max(2, Math.round(COLS * detail));
+    this.rowsAhead = Math.max(4, Math.round(ROWS_AHEAD * detail));
+  }
+
   constructor(gen: TerrainGen, uniforms: WorldUniforms) {
     this.gen = gen;
     this.material = createSnowMaterial(uniforms);
@@ -83,8 +98,8 @@ export class Terrain {
     this.queue.length = 0;
     const wanted = new Set<string>();
 
-    for (let dz = -ROWS_BEHIND; dz <= ROWS_AHEAD; dz++) {
-      for (let dx = -COLS; dx <= COLS; dx++) {
+    for (let dz = -ROWS_BEHIND; dz <= this.rowsAhead; dz++) {
+      for (let dx = -this.cols; dx <= this.cols; dx++) {
         const xi = px + dx;
         const zi = pz + dz;
         const dist = Math.max(Math.abs(dx), Math.abs(dz));

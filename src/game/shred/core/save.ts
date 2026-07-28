@@ -37,6 +37,30 @@ export interface Settings {
   crt: boolean;
   invertSteer: boolean;
   showHints: boolean;
+  /** On-screen controls: follow the device, or force them on/off. */
+  touch: "auto" | "on" | "off";
+}
+
+/**
+ * First-run quality guess. Phones and tablets start at medium (or low on
+ * anything that looks weak) so the first thirty seconds are smooth; the
+ * adaptive resolution and the settings screen take it from there.
+ */
+export function defaultQuality(): Settings["quality"] {
+  if (typeof window === "undefined") return "high";
+  const nav = navigator as Navigator & {
+    deviceMemory?: number;
+    hardwareConcurrency?: number;
+  };
+  const coarse = window.matchMedia?.("(pointer: coarse)").matches ?? false;
+  const cores = nav.hardwareConcurrency ?? 4;
+  const memory = nav.deviceMemory ?? (coarse ? 4 : 8);
+  const smallScreen = Math.min(window.innerWidth, window.innerHeight) < 500;
+
+  if (coarse || smallScreen) {
+    return cores <= 4 || memory <= 3 ? "low" : "medium";
+  }
+  return cores <= 4 || memory <= 4 ? "medium" : "high";
 }
 
 export interface SaveData {
@@ -103,6 +127,7 @@ const DEFAULT: SaveData = {
     crt: false,
     invertSteer: false,
     showHints: true,
+    touch: "auto",
   },
   best: {},
   bestTime: {},
@@ -255,7 +280,11 @@ export function load(): SaveData {
   if (typeof window === "undefined") return structuredClone(DEFAULT);
   try {
     const raw = window.localStorage.getItem(KEY);
-    if (!raw) return structuredClone(DEFAULT);
+    if (!raw) {
+      const fresh = structuredClone(DEFAULT);
+      fresh.settings.quality = defaultQuality();
+      return fresh;
+    }
     const parsed = JSON.parse(raw) as Partial<SaveData>;
     return {
       ...structuredClone(DEFAULT),

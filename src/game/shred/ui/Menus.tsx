@@ -158,7 +158,7 @@ export function TitleScreen({
 
   return (
     <div className="sh-overlay">
-      <div style={{ width: "min(1100px, 92vw)", display: "grid", gap: "2.2rem" }}>
+      <div className="sh-title-screen">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -186,21 +186,13 @@ export function TitleScreen({
               1999
             </span>
           </h2>
-          <p
-            style={{
-              marginTop: "0.9rem",
-              maxWidth: "44ch",
-              color: "var(--sh-dim)",
-              fontSize: "1rem",
-              lineHeight: 1.55,
-            }}
-          >
+          <p className="sh-title-blurb">
             Endless procedural mountains, big stupid airs, and a landing that
             actually feels like something. Late-afternoon light, all the way down.
           </p>
         </motion.div>
 
-        <div style={{ display: "grid", gap: "0.5rem", maxWidth: 420 }}>
+        <div className="sh-title-actions">
           {actions.map((a, i) => (
             <motion.div
               key={a.label}
@@ -222,7 +214,7 @@ export function TitleScreen({
           ))}
         </div>
 
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+        <div className="sh-title-stats">
           <span className="sh-chip">{save.totals.runs} runs</span>
           <span className="sh-chip">
             {(save.totals.distance / 1000).toFixed(1)} km ridden
@@ -258,14 +250,7 @@ export function ModeSelect({
   return (
     <div className="sh-overlay">
       <Sheet eyebrow="Select a mode" title="What kind of run?" wide>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "minmax(280px, 1fr) 1.15fr",
-            gap: "1.6rem",
-            alignItems: "start",
-          }}
-        >
+        <div className="sh-split">
           <div className="sh-grid">
             {available.map((m, i) => (
               <button
@@ -839,6 +824,21 @@ export function SettingsScreen({
           </button>,
         )}
         {row(
+          "On-screen controls",
+          <div style={{ display: "flex", gap: "0.35rem" }}>
+            {(["auto", "on", "off"] as const).map((t) => (
+              <button
+                key={t}
+                className="sh-chip"
+                data-active={s.touch === t}
+                onClick={() => onChange({ touch: t })}
+              >
+                {t}
+              </button>
+            ))}
+          </div>,
+        )}
+        {row(
           "Control hints",
           <button
             className="sh-chip"
@@ -888,7 +888,7 @@ export function SettingsScreen({
 
 // ─────────────────────────────────────────────────────────────── how to ────
 
-export function HowTo({ onBack }: { onBack: () => void }) {
+export function HowTo({ onBack, touch }: { onBack: () => void; touch: boolean }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.code === "Escape" || e.code === "Enter") onBack();
@@ -897,7 +897,18 @@ export function HowTo({ onBack }: { onBack: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onBack]);
 
-  const controls = [
+  const touchControls: [string, string][] = [
+    ["Left thumb", "Drag anywhere on the left to steer. The stick appears where you put your thumb — the further you push, the harder you carve."],
+    ["Thumb up", "Tuck. Less drag, less steering. Free speed on the straights."],
+    ["Thumb down", "Brake. Scrubs speed hard and throws a wall of snow."],
+    ["JUMP", "Hold to load up, release to ollie. Tap it again just before you land to stomp it."],
+    ["Grab diamond", "Indy, Melon, Nose and Tail — hold one while you're in the air."],
+    ["TWEAK", "Hold it with a grab for the tweaked variants: Japan, Method, Mute, Stalefish."],
+    ["Left thumb, in the air", "Left / right spins. Up and down flip. Both at once gives you a cork."],
+    ["‖", "Pause."],
+  ];
+
+  const controls: [string, string][] = [
     ["← →", "Steer. Hold it to carve — a held edge builds speed."],
     ["↑", "Tuck. Less drag, less steering. Free speed on the straights."],
     ["↓", "Brake. Scrubs speed hard and throws a wall of snow."],
@@ -910,6 +921,8 @@ export function HowTo({ onBack }: { onBack: () => void }) {
     ["P", "Photo mode (once unlocked)."],
     ["R", "Restart the run."],
   ];
+
+  const rows = touch ? touchControls : controls;
 
   return (
     <div className="sh-overlay">
@@ -926,11 +939,15 @@ export function HowTo({ onBack }: { onBack: () => void }) {
               Controls
             </div>
             <div style={{ display: "grid", gap: "0.45rem" }}>
-              {controls.map(([k, d]) => (
+              {rows.map(([k, d]) => (
                 <div key={k} style={{ display: "flex", gap: "0.8rem", alignItems: "baseline" }}>
                   <span
                     className="hud-key"
-                    style={{ minWidth: 96, justifyContent: "center", flexShrink: 0 }}
+                    style={{
+                      minWidth: touch ? 132 : 96,
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
                   >
                     <b>{k}</b>
                   </span>
@@ -959,7 +976,9 @@ export function HowTo({ onBack }: { onBack: () => void }) {
                   }}
                 >
                   <span style={{ fontSize: "0.86rem" }}>{t.name}</span>
-                  <span className="sh-btn__meta">{t.how}</span>
+                  <span className="sh-btn__meta">
+                    {touch ? touchHow(t.how) : t.how}
+                  </span>
                 </div>
               ))}
             </div>
@@ -972,9 +991,10 @@ export function HowTo({ onBack }: { onBack: () => void }) {
               }}
             >
               Land square and level for a <b style={{ color: "#fff" }}>perfect</b> — you get a
-              speed boost, a freeze frame and a 1.5× multiplier. Tap Space right
-              before touchdown to stomp it, and you keep the combo going into the
-              next hit. Chain them and the multiplier climbs fast.
+              speed boost, a freeze frame and a 1.5× multiplier.{" "}
+              {touch ? "Tap JUMP again" : "Tap Space"} right before touchdown to
+              stomp it, and you keep the combo going into the next hit. Chain
+              them and the multiplier climbs fast.
             </p>
           </div>
         </div>
@@ -988,6 +1008,16 @@ export function HowTo({ onBack }: { onBack: () => void }) {
       </Sheet>
     </div>
   );
+}
+
+/** Rewrites a keyboard hint as its on-screen-control equivalent. */
+function touchHow(how: string) {
+  return how
+    .replace("Hold ← or → in the air", "Thumb left or right in the air")
+    .replace("Hold ↑ in the air", "Thumb up in the air")
+    .replace("Hold ↓ in the air", "Thumb down in the air")
+    .replace("Tap Space just before you touch down", "Tap JUMP just before you land")
+    .replace(/^Shift \+ /, "TWEAK + ");
 }
 
 // ──────────────────────────────────────────────────────────────── pause ────
@@ -1186,11 +1216,15 @@ export function UnlockToasts({ items }: { items: { key: string; name: string }[]
 export function PhotoBar({
   onShoot,
   onExit,
+  onFilter,
   filterName,
+  touch,
 }: {
   onShoot: () => void;
   onExit: () => void;
+  onFilter: () => void;
   filterName: string;
+  touch: boolean;
 }) {
   return (
     <div className="shred-layer">
@@ -1199,20 +1233,33 @@ export function PhotoBar({
         style={{
           position: "absolute",
           left: "50%",
-          bottom: "2rem",
+          bottom: `calc(1.4rem + var(--sh-safe-b))`,
           transform: "translateX(-50%)",
           padding: "0.7rem 1rem",
           display: "flex",
           gap: "0.6rem",
           alignItems: "center",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          maxWidth: "94vw",
         }}
       >
-        <span className="sh-chip">← → orbit</span>
-        <span className="sh-chip">↑ ↓ pitch</span>
-        <span className="sh-chip">A / D zoom</span>
-        <span className="sh-chip" data-active>
-          C / {filterName}
-        </span>
+        {touch ? (
+          <>
+            <span className="sh-chip">Drag to orbit</span>
+            <span className="sh-chip">Pinch to zoom</span>
+          </>
+        ) : (
+          <>
+            <span className="sh-chip">← → orbit</span>
+            <span className="sh-chip">↑ ↓ pitch</span>
+            <span className="sh-chip">A / D zoom</span>
+          </>
+        )}
+        <button className="sh-chip" data-active onClick={onFilter}>
+          {touch ? "" : "C / "}
+          {filterName}
+        </button>
         <button className="sh-btn" style={{ width: "auto" }} onClick={onShoot}>
           <span className="sh-btn__label">Shoot</span>
           <span className="sh-btn__meta">Space</span>

@@ -36,6 +36,31 @@ import {
   UnlockToasts,
 } from "./Menus";
 import { FILTERS, type FilterId } from "../fx/PostFX";
+import TouchControls, { TouchPhotoPad } from "./TouchControls";
+
+/**
+ * Best-effort fullscreen + landscape lock. Every browser draws the line
+ * somewhere different, and none of it is required to play, so every step is
+ * allowed to fail quietly.
+ */
+async function goImmersive() {
+  try {
+    const el = document.documentElement;
+    if (!document.fullscreenElement && el.requestFullscreen) {
+      await el.requestFullscreen({ navigationUI: "hide" });
+    }
+  } catch {
+    /* denied or unsupported — fine */
+  }
+  try {
+    const orientation = screen.orientation as ScreenOrientation & {
+      lock?: (o: string) => Promise<void>;
+    };
+    await orientation?.lock?.("landscape");
+  } catch {
+    /* not lockable on this device — fine */
+  }
+}
 
 type Screen =
   | "title"
@@ -103,6 +128,17 @@ export default function ShredGame() {
   const [isBest, setIsBest] = useState(false);
   const [toasts, setToasts] = useState<UnlockDef[]>([]);
   const [filterName, setFilterName] = useState("Clean");
+  // A device can be both (laptop with a touchscreen), so this is a hint, not a
+  // mode: the keyboard always keeps working even when the pads are up.
+  const [coarsePointer] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      ((window.matchMedia?.("(pointer: coarse)").matches ?? false) ||
+        navigator.maxTouchPoints > 0),
+  );
+  const [portrait, setPortrait] = useState(
+    () => typeof window !== "undefined" && window.innerHeight > window.innerWidth,
+  );
 
   const saveRef = useRef<SaveData | null>(saveData);
   useEffect(() => {
@@ -110,6 +146,7 @@ export default function ShredGame() {
   }, [saveData]);
 
   const getSnapshot = useCallback(() => hudRef.current, []);
+  const getInput = useCallback(() => gameRef.current?.input ?? null, []);
 
   // ─────────────────────────────────────────────────────────── lifecycle ────
 
@@ -215,11 +252,32 @@ export default function ShredGame() {
     };
   }, []);
 
-  // Resize.
+  // Resize + orientation. Mobile browsers fire these on address-bar collapse
+  // too, which is exactly when the canvas needs re-measuring.
   useEffect(() => {
-    const onResize = () => gameRef.current?.resize();
+    const onResize = () => {
+      gameRef.current?.resize();
+      setPortrait(window.innerHeight > window.innerWidth);
+    };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
+    };
+  }, []);
+
+  // Backgrounding the tab (or taking a call) pauses the run rather than
+  // letting it carry on unwatched.
+  useEffect(() => {
+    const onHidden = () => {
+      if (document.visibilityState === "hidden") {
+        gameRef.current?.input.releaseAll();
+        gameRef.current?.pause();
+      }
+    };
+    document.addEventListener("visibilitychange", onHidden);
+    return () => document.removeEventListener("visibilitychange", onHidden);
   }, []);
 
   // Audio needs a gesture. Any key or click will do.
@@ -337,6 +395,9 @@ export default function ShredGame() {
 
   const startMode = useCallback(
     (id: ModeId) => {
+      // Touch devices get the full screen and, where the browser allows it, a
+      // landscape lock. Both are best-effort: neither is required to play.
+      if (coarsePointer) void goImmersive();
       gameRef.current?.audio.ui("select");
       setSummary(null);
       setPopups([]);
@@ -344,7 +405,7 @@ export default function ShredGame() {
       rebuild(id, true);
       showBanner("DROPPING IN", 900);
     },
-    [rebuild, showBanner],
+    [rebuild, showBanner, coarsePointer],
   );
 
   const again = useCallback(() => {
@@ -440,9 +501,13 @@ export default function ShredGame() {
   }
 
   const riding = screen === "run" && !paused && !summary && !photo;
+  const touchMode =
+    saveData.settings.touch === "on" ||
+    (saveData.settings.touch === "auto" && coarsePointer);
+  const showTouchControls = touchMode && screen === "run" && !paused && !summary;
 
   return (
-    <div className="shred-root" data-riding={riding}>
+    <div className="shred-root" data-riding={riding} data-touch={touchMode}>
       <canvas ref={canvasRef} className="shred-canvas" />
       <div className="sh-scanline" />
 
@@ -451,7 +516,7 @@ export default function ShredGame() {
           getSnapshot={getSnapshot}
           popups={popups}
           banner={banner}
-          showHints={saveData.settings.showHints && !photo}
+          showHints={saveData.settings.showHints && !photo && !touchMode}
         />
       )}
 
@@ -508,16 +573,46 @@ export default function ShredGame() {
 
         {screen === "howto" && (
           <div className="shred-layer">
-            <HowTo onBack={() => setScreen("title")} />
+            <HowTo
+              touch={touchMode}
+              onBack={() => setScreen("title")}
+            />
           </div>
         )}
       </>
 
+      {showTouchControls && !photo && (
+        <TouchControls
+          getInput={getInput}
+          onPause={() => gameRef.current?.pause()}
+        />
+      )}
+
+      {showTouchControls && photo && (
+        <>
+          <TouchPhotoPad
+            onOrbit={(dx, dy) => gameRef.current?.orbitBy(dx, dy)}
+            onZoom={(d) => gameRef.current?.zoomBy(d)}
+          />
+          <TouchControls
+            minimal
+            getInput={getInput}
+            onPause={() => gameRef.current?.togglePhoto()}
+          />
+        </>
+      )}
+
       {screen === "run" && photo && (
         <PhotoBar
           filterName={filterName}
+          touch={touchMode}
           onShoot={() => gameRef.current?.capturePhoto()}
           onExit={() => gameRef.current?.togglePhoto()}
+          onFilter={() => {
+            gameRef.current?.nextFilter();
+            const g = gameRef.current;
+            if (g) setFilterName(g.currentFilterName);
+          }}
         />
       )}
 
@@ -548,6 +643,12 @@ export default function ShredGame() {
       {toasts.length > 0 && (
         <div className="shred-layer">
           <UnlockToasts items={toasts} />
+        </div>
+      )}
+
+      {touchMode && portrait && screen !== "run" && !loading && (
+        <div className="shred-layer">
+          <div className="sh-chip sh-rotate-hint">Turn your phone sideways</div>
         </div>
       )}
 

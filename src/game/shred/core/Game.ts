@@ -34,7 +34,7 @@ import { ChaseCamera } from "../camera/ChaseCamera";
 import { Particles, PKind } from "../fx/Particles";
 import { Trails } from "../fx/Trails";
 import { Snowfall, WindStreaks } from "../fx/Weather";
-import { PostFX, FilterId } from "../fx/PostFX";
+import { PostFX, FilterId, FILTERS } from "../fx/PostFX";
 import { AudioEngine } from "../audio/Audio";
 import { riderById } from "../data/riders";
 import { boardById } from "../data/boards";
@@ -118,12 +118,20 @@ interface Gate {
 
 const QUALITY: Record<
   SaveData["settings"]["quality"],
-  { pr: number; scale: number; shadow: number; particles: number; snow: number; shadows: boolean }
+  {
+    pr: number;
+    scale: number;
+    shadow: number;
+    particles: number;
+    snow: number;
+    shadows: boolean;
+    detail: number;
+  }
 > = {
-  low: { pr: 1, scale: 0.72, shadow: 512, particles: 0.45, snow: 3500, shadows: false },
-  medium: { pr: 1.25, scale: 0.86, shadow: 1024, particles: 0.7, snow: 7000, shadows: true },
-  high: { pr: 1.5, scale: 1, shadow: 1536, particles: 1, snow: 11000, shadows: true },
-  ultra: { pr: 2, scale: 1, shadow: 2048, particles: 1.35, snow: 16000, shadows: true },
+  low: { pr: 1, scale: 0.72, shadow: 512, particles: 0.45, snow: 3500, shadows: false, detail: 0.62 },
+  medium: { pr: 1.25, scale: 0.86, shadow: 1024, particles: 0.7, snow: 7000, shadows: true, detail: 0.8 },
+  high: { pr: 1.5, scale: 1, shadow: 1536, particles: 1, snow: 11000, shadows: true, detail: 1 },
+  ultra: { pr: 2, scale: 1, shadow: 2048, particles: 1.35, snow: 16000, shadows: true, detail: 1 },
 };
 
 export class Game {
@@ -270,6 +278,7 @@ export class Game {
 
     this.gen = new TerrainGen(this.seed, preset);
     this.terrain = new Terrain(this.gen, this.uniforms);
+    this.terrain.setDetail(QUALITY[s.settings.quality].detail);
     this.scatter = new Scatter(this.gen, this.uniforms, this.seed);
     this.props = new Props(this.gen, this.uniforms);
     this.env = new Environment(this.scene, this.uniforms, sky);
@@ -1054,6 +1063,7 @@ export class Game {
   applyQuality() {
     const q = QUALITY[this.saveData.settings.quality];
     this.qualityScale = q.scale;
+    this.terrain.setDetail(q.detail);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, q.pr));
     this.renderer.shadowMap.enabled = q.shadows;
     if (q.shadows) {
@@ -1085,6 +1095,24 @@ export class Game {
 
   setShake(v: number) {
     this.chase.intensity = this.mode.cameraIntensity * v;
+  }
+
+  /** Photo-mode camera, driven by drag / pinch on touch. */
+  orbitBy(dYaw: number, dPitch: number) {
+    this.chase.orbitYaw += dYaw;
+    this.chase.orbitPitch = clamp(this.chase.orbitPitch + dPitch, -0.4, 1.35);
+  }
+
+  zoomBy(delta: number) {
+    this.chase.orbitDist = clamp(this.chase.orbitDist + delta, 2.2, 40);
+  }
+
+  nextFilter() {
+    this.cycleFilter();
+  }
+
+  get currentFilterName() {
+    return FILTERS.find((f) => f.id === this.post.filter)?.name ?? "Clean";
   }
 
   resize() {
