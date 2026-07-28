@@ -173,6 +173,8 @@ export class RiderRig {
   private qTarget = new THREE.Quaternion();
   private clothDir = new THREE.Vector3();
   private clothSide = new THREE.Vector3();
+  private clothPt = new THREE.Vector3();
+  private invGroup = new THREE.Matrix4();
   private ikTarget = new THREE.Vector3();
   private ikDir = new THREE.Vector3();
   private qAim = new THREE.Quaternion();
@@ -974,6 +976,20 @@ export class RiderRig {
     this.wind.copy(phys.vel).multiplyScalar(-2.6);
     this.wind.y += 3.2;
 
+    // The chain is simulated in world space — wind and gravity only make sense
+    // there — but the mesh hangs off the rig root, which carries the rider's
+    // full world transform. Writing world coordinates straight into its vertex
+    // buffer applies that transform a second time and throws the scarf as far
+    // from the rider as the rider is from the origin: a few metres at the top
+    // of a run, hundreds by the bottom. With frustum culling off it was drawn
+    // every frame regardless, a double-sided ribbon flickering across the
+    // mountain at arbitrary angles. That was the "black cubes".
+    //
+    // So the world matrices are brought up to date here and every vertex is
+    // mapped back into the group's own frame before it is written.
+    this.group.updateMatrixWorld(true);
+    this.invGroup.copy(this.group.matrixWorld).invert();
+
     const anchor = this.tmp.set(0, 1.34, 0);
     this.p.torso.localToWorld(anchor);
     this.scarfCloth.step(Math.min(dt, 1 / 60), anchor, this.wind, 0.62);
@@ -988,18 +1004,22 @@ export class RiderRig {
       this.clothSide.crossVectors(this.clothDir, this.up).normalize();
       if (this.clothSide.lengthSq() < 1e-6) this.clothSide.set(1, 0, 0);
       const w = 0.075 * (1 - i / pts.length) + 0.02;
-      pos.setXYZ(
-        i * 2,
-        a.x - this.clothSide.x * w,
-        a.y - this.clothSide.y * w,
-        a.z - this.clothSide.z * w,
-      );
-      pos.setXYZ(
-        i * 2 + 1,
-        a.x + this.clothSide.x * w,
-        a.y + this.clothSide.y * w,
-        a.z + this.clothSide.z * w,
-      );
+      this.clothPt
+        .set(
+          a.x - this.clothSide.x * w,
+          a.y - this.clothSide.y * w,
+          a.z - this.clothSide.z * w,
+        )
+        .applyMatrix4(this.invGroup);
+      pos.setXYZ(i * 2, this.clothPt.x, this.clothPt.y, this.clothPt.z);
+      this.clothPt
+        .set(
+          a.x + this.clothSide.x * w,
+          a.y + this.clothSide.y * w,
+          a.z + this.clothSide.z * w,
+        )
+        .applyMatrix4(this.invGroup);
+      pos.setXYZ(i * 2 + 1, this.clothPt.x, this.clothPt.y, this.clothPt.z);
     }
     pos.needsUpdate = true;
     this.scarfGeo.computeVertexNormals();
