@@ -58,7 +58,7 @@ export const TRACKS: TrackDef[] = [
     root: 43,
     progression: [0, 3, 6, 4],
     mood: "dream",
-    unlockScore: 60000,
+    unlockScore: 25000,
   },
   {
     id: "gravel-glass",
@@ -68,7 +68,7 @@ export const TRACKS: TrackDef[] = [
     root: 40,
     progression: [0, 0, 5, 6],
     mood: "punk",
-    unlockScore: 180000,
+    unlockScore: 65000,
   },
   {
     id: "mix-1999",
@@ -78,7 +78,7 @@ export const TRACKS: TrackDef[] = [
     root: 50,
     progression: [0, 3, 4, 2],
     mood: "retro",
-    unlockScore: 320000,
+    unlockScore: 140000,
   },
 ];
 

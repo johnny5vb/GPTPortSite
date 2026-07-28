@@ -46,7 +46,7 @@ export interface Rider {
     speed: number;
   };
   style: RiderStyle;
-  accessory: "scarf" | "backpack" | "camera" | "antenna" | "none";
+  accessory: "scarf" | "backpack" | "camera" | "antenna" | "fanny" | "none";
   unlock: Unlock;
 }
 
@@ -90,7 +90,7 @@ export const RIDERS: Rider[] = [
     stats: { spin: 1.22, pop: 1.05, balance: 0.9, speed: 0.98 },
     style: { signature: "Stalefish", spinBias: -0.5, tweak: 1.15, stance: "aggressive" },
     accessory: "none",
-    unlock: { kind: "score", value: 40000, label: "Score 40,000 in a run" },
+    unlock: { kind: "default", value: 0, label: "Starter" },
   },
   {
     id: "rin",
@@ -110,7 +110,7 @@ export const RIDERS: Rider[] = [
     stats: { spin: 1.12, pop: 1.18, balance: 1.05, speed: 0.96 },
     style: { signature: "Japan", spinBias: 0.6, tweak: 1.3, stance: "playful" },
     accessory: "scarf",
-    unlock: { kind: "tricks", value: 60, label: "Land 60 tricks" },
+    unlock: { kind: "default", value: 0, label: "Starter" },
   },
   {
     id: "solve",
@@ -130,7 +130,28 @@ export const RIDERS: Rider[] = [
     stats: { spin: 0.9, pop: 0.95, balance: 1.28, speed: 1.06 },
     style: { signature: "Melon", spinBias: 0.1, tweak: 0.7, stance: "technical" },
     accessory: "backpack",
-    unlock: { kind: "distance", value: 12000, label: "Ride 12 km total" },
+    unlock: { kind: "default", value: 0, label: "Starter" },
+  },
+  {
+    id: "tam",
+    name: "Tam Lindqvist",
+    handle: "SLOPESTYLE / JR CIRCUIT",
+    blurb:
+      "Sixteen and completely unbothered. Learns a trick in three tries, then does it switch.",
+    colors: {
+      jacket: "#b6ff3d",
+      jacketAlt: "#141414",
+      pants: "#2b2f36",
+      accent: "#ff5ea8",
+      skin: "#f0c9a0",
+      hair: "#f0e2c0",
+      helmet: "#b6ff3d",
+      goggles: "#ff5ea8",
+    },
+    stats: { spin: 1.15, pop: 1.14, balance: 0.92, speed: 0.94 },
+    style: { signature: "Nose", spinBias: 0.45, tweak: 1.25, stance: "playful" },
+    accessory: "fanny",
+    unlock: { kind: "runs", value: 2, label: "Finish 2 runs" },
   },
   {
     id: "null9",
@@ -150,7 +171,7 @@ export const RIDERS: Rider[] = [
     stats: { spin: 1.3, pop: 1.1, balance: 1.12, speed: 1.1 },
     style: { signature: "Cork", spinBias: -0.2, tweak: 1.0, stance: "technical" },
     accessory: "antenna",
-    unlock: { kind: "air", value: 4.5, label: "Hold a 4.5s air" },
+    unlock: { kind: "air", value: 3, label: "Hold a 3s air" },
   },
   {
     id: "marisol",
@@ -170,7 +191,28 @@ export const RIDERS: Rider[] = [
     stats: { spin: 1.0, pop: 1.0, balance: 1.15, speed: 1.0 },
     style: { signature: "Indy", spinBias: 0.3, tweak: 0.85, stance: "surfy" },
     accessory: "camera",
-    unlock: { kind: "runs", value: 15, label: "Finish 15 runs" },
+    unlock: { kind: "tricks", value: 25, label: "Land 25 tricks" },
+  },
+  {
+    id: "kestrel",
+    name: "Kestrel",
+    handle: "SWEEP / LAST CHAIR",
+    blurb:
+      "Sweeps the mountain after the lifts stop. Knows every rock on it by feel.",
+    colors: {
+      jacket: "#f26d1f",
+      jacketAlt: "#141a20",
+      pants: "#141a20",
+      accent: "#ffd23f",
+      skin: "#6f4a32",
+      hair: "#1a1a1a",
+      helmet: "#141a20",
+      goggles: "#ffd23f",
+    },
+    stats: { spin: 1.08, pop: 1.06, balance: 1.18, speed: 1.0 },
+    style: { signature: "Mute", spinBias: -0.35, tweak: 0.9, stance: "surfy" },
+    accessory: "backpack",
+    unlock: { kind: "distance", value: 3000, label: "Ride 3 km total" },
   },
   {
     id: "denny",
@@ -190,7 +232,28 @@ export const RIDERS: Rider[] = [
     stats: { spin: 0.92, pop: 0.9, balance: 1.05, speed: 1.2 },
     style: { signature: "Tail", spinBias: 0, tweak: 0.6, stance: "loose" },
     accessory: "scarf",
-    unlock: { kind: "score", value: 250000, label: "Score 250,000 in a run" },
+    unlock: { kind: "score", value: 40000, label: "Score 40,000 in a run" },
+  },
+  {
+    id: "orso",
+    name: "Orso Bellini",
+    handle: "ALPINE RACER / '92",
+    blurb:
+      "Trained on gates for a decade. Still tucks through everything and calls it a line.",
+    colors: {
+      jacket: "#d6d9de",
+      jacketAlt: "#c0202f",
+      pants: "#1b2440",
+      accent: "#c0202f",
+      skin: "#c9a17a",
+      hair: "#3a2c22",
+      helmet: "#c0202f",
+      goggles: "#f2f2f2",
+    },
+    stats: { spin: 0.86, pop: 0.88, balance: 1.22, speed: 1.26 },
+    style: { signature: "Indy", spinBias: 0, tweak: 0.5, stance: "technical" },
+    accessory: "none",
+    unlock: { kind: "runs", value: 10, label: "Finish 10 runs" },
   },
 ];
 

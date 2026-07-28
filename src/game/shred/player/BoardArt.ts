@@ -11,6 +11,33 @@ import { makeRng } from "../core/rng";
 const W = 128;
 const H = 512;
 
+/**
+ * Surface finish per topsheet. A sintered race base and a hand-painted art
+ * deck should not catch the light the same way, and the chrome wrap only
+ * works at all if it actually takes the environment map.
+ */
+export function boardFinish(art: Board["art"]): {
+  roughness: number;
+  metalness: number;
+  envMapIntensity: number;
+} {
+  switch (art) {
+    case "chrome":
+      return { roughness: 0.08, metalness: 0.95, envMapIntensity: 1.8 };
+    case "carbon":
+      return { roughness: 0.22, metalness: 0.5, envMapIntensity: 1.3 };
+    case "matte":
+      return { roughness: 0.62, metalness: 0.04, envMapIntensity: 0.7 };
+    case "wood":
+    case "painted":
+      return { roughness: 0.44, metalness: 0.02, envMapIntensity: 0.85 };
+    case "camo":
+      return { roughness: 0.55, metalness: 0.03, envMapIntensity: 0.75 };
+    default:
+      return { roughness: 0.28, metalness: 0.12, envMapIntensity: 1.1 };
+  }
+}
+
 export function makeBoardTexture(board: Board): THREE.CanvasTexture {
   const c = document.createElement("canvas");
   c.width = W;
@@ -156,6 +183,117 @@ export function makeBoardTexture(board: Board): THREE.CanvasTexture {
         }
         g.restore();
       }
+      break;
+    }
+    case "checker": {
+      const sq = 16;
+      for (let y = 0; y < H; y += sq) {
+        for (let x = 0; x < W; x += sq) {
+          if (((x / sq + y / sq) | 0) % 2 === 0) continue;
+          g.fillStyle = accent;
+          g.fillRect(x, y, sq, sq);
+        }
+      }
+      // A single stripe down the middle so the nose still reads at speed.
+      g.fillStyle = accent2;
+      g.fillRect(W * 0.5 - 7, 0, 14, H);
+      break;
+    }
+    case "topo": {
+      // Contour rings around a couple of summits, drawn as level sets of a
+      // sum of two gaussians — cheap, and it actually looks surveyed.
+      const peaks = [
+        { x: W * 0.42, y: H * 0.3, s: 62 },
+        { x: W * 0.6, y: H * 0.68, s: 84 },
+      ];
+      const field = (x: number, y: number) =>
+        peaks.reduce((a, p) => {
+          const dx = (x - p.x) / p.s;
+          const dy = (y - p.y) / p.s;
+          return a + Math.exp(-(dx * dx + dy * dy));
+        }, 0);
+      const step = 3;
+      for (let y = 0; y < H; y += step) {
+        for (let x = 0; x < W; x += step) {
+          const band = (field(x, y) * 9) % 1;
+          if (band < 0.16) {
+            g.fillStyle = band < 0.05 ? accent2 : accent;
+            g.fillRect(x, y, step, step);
+          }
+        }
+      }
+      break;
+    }
+    case "flame": {
+      // Licks rising from the tail. Each tongue is two cubics sharing a tip,
+      // with a sideways lean so they curl instead of reading as triangles.
+      for (let i = 0; i < 30; i++) {
+        const t = i / 30;
+        const x = W * 0.5 + Math.sin(i * 2.4) * W * 0.36;
+        const y = H - t * H * 0.9 + rng() * 40;
+        const len = 70 + rng() * 150;
+        const w = 8 + rng() * 16;
+        const lean = (rng() - 0.5) * w * 3.2;
+        const tipX = x + lean;
+        const tipY = y - len;
+        g.fillStyle = i % 3 === 0 ? accent2 : accent;
+        g.globalAlpha = 0.7 + rng() * 0.3;
+        g.beginPath();
+        g.moveTo(x - w, y);
+        g.bezierCurveTo(x - w * 1.1, y - len * 0.42, tipX - w * 0.8, y - len * 0.7, tipX, tipY);
+        g.bezierCurveTo(tipX + w * 0.15, y - len * 0.66, x + w * 0.5, y - len * 0.3, x + w, y);
+        g.closePath();
+        g.fill();
+      }
+      g.globalAlpha = 1;
+      break;
+    }
+    case "camo": {
+      // Overlapping blobs at three scales — the classic disruptive pattern.
+      const layers = [
+        { c: accent, n: 26, r: 26 },
+        { c: accent2, n: 18, r: 17 },
+      ];
+      for (const l of layers) {
+        g.fillStyle = l.c;
+        for (let i = 0; i < l.n; i++) {
+          const cx = rng() * W;
+          const cy = rng() * H;
+          g.beginPath();
+          for (let a = 0; a <= 12; a++) {
+            const ang = (a / 12) * Math.PI * 2;
+            const r = l.r * (0.55 + rng() * 0.75);
+            const px = cx + Math.cos(ang) * r;
+            const py = cy + Math.sin(ang) * r * 1.6;
+            if (a === 0) g.moveTo(px, py);
+            else g.lineTo(px, py);
+          }
+          g.closePath();
+          g.fill();
+        }
+      }
+      break;
+    }
+    case "chrome": {
+      // A vertical anisotropic sweep plus a horizon band — reads as polished
+      // metal once the environment map lands on top of it.
+      const grad = g.createLinearGradient(0, 0, W, 0);
+      grad.addColorStop(0, accent2);
+      grad.addColorStop(0.3, accent);
+      grad.addColorStop(0.48, base);
+      grad.addColorStop(0.66, accent);
+      grad.addColorStop(1, accent2);
+      g.fillStyle = grad;
+      g.fillRect(0, 0, W, H);
+      for (let i = 0; i < 220; i++) {
+        g.globalAlpha = 0.03 + rng() * 0.06;
+        g.fillStyle = rng() < 0.5 ? "#ffffff" : "#2b3542";
+        g.fillRect(rng() * W, 0, 1 + rng() * 2, H);
+      }
+      g.globalAlpha = 0.4;
+      g.fillStyle = "#ffffff";
+      g.fillRect(0, H * 0.46, W, 6);
+      g.globalAlpha = 1;
       break;
     }
   }

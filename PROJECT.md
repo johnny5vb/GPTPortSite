@@ -296,6 +296,23 @@ phone can still scroll to the bottom of a panel that doesn't fit.
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
 re-evaluated both on boot and at the end of every run.
 
+The starter set is deliberately generous: **4 riders, 5 boards, 3 mountains**
+plus 3 light presets are already unlocked on first boot. This was originally
+1/1/1, which made a game whose whole pitch is a quiver read as a game with one
+board. `DEFAULT.unlocked` in `core/save.ts` is the list; `load()` unions it with
+any saved progress, so widening it retroactively grants the new starters to
+existing saves. If you add content, decide explicitly whether it's a starter or
+a reward — don't default to locking it.
+
+Content lives in three places and is intentionally data-only: `data/riders.ts`
+(10), `data/boards.ts` (12) and `MOUNTAINS` in `world/TerrainGen.ts` (8).
+Mountain, rider and board cards all read their copy straight from those objects
+— there is no parallel switch statement in the UI to keep in sync. Board
+requirements live on the board; **mountain** requirements are the one exception
+and still live in `mountainReq` inside `core/save.ts`. Adding a board art kind
+means adding a case to `BoardArt.ts` and, if the finish differs, an entry in
+`boardFinish()`; adding a rider accessory means a case in `RiderRig.ts`.
+
 **Accessibility note.** The route's `<main>` carries the only `<h1>` (visually
 hidden); the title screen headline is an `<h2>` so heading order stays clean.
 The site's global `cursor: none` is overridden inside `.shred-root` so the
@@ -451,9 +468,10 @@ finer-grained detail.
 
 25. Built a complete arcade snowboard game at `/shred` (see the section above).
     Three.js, ~7k lines across `src/game/shred/`, zero binary assets. Endless
-    procedural mountains with 14 feature types, 7 riders, 7 boards, 5 mountains,
+    procedural mountains with 14 feature types, riders, boards, mountains,
     6 light presets, 8 game modes, 8 camera filters, a synthesised reactive
-    soundtrack, photo mode and a 50-entry unlock table.
+    soundtrack, photo mode and a full unlock table. (Content counts have since
+    grown — see item 32 and the SHRED section above for the current numbers.)
 26. Suppressed the site chrome on `/shred`: `RouteChrome` returns null,
     `CustomCursor` and `SmoothScroll` bail on the route (Lenis would otherwise
     keep a RAF loop running against the game loop).
@@ -471,6 +489,38 @@ finer-grained detail.
       broke the cave set-piece (`IcosahedronGeometry` is non-indexed);
     - HUD labels read from the snapshot at React-render time went stale when a
       run was rebuilt.
+29. Rendering + character pass: PMREM-baked IBL from the sky shader, MSAA on
+    the scene target (shipping with `samples: 0` *and* `antialias: false` was
+    the "crunchy edges" defect), full-resolution render target, and a rebuilt
+    `RiderRig` — capsule limbs, an extruded deck plate with sidecut, a real
+    head/helmet/goggle stack, and legs that stay bolted along the board while
+    only the upper body opens to the stance angle.
+30. iOS hardening (`core/renderer.ts`). One memoised `WebGLRenderer` per canvas
+    that outlives the Game — iOS caps live WebGL contexts and doesn't reliably
+    release them, so rebuilding per run could hand back a dead context. Caps
+    are probed rather than assumed: half-float colour attachments and MSAA
+    sample counts are verified by checking framebuffer completeness, falling
+    back 4 → 2 → 0 samples and then to 8-bit targets. Startup failures now
+    surface as a readable overlay with a safe-mode retry instead of an endless
+    spinner. **Not reproduced locally** — Playwright's WebKit download is
+    blocked by the network policy here, so real Safari remains unverified.
+31. Trick easement. Spin eases in over ~0.25s and carries momentum for ~0.4s
+    after release (it was a near-instant damp, which read as a switch rather
+    than a body). A landing assist eases yaw toward the nearest 180° and flip
+    toward the nearest 360° inside the last 0.6s before predicted touchdown,
+    scaled by urgency, rider balance, and inversely by how much the player is
+    still actively rotating — so it never fights deliberate input.
+32. Content pass, in response to "I want a selection of riders, a quiver of
+    boards and different mountains": riders 7 → 10, boards 7 → 12 (five new
+    procedural topsheets: checker, topo contours, flame, camo, chrome, plus
+    per-art `boardFinish()` so chrome actually takes the environment map),
+    mountains 5 → 8 (Long Meadow, Sawtooth Spine, Midnight Mile). Mountain
+    blurbs moved out of a switch in `Menus.tsx` and onto `MountainPreset`.
+    Crucially, the **starter set went from 1/1/1 to 4/5/3** and the whole
+    unlock ladder came down (top rider gate was 250k in a run; it's 40k now) —
+    the original complaint was really that first boot showed one of everything.
+    Garage tabs now show "4/10" style counts and the title screen shows the
+    current loadout.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

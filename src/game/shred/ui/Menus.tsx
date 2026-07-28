@@ -9,8 +9,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { RIDERS } from "../data/riders";
-import { BOARDS } from "../data/boards";
+import { RIDERS, riderById } from "../data/riders";
+import { BOARDS, boardById } from "../data/boards";
 import { MOUNTAINS } from "../world/TerrainGen";
 import { SKY_PRESETS } from "../world/Sky";
 import { TRACKS } from "../audio/Audio";
@@ -164,12 +164,28 @@ export function TitleScreen({
   const actions = useMemo(
     () => [
       { label: "Drop In", meta: "Choose a mode", fn: onPlay },
-      { label: "Garage", meta: "Riders / boards / mountain", fn: onGarage },
+      {
+        label: "Garage",
+        // The current loadout, so it's obvious this is a thing you change.
+        meta: `${riderById(save.selected.rider).name} / ${
+          boardById(save.selected.board).name
+        }`,
+        fn: onGarage,
+      },
       { label: "Unlocks", meta: `${save.unlocked.length} earned`, fn: onUnlocks },
       { label: "How to Ride", meta: "Controls & tricks", fn: onHowTo },
       { label: "Settings", meta: "Audio / visuals", fn: onSettings },
     ],
-    [onPlay, onGarage, onUnlocks, onSettings, onHowTo, save.unlocked.length],
+    [
+      onPlay,
+      onGarage,
+      onUnlocks,
+      onSettings,
+      onHowTo,
+      save.unlocked.length,
+      save.selected.rider,
+      save.selected.board,
+    ],
   );
   const [index, setIndex] = useMenuKeys(actions.length, (i) => actions[i].fn());
 
@@ -385,13 +401,17 @@ export function Garage({
     return () => window.removeEventListener("keydown", onKey);
   }, [onBack]);
 
-  const tabs: { id: GarageTab; label: string }[] = [
-    { id: "riders", label: "Riders" },
-    { id: "boards", label: "Boards" },
-    { id: "mountains", label: "Mountains" },
-    { id: "light", label: "Light" },
-    { id: "music", label: "Music" },
-    { id: "look", label: "Look" },
+  /** "4/10" — so it's obvious at a glance that there's more behind the tab. */
+  const count = (prefix: string, ids: { id: string }[]) =>
+    `${ids.filter((x) => has(`${prefix}:${x.id}`)).length}/${ids.length}`;
+
+  const tabs: { id: GarageTab; label: string; count: string }[] = [
+    { id: "riders", label: "Riders", count: count("rider", RIDERS) },
+    { id: "boards", label: "Boards", count: count("board", BOARDS) },
+    { id: "mountains", label: "Mountains", count: count("mountain", MOUNTAINS) },
+    { id: "light", label: "Light", count: count("sky", SKY_PRESETS) },
+    { id: "music", label: "Music", count: count("track", TRACKS) },
+    { id: "look", label: "Look", count: count("filter", FILTERS) },
   ];
 
   return (
@@ -405,7 +425,10 @@ export function Garage({
               data-active={tab === t.id}
               onClick={() => setTab(t.id)}
             >
-              {t.label}
+              {t.label}{" "}
+              <span style={{ opacity: 0.55, fontVariantNumeric: "tabular-nums" }}>
+                {t.count}
+              </span>
             </button>
           ))}
         </div>
@@ -530,7 +553,7 @@ export function Garage({
                       lineHeight: 1.5,
                     }}
                   >
-                    {owned ? mountainBlurb(m.id) : req(key)}
+                    {owned ? m.blurb : req(key)}
                   </p>
                   <StatBar label="Steep" value={0.75 + m.slope} />
                   <StatBar label="Trees" value={0.75 + m.treeDensity * 0.25} />
@@ -642,23 +665,6 @@ export function Garage({
       </Sheet>
     </div>
   );
-}
-
-function mountainBlurb(id: string) {
-  switch (id) {
-    case "hollow-ridge":
-      return "Wide, treed, forgiving. Natural hits everywhere and a park hidden in the middle.";
-    case "glass-basin":
-      return "Frozen lakes and glacier steps. Fast and slick — carve early, or don't carve at all.";
-    case "wolf-couloir":
-      return "Steep, narrow, mean. Cliff bands, gullies and the best shortcuts on the mountain.";
-    case "ember-pass":
-      return "Deep trees, a sleeping village and old bridges. Softest snow you'll find.";
-    case "north-cirque":
-      return "Above the treeline. Ice, seracs and long, cold, empty pitches.";
-    default:
-      return "";
-  }
 }
 
 // ────────────────────────────────────────────────────────────── unlocks ────

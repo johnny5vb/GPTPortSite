@@ -16,7 +16,7 @@
 import * as THREE from "three";
 import type { Rider } from "../data/riders";
 import type { Board } from "../data/boards";
-import { makeBoardTexture } from "./BoardArt";
+import { makeBoardTexture, boardFinish } from "./BoardArt";
 import { RiderPhysics } from "./Physics";
 import { TrickSystem } from "./TrickSystem";
 import { clamp, clamp01, damp, lerp, smoothstep } from "../core/math";
@@ -255,9 +255,7 @@ export class RiderRig {
     const deck = stylizeMaterial(
       new THREE.MeshStandardMaterial({
         map: this.boardTex,
-        roughness: 0.28,
-        metalness: 0.12,
-        envMapIntensity: 1.1,
+        ...boardFinish(this.board.art),
       }),
       this.uniforms,
       { snow: false, sparkle: false },
@@ -466,6 +464,27 @@ export class RiderRig {
         accessory = g;
         break;
       }
+      case "fanny": {
+        // Slung across the front of the hips, so it sits below the torso node
+        // and rides with the crouch rather than the shoulders.
+        const g = new THREE.Group();
+        const pouch = this.capsule(0.05, 0.12, accent, 0.11, -0.05, 0);
+        pouch.rotation.z = Math.PI / 2;
+        pouch.scale.set(1, 1, 0.62);
+        g.add(pouch);
+        const belt = this.mesh(
+          new THREE.TorusGeometry(0.135, 0.011, 6, 18),
+          jacketAlt,
+          0.01,
+          -0.05,
+          0,
+        );
+        belt.rotation.x = Math.PI / 2;
+        belt.scale.set(1, 0.72, 1);
+        g.add(belt);
+        accessory = g;
+        break;
+      }
       case "antenna": {
         const g = new THREE.Group();
         g.add(this.mesh(new THREE.CylinderGeometry(0.006, 0.01, 0.4, 6), accent, -0.06, 0.78, 0.09));
@@ -513,6 +532,7 @@ export class RiderRig {
     this.boardTex?.dispose();
     this.boardTex = tex;
     deck.map = tex;
+    Object.assign(deck, boardFinish(board.art));
     deck.needsUpdate = true;
   }
 

@@ -65,6 +65,8 @@ export interface Feature {
 export interface MountainPreset {
   id: string;
   name: string;
+  /** One line of character, shown on the garage card. */
+  blurb: string;
   /** Vertical drop per metre travelled. 0.22 mellow, 0.42 steep. */
   slope: number;
   /** Corridor half-width in metres. */
@@ -585,6 +587,8 @@ export const MOUNTAINS: MountainPreset[] = [
   {
     id: "hollow-ridge",
     name: "Hollow Ridge",
+    blurb:
+      "Wide, treed, forgiving. Natural hits everywhere and a park hidden in the middle.",
     slope: 0.3,
     corridor: 78,
     roughness: 1,
@@ -594,30 +598,23 @@ export const MOUNTAINS: MountainPreset[] = [
     featureWeights: { kickers: 20, park: 12, forest: 10 },
   },
   {
-    id: "glass-basin",
-    name: "Glass Basin",
-    slope: 0.26,
-    corridor: 96,
-    roughness: 0.75,
-    treeDensity: 0.45,
-    iceBias: 0.8,
-    powderBias: 0.25,
-    featureWeights: { lake: 14, glacier: 12, halfpipe: 10, forest: 3 },
-  },
-  {
-    id: "wolf-couloir",
-    name: "Wolf Couloir",
-    slope: 0.42,
-    corridor: 58,
-    roughness: 1.35,
-    treeDensity: 0.7,
-    iceBias: 0.55,
-    powderBias: 0.7,
-    featureWeights: { cliff: 16, gully: 14, shortcut: 10, bridge: 8, park: 4 },
+    id: "long-meadow",
+    name: "Long Meadow",
+    blurb:
+      "The mellow one. Groomed corduroy, big lazy rollers and room to get a trick wrong.",
+    slope: 0.22,
+    corridor: 110,
+    roughness: 0.6,
+    treeDensity: 0.5,
+    iceBias: 0.15,
+    powderBias: 0.4,
+    featureWeights: { open: 14, kickers: 14, park: 14, moguls: 8, cliff: 2 },
   },
   {
     id: "ember-pass",
     name: "Ember Pass",
+    blurb:
+      "Deep trees, a sleeping village and old bridges. Softest snow you'll find.",
     slope: 0.28,
     corridor: 86,
     roughness: 0.9,
@@ -627,8 +624,35 @@ export const MOUNTAINS: MountainPreset[] = [
     featureWeights: { forest: 16, village: 9, bridge: 8, cave: 7, moguls: 9 },
   },
   {
+    id: "glass-basin",
+    name: "Glass Basin",
+    blurb:
+      "Frozen lakes and glacier steps. Fast and slick — carve early, or don't carve at all.",
+    slope: 0.26,
+    corridor: 96,
+    roughness: 0.75,
+    treeDensity: 0.45,
+    iceBias: 0.8,
+    powderBias: 0.25,
+    featureWeights: { lake: 14, glacier: 12, halfpipe: 10, forest: 3 },
+  },
+  {
+    id: "sawtooth",
+    name: "Sawtooth Spine",
+    blurb:
+      "A ridge that never flattens out. Ribs, gullies and a bridge over most of them.",
+    slope: 0.34,
+    corridor: 64,
+    roughness: 1.5,
+    treeDensity: 0.6,
+    iceBias: 0.45,
+    powderBias: 0.5,
+    featureWeights: { moguls: 12, gully: 12, bridge: 10, cliff: 10, shortcut: 8 },
+  },
+  {
     id: "north-cirque",
     name: "North Cirque",
+    blurb: "Above the treeline. Ice, seracs and long, cold, empty pitches.",
     slope: 0.36,
     corridor: 70,
     roughness: 1.2,
@@ -636,6 +660,32 @@ export const MOUNTAINS: MountainPreset[] = [
     iceBias: 0.65,
     powderBias: 0.6,
     featureWeights: { glacier: 14, cliff: 12, halfpipe: 9, cave: 8 },
+  },
+  {
+    id: "midnight-mile",
+    name: "Midnight Mile",
+    blurb:
+      "The last run of the night, lit end to end. Village rails, a pipe and hard old snow.",
+    slope: 0.31,
+    corridor: 74,
+    roughness: 0.85,
+    treeDensity: 0.75,
+    iceBias: 0.6,
+    powderBias: 0.35,
+    featureWeights: { village: 14, park: 12, halfpipe: 10, bridge: 8, cave: 5 },
+  },
+  {
+    id: "wolf-couloir",
+    name: "Wolf Couloir",
+    blurb:
+      "Steep, narrow, mean. Cliff bands, gullies and the best shortcuts on the mountain.",
+    slope: 0.42,
+    corridor: 58,
+    roughness: 1.35,
+    treeDensity: 0.7,
+    iceBias: 0.55,
+    powderBias: 0.7,
+    featureWeights: { cliff: 16, gully: 14, shortcut: 10, bridge: 8, park: 4 },
   },
 ];
 

@@ -96,12 +96,28 @@ const DEFAULT: SaveData = {
     topSpeed: 0,
     lifetimeScore: 0,
   },
+  /**
+   * The starter set. Deliberately generous: a game whose whole pitch is a
+   * quiver reads as a game with one board if you have to earn the second one,
+   * so day one opens with four riders, five decks and three mountains that
+   * genuinely ride differently. The remaining two thirds are the progression.
+   */
   unlocked: [
     "rider:kaz",
+    "rider:vex",
+    "rider:rin",
+    "rider:solve",
     "board:timber",
+    "board:radical",
+    "board:checker",
+    "board:blackout",
+    "board:painted",
     "mountain:hollow-ridge",
+    "mountain:long-meadow",
+    "mountain:ember-pass",
     "sky:golden",
     "sky:bluebird",
+    "sky:dusk",
     "track:neon-descent",
     "track:powder-days",
     "filter:none",
@@ -162,10 +178,13 @@ export function unlockTable(): UnlockDef[] {
 
   const mountainReq: Record<string, Unlock> = {
     "hollow-ridge": { kind: "default", value: 0, label: "Starter" },
-    "ember-pass": { kind: "runs", value: 3, label: "Finish 3 runs" },
-    "glass-basin": { kind: "distance", value: 4000, label: "Ride 4 km total" },
-    "north-cirque": { kind: "score", value: 100000, label: "Score 100,000 in a run" },
-    "wolf-couloir": { kind: "tricks", value: 100, label: "Land 100 tricks" },
+    "long-meadow": { kind: "default", value: 0, label: "Starter" },
+    "ember-pass": { kind: "default", value: 0, label: "Starter" },
+    "glass-basin": { kind: "runs", value: 2, label: "Finish 2 runs" },
+    sawtooth: { kind: "distance", value: 2500, label: "Ride 2.5 km total" },
+    "north-cirque": { kind: "runs", value: 6, label: "Finish 6 runs" },
+    "midnight-mile": { kind: "tricks", value: 50, label: "Land 50 tricks" },
+    "wolf-couloir": { kind: "score", value: 60000, label: "Score 60,000 in a run" },
   };
   for (const m of MOUNTAINS)
     out.push({
@@ -178,10 +197,10 @@ export function unlockTable(): UnlockDef[] {
   const skyReq: { id: string; name: string; req: Unlock }[] = [
     { id: "golden", name: "Golden Hour", req: { kind: "default", value: 0, label: "Starter" } },
     { id: "bluebird", name: "Bluebird", req: { kind: "default", value: 0, label: "Starter" } },
-    { id: "dusk", name: "Alpenglow", req: { kind: "runs", value: 2, label: "Finish 2 runs" } },
-    { id: "dawn", name: "First Chair", req: { kind: "distance", value: 2500, label: "Ride 2.5 km total" } },
-    { id: "storm", name: "Whiteout", req: { kind: "crashes" as never, value: 10, label: "Crash 10 times" } as Unlock },
-    { id: "night", name: "Northern Lights", req: { kind: "air", value: 3, label: "Hold a 3s air" } },
+    { id: "dusk", name: "Alpenglow", req: { kind: "default", value: 0, label: "Starter" } },
+    { id: "dawn", name: "First Chair", req: { kind: "runs", value: 2, label: "Finish 2 runs" } },
+    { id: "storm", name: "Whiteout", req: { kind: "crashes" as never, value: 6, label: "Crash 6 times" } as Unlock },
+    { id: "night", name: "Northern Lights", req: { kind: "air", value: 2.5, label: "Hold a 2.5s air" } },
   ];
   for (const s of skyReq)
     out.push({ key: `sky:${s.id}`, kind: "sky", name: s.name, requirement: s.req });
@@ -199,13 +218,13 @@ export function unlockTable(): UnlockDef[] {
 
   const filterReq: Record<string, Unlock> = {
     none: { kind: "default", value: 0, label: "Starter" },
-    kodachrome: { kind: "runs", value: 4, label: "Finish 4 runs" },
-    sunset: { kind: "tricks", value: 40, label: "Land 40 tricks" },
-    vhs: { kind: "runs", value: 10, label: "Finish 10 runs" },
-    bleach: { kind: "distance", value: 9000, label: "Ride 9 km total" },
-    noir: { kind: "score", value: 120000, label: "Score 120,000 in a run" },
-    infra: { kind: "air", value: 5, label: "Hold a 5s air" },
-    ps1: { kind: "tricks", value: 150, label: "Land 150 tricks" },
+    kodachrome: { kind: "runs", value: 3, label: "Finish 3 runs" },
+    sunset: { kind: "tricks", value: 20, label: "Land 20 tricks" },
+    vhs: { kind: "runs", value: 7, label: "Finish 7 runs" },
+    bleach: { kind: "distance", value: 6000, label: "Ride 6 km total" },
+    noir: { kind: "score", value: 70000, label: "Score 70,000 in a run" },
+    infra: { kind: "air", value: 4, label: "Hold a 4s air" },
+    ps1: { kind: "tricks", value: 100, label: "Land 100 tricks" },
   };
   for (const f of FILTERS)
     out.push({
@@ -222,7 +241,7 @@ export function unlockTable(): UnlockDef[] {
     { id: "zen", name: "Zen", req: { kind: "default", value: 0, label: "Starter" } },
     { id: "bigair", name: "Big Air", req: { kind: "runs", value: 2, label: "Finish 2 runs" } },
     { id: "slalom", name: "Slalom", req: { kind: "runs", value: 5, label: "Finish 5 runs" } },
-    { id: "endless", name: "Endless", req: { kind: "distance", value: 5000, label: "Ride 5 km total" } },
+    { id: "endless", name: "Endless", req: { kind: "distance", value: 4000, label: "Ride 4 km total" } },
     { id: "daily", name: "Daily Challenge", req: { kind: "runs", value: 3, label: "Finish 3 runs" } },
   ];
   for (const m of modeReq)
@@ -238,19 +257,19 @@ export function unlockTable(): UnlockDef[] {
     key: "feature:specials",
     kind: "feature",
     name: "Signature Tricks",
-    requirement: { kind: "tricks", value: 80, label: "Land 80 tricks" },
+    requirement: { kind: "tricks", value: 40, label: "Land 40 tricks" },
   });
   out.push({
     key: "feature:retro",
     kind: "feature",
     name: "1999 Mode",
-    requirement: { kind: "runs", value: 12, label: "Finish 12 runs" },
+    requirement: { kind: "runs", value: 8, label: "Finish 8 runs" },
   });
   out.push({
     key: "feature:crt",
     kind: "feature",
     name: "CRT Filter",
-    requirement: { kind: "score", value: 200000, label: "Score 200,000 in a run" },
+    requirement: { kind: "score", value: 110000, label: "Score 110,000 in a run" },
   });
 
   return out;
