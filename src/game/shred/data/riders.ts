@@ -302,16 +302,17 @@ export const RIDERS: Rider[] = [
   {
     id: "denny",
     name: "Denny Pratt",
-    handle: "VINTAGE SKI BUM",
-    blurb: "Been living out of the same van since '94. Fastest man on the mountain.",
+    handle: "SPEED / FIRST CHAIR",
+    blurb:
+      "First chair every morning, gone before the cord sets. Points it straight and out-runs riders twice his age.",
     appearance: look({
-      build: "stocky",
+      build: "slim",
       skin: "#d3a077",
       hair: "shag",
-      hairColor: "#8a8a8a",
-      beard: "full",
+      hairColor: "#8a5a2b",
+      beard: "none",
       headwear: "beanie",
-      headwearColor: "#8c4b2a",
+      headwearColor: "#3f7fb8",
       face: "none",
       eyewear: "none",
       lensColor: "#f5f1e6",
