@@ -301,6 +301,14 @@ export class PostFX {
   private height = 1;
   private resScale = 1;
   private msaa = 4;
+  private useHdr = true;
+
+  /** Half-float targets. Falls back to 8-bit where they aren't renderable. */
+  set hdr(on: boolean) {
+    if (on === this.useHdr) return;
+    this.useHdr = on;
+    this.width = 0;
+  }
 
   // Animated state.
   private flash = 0;
@@ -408,8 +416,9 @@ export class PostFX {
     this.height = h;
 
     this.sceneRT?.dispose();
+    const type = this.useHdr ? THREE.HalfFloatType : THREE.UnsignedByteType;
     this.sceneRT = new THREE.WebGLRenderTarget(w, h, {
-      type: THREE.HalfFloatType,
+      type,
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       depthBuffer: true,
@@ -429,7 +438,7 @@ export class PostFX {
       mw = Math.max(2, Math.floor(mw / 2));
       mh = Math.max(2, Math.floor(mh / 2));
       const opts: THREE.RenderTargetOptions = {
-        type: THREE.HalfFloatType,
+        type,
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
         depthBuffer: false,

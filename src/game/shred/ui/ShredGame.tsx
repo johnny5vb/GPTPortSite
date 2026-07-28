@@ -36,6 +36,7 @@ import {
   UnlockToasts,
 } from "./Menus";
 import { FILTERS, type FilterId } from "../fx/PostFX";
+import { webglBlocker } from "../core/renderer";
 import TouchControls, { TouchPhotoPad } from "./TouchControls";
 
 /**
@@ -128,6 +129,7 @@ export default function ShredGame() {
   const [isBest, setIsBest] = useState(false);
   const [toasts, setToasts] = useState<UnlockDef[]>([]);
   const [filterName, setFilterName] = useState("Clean");
+  const [fatal, setFatal] = useState<string | null>(null);
   // A device can be both (laptop with a touchscreen), so this is a hint, not a
   // mode: the keyboard always keeps working even when the pads are up.
   const [coarsePointer] = useState(
@@ -207,31 +209,51 @@ export default function ShredGame() {
       const data = saveRef.current;
       if (!canvas || !data) return;
 
+      const blocked = webglBlocker();
+      if (blocked) {
+        setFatal(blocked);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       // Let the loading overlay paint before we block on terrain generation.
       requestAnimationFrame(() => {
-        gameRef.current?.dispose();
-        const g = new Game({
-          canvas,
-          save: data,
-          mode,
-          onHud: (s) => {
-            hudRef.current = s;
-          },
-          onEvent: handleEvent,
-        });
-        gameRef.current = g;
-        g.resize();
-        g.run();
-        if (audioStarted.current) {
-          void g.audio.start();
+        // Anything that throws in here used to leave the loading screen up
+        // forever with no explanation, because this runs outside React's
+        // render path. Failures are now surfaced instead of swallowed.
+        try {
+          gameRef.current?.dispose();
+          const g = new Game({
+            canvas,
+            save: data,
+            mode,
+            onHud: (s) => {
+              hudRef.current = s;
+            },
+            onEvent: handleEvent,
+          });
+          gameRef.current = g;
+          g.resize();
+          g.run();
+          if (audioStarted.current) {
+            void g.audio.start();
+          }
+          if (autoStart) g.start();
+          setFilterName(
+            FILTERS.find((f) => f.id === (data.selected.filter as FilterId))?.name ??
+              "Clean",
+          );
+          setFatal(null);
+        } catch (err) {
+          console.error("[shred] failed to start", err);
+          gameRef.current = null;
+          setFatal(
+            err instanceof Error ? `${err.name}: ${err.message}` : String(err),
+          );
+        } finally {
+          setLoading(false);
         }
-        if (autoStart) g.start();
-        setFilterName(
-          FILTERS.find((f) => f.id === (data.selected.filter as FilterId))?.name ??
-            "Clean",
-        );
-        setLoading(false);
       });
     },
     [handleEvent],
@@ -250,6 +272,22 @@ export default function ShredGame() {
       gameRef.current = null;
       if (bannerTimer.current) window.clearTimeout(bannerTimer.current);
     };
+  }, []);
+
+  // A lost WebGL context is the other way the screen can go blank without a
+  // word — on mobile it happens when the tab is backgrounded under memory
+  // pressure.
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const onLost = (e: Event) => {
+      e.preventDefault();
+      setFatal(
+        "The graphics context was lost — usually the browser reclaiming memory. Reloading the page will bring it back.",
+      );
+    };
+    canvas.addEventListener("webglcontextlost", onLost);
+    return () => canvas.removeEventListener("webglcontextlost", onLost);
   }, []);
 
   // Resize + orientation. Mobile browsers fire these on address-bar collapse
@@ -652,8 +690,61 @@ export default function ShredGame() {
         </div>
       )}
 
+      {fatal && (
+        <div className="shred-layer">
+          <div className="sh-overlay">
+            <div className="sh-panel sh-sheet" style={{ maxWidth: 560 }}>
+              <div className="sh-eyebrow">Couldn&rsquo;t start the game</div>
+              <h2
+                className="sh-title"
+                style={{ fontSize: "clamp(1.6rem,4vw,2.4rem)", margin: "0.4rem 0 1rem" }}
+              >
+                Something went wrong on this device
+              </h2>
+              <p
+                style={{
+                  color: "var(--sh-dim)",
+                  fontSize: "0.92rem",
+                  lineHeight: 1.6,
+                  marginBottom: "1rem",
+                }}
+              >
+                {fatal}
+              </p>
+              <div style={{ display: "grid", gap: "0.5rem" }}>
+                <button
+                  type="button"
+                  className="sh-btn"
+                  onClick={() => {
+                    const data = saveRef.current;
+                    if (data) {
+                      data.settings.quality = "low";
+                      persist(data);
+                      setSaveData({ ...data });
+                    }
+                    setFatal(null);
+                    rebuild("freeride", false);
+                  }}
+                >
+                  <span className="sh-btn__label">Try again in safe mode</span>
+                  <span className="sh-btn__meta">Lowest quality</span>
+                </button>
+                <button
+                  type="button"
+                  className="sh-btn"
+                  onClick={() => window.location.reload()}
+                >
+                  <span className="sh-btn__label">Reload the page</span>
+                  <span className="sh-btn__meta" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <AnimatePresence>
-        {loading && (
+        {loading && !fatal && (
           <motion.div
             key="loading"
             initial={{ opacity: 1 }}

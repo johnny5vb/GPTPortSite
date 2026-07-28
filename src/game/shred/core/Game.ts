@@ -40,6 +40,7 @@ import { riderById } from "../data/riders";
 import { boardById } from "../data/boards";
 import { ModeDef, modeById, ModeId } from "../data/modes";
 import type { SaveData } from "./save";
+import { acquireRenderer, probeCaps, type RenderCaps } from "./renderer";
 
 export type RunStatus = "loading" | "ready" | "riding" | "paused" | "photo" | "finished";
 
@@ -158,6 +159,7 @@ export class Game {
   private rig!: RiderRig;
   private chase!: ChaseCamera;
   private post: PostFX;
+  readonly caps: RenderCaps;
   private pmrem: THREE.PMREMGenerator;
   private envTarget: THREE.WebGLRenderTarget | null = null;
   private envDirty = true;
@@ -252,17 +254,9 @@ export class Game {
         ? hashString(new Date().toISOString().slice(0, 10))
         : (Math.random() * 0xffffffff) >>> 0);
 
-    this.renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas,
-      antialias: false,
-      alpha: false,
-      powerPreference: "high-performance",
-      stencil: false,
-    });
-    this.renderer.toneMapping = THREE.NoToneMapping;
-    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.renderer.autoClear = true;
+    // One renderer per canvas for the lifetime of the page — see renderer.ts.
+    this.renderer = acquireRenderer(this.canvas);
+    this.caps = probeCaps(this.renderer);
 
     this.uniforms = createWorldUniforms();
     this.post = new PostFX(this.renderer);
@@ -1092,8 +1086,11 @@ export class Game {
     const q = QUALITY[this.saveData.settings.quality];
     this.qualityScale = q.scale;
     this.terrain.setDetail(q.detail);
-    this.post.samples = q.samples;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, q.pr));
+    // Never ask for more MSAA than the driver proved it can give us; on Safari
+    // that is regularly zero, and an incomplete framebuffer renders black.
+    this.post.samples = Math.min(q.samples, this.caps.maxSamples);
+    this.post.hdr = this.caps.halfFloat;
+    this.renderer.setPixelRatio(Math.min(this.caps.maxPixelRatio, q.pr));
     this.renderer.shadowMap.enabled = q.shadows;
     if (q.shadows) {
       this.env.sun.shadow.mapSize.set(q.shadow, q.shadow);
@@ -1182,7 +1179,9 @@ export class Game {
     this.pmrem.dispose();
     for (const m of this.gateMats) m.dispose();
     this.audio.dispose();
-    this.renderer.dispose();
+    // The renderer is shared and deliberately outlives this Game — disposing
+    // it here is what used to leave the second run with a dead context.
+    this.renderer.setRenderTarget(null);
     this.scene.clear();
   }
 }

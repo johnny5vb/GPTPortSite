@@ -15,7 +15,7 @@
  */
 
 import { RiderPhysics, LandingInfo, LandingQuality } from "./Physics";
-import { clamp01, damp, lerp, DEG, snapTo } from "../core/math";
+import { clamp01, damp, lerp, smoothstep, DEG, snapTo } from "../core/math";
 import type { Rider } from "../data/riders";
 
 export interface GrabDef {
@@ -69,6 +69,18 @@ export interface TrickInput {
 const SPIN_RATE = 6.6; // rad/s ≈ 378°/s
 const FLIP_RATE = 7.5; // rad/s ≈ 430°/s
 
+/**
+ * Rotation eases in over roughly a quarter second and carries momentum for
+ * about twice that when you let go. Snapping instantly to full rate — and
+ * stopping dead — is what made spins feel like a switch rather than a body.
+ */
+const SPIN_UP = 0.0012;
+const SPIN_DOWN = 0.035;
+
+/** How long before touchdown the landing assist starts helping you square up. */
+const ASSIST_WINDOW = 0.6;
+const GRAVITY = 21.6;
+
 export class TrickSystem {
   score = 0;
   chain = 0;
@@ -90,6 +102,8 @@ export class TrickSystem {
   spinSpeed = 0;
   flipSpeed = 0;
   corkAmount = 0;
+  /** 0..1 — how hard the landing assist is currently working. Drives the HUD. */
+  assist = 0;
 
   /** Unlockable: rider signature trick (Shift + A + F). */
   specialsUnlocked = false;
@@ -141,6 +155,7 @@ export class TrickSystem {
       this.grabAmount = damp(this.grabAmount, 0, 0.0001, dt);
       this.spinSpeed = 0;
       this.flipSpeed = 0;
+      this.assist = 0;
       return;
     }
 
@@ -152,6 +167,7 @@ export class TrickSystem {
       this.spinSpeed = damp(this.spinSpeed, 0, 0.0001, dt);
       this.flipSpeed = damp(this.flipSpeed, 0, 0.0001, dt);
       this.corkAmount = damp(this.corkAmount, 0, 0.0005, dt);
+      this.assist = damp(this.assist, 0, 0.0005, dt);
       if (this.grabs.length) this.grabs.length = 0;
       this.grabHold = 0;
     }
@@ -160,12 +176,16 @@ export class TrickSystem {
   private airUpdate(dt: number, input: TrickInput, phys: RiderPhysics) {
     const spinStat = this.rider.stats.spin;
 
-    // Rotation ramps in over ~0.12s so a tap gives a nudge and a hold gives a
-    // full rotation — no snapping, no instant 720s.
+    // Asymmetric easing: winding up takes effort, and letting go leaves
+    // momentum behind rather than stopping the rider mid-rotation.
     const targetSpin = input.steer * SPIN_RATE * spinStat;
     const targetFlip = -input.pitch * FLIP_RATE * spinStat;
-    this.spinSpeed = damp(this.spinSpeed, targetSpin, 0.00004, dt);
-    this.flipSpeed = damp(this.flipSpeed, targetFlip, 0.00004, dt);
+    const spinEase =
+      Math.abs(targetSpin) > Math.abs(this.spinSpeed) ? SPIN_UP : SPIN_DOWN;
+    const flipEase =
+      Math.abs(targetFlip) > Math.abs(this.flipSpeed) ? SPIN_UP : SPIN_DOWN;
+    this.spinSpeed = damp(this.spinSpeed, targetSpin, spinEase, dt);
+    this.flipSpeed = damp(this.flipSpeed, targetFlip, flipEase, dt);
 
     // Off-axis: spinning while flipping tips the axis over, which is a cork.
     const cork =
@@ -174,9 +194,34 @@ export class TrickSystem {
     this.corkAmount = damp(this.corkAmount, cork, 0.0006, dt);
     const rollRate = this.corkAmount * Math.sign(this.spinSpeed || 1) * 2.4;
 
+    // ── landing assist ────────────────────────────────────────────────────
+    // Coming down, ease the rotation toward the nearest clean 180 (and the
+    // nearest whole flip). It never picks the trick for you — it only removes
+    // the last few degrees that would otherwise turn a well-judged 540 into a
+    // sketchy landing for reasons the player can't see.
+    let assistYaw = 0;
+    let assistPitch = 0;
+    if (phys.vel.y < 0 && phys.airTime > 0.22) {
+      const t = timeToLand(phys.airHeight, phys.vel.y);
+      if (t < ASSIST_WINDOW) {
+        const urgency = smoothstep(ASSIST_WINDOW, 0.08, t);
+        // Back off while the player is still actively rotating.
+        const holding = Math.max(Math.abs(input.steer), Math.abs(input.pitch));
+        const strength =
+          urgency * (1 - holding * 0.7) * this.rider.stats.balance * 6.5;
+        const k = clamp01(strength * dt);
+        assistYaw = (snapTo(phys.spinAccum, Math.PI) - phys.spinAccum) * k;
+        assistPitch =
+          (snapTo(phys.flipAccum, Math.PI * 2) - phys.flipAccum) * k;
+        this.assist = urgency * (1 - holding);
+      }
+    } else {
+      this.assist = damp(this.assist, 0, 0.001, dt);
+    }
+
     phys.applyAirRotation(
-      this.spinSpeed * dt,
-      this.flipSpeed * dt,
+      this.spinSpeed * dt + assistYaw,
+      this.flipSpeed * dt + assistPitch,
       rollRate * dt,
     );
 
@@ -364,5 +409,12 @@ export const TRICK_INDEX = [
   { name: "Stalefish", how: "Shift + F" },
   { name: "Stomp", how: "Tap Space just before you touch down" },
 ];
+
+/** Seconds until the rider reaches the surface, from height and vertical speed. */
+function timeToLand(height: number, vy: number) {
+  const disc = vy * vy + 2 * GRAVITY * Math.max(0, height);
+  if (disc <= 0) return Infinity;
+  return (vy + Math.sqrt(disc)) / GRAVITY;
+}
 
 void lerp;
