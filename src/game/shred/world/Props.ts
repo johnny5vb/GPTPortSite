@@ -43,12 +43,13 @@ export class Props {
 
     this.mats = {
       wood: mk({ color: "#6b4b34", roughness: 0.95, flatShading: true }),
-      metal: mk({ color: "#8d949e", roughness: 0.45, metalness: 0.65 }),
+      metal: mk({ color: "#8d949e", roughness: 0.38, metalness: 0.75, envMapIntensity: 1.3 }),
       rock: mk({ color: "#2b2f38", roughness: 1, flatShading: true }),
       ice: mk({
         color: "#a9d8ea",
-        roughness: 0.18,
+        roughness: 0.12,
         metalness: 0.05,
+        envMapIntensity: 1.8,
         transparent: true,
         opacity: 0.86,
         flatShading: true,

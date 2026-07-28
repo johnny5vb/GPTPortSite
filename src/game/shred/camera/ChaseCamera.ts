@@ -39,10 +39,10 @@ export interface CameraTuning {
 }
 
 const DEFAULT_TUNING: CameraTuning = {
-  distance: 5.9,
-  height: 2.2,
-  lookAhead: 8.5,
-  lookHeight: 1.55,
+  distance: 4.7,
+  height: 1.9,
+  lookAhead: 8.0,
+  lookHeight: 1.5,
   fov: 62,
   fovSpeedGain: 22,
 };

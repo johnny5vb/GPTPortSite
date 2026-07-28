@@ -300,6 +300,7 @@ export class PostFX {
   private width = 1;
   private height = 1;
   private resScale = 1;
+  private msaa = 4;
 
   // Animated state.
   private flash = 0;
@@ -312,6 +313,20 @@ export class PostFX {
 
   enabled = true;
   bloomStrength = 1;
+  /**
+   * MSAA on the scene target. The game renders to an offscreen buffer for the
+   * post chain, so the canvas `antialias` flag does nothing — this is what
+   * actually resolves the edges, and shipping without it is why the first
+   * build looked crunchy.
+   */
+  set samples(n: number) {
+    if (n === this.msaa) return;
+    this.msaa = n;
+    this.width = 0; // force the targets to be rebuilt at the new sample count
+  }
+  get samples() {
+    return this.msaa;
+  }
   exposure = 1.05;
   rays = 0.5;
   grain = 0.026;
@@ -399,7 +414,7 @@ export class PostFX {
       magFilter: THREE.LinearFilter,
       depthBuffer: true,
       stencilBuffer: false,
-      samples: 0,
+      samples: this.msaa,
     });
     this.sceneRT.texture.colorSpace = THREE.LinearSRGBColorSpace;
 

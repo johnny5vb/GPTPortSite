@@ -126,12 +126,14 @@ const QUALITY: Record<
     snow: number;
     shadows: boolean;
     detail: number;
+    /** MSAA samples on the scene target. 0 disables it. */
+    samples: number;
   }
 > = {
-  low: { pr: 1, scale: 0.72, shadow: 512, particles: 0.45, snow: 3500, shadows: false, detail: 0.62 },
-  medium: { pr: 1.25, scale: 0.86, shadow: 1024, particles: 0.7, snow: 7000, shadows: true, detail: 0.8 },
-  high: { pr: 1.5, scale: 1, shadow: 1536, particles: 1, snow: 11000, shadows: true, detail: 1 },
-  ultra: { pr: 2, scale: 1, shadow: 2048, particles: 1.35, snow: 16000, shadows: true, detail: 1 },
+  low: { pr: 1, scale: 0.8, shadow: 512, particles: 0.45, snow: 3500, shadows: false, detail: 0.62, samples: 0 },
+  medium: { pr: 1.5, scale: 1, shadow: 1024, particles: 0.7, snow: 7000, shadows: true, detail: 0.8, samples: 2 },
+  high: { pr: 2, scale: 1, shadow: 2048, particles: 1, snow: 11000, shadows: true, detail: 1, samples: 4 },
+  ultra: { pr: 2, scale: 1, shadow: 4096, particles: 1.35, snow: 16000, shadows: true, detail: 1, samples: 8 },
 };
 
 export class Game {
@@ -156,6 +158,9 @@ export class Game {
   private rig!: RiderRig;
   private chase!: ChaseCamera;
   private post: PostFX;
+  private pmrem: THREE.PMREMGenerator;
+  private envTarget: THREE.WebGLRenderTarget | null = null;
+  private envDirty = true;
 
   private snowParticles!: Particles;
   private glintParticles!: Particles;
@@ -261,6 +266,7 @@ export class Game {
 
     this.uniforms = createWorldUniforms();
     this.post = new PostFX(this.renderer);
+    this.pmrem = new THREE.PMREMGenerator(this.renderer);
 
     this.build();
     this.applyQuality();
@@ -329,6 +335,7 @@ export class Game {
     this.post.bloomStrength = sky.bloom;
     this.post.exposure = sky.exposure;
 
+    this.refreshEnvironment();
     this.wirePhysics();
     if (this.mode.gates) this.buildGateMaterials();
 
@@ -469,6 +476,26 @@ export class Game {
     this.tricks.onNameChange = (name) => {
       this.hud.trickName = name;
     };
+  }
+
+  /**
+   * Bake the sky into a prefiltered environment map. This is the single
+   * biggest lighting upgrade available without shipping an HDRI: every
+   * material now picks up real directional colour from the actual sky — snow
+   * goes warm under golden hour, ice reflects the horizon, the rider sits in
+   * the scene instead of on top of it. Cheap because it is baked once per
+   * light preset, not per frame.
+   */
+  private refreshEnvironment() {
+    const prev = this.envTarget;
+    this.envTarget = this.pmrem.fromScene(this.env.envScene, 0.04, 1, 100);
+    this.scene.environment = this.envTarget.texture;
+    // Restrained: the rim term, the hemisphere light and the sun were all
+    // tuned without an environment. Taking the full IBL on top of them turns
+    // the mountain into flat milk.
+    this.scene.environmentIntensity = 0.7;
+    prev?.dispose();
+    this.envDirty = false;
   }
 
   private surfaceColor() {
@@ -706,8 +733,8 @@ export class Game {
     if (this.adaptTimer > 1.4) {
       this.adaptTimer = 0;
       const base = QUALITY[this.saveData.settings.quality].scale;
-      if (this.fpsAvg < 46 && this.qualityScale > 0.62) {
-        this.qualityScale = Math.max(0.62, this.qualityScale - 0.1);
+      if (this.fpsAvg < 46 && this.qualityScale > 0.7) {
+        this.qualityScale = Math.max(0.7, this.qualityScale - 0.08);
         this.resize();
       } else if (this.fpsAvg > 58 && this.qualityScale < base) {
         this.qualityScale = Math.min(base, this.qualityScale + 0.06);
@@ -875,6 +902,7 @@ export class Game {
     );
 
     this.env.update(rawDt, this.chase.camera, this.elapsed, this.post.retro ? 1 : 0);
+    if (this.envDirty) this.refreshEnvironment();
 
     // Trails + spray.
     if (p.grounded && !p.crashed && p.speed > 2) {
@@ -1064,6 +1092,7 @@ export class Game {
     const q = QUALITY[this.saveData.settings.quality];
     this.qualityScale = q.scale;
     this.terrain.setDetail(q.detail);
+    this.post.samples = q.samples;
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, q.pr));
     this.renderer.shadowMap.enabled = q.shadows;
     if (q.shadows) {
@@ -1079,6 +1108,11 @@ export class Game {
     this.env.setPreset(p);
     this.post.bloomStrength = p.bloom;
     this.post.exposure = p.exposure;
+    // The sky cross-fades over about a second, so re-bake after it settles.
+    this.envDirty = true;
+    window.setTimeout(() => {
+      this.envDirty = true;
+    }, 1200);
   }
 
   setFilter(id: FilterId) {
@@ -1144,6 +1178,8 @@ export class Game {
     this.streaks.dispose();
     this.trails.dispose();
     this.post.dispose();
+    this.envTarget?.dispose();
+    this.pmrem.dispose();
     for (const m of this.gateMats) m.dispose();
     this.audio.dispose();
     this.renderer.dispose();

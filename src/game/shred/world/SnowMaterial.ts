@@ -114,10 +114,10 @@ const FRAGMENT_PARS = /* glsl */ `
 
 /** Albedo mix for the terrain. Runs in place of the usual map lookup. */
 const FRAGMENT_SNOW_ALBEDO = /* glsl */ `
-  vec3 snowLit   = vec3(0.960, 0.972, 0.995);
-  vec3 snowDeep  = vec3(0.855, 0.905, 0.985);
+  vec3 snowLit   = vec3(0.955, 0.968, 0.995);
+  vec3 snowDeep  = vec3(0.760, 0.845, 0.980);
   vec3 iceCol    = vec3(0.560, 0.780, 0.885);
-  vec3 rockCol   = vec3(0.190, 0.205, 0.250);
+  vec3 rockCol   = vec3(0.120, 0.132, 0.168);
   vec3 groomCol  = vec3(0.925, 0.945, 0.985);
 
   float ice = vMat.x, powder = vMat.y, rock = vMat.z, groom = vMat.w;
@@ -152,7 +152,7 @@ const FRAGMENT_STYLIZE = /* glsl */ `
 
   // Cold wrap light at grazing angles — cheap stand-in for snow scattering.
   float rim = pow(1.0 - clamp(dot(N, V), 0.0, 1.0), 3.0);
-  outgoingLight += uShadeColor * rim * 0.28 * (0.35 + vMat.y * 0.9);
+  outgoingLight += uShadeColor * rim * 0.14 * (0.35 + vMat.y * 0.9);
 
   // Sun sheen on ice and groomed snow.
   vec3 H = normalize(uSunDir + V);
@@ -246,10 +246,13 @@ export function ensureMatAttribute(
 export function createSnowMaterial(uniforms: WorldUniforms) {
   const mat = new THREE.MeshStandardMaterial({
     color: 0xffffff,
-    roughness: 0.82,
+    roughness: 0.78,
     metalness: 0.0,
     flatShading: false,
     dithering: true,
+    // Snow is already near-white; taking the full environment on top of that
+    // blows the highlights out, so it gets a reduced share.
+    envMapIntensity: 0.42,
   });
   return stylizeMaterial(mat, uniforms, { snow: true, sparkle: true });
 }
@@ -261,6 +264,7 @@ export function createPropMaterial(
   const mat = new THREE.MeshStandardMaterial({
     roughness: 0.9,
     metalness: 0,
+    envMapIntensity: 0.75,
     ...params,
   });
   return stylizeMaterial(mat, uniforms, { snow: false, sparkle: false });

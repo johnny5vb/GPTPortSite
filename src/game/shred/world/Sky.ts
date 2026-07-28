@@ -272,6 +272,14 @@ const SKY_FRAG = /* glsl */ `
   }
 `;
 
+const SKY_ENV_VERT = /* glsl */ `
+  varying vec3 vDir;
+  void main() {
+    vDir = position;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
 /** Jagged silhouette ridges that sit behind everything and sell the scale. */
 function buildRidge(
   radius: number,
@@ -342,6 +350,15 @@ export class Environment {
   private ridgeUniforms: Record<string, THREE.IUniform>[] = [];
   private world: WorldUniforms;
   private scene: THREE.Scene;
+
+  /**
+   * A stripped scene holding nothing but the sky, used to bake the image-based
+   * lighting. Because it shares the sky's uniforms, the environment light is
+   * always *this* sky — golden hour actually lights the snow gold, and the
+   * aurora tints it green — rather than a canned HDRI that half-matches.
+   */
+  readonly envScene = new THREE.Scene();
+  private envSky: THREE.Mesh;
 
   preset: SkyPreset;
   /** Smoothed values so a preset change cross-fades instead of snapping. */
@@ -431,6 +448,25 @@ export class Environment {
       this.ridgeUniforms.push(u);
       this.group.add(mesh);
     }
+
+    this.envSky = new THREE.Mesh(
+      new THREE.SphereGeometry(40, 32, 20),
+      new THREE.ShaderMaterial({
+        uniforms: this.skyUniforms,
+        vertexShader: SKY_ENV_VERT,
+        fragmentShader: SKY_FRAG,
+        side: THREE.BackSide,
+        depthWrite: false,
+        fog: false,
+      }),
+    );
+    // A dim ground plane keeps the lower hemisphere from lighting the world
+    // from below — snow bounces light up, but not sky-blue light.
+    const envGround = new THREE.Mesh(
+      new THREE.SphereGeometry(39, 24, 12, 0, Math.PI * 2, Math.PI * 0.5, Math.PI * 0.5),
+      new THREE.MeshBasicMaterial({ color: 0x8496ad, side: THREE.BackSide }),
+    );
+    this.envScene.add(this.envSky, envGround);
 
     this.sun = new THREE.DirectionalLight(
       new THREE.Color(preset.sunColor),
@@ -537,10 +573,12 @@ export class Environment {
 
     // Lights follow the rider so the shadow map stays tight and crisp.
     this.sun.color.copy(c.sunColor);
-    this.sun.intensity = c.sunIntensity;
+    this.sun.intensity = c.sunIntensity * 1.3;
     this.hemi.color.copy(c.ambSky);
     this.hemi.groundColor.copy(c.ambGround);
-    this.hemi.intensity = c.ambIntensity;
+    // IBL now carries the ambient; the hemisphere light only fills the
+    // shadow side so it doesn't go flat black.
+    this.hemi.intensity = c.ambIntensity * 0.4;
 
     const focus = this.world.uPlayer.value;
     this.sunTarget.position.copy(focus);
@@ -574,6 +612,14 @@ export class Environment {
   }
 
   dispose() {
+    this.envScene.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (m.isMesh) {
+        m.geometry.dispose();
+        (m.material as THREE.Material).dispose();
+      }
+    });
+    this.envScene.clear();
     this.sky.geometry.dispose();
     (this.sky.material as THREE.Material).dispose();
     for (const r of this.ridges) {

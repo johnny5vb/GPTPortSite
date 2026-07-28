@@ -76,8 +76,11 @@ interface Parts {
   bindingB: THREE.Mesh;
   body: THREE.Group;
   hips: THREE.Group;
+  stance: THREE.Group;
   legF: THREE.Group;
   legB: THREE.Group;
+  kneeF: THREE.Group;
+  kneeB: THREE.Group;
   torso: THREE.Group;
   head: THREE.Group;
   armF: THREE.Group;
@@ -151,20 +154,99 @@ export class RiderRig {
     return m;
   }
 
+  private mesh(geo: THREE.BufferGeometry, mat: THREE.Material, x = 0, y = 0, z = 0) {
+    ensureMatAttribute(geo);
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(x, y, z);
+    m.castShadow = true;
+    m.receiveShadow = false;
+    return m;
+  }
+
+  /** Limb / torso volume. Capsules read as a body; boxes read as a toy. */
+  private capsule(
+    radius: number,
+    length: number,
+    mat: THREE.Material,
+    x = 0,
+    y = 0,
+    z = 0,
+  ) {
+    return this.mesh(new THREE.CapsuleGeometry(radius, length, 6, 12), mat, x, y, z);
+  }
+
+  /**
+   * One section of the deck: a rounded, side-cut plate rather than a slab.
+   * Built as a 2D outline and extruded, so the nose and tail actually taper
+   * and the edges catch a highlight.
+   */
+  private deckPlate(
+    lengthZ: number,
+    widthBack: number,
+    widthFront: number,
+    thickness: number,
+    tipRound: number,
+  ) {
+    const shape = new THREE.Shape();
+    const hb = widthBack / 2;
+    const hf = widthFront / 2;
+    // Waist is narrower than either end — that's the sidecut a board turns on.
+    const waist = Math.min(hb, hf) * 0.88;
+
+    shape.moveTo(-hb, 0);
+    shape.quadraticCurveTo(-waist, lengthZ * 0.5, -hf, lengthZ - tipRound);
+    if (tipRound > 0.001) {
+      shape.quadraticCurveTo(-hf, lengthZ, 0, lengthZ);
+      shape.quadraticCurveTo(hf, lengthZ, hf, lengthZ - tipRound);
+    } else {
+      shape.lineTo(hf, lengthZ);
+    }
+    shape.quadraticCurveTo(waist, lengthZ * 0.5, hb, 0);
+    shape.lineTo(-hb, 0);
+
+    const geo = new THREE.ExtrudeGeometry(shape, {
+      depth: thickness,
+      bevelEnabled: true,
+      bevelThickness: 0.005,
+      bevelSize: 0.005,
+      bevelSegments: 2,
+      curveSegments: 14,
+    });
+    geo.rotateX(Math.PI / 2);
+    geo.translate(0, thickness, 0);
+
+    // Re-map UVs from the bounding box so the topsheet artwork lands square.
+    geo.computeBoundingBox();
+    const bb = geo.boundingBox!;
+    const sx = Math.max(1e-4, bb.max.x - bb.min.x);
+    const sz = Math.max(1e-4, bb.max.z - bb.min.z);
+    const pos = geo.getAttribute("position");
+    const uv = new Float32Array(pos.count * 2);
+    for (let i = 0; i < pos.count; i++) {
+      uv[i * 2] = (pos.getX(i) - bb.min.x) / sx;
+      uv[i * 2 + 1] = (pos.getZ(i) - bb.min.z) / sz;
+    }
+    geo.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+    geo.computeVertexNormals();
+    return geo;
+  }
+
   private build() {
     const c = this.rider.colors;
-    const jacket = this.mat(c.jacket);
-    const jacketAlt = this.mat(c.jacketAlt);
-    const pants = this.mat(c.pants);
-    const accent = this.mat(c.accent, { roughness: 0.5 });
-    const skin = this.mat(c.skin, { roughness: 0.85 });
-    const helmet = this.mat(c.helmet, { roughness: 0.42 });
+    const jacket = this.mat(c.jacket, { roughness: 0.86, flatShading: false });
+    const jacketAlt = this.mat(c.jacketAlt, { roughness: 0.84, flatShading: false });
+    const pants = this.mat(c.pants, { roughness: 0.92, flatShading: false });
+    const accent = this.mat(c.accent, { roughness: 0.6, flatShading: false });
+    const skin = this.mat(c.skin, { roughness: 0.72, flatShading: false });
+    const helmetMat = this.mat(c.helmet, { roughness: 0.34, flatShading: false });
     const goggles = this.mat(c.goggles, {
-      roughness: 0.12,
-      metalness: 0.55,
-      emissive: new THREE.Color(c.goggles).multiplyScalar(0.25),
+      roughness: 0.08,
+      metalness: 0.8,
+      envMapIntensity: 2.2,
+      emissive: new THREE.Color(c.goggles).multiplyScalar(0.12),
+      flatShading: false,
     });
-    const boot = this.mat("#1b1b1e");
+    const boot = this.mat("#191a1e", { roughness: 0.7, flatShading: false });
 
     const root = new THREE.Group();
 
@@ -173,9 +255,9 @@ export class RiderRig {
     const deck = stylizeMaterial(
       new THREE.MeshStandardMaterial({
         map: this.boardTex,
-        roughness: 0.35,
-        metalness: 0.1,
-        flatShading: false,
+        roughness: 0.28,
+        metalness: 0.12,
+        envMapIntensity: 1.1,
       }),
       this.uniforms,
       { snow: false, sparkle: false },
@@ -185,68 +267,153 @@ export class RiderRig {
     const boardRoot = new THREE.Group();
     const midLen = 0.78;
     const tipLen = 0.34;
+    const thick = 0.026;
 
-    const midGeo = new THREE.BoxGeometry(0.31, 0.045, midLen);
-    ensureMatAttribute(midGeo);
-    const boardMid = new THREE.Mesh(midGeo, deck);
-    boardMid.castShadow = true;
+    const midGeo = this.deckPlate(midLen, 0.256, 0.256, thick, 0);
+    midGeo.translate(0, 0, -midLen / 2);
+    const boardMid = this.mesh(midGeo, deck);
 
     const mkTip = (sign: number) => {
-      const g = new THREE.BoxGeometry(0.28, 0.04, tipLen);
-      ensureMatAttribute(g);
-      g.translate(0, 0, (sign * tipLen) / 2);
-      const m = new THREE.Mesh(g, deck);
+      const g = this.deckPlate(tipLen, 0.256, 0.215, thick, 0.1);
+      if (sign < 0) g.scale(1, 1, -1);
+      const m = this.mesh(g, deck);
       m.position.z = (sign * midLen) / 2;
-      m.castShadow = true;
       return m;
     };
     const boardNose = mkTip(1);
     const boardTail = mkTip(-1);
+
     boardRoot.add(boardMid, boardNose, boardTail);
 
-    const bindingF = this.box(0.26, 0.09, 0.2, accent, 0, 0.07, 0.2);
-    const bindingB = this.box(0.26, 0.09, 0.2, accent, 0, 0.07, -0.2);
-    boardRoot.add(bindingF, bindingB);
+    const bindingGeo = new THREE.CapsuleGeometry(0.028, 0.2, 4, 8);
+    bindingGeo.rotateZ(Math.PI / 2);
+    const bindingF = this.mesh(bindingGeo, accent, 0, thick + 0.05, 0.2);
+    const bindingB = this.mesh(bindingGeo.clone(), accent, 0, thick + 0.05, -0.2);
+    const baseF = this.mesh(new THREE.BoxGeometry(0.2, 0.02, 0.26), boot, 0, thick + 0.01, 0.2);
+    const baseB = this.mesh(new THREE.BoxGeometry(0.2, 0.02, 0.26), boot, 0, thick + 0.01, -0.2);
+    boardRoot.add(bindingF, bindingB, baseF, baseB);
     root.add(boardRoot);
 
     // ── body ─────────────────────────────────────────────────────────────
     const body = new THREE.Group();
     const hips = new THREE.Group();
-    hips.position.y = 0.78;
+    hips.position.y = 0.92;
 
-    const legF = new THREE.Group();
-    legF.position.set(0, 0, 0.2);
-    legF.add(this.box(0.19, 0.5, 0.21, pants, 0, -0.25, 0));
-    legF.add(this.box(0.2, 0.14, 0.26, boot, 0, -0.54, 0.01));
+    // Legs hang along the board, NOT rotated with the stance — a snowboarder's
+    // feet are bolted to the deck; only the upper body opens up.
+    // Thigh and shin are separate nodes so the knee can actually bend as the
+    // rider compresses — straight legs are the tell that a rig is fake.
+    const knees: THREE.Group[] = [];
+    const leg = (z: number) => {
+      const g = new THREE.Group();
+      g.position.set(0, 0, z);
+      g.add(this.capsule(0.088, 0.2, pants, 0, -0.19, 0));
 
-    const legB = new THREE.Group();
-    legB.position.set(0, 0, -0.2);
-    legB.add(this.box(0.19, 0.5, 0.21, pants, 0, -0.25, 0));
-    legB.add(this.box(0.2, 0.14, 0.26, boot, 0, -0.54, 0.01));
+      const knee = new THREE.Group();
+      knee.position.set(0, -0.36, 0);
+      knee.add(this.capsule(0.072, 0.22, pants, 0, -0.17, 0));
+      const bootMesh = this.mesh(new THREE.CapsuleGeometry(0.078, 0.09, 4, 10), boot, 0, -0.34, 0.015);
+      bootMesh.scale.set(1, 1, 1.3);
+      knee.add(bootMesh);
+      knees.push(knee);
+      g.add(knee);
+      return g;
+    };
+    const legF = leg(0.21);
+    const legB = leg(-0.21);
+    const kneeF = knees[0];
+    const kneeB = knees[1];
 
+    // Upper body: the stance node opens the shoulders; the torso node keeps
+    // its own animated lean so the two never fight.
+    const stance = new THREE.Group();
     const torso = new THREE.Group();
-    torso.add(this.box(0.36, 0.46, 0.28, jacket, 0, 0.23, 0));
-    torso.add(this.box(0.37, 0.12, 0.29, jacketAlt, 0, 0.1, 0));
-    torso.add(this.box(0.2, 0.1, 0.3, accent, 0, 0.4, 0));
+
+    // Pelvis overlaps the jacket hem so the two never separate as the torso
+    // pitches — a visible gap at the waist is the fastest way to look unfinished.
+    const pelvis = this.capsule(0.128, 0.1, pants, 0, 0.0, 0);
+    pelvis.scale.set(1.02, 1, 0.86);
+    torso.add(pelvis);
+
+    const chest = this.capsule(0.142, 0.2, jacket, 0, 0.28, 0);
+    chest.scale.set(0.98, 1, 0.82);
+    torso.add(chest);
+
+    const shoulders = this.capsule(0.092, 0.24, jacket, 0, 0.44, 0);
+    shoulders.rotation.x = Math.PI / 2;
+    torso.add(shoulders);
+
+    // A jacket skirt that sits *over* the pelvis, plus a colour break at the
+    // chest. Both follow the body's curve instead of being flat slabs stuck on.
+    const hem = this.capsule(0.148, 0.09, jacket, 0, 0.13, 0);
+    hem.scale.set(1.0, 1, 0.84);
+    torso.add(hem);
+    const chestBand = this.capsule(0.144, 0.05, jacketAlt, 0, 0.33, 0);
+    chestBand.scale.set(0.99, 1, 0.83);
+    torso.add(chestBand);
+    // Collar.
+    const collar = this.capsule(0.088, 0.04, jacketAlt, 0, 0.5, 0);
+    collar.scale.set(1, 1, 0.9);
+    torso.add(collar);
+
+    // ── head ─────────────────────────────────────────────────────────────
+    // Neck, or the head floats.
+    torso.add(this.capsule(0.052, 0.06, skin, 0, 0.53, 0));
 
     const head = new THREE.Group();
-    head.position.y = 0.56;
-    head.add(this.box(0.2, 0.21, 0.2, skin, 0, 0.1, 0));
-    head.add(this.box(0.23, 0.13, 0.23, helmet, 0, 0.2, 0));
-    head.add(this.box(0.22, 0.075, 0.06, goggles, 0, 0.105, 0.1));
+    head.position.y = 0.63;
+    const skull = this.mesh(new THREE.SphereGeometry(0.098, 22, 18), skin, 0, 0.05, 0);
+    skull.scale.set(0.9, 1.06, 0.98);
+    head.add(skull);
+    // A jaw wedge keeps the profile from reading as a ball.
+    const jaw = this.mesh(new THREE.SphereGeometry(0.072, 16, 12), skin, 0.028, 0.008, 0);
+    jaw.scale.set(0.9, 0.8, 0.9);
+    head.add(jaw);
 
-    const armF = new THREE.Group();
-    armF.position.set(0, 0.42, 0.13);
-    armF.add(this.box(0.11, 0.42, 0.12, jacket, 0, -0.21, 0));
-    armF.add(this.box(0.12, 0.11, 0.13, accent, 0, -0.45, 0));
+    // Helmet is a cap, not a shell — cover the crown and leave the face.
+    const helmetShell = this.mesh(
+      new THREE.SphereGeometry(0.112, 24, 16, 0, Math.PI * 2, 0, Math.PI * 0.58),
+      helmetMat,
+      0,
+      0.045,
+      0,
+    );
+    helmetShell.scale.set(0.98, 1.12, 1.02);
+    head.add(helmetShell);
+    // Ear pads.
+    for (const z of [-1, 1]) {
+      const pad = this.mesh(new THREE.SphereGeometry(0.042, 12, 10), helmetMat, -0.005, 0.048, z * 0.093);
+      pad.scale.set(0.75, 1.15, 0.6);
+      head.add(pad);
+    }
 
-    const armB = new THREE.Group();
-    armB.position.set(0, 0.42, -0.13);
-    armB.add(this.box(0.11, 0.42, 0.12, jacket, 0, -0.21, 0));
-    armB.add(this.box(0.12, 0.11, 0.13, accent, 0, -0.45, 0));
+    // Goggles: a wide lens across the eyes plus a strap round the back, so the
+    // most recognisable piece of snowboard kit actually reads as itself.
+    const lens = this.mesh(new THREE.SphereGeometry(0.088, 24, 16), goggles, 0.042, 0.055, 0);
+    lens.scale.set(0.85, 0.62, 1.28);
+    head.add(lens);
+    const strap = this.mesh(new THREE.TorusGeometry(0.101, 0.017, 8, 22), accent, 0, 0.055, 0);
+    strap.rotation.y = Math.PI / 2;
+    strap.scale.set(1, 0.78, 1);
+    head.add(strap);
+
+    const arm = (z: number) => {
+      const g = new THREE.Group();
+      g.position.set(0, 0.44, z);
+      g.add(this.capsule(0.058, 0.19, jacket, 0, -0.155, 0));
+      g.add(this.capsule(0.05, 0.17, jacket, 0, -0.38, 0));
+      g.add(this.capsule(0.056, 0.03, jacketAlt, 0, -0.5, 0));
+      const glove = this.mesh(new THREE.SphereGeometry(0.058, 14, 12), accent, 0, -0.555, 0.01);
+      glove.scale.set(0.85, 1, 1.15);
+      g.add(glove);
+      return g;
+    };
+    const armF = arm(0.165);
+    const armB = arm(-0.165);
 
     torso.add(head, armF, armB);
-    hips.add(legF, legB, torso);
+    stance.add(torso);
+    hips.add(legF, legB, stance);
     body.add(hips);
     root.add(body);
 
@@ -277,23 +444,32 @@ export class RiderRig {
     switch (this.rider.accessory) {
       case "backpack": {
         const g = new THREE.Group();
-        g.add(this.box(0.3, 0.34, 0.16, jacketAlt, 0, 0.26, -0.2));
-        g.add(this.box(0.32, 0.06, 0.17, accent, 0, 0.14, -0.2));
+        const pack = this.capsule(0.1, 0.2, jacketAlt, -0.14, 0.3, 0);
+        pack.scale.set(0.75, 1, 1.5);
+        g.add(pack);
+        g.add(this.mesh(new THREE.BoxGeometry(0.04, 0.03, 0.3), accent, -0.14, 0.2, 0));
         accessory = g;
         break;
       }
       case "camera": {
         const g = new THREE.Group();
-        g.add(this.box(0.17, 0.12, 0.09, this.mat("#20242a"), 0.0, 0.3, 0.17));
-        g.add(this.box(0.07, 0.07, 0.07, this.mat("#c9d4dd"), 0, 0.3, 0.23));
+        g.add(this.mesh(new THREE.BoxGeometry(0.13, 0.09, 0.08), this.mat("#1c2026"), 0.14, 0.3, 0));
+        g.add(
+          this.mesh(
+            new THREE.CylinderGeometry(0.035, 0.035, 0.06, 12),
+            this.mat("#c9d4dd", { metalness: 0.7, roughness: 0.2 }),
+            0.2,
+            0.3,
+            0,
+          ),
+        );
         accessory = g;
         break;
       }
       case "antenna": {
         const g = new THREE.Group();
-        const rod = this.box(0.02, 0.42, 0.02, accent, 0.09, 0.78, -0.08);
-        const tip = this.box(0.05, 0.05, 0.05, accent, 0.09, 1.0, -0.08);
-        g.add(rod, tip);
+        g.add(this.mesh(new THREE.CylinderGeometry(0.006, 0.01, 0.4, 6), accent, -0.06, 0.78, 0.09));
+        g.add(this.mesh(new THREE.SphereGeometry(0.022, 10, 8), accent, -0.06, 0.99, 0.09));
         accessory = g;
         break;
       }
@@ -315,8 +491,11 @@ export class RiderRig {
       bindingB,
       body,
       hips,
+      stance,
       legF,
       legB,
+      kneeF,
+      kneeB,
       torso,
       head,
       armF,
@@ -392,30 +571,37 @@ export class RiderRig {
     // Edge angle: the board rolls up on its edge in a carve.
     p.boardRoot.rotation.z = -this.sTilt * 0.5 * clamp01(speed / 18);
 
-    // Legs compress and the hips drop.
-    const legScale = lerp(1, 0.58, this.sCrouch);
+    // Legs compress: the hips drop, the thighs pitch forward and the knees
+    // fold. Scaling alone reads as a squashed cylinder; a folded knee reads as
+    // a rider absorbing the terrain.
+    const legScale = lerp(1, 0.86, this.sCrouch);
     p.legF.scale.y = legScale;
     p.legB.scale.y = legScale;
-    p.hips.position.y = lerp(0.78, 0.5, this.sCrouch);
+    p.hips.position.y = lerp(0.9, 0.63, this.sCrouch);
+    const bend = lerp(0.22, 1.15, this.sCrouch);
+    p.legF.rotation.x = bend * 0.45;
+    p.legB.rotation.x = bend * 0.45;
+    p.kneeF.rotation.x = -bend * 0.8;
+    p.kneeB.rotation.x = -bend * 0.8;
 
-    // Riding stance: the board is across the direction of travel, so the body
-    // sits rotated relative to it.
-    // Riders stand across the board. Anything much less than ~60° reads as
-    // a skier from behind, which is the fastest way to break the illusion.
+    // The feet are bolted along the deck, so the stance angle only opens the
+    // upper body. A modest opening is what a real stance looks like — rotating
+    // the whole body is what made the legs sit across the board.
     const stanceYaw =
       this.rider.style.stance === "aggressive"
-        ? 1.32
+        ? 0.46
         : this.rider.style.stance === "technical"
-          ? 1.1
-          : 1.18;
-    p.hips.rotation.y = stanceYaw;
+          ? 0.26
+          : 0.34;
+    p.stance.rotation.y = stanceYaw;
 
     // Lean into the carve, and counter-rotate the shoulders.
     p.torso.rotation.z = -this.sLean * 0.45;
-    p.torso.rotation.x = lerp(0.12, 0.5, this.sCrouch) - this.sGrab * 0.25;
+    p.torso.rotation.x = lerp(0.06, 0.3, this.sCrouch) - this.sGrab * 0.2;
     p.torso.rotation.y = -this.sLean * 0.3 + tricks.spinSpeed * 0.02;
-    // …and look back down the fall line over the leading shoulder.
-    p.head.rotation.y = -stanceYaw * 0.62 + this.sLean * 0.4;
+    // Built facing the toe edge, so it needs a quarter turn to look down the
+    // fall line — then a little more when leaning into a turn.
+    p.head.rotation.y = -1.15 - stanceYaw + this.sLean * 0.45;
     p.head.rotation.x = -p.torso.rotation.x * 0.6;
 
     // ── arms ─────────────────────────────────────────────────────────────
@@ -437,7 +623,7 @@ export class RiderRig {
       p.boardRoot.rotation.x = tx * g * 0.6 * this.rider.style.tweak;
       p.torso.rotation.z += tz * g * 0.35;
     } else {
-      const spread = lerp(0.25, 0.75, clamp01(Math.abs(tricks.spinSpeed) / 6));
+      const spread = lerp(0.12, 0.5, clamp01(Math.abs(tricks.spinSpeed) / 6));
       p.armF.rotation.x = damp(p.armF.rotation.x, -0.35 + flap, 0.0006, dt);
       p.armF.rotation.z = damp(p.armF.rotation.z, -spread - this.sLean * 0.4, 0.0006, dt);
       p.armB.rotation.x = damp(p.armB.rotation.x, -0.25 - flap, 0.0006, dt);
@@ -451,12 +637,12 @@ export class RiderRig {
       p.armB.rotation.x = Math.cos(t * 19) * 1.6;
       p.armF.rotation.z = Math.sin(t * 15) * 1.2;
       p.armB.rotation.z = -Math.cos(t * 17) * 1.2;
-      p.legF.rotation.x = Math.sin(t * 13) * 0.9;
-      p.legB.rotation.x = -Math.sin(t * 11) * 0.9;
+      p.kneeF.rotation.x = -0.6 + Math.sin(t * 13) * 0.9;
+      p.kneeB.rotation.x = -0.6 - Math.sin(t * 11) * 0.9;
       p.head.rotation.z = Math.sin(t * 25) * 0.4;
     } else {
-      p.legF.rotation.x = damp(p.legF.rotation.x, this.sLean * 0.1, 0.0005, dt);
-      p.legB.rotation.x = damp(p.legB.rotation.x, -this.sLean * 0.1, 0.0005, dt);
+      p.legF.rotation.z = damp(p.legF.rotation.z, this.sLean * 0.12, 0.0005, dt);
+      p.legB.rotation.z = damp(p.legB.rotation.z, this.sLean * 0.12, 0.0005, dt);
       p.head.rotation.z = damp(p.head.rotation.z, -this.sLean * 0.2, 0.0008, dt);
     }
 
