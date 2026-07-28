@@ -21,6 +21,7 @@ import { MOUNTAINS } from "../world/TerrainGen";
 import { SKY_PRESETS } from "../world/Sky";
 import { TRACKS } from "../audio/Audio";
 import { FILTERS } from "../fx/PostFX";
+import { TITLE_LOGO, TITLE_LOGO_ASPECT, TITLE_BG } from "./title-art";
 import { MODES, type ModeId } from "../data/modes";
 import { TRICK_INDEX } from "../player/TrickSystem";
 import { unlockTable, type SaveData } from "../core/save";
@@ -208,18 +209,19 @@ export function TitleScreen({
 }) {
   const actions = useMemo(
     () => [
-      { label: "Drop In", meta: "Choose a mode", fn: onPlay },
+      { label: "Drop In", meta: "Choose a mode", icon: "drop" as const, fn: onPlay, primary: true },
       {
         label: "Garage",
         // The current loadout, so it's obvious this is a thing you change.
         meta: `${riderById(save.selected.rider).name} / ${
           boardById(save.selected.board).name
         }`,
+        icon: "garage" as const,
         fn: onGarage,
       },
-      { label: "Unlocks", meta: `${save.unlocked.length} earned`, fn: onUnlocks },
-      { label: "How to Ride", meta: "Controls & tricks", fn: onHowTo },
-      { label: "Settings", meta: "Audio / visuals", fn: onSettings },
+      { label: "Unlocks", meta: `${save.unlocked.length} earned`, icon: "unlocks" as const, fn: onUnlocks },
+      { label: "How to Ride", meta: "Controls & tricks", icon: "howto" as const, fn: onHowTo },
+      { label: "Settings", meta: "Audio / visuals", icon: "settings" as const, fn: onSettings },
     ],
     [
       onPlay,
@@ -235,58 +237,57 @@ export function TitleScreen({
   const [index, setIndex] = useMenuKeys(actions.length, (i) => actions[i].fn());
 
   return (
-    <div className="sh-overlay">
+    <div className="sh-overlay sh-overlay--title">
+      <TitleBackdrop />
       <div className="sh-title-screen">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="sh-lockup"
+          initial={{ opacity: 0, y: 24, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="sh-eyebrow">A snowboard game</div>
-          <div className="sh-lockup">
-            <h2
-              className="sh-shout"
-              style={{
-                fontSize: "clamp(3.4rem, 12vw, 9rem)",
-                margin: "0.4rem 0 0",
-              }}
-            >
-              <span className="sh-wordmark">
-                {/* The offset copy is decoration, and a screen reader hitting
-                    "SHRED SHRED" would be worse than no wordmark at all. */}
-                <span className="sh-wordmark__ghost" aria-hidden="true">
-                  SHRED
+          {TITLE_LOGO ? (
+            <img
+              className="sh-logo"
+              src={TITLE_LOGO}
+              alt="SHRED 1999"
+              style={{ aspectRatio: String(TITLE_LOGO_ASPECT) }}
+            />
+          ) : (
+            <>
+              <h2 className="sh-shout sh-wordmark-line">
+                <span className="sh-wordmark">
+                  {/* The offset copy is decoration, and a screen reader hitting
+                      "SHRED SHRED" would be worse than no wordmark at all. */}
+                  <span className="sh-wordmark__ghost" aria-hidden="true">
+                    SHRED
+                  </span>
+                  <span className="sh-wordmark__ink">SHRED</span>
                 </span>
-                <span className="sh-wordmark__ink">SHRED</span>
-              </span>
-            </h2>
-            <div className="sh-year">1999</div>
-          </div>
-          <p className="sh-title-blurb">
-            Endless procedural mountains, big stupid airs, and a landing that
-            actually feels like something. Late-afternoon light, all the way down.
-          </p>
+              </h2>
+              <div className="sh-year">1999</div>
+            </>
+          )}
         </motion.div>
 
-        <div className="sh-title-actions">
+        <div className="sh-tiles">
           {actions.map((a, i) => (
-            <motion.div
+            <motion.button
               key={a.label}
-              initial={{ opacity: 0, x: -14 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.12 + i * 0.055, duration: 0.5 }}
+              type="button"
+              className="sh-tile"
+              data-focus={i === index}
+              data-primary={a.primary ? "true" : undefined}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              onMouseEnter={() => setIndex(i)}
+              onClick={a.fn}
             >
-              <button
-                type="button"
-                className="sh-btn"
-                data-focus={i === index}
-                onMouseEnter={() => setIndex(i)}
-                onClick={a.fn}
-              >
-                <span className="sh-btn__label">{a.label}</span>
-                <span className="sh-btn__meta">{a.meta}</span>
-              </button>
-            </motion.div>
+              <MenuIcon kind={a.icon} />
+              <span className="sh-tile__label">{a.label}</span>
+              <span className="sh-tile__meta">{a.meta}</span>
+            </motion.button>
           ))}
         </div>
 
@@ -300,6 +301,108 @@ export function TitleScreen({
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * The poster behind the title.
+ *
+ * The live mountain is still back there — it is the best thing the game has to
+ * show — so this doesn't cover it, it *frames* it: a low sun, a hard-edged ray
+ * fan, and two ridgelines. All three are period-correct snowboard-graphic
+ * devices and all three are geometry rather than image files, so the whole
+ * screen still costs nothing to ship.
+ */
+function TitleBackdrop() {
+  // With a supplied scene there is nothing for the drawn one to do: it would
+  // be a second sun over the top of a photograph. The scrim stays either way —
+  // whatever is back there, the menu has to stay readable over it.
+  if (TITLE_BG) {
+    return (
+      <div className="sh-backdrop sh-backdrop--art" aria-hidden="true">
+        <img className="sh-backdrop__art" src={TITLE_BG} alt="" />
+        <div className="sh-backdrop__fade" />
+      </div>
+    );
+  }
+
+  // Rays every 15°, alternating on and off, fanning from the sun.
+  const rays = Array.from({ length: 12 }, (_, i) => {
+    const a0 = -95 + i * 15.4;
+    const a1 = a0 + 7.4;
+    const r = 190;
+    const p = (deg: number) =>
+      `${50 + Math.cos((deg * Math.PI) / 180) * r} ${72 + Math.sin((deg * Math.PI) / 180) * r}`;
+    return `M50 72 L${p(a0)} L${p(a1)} Z`;
+  });
+
+  return (
+    <div className="sh-backdrop" aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="sh-backdrop__rays">
+        {rays.map((d, i) => (
+          <path key={i} d={d} />
+        ))}
+      </svg>
+      <div className="sh-backdrop__sun" />
+      <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="sh-backdrop__ridge sh-backdrop__ridge--far">
+        <path d="M0 40 L0 27 L7 21 L13 11 L21 24 L27 18 L35 6 L44 20 L51 15 L58 26 L67 9 L74 22 L82 17 L90 25 L100 19 L100 40 Z" />
+      </svg>
+      <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="sh-backdrop__ridge sh-backdrop__ridge--near">
+        <path d="M0 40 L0 34 L10 27 L19 33 L28 19 L36 30 L46 25 L55 34 L64 22 L73 31 L84 26 L93 33 L100 29 L100 40 Z" />
+      </svg>
+      <div className="sh-backdrop__fade" />
+    </div>
+  );
+}
+
+/**
+ * Menu icons.
+ *
+ * A console menu is read as shapes first and words second — you learn where
+ * "garage" is on the screen, not what it says. Each one is the object it opens:
+ * a fall line, a board, a padlock, a key cap, a slider.
+ */
+function MenuIcon({ kind }: { kind: "drop" | "garage" | "unlocks" | "howto" | "settings" }) {
+  const art: Record<string, React.ReactNode> = {
+    drop: (
+      <>
+        <path d="M12 3v14" strokeWidth="3" strokeLinecap="round" />
+        <path d="M5 12l7 7 7-7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ),
+    garage: (
+      <>
+        <path
+          d="M6.5 3.2c-1.6 0-2.6 1.5-2.6 3.6v10.4c0 2.1 1 3.6 2.6 3.6h11c1.6 0 2.6-1.5 2.6-3.6V6.8c0-2.1-1-3.6-2.6-3.6z"
+          strokeWidth="2"
+        />
+        <path d="M9 8.6h6M9 15.4h6" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ),
+    unlocks: (
+      <>
+        <rect x="4.5" y="10.5" width="15" height="10" rx="2.2" strokeWidth="2" />
+        <path d="M8 10.5V8a4 4 0 0 1 8 0" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ),
+    howto: (
+      <>
+        <rect x="3" y="6.5" width="18" height="11" rx="2.4" strokeWidth="2" />
+        <path d="M7.5 11h1M11.5 11h1M15.5 11h1M8.5 14h7" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ),
+    settings: (
+      <>
+        <path d="M4 8h16M4 16h16" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="9.5" cy="8" r="2.6" strokeWidth="2" />
+        <circle cx="15" cy="16" r="2.6" strokeWidth="2" />
+      </>
+    ),
+  };
+  return (
+    <svg className="sh-tile__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+      {art[kind]}
+    </svg>
   );
 }
 

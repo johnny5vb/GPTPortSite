@@ -133,7 +133,7 @@
 }
 
 .sh-title-screen .sh-shout {
-  font-size: clamp(2.1rem, min(11vw, 15vh), 9rem) !important;
+  font-size: clamp(2.4rem, min(12vw, 17vh), 10rem);
 }
 
 /* ── the wordmark ──────────────────────────────────────────────────────────
@@ -148,6 +148,12 @@
 /* The lockup sizes to the word, so the year's rules stop exactly at the D. */
 .sh-lockup {
   width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+.sh-wordmark-line {
+  font-size: clamp(3.4rem, 13vw, 10rem);
+  margin: 0;
 }
 .sh-wordmark {
   position: relative;
@@ -171,26 +177,31 @@
 }
 /* The year: a rule, the number, a rule — one line wide enough to sit under
    the word without competing with it. */
+/* The year gets its own face. Michroma is wide and mechanical in a way that
+   is specifically late-nineties, and setting it against Archivo Black's
+   density is most of what dates the lockup — one face doing two jobs would
+   just look like a subtitle. */
 .sh-year {
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.55rem;
-  font-family: var(--sh-mono);
-  font-weight: 500;
-  font-size: clamp(0.7rem, 1.5vw, 0.95rem);
-  letter-spacing: 0.62em;
-  text-indent: 0.62em;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 0.7rem;
+  font-family: "Michroma", var(--sh-mono);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 3.4vw, 2.5rem);
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
   color: var(--sh-white);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.7);
 }
 .sh-year::before,
 .sh-year::after {
   content: "";
   flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42));
-  max-width: 5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
 }
 .sh-year::after {
   background: linear-gradient(270deg, transparent, rgba(255, 255, 255, 0.42));
@@ -637,40 +648,274 @@
 
 /* ─────────────────────────────────────────────────────── title screen ── */
 
+/* Centred, like a console title screen. The old layout was a left-aligned
+   column with a paragraph under the logo, which is a landing page. */
 .sh-title-screen {
-  width: min(1100px, 92vw);
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 94vw);
   display: grid;
-  gap: 2.2rem;
+  justify-items: center;
+  text-align: center;
+  gap: clamp(1.4rem, 4vh, 3rem);
 }
-.sh-title-actions {
+/* ── the title poster ──────────────────────────────────────────────────────
+   The live mountain stays: it is the best thing the game has to show, and a
+   still image over the top of a running renderer would be a strange thing to
+   ship. So this frames it instead — a low sun, a hard-edged ray fan and two
+   ridgelines, all of which are period-correct snowboard-graphic devices, and
+   all of which are geometry rather than image files. Sits between the canvas
+   and the menu, and never takes a pointer event. */
+.sh-overlay--title {
+  background: none;
+  backdrop-filter: none;
+}
+.sh-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+/* A supplied scene sits behind everything, cropped rather than letterboxed —
+   the composition has open sky in the middle, which is where the logo goes. */
+.sh-backdrop__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 46%;
+}
+/* Over a bright photograph the scrim has to work much harder than it does over
+   the game's own dusk. Dark at the edges, darker still under the menu, and
+   clear enough through the middle that you can see what you're looking at. */
+.sh-backdrop--art .sh-backdrop__fade {
+  background:
+    radial-gradient(78% 58% at 50% 34%, rgba(5, 7, 12, 0.34), transparent 76%),
+    linear-gradient(
+      180deg,
+      rgba(5, 7, 12, 0.5),
+      rgba(5, 7, 12, 0.18) 30%,
+      rgba(5, 7, 12, 0.62) 68%,
+      rgba(5, 7, 12, 0.88)
+    );
+}
+
+.sh-backdrop__sun {
+  position: absolute;
+  left: 50%;
+  top: 72%;
+  width: 120vmax;
+  height: 120vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 196, 107, 0.5),
+    rgba(255, 61, 129, 0.18) 34%,
+    transparent 62%
+  );
+}
+.sh-backdrop__rays {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 210vmax;
+  height: 210vmax;
+  transform: translate(-50%, -46%);
+  fill: rgba(255, 236, 200, 0.075);
+  transform-origin: 50% 72%;
+  animation: sh-rays 90s linear infinite;
+}
+@keyframes sh-rays {
+  to {
+    transform: translate(-50%, -46%) rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-backdrop__rays {
+    animation: none;
+  }
+}
+.sh-backdrop__ridge {
+  position: absolute;
+  left: -2%;
+  width: 104%;
+}
+.sh-backdrop__ridge--far {
+  bottom: 8%;
+  height: 34vh;
+  fill: rgba(20, 27, 44, 0.42);
+}
+.sh-backdrop__ridge--near {
+  bottom: 0;
+  height: 30vh;
+  fill: rgba(9, 12, 22, 0.66);
+}
+/* A dark pocket for the type to sit in, so the wordmark reads over whatever
+   the mountain behind it happens to be doing this frame. */
+.sh-backdrop__fade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(72% 52% at 50% 40%, rgba(5, 7, 12, 0.72), transparent 72%),
+    linear-gradient(180deg, rgba(5, 7, 12, 0.55), rgba(5, 7, 12, 0.1) 40%, rgba(5, 7, 12, 0.7));
+}
+
+/* A supplied wordmark replaces the drawn lockup entirely. It is sized off the
+   viewport height as well as the width so it can't push the menu off the
+   bottom of a laptop screen, and it carries a drop shadow because artwork that
+   was exported on a white card has no edge of its own to sit against. */
+.sh-logo {
+  display: block;
+  width: min(78vw, 62rem);
+  max-height: 42vh;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 34px rgba(0, 0, 0, 0.6))
+    drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+}
+
+/* ── the menu ──────────────────────────────────────────────────────────────
+   Tiles, not a list. A console menu is read as shapes first and words second:
+   you learn where "garage" *is* on the screen. That only works if each entry
+   is a block big enough to have a position, with an icon that carries it — a
+   stack of full-width rows with right-aligned metadata is an app, and it reads
+   like one however it's styled.
+
+   "Drop In" is wider than the rest because it is what you came here to do. */
+.sh-tiles {
   display: grid;
-  gap: 0.5rem;
-  max-width: 420px;
+  grid-template-columns: 1.35fr repeat(4, 1fr);
+  gap: clamp(0.5rem, 1vw, 0.85rem);
+  width: 100%;
+  max-width: 62rem;
 }
+.sh-tile {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.4rem;
+  padding: clamp(1rem, 2.4vh, 1.75rem) 0.7rem clamp(0.9rem, 2vh, 1.4rem);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.075),
+    rgba(255, 255, 255, 0.022)
+  );
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  color: var(--sh-white);
+  text-align: center;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.sh-tile__icon {
+  width: clamp(1.9rem, 3.6vh, 2.6rem);
+  height: clamp(1.9rem, 3.6vh, 2.6rem);
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.sh-tile__label {
+  font-family: var(--sh-sans);
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.sh-tile__meta {
+  font-family: var(--sh-mono);
+  font-weight: 500;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sh-faint);
+  line-height: 1.4;
+  max-width: 15ch;
+}
+
+/* The selected tile lifts out of the row. Keyboard focus and hover are the
+   same state on purpose — a controller and a mouse should light the same
+   thing, and there is only ever one selection. */
+.sh-tile[data-focus="true"] {
+  transform: translateY(-6px) scale(1.04);
+  border-color: rgba(110, 231, 255, 0.75);
+  background: linear-gradient(
+    180deg,
+    rgba(110, 231, 255, 0.2),
+    rgba(110, 231, 255, 0.05)
+  );
+  box-shadow:
+    0 0 0 1px rgba(110, 231, 255, 0.35),
+    0 22px 50px -26px rgba(110, 231, 255, 0.9);
+}
+.sh-tile[data-focus="true"] .sh-tile__icon {
+  opacity: 1;
+}
+.sh-tile[data-focus="true"] .sh-tile__meta {
+  color: var(--sh-dim);
+}
+
+/* The primary action carries the brand colour whether it's selected or not. */
+.sh-tile[data-primary] {
+  border-color: rgba(46, 229, 179, 0.45);
+  background: linear-gradient(
+    180deg,
+    rgba(46, 229, 179, 0.18),
+    rgba(46, 229, 179, 0.04)
+  );
+}
+.sh-tile[data-primary] .sh-tile__icon {
+  color: var(--sh-green);
+}
+.sh-tile[data-primary][data-focus="true"] {
+  border-color: rgba(46, 229, 179, 0.95);
+  background: linear-gradient(
+    180deg,
+    rgba(46, 229, 179, 0.34),
+    rgba(46, 229, 179, 0.09)
+  );
+  box-shadow:
+    0 0 0 1px rgba(46, 229, 179, 0.5),
+    0 22px 54px -24px rgba(46, 229, 179, 0.95);
+}
+
 .sh-title-stats {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-}
-.sh-title-blurb {
-  margin-top: 0.9rem;
-  max-width: 44ch;
-  color: var(--sh-dim);
-  font-size: 1rem;
-  line-height: 1.55;
+  justify-content: center;
 }
 
 /* Short screens — mostly landscape phones. The wordmark is sized off the
    smaller dimension so it can never push the menu off the bottom. */
 @media (max-height: 520px) {
   .sh-title-screen {
-    gap: 1rem;
-  }
-  .sh-title-blurb {
-    display: none;
+    gap: 0.9rem;
   }
   .sh-title-stats {
     display: none;
+  }
+  .sh-tile {
+    padding: 0.7rem 0.5rem 0.6rem;
+  }
+  .sh-tile__meta {
+    display: none;
+  }
+}
+
+/* Narrow: the row becomes two rows rather than five slivers. */
+@media (max-width: 680px) {
+  .sh-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sh-tile[data-primary] {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1025,9 +1270,9 @@
 @media (max-height: 460px) {
   .sh-title-screen { gap: 0.7rem; }
   .sh-title-screen .sh-shout {
-    font-size: clamp(1.8rem, min(9vw, 13vh), 9rem) !important;
+    font-size: clamp(1.8rem, min(9vw, 13vh), 9rem);
   }
-  .sh-title-actions { gap: 0.35rem; }
+  .sh-tiles { gap: 0.35rem; }
   .sh-overlay .sh-btn { min-height: 44px; padding: 0.6rem 1rem; }
   .sh-sheet { padding: 1rem 1.1rem; max-height: 90vh; }
 
