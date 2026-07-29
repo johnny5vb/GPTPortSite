@@ -39,6 +39,7 @@ import {
 import { FILTERS, type FilterId } from "../fx/PostFX";
 import { webglBlocker } from "../core/renderer";
 import TouchControls, { TouchPhotoPad } from "./TouchControls";
+import { useTapToClick } from "./useTapToClick";
 import { Creator } from "./Creator";
 import type { CustomRider } from "../data/riders";
 
@@ -147,6 +148,11 @@ export default function ShredGame() {
   const [portrait, setPortrait] = useState(
     () => typeof window !== "undefined" && window.innerHeight > window.innerWidth,
   );
+
+  // Menus activate from pointer events rather than trusting a browser to
+  // synthesise a click out of a tap. See the hook for why that isn't reliable.
+  const rootRef = useRef<HTMLDivElement>(null);
+  useTapToClick(rootRef);
 
   const saveRef = useRef<SaveData | null>(saveData);
   useEffect(() => {
@@ -606,7 +612,12 @@ export default function ShredGame() {
   const showTouchControls = touchMode && screen === "run" && !paused && !summary;
 
   return (
-    <div className="shred-root" data-riding={riding} data-touch={touchMode}>
+    <div
+      ref={rootRef}
+      className="shred-root"
+      data-riding={riding}
+      data-touch={touchMode}
+    >
       <canvas ref={canvasRef} className="shred-canvas" />
       <div className="sh-scanline" />
 
