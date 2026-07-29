@@ -285,6 +285,22 @@ optional CRT pass. Quality presets plus adaptive resolution keep it at 60fps.
   same hue rather than a generic white flash. A pad is a **ring with a dark
   centre**, not a filled disc: the ring is what stays legible over snow, a low
   sun and a rock face, all of which this game puts behind it.
+- **The viewport tag is load-bearing.** Without
+  `width=device-width`, a mobile browser lays the page out at a 980px
+  "desktop" width and scales the result down — every phone media query misses,
+  the touch controls render at desktop size, and the bottom of a menu ends up
+  past the visible area with nothing to scroll. The site route gets this from
+  the `viewport` export in `src/app/shred/page.tsx`; the standalone shell had no
+  such tag for months, so the game was unusable on a phone in exactly the two
+  places it gets shared — the single-file build and the published artifact —
+  while being perfect on a desktop. `tools/standalone/shell.html` now carries
+  the tag *and* a script that re-asserts it into the real `<head>`, because a
+  host that wraps the page owns that head.
+
+  This also invalidated every mobile check made before it was found: the
+  emulator was reporting 980×453 while the "device" was 844×390, so anything
+  measured at a phone viewport was measuring the wrong layout. Any mobile test
+  here should assert `innerWidth` first.
 - **The whole cluster sizes off one `--tc` unit**, so a short landscape phone
   and a portrait one shrink it coherently. This replaced a set of media queries
   that re-declared every control's width individually — which is how the
@@ -973,6 +989,15 @@ finer-grained detail.
 
 39. Landings escalate: four tiers, drawn marks for what was hard, a combo pill
     that heats as the chain climbs.
+
+**The standalone build** lives in `tools/standalone/` — `shell.html` (the page
+around the game), `entry.tsx` and `build.mjs`, emitting `dist/shred-1999.html`
+(a complete document, for a host or a Netlify drop) and `dist/artifact.html`
+(the same page as a fragment, for a host that supplies its own wrapper). It was
+a pile of scratch files until the viewport bug showed why a deliverable that
+ships to real phones should not live outside the repo. One trap already hit: the
+substitution is a plain string replace, so naming a placeholder in the shell's
+own prose pastes the entire bundle into the comment too.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

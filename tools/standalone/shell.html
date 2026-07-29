@@ -1,0 +1,155 @@
+<!--
+  SHRED 1999 — standalone shell.
+
+  This is the page around the game for the two targets that are not the site
+  route: a single-file build you can drop on any host, and a published artifact
+  whose wrapper owns the document's <head>. Everything the game needs is inlined
+  by the bundler, so this file has no <link>, no <script src>, and no /public.
+
+  build.mjs substitutes two placeholder comments below — one inside the empty
+  <style>, one inside the final <script>. Don't name them in prose anywhere in
+  this file: the substitution is a plain string replace, so a second mention
+  gets the whole bundle pasted into it too.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#05070c">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>SHRED 1999</title>
+
+<script>
+/*
+ * Guarantee the viewport, whatever wraps this page.
+ *
+ * This tag is load-bearing, not boilerplate. Without it a mobile browser lays
+ * the page out at a 980px "desktop" width and scales the result down: every
+ * phone media query misses, the touch controls render at desktop size, and the
+ * bottom of a menu sits past the visible area with nothing to scroll — the
+ * whole interface is unusable on a phone while looking perfect on a desktop.
+ *
+ * The <meta> above covers the standalone build. It cannot be relied on inside a
+ * host that supplies its own <head>, so this re-asserts it into the real head
+ * before anything is laid out. The values mirror `src/app/shred/page.tsx`
+ * exactly: no pinch-zoom, because it fights the touch controls, and
+ * `viewport-fit=cover` so the canvas runs under the notch while the HUD insets
+ * itself with the safe-area variables.
+ */
+(function () {
+  var want =
+    "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover";
+  var m = document.querySelector('meta[name="viewport"]');
+  if (!m) {
+    m = document.createElement("meta");
+    m.setAttribute("name", "viewport");
+    (document.head || document.documentElement).appendChild(m);
+  }
+  if (m.getAttribute("content") !== want) m.setAttribute("content", want);
+})();
+</script>
+
+<style>
+/* The game ships its own stylesheet; it expects these three font variables to
+   exist, so map them onto stacks that survive without a font CDN. */
+:root {
+  color-scheme: dark;
+  --font-fraunces: "Archivo Black", "Helvetica Neue", Impact, sans-serif;
+  --font-geist: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-jetbrains: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #05070c;
+  color: #fff;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Boot / failure state. Replaced by the game the moment it mounts. */
+.boot {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1.1rem;
+  padding: 2rem;
+  text-align: center;
+  background: #05070c;
+}
+/* The wordmark, before the game's own stylesheet has loaded: the same lockup,
+   built out of what a bare page has. */
+.boot-mark {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-fraunces);
+  font-weight: 600;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+.boot-mark i {
+  font-family: var(--font-jetbrains);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.2em;
+  letter-spacing: 0.62em;
+  text-indent: 0.62em;
+  opacity: 0.8;
+}
+.boot-note {
+  font-family: var(--font-jetbrains);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+.boot-fail {
+  font-family: var(--font-geist);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.62);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .boot-note { animation: boot-pulse 1.8s ease-in-out infinite; }
+}
+@keyframes boot-pulse { 50% { opacity: 0.45; } }
+</style>
+
+<style>/*__CSS__*/</style>
+
+<div id="shred-root">
+  <div class="boot">
+    <div class="boot-mark">SHRED<i>1999</i></div>
+    <div class="boot-note">Building the mountain…</div>
+  </div>
+</div>
+
+<script>
+/* A browser with WebGL switched off gets a sentence, not a spinner. */
+(function () {
+  var probe = document.createElement("canvas");
+  var gl = null;
+  try { gl = probe.getContext("webgl2") || probe.getContext("webgl"); } catch (e) { gl = null; }
+  if (!gl) {
+    document.getElementById("shred-root").innerHTML =
+      '<div class="boot">' +
+      '<div class="boot-mark">SHRED<i>1999</i></div>' +
+      '<p class="boot-fail">This browser has WebGL turned off, so there is nothing to render the mountain with. ' +
+      'Enable hardware acceleration, or open this page in Chrome, Edge, Firefox or Safari.</p>' +
+      "</div>";
+    window.__shredNoGL = true;
+  }
+})();
+</script>
+
+<script>
+if (!window.__shredNoGL) {
+/*__JS__*/
+}
+</script>
