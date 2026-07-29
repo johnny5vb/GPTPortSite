@@ -1156,15 +1156,47 @@
 
 /* ────────────────────────────────────────────────────── touch controls ── */
 
+/*
+ * The on-screen pad, in the language mobile sports games use: a resting
+ * joystick bottom-left, and a diamond of round action pads bottom-right with a
+ * larger primary alongside it.
+ *
+ * Two things carry it and both were missing before. **Colour is the label** —
+ * a thumb travelling to a pad does not read four words, it goes to the green
+ * one, so each action owns a hue and keeps it. And a pad is a **ring with a
+ * dark centre**, not a filled disc: the ring is what stays legible over snow,
+ * a low sun or a rock face, all of which this game puts behind it.
+ *
+ * Everything sizes off `--tc`, so a short landscape phone and a portrait one
+ * shrink the whole cluster coherently instead of one control at a time.
+ */
 .touch-layer {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
   touch-action: none;
+  --tc: 1;
+  --tc-pad: 68px;
+  --tc-ring: rgba(255, 255, 255, 0.34);
+  --tc-fill: rgba(10, 13, 19, 0.5);
 }
 .touch-layer > * {
   pointer-events: auto;
+}
+/* Short landscape: the pad competes with the horizon for height. */
+@media (max-height: 430px) {
+  .touch-layer { --tc: 0.84; }
+}
+/* Portrait: narrow is the constraint, not short, and the whole cluster plus a
+   resting stick has to fit across ~390px without the two touching. At 0.82 the
+   JUMP pad sat on top of the stick ring. */
+@media (max-width: 520px) and (orientation: portrait) {
+  .touch-layer { --tc: 0.72; }
+  .touch-stick-home {
+    left: calc(0.9rem + var(--sh-safe-l));
+    bottom: calc(1rem + var(--sh-safe-b));
+  }
 }
 
 .touch-stick-zone {
@@ -1176,6 +1208,47 @@
   touch-action: none;
 }
 
+/* ── the stick ─────────────────────────────────────────────────────────── */
+
+.touch-stick-home {
+  position: absolute;
+  left: calc(1.6rem + var(--sh-safe-l));
+  bottom: calc(1.4rem + var(--sh-safe-b));
+  width: calc(150px * var(--tc));
+  height: calc(150px * var(--tc));
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  transition: opacity 0.18s ease;
+}
+.touch-stick-home__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.012) 68%,
+    transparent
+  );
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.touch-stick-home__knob {
+  position: relative;
+  width: calc(62px * var(--tc));
+  height: calc(62px * var(--tc));
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.42);
+  background: radial-gradient(
+    circle at 50% 34%,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+  box-shadow: 0 8px 26px -10px rgba(0, 0, 0, 0.9);
+}
+
 .touch-stick-base,
 .touch-stick-knob {
   position: fixed;
@@ -1185,44 +1258,55 @@
   transition: opacity 0.16s ease;
 }
 .touch-stick-base {
-  width: 148px;
-  height: 148px;
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  width: calc(150px * var(--tc));
+  height: calc(150px * var(--tc));
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.24);
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.015) 70%,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.015) 68%,
     transparent
   );
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .touch-stick-knob {
-  width: 62px;
-  height: 62px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.2);
+  width: calc(62px * var(--tc));
+  height: calc(62px * var(--tc));
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  background: radial-gradient(
+    circle at 50% 32%,
+    rgba(255, 255, 255, 0.42),
+    rgba(255, 255, 255, 0.16)
+  );
   backdrop-filter: blur(10px);
-  box-shadow: 0 6px 24px -8px rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 28px -8px rgba(0, 0, 0, 0.85);
 }
 .touch-stick-hint {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--sh-mono);
-  font-size: 0.52rem;
-  letter-spacing: 0.22em;
+  font-family: var(--sh-display);
+  font-weight: 600;
+  font-size: calc(0.52rem * var(--tc));
+  letter-spacing: 0.2em;
   font-style: normal;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.5);
 }
-.touch-stick-hint--up { top: 8px; }
-.touch-stick-hint--down { bottom: 8px; }
+.touch-stick-hint--up { top: calc(9px * var(--tc)); }
+.touch-stick-hint--down { bottom: calc(9px * var(--tc)); }
+
+/* ── the action cluster ────────────────────────────────────────────────── */
 
 .touch-right {
   position: absolute;
   right: calc(0.9rem + var(--sh-safe-r));
   bottom: calc(0.9rem + var(--sh-safe-b));
-  width: 258px;
-  height: 218px;
+  width: calc(304px * var(--tc));
+  height: calc(188px * var(--tc));
   pointer-events: none;
 }
 .touch-right > * {
@@ -1236,86 +1320,116 @@
   position: absolute;
   display: grid;
   place-content: center;
-  gap: 1px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(12, 15, 21, 0.42);
+  /* Ring outside, dark inside: the ring is what survives a bright snowfield. */
+  border: 2px solid var(--tc-ring);
+  background: var(--tc-fill);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 10px 30px -12px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
   color: #fff;
-  font-family: var(--sh-mono);
-  letter-spacing: 0.1em;
+  font-family: var(--sh-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-align: center;
-  transition: transform 0.09s ease, background 0.09s ease, border-color 0.09s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  transition: transform 0.08s ease, background 0.08s ease, border-color 0.08s ease;
   touch-action: none;
 }
 .touch-jump[data-on="true"],
 .touch-grab[data-on="true"],
 .touch-tweak[data-on="true"] {
-  transform: scale(0.93);
-  background: rgba(255, 255, 255, 0.24);
-  border-color: rgba(255, 255, 255, 0.75);
-}
-
-.touch-jump {
-  right: 0;
-  bottom: 0;
-  width: 104px;
-  height: 104px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  border-color: rgba(110, 231, 255, 0.55);
-  background: rgba(110, 231, 255, 0.16);
-}
-.touch-jump em {
-  display: block;
-  font-style: normal;
-  font-size: 0.46rem;
-  letter-spacing: 0.14em;
-  opacity: 0.6;
-  margin-top: 3px;
-}
-.touch-jump[data-on="true"] {
-  background: rgba(110, 231, 255, 0.4);
-}
-
-.touch-tweak {
-  right: 0;
-  bottom: 114px;
-  width: 104px;
-  height: 46px;
-  border-radius: 14px;
-  font-size: 0.6rem;
-  border-color: rgba(255, 196, 107, 0.5);
-  background: rgba(255, 196, 107, 0.14);
-}
-.touch-tweak[data-on="true"] {
-  background: rgba(255, 196, 107, 0.42);
+  transform: scale(0.92);
+  /* Pressed floods with the pad's own colour — the confirmation is the hue it
+     already taught you, not a generic white flash. */
+  background: color-mix(in srgb, var(--tc-hue) 62%, transparent);
+  border-color: #fff;
 }
 
 .touch-diamond {
   position: absolute;
-  left: 0;
-  bottom: 6px;
-  width: 132px;
-  height: 132px;
+  right: 0;
+  bottom: calc(4px * var(--tc));
+  width: calc(180px * var(--tc));
+  height: calc(180px * var(--tc));
 }
 .touch-grab {
-  width: 56px;
-  height: 56px;
-  font-size: 0.48rem;
+  width: calc(var(--tc-pad) * var(--tc));
+  height: calc(var(--tc-pad) * var(--tc));
+  font-size: calc(0.56rem * var(--tc));
+  border-color: color-mix(in srgb, var(--tc-hue) 72%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--tc-hue) 20%, transparent),
+    var(--tc-fill)
+  );
 }
-.touch-grab--n { left: 38px; top: 0; }
-.touch-grab--s { left: 38px; bottom: 0; }
-.touch-grab--w { left: 0; top: 38px; }
-.touch-grab--e { right: 0; top: 38px; }
+.touch-grab--n {
+  left: calc(56px * var(--tc));
+  top: 0;
+  --tc-hue: var(--sh-cyan);
+}
+.touch-grab--s {
+  left: calc(56px * var(--tc));
+  bottom: 0;
+  --tc-hue: var(--sh-green);
+}
+.touch-grab--w {
+  left: 0;
+  top: calc(56px * var(--tc));
+  --tc-hue: var(--sh-amber);
+}
+.touch-grab--e {
+  right: 0;
+  top: calc(56px * var(--tc));
+  --tc-hue: var(--sh-pink);
+}
+
+/* JUMP sits inboard of the diamond and low, where a thumb rests without
+   reaching — it is held far more than any single grab. */
+.touch-jump {
+  right: calc(192px * var(--tc));
+  bottom: 0;
+  width: calc(112px * var(--tc));
+  height: calc(112px * var(--tc));
+  font-size: calc(0.86rem * var(--tc));
+  letter-spacing: 0.1em;
+  --tc-hue: #ffffff;
+  border-color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(10, 13, 19, 0.5));
+}
+.touch-jump[data-on="true"] {
+  background: rgba(255, 255, 255, 0.72);
+  color: #0a0d13;
+  text-shadow: none;
+}
+
+/* TWEAK is a modifier, not an action — a pill rather than a pad, so a thumb
+   never confuses it for one of the four. */
+.touch-tweak {
+  right: calc(192px * var(--tc));
+  bottom: calc(130px * var(--tc));
+  width: calc(112px * var(--tc));
+  height: calc(48px * var(--tc));
+  border-radius: calc(14px * var(--tc));
+  font-size: calc(0.62rem * var(--tc));
+  --tc-hue: var(--sh-amber);
+  border-color: color-mix(in srgb, var(--sh-amber) 58%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--sh-amber) 12%, transparent),
+    var(--tc-fill)
+  );
+}
 
 .touch-pause {
   top: calc(0.7rem + var(--sh-safe-t));
   left: 50%;
   transform: translateX(-50%);
-  width: 46px;
-  height: 46px;
+  width: calc(46px * var(--tc));
+  height: calc(46px * var(--tc));
   grid-auto-flow: column;
   gap: 5px;
 }
@@ -1346,14 +1460,10 @@
     margin-right: 0;
     width: 46vw;
   }
-  /* Narrower cluster and stick zone so the two can't overlap on a phone. */
-  .touch-right { width: 214px; height: 194px; }
-  .touch-jump { width: 92px; height: 92px; }
-  .touch-tweak { width: 92px; height: 42px; bottom: 102px; }
-  .touch-diamond { width: 112px; height: 112px; }
-  .touch-grab { width: 50px; height: 50px; }
-  .touch-grab--n, .touch-grab--s { left: 31px; }
-  .touch-grab--w, .touch-grab--e { top: 31px; }
+  /* Sizes come from `--tc` at the top of the touch section — a per-control
+     override here is how the cluster drifts out of proportion. Only the stick
+     zone changes, and that is behaviour: a narrower reach so a thumb sliding
+     off the stick can't land on a pad. */
   .touch-stick-zone { width: 40%; }
 }
 
@@ -1365,7 +1475,7 @@
   }
 }
 
-/* Short landscape phones: shrink the cluster so it can't eat the view. */
+/* Short landscape phones: the menus need the height back. */
 @media (max-height: 460px) {
   .sh-title-screen { gap: 0.7rem; }
   .sh-title-screen .sh-shout {
@@ -1374,16 +1484,6 @@
   .sh-tiles { gap: 0.35rem; }
   .sh-overlay .sh-btn { min-height: 44px; padding: 0.6rem 1rem; }
   .sh-sheet { padding: 1rem 1.1rem; max-height: 90vh; }
-
-  .touch-right { width: 210px; height: 186px; }
-  .touch-jump { width: 86px; height: 86px; }
-  .touch-tweak { width: 86px; bottom: 96px; height: 40px; }
-  .touch-diamond { width: 116px; height: 116px; }
-  .touch-grab { width: 48px; height: 48px; }
-  .touch-grab--n, .touch-grab--s { left: 34px; }
-  .touch-grab--w, .touch-grab--e { top: 34px; }
-  .touch-stick-base { width: 118px; height: 118px; }
-  .touch-stick-knob { width: 50px; height: 50px; }
 }
 
 /* ─────────────────────────────────────────────── responsive menu layout ── */

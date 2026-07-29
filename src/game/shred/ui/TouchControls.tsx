@@ -99,12 +99,16 @@ export default function TouchControls({ getInput, onPause, minimal }: Props) {
   const zoneRef = useRef<HTMLDivElement>(null);
   const baseRef = useRef<HTMLDivElement>(null);
   const knobRef = useRef<HTMLDivElement>(null);
+  const homeRef = useRef<HTMLDivElement>(null);
   const pointerId = useRef<number | null>(null);
   const origin = useRef({ x: 0, y: 0 });
 
   const setStickVisible = (on: boolean) => {
     if (baseRef.current) baseRef.current.style.opacity = on ? "1" : "0";
     if (knobRef.current) knobRef.current.style.opacity = on ? "1" : "0";
+    // The resting stick is the "put your thumb here" mark. It has to go the
+    // moment a real one appears, or there are two sticks on screen.
+    if (homeRef.current) homeRef.current.style.opacity = on ? "0" : "1";
   };
 
   const onDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
@@ -203,6 +207,17 @@ export default function TouchControls({ getInput, onPause, minimal }: Props) {
             onPointerCancel={onUp}
             onContextMenu={(e) => e.preventDefault()}
           />
+          {/* Where the stick rests. The stick itself still appears wherever the
+              thumb lands — this is only the mark that says a thumb goes here,
+              which is the thing a first-time player needs and a returning one
+              stops seeing. */}
+          <div ref={homeRef} className="touch-stick-home">
+            <span className="touch-stick-home__ring" />
+            <span className="touch-stick-home__knob" />
+            <i className="touch-stick-hint touch-stick-hint--up">TUCK</i>
+            <i className="touch-stick-hint touch-stick-hint--down">BRAKE</i>
+          </div>
+
           <div ref={baseRef} className="touch-stick-base" style={{ opacity: 0 }}>
             <i className="touch-stick-hint touch-stick-hint--up">TUCK</i>
             <i className="touch-stick-hint touch-stick-hint--down">BRAKE</i>
@@ -246,7 +261,6 @@ export default function TouchControls({ getInput, onPause, minimal }: Props) {
               getInput={getInput}
               action="jump"
               label="JUMP"
-              sub="hold to load"
               className="touch-jump"
             />
           </div>

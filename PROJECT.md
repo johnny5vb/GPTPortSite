@@ -270,9 +270,27 @@ optional CRT pass. Quality presets plus adaptive resolution keep it at 60fps.
 - **Left half is a floating analog stick.** It appears wherever the thumb lands
   rather than at a fixed spot. Left/right steers (and spins in the air), up
   tucks (front flip), down brakes (back flip). It is genuinely analog, so a
-  phone gets *finer* control over edge angle than a keyboard does.
-- **Bottom right is JUMP, a four-way grab diamond, and a TWEAK modifier** that
-  turns each grab into its tweaked variant — exactly what Shift does.
+  phone gets *finer* control over edge angle than a keyboard does. A faint
+  resting stick is drawn at the bottom-left home position and fades the instant
+  a real one appears — the mark a first-timer needs and a returning player stops
+  seeing, without giving up the floating behaviour.
+- **Bottom right is a four-way grab diamond, with JUMP and a TWEAK modifier
+  inboard of it.** TWEAK turns each grab into its tweaked variant, exactly what
+  Shift does. The arrangement follows the mobile-sports-game convention the
+  owner asked for: the action diamond owns the corner, and the control that is
+  *held* rather than tapped sits where the thumb rests, inboard and low.
+- **Colour is the label.** A thumb travelling to a pad does not read four words,
+  it goes to the green one — so each action owns a hue (nose cyan, melon pink,
+  indy green, tail amber) and keeps it, and pressing floods the pad with that
+  same hue rather than a generic white flash. A pad is a **ring with a dark
+  centre**, not a filled disc: the ring is what stays legible over snow, a low
+  sun and a rock face, all of which this game puts behind it.
+- **The whole cluster sizes off one `--tc` unit**, so a short landscape phone
+  and a portrait one shrink it coherently. This replaced a set of media queries
+  that re-declared every control's width individually — which is how the
+  proportions drift, and did: a later block was silently overriding the newer
+  sizes until it was deleted. If a control needs to be smaller on a phone,
+  change `--tc`, not the control.
 - Both feed the same `Input` the keyboard uses, so the physics has no idea
   which is driving, and a laptop with a touchscreen can use either. Settings →
   *On-screen controls* forces them on or off.
