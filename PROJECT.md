@@ -284,7 +284,11 @@ optional CRT pass. Quality presets plus adaptive resolution keep it at 60fps.
   indy green, tail amber) and keeps it, and pressing floods the pad with that
   same hue rather than a generic white flash. A pad is a **ring with a dark
   centre**, not a filled disc: the ring is what stays legible over snow, a low
-  sun and a rock face, all of which this game puts behind it.
+  sun and a rock face, all of which this game puts behind it. When a pad needs
+  to read *harder*, raise the contrast — brighter ring, darker centre, an outer
+  dark halo — and leave the coloured area alone. More colour is how a control
+  layer stops being a control layer and starts being the loudest thing on
+  screen.
 - **The viewport tag is load-bearing.** Without
   `width=device-width`, a mobile browser lays the page out at a 980px
   "desktop" width and scales the result down — every phone media query misses,
