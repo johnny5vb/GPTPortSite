@@ -615,6 +615,15 @@ from the rAF loop through a CSS custom property rather than React state.
 unlocks from lifetime totals — no currency, nothing to buy — and unlocks are
 re-evaluated both on boot and at the end of every run.
 
+**Every screen that can start a run has a visible way to start it.** Mode select
+and mountain select used to offer only *Back* — the sole way forward was tapping
+a tile, which reads as a choice rather than as a command, and leaves a player
+who taps once and sees nothing with no button to reach for. Both now carry the
+sticky `.sh-actions` row the garage has (Continue / Drop in, plus Back), pinned
+to the bottom of the sheet so it is on screen whatever the content above does.
+Tapping a tile still starts immediately; the button is the guarantee, not the
+fast path.
+
 **Picking the hill is part of deciding to ride.** Mountain selection used to
 live only in the garage, behind a tab, three taps from the title — so the
 drop-in flow never asked, and players rode the same hill until they concluded

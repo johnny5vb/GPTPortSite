@@ -265,6 +265,17 @@
     border-color 0.18s ease,
     transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.sh-btn[data-primary="true"] {
+  border-color: rgba(46, 229, 179, 0.55);
+  background: linear-gradient(180deg, rgba(17, 96, 78, 0.72), rgba(9, 48, 41, 0.82));
+}
+.sh-btn[data-primary="true"] .sh-btn__label {
+  color: #eafff8;
+}
+.sh-btn[data-primary="true"]:hover:not(:disabled) {
+  border-color: rgba(46, 229, 179, 0.95);
+}
+
 .sh-btn:hover:not(:disabled),
 .sh-btn[data-focus="true"] {
   border-color: rgba(110, 231, 255, 0.8);
@@ -1712,7 +1723,7 @@
 }
 
 /* Garage: a persistent action row, so selecting a rider is never a dead end. */
-.sh-garage-actions {
+.sh-actions {
   position: sticky;
   bottom: 0;
   margin-top: 1.4rem;
@@ -1723,9 +1734,11 @@
   justify-content: space-between;
   gap: 0.8rem;
   border-top: 1px solid var(--sh-line);
-  /* Fades in at the top so it isn't a hard bar, but is genuinely opaque by the
-     time it reaches its own text — at 52% the card names scrolling underneath
-     read straight through the loadout line. */
+  /* Pinned to the bottom of the sheet so the way forward is on screen whatever
+     the content above does — a start button you have to scroll to find is a
+     start button that isn't there. Fades in at the top so it isn't a hard bar,
+     but is genuinely opaque by the time it reaches its own text: at 52% the
+     card names scrolling underneath read straight through it. */
   background: linear-gradient(
     180deg,
     rgba(14, 16, 22, 0) 0%,

@@ -616,7 +616,20 @@ export function MountainSelect({
           )}
         </div>
 
-        <div style={{ marginTop: "1.4rem", display: "flex", gap: "0.5rem" }}>
+        {/* Tapping a mountain still drops in on the spot — this is the
+            guaranteed way out of the screen, for anyone who reads a tile as a
+            choice rather than as a command. */}
+        <div className="sh-actions">
+          <button
+            className="sh-btn"
+            data-primary="true"
+            style={{ width: "auto" }}
+            onClick={() => current && onPick(current.id)}
+            disabled={!current}
+          >
+            <span className="sh-btn__label">Drop in</span>
+            <span className="sh-btn__meta">Enter</span>
+          </button>
           <button className="sh-btn" style={{ width: "auto" }} onClick={onBack}>
             <span className="sh-btn__label">Back</span>
             <span className="sh-btn__meta">Esc</span>
@@ -732,7 +745,17 @@ export function ModeSelect({
           </AnimatePresence>
         </div>
 
-        <div style={{ marginTop: "1.6rem", display: "flex", gap: "0.6rem" }}>
+        <div className="sh-actions">
+          <button
+            className="sh-btn"
+            data-primary="true"
+            style={{ width: "auto" }}
+            onClick={() => current && onPick(current.id)}
+            disabled={!current}
+          >
+            <span className="sh-btn__label">Continue</span>
+            <span className="sh-btn__meta">Enter</span>
+          </button>
           <button className="sh-btn" style={{ width: "auto" }} onClick={onBack}>
             <span className="sh-btn__label">Back</span>
             <span className="sh-btn__meta">Esc</span>
@@ -1123,7 +1146,7 @@ export function Garage({
           </div>
         )}
 
-        <div className="sh-garage-actions">
+        <div className="sh-actions">
           <div className="sh-garage-loadout">
             <span className="sh-eyebrow">Riding as</span>
             <span>
