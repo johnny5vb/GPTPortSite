@@ -704,3 +704,17 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     About → ResumePreview → Consulting is the right narrative, and the numbers
     exist to ascend as you scroll. Verified in a browser that all eight rail
     targets resolve and their page positions are strictly ascending.
+
+37. **IMPORTANT! Colorado — cover and opener swapped.** The cover is now the
+    member-facing social carousel as one square 2×2 set (`carousel-set.jpg`,
+    `coverAspect: "1 / 1"`) — the campaign as the public actually meets it,
+    not the deck cover. "The work" now opens with `system-at-a-glance.jpg`, a
+    12-tile montage of the campaign's real documents in reading order: the
+    partner eligibility flowchart, brand-guidelines pages 1–6, and all five
+    Phase 2 immigrant-coverage slides, rendered from the source PDFs onto the
+    same light neutral plate the flagship covers use.
+    - Two moments removed as duplicates of the new cover/opener: the three-slide
+      carousel gallery (the cover now carries all four slides) and the closing
+      standalone flowchart (it leads the montage). `carousel-1..4.jpg`,
+      `cover.jpg`, and `flowchart.jpg` stay on disk, just unreferenced.
+

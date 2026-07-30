@@ -1029,7 +1029,10 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#78256F", "#0067AB", "#245D38", "#f4ecf3"],
     display: "IMPORTANT!",
-    cover: "/work/important-colorado/cover.jpg",
+    // The member-facing carousel as one square set — the campaign as the public
+    // actually meets it, rather than the deck cover.
+    cover: "/work/important-colorado/carousel-set.jpg",
+    coverAspect: "1 / 1",
     gallery: [],
     roleSummary: "Created the 'IMPORTANT!' wordmark and campaign tactics for Health First Colorado.",
     caseStudy: {
@@ -1089,6 +1092,16 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "full",
+          aspect: "13 / 10",
+          image: {
+            src: "/work/important-colorado/system-at-a-glance.jpg",
+            alt: "The campaign's documents laid out together — the partner eligibility flowchart, the brand guidelines, and the Phase 2 immigrant-coverage slides",
+          },
+          caption:
+            "The whole system in one view: a partner-facing eligibility flowchart, the brand guidelines that keep a hundred-plus organizations recognizable, and the Phase 2 slides on immigrant health coverage.",
+        },
+        {
+          kind: "full",
           aspect: "16 / 9",
           image: {
             src: "/work/important-colorado/wordmark-anatomy.jpg",
@@ -1128,25 +1141,6 @@ export const PROJECTS: Project[] = [
             "Every pairing carries its contrast ratio and WCAG level, and the brightest two colours are held back from body text — on a public-health message, legibility is the message.",
         },
         {
-          kind: "gallery",
-          images: [
-            {
-              src: "/work/important-colorado/carousel-1.jpg",
-              alt: "Social carousel slide one — federal changes may affect your coverage",
-            },
-            {
-              src: "/work/important-colorado/carousel-3.jpg",
-              alt: "Social carousel slide — watch your mail, email, and texts",
-            },
-            {
-              src: "/work/important-colorado/carousel-4.jpg",
-              alt: "Social carousel closing slide with the campaign wordmark and Health First Colorado lockup",
-            },
-          ],
-          caption:
-            "The member-facing end of it — a swipeable carousel that turns a federal policy change into three things you can do this week.",
-        },
-        {
           kind: "full",
           aspect: "16 / 9",
           image: {
@@ -1155,16 +1149,6 @@ export const PROJECTS: Project[] = [
           },
           caption:
             "Phase 2, on immigrant health coverage: the hardest information in the campaign, laid out so a reader can find their own situation in one pass.",
-        },
-        {
-          kind: "full",
-          aspect: "3 / 2",
-          image: {
-            src: "/work/important-colorado/flowchart.jpg",
-            alt: "Partner resource — an H.R. 1 eligibility decision flowchart for staff guiding members",
-          },
-          caption:
-            "And the partner-facing counterpart — a decision flowchart for the staff walking members through it, with the screen-reader-accessible version linked alongside.",
         },
       ],
     },
