@@ -126,8 +126,8 @@ are un-numbered CTA bands between the numbered narrative sections.
 02  Work          (Work — Featured leadership work + Selected independent work + More work)
 03  In Focus      (Showpiece)
 04  AI & Systems  (AISystemsTeaser — compact, links → /lab; big demo removed from home)
-05  Consulting    (Services — reframed as the secondary Carman Creative offer)
-06  About         (About)
+05  About         (About)
+06  Consulting    (Services — reframed as the secondary Carman Creative offer)
 07  Contact       (ContactCTA — split employment vs. project inquiry paths)
 ```
 
@@ -675,3 +675,32 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
 4. Before changing anything that touches the headings / contrast / aria
    patterns, re-read the Accessibility section — those decisions cost a
    long audit cycle.
+
+### Later session — flagship covers unified; section numbering corrected
+
+35. **All three flagship covers now share one treatment**: the piece itself on a
+    light neutral plate (`#f4f2ef`) with a soft drop shadow, composed at
+    1800×1350 and served at `coverAspect: "4 / 3"`. Carelon is a spread of four
+    real deliverables; Marketing Bench is the platform homepage centered
+    (cropped to the header/hero/Quick Links framing the owner asked for);
+    Workfront is the "Future State Overview" slide on the same plate. The
+    Marketing Bench cover uses the **clean, un-annotated** homepage — extracted
+    as the embedded source bitmap from page 2 of the user guide PDF
+    (`get_images` → 1709×2029), not a re-render of the annotated page. The
+    annotated walkthrough returned to "The work" as its opening moment, so
+    neither image is used twice.
+    - Note: a composite of the poster + a slide + a UI screenshot was tried for
+      Workfront and **rejected by the owner** ("that woman poster mixed with the
+      weird slide and screenshot are not doing it for me"). Composites work when
+      the pieces are finished artifacts (Carelon); they don't when the set is
+      mostly screenshots. Reverted, then replaced with the real program slides
+      the owner supplied.
+
+36. **Section numbering ran backwards between 05 and 06.** `About` renders
+    before `Services` on the home page but was numbered 06 against Services'
+    05, so the rail's 05 dot jumped past About and its 06 dot jumped backwards.
+    Renumbered to follow DOM order — **05 About, 06 Consulting** — in
+    `SectionRail.tsx` and both section eyebrows. The page order was left alone:
+    About → ResumePreview → Consulting is the right narrative, and the numbers
+    exist to ascend as you scroll. Verified in a browser that all eight rail
+    targets resolve and their page positions are strictly ascending.

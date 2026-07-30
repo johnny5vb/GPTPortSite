@@ -313,7 +313,10 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1cb791", "#1f8a6d", "#f3f1ea"],
     display: "MARKETING BENCH",
-    cover: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
+    // The platform itself, centered on the same neutral plate the other two
+    // flagships use. The annotated user-guide version still carries the
+    // walkthrough inside "The work".
+    cover: "/work/creative-operations-marketing-bench/platform-homepage.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -366,6 +369,16 @@ export const PROJECTS: Project[] = [
       reflection:
         "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials — exactly the kind of work AI is good at staying on top of.",
       work: [
+        {
+          kind: "full",
+          aspect: "3 / 4",
+          image: {
+            src: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
+            alt: "Annotated walkthrough of the Marketing Hub homepage — build a marketing folder, quick links to the resource center, stationery, sales support, and promo items",
+          },
+          caption:
+            "How it was taught: the homepage annotated for the field, with “Build a Marketing Folder” as the front door and quick links into the resource center, stationery, sales support, and promo items.",
+        },
         {
           kind: "full",
           aspect: "3 / 2",
@@ -466,8 +479,8 @@ export const PROJECTS: Project[] = [
     display: "WORKFRONT RESTART",
     // The future-state model — planning, execution, reporting — says what was
     // rebuilt in one frame, which a screenshot of the tool never could.
-    cover: "/work/workfront-workflow-transformation/future-state.jpg",
-    coverAspect: "16 / 9",
+    cover: "/work/workfront-workflow-transformation/future-state-plate.jpg",
+    coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
       "Redrew Workfront phases, batching, and intake for the creative team.",

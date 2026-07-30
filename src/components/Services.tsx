@@ -71,7 +71,7 @@ export default function Services() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 05 — Consulting
+            // 06 — Consulting
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">

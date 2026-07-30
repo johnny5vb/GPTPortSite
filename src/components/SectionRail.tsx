@@ -9,8 +9,10 @@ const SECTIONS = [
   { id: "work", label: "Work", num: "02" },
   { id: "spotlight", label: "In Focus", num: "03" },
   { id: "talks-back", label: "AI & Systems", num: "04" },
-  { id: "services", label: "Consulting", num: "05" },
-  { id: "about", label: "About", num: "06" },
+  // Order here must follow the DOM order on the home page — About renders
+  // before Services, so it carries the lower number.
+  { id: "about", label: "About", num: "05" },
+  { id: "services", label: "Consulting", num: "06" },
   { id: "contact", label: "Contact", num: "07" },
 ];
 
