@@ -66,39 +66,7 @@ const isTodo = (s: string) => s.trim().toUpperCase().startsWith("TODO");
 export default function LeadershipPage() {
   return (
     <>
-      <section className="relative overflow-hidden container-x pt-28 md:pt-32 pb-12">
-        {/* The page opened on nothing but type. A one-colour, ordered-dither
-            treatment of the portrait anchors it without adding a new colour
-            or competing with the headline — it dissolves left into the ink. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 hidden lg:block w-[40%] select-none"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent, black 72%), linear-gradient(to bottom, black 62%, transparent)",
-            maskComposite: "intersect",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent, black 72%), linear-gradient(to bottom, black 62%, transparent)",
-            WebkitMaskComposite: "source-in",
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 0.3, scale: 1 }}
-            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-            className="relative h-full w-full"
-          >
-            <Image
-              src="/brand/portrait-duotone.png"
-              alt=""
-              fill
-              sizes="46vw"
-              className="object-cover object-[72%_22%]"
-              priority
-            />
-          </motion.div>
-        </div>
-
+      <section className="container-x pt-28 md:pt-32 pb-12">
         <Link
           href="/"
           data-cursor="back"
