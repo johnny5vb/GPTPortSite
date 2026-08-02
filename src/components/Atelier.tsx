@@ -384,7 +384,7 @@ export default function Atelier() {
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[12.5px] text-bone/90">
+                      <span className="text-[12.5px] text-bone/85">
                         {d.title}
                       </span>
                       {active && <Check className="h-3.5 w-3.5 text-green shrink-0 ml-2" />}
@@ -592,7 +592,7 @@ export default function Atelier() {
                           {pin.category}
                         </span>
                       </div>
-                      <p className="text-[13px] leading-snug text-bone/90">
+                      <p className="text-[13px] leading-snug text-bone/85">
                         {pin.notes[tone]}
                       </p>
                     </div>

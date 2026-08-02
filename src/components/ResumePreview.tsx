@@ -23,7 +23,7 @@ export default function ResumePreview() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
               // Résumé
             </p>
-            <h2 className="mt-4 font-display text-[clamp(1.8rem,3.8vw,2.8rem)] leading-[1.08] tracking-[-0.03em] text-bone">
+            <h2 className="mt-4 t-display-md">
               The short version.
             </h2>
             <p className="mt-4 text-mute text-sm leading-relaxed max-w-[36ch]">
@@ -55,7 +55,7 @@ export default function ResumePreview() {
                   <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
                     {row.label}
                   </dt>
-                  <dd className="text-sm text-bone/90 leading-snug">
+                  <dd className="text-sm text-bone/85 leading-snug">
                     {row.value}
                   </dd>
                 </motion.div>

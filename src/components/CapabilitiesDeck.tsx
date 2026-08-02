@@ -559,7 +559,7 @@ function TalksBack() {
                     Assistant
                   </span>
                 </div>
-                <p className="text-[13px] leading-snug text-bone/90">
+                <p className="text-[13px] leading-snug text-bone/85">
                   Three options — all on-brand, all in voice.
                 </p>
                 <div className="mt-2 grid grid-cols-3 gap-1.5">
@@ -816,7 +816,7 @@ function Process() {
             <h3 className="mt-3 font-display text-2xl md:text-3xl leading-[1.05] tracking-[-0.03em] text-bone">
               {p.title}
             </h3>
-            <p className="mt-2 text-bone/75 leading-relaxed">{p.body}</p>
+            <p className="mt-2 text-bone/80 leading-relaxed">{p.body}</p>
           </div>
         ))}
       </div>

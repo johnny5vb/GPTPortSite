@@ -119,7 +119,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.4rem,6.4vw,5.4rem)] leading-[1.08] tracking-[-0.04em] text-bone"
+            className="t-display-lg"
           >
             Creative direction,
             <br />
@@ -202,7 +202,7 @@ export default function About() {
                   {STRENGTHS.map((s) => (
                     <li
                       key={s}
-                      className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] text-bone/80 border border-line rounded-full px-2.5 py-1"
+                      className="inline-flex items-center text-[13px] text-bone/80 border border-line rounded-full px-3 py-1"
                     >
                       {s}
                     </li>
@@ -226,10 +226,12 @@ export default function About() {
                     className="grid grid-cols-[1fr_auto] gap-2 items-baseline py-3 border-b border-line/70"
                   >
                     <div>
-                      <div className="font-mono text-xs uppercase tracking-[0.18em] text-bone">
-                        {role.company}
-                      </div>
-                      <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
+                      {/* Company and title were both mono uppercase, which gave
+                          the column ~20 shouting lines and no rank. The display
+                          face carries the employer; the role sits under it in
+                          sentence case. Only the date stays mono — it's data. */}
+                      <div className="t-display-sm">{role.company}</div>
+                      <div className="mt-0.5 text-sm text-mute">
                         {role.title}
                       </div>
                       {role.formerly && (
@@ -254,7 +256,7 @@ export default function About() {
                 {STACK.map((s) => (
                   <li
                     key={s}
-                    className="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.16em] text-bone/80 border border-line rounded-full px-2.5 py-1 hover:border-green hover:text-green transition-colors"
+                    className="inline-flex items-center text-[13px] text-bone/80 border border-line rounded-full px-3 py-1 transition-colors duration-300 hover:border-green hover:text-green"
                   >
                     {s}
                   </li>

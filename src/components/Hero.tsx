@@ -187,7 +187,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.55 }}
             className="col-span-12 md:col-span-6 md:col-start-7 max-w-[54ch] space-y-4"
           >
-            <p className="text-bone/90 text-base md:text-lg leading-relaxed">
+            <p className="text-bone/85 text-base md:text-lg leading-relaxed">
               I&apos;m John Carman, a{" "}
               <span className="text-green">Creative Director</span> with{" "}
               {PROFILE.yearsExperience} years across enterprise brand

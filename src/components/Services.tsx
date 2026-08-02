@@ -80,7 +80,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.4rem,6.4vw,5.4rem)] leading-[1.08] tracking-[-0.04em] text-bone"
+            className="t-display-lg"
           >
             Work with{" "}
             <em className="font-display-wonk text-green">Carman Creative.</em>

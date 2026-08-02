@@ -41,7 +41,7 @@ export default function AISystemsTeaser() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.2rem,5.4vw,4.4rem)] leading-[1.08] tracking-[-0.04em] text-bone"
+            className="t-display-lg"
           >
             AI that helps teams{" "}
             <em className="font-display-wonk text-green">move faster.</em>

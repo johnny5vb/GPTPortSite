@@ -718,3 +718,57 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       standalone flowchart (it leads the montage). `carousel-1..4.jpg`,
       `cover.jpg`, and `flowchart.jpg` stay on disk, just unreferenced.
 
+### Later session — design-review pass (type system, cursor, leadership page)
+
+38. **A designer friend reviewed the live site.** Acted on the points that were
+    system problems; deferred the one that would undo a settled decision.
+    - **Type scale (`globals.css`).** The complaint "no consistent pattern of
+      size, font, coloration section to section" was measurable: 25 distinct
+      heading clamps site-wide, nine on the home page alone, with peer-level
+      section headings at 4.4rem / 5.4rem / 8.4rem maxima, plus five body-text
+      opacities. Added a four-rung display scale (`t-display-xl/lg/md/sm`),
+      three body ranks (`t-lede`, `t-body`, `t-body-mute`) and two mono label
+      sizes (`t-label`, `t-label-sm`). Home page now renders H1 85px → section
+      H2 77px → band H2 42px. Deliberate one-off display moments (the Manifesto
+      numeral, the Showpiece pull-quote) stay bespoke — they're accents, not
+      rungs. `text-bone/90` and `/75` folded into `/85` and `/80`.
+    - **Accent-label overuse.** ~250 mono-uppercase label instances across ten
+      near-identical recipes. The About experience column was the worst case —
+      company, title, date and eight tool pills all mono uppercase, ~20 shouting
+      lines with no rank. Company now sets in the display face, role in
+      sentence-case sans, and only the date stays mono (it's data). Same fix for
+      the strengths/tools pills and the Leadership "what I can lead" pills.
+    - **Cursor.** 32 distinct `data-cursor` values, most of them nouns naming a
+      destination ("site", "cta", "ghost", "leadership") rather than an action —
+      unreadable as a cursor label. `CustomCursor` now keeps a short allow-list
+      (`LABELS`) and shows a word only for those; everything else gets the ring
+      alone. The ring no longer fills solid (it was a colour block on top of the
+      thing you were pointing at), the dot stays visible so you never lose the
+      aim point, and the label trails below-right instead of underneath.
+    - **Leadership page rhythm.** Six identical bands of "11px mono eyebrow
+      beside a wall of content" — no rung between label and body. `Block` now
+      takes a `heading` rendered at `t-display-md`, and the label column sticks
+      as the band scrolls.
+    - **Support-page visual.** `/leadership` opened on pure type. Added
+      `public/brand/portrait-duotone.png` — the existing portrait put through a
+      Bayer 8×8 ordered dither, mapped ink→green, with the cream paper floored
+      out so the texture lands on the drawing and not the background. Sits at
+      0.3 opacity behind the hero, masked so it dissolves left; it reads as
+      texture, not as a competing image. Generated with PIL + numpy.
+    - **Movement.** Hover response added where it was missing rather than
+      everywhere: leadership cards lift and their artwork scales (matching the
+      home cards), and list-row `↳` markers track right on hover.
+
+    **Deferred deliberately — the home hero.** The friend asked for "a dynamic
+    more visual hero image on the home page." That's the one piece already
+    iterated to a settled answer: animated mark → drifting work contact sheet
+    (rejected as too busy/floaty) → the quiet monogram. Changing it is an
+    owner's call, not a review note to action. Raised, not implemented.
+
+    **Accessibility note.** An axe run mid-pass reported colour-contrast
+    failures with foreground values (#757575, #595959) that match no token in
+    the system — the scanner was sampling elements part-way through their
+    `whileInView` reveal, where the blended colour is neither the start nor the
+    end state. Re-run after letting reveals settle: **0 violations** on `/` and
+    `/leadership`. Worth remembering before chasing a phantom regression.
+

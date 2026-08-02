@@ -162,7 +162,7 @@ function LabCard({ lab, index }: { lab: Lab; index: number }) {
         {lab.bullets.map((b) => (
           <li
             key={b}
-            className="flex items-start gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/75"
+            className="flex items-start gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/80"
           >
             <span className="text-green mt-1">↳</span>
             {b}

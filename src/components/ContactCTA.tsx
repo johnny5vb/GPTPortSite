@@ -68,7 +68,7 @@ export default function ContactCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.8rem,8.4vw,8.4rem)] leading-[1.08] tracking-[-0.04em] text-bone"
+            className="t-display-lg"
           >
             Let&apos;s make the work,
             <br />

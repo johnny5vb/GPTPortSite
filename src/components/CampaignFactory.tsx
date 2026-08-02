@@ -207,7 +207,7 @@ export default function CampaignFactory() {
                       <span style={{ background: c.accent }} className="flex-1" />
                       <span style={{ background: c.accent2 }} className="flex-1" />
                     </div>
-                    <p className="mt-2 text-[11px] leading-snug text-bone/90 font-display">
+                    <p className="mt-2 text-[11px] leading-snug text-bone/85 font-display">
                       {c.headline}
                     </p>
                     <p className="text-[10.5px] text-mute mt-0.5">
@@ -280,7 +280,7 @@ export default function CampaignFactory() {
                 Output
               </span>
             </div>
-            <p className="text-[12.5px] leading-snug text-bone/90">
+            <p className="text-[12.5px] leading-snug text-bone/85">
               All variants share one brand file. Switch the brand and the
               entire factory re-skins in 500ms.
             </p>

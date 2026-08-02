@@ -270,7 +270,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
                 <div className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mute mb-1.5">
                   // voice
                 </div>
-                <p className="text-[12.5px] leading-snug text-bone/90">
+                <p className="text-[12.5px] leading-snug text-bone/85">
                   {brand.voice}
                 </p>
               </div>
@@ -311,7 +311,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
                       {phase === "thinking" ? (
                         <ThinkingDots />
                       ) : (
-                        <p className="text-[13px] leading-snug text-bone/90">
+                        <p className="text-[13px] leading-snug text-bone/85">
                           {prompt.reply}{" "}
                           <span className="text-mute">
                             See three options →
@@ -343,7 +343,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
                           : "border-line hover:border-line-2 bg-ink-2"
                       }`}
                     >
-                      <span className="text-[12.5px] text-bone/90 leading-snug">
+                      <span className="text-[12.5px] text-bone/85 leading-snug">
                         {p.user}
                       </span>
                       <Send

@@ -66,7 +66,39 @@ const isTodo = (s: string) => s.trim().toUpperCase().startsWith("TODO");
 export default function LeadershipPage() {
   return (
     <>
-      <section className="container-x pt-28 md:pt-32 pb-12">
+      <section className="relative overflow-hidden container-x pt-28 md:pt-32 pb-12">
+        {/* The page opened on nothing but type. A one-colour, ordered-dither
+            treatment of the portrait anchors it without adding a new colour
+            or competing with the headline — it dissolves left into the ink. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 hidden lg:block w-[40%] select-none"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 72%), linear-gradient(to bottom, black 62%, transparent)",
+            maskComposite: "intersect",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 72%), linear-gradient(to bottom, black 62%, transparent)",
+            WebkitMaskComposite: "source-in",
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 0.3, scale: 1 }}
+            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+            className="relative h-full w-full"
+          >
+            <Image
+              src="/brand/portrait-duotone.png"
+              alt=""
+              fill
+              sizes="46vw"
+              className="object-cover object-[72%_22%]"
+              priority
+            />
+          </motion.div>
+        </div>
+
         <Link
           href="/"
           data-cursor="back"
@@ -100,7 +132,7 @@ export default function LeadershipPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-[clamp(2.4rem,6.4vw,6rem)] leading-[1.05] tracking-[-0.045em] text-bone"
+              className="t-display-xl"
             >
               Creative leadership built inside{" "}
               <em className="font-display-wonk text-green">
@@ -139,14 +171,16 @@ export default function LeadershipPage() {
       </section>
 
       {/* Leadership experience */}
-      <Block eyebrow="Leadership experience">
+      <Block eyebrow="Leadership experience" heading="Where the experience comes from.">
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 max-w-[70ch]">
           {EXPERIENCE.map((e) => (
             <li
               key={e}
-              className="flex items-start gap-3 py-2.5 border-b border-line/60 leading-relaxed"
+              className="group/row flex items-start gap-3 py-2.5 border-b border-line/60 leading-relaxed"
             >
-              <span className="text-green mt-1.5 shrink-0">↳</span>
+              <span className="text-green mt-1.5 shrink-0 transition-transform duration-300 group-hover/row:translate-x-1">
+                ↳
+              </span>
               <span className={isTodo(e) ? "text-mute-2 italic" : "text-bone/85"}>
                 {e}
               </span>
@@ -156,12 +190,14 @@ export default function LeadershipPage() {
       </Block>
 
       {/* What John can lead */}
-      <Block eyebrow="What John can lead">
+      <Block eyebrow="What John can lead" heading="What I can take ownership of.">
+        {/* Eight mono-uppercase pills in a row read as eight labels shouting at
+            equal volume. Sentence case lets them read as a list of disciplines. */}
         <div className="flex flex-wrap gap-2">
           {CAN_LEAD.map((c) => (
             <span
               key={c}
-              className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.16em] text-bone/85 border border-line rounded-full px-4 py-2"
+              className="inline-flex items-center text-[15px] text-bone/85 border border-line rounded-full px-4 py-2 transition-colors duration-300 hover:border-green/60 hover:text-bone"
             >
               {c}
             </span>
@@ -170,14 +206,14 @@ export default function LeadershipPage() {
       </Block>
 
       {/* Featured leadership case studies */}
-      <Block eyebrow="Featured leadership work">
+      <Block eyebrow="Featured leadership work" heading="Three programs, start to finish.">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           {LEADERSHIP_PROJECTS.map((p) => (
             <Link
               key={p.slug}
               href={`/work/${p.slug}`}
               data-cursor="open case"
-              className="group rounded-xl border border-line bg-ink-2 p-6 hover:border-line-2 transition-colors flex flex-col"
+              className="group rounded-xl border border-line bg-ink-2 p-6 transition-all duration-500 hover:border-line-2 hover:-translate-y-1 flex flex-col"
             >
               {/* The piece itself, whole on a neutral plate, with the project
                   name over a scrim so it stays legible on any artwork. */}
@@ -188,7 +224,7 @@ export default function LeadershipPage() {
                     alt={`${p.title} preview`}
                     fill
                     sizes="(max-width: 640px) 100vw, 33vw"
-                    className="object-contain p-2"
+                    className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                 ) : null}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-3 pt-8">
@@ -212,11 +248,13 @@ export default function LeadershipPage() {
       </Block>
 
       {/* Leadership proof */}
-      <Block eyebrow="Leadership proof">
+      <Block eyebrow="Leadership proof" heading="The record behind it.">
         <ul className="space-y-3 max-w-[64ch]">
           {PROOF.map((p) => (
-            <li key={p} className="flex items-start gap-3 leading-relaxed">
-              <span className="text-green mt-1.5 shrink-0">↳</span>
+            <li key={p} className="group/row flex items-start gap-3 leading-relaxed">
+              <span className="text-green mt-1.5 shrink-0 transition-transform duration-300 group-hover/row:translate-x-1">
+                ↳
+              </span>
               <span className={isTodo(p) ? "text-mute-2 italic" : "text-bone/85"}>
                 {p}
               </span>
@@ -229,7 +267,7 @@ export default function LeadershipPage() {
       <Testimonials />
 
       {/* Leadership philosophy */}
-      <Block eyebrow="Leadership philosophy">
+      <Block eyebrow="Leadership philosophy" heading="How I think about leading.">
         <p className="text-bone/85 text-lg leading-relaxed max-w-[62ch] mb-10">
           Strong creative leadership isn&apos;t only about producing good ideas.
           It&apos;s about setting a clear standard, helping people improve,
@@ -257,7 +295,7 @@ export default function LeadershipPage() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-4">
               // Next step
             </p>
-            <h2 className="font-display text-[clamp(2.2rem,5.4vw,4.6rem)] leading-[1.08] tracking-[-0.04em] text-bone">
+            <h2 className="t-display-lg">
               Considering John for a
               <br />
               <em className="font-display-wonk text-green">
@@ -288,26 +326,35 @@ export default function LeadershipPage() {
   );
 }
 
+/**
+ * Every band was an 11px mono eyebrow beside a wall of content, six times in a
+ * row — no rung between the label and the body, so nothing marked where one
+ * section ended and the next began. The eyebrow now sits above a display-rung
+ * heading and stays with you as the band scrolls.
+ */
 function Block({
   eyebrow,
+  heading,
   children,
 }: {
   eyebrow: string;
+  heading: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="container-x py-16 md:py-24 rule-top">
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
-            className="font-mono text-[11px] uppercase tracking-[0.22em] text-green"
+            className="md:sticky md:top-28"
           >
-            // {eyebrow}
-          </motion.p>
+            <p className="t-label text-green">// {eyebrow}</p>
+            <h2 className="mt-3 t-display-md max-w-[16ch]">{heading}</h2>
+          </motion.div>
         </div>
         <div className="col-span-12 md:col-span-8">{children}</div>
       </div>

@@ -23,7 +23,7 @@ export default function AudienceSplit() {
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
             // Hiring John
           </p>
-          <h2 className="mt-5 font-display text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.05] tracking-[-0.035em] text-bone">
+          <h2 className="mt-5 t-display-md">
             For companies considering a{" "}
             <em className="font-display-wonk text-green">
               senior creative leader.
@@ -64,7 +64,7 @@ export default function AudienceSplit() {
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
             // Work With Carman Creative
           </p>
-          <h2 className="mt-5 font-display text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.08] tracking-[-0.03em] text-bone">
+          <h2 className="mt-5 t-display-md">
             For organizations with a project in mind.
           </h2>
           <p className="mt-5 text-bone/80 leading-relaxed max-w-[46ch]">
