@@ -12,7 +12,7 @@ import {
 } from "framer-motion";
 import { ArrowDown, ArrowUpRight, ArrowDownToLine } from "lucide-react";
 import { Link } from "next-view-transitions";
-import HeroMonogram from "./HeroMonogram";
+import HeroIsolines from "./HeroIsolines";
 import { PROFILE } from "@/lib/profile";
 
 const ROTATORS = ["organizations.", "operations.", "systems.", "campaigns."];
@@ -81,21 +81,16 @@ export default function Hero() {
       id="top"
       className="relative min-h-[100svh] container-x pt-20 pb-8 flex flex-col overflow-hidden"
     >
-      {/* Background grid + glow */}
+      {/* Hero visual — a live topographic contour field. It replaces both the
+          80px background grid (two line systems in the same space muddied each
+          other) and the CC monogram, which competed with it for the headline's
+          right-side gap. The glow stays, softened, to keep some depth behind
+          the type. */}
+      <HeroIsolines />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
       >
-        <div
-          className="absolute inset-0 opacity-[0.08]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-            maskImage:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent 75%)",
-          }}
-        />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -103,18 +98,14 @@ export default function Hero() {
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(28,183,145,0.22), transparent)",
+              "radial-gradient(closest-side, rgba(28,183,145,0.14), transparent)",
             filter: "blur(40px)",
           }}
         />
       </div>
 
-      {/* Hero visual — a calm CC monogram anchoring the headline's right-side
-          gap (lg+ only; the mobile hero is pure typography). */}
-      <HeroMonogram mx={mx} my={my} />
-
       {/* Top meta strip */}
-      <div className="flex items-end justify-between text-[10px] uppercase tracking-[0.22em] font-mono text-mute pt-2">
+      <div className="relative z-10 flex items-end justify-between text-[10px] uppercase tracking-[0.22em] font-mono text-bone/70 pt-2">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,13 +113,13 @@ export default function Hero() {
           className="flex gap-6"
         >
           <span>
-            <span className="text-mute-2">00 /</span> Index
+            <span className="text-bone/55">00 /</span> Index
           </span>
           <span className="hidden sm:inline">
-            <span className="text-mute-2">EST.</span> 2005
+            <span className="text-bone/55">EST.</span> 2005
           </span>
           <span className="hidden md:inline">
-            <span className="text-mute-2">v</span> 1.0
+            <span className="text-bone/55">v</span> 1.0
           </span>
         </motion.div>
         <motion.div
@@ -145,7 +136,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: heroY, opacity: heroOpacity }}
-        className="flex-1 flex flex-col justify-center mt-8 md:mt-4"
+        className="relative z-10 flex-1 flex flex-col justify-center mt-8 md:mt-4"
       >
         {/* Kicker: slide-in only (no opacity-0 initial state) so static
             accessibility scanners can read the contrast of text-green on
@@ -194,7 +185,7 @@ export default function Hero() {
               leadership, campaigns, digital experiences, and creative
               operations.
             </p>
-            <p className="text-mute text-sm md:text-base leading-relaxed">
+            <p className="text-bone/70 text-sm md:text-base leading-relaxed">
               I help organizations produce clearer, stronger, more effective
               creative work — and build the systems that let teams keep
               improving.
@@ -221,7 +212,7 @@ export default function Hero() {
               <a
                 href="#contact"
                 data-cursor="ask"
-                className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.2em] text-mute hover:text-bone transition-colors"
+                className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.2em] text-bone/70 hover:text-bone transition-colors"
               >
                 Discuss a project →
               </a>
@@ -231,14 +222,14 @@ export default function Hero() {
       </motion.div>
 
       {/* Bottom strip */}
-      <div className="relative flex flex-wrap items-end justify-between gap-6 pt-6 border-t border-line">
+      <div className="relative z-10 flex flex-wrap items-end justify-between gap-6 pt-6 border-t border-line">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute"
+          className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70"
         >
-          <div className="text-mute-2">// what I do</div>
+          <div className="text-bone/55">// what I do</div>
           <div className="mt-2 text-bone/80">
             Creative Director / Brand &amp; Creative Operations Leader /
             AI-Enabled Strategist

@@ -772,3 +772,47 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     end state. Re-run after letting reveals settle: **0 violations** on `/` and
     `/leadership`. Worth remembering before chasing a phantom regression.
 
+### Later session — the home hero: topographic isolines
+
+39. **The hero visual is now a live contour field** (`HeroIsolines.tsx`), chosen
+    by the owner from a set of six generative options built as running
+    prototypes. It replaces **both** `HeroMonogram` (which competed with it for
+    the headline's right-side gap) and the 80px background grid (two line
+    systems in the same space muddied each other). `HeroMonogram.tsx` is left
+    on disk, unimported, in case it's ever wanted back.
+    - **What it is:** real isolines — marching squares over a drifting 3-octave
+      value-noise field — so it produces closed loops, islands and saddles and
+      never repeats. Not a stack of sine waves; that was the first attempt and
+      it read as overlapping waves, which is why it was rejected.
+    - **Cost control:** cell size is derived from viewport area against a target
+      sample count, so cost is flat from a phone to a 5K display. Throttled to
+      30fps, paused by IntersectionObserver when the hero scrolls away and by
+      `visibilitychange` when the tab is hidden. Pointer swell is added only on
+      fine pointers. Under `prefers-reduced-motion` it draws **one static
+      frame** and never starts a loop.
+    - **Tuning lives in the `FIELD` constant** at the top of the file.
+
+    **Two traps worth remembering.**
+    1. **`-z-10` hid it completely.** A negative z-index child paints below its
+       ancestors' backgrounds, and `body` carries an opaque ink background — so
+       the canvas was drawing correctly (measurable via `getImageData`) while
+       compositing to nothing on screen. The pre-existing hero grid/glow div had
+       the same bug and had presumably never been visible either. Fix: the field
+       and glow sit at `z-0` and every content layer in the hero got
+       `relative z-10`. **Never diagnose a canvas by reading the canvas** —
+       screenshot the composited page and sample its pixels.
+    2. **Contrast has to be measured against the composited page.** axe reads
+       DOM background colours, so a canvas behind text is invisible to it and
+       reports 0 violations while small grey text sits on bright lines. Measured
+       properly, `text-mute` over the field fell to **2.39:1**. Two changes
+       fixed it: field intensity came down to 0.75, and the hero's own greys
+       moved up (`text-mute` → `text-bone/70`, `text-mute-2` → `text-bone/55`)
+       because the hero is the one section whose background isn't flat ink. The
+       system tokens elsewhere are unchanged. Worst-case small-text ratio over
+       the field is now **5.14:1**; axe still reports 0 violations, 27 passes.
+
+    Verified: animates, pauses when scrolled away, single static frame under
+    reduced motion, no horizontal scroll at 390px, other routes untouched. The
+    dev-only reduced-motion hydration warning is the pre-existing one noted in
+    change #25 (it fires in `ScrollProgress`/`ScrollBackdrop`, not here).
+
