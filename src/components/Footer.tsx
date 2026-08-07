@@ -28,7 +28,7 @@ export default function Footer() {
             <ul className="space-y-1">
               <li>
                 <a
-                  href="mailto:johnbcarman@gmail.com"
+                  href="mailto:john@carmancreative.com"
                   className="text-bone/80 hover:text-green"
                 >
                   Email →

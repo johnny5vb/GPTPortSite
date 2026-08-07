@@ -57,11 +57,11 @@ export default function ContactCTA() {
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <MagneticButton
-                href="mailto:johnbcarman@gmail.com?subject=Project%20inquiry"
+                href="mailto:john@carmancreative.com?subject=Project%20inquiry"
                 className="group inline-flex items-center gap-3 rounded-full bg-green text-ink px-7 py-5 font-mono text-[12px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
                 ariaLabel="Email John"
               >
-                johnbcarman@gmail.com
+                john@carmancreative.com
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </MagneticButton>
 

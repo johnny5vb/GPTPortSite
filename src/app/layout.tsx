@@ -5,6 +5,12 @@ import CustomCursor from "@/components/CustomCursor";
 import RouteChrome from "@/components/RouteChrome";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ViewTransitions } from "next-view-transitions";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/seo";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -25,29 +31,33 @@ const geist = Geist({
   display: "swap",
 });
 
+/**
+ * Sitewide metadata defaults. Every route inherits these and overrides the
+ * bits that are page-specific — see `src/lib/seo.ts` for the shared helper.
+ *
+ * Deliberately no `alternates.canonical` here: a canonical set on the root
+ * layout cascades to every child, so each page declares its own.
+ */
 export const metadata: Metadata = {
-  title: "Carman Creative — Creative Direction, Accelerated by AI",
-  description:
-    "John Carman. Creative Director and AI Strategist with 20 years building brands, design systems, and product experiences. Studio in Virginia Beach, Philadelphia, and Brooklyn.",
-  metadataBase: new URL("https://www.carmancreative.com"),
-  applicationName: "Carman Creative",
-  authors: [{ name: "John Carman", url: "https://www.carmancreative.com" }],
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  authors: [{ name: "John Carman", url: SITE_URL }],
   creator: "John Carman",
-  publisher: "Carman Creative",
+  publisher: SITE_NAME,
   openGraph: {
-    title: "Carman Creative — Creative Direction, Accelerated by AI",
-    description:
-      "John Carman. Creative Director and AI Strategist. Brands, design systems, and product made with conviction.",
-    url: "https://www.carmancreative.com",
-    siteName: "Carman Creative",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Carman Creative — Creative Direction, Accelerated by AI",
-    description:
-      "John Carman. Creative Director and AI Strategist. Brands, design systems, and product made with conviction.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 

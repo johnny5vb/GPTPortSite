@@ -40,6 +40,31 @@ Brand mark + wordmark SVGs are in `/public/brand/`. The favicon, apple-touch
 icon, and Open Graph image are all dynamically generated via Next.js App Router
 file conventions: `src/app/icon.svg`, `apple-icon.tsx`, `opengraph-image.tsx`.
 
+### SEO / share metadata
+
+`src/lib/seo.ts` holds the sitewide constants (`SITE_URL`, `SITE_TITLE`,
+`SITE_DESCRIPTION`) plus `pageMetadata()`, which every route calls to emit a
+unique title, description, `<link rel="canonical">`, Open Graph block, and
+Twitter `summary_large_image` block from one place. Use it for any new route —
+don't hand-roll a `metadata` export.
+
+Share images come from the `opengraph-image` file convention, never a static
+`/public/og-image.png`:
+
+- `src/app/opengraph-image.tsx` — the site default (wordmark + headline).
+- `src/app/lab/opengraph-image.tsx`, `src/app/capabilities/opengraph-image.tsx`
+  — thin re-exports of the default. **Metadata image files do not cascade into
+  child segments**, so every new top-level route needs one of these or it ships
+  with no `og:image`. `runtime` has to be redeclared literally in each (Next
+  parses it at compile time and rejects a re-export).
+- `src/app/work/[slug]/opengraph-image.tsx` — per-case-study card: the project
+  cover under a dark scrim with the title in Fraunces. Next serves the same
+  image for `twitter:image`, so no `twitter-image` file is needed anywhere.
+
+`src/app/robots.ts` allows all crawlers and points at `src/app/sitemap.ts`,
+which enumerates `/`, `/lab`, `/capabilities`, and every slug in
+`src/lib/projects.ts` (so new case studies list themselves).
+
 ---
 
 ## Brand tokens
@@ -168,7 +193,7 @@ real screenshots of the existing FRP WordPress site (the user provided them
 via Finder).
 
 ### Contact info (kept consistent across Footer, ContactCTA, CapabilitiesDeck)
-- Email: `johnbcarman@gmail.com`
+- Email: `john@carmancreative.com`
 - LinkedIn: `https://www.linkedin.com/in/johncarman/`
 - Instagram: `https://www.instagram.com/jbcarms` (display `@jbcarms`)
 - Capabilities deck: linked in Footer's connect list as `/capabilities`
@@ -184,7 +209,10 @@ to sound desperate). Footer status reads "Always grinding" / "Q3 2026 onward".
 - `∞` time spent exploring AI
 
 The `Stat` component in `About.tsx` takes either `to={number}` (animated count
-via `CountUp`) or `display="∞"` (static value with `aria-label`).
+via `CountUp`) or `display="∞"` (static value with `aria-label`). Numeric stats
+also pass `from={…}` — a floor so a count-up caught mid-animation (or paused by
+a slow load) never displays an implausibly small claim. The About bio prose says
+"20+ years" so it matches the counter word for word; keep the two in sync.
 
 ### Current roles (About)
 - Carman Creative — Founder — 2020 — Present (live)
@@ -347,6 +375,29 @@ finer-grained detail.
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`
 (preview-server config). New dependencies: `lenis`, `next-view-transitions`.
+
+### Later session — finish-line edits
+
+25. Contact email switched from the personal Gmail to the branded
+    `john@carmancreative.com` everywhere it's displayed or linked (Footer,
+    ContactCTA, CapabilitiesDeck). **Open item:** the mailbox itself has to
+    exist — a forward at the registrar plus Gmail "Send mail as," or Google
+    Workspace. Until then the site links to an address that bounces.
+26. About counters: added a `from` floor so a count-up caught mid-flight never
+    shows an implausibly small number, and changed the bio's "two decades" to
+    "20+ years" so the prose matches the counter exactly.
+27. Full SEO / share-metadata pass — see the SEO section above. Added
+    `src/lib/seo.ts`, per-route canonicals + OG + Twitter tags, per-case-study
+    OG cards, `robots.ts`, and `sitemap.ts`.
+
+**Repo vs. live-site drift (unresolved).** A handoff brief described a live
+carmancreative.com with a Leadership section, a `/resume` page, ~17 routes, and
+case studies (`beacon-carelon-transformation`, `important-colorado`,
+`marketing-bench`, `workfront`) carrying "CASE STUDY IN PROGRESS" pills, plus
+About counters reading `20+ / 15+ / 5`. **None of that exists in this repo** —
+not on any branch, not anywhere in git history. Whatever is deployed at
+carmancreative.com was built from a source tree this repo has never seen. Find
+and reconcile that tree before trusting this repo as the source of truth.
 
 ---
 

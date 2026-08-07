@@ -108,8 +108,16 @@ export default function About() {
 
           {/* Animated stat row */}
           <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8 border-t border-line pt-6">
-            <Stat to={20} suffix="+" label="Years of creative direction" />
-            <Stat to={175} suffix="+" label="Projects shipped" />
+            {/* `from` sets a floor so a slow/paused count-up is never caught
+                mid-animation showing an implausibly small claim (e.g. "3+
+                years"). The counters only ever animate across the top slice. */}
+            <Stat
+              to={20}
+              from={16}
+              suffix="+"
+              label="Years of creative direction"
+            />
+            <Stat to={175} from={140} suffix="+" label="Projects shipped" />
             <Stat display="∞" label="Time spent exploring AI" />
           </div>
 
@@ -119,7 +127,7 @@ export default function About() {
                 I&apos;m a Creative Director and AI strategist working out of
                 Virginia Beach, Philadelphia, and Brooklyn. I lead creative for
                 brands that care about clarity, craft, and outcomes — bringing
-                two decades of experience across brand identity, web design,
+                20+ years of experience across brand identity, web design,
                 packaging, and product to every engagement.
               </p>
               <p>
@@ -204,11 +212,14 @@ export default function About() {
  */
 function Stat({
   to,
+  from,
   suffix,
   label,
   display,
 }: {
   to?: number;
+  /** Floor the count-up starts from — see the call site for why. */
+  from?: number;
   suffix?: string;
   label: string;
   display?: string;
@@ -219,7 +230,7 @@ function Stat({
         {display !== undefined ? (
           <span aria-label={display}>{display}</span>
         ) : (
-          <CountUp to={to ?? 0} suffix={suffix} />
+          <CountUp to={to ?? 0} from={from} suffix={suffix} />
         )}
       </div>
       <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-mute leading-snug">

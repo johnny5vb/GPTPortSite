@@ -911,11 +911,11 @@ function Contact() {
           </p>
           <div className="mt-10 flex items-center flex-wrap gap-4">
             <a
-              href="mailto:johnbcarman@gmail.com?subject=Project%20inquiry"
+              href="mailto:john@carmancreative.com?subject=Project%20inquiry"
               data-cursor="email"
               className="inline-flex items-center gap-3 rounded-full bg-green text-ink px-7 py-5 font-mono text-[12px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
             >
-              johnbcarman@gmail.com
+              john@carmancreative.com
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <Link
