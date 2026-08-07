@@ -390,14 +390,55 @@ Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
     `src/lib/seo.ts`, per-route canonicals + OG + Twitter tags, per-case-study
     OG cards, `robots.ts`, and `sitemap.ts`.
 
-**Repo vs. live-site drift (unresolved).** A handoff brief described a live
-carmancreative.com with a Leadership section, a `/resume` page, ~17 routes, and
-case studies (`beacon-carelon-transformation`, `important-colorado`,
-`marketing-bench`, `workfront`) carrying "CASE STUDY IN PROGRESS" pills, plus
-About counters reading `20+ / 15+ / 5`. **None of that exists in this repo** —
-not on any branch, not anywhere in git history. Whatever is deployed at
-carmancreative.com was built from a source tree this repo has never seen. Find
-and reconcile that tree before trusting this repo as the source of truth.
+---
+
+## ⚠️ The deployed site is NOT built from this repo
+
+Read this before assuming a change here reaches carmancreative.com. It does not.
+
+**What's live.** Netlify project `carman-creative`, current production deploy
+`6a6fa7718e3202e4f35678a9`, published **2026-08-02**. Its provenance fields are
+`deploy_source: "drop"`, `manual_deploy: true`, `commit_ref: null`,
+`branch: null`, `build_id: null`, `has_source_zip: false` — a hand-dragged
+folder of pre-built static HTML with no git link and no recoverable source.
+
+Netlify's own file manifest for that deploy lists **17 generated pages**,
+including `leadership.html`, `resume.html`, `work/important-colorado.html`,
+`work/friends-rehab.html`, and `work/spikes-k9-fund.html`.
+
+**What's here.** 10 routes: `/`, `/lab`, `/capabilities`, and 7 case studies
+(`colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust`,
+`stamp-out-stigma`, `spikes-k9-fund`, `beacon-van`). No Leadership section, no
+`/resume`, no Carelon / Important Colorado / Marketing Bench / Workfront, no
+"CASE STUDY IN PROGRESS" pill, and About counters reading `20+ / 175+ / ∞`
+rather than the live site's `20+ / 15+ / 5`. This is also not a static export —
+there is no `output: "export"`, and `netlify.toml` runs
+`@netlify/plugin-nextjs` against `.next`, so it could not have produced that
+drop.
+
+Only `friends-rehab` and `spikes-k9-fund` appear in both. The two trees share
+ancestry but diverged a long way.
+
+**Where the live source is not.** Searched and ruled out:
+
+- every branch of this repo (`main`, `claude/shred-1999-snowboard-ui0xmm`,
+  `claude/new-session-nzt8d1`) and its full history
+  (`git log --all -S"carelon"` → empty)
+- `johnny5vb/carmancreative` — the legacy WordPress install, not the Next.js app
+- `johnny5vb/CQAP` — Creative Quality Assurance Platform, unrelated
+- `johnny5vb/Carman-Fitness`, `samplesite`, `jumpingfish` — unrelated
+- GitHub code search across all of `johnny5vb` for `Carelon`,
+  `important-colorado`, `marketing-bench`, `CASE STUDY IN PROGRESS` → 0 hits
+
+**Conclusion: the live source exists only as an uncommitted local folder on
+John's Mac** (the handoff brief points at `~/Developer/GPTPortSite`, but what
+was pushed from that path is this tree, so the newer work was never committed).
+
+**To reconcile**, from the local machine: find the tree whose build output
+contains `leadership.html` and `resume.html` (`grep -rl "CASE STUDY IN
+PROGRESS"` across `~/Developer`, or check the folder last dragged to Netlify),
+then commit and push it. Until that lands, edits made here are edits to a tree
+nobody is serving.
 
 ---
 
