@@ -34,6 +34,23 @@ const description =
 export const metadata: Metadata = {
   title: `${BAND.name} — Garage Rock from ${BAND.hometown}`,
   description,
+  /**
+   * Held out of search until the real band content lands.
+   *
+   * Every name, date, venue, release, and email on this route is a
+   * placeholder, and this route is served from carmancreative.com — a
+   * professional portfolio domain. Invented tour dates getting indexed
+   * against that domain is not a good trade for the SEO of a page nobody
+   * is searching for yet.
+   *
+   * Scoped to this segment only: the portfolio's own routes are unaffected.
+   * Delete this block when the real content goes in.
+   */
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false },
+  },
   openGraph: {
     title: `${BAND.name} — Garage Rock from ${BAND.hometown}`,
     description,
