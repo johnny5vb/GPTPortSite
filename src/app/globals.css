@@ -26,6 +26,31 @@
   --font-mono: var(--font-jetbrains);
 }
 
+/* ─── The Shooting Stars ─────────────────────────────────────────────────
+   Tokens for the band microsite at /shooting-stars. Namespaced `ss-` so they
+   can never collide with the Carman Creative brand tokens above. The band
+   site is art-directed independently: midnight sky, gig-poster type, a comet
+   gradient of violet → ember → gold. Fonts are loaded in the band layout
+   (src/app/shooting-stars/layout.tsx) and only bound inside that subtree. */
+@theme {
+  --color-ss-night: #08070f;
+  --color-ss-deep: #04040a;
+  --color-ss-panel: #100e1c;
+  --color-ss-panel-2: #171427;
+  --color-ss-line: #221f36;
+  --color-ss-line-2: #322d4d;
+  --color-ss-cream: #f6f2e9;
+  /* 7.8:1 on --color-ss-night — safe for body copy */
+  --color-ss-smoke: #a49dba;
+  --color-ss-gold: #ffc94a;
+  --color-ss-ember: #ff5a3c;
+  /* 4.6:1 on night — decoration and large type only, never small body copy */
+  --color-ss-violet: #7c5cff;
+
+  --font-band: var(--font-anton);
+  --font-band-body: var(--font-space-grotesk);
+}
+
 @layer base {
   :root {
     color-scheme: dark;
@@ -262,6 +287,178 @@ html.lenis body {
 /* Soften the thumbnail → cover morph so pixel interpolation isn't visible. */
 ::view-transition-image-pair(*) {
   animation-duration: 460ms;
+}
+
+/* ─── The Shooting Stars — scoped styles ─────────────────────────────────
+   Everything below only applies inside `.ss-page` (the wrapper in the band
+   layout). The band site is a separate product from the portfolio: it uses
+   the native cursor, its own heading font, and its own selection color.    */
+
+/* The portfolio hides the system cursor globally in favour of CustomCursor.
+   CustomCursor bails on /shooting-stars, so hand the real cursor back — the
+   class selector outranks the global `*:not(...)` rule at equal importance. */
+@media (hover: hover) and (pointer: fine) {
+  .ss-page,
+  .ss-page * {
+    cursor: auto !important;
+  }
+  .ss-page a,
+  .ss-page button,
+  .ss-page summary,
+  .ss-page [role="button"] {
+    cursor: pointer !important;
+  }
+  .ss-page input,
+  .ss-page textarea {
+    cursor: text !important;
+  }
+}
+
+.ss-page {
+  /* Re-declare the two font tokens here, not just in @theme. A custom
+     property is substituted at the element that declares it, so the @theme
+     `--font-band: var(--font-anton)` on :root resolves against a :root that
+     has no --font-anton (the band layout puts it on this wrapper) and
+     computes to nothing. Declaring them on the same element that carries
+     next/font's variables makes the substitution succeed. */
+  --font-band: var(--font-anton);
+  --font-band-body: var(--font-space-grotesk);
+
+  background: var(--color-ss-night);
+  color: var(--color-ss-cream);
+  font-family: var(--font-band-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.ss-page ::selection {
+  background: var(--color-ss-gold);
+  color: var(--color-ss-deep);
+}
+
+.ss-page :focus-visible {
+  outline: 2px solid var(--color-ss-gold);
+  outline-offset: 3px;
+}
+
+/* Poster type: Anton is a single-weight condensed grotesque. It needs tight
+   tracking and a short leading to read like a gig poster rather than a web
+   heading — but not tighter than 0.92, because Anton's cap height is ~0.83em
+   and anything below that has consecutive lines touching.
+
+   Both rules live in @layer components so Tailwind's `leading-*` utilities
+   still win where a specific block wants looser lines. */
+@layer components {
+  .ss-page h1,
+  .ss-page h2,
+  .ss-page h3 {
+    font-family: var(--font-band), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+
+  .ss-display {
+    font-family: var(--font-band), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Comet gradient — the band's one signature graphic device. Used on accent
+   words, rules, and the logo trail. */
+.ss-comet-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-ss-violet) 0%,
+    var(--color-ss-ember) 46%,
+    var(--color-ss-gold) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Outlined poster type — used for one word in the hero so the stack has a
+   figure/ground rhythm instead of a solid block. */
+.ss-outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-ss-cream);
+  paint-order: stroke fill;
+}
+@media (min-width: 768px) {
+  .ss-outline-text {
+    -webkit-text-stroke-width: 2px;
+  }
+}
+
+/* Halftone dot field for poster panels. */
+.ss-halftone {
+  background-image: radial-gradient(
+    var(--color-ss-line-2) 1px,
+    transparent 1px
+  );
+  background-size: 7px 7px;
+}
+
+/* Slow drift for the aurora blooms behind the hero + contact block. */
+@keyframes ss-bloom {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.12);
+    opacity: 0.8;
+  }
+}
+.ss-bloom {
+  animation: ss-bloom 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Slow rotation for the badge seal. Tailwind's own `spin` keyframes are only
+   emitted when an `animate-spin` utility is used, so the band site declares
+   its own rather than depending on that. */
+@keyframes ss-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ss-spin {
+  animation: ss-spin 48s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ss-marquee-rev {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.ss-marquee-rev {
+  animation: ss-marquee-rev 38s linear infinite;
+  will-change: transform;
+}
+
+/* Pause every band-site loop for reduced-motion users. The global rule in
+   @layer utilities collapses durations, which would leave marquees frozen
+   mid-slide; resetting the transform parks them at their start instead. */
+@media (prefers-reduced-motion: reduce) {
+  .ss-page .marquee,
+  .ss-page .ss-marquee-rev,
+  .ss-page .ss-spin,
+  .ss-page .ss-bloom {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

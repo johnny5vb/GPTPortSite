@@ -77,6 +77,7 @@ variable-font axis trick.
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | Showcase for AI-native design systems |
 | `/work/[slug]` | `ProjectDetail` | Case studies — `colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`, `beacon-van` |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (not currently linked from the home page; the link in Footer's connect list points to it for sharing) |
+| `/shooting-stars` | `BandHero, BandAbout, BandMusic, BandTour, BandPress, BandContact, BandFooter` | **The Shooting Stars** band microsite — a separate product living in the same app. See its own section below. |
 
 Routes data is sourced from `src/data/projects.ts`. Section numbers on the
 home page come from `SectionRail.tsx` and must stay in sync with the eyebrow
@@ -197,6 +198,140 @@ via `CountUp`) or `display="∞"` (static value with `aria-label`).
 ### Locations
 Virginia Beach / Philadelphia / Brooklyn. **Never** Newport Beach (early
 LLM hallucination; user corrected it). Separators are `/`, not `·` or `•`.
+
+---
+
+## The Shooting Stars — band microsite (`/shooting-stars`)
+
+A separate product that happens to share this Next.js app. It is **not**
+Carman Creative work-in-a-portfolio-frame: it has its own identity, palette,
+typefaces, header, and footer, and it is deliberately unlinked from the
+portfolio nav (same posture as `/capabilities`).
+
+**The band.** The Shooting Stars — a four-piece garage rock / power pop band
+out of Virginia Beach, formed 2024. Voice: confident, dry, a little
+self-aware, never winking so hard it undercuts the design. "Four kids, one
+garage" is the thesis; the layout around it is treated completely straight,
+which is what makes it read as a real band site rather than a joke.
+
+**All content is placeholder** — band member names, tour dates, venues,
+release titles, streaming links (`#`), and the `@theshootingstars` /
+`*.band` email addresses are invented to look like a working band's. Swap
+them for the real thing; nothing else needs to change.
+
+### Where things live
+
+| Thing | Path |
+| --- | --- |
+| Every word, name, date, release | `src/lib/shootingStars.ts` |
+| Components | `src/components/shooting-stars/` |
+| Route, metadata, band fonts | `src/app/shooting-stars/layout.tsx` |
+| Favicon | `src/app/shooting-stars/icon.svg` (static file convention) |
+| Share card | `src/app/shooting-stars/opengraph-image.tsx` |
+| Tokens + scoped CSS | `globals.css`, second `@theme` block + `.ss-page` section |
+
+### Brand tokens (`ss-` namespace)
+
+Namespaced so they can never collide with the Carman Creative tokens.
+
+```
+ss-night    #08070f   (background)
+ss-deep     #04040a
+ss-panel    #100e1c
+ss-panel-2  #171427
+ss-line     #221f36
+ss-line-2   #322d4d   ← border tone only; 1.5:1 on night, never use for text
+ss-cream    #f6f2e9   (primary text)
+ss-smoke    #a49dba   (7.8:1 on night — safe for body copy)
+ss-gold     #ffc94a   (primary accent, 12.9:1)
+ss-ember    #ff5a3c   (secondary, 6.4:1)
+ss-violet   #7c5cff   (4.6:1 — decoration and large type only)
+```
+
+Signature graphic device: the **comet gradient**, violet → ember → gold, on
+rules, the logo trail, and the badge ring.
+
+### Typography
+
+- **Anton** (`--font-anton` → `--font-band`) — gig-poster display, uppercase.
+- **Space Grotesk** (`--font-space-grotesk` → `--font-band-body`) — body/UI.
+- **JetBrains Mono** — reused from the portfolio for eyebrows and ticket-stub
+  detail lines.
+
+Two gotchas, both already handled, both easy to reintroduce:
+
+1. `--font-band: var(--font-anton)` is declared **twice** — once in `@theme`
+   (so the `font-band` utility exists) and again on `.ss-page`. The second one
+   is load-bearing: a custom property is substituted at the element that
+   declares it, and `:root` has no `--font-anton` (the band layout puts it on
+   the wrapper), so the `@theme` copy alone computes to nothing and every
+   heading silently falls back to Geist.
+2. Anton's cap height is ~0.83em, so **line-height below 0.92 makes
+   consecutive lines touch**. Both `.ss-page h1,h2,h3` and `.ss-display` sit at
+   0.92 and live in `@layer components` so Tailwind `leading-*` utilities can
+   still loosen a specific block.
+
+Also: never size Anton text with `ch` widths — the face is condensed enough
+that `max-w-[20ch]` measures far narrower than the text sets, which broke the
+press pull quote into one word per line.
+
+### Identity
+
+`StarLogo.tsx` — a four-point sparkle with a tapered comet trail. Three
+lockups: `StarMark` (symbol), `LogoLockup` (nav/footer), `BandBadge`
+(circular seal, slow-rotating, for poster and merch moments). Gradients are
+declared once by `<StarLogoDefs />` in the band layout and referenced by id,
+so nothing depends on a hydration-unsafe id counter.
+
+### Imagery — all drawn, no photography
+
+There are no band photos, so the site draws its own and treats that as the
+art direction rather than a gap:
+
+- `AlbumArt.tsx` — four procedural record sleeves (`comet`, `eclipse`,
+  `orbit`, `signal`) sharing one palette and one type treatment. Title size
+  steps down for long release names. `compact` drops the sleeve type for
+  thumbnail use. **Note:** an earlier `prism` design was replaced because it
+  had drifted into a direct restaging of a famous existing album cover —
+  keep new sleeves original.
+- `StagePoster.tsx` — the "band photo" stand-in: raking stage beams, halftone
+  moon, backline silhouettes (drums, amps, mic stands), crowd.
+- `StarField.tsx` — canvas star field with occasional shooting stars behind
+  the hero. Paints one static frame under reduced motion.
+
+### Integration with the portfolio
+
+- `RouteChrome.tsx` and `CustomCursor.tsx` both bail on `/shooting-stars`.
+- The portfolio hides the system cursor globally; `.ss-page` in `globals.css`
+  hands the native cursor back. If you ever remove that rule, the band site
+  loses its cursor entirely.
+- Lenis smooth scroll and the `noise-fixed` grain stay on — they suit both.
+- The `#main-content` skip-link target is honoured by the band page's `<main>`.
+
+### Accessibility
+
+axe-core (wcag2a/aa + wcag21a/aa + best-practice): **0 violations, 45 passes**
+at 1440px and 390px. No horizontal overflow at either width. Reduced motion
+verified: every reveal completes, and marquees/badge rotation park at their
+start instead of collapsing to a 0.001ms frame.
+
+The one open item is ~45 axe **incompletes**, all `color-contrast` on elements
+sitting over the canvas star field, the blurred aurora blooms, or the
+`backdrop-blur` header — axe cannot sample those backgrounds. Measured by
+hand, the worst realistic case (`ss-smoke` over the brightest part of the
+violet bloom) is ~5.8:1, so they pass AA in fact. This is the one place the
+band site does not match the portfolio's 0-incomplete result, and it is a
+consequence of having a canvas hero at all.
+
+Decisions worth preserving:
+- `ss-line-2` is a **border** tone. Putting copy on it fails contrast (1.5:1).
+- The h1 uses solid colours, not the comet gradient — `background-clip: text`
+  needs `color: transparent`, which contrast scanners read as invisible.
+  `.ss-comet-text` and `.ss-outline-text` exist for `aria-hidden` decoration.
+- The mailing-list form composes a `mailto:` and says so on the button and in
+  the helper text. The site is static; a form that swallowed an address and
+  replied "thanks" would be lying.
+- Sold-out and past shows render as static text, not dead links.
 
 ---
 
@@ -343,6 +478,21 @@ finer-grained detail.
     overlaid at `top-2` and collided with each composition's own labels — moved
     to a caption above each mock (cleaner on desktop too). No horizontal page
     scroll anywhere.
+
+### Later session — The Shooting Stars band microsite
+
+25. Built `/shooting-stars`, a complete band site for The Shooting Stars,
+    inside this app but art-directed as a separate product: own logo system,
+    own `ss-` palette, own typefaces (Anton + Space Grotesk), own header and
+    footer, own favicon and OG card. Sections: hero (canvas star field,
+    poster wordmark, latest-release and next-show capsules), 01 The Band
+    (story, drawn gig poster, stat strip, four-up lineup), 02 Music (featured
+    release with tracklist + back-catalog grid, all sleeves drawn in SVG),
+    03 Tour (upcoming rows with ticket states, played shows, booking CTA),
+    press quotes, 04 Contact (booking email, mailto mailing list, socials).
+    `RouteChrome` and `CustomCursor` opt out of the route; Lenis stays on.
+    Full write-up in the section above. Anton TTFs added to `/public/fonts`
+    for the OG card.
 
 Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 `hero-mockups-2.html` (the visual option mockups), and `.claude/launch.json`

@@ -8,17 +8,19 @@ import ScrollBackdrop from "./ScrollBackdrop";
 
 /**
  * Route-aware global chrome. The Capabilities deck has its own header and
- * pagination, so suppress the site nav + section rail there. The section rail
- * only makes sense on the home page (its anchor targets live there). The
- * scroll-driven backdrop also only runs on the home page to avoid double-
- * tinting case study pages.
+ * pagination, so suppress the site nav + section rail there. The Shooting
+ * Stars band site is a separately art-directed product with its own header,
+ * so it opts out too. The section rail only makes sense on the home page (its
+ * anchor targets live there). The scroll-driven backdrop also only runs on the
+ * home page to avoid double-tinting case study pages.
  */
 export default function RouteChrome() {
   const pathname = usePathname() ?? "/";
   const isDeck = pathname.startsWith("/capabilities");
+  const isBandSite = pathname.startsWith("/shooting-stars");
   const isHome = pathname === "/";
 
-  if (isDeck) return null;
+  if (isDeck || isBandSite) return null;
 
   return (
     <>
