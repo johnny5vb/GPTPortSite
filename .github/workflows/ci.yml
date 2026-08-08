@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A newer push to the same branch cancels the in-flight run — no point
+# finishing a build for a commit that has already been replaced.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          # Matches NODE_VERSION in netlify.toml so CI and the deploy runner
+          # agree. Bump both together.
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # `next build` type-checks the whole project, so this covers tsc too.
+      - name: next build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Reported but not enforced. `main` currently carries 61 pre-existing
+      # eslint problems (mostly `react/jsx-no-comment-textnodes`, from the
+      # "// 02 — Recent Work" section eyebrows being literal JSX text), so a
+      # blocking gate would fail every PR for reasons unrelated to its diff.
+      # Once those are cleaned up, drop `continue-on-error` and this becomes
+      # a real gate.
+      - name: eslint
+        run: npm run lint
+        continue-on-error: true

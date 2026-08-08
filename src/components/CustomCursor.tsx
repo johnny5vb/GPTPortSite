@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
+  const pathname = usePathname() ?? "/";
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
   const ringX = useSpring(x, { stiffness: 220, damping: 24, mass: 0.4 });
@@ -48,7 +50,10 @@ export default function CustomCursor() {
     };
   }, [x, y]);
 
-  if (!enabled) return null;
+  // The Shooting Stars band site uses the native cursor — it's a separately
+  // art-directed product, and globals.css hands the real cursor back inside
+  // `.ss-page`. Bail after the hooks so the hook order stays stable.
+  if (!enabled || pathname.startsWith("/shooting-stars")) return null;
 
   const isLabel = hovering && hovering !== "hover" && hovering !== "true";
   const isHover = !!hovering;
