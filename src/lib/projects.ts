@@ -456,6 +456,9 @@ export const PROJECTS: Project[] = [
     num: "L03",
     tier: "leadership",
     flagship: true,
+    // Pulled from the site while a stronger third leadership example is
+    // chosen. Written and fully wired — flip this off to republish.
+    draft: true,
     title: "Workfront Workflow Transformation",
     client: "Elevance Health / Carelon",
     year: "2025",

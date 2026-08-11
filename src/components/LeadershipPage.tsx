@@ -174,8 +174,17 @@ export default function LeadershipPage() {
       </Block>
 
       {/* Featured leadership case studies */}
-      <Block eyebrow="Featured leadership work" heading="Three programs, start to finish.">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {/* Heading and column count both stay count-agnostic — the flagship set
+          changes as examples are curated in and out. */}
+      <Block
+        eyebrow="Featured leadership work"
+        heading="Programs led start to finish."
+      >
+        <div
+          className={`grid grid-cols-1 gap-4 md:gap-6 ${
+            LEADERSHIP_PROJECTS.length >= 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"
+          }`}
+        >
           {LEADERSHIP_PROJECTS.map((p) => (
             <Link
               key={p.slug}

@@ -98,7 +98,7 @@ variable-font axis trick.
 | `/leadership` | `LeadershipPage` | Dedicated page for senior in-house readiness: experience, what John can lead, flagship case studies, leadership proof, philosophy, résumé/contact CTAs |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
-| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation`, `creative-operations-marketing-bench`, `workfront-workflow-transformation`; independent — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`; secondary — `harrison-bounds`, `beacon-van` |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation`, `creative-operations-marketing-bench` (`workfront-workflow-transformation` is drafted out); independent — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`; secondary — `harrison-bounds`, `beacon-van` |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
@@ -815,4 +815,23 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     reduced motion, no horizontal scroll at 390px, other routes untouched. The
     dev-only reduced-motion hydration warning is the pre-existing one noted in
     change #25 (it fires in `ScrollProgress`/`ScrollBackdrop`, not here).
+
+40. **Workfront Restart pulled from the leadership set** at the owner's request,
+    while a stronger third example is curated. Done with the same reversible
+    `draft: true` flag as EverMark — the case study stays written and fully
+    wired (cover, four program slides, "The work" moments, adoption poster);
+    flip the flag off to republish. Verified: `/work/workfront-workflow-transformation`
+    404s, it's out of the sitemap, and no page links to it.
+    - Both grids that showed the flagships were hard-coded to three columns and
+      would have left a hole. `Work.tsx` and `LeadershipPage.tsx` now pick their
+      column count from `LEADERSHIP_PROJECTS.length`, and the leadership band
+      heading went from "Three programs, start to finish." to the count-agnostic
+      "Programs led start to finish."
+    - **Left in place deliberately:** the Workfront lines in the Leadership
+      page's `EXPERIENCE` and `PROOF` lists ("Workfront and production workflow
+      ownership", "Reworked Workfront intake, review, and approval across ~75+
+      projects a month"). Those are true statements about the work John has
+      done, independent of whether the case study is on the site. Remove them
+      only if he wants the experience itself de-emphasised, not as a side effect
+      of pulling the case study.
 

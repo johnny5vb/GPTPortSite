@@ -57,7 +57,13 @@ export default function Work() {
           Leadership overview <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      {/* Column count follows the number of published flagships, so pulling one
+          down doesn't leave a hole in the row. */}
+      <div
+        className={`grid grid-cols-1 gap-4 md:gap-6 ${
+          LEADERSHIP_PROJECTS.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+        }`}
+      >
         {LEADERSHIP_PROJECTS.map((p, i) => (
           <LeadershipCard key={p.slug} project={p} index={i} />
         ))}
