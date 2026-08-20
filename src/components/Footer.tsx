@@ -50,14 +50,6 @@ export default function Footer() {
                   Instagram →
                 </a>
               </li>
-              <li>
-                <a
-                  href="/capabilities"
-                  className="text-bone/80 hover:text-green"
-                >
-                  Capabilities deck →
-                </a>
-              </li>
             </ul>
           </div>
 

@@ -76,7 +76,7 @@ variable-font axis trick.
 | `/` | `Hero, Manifesto, Work, Showpiece, StyleGuideTalksBack (featured), Services, About, ContactCTA, Footer` | The main narrative |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | Showcase for AI-native design systems |
 | `/work/[slug]` | `ProjectDetail` | Case studies — `colony-coffee`, `friends-rehab`, `harrison-bounds`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`, `beacon-van` |
-| `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (not currently linked from the home page; the link in Footer's connect list points to it for sharing) |
+| `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck. **Not linked from anywhere on the site** and `robots: noindex, nofollow` — reachable only by direct URL, shared deliberately. |
 
 Routes data is sourced from `src/data/projects.ts`. Section numbers on the
 home page come from `SectionRail.tsx` and must stay in sync with the eyebrow
@@ -125,7 +125,8 @@ labels inside each section component.
   highlighted block — see "Availability posture" below.
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
   — that was removed). CC mark, copyright, connect list (Email / LinkedIn /
-  Instagram / Capabilities deck), studio locations.
+  Instagram), studio locations. The Capabilities deck link was removed —
+  see "Availability posture".
 - **`Nav.tsx`** — Top nav. Uses `MagneticNavLink` for subtle spring-physics
   cursor follow. Underlines the current route.
 - **`SectionRail.tsx`** — Sticky right-edge dot rail with 8 sections,
@@ -172,7 +173,8 @@ via Finder).
 - Email: `johnbcarman@gmail.com`
 - LinkedIn: `https://www.linkedin.com/in/johncarman/`
 - Instagram: `https://www.instagram.com/jbcarms` (display `@jbcarms`)
-- Capabilities deck: linked in Footer's connect list as `/capabilities`
+- Capabilities deck: `/capabilities` — not linked from the site at all;
+  share the URL directly when you want someone to see it
 
 ### Availability posture
 
@@ -200,8 +202,8 @@ Rules going forward:
   that reads as a notice period.
 - Keep "Fractional CD" off the home page. It survives in `Services.tsx`
   (S/03 Creative Direction is studio-service framing) and in
-  `/capabilities`, which is intentionally unlinked from the nav and shared
-  deliberately.
+  `/capabilities`, which is unlinked from the entire site, `noindex`ed, and
+  shared by direct URL only.
 - Earlier removals still stand: no "Open for new work", no reply-time
   promises.
 
@@ -296,7 +298,9 @@ fresh.
 - **Do not** ask for or accept user credentials in chat — security
   constraint established with the user.
 - **Do not** delete `/capabilities` route content. It's intentionally
-  unlinked from the main nav but kept reachable for sharing.
+  unlinked from the whole site but kept reachable by direct URL for
+  sharing. Equally, **do not** re-link it from the nav or footer, and keep
+  its `robots: noindex` metadata.
 
 ---
 
@@ -400,5 +404,12 @@ Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
     Footer "Always grinding" / "Q3 2026 onward" status → `// studio`
     locations; ContactCTA availability strip deleted; "Open for / Retainer /
     Project / Fractional CD" block → neutral "Engagements / Project /
-    Retainer". `/capabilities` and `Services.tsx` intentionally unchanged.
+    Retainer". `Services.tsx` intentionally unchanged.
     Full rationale + rules in "Availability posture".
+26. Follow-up: pulled the "Capabilities deck →" link out of the Footer's
+    connect list, so the deck is no longer one click from every page, and
+    added `robots: { index: false, follow: false }` to
+    `src/app/capabilities/page.tsx` — the page had been footer-linked on the
+    live site long enough to be crawlable, so unlinking alone would not have
+    pulled it out of search. Route and content untouched; direct URL still
+    works for deliberate sharing.

@@ -11,6 +11,10 @@ export const metadata: Metadata = {
       "Creative direction, accelerated by AI. Studio in Virginia Beach, Philadelphia, and Brooklyn.",
     type: "website",
   },
+  // Unlinked from site navigation and shared deliberately — keep it out of
+  // search results so it is not stumbled onto. See "Availability posture"
+  // in PROJECT.md.
+  robots: { index: false, follow: false },
 };
 
 export default function Page() {
