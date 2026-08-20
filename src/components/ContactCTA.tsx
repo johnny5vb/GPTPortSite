@@ -8,19 +8,6 @@ import VelocityHeading from "./VelocityHeading";
 export default function ContactCTA() {
   return (
     <section id="contact" className="relative py-28 md:py-40 container-x rule-top overflow-hidden">
-      {/* Availability strip — single line of information, not decoration */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-16 md:mb-24 font-mono text-[10px] uppercase tracking-[0.22em]"
-      >
-        <span className="text-bone/80">Q3 2026 onward</span>
-        <span className="text-mute-2">/</span>
-        <span className="text-bone/80">Retainer / Project / Fractional CD</span>
-      </motion.div>
-
       <div className="relative">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -78,11 +65,7 @@ export default function ContactCTA() {
               label="Social"
               value={`@jbcarms\nlinkedin.com/in/johncarman`}
             />
-            <ContactBlock
-              label="Open for"
-              value={`Retainer / Project\nFractional CD`}
-              highlight
-            />
+            <ContactBlock label="Engagements" value={`Project\nRetainer`} />
           </div>
         </div>
       </div>
@@ -90,31 +73,13 @@ export default function ContactCTA() {
   );
 }
 
-function ContactBlock({
-  label,
-  value,
-  highlight,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
+function ContactBlock({ label, value }: { label: string; value: string }) {
   return (
-    <div
-      className={`p-4 rounded-md border ${
-        highlight
-          ? "border-green/40 bg-green/5"
-          : "border-line bg-ink-2"
-      }`}
-    >
+    <div className="p-4 rounded-md border border-line bg-ink-2">
       <div className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-mute mb-2">
         {label}
       </div>
-      <div
-        className={`whitespace-pre-line text-sm leading-snug ${
-          highlight ? "text-green" : "text-bone"
-        }`}
-      >
+      <div className="whitespace-pre-line text-sm leading-snug text-bone">
         {value}
       </div>
     </div>

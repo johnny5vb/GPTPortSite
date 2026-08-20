@@ -121,10 +121,11 @@ labels inside each section component.
 - **`About.tsx`** — Section 06. Portrait, animated stat counters via
   `CountUp.tsx`, current roles list, tools-in-rotation pills.
 - **`ContactCTA.tsx`** — Section 07. Email button + ContactBlocks grid
-  (Studio / Hours / Social / Open for).
+  (Studio / Hours / Social / Engagements). No availability strip and no
+  highlighted block — see "Availability posture" below.
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
   — that was removed). CC mark, copyright, connect list (Email / LinkedIn /
-  Instagram / Capabilities deck), "Always grinding" status.
+  Instagram / Capabilities deck), studio locations.
 - **`Nav.tsx`** — Top nav. Uses `MagneticNavLink` for subtle spring-physics
   cursor follow. Underlines the current route.
 - **`SectionRail.tsx`** — Sticky right-edge dot rail with 8 sections,
@@ -173,10 +174,36 @@ via Finder).
 - Instagram: `https://www.instagram.com/jbcarms` (display `@jbcarms`)
 - Capabilities deck: linked in Footer's connect list as `/capabilities`
 
-### Availability strip
-Currently reads `Q3 2026 onward / Retainer / Project / Fractional CD`.
-The pulsing green "Open for new work" indicator was removed (didn't want
-to sound desperate). Footer status reads "Always grinding" / "Q3 2026 onward".
+### Availability posture
+
+**Deliberate constraint:** the owner holds a current full-time creative role
+(Elevance Health, listed live in About). The public site must never read like
+a job search — a colleague or manager landing here should see an established
+studio, not someone shopping around. Client-work availability is fine;
+employment-flavored availability is not.
+
+Removed for that reason:
+- The pulsing green "Available" pill in the top nav (was `data-cursor="hire"`).
+  It is now a plain, unpulsed **"Start a project"** link.
+- The Footer's pulsing "Always grinding" status + "Q3 2026 onward" date.
+  That column is now `// studio` with the three locations.
+- The ContactCTA availability strip (`Q3 2026 onward / Retainer / Project /
+  Fractional CD`) — deleted outright.
+- The green-highlighted **"Open for"** contact block. It is now a neutral
+  **"Engagements — Project / Retainer"** block on the default border style.
+
+Rules going forward:
+- No pulsing/animated status indicators tied to availability anywhere in
+  global chrome. (The `live` dots on About's current-roles list are fine —
+  they mark active employment, not availability.)
+- No forward-looking start dates ("Q3 2026 onward" and friends). A date like
+  that reads as a notice period.
+- Keep "Fractional CD" off the home page. It survives in `Services.tsx`
+  (S/03 Creative Direction is studio-service framing) and in
+  `/capabilities`, which is intentionally unlinked from the nav and shared
+  deliberately.
+- Earlier removals still stand: no "Open for new work", no reply-time
+  promises.
 
 ### About stats
 - `20+` years of creative direction
@@ -256,6 +283,10 @@ fresh.
 
 - **Do not** sound desperate in copy (no "Open for new work", no "I'm
   available!"). Tone is confident understatement.
+- **Do not** reintroduce job-search signals — pulsing "Available" badges,
+  forward-looking start dates, or highlighted "Open for" blocks. See
+  "Availability posture". The owner is currently employed; the site must
+  not read as a search.
 - **Do not** use `·` or `•` as separators. Use `/`.
 - **Do not** reintroduce h4/h5 inside decorative mockup cards.
 - **Do not** put `aria-label` on a bare `<span>` without a role.
@@ -360,3 +391,14 @@ Scratch artifacts from this session (safe to delete): `hero-mockups.html`,
 4. Before changing anything that touches the headings / contrast / aria
    patterns, re-read the Accessibility section — those decisions cost a
    long audit cycle.
+
+### Later session — availability posture pass
+
+25. Removed job-search signaling from the public site so a current-employer
+    visitor reads "established studio," not "quietly looking." Nav pill
+    "Available" (pulsing, `data-cursor="hire"`) → plain "Start a project";
+    Footer "Always grinding" / "Q3 2026 onward" status → `// studio`
+    locations; ContactCTA availability strip deleted; "Open for / Retainer /
+    Project / Fractional CD" block → neutral "Engagements / Project /
+    Retainer". `/capabilities` and `Services.tsx` intentionally unchanged.
+    Full rationale + rules in "Availability posture".

@@ -62,15 +62,11 @@ export default function Footer() {
           </div>
 
           <div className="col-span-12 md:col-span-4 font-mono text-[10px] uppercase tracking-[0.22em] md:text-right">
-            <div className="text-mute mb-2">// status</div>
-            <div className="inline-flex items-center gap-2 text-green">
-              <span className="relative inline-flex h-1.5 w-1.5">
-                <span className="absolute inset-0 rounded-full bg-green animate-ping opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green" />
-              </span>
-              Always grinding
+            <div className="text-mute mb-2">// studio</div>
+            <div className="text-bone/80 leading-relaxed">
+              Virginia Beach <span className="text-mute">/</span> Philadelphia{" "}
+              <span className="text-mute">/</span> Brooklyn
             </div>
-            <div className="text-bone/80 mt-2">Q3 2026 onward</div>
           </div>
         </div>
       </div>

@@ -76,14 +76,10 @@ export default function Nav() {
           ))}
           <a
             href="/#contact"
-            data-cursor="hire"
-            className="ml-3 inline-flex items-center gap-2 rounded-full border border-green/60 bg-green/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-green hover:bg-green hover:text-ink transition-colors"
+            data-cursor="contact"
+            className="ml-3 inline-flex items-center rounded-full border border-line-2 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/80 hover:border-green/60 hover:text-green transition-colors"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inset-0 rounded-full bg-green animate-ping opacity-80" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green" />
-            </span>
-            Available
+            Start a project
           </a>
         </nav>
 
