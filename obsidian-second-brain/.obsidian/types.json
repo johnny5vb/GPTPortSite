@@ -1,0 +1,24 @@
+{
+  "types": {
+    "type": "text",
+    "status": "text",
+    "client": "text",
+    "author": "text",
+    "role": "text",
+    "company": "text",
+    "format": "text",
+    "url": "text",
+    "week": "text",
+    "year": "number",
+    "created": "date",
+    "date": "date",
+    "started": "date",
+    "due": "date",
+    "met": "date",
+    "captured": "date",
+    "tags": "tags",
+    "attendees": "multitext",
+    "project": "text",
+    "cssclasses": "multitext"
+  }
+}

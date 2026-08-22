@@ -1,0 +1,6 @@
+{
+  "daily-notes": [{ "modifiers": ["Mod", "Shift"], "key": "D" }],
+  "templates:insert-template": [{ "modifiers": ["Mod", "Shift"], "key": "I" }],
+  "global-search:open": [{ "modifiers": ["Mod", "Shift"], "key": "F" }],
+  "note-composer:split-file": [{ "modifiers": ["Mod", "Shift"], "key": "S" }]
+}
