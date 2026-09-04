@@ -98,7 +98,7 @@ variable-font axis trick.
 | `/leadership` | `LeadershipPage` | Dedicated page for senior in-house readiness: experience, what John can lead, flagship case studies, leadership proof, philosophy, résumé/contact CTAs |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
-| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation`, `creative-operations-marketing-bench`, `workfront-workflow-transformation`; independent — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`; secondary — `harrison-bounds`, `beacon-van` |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation`, `creative-operations-marketing-bench` (the `workfront-workflow-transformation` flagship was removed at the owner's request); independent — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`; secondary — `harrison-bounds`, `beacon-van` |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
