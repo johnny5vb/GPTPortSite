@@ -26,8 +26,8 @@ lead.
 The product is a single-page narrative on `/` plus deeper subpages: a
 **Leadership** page (`/leadership`), a print-friendly **Résumé** (`/resume`),
 an AI & Systems lab (`/lab`), a capabilities deck (`/capabilities`), and case
-studies at `/work/[slug]` (three enterprise **leadership** flagships +
-independent client work). The home page is a long-scroll story with a sticky
+studies at `/work/[slug]` (three **leadership** flagships + independent
+client work). The home page is a long-scroll story with a sticky
 section rail and framer-motion choreography.
 
 Voice and tone target: **quiet authority** — confident, senior, direct. Not
@@ -101,18 +101,18 @@ variable-font axis trick.
 | Route | Component | Purpose |
 | --- | --- | --- |
 | `/` | `Hero, Intro, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative — leadership-first |
-| `/leadership` | `LeadershipPage` | Dedicated page for senior in-house readiness: experience, what John can lead, flagship case studies, leadership proof, philosophy, résumé/contact CTAs |
+| `/leadership` | `LeadershipPage` | Career context: experience, what John can lead, flagship case studies, leadership proof, testimonials, philosophy, résumé/contact CTAs. Neutral in tone since the copy-deck pass — it's background, not a pitch |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
-| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation`, `creative-operations-marketing-bench` (`workfront-workflow-transformation` is drafted out); independent — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `stamp-out-stigma`, `spikes-k9-fund`; secondary — `harrison-bounds`, `beacon-van` |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 — `colony-coffee`, `atromitos`, `important-colorado`, `friends-rehab`, `special-forces-trust`, `spikes-k9-fund`; `evermark` is drafted out. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
 `src/data/`). Each project carries a `tier` (`leadership` / `independent` /
 `secondary`); flagships add `flagship: true` + a `caseStudy` object (overview,
 challenge, mandate, context, role, team, decisions, outcomes, reflection). All
-three flagships now carry a real `cover`; a flagship without one falls back to
-the `display` wordmark. Covers and thumbnails present the piece **whole**
+flagship carries a real `cover`; a flagship without one falls back to the
+`display` wordmark. Covers and thumbnails present the piece **whole**
 (`object-contain`) on a **neutral** plate — never cropped, never on a colour
 wash. A `draft: true` project is written but unpublished: filtered from every
 listing, no route, unreachable via `getProject`, out of the sitemap. Helpers:
@@ -898,3 +898,21 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     down from 74 problems to 71 (the remainder are the pre-existing `// eyebrow`
     `react/jsx-no-comment-textnodes` convention), and `/`, `/leadership`,
     `/resume` read clean of every sweep term in a running browser.
+
+42. **Stamp Out Stigma promoted to the leadership set (L03).** Times Square was
+    **Beacon Health Options** work, not a Carman Creative engagement, but it
+    was filed as independent `06` with "Stamp Out Stigma" listed as its own
+    client — which credited the campaign to itself and understated the role.
+    It is now `tier: "leadership"`, `flagship: true`, client Beacon Health
+    Options, with the role stated as creative lead over concept, messaging and
+    OOH, plus a `roleSummary` so it reads alongside the other flagships.
+    - Workfront (still `draft`) moved `L03` → `L04`; Spike's K9 Fund moved
+      `07` → `06` so the independents close their gap at **01–06**.
+    - The flat `gallery` array was retired in favour of the `caseStudy.work`
+      sequence the other flagships use — the Times Square dusk shot came back
+      as a full-width moment rather than a thumbnail in a strip. `gallery` is
+      now `[]`, which `ProjectDetail` already guards on.
+    - This restores a **third published leadership example**, so the "Case
+      study in progress" badge came off the leadership cards in `Work.tsx`.
+      The count-agnostic grid from change #40 handled the column math without
+      edits.
