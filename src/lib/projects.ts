@@ -453,7 +453,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "workfront-workflow-transformation",
-    num: "L03",
+    num: "L04",
     tier: "leadership",
     flagship: true,
     // Pulled from the site while a stronger third leadership example is
@@ -1409,10 +1409,11 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "stamp-out-stigma",
-    num: "06",
-    tier: "independent",
+    num: "L03",
+    tier: "leadership",
+    flagship: true,
     title: "Stamp Out Stigma",
-    client: "Stamp Out Stigma",
+    client: "Beacon Health Options",
     year: "2023",
     category: "Advertising / Campaign",
     duration: "6 weeks",
@@ -1450,16 +1451,14 @@ export const PROJECTS: Project[] = [
     palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
     display: "STIGMA",
     cover: "/work/stamp-out-stigma/cover.jpg",
-    gallery: [
-      { src: "/work/stamp-out-stigma/gallery-2.png", alt: "Stamp Out Stigma — the campaign on the Times Square screens" },
-      { src: "/work/stamp-out-stigma/gallery-1.jpg", alt: "Stamp Out Stigma — the campaign creative up close" },
-      { src: "/work/stamp-out-stigma/gallery-3.png", alt: "Stamp Out Stigma — Times Square at dusk" },
-    ],
+    gallery: [],
     externalUrl: "https://www.carmancreative.com/work/sos",
+    roleSummary:
+      "Led a national mental-health awareness campaign into Times Square.",
     caseStudy: {
       overview: [
-        { label: "Client", value: "Stamp Out Stigma" },
-        { label: "Role", value: "Campaign & OOH design (Carman Creative)" },
+        { label: "Client", value: "Beacon Health Options" },
+        { label: "Role", value: "Creative lead — campaign concept, messaging, and OOH design" },
         { label: "Year", value: "2023" },
         { label: "Scope", value: "Awareness campaign, out-of-home creative" },
         { label: "Deliverables", value: "Times Square activation creative" },
@@ -1475,7 +1474,7 @@ export const PROJECTS: Project[] = [
         "Designed the out-of-home creative for legibility at a glance",
       ],
       team: [
-        "Stamp Out Stigma campaign stakeholders",
+        "Beacon Health Options campaign stakeholders",
         "A collaborative campaign effort",
       ],
       decisions: [
@@ -1518,12 +1517,21 @@ export const PROJECTS: Project[] = [
           caption:
             "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
         },
+        {
+          kind: "full",
+          image: {
+            src: "/work/stamp-out-stigma/gallery-3.png",
+            alt: "Stamp Out Stigma — Times Square at dusk",
+          },
+          caption:
+            "The placement in context — one honest message holding its own against the loudest advertising environment in the world.",
+        },
       ],
     },
   },
   {
     slug: "spikes-k9-fund",
-    num: "07",
+    num: "06",
     tier: "independent",
     title: "Spike's K9 Fund",
     client: "Spike's K9 Fund",
