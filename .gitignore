@@ -42,9 +42,10 @@ yarn-error.log*
 # netlify CLI cache
 .netlify/
 
-# Claude Code session state — never commit, EXCEPT committed design skills
+# Claude Code session state — never commit, except checked-in skills
 .claude/*
 !.claude/skills/
+!.claude/skills/**
 
 # typescript
 *.tsbuildinfo
