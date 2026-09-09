@@ -13,7 +13,6 @@ import {
 import { ArrowDown, ArrowUpRight, ArrowDownToLine } from "lucide-react";
 import { Link } from "next-view-transitions";
 import HeroIsolines from "./HeroIsolines";
-import { PROFILE } from "@/lib/profile";
 
 const ROTATORS = ["organizations.", "operations.", "systems.", "campaigns."];
 
@@ -129,7 +128,7 @@ export default function Hero() {
           className="flex gap-6"
         >
           <span className="hidden sm:inline text-bone/80">Virginia Beach</span>
-          <span className="hidden md:inline text-bone/80">Remote / Hybrid</span>
+          <span className="hidden md:inline text-bone/80">Brand / Design Systems</span>
           <span className="text-green">{now} EST</span>
         </motion.div>
       </div>
@@ -178,44 +177,43 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.55 }}
             className="col-span-12 md:col-span-6 md:col-start-7 max-w-[54ch] space-y-4"
           >
+            {/* One paragraph, not two. The Intro band directly below now
+                carries the "who I am, what this is" statement, so repeating it
+                here left the top of the page saying the same thing twice. */}
             <p className="text-bone/85 text-base md:text-lg leading-relaxed">
-              I&apos;m John Carman, a{" "}
-              <span className="text-green">Creative Director</span> with{" "}
-              {PROFILE.yearsExperience} years across enterprise brand
-              leadership, campaigns, digital experiences, and creative
-              operations.
-            </p>
-            <p className="text-bone/70 text-sm md:text-base leading-relaxed">
               I help organizations produce clearer, stronger, more effective
-              creative work — and build the systems that let teams keep
+              creative work — and build the{" "}
+              <span className="text-green">systems</span> that let teams keep
               improving.
             </p>
 
-            {/* Primary path: employment. Secondary: consulting. */}
+            {/* The work leads. Leadership and the résumé stay reachable, one
+                rung down — they are context, not the pitch. */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href="#work"
+                data-cursor="work"
+                className="group inline-flex items-center gap-2 rounded-full bg-green text-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
+              >
+                View the Work
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
               <Link
                 href="/leadership"
                 data-cursor="leadership"
-                className="group inline-flex items-center gap-2 rounded-full bg-green text-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-line-2 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
               >
-                View Leadership Work
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                Leadership
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </Link>
               <Link
                 href="/resume"
                 data-cursor="resume"
-                className="inline-flex items-center gap-2 rounded-full border border-line-2 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
+                className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/70 hover:text-bone transition-colors"
               >
-                Download Résumé
+                Résumé
                 <ArrowDownToLine className="h-3.5 w-3.5" />
               </Link>
-              <a
-                href="#contact"
-                data-cursor="ask"
-                className="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.2em] text-bone/70 hover:text-bone transition-colors"
-              >
-                Discuss a project →
-              </a>
             </div>
           </motion.div>
         </div>

@@ -27,12 +27,11 @@ const instrumentSans = Instrument_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "John Carman | Creative Director, Brand and Creative Operations Leader",
+    default: "John Carman — Carman Creative",
     template: "%s",
   },
   description:
-    "Portfolio of Creative Director John Carman — enterprise brand leadership, campaigns, creative operations, digital experiences, and AI-enabled creative systems. Based in Virginia Beach; available for remote and select hybrid roles.",
+    "John Carman — creative director and founder of Carman Creative. Brand, creative direction, and design-systems work.",
   metadataBase: new URL("https://www.carmancreative.com"),
   applicationName: "Carman Creative",
   authors: [{ name: "John Carman", url: "https://www.carmancreative.com" }],
@@ -40,10 +39,9 @@ export const metadata: Metadata = {
   publisher: "Carman Creative",
   alternates: { canonical: "/" },
   openGraph: {
-    title:
-      "John Carman | Creative Director, Brand and Creative Operations Leader",
+    title: "John Carman — Carman Creative",
     description:
-      "Enterprise brand leadership, campaigns, creative operations, and AI-enabled creative systems.",
+      "John Carman — creative director and founder of Carman Creative. Brand, creative direction, and design-systems work.",
     url: "https://www.carmancreative.com",
     siteName: "Carman Creative",
     type: "website",
@@ -51,10 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "John Carman | Creative Director, Brand and Creative Operations Leader",
+    title: "John Carman — Carman Creative",
     description:
-      "Enterprise brand leadership, campaigns, creative operations, and AI-enabled creative systems.",
+      "John Carman — creative director and founder of Carman Creative. Brand, creative direction, and design-systems work.",
   },
 };
 
@@ -62,14 +59,14 @@ export const viewport: Viewport = {
   themeColor: "#080808",
 };
 
-/** Person structured data for search — leadership-forward. */
+/** Person structured data for search. Descriptive, no availability signal. */
 const personLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "John Carman",
   jobTitle: "Creative Director",
   description:
-    "Creative Director and Brand & Creative Operations Leader with 20 years across enterprise brand, campaigns, creative operations, and AI-enabled creative systems.",
+    "Creative director and founder of Carman Creative. Twenty years across brand, creative direction, creative operations, and design systems, most of it inside large organizations.",
   url: "https://www.carmancreative.com",
   address: {
     "@type": "PostalAddress",

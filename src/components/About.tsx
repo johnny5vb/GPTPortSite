@@ -158,12 +158,11 @@ export default function About() {
                 brand, workflow, and stakeholder leadership.
               </p>
               <p>
-                Alongside that, I run Carman Creative — selected brand, digital,
-                and consulting engagements — and spend real time modernizing how
-                creative teams work with AI. I&apos;m now looking to bring that
-                experience to a more challenging leadership environment: to shape
-                the work, strengthen the team, and improve how creative moves
-                through an organization.
+                Alongside that, I run Carman Creative — brand, digital, and
+                design-systems work — and spend real time modernizing how
+                creative teams work with AI. The through-line is the same
+                wherever the work happens: shape the work, strengthen the team,
+                and improve how creative moves through an organization.
               </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -176,7 +175,7 @@ export default function About() {
                   <ArrowDownToLine className="h-3.5 w-3.5" />
                 </Link>
                 <a
-                  href={`mailto:${PROFILE.contact.email}?subject=Leadership%20opportunity`}
+                  href={`mailto:${PROFILE.contact.email}`}
                   data-cursor="email"
                   className="inline-flex items-center gap-2 rounded-full border border-line-2 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
                 >

@@ -37,8 +37,6 @@ export default function Footer() {
               </div>
               <div className="mt-2 text-mute-2 font-sans normal-case tracking-normal">
                 {PROFILE.location.base}
-                <br />
-                {PROFILE.location.availability}.
               </div>
               <div className="mt-3 text-mute font-mono uppercase tracking-[0.18em] text-[10px]">
                 © {year} / All rights reserved
@@ -66,15 +64,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Status */}
+          {/* Practice. This was a status block announcing availability; it now
+              names the disciplines instead. */}
           <div className="col-span-12 md:col-span-3 font-mono text-[10px] uppercase tracking-[0.22em] md:text-right">
-            <div className="text-mute mb-2">// status</div>
-            <div className="text-green leading-relaxed">
-              Open to the right leadership opportunity
-            </div>
-            <div className="text-bone/70 mt-3 normal-case tracking-normal font-sans text-[11px] leading-snug">
-              Carman Creative provides selected brand, digital, and creative
-              consulting engagements.
+            <div className="text-mute mb-2">// practice</div>
+            <div className="text-bone/70 normal-case tracking-normal font-sans text-[11px] leading-snug">
+              {PROFILE.practiceLine}
             </div>
           </div>
         </div>

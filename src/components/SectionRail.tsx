@@ -12,7 +12,7 @@ const SECTIONS = [
   // Order here must follow the DOM order on the home page — About renders
   // before Services, so it carries the lower number.
   { id: "about", label: "About", num: "05" },
-  { id: "services", label: "Consulting", num: "06" },
+  { id: "services", label: "Practice", num: "06" },
   { id: "contact", label: "Contact", num: "07" },
 ];
 

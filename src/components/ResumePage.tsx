@@ -123,9 +123,6 @@ export default function ResumePage() {
               linkedin.com/in/johncarman
             </a>
           </p>
-          <p className="mt-2 text-sm text-mute">
-            {PROFILE.location.availability}.
-          </p>
         </header>
 
         {/* Summary */}
@@ -136,8 +133,7 @@ export default function ResumePage() {
             useful, and distinctive creative work — most of it inside enterprise
             healthcare. Experienced leading brand, campaigns, digital, and
             creative operations; managing designers, agencies, and stakeholders;
-            and modernizing how teams work with AI. Seeking a senior in-house
-            creative leadership role.
+            and modernizing how teams work with AI.
           </p>
         </Section>
 

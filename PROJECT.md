@@ -11,13 +11,17 @@ The personal portfolio + career site for **John Carman**, a **Creative
 Director and Brand & Creative Operations Leader** based in Virginia Beach.
 Site lives at **https://www.carmancreative.com**.
 
-**Primary purpose (repositioned):** present John first as a senior creative
-leader available for **Director-level in-house employment**, and second as
-**Carman Creative**, a consulting/freelance offering. The employment path is
-more prominent than the consulting path everywhere on the site. The
-positioning hierarchy is: (1) Creative Director, (2) Brand & Creative
-Operations Leader, (3) AI-Enabled Creative Strategist — AI is a supporting
-advantage, never the lead.
+**Primary purpose (neutral, as of the copy-deck pass):** present John as a
+working creative director and the practice he runs — **brand, creative
+direction, and design systems** — and let the work carry the argument. The
+site **does not solicit**: no availability posture, no "open to roles," no
+"hire the practice." An earlier pass had positioned it employment-first
+(Director-level in-house, with consulting secondary); that framing was
+replaced. `/leadership` and `/resume` remain, linked and neutral in tone, as
+career context for anyone who goes looking. The positioning hierarchy is
+still: (1) Creative Director, (2) Brand & Creative Operations Leader,
+(3) AI-Enabled Creative Strategist — AI is a supporting advantage, never the
+lead.
 
 The product is a single-page narrative on `/` plus deeper subpages: a
 **Leadership** page (`/leadership`), a print-friendly **Résumé** (`/resume`),
@@ -28,14 +32,16 @@ section rail and framer-motion choreography.
 
 Voice and tone target: **quiet authority** — confident, senior, direct. Not
 "swagger," not hustle. Modern tools, classical taste. Specific things to
-avoid: sounding desperate or hustle-y ("Always grinding" was removed in favor
-of "Open to the right leadership opportunity"); the old `carman • creative`
+avoid: any solicitation or availability language at all (the neutral pass
+removed the last of it — see the sweep list in the change log); the old
+`carman • creative`
 dot treatment (dots are out, slashes are in); leading with "AI Strategist";
 fabricated metrics (see the TODO discipline below).
 
 **Single source of truth for identity/contact:** `src/lib/profile.ts`
-(`PROFILE`) — name, title stack, email, socials, location, availability,
-résumé href. Import from it; don't hard-code contact/positioning again.
+(`PROFILE`) — name, title stack, email, socials, location, practice line,
+résumé href. Import from it; don't hard-code contact/positioning again. There
+is deliberately **no availability field**; don't add one back.
 
 **Honesty / TODO discipline:** never publish unverified metrics as facts.
 Numbers awaiting confirmation (e.g. ~1,500+ assets, ~70,000+ employees,
@@ -94,7 +100,7 @@ variable-font axis trick.
 
 | Route | Component | Purpose |
 | --- | --- | --- |
-| `/` | `Hero, AudienceSplit, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative — leadership-first |
+| `/` | `Hero, Intro, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative — leadership-first |
 | `/leadership` | `LeadershipPage` | Dedicated page for senior in-house readiness: experience, what John can lead, flagship case studies, leadership proof, philosophy, résumé/contact CTAs |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
@@ -118,8 +124,9 @@ Section numbers come from `SectionRail.tsx` and must stay in sync with the
 eyebrow labels inside each section component.
 
 ### Home section numbering (eyebrows)
-`AudienceSplit` (Hiring John / Work With Carman Creative) and `ResumePreview`
-are un-numbered CTA bands between the numbered narrative sections.
+`Intro` (the `// John Carman` identity band — formerly `AudienceSplit`, a
+two-card Hiring John / Work With Carman Creative split) and `ResumePreview`
+are un-numbered bands between the numbered narrative sections.
 ```
 00  Intro        (Hero)
 01  How I Lead    (Manifesto — leadership philosophy, 4 principles)
@@ -127,8 +134,8 @@ are un-numbered CTA bands between the numbered narrative sections.
 03  In Focus      (Showpiece)
 04  AI & Systems  (AISystemsTeaser — compact, links → /lab; big demo removed from home)
 05  About         (About)
-06  Consulting    (Services — reframed as the secondary Carman Creative offer)
-07  Contact       (ContactCTA — split employment vs. project inquiry paths)
+06  Practice      (Services — the four disciplines, described not offered)
+07  Contact       (ContactCTA — one invitation, one plain mailto)
 ```
 
 ---
@@ -161,7 +168,8 @@ are un-numbered CTA bands between the numbered narrative sections.
   (Studio / Hours / Social / Open for).
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
   — that was removed). CC mark, copyright, connect list (Email / LinkedIn /
-  Instagram / Capabilities deck), "Always grinding" status.
+  Instagram / Capabilities deck), and a `// practice` block naming the
+  disciplines (this replaced a `// status` availability block).
 - **`Nav.tsx`** — Top nav. Uses `MagneticNavLink` for subtle spring-physics
   cursor follow. Underlines the current route.
 - **`SectionRail.tsx`** — Sticky right-edge dot rail with 8 sections,
@@ -214,15 +222,16 @@ via Finder).
 - Instagram: `https://www.instagram.com/jbcarms` (display `@jbcarms`)
 - Capabilities deck: linked in Footer as `/capabilities`
 
-### Availability / positioning strips
-- Contact section strip: `Open to senior creative leadership roles / Remote /
-  Select hybrid / Select consulting via Carman Creative`.
-- Footer status: `Open to the right leadership opportunity` (replaced the old
-  hustle-y "Always grinding"), plus the secondary line "Carman Creative
-  provides selected brand, digital, and creative consulting engagements."
-- Contact has **two inquiry paths** (mailto-based, no backend): "Discuss a
-  Leadership Opportunity" (primary) and "Discuss a Creative Project"
-  (secondary). TODO: wire Netlify Forms if real forms are wanted.
+### Positioning strips (no availability anywhere)
+- Contact section strip: `Carman Creative / Brand / Creative direction /
+  Design systems`.
+- Footer `// practice`: `Carman Creative — brand, creative direction, and
+  design systems.` (`PROFILE.practiceLine`).
+- Hero meta strip: `Virginia Beach / Brand / Design Systems`.
+- Contact has **one** path — a plain `mailto:` behind "Email me", with no
+  pre-filled subject or body (pre-filling an intake form implies a
+  transaction is being solicited). TODO: wire Netlify Forms if a real form is
+  wanted.
 
 ### About stats (leadership proof — only defensible numbers)
 - `20+` years leading creative & brand
@@ -315,9 +324,10 @@ fresh.
 
 ## Critical "do not" list
 
-- **Do not** demote the employment positioning below consulting. John is a
-  Creative Director seeking a senior in-house role first; Carman Creative
-  consulting is secondary. Keep the leadership path more prominent everywhere.
+- **Do not** reintroduce availability or solicitation language. No "open
+  to", "available for", "seeking", "for hiring teams", "hire me". The site
+  describes the work; it does not ask for any. (This reverses the earlier
+  employment-first rule — see change #41.)
 - **Do not** lead with "AI Strategist." AI is the third descriptor, a
   supporting advantage — never the headline.
 - **Do not** publish unverified metrics as facts. Gate them behind visible
@@ -326,8 +336,7 @@ fresh.
   keep the working Gmail live; a bouncing address is a credibility leak.
 - **Do not** invent testimonials/quotes. `TODO` placeholders only, never
   fake quotes on the live site.
-- **Do not** sound desperate or hustle-y (no "Always grinding", no "Open for
-  new work", no "I'm available!"). Tone is confident understatement.
+- **Do not** sound desperate or hustle-y. Tone is confident understatement.
 - **Do not** use `·` or `•` as separators. Use `/`.
 - **Do not** reintroduce h4/h5 inside decorative mockup cards.
 - **Do not** put `aria-label` on a bare `<span>` without a role.
@@ -835,3 +844,57 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       only if he wants the experience itself de-emphasised, not as a side effect
       of pulling the case study.
 
+
+### Later session — the neutral copy deck
+
+41. **Applied the neutral copy deck** (`carmancreative-neutral-copy-deck.md`,
+    Part A of the v2 brief). The site no longer presents as a job search or a
+    sales pitch; it presents as a creative director's portfolio and the
+    practice he runs. Nothing about the visual system, type, motion, or the
+    case studies changed — this was copy, IA, and metadata only.
+    - **`AudienceSplit` → `Intro`.** The two-card "Hiring John / Work With
+      Carman Creative" split collapsed into one `// John Carman` identity band
+      with the deck's headline and body, and two quiet links (View the work,
+      About). `AudienceSplit.tsx` is deleted, not orphaned.
+    - **Contact** lost its availability strip (now the four disciplines), lost
+      the hiring/project card split, and lost the pre-filled mailto intakes.
+      One "Email me" button on a bare `mailto:`. Detail cards went 4 → 3:
+      Based in / Email / LinkedIn (the Availability card is gone).
+    - **Footer** `// status` → `// practice`; the "Open to the right
+      leadership opportunity" line and the availability line under John's name
+      are both gone.
+    - **Services** is section **06 — Practice** (rail label too, previously
+      "Consulting"); heading "Work with Carman Creative." → "The work of
+      Carman Creative."; the Creative Direction card's "I lead. I hire…" pitch
+      and the second-person "your team" both neutralized.
+    - **`PROFILE`** dropped `location.availability` and `location.line`, and
+      gained `practice` / `practiceLine`. The file header now says why there
+      is no availability field.
+    - **SEO** per the deck: title base and og:title are `John Carman — Carman
+      Creative`; description is the deck's one-liner, mirrored to og/twitter
+      and the Person JSON-LD. `/capabilities` lost its availability sentence.
+      Case-study pages already used `project.blurb` as their description, so
+      the deck's §6 ask was already satisfied there.
+    - **Beyond the deck, from its final sweep:** `/leadership` ("Contact John
+      About a Role" → "Get in touch"; "Considering John for a leadership
+      role?" → "Happy to talk about any of it."; `?subject=Leadership
+      opportunity` dropped from every mailto), `/resume` (availability line
+      and "Seeking a senior in-house creative leadership role." removed), and
+      About ("I'm now looking to bring that experience to a more challenging
+      leadership environment" → a neutral through-line sentence).
+    - **Two judgment calls worth knowing.** (1) The Hero's CTA stack led with
+      View Leadership Work + Download Résumé; the work now leads, with
+      Leadership and Résumé one rung down. (2) Inserting the Intro band left
+      the hero and the band saying the same thing twice, so the hero's
+      biographical paragraph was cut and the band carries it. Both are
+      one-diff reversions if the hero should stay as it was.
+    - **Deliberately not swept:** `caseStudy.mandate` in `projects.ts`. There
+      "mandate" means the project brief, not a hiring mandate.
+    - **Email stayed on Gmail.** The deck pointed the button at
+      `john@carmancreative.com`; the mailbox still isn't provisioned, so the
+      standing rule held. Flip `PROFILE.contact.email` when it exists.
+
+    Verified: clean `npm run build` (20 pages), `tsc --noEmit` clean, eslint
+    down from 74 problems to 71 (the remainder are the pre-existing `// eyebrow`
+    `react/jsx-no-comment-textnodes` convention), and `/`, `/leadership`,
+    `/resume` read clean of every sweep term in a running browser.

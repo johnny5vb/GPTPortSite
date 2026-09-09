@@ -127,11 +127,11 @@ export default function LeadershipPage() {
                 <ArrowDownToLine className="h-3.5 w-3.5" />
               </Link>
               <a
-                href={`mailto:${PROFILE.contact.email}?subject=Leadership%20opportunity`}
+                href={`mailto:${PROFILE.contact.email}`}
                 data-cursor="email"
                 className="inline-flex items-center gap-2 rounded-full border border-line-2 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
               >
-                Contact John About a Role
+                Get in touch
               </a>
             </div>
           </div>
@@ -270,14 +270,12 @@ export default function LeadershipPage() {
         <div className="grid grid-cols-12 gap-6 items-end">
           <div className="col-span-12 md:col-span-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-4">
-              // Next step
+              // Contact
             </p>
             <h2 className="t-display-lg">
-              Considering John for a
+              Happy to talk about
               <br />
-              <em className="font-display-wonk text-green">
-                leadership role?
-              </em>
+              <em className="font-display-wonk text-green">any of it.</em>
             </h2>
           </div>
           <div className="col-span-12 md:col-span-4 md:text-right flex flex-wrap md:justify-end gap-3">
@@ -290,11 +288,11 @@ export default function LeadershipPage() {
               <ArrowDownToLine className="h-3.5 w-3.5" />
             </Link>
             <a
-              href={`mailto:${PROFILE.contact.email}?subject=Leadership%20opportunity`}
+              href={`mailto:${PROFILE.contact.email}`}
               data-cursor="email"
               className="inline-flex items-center gap-2 rounded-full border border-line-2 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-bone hover:border-green hover:text-green transition-colors"
             >
-              Contact John
+              Email me
             </a>
           </div>
         </div>

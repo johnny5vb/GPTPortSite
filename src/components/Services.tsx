@@ -15,7 +15,7 @@ const SERVICES: Service[] = [
     num: "S/01",
     title: "Design Systems",
     pitch:
-      "Defined, documented, governed. The system that lets your team ship for years without losing the plot.",
+      "Defined, documented, governed. The system that lets a team ship for years without losing the plot.",
     bullets: [
       "Set rules for color, type, space, and motion",
       "Component library + Storybook",
@@ -41,7 +41,7 @@ const SERVICES: Service[] = [
     num: "S/03",
     title: "Creative Direction",
     pitch:
-      "I lead. I hire. I keep the work honest. Embedded with your team for a launch, a quarter, or the long haul.",
+      "Setting the standard, keeping the work honest, and helping teams do their best work.",
     bullets: [
       "Campaign & launch direction",
       "Team building + hiring",
@@ -71,7 +71,7 @@ export default function Services() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 06 — Consulting
+            // 06 — Practice
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">
@@ -82,13 +82,12 @@ export default function Services() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="t-display-lg"
           >
-            Work with{" "}
+            The work of{" "}
             <em className="font-display-wonk text-green">Carman Creative.</em>
           </motion.h2>
           <p className="mt-6 text-mute max-w-[54ch] leading-relaxed">
-            Alongside in-house leadership, I take on selected brand, digital,
-            and creative-systems engagements. Four shapes the work usually
-            takes — most pull from two or three at once.
+            Brand, digital, and creative-systems work. Four shapes it usually
+            takes — most projects pull from two or three at once.
           </p>
         </div>
       </header>

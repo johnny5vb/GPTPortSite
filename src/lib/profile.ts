@@ -1,15 +1,18 @@
 /**
- * Profile — single source of truth for identity, positioning, contact, and
- * availability. Every component that renders a name, title, email, social
- * link, location, or availability line should import from here so the site
- * stays internally consistent (no more drift between Hero / About / Footer /
- * ContactCTA).
+ * Profile — single source of truth for identity, positioning, and contact.
+ * Every component that renders a name, title, email, social link, or location
+ * should import from here so the site stays internally consistent (no more
+ * drift between Hero / About / Footer / ContactCTA).
+ *
+ * Posture is neutral: this is a portfolio for a working creative director and
+ * the practice he runs, not a job search. There is deliberately no
+ * availability field — the site describes what the work is, and does not
+ * solicit. Don't reintroduce "open to", "available for", or "seeking" copy
+ * without an explicit decision to reposition again.
  *
  * Positioning hierarchy (do not reorder without intent): John is a Creative
  * Director first, a brand + creative-operations leader second, and an
- * AI-enabled strategist third. The site's primary audience is companies
- * considering him for a senior in-house role; consulting is the secondary
- * offering.
+ * AI-enabled strategist third.
  */
 
 export const PROFILE = {
@@ -31,11 +34,11 @@ export const PROFILE = {
 
   location: {
     base: "Virginia Beach, Virginia",
-    /** Confident, non-desperate availability posture. */
-    availability: "Available for remote and select hybrid opportunities",
-    /** One-line version for strips. */
-    line: "Based in Virginia Beach. Available for remote and select hybrid opportunities.",
   },
+
+  /** What the practice does. Descriptive, not an offer. */
+  practice: "Brand, creative direction, and design systems",
+  practiceLine: "Carman Creative — brand, creative direction, and design systems.",
 
   contact: {
     /**

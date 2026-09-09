@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero";
-import AudienceSplit from "@/components/AudienceSplit";
+import Intro from "@/components/Intro";
 import Manifesto from "@/components/Manifesto";
 import Work from "@/components/Work";
 import Showpiece from "@/components/Showpiece";
@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main id="main-content" className="relative">
       <Hero />
-      <AudienceSplit />
+      <Intro />
       <Manifesto />
       <Work />
       <Showpiece />
