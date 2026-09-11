@@ -39,8 +39,8 @@ export default async function Image() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#080808",
-          color: "#f5f3ef",
+          background: "#0c0b09",
+          color: "#f6f2ea",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -69,7 +69,7 @@ export default async function Image() {
             textAlign: "center",
           }}
         >
-          <span style={{ color: "#f5f3ef" }}>Creative Director /</span>
+          <span style={{ color: "#f6f2ea" }}>Creative Director /</span>
           <span style={{ color: "#1cb791", fontStyle: "italic" }}>
             creative operations leader.
           </span>

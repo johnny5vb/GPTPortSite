@@ -12,34 +12,35 @@ import { ArrowUpRight } from "lucide-react";
 export default function Intro() {
   return (
     <section id="intro" className="relative container-x py-16 md:py-24 rule-top">
-      <div className="grid grid-cols-12 gap-6 md:gap-10">
-        <div className="col-span-12 md:col-span-4">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.6 }}
-            className="t-label text-green md:sticky md:top-28"
-          >
-            // John Carman
-          </motion.p>
-        </div>
+      {/* Left-anchored editorial stack. This was a 4/8 label-plus-content
+          split, which started every heading a third of the way across and
+          then capped it with a max-width — the result read as a narrow column
+          floating in the middle of the page. The eyebrow now sits above the
+          heading and everything runs from the left edge. */}
+      <div>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="t-label text-green mb-5"
+        >
+          // John Carman
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="col-span-12 md:col-span-8"
         >
-          <h2 className="t-display-md max-w-[24ch]">
-            Creative director. I build brands, lead teams, and create the{" "}
+          <h2 className="t-display-md max-w-[34ch]">
+            Creative director working across brand,{" "}
             <em className="font-display-wonk text-green">
-              systems that keep the work good
-            </em>{" "}
-            at scale.
+              creative operations, and design.
+            </em>
           </h2>
-          <p className="mt-6 text-bone/85 leading-relaxed max-w-[56ch]">
+          <p className="mt-6 text-bone/85 leading-relaxed max-w-[68ch]">
             I run Carman Creative and have spent about twenty years in brand and
             creative operations, most of it inside large, complex organizations.
             This is a selection of that work.

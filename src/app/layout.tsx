@@ -1,27 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, JetBrains_Mono, Instrument_Sans } from "next/font/google";
+import { Newsreader, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import RouteChrome from "@/components/RouteChrome";
 import SmoothScroll from "@/components/SmoothScroll";
 import { ViewTransitions } from "next-view-transitions";
 
-const fraunces = Fraunces({
+// One serif family for display *and* body. Its optical-size axis does the
+// work Fraunces' SOFT/WONK axes used to — tight and dramatic at 60pt, open
+// and readable at 14pt — so there is no pairing left to get wrong.
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  axes: ["SOFT", "WONK", "opsz"],
+  variable: "--font-newsreader",
+  axes: ["opsz"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
-  display: "swap",
-});
-
-const instrumentSans = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-instrument-sans",
   display: "swap",
 });
 
@@ -56,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080808",
+  themeColor: "#0c0b09",
 };
 
 /** Person structured data for search. Descriptive, no availability signal. */
@@ -88,7 +86,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${jetbrains.variable} ${instrumentSans.variable}`}
+      className={`${newsreader.variable} ${jetbrains.variable}`}
     >
       <body className="noise-fixed antialiased">
         <ViewTransitions>

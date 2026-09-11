@@ -34,8 +34,8 @@ const THEMES: Theme[] = [
     mute: "#8a8a8a",
     accent: "#1cb791",
     accent2: "#2ee5b3",
-    font: "var(--font-instrument-sans)",
-    display: "var(--font-fraunces)",
+    font: "var(--font-sans)",
+    display: "var(--font-display)",
   },
   {
     id: "atlas",
@@ -48,8 +48,8 @@ const THEMES: Theme[] = [
     mute: "#7a6c5d",
     accent: "#d24a1f",
     accent2: "#f7b4a3",
-    font: "var(--font-instrument-sans)",
-    display: "var(--font-fraunces)",
+    font: "var(--font-sans)",
+    display: "var(--font-display)",
   },
   {
     id: "reservoir",
@@ -62,8 +62,8 @@ const THEMES: Theme[] = [
     mute: "#7d93ad",
     accent: "#2ee5b3",
     accent2: "#7ad7ff",
-    font: "var(--font-instrument-sans)",
-    display: "var(--font-fraunces)",
+    font: "var(--font-sans)",
+    display: "var(--font-display)",
   },
   {
     id: "wonk",
@@ -76,8 +76,8 @@ const THEMES: Theme[] = [
     mute: "#a39c8a",
     accent: "#e7ff52",
     accent2: "#a3b62c",
-    font: "var(--font-instrument-sans)",
-    display: "var(--font-fraunces)",
+    font: "var(--font-sans)",
+    display: "var(--font-display)",
   },
 ];
 

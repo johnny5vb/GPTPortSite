@@ -116,8 +116,8 @@ export default function CapabilitiesDeck() {
           }
           html,
           body {
-            background: #080808;
-            color: #f5f3ef;
+            background: #0c0b09;
+            color: #f6f2ea;
           }
           .deck-chrome,
           .deck-rail {

@@ -92,14 +92,12 @@ export default function Manifesto() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Header — single row, title on one line */}
-      <header className="grid grid-cols-12 gap-6 mb-10 md:mb-12 items-baseline">
-        <div className="col-span-12 md:col-span-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 01 — How I Lead
-          </p>
-        </div>
-        <div className="col-span-12 md:col-span-8">
+      {/* Left-anchored, not a 4/8 label split — see the note in Intro.tsx. */}
+      <header className="mb-10 md:mb-12">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-5">
+          // 01 — How I Lead
+        </p>
+        <div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +107,7 @@ export default function Manifesto() {
           >
             How I <em className="font-display-wonk text-green">lead.</em>
           </motion.h2>
-          <p className="mt-4 text-mute text-sm md:text-base leading-relaxed max-w-[52ch]">
+          <p className="mt-4 text-mute text-sm md:text-base leading-relaxed max-w-[70ch]">
             Leadership isn&apos;t only good ideas. It&apos;s setting a clear
             standard, helping people improve, aligning stakeholders, protecting
             the work from unnecessary complexity, and building systems that make

@@ -15,10 +15,17 @@ export type ProjectImage = {
 
 /**
  * Which shelf a project sits on. "leadership" work is enterprise, strategic,
- * and leads the site; "independent" is selected client work; "secondary" is
- * smaller production work kept in a compact gallery, not on the front line.
+ * and leads the site; "independent" is selected client work; "systems" is
+ * self-initiated — tools and products John designed and built himself, kept
+ * deliberately separate so nothing self-initiated reads as a client
+ * engagement; "secondary" is smaller production work kept in a compact
+ * gallery, not on the front line.
  */
-export type ProjectTier = "leadership" | "independent" | "secondary";
+export type ProjectTier =
+  | "leadership"
+  | "independent"
+  | "systems"
+  | "secondary";
 
 /**
  * Extended, leadership-oriented case-study content. Present only on flagship
@@ -155,7 +162,7 @@ export const PROJECTS: Project[] = [
     // composed spread of the real delivered Carelon pieces — report cover,
     // member-facing crisis flyer, sales sheet, and print folder — so the
     // rebrand reads as an applied system rather than a logo sheet.
-    cover: "/work/beacon-carelon-transformation/brand-at-a-glance.jpg",
+    cover: "/work/beacon-carelon-transformation/card-namechange.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -316,7 +323,7 @@ export const PROJECTS: Project[] = [
     // The platform itself, centered on the same neutral plate the other two
     // flagships use. The annotated user-guide version still carries the
     // walkthrough inside "The work".
-    cover: "/work/creative-operations-marketing-bench/platform-homepage.jpg",
+    cover: "/work/creative-operations-marketing-bench/card-platform.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -1450,7 +1457,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
     display: "STIGMA",
-    cover: "/work/stamp-out-stigma/cover.jpg",
+    cover: "/work/stamp-out-stigma/gallery-1.jpg",
     gallery: [],
     externalUrl: "https://www.carmancreative.com/work/sos",
     roleSummary:
@@ -1509,13 +1516,14 @@ export const PROJECTS: Project[] = [
             "The message on the Times Square screens — honest, human, and impossible to miss in one of the loudest rooms on earth.",
         },
         {
-          kind: "detail",
+          kind: "full",
+          aspect: "4 / 3",
           image: {
-            src: "/work/stamp-out-stigma/gallery-1.jpg",
-            alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
+            src: "/work/stamp-out-stigma/cover.jpg",
+            alt: "Stamp Out Stigma — the campaign running on the Times Square screens above 7th Avenue",
           },
           caption:
-            "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
+            "The buy in the round — the campaign on the Thomson Reuters and PR Newswire screens above 7th Avenue, at the scale the message was bought at.",
         },
         {
           kind: "full",
@@ -1649,6 +1657,381 @@ export const PROJECTS: Project[] = [
       ],
     },
   },
+  /* ── Systems & side projects ───────────────────────────────────────────
+     Self-initiated. John designed and built each of these himself; none is a
+     client engagement, and the tier keeps that distinction visible rather
+     than letting personal work borrow the credibility of commissioned work.
+     ───────────────────────────────────────────────────────────────────── */
+  {
+    slug: "carman-os",
+    num: "S01",
+    tier: "systems",
+    title: "Carman OS",
+    client: "Self-initiated",
+    year: "2026",
+    category: "Creative System / AI Tooling",
+    duration: "Ongoing",
+    tags: ["AI Systems", "Creative Operations", "Product"],
+    blurb:
+      "A working operating system for creative practice — 24 prompts organised by the four phases every project moves through, each routed to the model that actually handles it best.",
+    oneLiner: "The method, made operational.",
+    brief:
+      "Most prompt collections are a folder of clever one-offs. Carman OS is the opposite: a method first, a library second. Every project moves through Define, Explore, Build, Refine — and each prompt is filed against the phase it serves and the model best suited to run it.",
+    process: [
+      {
+        label: "The four phases",
+        body: "Define, Explore, Build, Refine. The structure is the point — it puts a prompt in the hands of someone who knows which part of the problem they are in.",
+      },
+      {
+        label: "Right tool, right job",
+        body: "Thinking routes to ChatGPT, building to Claude, research to Gemini, visualising to Midjourney. The tool stack is stated on the front page rather than assumed.",
+      },
+      {
+        label: "Written to be used",
+        body: "Each card says what the prompt returns before you copy it — three stronger directions, a message hierarchy, a five-section case study — so the library is browsable by outcome.",
+      },
+    ],
+    services: ["Creative systems", "AI tooling", "Product design", "Front-end"],
+    palette: ["#080808", "#111111", "#1cb791", "#f5f3ef"],
+    display: "CARMAN OS",
+    cover: "/work/carman-os/cover.jpg",
+    coverAspect: "4 / 3",
+    gallery: [],
+    externalUrl: "https://carmanos.netlify.app/",
+    caseStudy: {
+      overview: [
+        { label: "Project", value: "Self-initiated" },
+        { label: "Role", value: "Concept, design, build" },
+        { label: "Year", value: "2026" },
+        { label: "Scope", value: "Creative method, prompt library, web app" },
+        { label: "Library", value: "24 prompts across 8 categories" },
+      ],
+      challenge:
+        "Teams adopt AI one clever prompt at a time. What they end up with is a folder of tricks nobody else can use — no shared idea of when a prompt applies, no agreement on which model to point it at, and no way to tell a genuinely useful one from a novelty. The knowledge stays trapped with whoever wrote it.",
+      mandate:
+        "Turn a personal way of working into something structured enough to hand to someone else: a method that says where you are in a project, and a library filed against it.",
+      context:
+        "Built on my own time, out of my own practice — the prompts are the ones I actually use for client work, portfolio writing, campaign development and critique.",
+      role: [
+        "Defined the four-phase model the whole system is organised around",
+        "Wrote and tested every prompt in the library",
+        "Assigned each prompt to the model that handles it best, and said so on the card",
+        "Designed and built the interface, including search, category filtering and copy-to-clipboard",
+        "Wrote the card copy so each prompt states its output before you use it",
+      ],
+      team: ["Self-initiated — concept, writing, design and build by John Carman"],
+      decisions: [
+        {
+          title: "A method, not a folder",
+          body: "The four phases come first and the prompts hang off them. It means the library answers 'where am I in this project?' before it answers 'what should I type?' — which is the question that actually determines whether a prompt helps.",
+        },
+        {
+          title: "Name the model on every card",
+          body: "Thinking, building, research and visualising go to different models because they genuinely differ. Putting the routing on the card removes the most common failure — a good prompt run somewhere it was never built for.",
+        },
+        {
+          title: "Say what it returns",
+          body: "Every card states its output up front: three territories with names and taglines, a message hierarchy with proof, a five-section case study in director voice. You choose by the shape of the result rather than by reading the prompt.",
+        },
+        {
+          title: "Prompts that push, not just produce",
+          body: "A whole category exists to make the work harder — Design Push asks for one uncomfortable direction, Final Critique returns the unsoftened senior review. AI is easiest to use as a shortcut to the safe answer, and the library deliberately resists that.",
+        },
+      ],
+      outcomes: [
+        "24 prompts live across strategy, synthesis, portfolio, build, brand and campaign, client communication, critique and visual exploration",
+        "A four-phase model that makes the library teachable rather than personal",
+        "In everyday use in my own practice — the case-study and portfolio prompts wrote parts of this site",
+      ],
+      reflection:
+        "The useful part was never the prompts. It was being forced to name the phases and admit which model I actually reach for and why. Writing that down turned a set of habits into something I can hand to another designer — and the parts that were hardest to write down turned out to be the parts that were vaguest in my own head.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/carman-os/home.jpg",
+            alt: "Carman OS — the four-phase model and tool stack above the prompt library",
+          },
+          url: "carmanos.netlify.app",
+          caption:
+            "The front page leads with the method, not the library — four phases on the left, the tool stack on the right, and the prompt count in the corner.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/carman-os/library.jpg",
+            alt: "Carman OS — prompt cards grouped by category, each naming its model and its output",
+          },
+          caption:
+            "Cards are grouped by what you are trying to do. Each names its model, says what it returns, and copies in one click.",
+        },
+        {
+          kind: "detail",
+          image: {
+            src: "/work/carman-os/preview.jpg",
+            alt: "Carman OS — previewing a prompt in full before copying it",
+          },
+          caption:
+            "Preview before you copy. The prompt is readable in full — the library is meant to be learned from, not just pasted out of.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "cqap",
+    num: "S02",
+    tier: "systems",
+    title: "CQAP",
+    client: "Self-initiated prototype",
+    year: "2026",
+    category: "Product / Creative Operations",
+    duration: "In progress — Alpha",
+    tags: ["Brand Governance", "Creative Operations", "Product"],
+    blurb:
+      "A Creative Quality Assurance Platform — a working prototype for reviewing creative against brand standards, where every completed review leaves behind a decision the next one can reuse.",
+    oneLiner: "Review once. Decide once. Reuse the decision.",
+    brief:
+      "Creative review at enterprise scale is where quality is won or lost, and it is almost always run out of inboxes and memory. CQAP is a prototype for the alternative: a structured review that captures the reasoning, not just the verdict.",
+    process: [
+      {
+        label: "Structured intake",
+        body: "Work enters classified by brand, line of business, channel and piece type — so a review starts already knowing which standards apply.",
+      },
+      {
+        label: "Reviews that leave a trace",
+        body: "A completed review becomes a connected record instead of disappearing into a project archive. The decision is the artifact.",
+      },
+      {
+        label: "Intelligence that compounds",
+        body: "Standards, guidelines and prior decisions are searchable together, so the same question is not re-litigated every quarter.",
+      },
+    ],
+    services: [
+      "Product design",
+      "Creative operations",
+      "Brand governance",
+      "Front-end",
+    ],
+    palette: ["#f8f9fb", "#1b2a4a", "#2563eb", "#ffffff"],
+    display: "CQAP",
+    cover: "/work/cqap/cover.jpg",
+    coverAspect: "4 / 3",
+    gallery: [],
+    externalUrl: "https://cqap.vercel.app/",
+    caseStudy: {
+      overview: [
+        { label: "Project", value: "Self-initiated prototype" },
+        { label: "Role", value: "Concept, product design, build" },
+        { label: "Year", value: "2026" },
+        { label: "Status", value: "Alpha — working prototype, not a shipped product" },
+        { label: "Stack", value: "Next.js, deployed on Vercel" },
+      ],
+      challenge:
+        "In a large organisation, the same creative question gets answered again and again. Someone decides how a template should version, or which identity a piece of collateral carries — and that decision lives in an email thread until the person who made it moves on. Reviewers spend their time re-deciding settled questions instead of catching the things that actually matter.",
+      mandate:
+        "Prototype a review tool where the reasoning survives the review: classify work on the way in, capture the decision on the way out, and make both searchable.",
+      context:
+        "Built on my own time as a prototype, out of years of running creative review at volume. It holds no client work and no confidential material — the screens here are an empty Alpha workspace.",
+      role: [
+        "Framed the problem as institutional memory rather than workflow speed",
+        "Designed the review model — classify on intake, capture the decision on completion",
+        "Designed the workspace, the searchable intelligence layer and the memory view",
+        "Built the prototype in Next.js",
+        "Wrote the product language, including the measurement principle below",
+      ],
+      team: ["Self-initiated — concept, design and build by John Carman"],
+      decisions: [
+        {
+          title: "Memory is the product",
+          body: "The obvious version of this tool is a faster approval queue. The useful version is one where a completed review becomes a reusable record — 'Decisions that can be reused' is the actual heading on the memory view, because that is the thing worth building.",
+        },
+        {
+          title: "Classify on the way in",
+          body: "Work is identified by brand, line of business, channel and piece type before review begins. Most review disagreement is really ambiguity about which standard applies, and this settles it first.",
+        },
+        {
+          title: "Measure the system, never the reviewer",
+          body: "The Impact view states it in the interface: these metrics describe organisational activity, not individual reviewer productivity. A governance tool that becomes a surveillance tool stops getting honest input, and that has to be a stated principle rather than a good intention.",
+        },
+        {
+          title: "Approved work becomes reference",
+          body: "Strong examples are promoted into the intelligence layer rather than just being cleared. Governance that only ever says no teaches nothing; showing the best prior answer is how standards actually spread.",
+        },
+      ],
+      outcomes: [
+        "A working Alpha with the full model in place — workspace, searchable intelligence, memory and impact",
+        "A stated measurement principle that keeps the tool pointed at the system rather than at people",
+        "TODO: Confirm — no pilot, adoption or outcome data yet; this is a prototype and is presented as one",
+      ],
+      reflection:
+        "Building it clarified what I had been doing manually for years. The hard part of creative review was never the reviewing — it was that the reasoning evaporated the moment the job closed, so the same ground got re-covered every quarter. Once memory became the product rather than a feature, most of the other design questions answered themselves.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/cqap/workspace.jpg",
+            alt: "CQAP — the reviewer workspace, with start review, continue review and search",
+          },
+          url: "cqap.vercel.app",
+          caption:
+            "The workspace opens on the only three things a reviewer needs: start something, continue something, or look up what was already decided.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/cqap/memory.jpg",
+            alt: "CQAP — the memory view, where completed reviews become reusable records",
+          },
+          b: {
+            src: "/work/cqap/impact.jpg",
+            alt: "CQAP — the impact view, measuring organisational activity rather than individuals",
+          },
+          labelA: "Memory",
+          labelB: "Impact",
+          caption:
+            "Left, the idea the whole prototype rests on — completed reviews become connected records rather than disappearing into an archive. Right, the measurement principle stated in the interface itself: organisational activity, never individual productivity. Both shown in an empty Alpha state.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "premier-friends-club",
+    num: "S03",
+    tier: "systems",
+    title: "Premier Friends Club",
+    client: "Self-initiated",
+    year: "2026",
+    category: "Editorial / Product",
+    duration: "2026–27 season",
+    tags: ["Editorial", "Identity", "Product"],
+    blurb:
+      "Nine friends, eight Premier League clubs, one table. An editorial sports brand built over a fixture feed that keeps its own results, standings and derbies up to date all season.",
+    oneLiner: "Eight clubs. One table. No hiding.",
+    brief:
+      "Nine friends, each committed to a different club, and a group chat that never stops arguing about who is actually having the better season. The site settles it: every league result each friend's club posts is banked as their points, in one table that runs to the final day.",
+    process: [
+      {
+        label: "A real brand, not a joke",
+        body: "Crest, wordmark, motto and an editorial voice. The premise is funny; treating it seriously is what makes it land.",
+      },
+      {
+        label: "The table is the product",
+        body: "Standings ranked on points, mirroring the league table they follow — so the format is instantly legible to anyone who follows football.",
+      },
+      {
+        label: "It runs itself",
+        body: "Results, standings and fixtures refresh on their own across a 38-game season, so the site stays current with no one tending it.",
+      },
+    ],
+    services: [
+      "Brand identity",
+      "Editorial design",
+      "Product design",
+      "Front-end",
+    ],
+    palette: ["#f2ede4", "#c8102e", "#111111", "#6cabdd"],
+    display: "PFC",
+    cover: "/work/premier-friends-club/cover.jpg",
+    coverAspect: "4 / 3",
+    gallery: [],
+    externalUrl: "https://premier-friends-club.netlify.app/",
+    caseStudy: {
+      overview: [
+        { label: "Project", value: "Self-initiated" },
+        { label: "Role", value: "Brand, design, build" },
+        { label: "Year", value: "2026" },
+        { label: "Scope", value: "Identity, editorial design, live standings site" },
+        { label: "Season", value: "2026–27 — runs to 30 May 2027" },
+      ],
+      challenge:
+        "A running argument among nine friends with no way to settle it. Everyone remembers their own good weekends and forgets the bad ones, and a group chat has no memory. The problem is not really software — it is that bragging rights need a scoreboard nobody can dispute.",
+      mandate:
+        "Give the argument a table. Make it look like something worth taking seriously, and make it keep itself current for a whole season without anyone maintaining it.",
+      context:
+        "A personal project, built for nine friends. Fratres Stulta Fides — foolish faith, kept together.",
+      role: [
+        "Created the identity — crest, wordmark, motto and editorial voice",
+        "Art-directed the collage hero from club colours, crests and terrace imagery",
+        "Designed the table, fixture ticker, member roster and gallery",
+        "Built the site and wired it to a fixture feed so results and standings update themselves",
+        "Wrote the copy, including the per-fixture derby lines",
+      ],
+      team: ["Self-initiated — brand, design and build by John Carman"],
+      decisions: [
+        {
+          title: "Treat it like a real competition",
+          body: "Serif headlines, a proper crest, a Latin motto, an editorial voice that reports the standings straight. Playing it deadpan is what makes the joke work — a site that winked at itself would have been funny once and boring by October.",
+        },
+        {
+          title: "Follow the league's own format",
+          body: "Points, ranked exactly as the Premier League table ranks them. Nobody has to learn a scoring system, and no one can argue with the maths.",
+        },
+        {
+          title: "Name the friend, not just the club",
+          body: "Fixtures read 'Thomas Evan Hicks · Liverpool vs Eric Moreno · Fulham'. When two friends' clubs meet it becomes a derby with a name attached, which is the part everyone actually cares about.",
+        },
+        {
+          title: "Handle the asymmetry honestly",
+          body: "One friend's club plays 46 games to everyone else's 38. Rather than hide it or fudge the maths, the site says so on the front page and shows points per game alongside the total.",
+        },
+      ],
+      outcomes: [
+        "Live for the 2026–27 season, updating itself through to 30 May 2027",
+        "Nine members, eight clubs, and 41 friend derbies still to come at the time of writing",
+        "The argument now has a table, which has settled nothing and improved everything",
+      ],
+      reflection:
+        "Small, self-imposed briefs are where I try the things client work is too cautious for — in this case a heavy collage treatment and a completely deadpan editorial voice on an absurd premise. It also had to run unattended for ten months, which is a stricter constraint than most client sites face and a good discipline.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/premier-friends-club/home.jpg",
+            alt: "Premier Friends Club — the collage hero and this week's fixture ticker",
+          },
+          url: "premier-friends-club.netlify.app",
+          caption:
+            "The hero is a collage of all eight clubs at once — colours, crests and terraces torn together, with the week's fixtures running underneath.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/premier-friends-club/table.jpg",
+            alt: "Premier Friends Club — the live standings table",
+          },
+          caption:
+            "The table, ranked on points exactly as the league ranks its own — with points per game alongside, because one member plays eight more matches than everyone else.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/premier-friends-club/matches.jpg",
+            alt: "Premier Friends Club — the fixture list",
+          },
+          b: {
+            src: "/work/premier-friends-club/members.jpg",
+            alt: "Premier Friends Club — the member roster",
+          },
+          labelA: "Matches",
+          labelB: "Members",
+          caption:
+            "Fixtures name the friend before the club, so a derby is between two people. The roster is the other half of the joke played straight — nine mates, badged like a squad.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/premier-friends-club/gallery.jpg",
+            alt: "Premier Friends Club — the gallery",
+          },
+          caption:
+            "The gallery — years of wind-ups and wet away days, which is what the table is really keeping score of.",
+        },
+      ],
+    },
+  },
 ];
 
 /**
@@ -1672,6 +2055,7 @@ export function projectsByTier(tier: ProjectTier): Project[] {
 
 export const LEADERSHIP_PROJECTS = projectsByTier("leadership");
 export const INDEPENDENT_PROJECTS = projectsByTier("independent");
+export const SYSTEMS_PROJECTS = projectsByTier("systems");
 export const SECONDARY_PROJECTS = projectsByTier("secondary");
 
 /**

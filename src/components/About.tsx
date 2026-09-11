@@ -80,11 +80,15 @@ export default function About() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 relative overflow-hidden rounded-md border border-line"
           >
+            {/* The studio scene, not the engraved portrait — that one carries
+                the hero, and running it twice on one page made the page feel
+                like it was repeating itself. */}
             <Image
-              src="/brand/portrait.png"
-              alt="John Carman, Creative Director"
-              width={1024}
-              height={1024}
+              src="/brand/studio.jpg"
+              alt="John Carman at his desk"
+              width={2048}
+              height={1716}
+              sizes="(max-width: 768px) 92vw, 40vw"
               priority={false}
               className="w-full h-auto block"
             />

@@ -451,7 +451,7 @@ function WebHero({ campaign }: { campaign: Campaign }) {
         <p role="presentation"
           className="mt-2 leading-[0.92] tracking-[-0.04em]"
           style={{
-            fontFamily: "var(--font-fraunces)",
+            fontFamily: "var(--font-display)",
             fontWeight: 500,
             fontSize: "clamp(1.5rem, 3.5vw, 2.6rem)",
             color: campaign.ink,
@@ -556,7 +556,7 @@ function IGPortrait({ campaign }: { campaign: Campaign }) {
         <p role="presentation"
           className="mt-1 leading-[1.02] tracking-[-0.025em]"
           style={{
-            fontFamily: "var(--font-fraunces)",
+            fontFamily: "var(--font-display)",
             fontWeight: 500,
             fontSize: "0.95rem",
             color: campaign.ink,
@@ -690,7 +690,7 @@ function IGSquare({ campaign }: { campaign: Campaign }) {
         <p role="presentation"
           className="leading-[1.0] tracking-[-0.025em]"
           style={{
-            fontFamily: "var(--font-fraunces)",
+            fontFamily: "var(--font-display)",
             fontWeight: 500,
             fontSize: "1rem",
             color: campaign.ink,
@@ -785,7 +785,7 @@ function Banner({ campaign }: { campaign: Campaign }) {
         <p role="presentation"
           className="leading-[1] tracking-[-0.025em]"
           style={{
-            fontFamily: "var(--font-fraunces)",
+            fontFamily: "var(--font-display)",
             fontWeight: 500,
             fontSize: "0.95rem",
             color: campaign.ink,

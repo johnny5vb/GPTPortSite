@@ -7,22 +7,27 @@
 @source not "../../**/*.md";
 
 @theme {
-  --color-ink: #080808;
-  --color-ink-2: #0d0d0d;
-  --color-surface: #111111;
-  --color-surface-2: #181818;
-  --color-line: #1f1f1f;
-  --color-line-2: #2a2a2a;
-  --color-bone: #f5f3ef;
-  --color-mute: #8a8a8a;
-  /* WCAG AA on --color-ink: #808080 = 4.9:1; #555555 was 2.5:1 (failed) */
-  --color-mute-2: #808080;
+  /* Warm ground. The neutrals were pure cold black (#080808 → #2a2a2a),
+     which made the accent read as neon and the whole page as heavy. Every
+     step now carries a little red and yellow, so the ink reads as very dark
+     brown-black rather than switched-off screen. Hues stay consistent across
+     the ramp; only lightness moves. */
+  --color-ink: #0c0b09;
+  --color-ink-2: #131110;
+  --color-surface: #191614;
+  --color-surface-2: #201d19;
+  --color-line: #2a2622;
+  --color-line-2: #38322c;
+  --color-bone: #f6f2ea;
+  --color-mute: #968e83;
+  /* WCAG AA on --color-ink: #8b8378 = 5.1:1. Don't push this darker. */
+  --color-mute-2: #8b8378;
   --color-green: #1cb791;
   --color-green-bright: #2ee5b3;
   --color-green-dim: #0e6e57;
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-instrument-sans);
+  --font-display: var(--font-newsreader);
+  --font-sans: var(--font-newsreader);
   --font-mono: var(--font-jetbrains);
 }
 
@@ -35,7 +40,9 @@
   body {
     background: var(--color-ink);
     color: var(--color-bone);
-    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-sans), Georgia, ui-serif, serif;
+    font-variation-settings: "opsz" 14;
+    font-size: 1.0625rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -103,11 +110,14 @@
 
   .font-display {
     font-family: var(--font-display);
-    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-variation-settings: "opsz" 60;
   }
+  /* Kept its name so nothing else had to change. It is now a real italic
+     rather than Fraunces' WONK axis — quieter, and it actually has proper
+     italic letterforms instead of a slanted roman. */
   .font-display-wonk {
     font-family: var(--font-display);
-    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+    font-variation-settings: "opsz" 60;
     font-style: italic;
   }
 }
@@ -141,10 +151,14 @@
      t-display-sm  card or list-item heading
      Deliberate one-off display moments (the Manifesto numeral, the Showpiece
      pull-quote) stay bespoke — they're accents, not rungs on the ladder. */
+  /* One family, two optical sizes. Display rungs run at opsz 60 (tight,
+     high-contrast, built for large); text rungs at opsz 14 (open apertures,
+     sturdier strokes, built to be read). Same font, different drawing. */
   .t-display-xl,
   .t-display-lg,
   .t-display-md,
   .t-display-sm {
+    font-variation-settings: "opsz" 60;
     font-family: var(--font-display), Georgia, serif;
     color: var(--color-bone);
     text-wrap: balance;
@@ -172,8 +186,9 @@
 
   /* Three body ranks, three fixed colours. Nothing else. */
   .t-lede {
-    font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
-    line-height: 1.6;
+    font-variation-settings: "opsz" 14;
+    font-size: clamp(1.125rem, 1.4vw, 1.3125rem);
+    line-height: 1.62;
     color: color-mix(in srgb, var(--color-bone) 85%, transparent);
   }
   .t-body {

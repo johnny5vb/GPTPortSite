@@ -619,7 +619,7 @@ function HeroComposition({ index, brand }: { index: number; brand: Brand }) {
           role="presentation"
           className="leading-[0.95] tracking-[-0.035em]"
           style={{
-            fontFamily: "var(--font-fraunces)",
+            fontFamily: "var(--font-display)",
             fontWeight: 500,
             fontSize: index === 1 ? "1.15rem" : "0.98rem",
             fontStyle: index === 2 ? "italic" : "normal",
@@ -693,7 +693,7 @@ function SocialComposition({ index, brand }: { index: number; brand: Brand }) {
                 role="presentation"
                 className="text-[13px] leading-[1.05] tracking-[-0.025em]"
                 style={{
-                  fontFamily: "var(--font-fraunces)",
+                  fontFamily: "var(--font-display)",
                   fontWeight: 500,
                   color: brand.ink,
                 }}
@@ -734,7 +734,7 @@ function SocialComposition({ index, brand }: { index: number; brand: Brand }) {
               role="presentation"
               className="text-[12px] leading-[1.05] tracking-[-0.025em] mt-1"
               style={{
-                fontFamily: "var(--font-fraunces)",
+                fontFamily: "var(--font-display)",
                 fontWeight: 500,
                 color: brand.ink,
               }}
@@ -795,7 +795,7 @@ function TypesetComposition({
         role="presentation"
         className="leading-[0.95] tracking-[-0.04em] mt-1"
         style={{
-          fontFamily: "var(--font-fraunces)",
+          fontFamily: "var(--font-display)",
           fontWeight: 500,
           fontSize: s.display,
           color: brand.ink,

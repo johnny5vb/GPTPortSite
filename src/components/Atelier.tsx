@@ -732,7 +732,7 @@ function HeroMock({ draft }: { draft: Draft }) {
           <p role="presentation"
             className="mt-3 leading-[0.95] tracking-[-0.04em]"
             style={{
-              fontFamily: "var(--font-fraunces)",
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: "clamp(1.6rem, 4vw, 3rem)",
               color: draft.ink,
@@ -832,7 +832,7 @@ function EditorialMock({ draft }: { draft: Draft }) {
         <div className="absolute top-4 left-4 right-4 flex items-baseline justify-between z-10">
           <span
             style={{
-              fontFamily: "var(--font-fraunces)",
+              fontFamily: "var(--font-display)",
               fontWeight: 700,
               fontSize: "1.7rem",
               color: draft.surface,
@@ -861,7 +861,7 @@ function EditorialMock({ draft }: { draft: Draft }) {
           <p role="presentation"
             className="mt-3 leading-[0.95]"
             style={{
-              fontFamily: "var(--font-fraunces)",
+              fontFamily: "var(--font-display)",
               fontStyle: "italic",
               fontVariationSettings: '"SOFT" 50, "WONK" 1',
               fontWeight: 700,
@@ -961,7 +961,7 @@ function ProductMock({ draft }: { draft: Draft }) {
           <p role="presentation"
             className="mt-3 leading-[0.95] tracking-[-0.03em]"
             style={{
-              fontFamily: "var(--font-fraunces)",
+              fontFamily: "var(--font-display)",
               fontWeight: 500,
               fontSize: "clamp(1.6rem, 4.2vw, 2.8rem)",
               color: draft.ink,
@@ -1069,7 +1069,7 @@ function ProductMock({ draft }: { draft: Draft }) {
                 <div
                   className="leading-none tracking-[-0.025em]"
                   style={{
-                    fontFamily: "var(--font-fraunces)",
+                    fontFamily: "var(--font-display)",
                     fontWeight: 600,
                     fontSize: "1.5rem",
                     color: draft.ink,

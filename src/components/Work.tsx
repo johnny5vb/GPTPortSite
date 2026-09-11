@@ -8,6 +8,7 @@ import { Link } from "next-view-transitions";
 import {
   LEADERSHIP_PROJECTS,
   INDEPENDENT_PROJECTS,
+  SYSTEMS_PROJECTS,
   SECONDARY_PROJECTS,
   type Project,
 } from "@/lib/projects";
@@ -16,13 +17,12 @@ import VelocityHeading from "./VelocityHeading";
 export default function Work() {
   return (
     <section id="work" className="relative py-16 sm:py-24 md:py-40 container-x rule-top">
-      <header className="grid grid-cols-12 gap-6 mb-16 md:mb-20">
-        <div className="col-span-12 md:col-span-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 02 — Work
-          </p>
-        </div>
-        <div className="col-span-12 md:col-span-8">
+      {/* Left-anchored, not a 4/8 label split — see the note in Intro.tsx. */}
+      <header className="mb-16 md:mb-20">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-5">
+          // 02 — Work
+        </p>
+        <div>
           <VelocityHeading className="origin-left">
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
@@ -36,7 +36,7 @@ export default function Work() {
               <em className="font-display-wonk text-green">craft throughout.</em>
             </motion.h2>
           </VelocityHeading>
-          <p className="mt-6 text-mute max-w-[58ch] leading-relaxed">
+          <p className="mt-6 text-mute max-w-[70ch] leading-relaxed">
             Enterprise brand and creative-operations work leads, followed by
             selected independent projects. Each case study states what I
             personally led and who I led it with.
@@ -78,6 +78,26 @@ export default function Work() {
           <ProjectRow key={p.slug} project={p} index={i} />
         ))}
       </div>
+
+      {/* Systems & side projects — self-initiated. Kept on their own shelf so
+          nothing built for myself reads as a client engagement. */}
+      {SYSTEMS_PROJECTS.length > 0 && (
+        <>
+          <div className="mt-20 border-t border-line pt-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 mb-2">
+            <h3 className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone">
+              Systems &amp; side projects
+            </h3>
+            <p className="text-sm text-mute">
+              Built for myself, not for a client.
+            </p>
+          </div>
+          <div className="space-y-2">
+            {SYSTEMS_PROJECTS.map((p, i) => (
+              <ProjectRow key={p.slug} project={p} index={i} />
+            ))}
+          </div>
+        </>
+      )}
 
       {/* Secondary / smaller production work */}
       {SECONDARY_PROJECTS.length > 0 && (
