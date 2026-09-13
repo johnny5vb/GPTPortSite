@@ -162,7 +162,7 @@ export const PROJECTS: Project[] = [
     // composed spread of the real delivered Carelon pieces — report cover,
     // member-facing crisis flyer, sales sheet, and print folder — so the
     // rebrand reads as an applied system rather than a logo sheet.
-    cover: "/work/beacon-carelon-transformation/card-namechange.jpg",
+    cover: "/work/beacon-carelon-transformation/card-rebrand.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -1457,7 +1457,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
     display: "STIGMA",
-    cover: "/work/stamp-out-stigma/gallery-1.jpg",
+    cover: "/work/stamp-out-stigma/card-timessquare.jpg",
     gallery: [],
     externalUrl: "https://www.carmancreative.com/work/sos",
     roleSummary:
@@ -1516,14 +1516,13 @@ export const PROJECTS: Project[] = [
             "The message on the Times Square screens — honest, human, and impossible to miss in one of the loudest rooms on earth.",
         },
         {
-          kind: "full",
-          aspect: "4 / 3",
+          kind: "detail",
           image: {
-            src: "/work/stamp-out-stigma/cover.jpg",
-            alt: "Stamp Out Stigma — the campaign running on the Times Square screens above 7th Avenue",
+            src: "/work/stamp-out-stigma/gallery-1.jpg",
+            alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
           },
           caption:
-            "The buy in the round — the campaign on the Thomson Reuters and PR Newswire screens above 7th Avenue, at the scale the message was bought at.",
+            "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
         },
         {
           kind: "full",
