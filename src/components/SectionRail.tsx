@@ -94,7 +94,7 @@ export default function SectionRail() {
                   <motion.span
                     animate={{
                       scale: isActive ? 1 : 0.45,
-                      backgroundColor: isActive ? "#1cb791" : "#5a5a5a",
+                      backgroundColor: isActive ? "#3b9a7e" : "#5a5a5a",
                     }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     className="block h-2.5 w-2.5 rounded-full"

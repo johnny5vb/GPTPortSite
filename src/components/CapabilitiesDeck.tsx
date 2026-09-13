@@ -493,11 +493,11 @@ function BIAD() {
             </div>
             <div className="p-5 grid gap-3">
               {[
-                { label: "color/bg", v: "#080808" },
+                { label: "color/bg", v: "#0c0b09" },
                 { label: "color/surface", v: "#141414" },
-                { label: "color/accent", v: "#1cb791" },
+                { label: "color/accent", v: "#3b9a7e" },
                 { label: "radius/soft", v: "12px" },
-                { label: "type/display", v: "Fraunces" },
+                { label: "type/display", v: "Newsreader" },
               ].map((t) => (
                 <div
                   key={t.label}
@@ -641,7 +641,7 @@ function Factory() {
                   style={{
                     background:
                       i % 2
-                        ? "radial-gradient(circle at 70% 50%, rgba(28,183,145,0.5), transparent 60%)"
+                        ? "radial-gradient(circle at 70% 50%, rgba(59,154,126,0.5), transparent 60%)"
                         : "radial-gradient(circle at 30% 50%, rgba(46,229,179,0.45), transparent 60%)",
                   }}
                 />

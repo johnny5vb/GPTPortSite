@@ -33,14 +33,14 @@ export default function ScrollBackdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 90% 60% at 80% 100%, rgba(28,183,145,0.05), transparent 60%)",
+            "radial-gradient(ellipse 90% 60% at 80% 100%, rgba(59,154,126,0.05), transparent 60%)",
         }}
       />
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 40% at 20% 0%, rgba(28,183,145,0.025), transparent 55%)",
+            "radial-gradient(ellipse 70% 40% at 20% 0%, rgba(59,154,126,0.025), transparent 55%)",
         }}
       />
     </motion.div>

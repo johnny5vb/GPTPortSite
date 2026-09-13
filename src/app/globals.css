@@ -22,9 +22,9 @@
   --color-mute: #968e83;
   /* WCAG AA on --color-ink: #8b8378 = 5.1:1. Don't push this darker. */
   --color-mute-2: #8b8378;
-  --color-green: #1cb791;
-  --color-green-bright: #2ee5b3;
-  --color-green-dim: #0e6e57;
+  --color-green: #3b9a7e;
+  --color-green-bright: #4fb593;
+  --color-green-dim: #276b56;
 
   --font-display: var(--font-newsreader);
   --font-sans: var(--font-newsreader);
@@ -387,7 +387,7 @@ html.lenis body {
   }
   /* Keep the accent legible on white */
   .resume-doc .text-green {
-    color: #0e6e57 !important;
+    color: #276b56 !important;
   }
   .resume-doc {
     max-width: none !important;

@@ -27,7 +27,7 @@ The product is a single-page narrative on `/` plus deeper subpages: a
 **Leadership** page (`/leadership`), a print-friendly **Résumé** (`/resume`),
 an AI & Systems lab (`/lab`), a capabilities deck (`/capabilities`), and case
 studies at `/work/[slug]` (three **leadership** flagships + independent
-client work). The home page is a long-scroll story with a sticky
+client work + a **systems** shelf of self-initiated tools). The home page is a long-scroll story with a sticky
 section rail and framer-motion choreography.
 
 Voice and tone target: **quiet authority** — confident, senior, direct. Not
@@ -59,7 +59,7 @@ claims. The flagship leadership case studies are scaffolded this way.
 | Language | TypeScript |
 | Styling | Tailwind v4 (CSS-first, `@theme` block in `globals.css` — there is no `tailwind.config.js`) |
 | Motion | framer-motion |
-| Fonts | Fraunces (display, with SOFT + WONK axes), **Instrument Sans** (body — replaced Geist), JetBrains Mono — all via `next/font/google` |
+| Fonts | **Newsreader** for display *and* body (one family; its `opsz` axis does the work — 60 for display rungs, 14 for text), JetBrains Mono for labels — via `next/font/google`. Fraunces + Instrument Sans were retired in change #44. |
 | Hosting | Netlify (`@netlify/plugin-nextjs`) |
 | Registrar / DNS | WordPress.com (domain `carmancreative.com`) |
 
@@ -75,24 +75,31 @@ Defined in `src/app/globals.css` under `@theme {}`. Don't redefine these — use
 the existing custom properties / Tailwind class names everywhere.
 
 ```
-ink         #080808   (background)
-ink-2       #0d0d0d
-surface     #111111
-surface-2   #181818
-line        #1f1f1f
-line-2      #2a2a2a
-bone        #f5f3ef   (primary text)
-mute        #8a8a8a
-mute-2      #808080   ← was #555555; raised for WCAG AA contrast on ink
-green       #1cb791   (brand accent)
-green-bright #2ee5b3
-green-dim   #0e6e57
+ink         #0c0b09   (background — warm; was cold #080808)
+ink-2       #131110
+surface     #191614
+surface-2   #201d19
+line        #2a2622
+line-2      #38322c
+bone        #f6f2ea   (primary text)
+mute        #968e83   (6.08:1 on ink)
+mute-2      #8b8378   (5.26:1 on ink — don't push darker)
+green       #3b9a7e   (brand accent — muted from #1cb791 in change #47; 5.72:1 on ink)
+green-bright #4fb593
+green-dim   #276b56   (print stylesheet only — green on white)
 ```
 
-Fonts via CSS vars: `--font-display` (Fraunces), `--font-sans` (Instrument Sans),
-`--font-mono` (JetBrains Mono). The italic "wonk" treatment used for accent
-words (`<em className="font-display-wonk text-green">…</em>`) is a Fraunces
-variable-font axis trick.
+Every neutral carries a little red and yellow so the ground reads as very
+dark brown-black rather than a switched-off screen; only lightness moves
+across the ramp. Fonts via CSS vars: `--font-display` and `--font-sans` both
+point at `--font-newsreader`; `--font-mono` is JetBrains Mono. The accent
+treatment `<em className="font-display-wonk text-green">…</em>` kept its
+class name but is now a **true italic** (Newsreader has one), not a variable
+axis trick. The green is hardcoded in ~18 files three ways — the token, SVG
+`fill`s in `CCMark`/`CCWordmark`/`public/brand/*.svg`, and an `rgba()` in
+the `HeroIsolines` canvas — so a colour change is a sweep, not a token edit.
+Demo palettes (Atlas/Reservoir presets, Atelier severities, deck chart data)
+and `projects.ts` palettes are **data**, not chrome, and stay put.
 
 ---
 
@@ -100,15 +107,15 @@ variable-font axis trick.
 
 | Route | Component | Purpose |
 | --- | --- | --- |
-| `/` | `Hero, Intro, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative — leadership-first |
+| `/` | `Hero, Intro, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative |
 | `/leadership` | `LeadershipPage` | Career context: experience, what John can lead, flagship case studies, leadership proof, testimonials, philosophy, résumé/contact CTAs. Neutral in tone since the copy-deck pass — it's background, not a pitch |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
-| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 — `colony-coffee`, `atromitos`, `important-colorado`, `friends-rehab`, `special-forces-trust`, `spikes-k9-fund`; `evermark` is drafted out. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 — `colony-coffee`, `atromitos`, `important-colorado`, `friends-rehab`, `special-forces-trust`, `spikes-k9-fund`; `evermark` is drafted out. **Systems S01–S03** (self-initiated, own shelf) — `carman-os`, `cqap`, `premier-friends-club`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
-`src/data/`). Each project carries a `tier` (`leadership` / `independent` /
+`src/data/`). Each project carries a `tier` (`leadership` / `independent` / `systems` /
 `secondary`); flagships add `flagship: true` + a `caseStudy` object (overview,
 challenge, mandate, context, role, team, decisions, outcomes, reflection). All
 flagship carries a real `cover`; a flagship without one falls back to the
@@ -117,7 +124,7 @@ flagship carries a real `cover`; a flagship without one falls back to the
 wash. A `draft: true` project is written but unpublished: filtered from every
 listing, no route, unreachable via `getProject`, out of the sitemap. Helpers:
 `PUBLISHED_PROJECTS`, `LEADERSHIP_PROJECTS`, `INDEPENDENT_PROJECTS`,
-`SECONDARY_PROJECTS`, `projectsByTier`, `tierOf`. `getAdjacentProjects` stays
+`SYSTEMS_PROJECTS`, `SECONDARY_PROJECTS`, `projectsByTier`, `tierOf`. `getAdjacentProjects` stays
 within a tier.
 
 Section numbers come from `SectionRail.tsx` and must stay in sync with the
@@ -142,16 +149,14 @@ are un-numbered bands between the numbered narrative sections.
 
 ## Major components
 
-- **`Hero.tsx`** — Section 00. Long animated headline with rotator
-  ("ship./lead./stand out./last.") on the last word. Renders `HeroMark`.
-- **`HeroMonogram.tsx`** — The hero visual. A single calm CC monogram anchored
-  in the headline's right-side negative space (`lg+` only; the mobile hero is
-  pure typography). The mark is static after entrance; only a soft brand-green
-  glow breathes slowly behind it, plus a whisper of cursor parallax from the
-  Hero's shared pointer MotionValues. Decorative (`aria-hidden`). Reduced-motion
-  aware. (History: started as the animated `HeroMark`, briefly became a drifting
-  work "contact sheet" — `HeroContactSheet` — which read as too busy/floaty, then
-  settled here on a quiet monogram.)
+- **`Hero.tsx`** — Section 00. Two-column portrait hero: headline
+  ("Creative direction, and the systems that *make it repeatable.*"), a
+  proof row (20+ / 15+ / 5), work-first CTAs, and the engraved portrait
+  (`/brand/portrait-hero.jpg`) framed as a print, stretched to meet the
+  headline cap and the CTA baseline. `HeroIsolines` (the live contour field)
+  is the background. Neutral copy — no availability posture.
+- **`HeroMonogram.tsx`** — On disk, unimported. Superseded twice: first by
+  the contour field (change #39), then the portrait layout (change #44).
 - **`Manifesto.tsx`** — Section 01. Compact interactive slider with
   auto-advance (5.5s), dot nav, prev/next/pause. Four principles.
 - **`Work.tsx`** — Section 02. Four project rows linking to `/work/[slug]`.
@@ -162,8 +167,10 @@ are un-numbered bands between the numbered narrative sections.
   the rest."* and links to `/lab`. Without `featured` it's used standalone on
   `/lab` for one of the four systems.
 - **`Services.tsx`** — Section 05. Service rows.
-- **`About.tsx`** — Section 06. Portrait, animated stat counters via
-  `CountUp.tsx`, current roles list, tools-in-rotation pills.
+- **`About.tsx`** — Section 05. The studio scene (`/brand/studio.jpg` —
+  generated, not photographic; the owner's call), animated stat counters via
+  `CountUp.tsx`, current roles list, tools-in-rotation pills. It used to
+  repeat the hero portrait; that duplicate is gone.
 - **`ContactCTA.tsx`** — Section 07. Email button + ContactBlocks grid
   (Studio / Hours / Social / Open for).
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
@@ -916,3 +923,80 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       study in progress" badge came off the leadership cards in `Work.tsx`.
       The count-agnostic grid from change #40 handled the column math without
       edits.
+
+### Later session — the site as it now stands
+
+43. **The live site had never been built from this repo.** Netlify's production
+    deploy was a manual drag-and-drop from 2026-08-02 (`deploy_source: "drop"`,
+    no commit, no branch), which is why every prior Workfront removal was
+    correct in git and invisible on the web. Fixed by linking the folder
+    (`netlify link --id 789dda90-…`) and deploying with
+    `netlify deploy --build --prod` from the owner's Mac. **Deploy flow now:**
+    that one command, nothing chained in front of it — chaining a local
+    `npm run build` ahead of it produced one transient "Error while running
+    build" from the two builds racing. `main` was merged forward (keeping this
+    tree over two superseded parallel commits: a candidate-forward hero and a
+    deletion-based Workfront removal) and is ahead of `origin/main`; pushing
+    needs the owner's `gh auth login`.
+
+44. **Retyped on Newsreader, ground warmed, hero rebuilt around the portrait.**
+    Direction C of three rendered on the real page (A: Instrument Serif /
+    Archivo; B: Space Grotesk / Spectral; C: Newsreader throughout) — the owner
+    chose C. Tokens above. Four lab components still referenced
+    `var(--font-fraunces)` and would have fallen back to a default serif in
+    silence; repointed. The portrait hero came from the discarded `1d49c56`
+    layout with its availability copy stripped; the contour field stays as its
+    background. Intro, How I lead and Work each had a `col-span-4` label rail
+    beside `col-span-8` content — every heading started a third of the way
+    across and then got capped, reading as a narrow column floating mid-page.
+    All three are left-anchored now. Headline chosen from four rendered
+    options; the Intro band switched to the copy deck's plainer alternate so it
+    stops echoing the hero.
+
+45. **Systems tier.** `tier: "systems"` + `SYSTEMS_PROJECTS` for self-initiated
+    work, on its own shelf ("Built for myself, not for a client") so nothing
+    borrows a client engagement's credibility: **Carman OS** (S01, the 24-prompt
+    four-phase method), **CQAP** (S02, Creative Quality Assurance Platform —
+    labelled Alpha with a visible TODO where pilot data would go) and
+    **Premier Friends Club** (S03). Case studies written from the live sites
+    (carmanos.netlify.app, cqap.vercel.app, premier-friends-club.netlify.app),
+    screens captured with Playwright. **CQAP is redacted by design:** its
+    Creative Intelligence screen renders Elevance's real brand architecture and
+    is not exported at all; the workspace cover stops above the "Recently
+    Learned" block, which carries internal job vocabulary. Five richer review
+    screens exist but only as chat attachments — they need to land on disk
+    (`public/work/cqap/`) before the agreed blur pass (proof content and job
+    identifiers obscured, UI chrome sharp).
+
+46. **Leadership thumbnails, twice.** First pass: the cards read as
+    low-resolution but the files were fine — a 4:3 plate at 366px gave each of
+    four composited deliverables ~120px, so their copy turned to mush.
+    (A `sizes` theory was checked and was wrong: 750px into a 366px box at 2×
+    is correct.) Second pass, on the owner's read: **Carelon** now shows the
+    rebrand itself — Beacon lockup above, Carelon lockup below, a chevron
+    between, marks lifted from the real guideline pages (`card-rebrand.jpg`).
+    **Stamp Out Stigma** shows the placement, not the artwork — the daytime
+    Times Square photo cropped to the screens (`card-timessquare.jpg`), because
+    the graphic is a few years old and a thumbnail invites a designer to pick
+    at it. The dusk shot (`gallery-2.png`) was rejected: its street signage
+    renders as garbled text, the fingerprint of a generated image, on a piece
+    whose whole claim is a real buy. The creative moved inside the case study
+    as a detail moment. **Marketing Bench** is the platform screen edge to
+    edge. Carman OS and CQAP crop into real detail rather than shrinking a
+    whole page onto a plate.
+
+47. **Green muted with the wordmark.** `#1cb791` → `#3b9a7e` (same hue and
+    lightness, saturation ~74% → ~44%), previewed on the live page by remapping
+    all three sources at once — the token, the SVG fills, and the canvas
+    `rgba()` via a `strokeStyle` setter patch — so the preview couldn't lie
+    about scope. Chosen from current / muted / sage. Applied to the tokens,
+    every piece of chrome, `CCMark`/`CCWordmark`, the four brand SVGs, the
+    favicon and apple-touch icon, the OG image, the BIAD demo's "Carman" preset
+    (it *is* this brand) and the capabilities deck's token spec (which was also
+    stale on ground and typeface). Contrast re-measured: 5.72:1 on ink.
+
+    **Two files the owner keeps sending as chat attachments** never reach disk
+    and so can't be used: the portrait-orientation engraving (`…1mz7ah…png`)
+    and the five CQAP review screens. Finder's search hides `~/Developer`;
+    ⌘⇧G with the full path works, and so does saving to the Desktop and saying
+    so. A UNIX symlink on the Desktop does *not* work as a Finder shortcut.

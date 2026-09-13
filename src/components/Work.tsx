@@ -249,7 +249,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           className="absolute inset-0 -z-10 origin-left"
           style={{
             background:
-              "linear-gradient(90deg, rgba(28,183,145,0.06), rgba(28,183,145,0))",
+              "linear-gradient(90deg, rgba(59,154,126,0.06), rgba(59,154,126,0))",
           }}
         />
 

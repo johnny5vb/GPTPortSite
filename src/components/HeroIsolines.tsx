@@ -205,7 +205,7 @@ export default function HeroIsolines() {
         // Mid-elevation bands read strongest; the extremes fade out.
         const alpha =
           (0.08 + 0.3 * (1 - Math.abs(level - 0.5) * 2)) * FIELD.intensity;
-        ctx.strokeStyle = `rgba(28, 183, 145, ${alpha.toFixed(3)})`;
+        ctx.strokeStyle = `rgba(59, 154, 126, ${alpha.toFixed(3)})`;
         ctx.stroke();
       }
     };

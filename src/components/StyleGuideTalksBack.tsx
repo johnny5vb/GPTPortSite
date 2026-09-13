@@ -462,7 +462,7 @@ function LabCTA() {
         className="absolute -top-24 -right-24 h-64 w-64 rounded-full"
         style={{
           background:
-            "radial-gradient(closest-side, rgba(28,183,145,0.18), transparent)",
+            "radial-gradient(closest-side, rgba(59,154,126,0.18), transparent)",
           filter: "blur(40px)",
         }}
       />

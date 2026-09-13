@@ -110,7 +110,7 @@ export default function Hero() {
           className="absolute -top-32 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(28,183,145,0.14), transparent)",
+              "radial-gradient(closest-side, rgba(59,154,126,0.14), transparent)",
             filter: "blur(40px)",
           }}
         />

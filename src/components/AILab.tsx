@@ -126,7 +126,7 @@ function LabCard({ lab, index }: { lab: Lab; index: number }) {
             style={{
               background:
                 lab.status === "Shipping"
-                  ? "#1cb791"
+                  ? "#3b9a7e"
                   : lab.status === "In beta"
                     ? "#f5f3ef"
                     : "#8a8a8a",
