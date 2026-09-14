@@ -200,6 +200,8 @@ export default function LeadershipPage() {
                     src={p.cover}
                     alt={`${p.title} preview`}
                     fill
+
+                    quality={90}
                     sizes="(max-width: 640px) 100vw, 33vw"
                     className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
                   />

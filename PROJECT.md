@@ -1000,3 +1000,40 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     and the five CQAP review screens. Finder's search hides `~/Developer`;
     ⌘⇧G with the full path works, and so does saving to the Desktop and saying
     so. A UNIX symlink on the Desktop does *not* work as a Finder shortcut.
+
+48. **Image sharpness — audited, fixed at the pipeline, and a rule for new
+    assets.** The owner reported screenshots reading blurry across case
+    studies, the lab and the leadership cards. Measured (Playwright at 2×,
+    every `<img>` on seven pages: CSS width × 2 vs. served width vs. source
+    width): the pipeline was requesting correctly (`w=3840`); the sources
+    were the ceiling. Full-bleed `work` moments render at ~1320 CSS px and
+    need ~2650px on a 2× display; the captures were 2880 but had been exported
+    at 2000 — a 1.32× upscale, self-inflicted. Covers were 1600 into 1772.
+    And everything served at `q=75`, which softens UI text even with the
+    pixels present.
+    - **`next.config.ts`:** `qualities: [75, 90]` (Next 16 only optimises
+      listed qualities — a `quality` prop outside the list is coerced to 75,
+      silently), `deviceSizes` gains a **2880** bucket (a 2650px slot was
+      rounding up to 3840), `formats: avif + webp`. Netlify serves WebP; a
+      2880px q90 full-bleed screenshot delivers at ~104 KB.
+    - **`quality={90}`** on every screenshot-bearing `<Image>`: the shared
+      `Frame` in `ProjectDetail` (all work moments), the case-study hero,
+      `Showpiece`, the Work cards, the leadership cards.
+    - **Sources re-exported at native 2880** for PFC, Carman OS and FRP;
+      covers rebuilt at 2400×1800. Before/after: 2 blurry / 15 soft / 41 ok →
+      2 / 4 / 52. The four remaining "soft" are CQAP (2150 is the owner's
+      native capture width) and the Carelon rebrand card (a composition of
+      small logo crops). The two "blurry" need new sources, not pipeline work:
+      the **Colony showpiece** (`gallery-2.png`, 905px into a 1429px frame —
+      the only copy of that render; the iCloud Colony folder holds the real
+      600dpi finished labels, a better candidate anyway) and Carelon's
+      `system-graphic-language.jpg` (a 1600px PDF render; re-render at 2× with
+      PyMuPDF if the PDF is to hand).
+
+    **The rule for any new asset.** Full-bleed work moment: **≥ 2650px wide**
+    (capture at 1440 CSS × 2 = 2880). Pair / detail / gallery: ≥ 1300px.
+    Cover: 2400×1800. Save masters as JPEG q92 or PNG; don't pre-shrink —
+    the optimiser resizes and re-encodes per device, and the raw file never
+    ships. `ls -lat` sorts by modified date, which macOS preserves on move;
+    sort by **date added** (`mdls -name kMDItemDateAdded`) when looking for a
+    file someone just AirDropped.

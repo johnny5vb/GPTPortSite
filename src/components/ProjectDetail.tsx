@@ -131,6 +131,8 @@ export default function ProjectDetail({ project, prev, next }: Props) {
                 src={project.cover}
                 alt={`${project.title} — cover`}
                 fill
+
+                quality={90}
                 sizes="(max-width: 1400px) 100vw, 1400px"
                 className="object-contain p-3 md:p-5"
                 priority
@@ -159,6 +161,8 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               src={project.cover}
               alt={`${project.title} — cover`}
               fill
+
+              quality={90}
               sizes="(max-width: 1400px) 100vw, 1400px"
               className="object-contain p-4 md:p-8"
               priority
@@ -523,6 +527,8 @@ function StandardBody({ project }: { project: Project }) {
                     src={img.src}
                     alt={img.alt}
                     fill
+
+                    quality={90}
                     sizes={
                       wide
                         ? "(max-width: 1400px) 100vw, 1400px"
@@ -592,6 +598,8 @@ function Frame({
           src={image.src}
           alt={image.alt}
           fill
+
+          quality={90}
           sizes={sizes}
           className="object-contain p-2 sm:p-3"
         />

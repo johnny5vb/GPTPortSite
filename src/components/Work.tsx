@@ -149,6 +149,8 @@ function LeadershipCard({
               src={project.cover}
               alt={`${project.title} preview`}
               fill
+
+              quality={90}
               sizes="360px"
               className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
             />
@@ -196,6 +198,8 @@ function SecondaryCard({ project }: { project: Project }) {
           src={project.cover}
           alt={`${project.title} preview`}
           fill
+
+          quality={90}
           sizes="96px"
           className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
         />
@@ -283,6 +287,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                 src={project.cover}
                 alt={`${project.title} preview`}
                 fill
+
+                quality={90}
                 sizes="320px"
                 className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
               />

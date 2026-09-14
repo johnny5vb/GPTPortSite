@@ -87,6 +87,8 @@ export default function Showpiece({
             src={project.cover}
             alt={`${project.title} — featured`}
             fill
+
+            quality={90}
             sizes="(max-width: 1400px) 100vw, 1400px"
             className="object-cover"
           />
