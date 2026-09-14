@@ -1838,7 +1838,7 @@ export const PROJECTS: Project[] = [
       mandate:
         "Prototype a review tool where the reasoning survives the review: classify work on the way in, capture the decision on the way out, and make both searchable.",
       context:
-        "Built on my own time as a prototype, out of years of running creative review at volume. The screens here show a real review pass; the proof under review and the job identifiers are deliberately softened, because that is client work and the tool is the subject.",
+        "Built on my own time as a prototype, out of years of running creative review at volume. The screens show a real review pass on a real piece — a Carelon Palliative Care welcome guide — from package validation through to an approved decision.",
       role: [
         "Framed the problem as institutional memory rather than workflow speed",
         "Designed the review model — classify on intake, capture the decision on completion",
@@ -1891,7 +1891,7 @@ export const PROJECTS: Project[] = [
             alt: "CQAP — the review workspace with two reviewer findings accepted",
           },
           caption:
-            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard. The proof itself is softened here — it is real client work and not the point; the mechanism is.",
+            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard — here, a Carelon Palliative Care welcome guide, two minor findings, both accepted.",
         },
         {
           kind: "pair",
@@ -1910,13 +1910,13 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "full",
-          aspect: "2.8 / 1",
+          aspect: "16 / 9",
           image: {
             src: "/work/cqap/01-dashboard.jpg",
             alt: "CQAP — the workspace with one review active and one completed",
           },
           caption:
-            "The workspace with work in it: one review in progress, one just approved and already available as a prior decision.",
+            "The workspace with work in it: one review in progress, one just approved and already available as a prior decision, and the standards the system has learned along the way.",
         },
       ],
     },
