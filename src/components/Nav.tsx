@@ -21,6 +21,7 @@ const links = [
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -44,8 +45,12 @@ export default function Nav() {
             : "bg-transparent"
         }`}
       >
+        {/* On the home page this is an in-page jump (smooth via Lenis); on
+            every other route it is a real navigation home. `#top` alone only
+            exists on the home page, so elsewhere it scrolled the current page
+            to its top and went nowhere. */}
         <a
-          href="#top"
+          href={pathname === "/" ? "#top" : "/"}
           className="flex items-center gap-3 group py-3"
           data-cursor="home"
           aria-label="Carman Creative — home"
