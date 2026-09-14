@@ -1838,7 +1838,7 @@ export const PROJECTS: Project[] = [
       mandate:
         "Prototype a review tool where the reasoning survives the review: classify work on the way in, capture the decision on the way out, and make both searchable.",
       context:
-        "Built on my own time as a prototype, out of years of running creative review at volume. It holds no client work and no confidential material — the screens here are an empty Alpha workspace.",
+        "Built on my own time as a prototype, out of years of running creative review at volume. The screens here show a real review pass; the proof under review and the job identifiers are deliberately softened, because that is client work and the tool is the subject.",
       role: [
         "Framed the problem as institutional memory rather than workflow speed",
         "Designed the review model — classify on intake, capture the decision on completion",
@@ -1866,7 +1866,7 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "A working Alpha with the full model in place — workspace, searchable intelligence, memory and impact",
+        "A working Alpha with the full loop in place — package validation, a review workspace with placed findings, a decision that becomes a reusable record",
         "A stated measurement principle that keeps the tool pointed at the system rather than at people",
         "TODO: Confirm — no pilot, adoption or outcome data yet; this is a prototype and is presented as one",
       ],
@@ -1876,27 +1876,47 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/cqap/workspace.jpg",
-            alt: "CQAP — the reviewer workspace, with start review, continue review and search",
+            src: "/work/cqap/02-package-ready.jpg",
+            alt: "CQAP — validation and context: the package is ready to review",
           },
           url: "cqap.vercel.app",
           caption:
-            "The workspace opens on the only three things a reviewer needs: start something, continue something, or look up what was already decided.",
+            "Validation before judgment. File integrity is checked and the context — brand, line of business, channel, piece type — is confirmed before anyone forms an opinion about the work.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/cqap/04-review-findings.jpg",
+            alt: "CQAP — the review workspace with two reviewer findings accepted",
+          },
+          caption:
+            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard. The proof itself is softened here — it is real client work and not the point; the mechanism is.",
         },
         {
           kind: "pair",
           a: {
-            src: "/work/cqap/memory.jpg",
-            alt: "CQAP — the memory view, where completed reviews become reusable records",
+            src: "/work/cqap/03-review-clean.jpg",
+            alt: "CQAP — the review workspace before any findings",
           },
           b: {
-            src: "/work/cqap/impact.jpg",
-            alt: "CQAP — the impact view, measuring organisational activity rather than individuals",
+            src: "/work/cqap/05-approved.jpg",
+            alt: "CQAP — review complete: approved, saved as a review memory",
           },
-          labelA: "Memory",
-          labelB: "Impact",
+          labelA: "Nothing surfaced",
+          labelB: "Approved",
           caption:
-            "Left, the idea the whole prototype rests on — completed reviews become connected records rather than disappearing into an archive. Right, the measurement principle stated in the interface itself: organisational activity, never individual productivity. Both shown in an empty Alpha state.",
+            "Left: CQAP stays quiet when the evidence isn't strong enough — the panel says so in its own words. Right: a decision becomes a record. The review is saved as a memory, its accepted findings keep their evidence, and the workspace updates.",
+        },
+        {
+          kind: "full",
+          aspect: "2.8 / 1",
+          image: {
+            src: "/work/cqap/01-dashboard.jpg",
+            alt: "CQAP — the workspace with one review active and one completed",
+          },
+          caption:
+            "The workspace with work in it: one review in progress, one just approved and already available as a prior decision.",
         },
       ],
     },
