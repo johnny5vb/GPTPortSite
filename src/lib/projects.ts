@@ -697,12 +697,8 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#1a120a", "#c98a4b", "#e8d6b3", "#f6efe2"],
     display: "COLONY",
-    cover: "/work/colony-coffee/gallery-2.png",
-    gallery: [
-      { src: "/work/colony-coffee/gallery-1.jpg", alt: "Colony Coffee — packaging system" },
-      { src: "/work/colony-coffee/gallery-2.png", alt: "Colony Coffee — brand application" },
-      { src: "/work/colony-coffee/gallery-3.png", alt: "Colony Coffee — identity detail" },
-    ],
+    cover: "/work/colony-coffee/lineup.jpg",
+    gallery: [],
     externalUrl: "https://www.carmancreative.com/work/colonycoffee",
     caseStudy: {
       overview: [
@@ -756,13 +752,19 @@ export const PROJECTS: Project[] = [
         "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
       work: [
         {
-          kind: "detail",
-          image: {
-            src: "/work/colony-coffee/cover.png",
-            alt: "Colony Coffee — the Founders Blend bag",
+          kind: "pair",
+          a: {
+            src: "/work/colony-coffee/liberty.jpg",
+            alt: "Colony Coffee — the Liberty dark roast bag, a midnight rider with a lantern",
           },
+          b: {
+            src: "/work/colony-coffee/founders.jpg",
+            alt: "Colony Coffee — the Founders Blend medium roast bag, the founders at a candlelit table",
+          },
+          labelA: "Liberty — dark roast",
+          labelB: "Founders Blend — medium roast",
           caption:
-            "Founders Blend, up close — “Balanced like the Constitution,” down to the detail Todd cared about.",
+            "Two of the three, up close — “Bold enough for midnight riders” and “Balanced like the Constitution,” down to the detail Todd cared about.",
         },
         {
           kind: "full",
