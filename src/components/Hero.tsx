@@ -222,7 +222,7 @@ export default function Hero() {
                   fill
                   sizes="(max-width: 1024px) 640px, 900px"
                   priority
-                  className="object-cover object-top"
+                  className="object-cover object-[50%_30%]"
                 />
                 <span
                   aria-hidden
