@@ -1025,8 +1025,7 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       native capture width) and the Carelon rebrand card (a composition of
       small logo crops). The two "blurry" need new sources, not pipeline work:
       the **Colony showpiece** (`gallery-2.png`, 905px into a 1429px frame —
-      the only copy of that render; the iCloud Colony folder holds the real
-      600dpi finished labels, a better candidate anyway) and Carelon's
+      resolved in #49 with recreated mockups) and Carelon's
       `system-graphic-language.jpg` (a 1600px PDF render; re-render at 2× with
       PyMuPDF if the PDF is to hand).
 
@@ -1037,3 +1036,31 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     ships. `ls -lat` sorts by modified date, which macOS preserves on move;
     sort by **date added** (`mdls -name kMDItemDateAdded`) when looking for a
     file someone just AirDropped.
+
+49. **Colony Coffee — recreated mockups, and a local 2× upscale path.** The
+    owner regenerated the Colony mockups (ChatGPT) to replace the 905px
+    render flagged in #48. Three files: the three-bag lineup is now the
+    `cover` (Work thumbnail, case-study hero, and the home Showpiece);
+    Liberty and Founders are a `pair` moment inside "The work", replacing
+    the old single Founders inset (`cover.png`, still on disk, unreferenced).
+    The label sheet (`gallery-3.png`) and the exploration board
+    (`gallery-1.jpg`) stay. The "Selected stills" strip (`gallery: []`) was
+    dropped — it repeated two images already in the sequence plus the one
+    being retired.
+    - **ChatGPT tops out at ~1536–1672px**, under the #48 rule. Rather than
+      wait on a manual upscale, **Photoshop 2026 was driven by script** —
+      `osascript -e 'tell application "Adobe Photoshop 2026" to do
+      javascript "…"'` with `doc.resizeImage(…, ResampleMethod.
+      PRESERVEDETAILS, 20)` (Preserve Details 2.0, Adobe's ML upscaler).
+      No window opens. Verified the small label type at 1:1 before
+      shipping: clean edges, no artifacts. Masters are now 3344×1882 and
+      3072×2048, saved JPEG q92. **Two gotchas:** Photoshop can't open a
+      `.jsx` from the session scratchpad under `/private/tmp` (pass the
+      script inline as a string), and it writes fine to `~/Desktop`. The
+      script lives nowhere in the repo — it's three lines, rebuild it.
+    - The lineup is a dark, detailed render, so its 2880 q90 WebP is
+      ~680 KB — heavier than a UI screenshot, acceptable for the one image
+      carrying the home page.
+    - This is the path for anything else that arrives from an image
+      generator at 1536: drop it in `~/Desktop/For Claude/`, upscale 2× in
+      Photoshop by script, then place it.
