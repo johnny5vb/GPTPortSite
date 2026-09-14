@@ -215,9 +215,13 @@ export default function Hero() {
                     was cropping ~60% of it away and needed an objectPosition
                     nudge to keep his face centred. Rather than crop the
                     artwork, the clear paper above it was extended — so the
-                    figure now sits whole in the frame with real headroom. */}
+                    figure now sits whole in the frame with real headroom.
+                    The file is versioned in its name (-v3) on purpose: the
+                    optimised image is served immutable for a year, so a
+                    recrop under the same filename never reaches a returning
+                    browser. Bump the suffix whenever the crop changes. */}
                 <Image
-                  src="/brand/portrait-hero.jpg"
+                  src="/brand/portrait-hero-v3.jpg"
                   alt="John Carman, Creative Director"
                   fill
                   sizes="(max-width: 1024px) 640px, 900px"
