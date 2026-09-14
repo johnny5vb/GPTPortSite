@@ -752,16 +752,6 @@ export const PROJECTS: Project[] = [
         "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
       work: [
         {
-          kind: "full",
-          aspect: "4 / 3",
-          image: {
-            src: "/work/colony-coffee/on-shelf.jpg",
-            alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
-          },
-          caption:
-            "The real thing — first batch printed, bagged, and on the shelf at the shop. All three roasts, exactly as designed.",
-        },
-        {
           kind: "pair",
           a: {
             src: "/work/colony-coffee/liberty.jpg",
@@ -777,14 +767,19 @@ export const PROJECTS: Project[] = [
             "Two of the three, up close — “Bold enough for midnight riders” and “Balanced like the Constitution,” down to the detail Todd cared about.",
         },
         {
-          kind: "full",
-          aspect: "3 / 2",
-          image: {
+          kind: "pair",
+          a: {
+            src: "/work/colony-coffee/on-shelf.jpg",
+            alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
+          },
+          b: {
             src: "/work/colony-coffee/gallery-3.png",
             alt: "Colony Coffee — the coffee-bag label design system across three roasts",
           },
+          labelA: "On the shelf",
+          labelB: "The concepts it came from",
           caption:
-            "One system, three roasts — heroic illustration meets colonial-era Americana: courage, balance, comfort.",
+            "The real thing beside the work that made it — first batch printed, bagged, and on the shelf at the shop, next to the label concepts across all three roasts: heroic illustration meets colonial-era Americana.",
         },
         {
           kind: "full",
@@ -796,7 +791,7 @@ export const PROJECTS: Project[] = [
           caption:
             "Where it came from — a few rounds of direction: palettes, collateral, and the historical art the labels grew out of.",
         },
-      ],
+    ],
     },
   },
   {
