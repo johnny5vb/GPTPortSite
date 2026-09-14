@@ -152,7 +152,7 @@ are un-numbered bands between the numbered narrative sections.
 - **`Hero.tsx`** — Section 00. Two-column portrait hero: headline
   ("Creative direction, and the systems that *make it repeatable.*"), a
   proof row (20+ / 15+ / 5), work-first CTAs, and the engraved portrait
-  (`/brand/portrait-hero.jpg`) framed as a print, stretched to meet the
+  (`/brand/portrait-hero-v3.jpg` — versioned, see #50) framed as a print, stretched to meet the
   headline cap and the CTA baseline. `HeroIsolines` (the live contour field)
   is the background. Neutral copy — no availability posture.
 - **`HeroMonogram.tsx`** — On disk, unimported. Superseded twice: first by
@@ -1064,3 +1064,36 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     - This is the path for anything else that arrives from an image
       generator at 1536: drop it in `~/Desktop/For Claude/`, upscale 2× in
       Photoshop by script, then place it.
+
+50. **Hero portrait: the recrop nobody saw, and the rule it taught.** The
+    owner reported dead paper above the head *after* #48's recrop had shipped
+    — his screenshot showed the head top at ~29% of the frame; the live file
+    measured 15%. The cause: `portrait-hero.jpg` was recomposed under the
+    **same filename**, and Netlify serves `/_next/image` responses with
+    `cache-control: public, max-age=31536000, immutable` — a returning browser
+    never re-fetches. Fixed by cropping another 75px of paper (head top now
+    ~10% of the frame, verified at 1440×760 / 1280×900 / 1920×1080) and
+    renaming to **`portrait-hero-v3.jpg`**; the old file is deleted.
+    **Rule: any image swapped under an existing name is invisible to
+    returning visitors for a year. Bump the filename** (`-v4`, a date, a
+    hash) whenever the pixels change. Case-study assets have all been new
+    names so far; the portrait was the one that wasn't.
+
+51. **Colony — the real bags.** The owner sent a phone photo of the printed
+    bags on the shelf at the shop (`IMG_1971.jpg`, 4284×3514 — it landed in
+    `~/Downloads`, found by date-added). Cropped to 4:3 with the sign's top
+    edge trimmed, saved as `on-shelf.jpg`. The owner's call on hierarchy:
+    **the polished mockups stay as the cover, thumbnail and first image**;
+    the photo goes inside. "The work" now runs: Liberty/Founders mockup pair
+    → **"On the shelf" / "The concepts it came from"** pair (the photo beside
+    the label-design sheet) → the exploration board. Status is "On the shelf
+    — first batch shipped"; the outcome line matches. Note the pair puts a
+    dark photo beside a white document plate — raised with the owner, left
+    as is.
+
+52. **Wordmark goes home from every route.** The nav logo linked to `#top`,
+    an id that only exists in `Hero`. From `/leadership`, `/lab` or a case
+    study it scrolled the *current* page to its top and went nowhere. `Nav`
+    now sets `href={pathname === "/" ? "#top" : "/"}` — an in-page Lenis
+    glide on home, a real navigation (with the cross-document crossfade)
+    everywhere else. Verified from three routes and from mid-home.
