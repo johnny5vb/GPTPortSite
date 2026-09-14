@@ -313,9 +313,15 @@ Key decisions worth preserving:
 
 ### Deploy flow
 ```
-npm run build         # local prod build into .next
-netlify deploy --prod --dir=.next
+git push origin main
 ```
+That's it. Since change #53 the Netlify site is linked to
+`github.com/johnny5vb/GPTPortSite` (branch `main`): every push builds on
+Netlify (~40 s) and publishes itself. Nothing on the Mac deploys any more —
+`npx netlify deploy --build --prod` still works for a one-off, but it isn't
+the flow and it isn't needed. Pull requests get deploy previews automatically.
+Git pushes as `johnny5vb` via `gh auth login` + `gh auth setup-git` (keyring);
+the repo is public, so fetches never needed auth — only pushes did.
 
 The old `min-h-[&!]` CSS warning is **fixed**. Root cause: Tailwind v4
 auto-scans content including Markdown, and this very file documented the token
@@ -686,8 +692,8 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
 1. Read this whole file.
 2. Run `npm run dev` and open `/`. Scroll through all 8 sections, then visit
    `/lab`, `/capabilities`, and at least one `/work/<slug>`.
-3. Check the live site at carmancreative.com to compare with your local
-   state (Netlify is usually a bit ahead of any uncommitted local work).
+3. The live site is exactly `origin/main` (Netlify builds every push). If
+   local `main` is ahead, the difference is what hasn't shipped yet.
 4. Before changing anything that touches the headings / contrast / aria
    patterns, re-read the Accessibility section — those decisions cost a
    long audit cycle.
@@ -931,13 +937,12 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     no commit, no branch), which is why every prior Workfront removal was
     correct in git and invisible on the web. Fixed by linking the folder
     (`netlify link --id 789dda90-…`) and deploying with
-    `netlify deploy --build --prod` from the owner's Mac. **Deploy flow now:**
-    that one command, nothing chained in front of it — chaining a local
-    `npm run build` ahead of it produced one transient "Error while running
-    build" from the two builds racing. `main` was merged forward (keeping this
-    tree over two superseded parallel commits: a candidate-forward hero and a
-    deletion-based Workfront removal) and is ahead of `origin/main`; pushing
-    needs the owner's `gh auth login`.
+    `netlify deploy --build --prod` from the owner's Mac (superseded by the
+    GitHub link in #53 — chaining a local `npm run build` ahead of that
+    command produced one transient "Error while running build" from the two
+    builds racing). `main` was merged forward (keeping this tree over two
+    superseded parallel commits: a candidate-forward hero and a
+    deletion-based Workfront removal); it reached GitHub in #53.
 
 44. **Retyped on Newsreader, ground warmed, hero rebuilt around the portrait.**
     Direction C of three rendered on the real page (A: Instrument Serif /
@@ -1097,3 +1102,17 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     now sets `href={pathname === "/" ? "#top" : "/"}` — an in-page Lenis
     glide on home, a real navigation (with the cross-document crossfade)
     everywhere else. Verified from three routes and from mid-home.
+
+53. **Repo, GitHub and the live site are finally one thing.** Two gaps closed
+    in one sitting. (a) `main` had never been pushed from this machine — 54
+    commits ahead, and the earlier `git fetch` successes were misleading
+    because the repo is public and reads need no auth. The owner ran
+    `gh auth login --web` and `gh auth setup-git`; pushed as `johnny5vb`.
+    (b) The owner linked the Netlify site to the GitHub repo (Project
+    configuration → Build & deploy → Link repository; `main`, `npm run
+    build`, `.next` — picked up from `netlify.toml`). Proven with an empty
+    commit: pushed from here, built on Netlify in 41 s, published, with
+    nothing run locally. **The deploy flow is now `git push` and nothing
+    else** — see the Deployment section. This retires the "Netlify is
+    usually a bit ahead of any uncommitted local work" note in the cold-start
+    checklist: the live site is exactly `origin/main`.
