@@ -1169,125 +1169,132 @@ export const PROJECTS: Project[] = [
     tier: "independent",
     title: "Friends Rehabilitation Program",
     client: "Friends Rehabilitation Program (FRP)",
-    year: "2025",
-    category: "Health & Human Services / Web Design",
-    duration: "6 weeks",
-    tags: ["Web", "Brand", "CMS"],
+    year: "2025–2026",
+    category: "Nonprofit / Web Design",
+    duration: "Two phases — refresh, then rebuild",
+    tags: ["Web", "Brand", "Nonprofit"],
     blurb:
-      "A digital home for a long-running rehabilitation nonprofit. Calm, clear, donor-ready — built so staff can update content without a designer in the loop.",
-    oneLiner:
-      "A calm, supportive digital experience that prioritizes clarity and reassurance.",
+      "A new website for a sixty-year-old Quaker housing nonprofit in Philadelphia — homeless services, re-entry, trades training — built to make the mission legible and giving easy.",
+    oneLiner: "Advancing justice. Building futures.",
     brief:
-      "The website refresh centered on clarity, accessibility, and trust — making it easier to understand services, find resources, and take next steps.",
+      "FRP has helped Philadelphians get into stable housing and stay there since 1961. The first pass gave them a calmer, clearer site. The rebuild goes further: a proper editorial identity on the web, programs explained plainly, and a giving experience that works as hard as the mission does.",
     process: [
       {
-        label: "Research",
-        body: "Research focused on understanding the needs of individuals seeking treatment, their families, and referral partners.",
+        label: "Say what FRP actually does",
+        body: "Homeless services, re-entry and transitional housing, and GRIT workforce training — three programs and the pathway between them, named on every page so no visitor has to guess.",
       },
       {
-        label: "Concept",
-        body: "The concept centered on creating a calm, supportive digital experience that prioritizes clarity and reassurance.",
+        label: "An identity, not a template",
+        body: "Navy and gold, a serif display face, an arched photograph. It reads as an institution with sixty years behind it, not a nonprofit with a theme.",
       },
       {
-        label: "Design",
-        body: "Design emphasized readability, approachable typography, and a restrained visual system to support emotional ease.",
+        label: "Make giving specific",
+        body: "The Housewarming Fund furnishes an empty apartment into a home. The Homeownership Fund starts a family toward owning. Each fund gets its own page and its own ask.",
       },
       {
-        label: "Development",
-        body: "The site was developed with accessibility, performance, and maintainability in mind — ensuring reliable performance across devices.",
+        label: "Show the numbers, and the source",
+        body: "The Impact page leads with three figures and a link to the annual report they come from — the short version, and where to check it.",
       },
     ],
-    services: [
-      "Brand identity",
-      "Web design",
-      "Content strategy",
-      "AI-powered creative systems",
-    ],
-    palette: ["#0e2b3a", "#3a6b7a", "#cbd9d5", "#f4f1ea"],
+    services: ["Web design", "Brand system", "Content strategy", "Front-end build"],
+    palette: ["#12283a", "#c9a24a", "#0d6b6b", "#f5f7f9"],
     display: "FRP",
-    cover: "/work/friends-rehab/frp-hero.png",
-    gallery: [
-      {
-        src: "/work/friends-rehab/frp-purpose.png",
-        alt: "FRP website — Our purpose is the people we serve, with Our Programs section",
-      },
-      {
-        src: "/work/friends-rehab/frp-housewarming.png",
-        alt: "FRP website — The Housewarming Fund page",
-      },
-      {
-        src: "/work/friends-rehab/frp-homeless.png",
-        alt: "FRP website — Homeless Services Program page",
-      },
-    ],
-    externalUrl: "https://www.carmancreative.com/work/frp",
+    cover: "/work/friends-rehab/v2-cover.jpg",
+    coverAspect: "4 / 3",
+    gallery: [],
+    externalUrl: "https://friends-frp.org",
     caseStudy: {
       overview: [
         { label: "Client", value: "Friends Rehabilitation Program (FRP)" },
-        { label: "Role", value: "Web & content lead (Carman Creative)" },
-        { label: "Year", value: "2025" },
-        { label: "Scope", value: "Website refresh, content structure, CMS" },
-        { label: "Deliverables", value: "Redesigned site staff can maintain" },
+        { label: "Role", value: "Design and build (Carman Creative)" },
+        { label: "Year", value: "2025–2026" },
+        { label: "Scope", value: "Identity on the web, twelve pages, giving experience" },
+        { label: "Status", value: "In final review with FRP's team — launch to follow" },
       ],
       challenge:
-        "A long-running rehabilitation nonprofit needed a digital home that people in crisis — and the families and referral partners around them — could actually use: clear services, findable resources, and obvious next steps, all trustworthy at a glance.",
+        "A Quaker nonprofit that has served Philadelphia since 1961, with a name that no longer describes the work: FRP runs homeless services, re-entry and transitional housing, and trades training, not rehabilitation. The old site was calm and maintainable but it didn't say any of that clearly, and it made giving an afterthought. Visitors — donors, partners, people looking for help — had to work out what the organization did before they could act.",
       mandate:
-        "Rebuild the site around clarity and reassurance, and hand the organization something staff could update without a designer in the loop.",
+        "Rebuild the site so the mission is legible in one screen, the three programs and the pathway between them are plain, and giving is a first-class experience with specific things to give to.",
       context:
-        "A mission-driven organization with limited technical capacity and an audience that often arrives under stress. The content had to be accessible and calm.",
+        "A second engagement, following the first refresh. A mission-driven client with limited technical capacity and a sixty-year story worth telling well. The work is in final review with FRP's team.",
       role: [
-        "Led the site refresh and information architecture",
-        "Shaped the content so services and next steps read plainly",
-        "Built it on a CMS staff can maintain themselves",
+        "Reframed the site around what FRP does — housing, re-entry, workforce — rather than what its name says",
+        "Designed the identity on the web: navy and gold, a serif display face, the arched photography",
+        "Structured twelve pages across About, Programs, Ways to Give, Impact and Contact",
+        "Wrote and shaped the copy so each program and each fund reads plainly",
+        "Built the site as a static front end with a page-build script",
       ],
-      team: [
-        "FRP staff and stakeholders",
-        "A direct client relationship",
-      ],
+      team: ["FRP leadership and staff", "A direct client relationship"],
       decisions: [
         {
-          title: "Design for reassurance, not decoration",
-          body: "Readable typography and a restrained system, so the experience reads calm and credible to someone seeking help rather than busy or clinical.",
+          title: "Lead with the mission, not the name",
+          body: "The name reads as treatment; the work is housing, re-entry and job training. Rather than explain the name, the hero says what FRP does in two sentences, and the three programs are named in the first screen.",
         },
         {
-          title: "Independence over dependence",
-          body: "Built on a CMS so staff can keep content current without a designer in the loop — the durability a small nonprofit actually needs.",
+          title: "An institution's identity",
+          body: "Sixty years of Quaker practice earns gravity. Navy, gold, a serif display face and one arched photograph give the site the bearing of a long-standing institution rather than a small nonprofit's theme.",
         },
         {
-          title: "Now: build toward giving",
-          body: "The current work takes it further — reworking the site into a more donation-friendly experience, because for a nonprofit, making it easy to give is the point.",
+          title: "Give to something specific",
+          body: "A general donate button is easy to ignore. The Housewarming Fund and the Homeownership Fund each get a page, a story and an ask — so a gift has a shape, and a donor knows what it does.",
+        },
+        {
+          title: "Numbers with a source",
+          body: "The Impact page shows three figures and links to the annual report they come from. Credibility for a nonprofit is being checkable; the page says so in its own headline.",
         },
       ],
       outcomes: [
-        "Stood up a refreshed website the staff can maintain themselves",
-        "Currently rebuilding it into a more donation-friendly web experience",
+        "A twelve-page site with a clear identity, three programs explained plainly, and two named funds to give to",
+        "In final review with FRP's team ahead of launch",
+        "The first refresh remains live at friends-frp.org until cutover",
       ],
       reflection:
-        "The first refresh gave FRP a calm, credible home they can run without a designer. Now I'm taking it further toward donations — because for a nonprofit, the easier it is to give, the more good the work does.",
+        "The first pass fixed how the site felt. This one fixed what it said. The biggest move wasn't visual — it was putting homeless services, re-entry and trades training in the first screen, because a visitor who has to work out what you do won't stay long enough to give.",
       work: [
         {
-          kind: "pair",
-          a: {
-            src: "/work/friends-rehab/frp-purpose.png",
-            alt: "FRP — Our purpose and Our Programs",
+          kind: "browser",
+          image: {
+            src: "/work/friends-rehab/v2-home.jpg",
+            alt: "FRP — the new homepage: Advancing Justice. Building Futures.",
           },
-          b: {
-            src: "/work/friends-rehab/frp-homeless.png",
-            alt: "FRP — Homeless Services Program",
-          },
-          labelA: "Our purpose",
-          labelB: "Homeless Services",
+          url: "friends-frp.org",
           caption:
-            "Programs and services, written to read plainly and be findable at a glance.",
+            "The homepage says what FRP does in two sentences — housing, re-entry, trades training — under a headline that carries sixty years of Quaker practice.",
         },
         {
           kind: "full",
+          aspect: "16 / 10",
           image: {
-            src: "/work/friends-rehab/frp-housewarming.png",
-            alt: "FRP — The Housewarming Fund page",
+            src: "/work/friends-rehab/v2-impact.jpg",
+            alt: "FRP — the Impact page: the numbers, and where to check them",
           },
           caption:
-            "The Housewarming Fund — a focused giving page, and the start of a more donation-friendly experience.",
+            "Impact — three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/friends-rehab/v2-programs.jpg",
+            alt: "FRP — the Programs page",
+          },
+          b: {
+            src: "/work/friends-rehab/v2-reentry.jpg",
+            alt: "FRP — the Re-entry & TLCC program page",
+          },
+          labelA: "Programs",
+          labelB: "Re-entry",
+          caption:
+            "Three programs and the pathway between them, each with its own page. Re-entry and transitional housing, shown here, is the one most visitors arrive not knowing FRP does.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/friends-rehab/v2-give.jpg",
+            alt: "FRP — Ways to Give",
+          },
+          caption:
+            "Ways to Give — the Housewarming Fund and the Homeownership Fund, each a specific thing a gift does, rather than one general button.",
         },
       ],
     },
