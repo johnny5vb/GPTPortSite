@@ -706,7 +706,7 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Brand concept & label design (Carman Creative)" },
         { label: "Year", value: "2025" },
         { label: "Scope", value: "Brand system, labels & packaging, business card" },
-        { label: "Status", value: "First batch of labels in production" },
+        { label: "Status", value: "On the shelf — first batch shipped" },
       ],
       challenge:
         "Todd Mills — a veteran, and genuinely passionate about coffee — wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
@@ -745,12 +745,22 @@ export const PROJECTS: Project[] = [
       ],
       outcomes: [
         "What began as a logo request became a full brand system that launched the company",
-        "Direction locked; Todd moved into production — first batch of labels recently printed",
+        "Direction locked, production done — the first batch is printed, bagged, and on the shelf",
         "The start of an ongoing relationship — more Colony work to come",
       ],
       reflection:
         "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
       work: [
+        {
+          kind: "full",
+          aspect: "4 / 3",
+          image: {
+            src: "/work/colony-coffee/on-shelf.jpg",
+            alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
+          },
+          caption:
+            "The real thing — first batch printed, bagged, and on the shelf at the shop. All three roasts, exactly as designed.",
+        },
         {
           kind: "pair",
           a: {
