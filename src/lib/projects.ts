@@ -380,7 +380,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "3 / 4",
           image: {
-            src: "/work/creative-operations-marketing-bench/platform-homepage-annotated.jpg",
+            src: "/work/creative-operations-marketing-bench/platform-homepage-annotated-v2.jpg",
             alt: "Annotated walkthrough of the Marketing Hub homepage — build a marketing folder, quick links to the resource center, stationery, sales support, and promo items",
           },
           caption:
@@ -390,7 +390,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "3 / 2",
           image: {
-            src: "/work/creative-operations-marketing-bench/client-catalog.jpg",
+            src: "/work/creative-operations-marketing-bench/client-catalog-v2.jpg",
             alt: "The customized client materials catalog, with logos for Amtrak, Baltimore City Public Schools, California, Catholic Health Initiatives and CenturyLink",
           },
           caption:
@@ -415,7 +415,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "3 / 2",
           image: {
-            src: "/work/creative-operations-marketing-bench/output-annotated.jpg",
+            src: "/work/creative-operations-marketing-bench/output-annotated-v2.jpg",
             alt: "A finished branded piece annotated to show which fields fill automatically and which the user sets",
           },
           caption:
@@ -1471,7 +1471,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
     display: "STIGMA",
-    cover: "/work/stamp-out-stigma/card-timessquare.jpg",
+    cover: "/work/stamp-out-stigma/card-timessquare-v2.jpg",
     gallery: [],
     externalUrl: "https://www.carmancreative.com/work/sos",
     roleSummary:
@@ -1523,7 +1523,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "4 / 3",
           image: {
-            src: "/work/stamp-out-stigma/gallery-2.png",
+            src: "/work/stamp-out-stigma/gallery-2-v2.jpg",
             alt: "Stamp Out Stigma — the campaign on the Times Square screens at dusk",
           },
           caption:
@@ -1532,7 +1532,7 @@ export const PROJECTS: Project[] = [
         {
           kind: "detail",
           image: {
-            src: "/work/stamp-out-stigma/gallery-1.jpg",
+            src: "/work/stamp-out-stigma/gallery-1-v2.jpg",
             alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
           },
           caption:
@@ -1541,7 +1541,7 @@ export const PROJECTS: Project[] = [
         {
           kind: "full",
           image: {
-            src: "/work/stamp-out-stigma/gallery-3.png",
+            src: "/work/stamp-out-stigma/gallery-3-v2.jpg",
             alt: "Stamp Out Stigma — Times Square at dusk",
           },
           caption:
