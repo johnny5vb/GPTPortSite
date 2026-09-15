@@ -236,7 +236,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "3 / 2",
           image: {
-            src: "/work/beacon-carelon-transformation/system-graphic-language.jpg",
+            src: "/work/beacon-carelon-transformation/system-graphic-language-v2.jpg",
             alt: "The brand's graphic language — focus, progress, and connection built from the mark's geometry",
           },
           caption:
