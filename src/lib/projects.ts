@@ -162,7 +162,7 @@ export const PROJECTS: Project[] = [
     // composed spread of the real delivered Carelon pieces — report cover,
     // member-facing crisis flyer, sales sheet, and print folder — so the
     // rebrand reads as an applied system rather than a logo sheet.
-    cover: "/work/beacon-carelon-transformation/card-rebrand.jpg",
+    cover: "/work/beacon-carelon-transformation/card-rebrand-v2.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -323,7 +323,7 @@ export const PROJECTS: Project[] = [
     // The platform itself, centered on the same neutral plate the other two
     // flagships use. The annotated user-guide version still carries the
     // walkthrough inside "The work".
-    cover: "/work/creative-operations-marketing-bench/card-platform.jpg",
+    cover: "/work/creative-operations-marketing-bench/card-platform-v2.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -773,7 +773,7 @@ export const PROJECTS: Project[] = [
             alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
           },
           b: {
-            src: "/work/colony-coffee/gallery-3.png",
+            src: "/work/colony-coffee/label-sheet-v2.jpg",
             alt: "Colony Coffee — the coffee-bag label design system across three roasts",
           },
           labelA: "On the shelf",
@@ -905,7 +905,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1b2a", "#2b8fb8", "#1f3a5c", "#eef2f6"],
     display: "ATRÓMITOS",
-    cover: "/work/atromitos/site-home.jpg",
+    cover: "/work/atromitos/site-home-v2.jpg",
     gallery: [],
     roleSummary: "Website refresh + Knowledge Hub + the Andy Hill editorial report.",
     caseStudy: {
@@ -963,7 +963,7 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/atromitos/site-home.jpg",
+            src: "/work/atromitos/site-home-v2.jpg",
             alt: "The Atrómitos homepage — “Consulting Done Fearlessly” over a lioness at sunrise",
           },
           caption:
@@ -973,7 +973,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/atromitos/knowledge-hub.jpg",
+            src: "/work/atromitos/knowledge-hub-v2.jpg",
             alt: "The Atrómitos Knowledge Hub — a What's New feature above cards for the podcast, articles, learning, and policy analysis",
           },
           caption:
@@ -1121,7 +1121,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/important-colorado/wordmark-anatomy.jpg",
+            src: "/work/important-colorado/wordmark-anatomy-v2.jpg",
             alt: "Wordmark anatomy — three lines, three jobs: IMPORTANT!, the federal-changes framing, and the program name",
           },
           caption:
@@ -1161,7 +1161,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/important-colorado/phase2-eligibility.jpg",
+            src: "/work/important-colorado/phase2-eligibility-v2.jpg",
             alt: "Phase 2 slide — an eligibility table showing which immigration statuses may qualify for coverage",
           },
           caption:
@@ -1883,7 +1883,7 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/cqap/02-package-ready.jpg",
+            src: "/work/cqap/02-package-ready-v2.jpg",
             alt: "CQAP — validation and context: the package is ready to review",
           },
           url: "cqap.vercel.app",
@@ -1894,7 +1894,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/cqap/04-review-findings.jpg",
+            src: "/work/cqap/04-review-findings-v2.jpg",
             alt: "CQAP — the review workspace with two reviewer findings accepted",
           },
           caption:
@@ -1919,7 +1919,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/cqap/01-dashboard.jpg",
+            src: "/work/cqap/01-dashboard-v2.jpg",
             alt: "CQAP — the workspace with one review active and one completed",
           },
           caption:
