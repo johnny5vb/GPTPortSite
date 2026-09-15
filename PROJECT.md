@@ -1116,3 +1116,34 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     else** — see the Deployment section. This retires the "Netlify is
     usually a bit ahead of any uncommitted local work" note in the cold-start
     checklist: the live site is exactly `origin/main`.
+
+54. **Image sharpness — the remaining list, cleared.** Live audit went from
+    **77 ok / 9 soft / 10 blurry** (14 pages, 96 images) to **95 / 2 / 0**.
+    Every replaced image got a **new filename** (`-v2`) per #50.
+    - **Atrómitos** homepage + Knowledge Hub recaptured at 2880 from the
+      client's live site. It is `atromitosconsulting.com` — `atromitos.com`
+      is a parked domain. The site stacks a CookieYes banner, a second
+      shadow-DOM cookie banner (`#cookiez-banner`), an Elementor webinar
+      popup and two accessibility widgets (`#cya11y-container`,
+      `#ea11y-root`); remove those by id before capturing. Cookies declined,
+      not accepted.
+    - **PDF re-renders at 2880** with PyMuPDF (`python3 -m pip install
+      pymupdf`, now installed): the Colony label sheet (`CC-Label Mockup
+      Design Options-Full.pdf`, page 1, iCloud), the IMPORTANT! Phase 2
+      eligibility slide (`Phase 2-Immigrant Coverage Slides-English-062326.pdf`,
+      page 2), and the wordmark-anatomy slide from the brand guidelines —
+      which only exist as a `.pptx`, so **PowerPoint was driven by
+      `osascript`** (`save … as save as PDF`) to get a PDF first. PowerPoint
+      needed the file copied to `~/Desktop/For Claude/` to open it.
+    - **Photoshop 2× (Preserve Details 2.0, per #49)** on everything whose
+      source is off this Mac: the three CQAP review screens, the two
+      leadership cards, Carelon's graphic-language page (thin-line vector on
+      flat colour — ideal for it; the portrait document it came from is not
+      the landscape `Carelon_Brand_Guidelines_v2.0` PDF in Downloads), the
+      three Marketing Bench user-guide screens, and all four Stamp Out
+      Stigma images. **These last two sets are interim**: the Stamp photos
+      started at 1100px and are still 1.2× at full width; the Marketing
+      Bench guide PDF and the original Times Square photos would still beat
+      the upscale. The audit script is `audit.mjs` in the session
+      scratchpad — it imports Playwright from `~/frp-website-preview/
+      node_modules`, since this repo has none.
