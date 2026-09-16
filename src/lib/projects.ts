@@ -795,239 +795,266 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    slug: "evermark",
+    slug: "friends-rehab",
     num: "02",
     tier: "independent",
-    // Held back: the proposal hasn't come back signed, so this isn't a client
-    // engagement to show yet. Copy is written and ready — flip this off to publish.
-    draft: true,
-    title: "EverMark",
-    client: "EverMark",
-    year: "",
-    category: "Brand & Digital",
-    duration: "",
-    tags: ["Brand", "Identity", "Web"],
-    blurb: "Identity, website, and marketing collateral for EverMark — a family-owned premium design-and-build company in PA's Lehigh Valley. In progress.",
-    oneLiner: "Helping a family builder stand out in a sea of sameness.",
-    brief: "EverMark is a family-owned, premium design-and-build company in Pennsylvania's Lehigh Valley, working to stand out in a crowded field of builders and developers. After a lot of exploration, I began building their identity — with a website, Google Business Profile, and a suite of marketing collateral to follow.",
-    process: [],
-    services: [
-      "Identity system",
-      "Web design",
-      "Marketing collateral",
-      "Google Business Profile",
+    title: "Friends Rehabilitation Program",
+    client: "Friends Rehabilitation Program (FRP)",
+    year: "2025–2026",
+    category: "Nonprofit / Web Design",
+    duration: "Two phases — refresh, then rebuild",
+    tags: ["Web", "Brand", "Nonprofit"],
+    blurb:
+      "A new website for a sixty-year-old Quaker housing nonprofit in Philadelphia — homeless services, re-entry, trades training — built to make the mission legible and giving easy.",
+    oneLiner: "Advancing justice. Building futures.",
+    brief:
+      "FRP has helped Philadelphians get into stable housing and stay there since 1961. The first pass gave them a calmer, clearer site. The rebuild goes further: a proper editorial identity on the web, programs explained plainly, and a giving experience that works as hard as the mission does.",
+    process: [
+      {
+        label: "Say what FRP actually does",
+        body: "Homeless services, re-entry and transitional housing, and GRIT workforce training — three programs and the pathway between them, named on every page so no visitor has to guess.",
+      },
+      {
+        label: "An identity, not a template",
+        body: "Navy and gold, a serif display face, an arched photograph. It reads as an institution with sixty years behind it, not a nonprofit with a theme.",
+      },
+      {
+        label: "Make giving specific",
+        body: "The Housewarming Fund furnishes an empty apartment into a home. The Homeownership Fund starts a family toward owning. Each fund gets its own page and its own ask.",
+      },
+      {
+        label: "Show the numbers, and the source",
+        body: "The Impact page leads with three figures and a link to the annual report they come from — the short version, and where to check it.",
+      },
     ],
-    palette: ["#141210", "#c9a24a", "#2e2a22", "#f2efe6"],
-    display: "EVERMARK",
-    cover: "",
+    services: ["Web design", "Brand system", "Content strategy", "Front-end build"],
+    palette: ["#12283a", "#c9a24a", "#0d6b6b", "#f5f7f9"],
+    display: "FRP",
+    cover: "/work/friends-rehab/v2-cover.jpg",
+    coverAspect: "4 / 3",
     gallery: [],
-    roleSummary: "Identity, website, and collateral for a family-owned design-build brand.",
+    externalUrl: "https://friends-frp.org",
     caseStudy: {
       overview: [
-        { label: "Client", value: "EverMark (family-owned)" },
-        { label: "Role", value: "Brand & digital lead (Carman Creative)" },
-        { label: "Location", value: "Lehigh Valley, PA" },
-        { label: "Scope", value: "Identity, website, GBP, collateral" },
-        { label: "Status", value: "In progress — identity underway" },
+        { label: "Client", value: "Friends Rehabilitation Program (FRP)" },
+        { label: "Role", value: "Design and build (Carman Creative)" },
+        { label: "Year", value: "2025–2026" },
+        { label: "Scope", value: "Identity on the web, twelve pages, giving experience" },
+        { label: "Status", value: "In final review with FRP's team — launch to follow" },
       ],
       challenge:
-        "EverMark is a family-owned, premium design-and-build company trying to stand out in a crowded field of builders and developers. The brand has to feel genuinely premium — and unmistakably theirs — in a category where most names blur together.",
+        "A Quaker nonprofit that has served Philadelphia since 1961, with a name that no longer describes the work: FRP runs homeless services, re-entry and transitional housing, and trades training, not rehabilitation. The old site was calm and maintainable but it didn't say any of that clearly, and it made giving an afterthought. Visitors — donors, partners, people looking for help — had to work out what the organization did before they could act.",
       mandate:
-        "After a lot of exploration and conversation, I began building EverMark's identity system — and I'll be developing the website, Google Business Profile, and a full suite of marketing collateral to help them reach the potential they deserve.",
+        "Rebuild the site so the mission is legible in one screen, the three programs and the pathway between them are plain, and giving is a first-class experience with specific things to give to.",
       context:
-        "A brand-new client and a family-owned business making the decisions directly, in a design-build category where differentiation is genuinely hard and trust is everything.",
+        "A second engagement, following the first refresh. A mission-driven client with limited technical capacity and a sixty-year story worth telling well. The work is in final review with FRP's team.",
       role: [
-        "Led the exploration and early conversations to find the positioning",
-        "Building the identity system",
-        "Developing the website (in progress)",
-        "Setting up the Google Business Profile (in progress)",
-        "Designing a suite of marketing collateral (in progress)",
+        "Reframed the site around what FRP does — housing, re-entry, workforce — rather than what its name says",
+        "Designed the identity on the web: navy and gold, a serif display face, the arched photography",
+        "Structured twelve pages across About, Programs, Ways to Give, Impact and Contact",
+        "Wrote and shaped the copy so each program and each fund reads plainly",
+        "Built the site as a static front end with a page-build script",
       ],
-      team: [
-        "EverMark's owners — a family-owned business",
-        "A direct client relationship",
-      ],
+      team: ["FRP leadership and staff", "A direct client relationship"],
       decisions: [
         {
-          title: "Stand out in a sea of sameness",
-          body: "The core call: differentiate a premium design-build brand in a category where nearly everyone looks and sounds alike. TODO: Confirm the specific direction as the identity locks.",
+          title: "Lead with the mission, not the name",
+          body: "The name reads as treatment; the work is housing, re-entry and job training. Rather than explain the name, the hero says what FRP does in two sentences, and the three programs are named in the first screen.",
         },
         {
-          title: "TODO: Add decisions as the work ships",
-          body: "TODO: The identity, website, and collateral choices — captured here as they're made.",
+          title: "An institution's identity",
+          body: "Sixty years of Quaker practice earns gravity. Navy, gold, a serif display face and one arched photograph give the site the bearing of a long-standing institution rather than a small nonprofit's theme.",
+        },
+        {
+          title: "Give to something specific",
+          body: "A general donate button is easy to ignore. The Housewarming Fund and the Homeownership Fund each get a page, a story and an ask — so a gift has a shape, and a donor knows what it does.",
+        },
+        {
+          title: "Numbers with a source",
+          body: "The Impact page shows three figures and links to the annual report they come from. Credibility for a nonprofit is being checkable; the page says so in its own headline.",
         },
       ],
       outcomes: [
-        "Identity system in development; website, Google Business Profile, and collateral to follow",
-        "TODO: Add outcomes as EverMark launches",
-      ],
-      reflection: "TODO: Add a reflection as the work ships.",
-      work: [
-        {
-          kind: "full",
-          tall: true,
-          image: { src: "", alt: "EverMark identity system" },
-          caption:
-            "The identity — built to feel genuinely premium in a category where names blur together.",
-        },
-        {
-          kind: "detail",
-          image: { src: "", alt: "The EverMark mark, up close" },
-          caption: "The mark and its details.",
-        },
-        {
-          kind: "browser",
-          image: { src: "", alt: "EverMark website — in development" },
-          caption:
-            "The website in development — the digital home, Google Business Profile, and collateral to follow.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "atromitos",
-    num: "02",
-    tier: "independent",
-    title: "Atrómitos",
-    client: "Atrómitos",
-    year: "",
-    category: "Website / Editorial",
-    duration: "",
-    tags: ["Web", "Editorial", "Knowledge Hub"],
-    blurb: "A website refresh and a new consolidated Knowledge Hub for Atrómitos — a woman-owned consulting firm — plus a 65-page editorial report for the Andy Hill CARE Fund.",
-    oneLiner: "Their art direction, elevated — and a Knowledge Hub that carries their expertise.",
-    brief: "Atrómitos is a woman-owned health and human services consulting firm. They came in through a referral with their own art direction already settled — they weren't looking for a redesign. So the job was to execute their direction faithfully, raise the craft inside it, and add the things that would actually move the business: real interactivity and a consolidated Knowledge Hub for their published work and webinars. The Andy Hill CARE Fund report was a separate commission.",
-    process: [],
-    services: [
-      "Web design",
-      "Knowledge Hub",
-      "Editorial / booklet design",
-    ],
-    palette: ["#0e1b2a", "#2b8fb8", "#1f3a5c", "#eef2f6"],
-    display: "ATRÓMITOS",
-    cover: "/work/atromitos/site-home-v2.jpg",
-    gallery: [],
-    roleSummary: "Website refresh + Knowledge Hub + the Andy Hill editorial report.",
-    caseStudy: {
-      overview: [
-        { label: "Client", value: "Atrómitos (woman-owned consulting)" },
-        { label: "Role", value: "Web design & editorial (Carman Creative)" },
-        { label: "How it came in", value: "Referral from another client" },
-        { label: "Scope", value: "Website refresh, Knowledge Hub, Andy Hill report" },
-        { label: "Status", value: "Live — client very happy" },
-      ],
-      challenge:
-        "Atrómitos arrived with the site already laid out the way they wanted it. The art direction was theirs and it wasn't up for redesign — so the usual lever, rethinking the look, was off the table. The real problem was underneath it: their published work — articles, policy analysis, podcasts, webinars, toolkits — was scattered, and the site didn't do justice to how much expertise the firm actually produces.",
-      mandate:
-        "Execute their art direction faithfully, sharpen the craft within it, and build what the site was missing: genuine interactivity and one consolidated home for everything they publish. The Andy Hill CARE Fund report came in separately as its own commission.",
-      context:
-        "A referral from a completely unrelated client — a good sign the reputation travels. An active, engaged consulting firm that publishes constantly, with a settled visual direction of their own and clear opinions about it.",
-      role: [
-        "Took the client's art direction as the brief and built the site to it",
-        "Raised the execution — typography, spacing, and finish — inside their direction",
-        "Added interactivity the original layout didn't have",
-        "Designed and built the Knowledge Hub — one consolidated home for their articles, policy analysis, podcast, webinars, and toolkits",
-        "Designed the Andy Hill CARE Fund report — a 65-page editorial document, commissioned separately",
-      ],
-      team: [
-        "Atromitos — woman-owned consulting client",
-        "Referred by another client; a direct client relationship",
-      ],
-      decisions: [
-        {
-          title: "Serve their direction — then raise it",
-          body: "The client had settled the art direction and didn't want it reopened. I took that as the brief rather than a fight, and spent the effort where it was still mine to spend: sharper typography, better spacing and hierarchy, and a level of finish above what came in.",
-        },
-        {
-          title: "Put the value where the direction wasn't",
-          body: "If the look was fixed, the contribution had to come from what the site could do. That meant real interactivity and, above all, the Knowledge Hub — the piece that changed what the site is actually for.",
-        },
-        {
-          title: "Consolidate the expertise into one place",
-          body: "A firm that publishes this much was spreading it across formats and corners of the site. The Knowledge Hub pulls the articles, policy analysis, podcast, webinars, and practical toolkits into one home, so the depth reads at a glance instead of having to be hunted for.",
-        },
-        {
-          title: "Treat the report as real editorial",
-          body: "The Andy Hill CARE Fund piece got the full treatment — 65 pages of structured findings, numbered takeaways, section openers, and a tiered recommendation framework. A considered document, not a long memo.",
-        },
-      ],
-      outcomes: [
-        "A site built to the client's own direction, executed at a higher level of craft than what came in",
-        "The Knowledge Hub — one consolidated home for the firm's articles, policy analysis, podcast, webinars, and toolkits",
-        "The Andy Hill CARE Fund report delivered and very well received",
-        "An ongoing relationship with an active, engaged client — more work expected",
+        "A twelve-page site with a clear identity, three programs explained plainly, and two named funds to give to",
+        "In final review with FRP's team ahead of launch",
+        "The first refresh remains live at friends-frp.org until cutover",
       ],
       reflection:
-        "Not every engagement hands you the visual direction, and this one didn't: the layout was theirs and staying. The useful lesson was where to put the effort when the look is settled — into craft inside their system, and into the Knowledge Hub, which is the piece I'd point at. It came in as a referral from an unrelated client, which tells me the work travels, and it's a relationship I expect to keep building on.",
+        "The first pass fixed how the site felt. This one fixed what it said. The biggest move wasn't visual — it was putting homeless services, re-entry and trades training in the first screen, because a visitor who has to work out what you do won't stay long enough to give.",
       work: [
         {
           kind: "browser",
           image: {
-            src: "/work/atromitos/site-home-v2.jpg",
-            alt: "The Atrómitos homepage — “Consulting Done Fearlessly” over a lioness at sunrise",
+            src: "/work/friends-rehab/v2-home.jpg",
+            alt: "FRP — the new homepage: Advancing Justice. Building Futures.",
           },
+          url: "friends-frp.org",
           caption:
-            "The site, built to the client's own art direction — executed with sharper type, spacing, and finish than what came in.",
+            "The homepage says what FRP does in two sentences — housing, re-entry, trades training — under a headline that carries sixty years of Quaker practice.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/atromitos/knowledge-hub-v2.jpg",
-            alt: "The Atrómitos Knowledge Hub — a What's New feature above cards for the podcast, articles, learning, and policy analysis",
+            src: "/work/friends-rehab/v2-impact.jpg",
+            alt: "FRP — the Impact page: the numbers, and where to check them",
           },
           caption:
-            "The Knowledge Hub — the contribution I'd point at. One home for the articles, policy analysis, podcast, webinars, and toolkits a firm this active keeps producing.",
-        },
-        {
-          kind: "detail",
-          image: {
-            src: "/work/atromitos/andyhill-cover.jpg",
-            alt: "Findings and Recommendations for the Andy Hill CARE Fund — report cover",
-          },
-          caption:
-            "A separate commission: “Findings and Recommendations for the Andy Hill CARE Fund” — 65 pages on community-based organizations and diversity in cancer clinical trials.",
+            "Impact — three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
         },
         {
           kind: "pair",
           a: {
-            src: "/work/atromitos/andyhill-findings.jpg",
-            alt: "Key Findings at a Glance — numbered findings with supporting detail",
+            src: "/work/friends-rehab/v2-programs.jpg",
+            alt: "FRP — the Programs page",
           },
           b: {
-            src: "/work/atromitos/andyhill-divider.jpg",
-            alt: "Executive Summary section opener with photography and a colour panel",
+            src: "/work/friends-rehab/v2-reentry.jpg",
+            alt: "FRP — the Re-entry & TLCC program page",
           },
-          labelA: "Findings at a glance",
-          labelB: "Section openers",
+          labelA: "Programs",
+          labelB: "Re-entry",
           caption:
-            "Editorial structure doing the work: numbered findings a reader can scan, and section openers that give a 65-page document a rhythm.",
+            "Three programs and the pathway between them, each with its own page. Re-entry and transitional housing, shown here, is the one most visitors arrive not knowing FRP does.",
         },
         {
-          kind: "gallery",
-          images: [
-            {
-              src: "/work/atromitos/andyhill-voices.jpg",
-              alt: "Community Voices section — themed qualitative findings",
-            },
-            {
-              src: "/work/atromitos/andyhill-framework.jpg",
-              alt: "Program design and tiered recommendation framework pages",
-            },
-            {
-              src: "/work/atromitos/andyhill-cover.jpg",
-              alt: "The Andy Hill CARE Fund report cover",
-            },
-          ],
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/friends-rehab/v2-give.jpg",
+            alt: "FRP — Ways to Give",
+          },
           caption:
-            "Inside the report — community voices, a tiered recommendation framework, and the design system holding 65 pages of dense research together.",
+            "Ways to Give — the Housewarming Fund and the Homeownership Fund, each a specific thing a gift does, rather than one general button.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "special-forces-trust",
+    num: "03",
+    tier: "independent",
+    title: "Special Forces Trust",
+    client: "Special Forces Trust",
+    year: "2024",
+    category: "Nonprofit / Brand & Web",
+    duration: "",
+    tags: ["Brand", "Web", "Merch"],
+    blurb:
+      "A brand refresh, a better website, branded merchandise, and an events platform for Special Forces Trust — a fund supporting military spouses and veterans.",
+    oneLiner:
+      "Giving back to the military community and their families.",
+    brief:
+      "Special Forces Trust is a fund that supports military spouses and veterans through fundraising and events. I refreshed their logo and branding, rebuilt their website with a better approach, created branded merchandise, and built a better platform for veterans to engage with and get involved in the events they host.",
+    process: [
+      {
+        label: "Research",
+        body: "Research focused on understanding the expectations of military families, donors, and partners, as well as best practices across veteran-focused nonprofits.",
+      },
+      {
+        label: "Concept",
+        body: "The concept centered on creating a calm, modern digital presence that reflects strength, reliability, and respect.",
+      },
+      {
+        label: "Design",
+        body: "Design emphasized restraint, strong hierarchy, and clear typography to support readability and trust.",
+      },
+      {
+        label: "Development",
+        body: "The site was built with performance, accessibility, and long-term maintainability in mind.",
+      },
+    ],
+    services: [
+      "Brand refresh",
+      "Web design",
+      "Branded merchandise",
+      "Events platform",
+    ],
+    palette: ["#0a1729", "#1f3a5c", "#8a9bb0", "#e8ecf2"],
+    display: "SFT",
+    cover: "/work/special-forces-trust/cover.png",
+    gallery: [
+      { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT — refreshed homepage" },
+      { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT — Supporting Our Quiet Professionals" },
+      { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT — ways to give back and branded gear" },
+    ],
+    externalUrl: "https://www.carmancreative.com/work/sft",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Special Forces Trust" },
+        { label: "Role", value: "Brand refresh, website & merch (Carman Creative)" },
+        { label: "Serves", value: "Military spouses & veterans" },
+        { label: "Scope", value: "Logo/brand, website, merch, events platform" },
+        { label: "Status", value: "Delivered" },
+      ],
+      challenge:
+        "Special Forces Trust supports military spouses and veterans through fundraising and events. They needed a refreshed brand and a better website — and a clearer way for veterans to engage with and get involved in the events the fund hosts.",
+      mandate:
+        "Refresh the brand and rebuild the experience: a stronger logo and identity, a better website, branded merchandise, and a platform that makes it easy for veterans and supporters to take part.",
+      context:
+        "A mission-driven fund serving the military community, where the work has to feel respectful and credible — and genuinely easy for people to show up for.",
+      role: [
+        "Refreshed the logo and branding",
+        "Rebuilt the website with a better approach",
+        "Created branded merchandise",
+        "Built a better platform for veterans to engage and join the events",
+      ],
+      team: [
+        "Special Forces Trust — client",
+        "A direct client relationship",
+      ],
+      decisions: [
+        {
+          title: "Refresh, don't replace",
+          body: "Strengthened the existing identity rather than starting from scratch, keeping continuity with a brand the community already knows and trusts.",
+        },
+        {
+          title: "Make getting involved the easy part",
+          body: "Built the platform around helping veterans engage with and get into the events — because participation is the whole point of the fund.",
+        },
+      ],
+      outcomes: [
+        "A refreshed brand, a better website, and branded merch",
+        "A clearer platform for veterans to engage with and join the events",
+      ],
+      reflection:
+        "I was proud to work on something that gives back to the military community and their families.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/special-forces-trust/gallery-3.png",
+            alt: "Special Forces Trust website — Supporting Warriors and their Families, with a How We Help section",
+          },
+          caption:
+            "The refreshed site — “Supporting Warriors and their Families, Honoring Veterans,” with clear paths to donate, get involved, and request support.",
+        },
+        {
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/special-forces-trust/gallery-2.png",
+            alt: "Special Forces Trust — the Supporting Our Quiet Professionals section",
+          },
+          caption:
+            "“Supporting Our Quiet Professionals” — the mission told plainly, carried by the community's own photography.",
+        },
+        {
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/special-forces-trust/gallery-1.png",
+            alt: "Special Forces Trust — Ways to give back, with branded SFT gear",
+          },
+          caption:
+            "Ways to give back — branded SFT gear, where every purchase helps fund the events and services the Trust provides.",
         },
       ],
     },
   },
   {
     slug: "important-colorado",
-    num: "03",
+    num: "04",
     tier: "independent",
     title: "Important! Colorado",
     client: "Health First Colorado",
@@ -1171,388 +1198,8 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    slug: "friends-rehab",
-    num: "04",
-    tier: "independent",
-    title: "Friends Rehabilitation Program",
-    client: "Friends Rehabilitation Program (FRP)",
-    year: "2025–2026",
-    category: "Nonprofit / Web Design",
-    duration: "Two phases — refresh, then rebuild",
-    tags: ["Web", "Brand", "Nonprofit"],
-    blurb:
-      "A new website for a sixty-year-old Quaker housing nonprofit in Philadelphia — homeless services, re-entry, trades training — built to make the mission legible and giving easy.",
-    oneLiner: "Advancing justice. Building futures.",
-    brief:
-      "FRP has helped Philadelphians get into stable housing and stay there since 1961. The first pass gave them a calmer, clearer site. The rebuild goes further: a proper editorial identity on the web, programs explained plainly, and a giving experience that works as hard as the mission does.",
-    process: [
-      {
-        label: "Say what FRP actually does",
-        body: "Homeless services, re-entry and transitional housing, and GRIT workforce training — three programs and the pathway between them, named on every page so no visitor has to guess.",
-      },
-      {
-        label: "An identity, not a template",
-        body: "Navy and gold, a serif display face, an arched photograph. It reads as an institution with sixty years behind it, not a nonprofit with a theme.",
-      },
-      {
-        label: "Make giving specific",
-        body: "The Housewarming Fund furnishes an empty apartment into a home. The Homeownership Fund starts a family toward owning. Each fund gets its own page and its own ask.",
-      },
-      {
-        label: "Show the numbers, and the source",
-        body: "The Impact page leads with three figures and a link to the annual report they come from — the short version, and where to check it.",
-      },
-    ],
-    services: ["Web design", "Brand system", "Content strategy", "Front-end build"],
-    palette: ["#12283a", "#c9a24a", "#0d6b6b", "#f5f7f9"],
-    display: "FRP",
-    cover: "/work/friends-rehab/v2-cover.jpg",
-    coverAspect: "4 / 3",
-    gallery: [],
-    externalUrl: "https://friends-frp.org",
-    caseStudy: {
-      overview: [
-        { label: "Client", value: "Friends Rehabilitation Program (FRP)" },
-        { label: "Role", value: "Design and build (Carman Creative)" },
-        { label: "Year", value: "2025–2026" },
-        { label: "Scope", value: "Identity on the web, twelve pages, giving experience" },
-        { label: "Status", value: "In final review with FRP's team — launch to follow" },
-      ],
-      challenge:
-        "A Quaker nonprofit that has served Philadelphia since 1961, with a name that no longer describes the work: FRP runs homeless services, re-entry and transitional housing, and trades training, not rehabilitation. The old site was calm and maintainable but it didn't say any of that clearly, and it made giving an afterthought. Visitors — donors, partners, people looking for help — had to work out what the organization did before they could act.",
-      mandate:
-        "Rebuild the site so the mission is legible in one screen, the three programs and the pathway between them are plain, and giving is a first-class experience with specific things to give to.",
-      context:
-        "A second engagement, following the first refresh. A mission-driven client with limited technical capacity and a sixty-year story worth telling well. The work is in final review with FRP's team.",
-      role: [
-        "Reframed the site around what FRP does — housing, re-entry, workforce — rather than what its name says",
-        "Designed the identity on the web: navy and gold, a serif display face, the arched photography",
-        "Structured twelve pages across About, Programs, Ways to Give, Impact and Contact",
-        "Wrote and shaped the copy so each program and each fund reads plainly",
-        "Built the site as a static front end with a page-build script",
-      ],
-      team: ["FRP leadership and staff", "A direct client relationship"],
-      decisions: [
-        {
-          title: "Lead with the mission, not the name",
-          body: "The name reads as treatment; the work is housing, re-entry and job training. Rather than explain the name, the hero says what FRP does in two sentences, and the three programs are named in the first screen.",
-        },
-        {
-          title: "An institution's identity",
-          body: "Sixty years of Quaker practice earns gravity. Navy, gold, a serif display face and one arched photograph give the site the bearing of a long-standing institution rather than a small nonprofit's theme.",
-        },
-        {
-          title: "Give to something specific",
-          body: "A general donate button is easy to ignore. The Housewarming Fund and the Homeownership Fund each get a page, a story and an ask — so a gift has a shape, and a donor knows what it does.",
-        },
-        {
-          title: "Numbers with a source",
-          body: "The Impact page shows three figures and links to the annual report they come from. Credibility for a nonprofit is being checkable; the page says so in its own headline.",
-        },
-      ],
-      outcomes: [
-        "A twelve-page site with a clear identity, three programs explained plainly, and two named funds to give to",
-        "In final review with FRP's team ahead of launch",
-        "The first refresh remains live at friends-frp.org until cutover",
-      ],
-      reflection:
-        "The first pass fixed how the site felt. This one fixed what it said. The biggest move wasn't visual — it was putting homeless services, re-entry and trades training in the first screen, because a visitor who has to work out what you do won't stay long enough to give.",
-      work: [
-        {
-          kind: "browser",
-          image: {
-            src: "/work/friends-rehab/v2-home.jpg",
-            alt: "FRP — the new homepage: Advancing Justice. Building Futures.",
-          },
-          url: "friends-frp.org",
-          caption:
-            "The homepage says what FRP does in two sentences — housing, re-entry, trades training — under a headline that carries sixty years of Quaker practice.",
-        },
-        {
-          kind: "full",
-          aspect: "16 / 10",
-          image: {
-            src: "/work/friends-rehab/v2-impact.jpg",
-            alt: "FRP — the Impact page: the numbers, and where to check them",
-          },
-          caption:
-            "Impact — three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
-        },
-        {
-          kind: "pair",
-          a: {
-            src: "/work/friends-rehab/v2-programs.jpg",
-            alt: "FRP — the Programs page",
-          },
-          b: {
-            src: "/work/friends-rehab/v2-reentry.jpg",
-            alt: "FRP — the Re-entry & TLCC program page",
-          },
-          labelA: "Programs",
-          labelB: "Re-entry",
-          caption:
-            "Three programs and the pathway between them, each with its own page. Re-entry and transitional housing, shown here, is the one most visitors arrive not knowing FRP does.",
-        },
-        {
-          kind: "full",
-          aspect: "16 / 10",
-          image: {
-            src: "/work/friends-rehab/v2-give.jpg",
-            alt: "FRP — Ways to Give",
-          },
-          caption:
-            "Ways to Give — the Housewarming Fund and the Homeownership Fund, each a specific thing a gift does, rather than one general button.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "special-forces-trust",
-    num: "05",
-    tier: "independent",
-    title: "Special Forces Trust",
-    client: "Special Forces Trust",
-    year: "2024",
-    category: "Nonprofit / Brand & Web",
-    duration: "",
-    tags: ["Brand", "Web", "Merch"],
-    blurb:
-      "A brand refresh, a better website, branded merchandise, and an events platform for Special Forces Trust — a fund supporting military spouses and veterans.",
-    oneLiner:
-      "Giving back to the military community and their families.",
-    brief:
-      "Special Forces Trust is a fund that supports military spouses and veterans through fundraising and events. I refreshed their logo and branding, rebuilt their website with a better approach, created branded merchandise, and built a better platform for veterans to engage with and get involved in the events they host.",
-    process: [
-      {
-        label: "Research",
-        body: "Research focused on understanding the expectations of military families, donors, and partners, as well as best practices across veteran-focused nonprofits.",
-      },
-      {
-        label: "Concept",
-        body: "The concept centered on creating a calm, modern digital presence that reflects strength, reliability, and respect.",
-      },
-      {
-        label: "Design",
-        body: "Design emphasized restraint, strong hierarchy, and clear typography to support readability and trust.",
-      },
-      {
-        label: "Development",
-        body: "The site was built with performance, accessibility, and long-term maintainability in mind.",
-      },
-    ],
-    services: [
-      "Brand refresh",
-      "Web design",
-      "Branded merchandise",
-      "Events platform",
-    ],
-    palette: ["#0a1729", "#1f3a5c", "#8a9bb0", "#e8ecf2"],
-    display: "SFT",
-    cover: "/work/special-forces-trust/cover.png",
-    gallery: [
-      { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT — refreshed homepage" },
-      { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT — Supporting Our Quiet Professionals" },
-      { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT — ways to give back and branded gear" },
-    ],
-    externalUrl: "https://www.carmancreative.com/work/sft",
-    caseStudy: {
-      overview: [
-        { label: "Client", value: "Special Forces Trust" },
-        { label: "Role", value: "Brand refresh, website & merch (Carman Creative)" },
-        { label: "Serves", value: "Military spouses & veterans" },
-        { label: "Scope", value: "Logo/brand, website, merch, events platform" },
-        { label: "Status", value: "Delivered" },
-      ],
-      challenge:
-        "Special Forces Trust supports military spouses and veterans through fundraising and events. They needed a refreshed brand and a better website — and a clearer way for veterans to engage with and get involved in the events the fund hosts.",
-      mandate:
-        "Refresh the brand and rebuild the experience: a stronger logo and identity, a better website, branded merchandise, and a platform that makes it easy for veterans and supporters to take part.",
-      context:
-        "A mission-driven fund serving the military community, where the work has to feel respectful and credible — and genuinely easy for people to show up for.",
-      role: [
-        "Refreshed the logo and branding",
-        "Rebuilt the website with a better approach",
-        "Created branded merchandise",
-        "Built a better platform for veterans to engage and join the events",
-      ],
-      team: [
-        "Special Forces Trust — client",
-        "A direct client relationship",
-      ],
-      decisions: [
-        {
-          title: "Refresh, don't replace",
-          body: "Strengthened the existing identity rather than starting from scratch, keeping continuity with a brand the community already knows and trusts.",
-        },
-        {
-          title: "Make getting involved the easy part",
-          body: "Built the platform around helping veterans engage with and get into the events — because participation is the whole point of the fund.",
-        },
-      ],
-      outcomes: [
-        "A refreshed brand, a better website, and branded merch",
-        "A clearer platform for veterans to engage with and join the events",
-      ],
-      reflection:
-        "I was proud to work on something that gives back to the military community and their families.",
-      work: [
-        {
-          kind: "browser",
-          image: {
-            src: "/work/special-forces-trust/gallery-3.png",
-            alt: "Special Forces Trust website — Supporting Warriors and their Families, with a How We Help section",
-          },
-          caption:
-            "The refreshed site — “Supporting Warriors and their Families, Honoring Veterans,” with clear paths to donate, get involved, and request support.",
-        },
-        {
-          kind: "full",
-          aspect: "2 / 1",
-          image: {
-            src: "/work/special-forces-trust/gallery-2.png",
-            alt: "Special Forces Trust — the Supporting Our Quiet Professionals section",
-          },
-          caption:
-            "“Supporting Our Quiet Professionals” — the mission told plainly, carried by the community's own photography.",
-        },
-        {
-          kind: "full",
-          aspect: "2 / 1",
-          image: {
-            src: "/work/special-forces-trust/gallery-1.png",
-            alt: "Special Forces Trust — Ways to give back, with branded SFT gear",
-          },
-          caption:
-            "Ways to give back — branded SFT gear, where every purchase helps fund the events and services the Trust provides.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "stamp-out-stigma",
-    num: "L03",
-    tier: "leadership",
-    flagship: true,
-    title: "Stamp Out Stigma",
-    client: "Beacon Health Options",
-    year: "2023",
-    category: "Advertising / Campaign",
-    duration: "6 weeks",
-    tags: ["Campaign", "OOH", "Advertising"],
-    blurb:
-      "A national mental-health awareness campaign staged in Times Square — built to spark honest conversation and cut the stigma around mental illness.",
-    oneLiner:
-      "Mental health is just as important as physical health.",
-    brief:
-      "A national mental health awareness initiative staged in Times Square, designed to spark conversation and reduce stigma around mental illness — reinforcing that mental health matters as much as physical health, and that sharing personal stories helps others feel seen and supported.",
-    process: [
-      {
-        label: "Research",
-        body: "Research focused on public attitudes toward mental health, stigma barriers, and how large-scale awareness campaigns create emotional resonance in high-visibility environments. Insights emphasized empathy, representation, and clear messaging that could connect instantly with a broad, diverse audience.",
-      },
-      {
-        label: "Concept",
-        body: "The concept centered on visibility and honesty — using real stories and human emotion to normalize conversations around mental health. Placing the message in one of the most public spaces in the world challenged silence and encouraged people to speak openly about their experiences.",
-      },
-      {
-        label: "Design",
-        body: "Design leveraged strong typography, restrained color, and emotionally grounded imagery to communicate urgency without sensationalism. The messaging was intentionally clear and direct — understood at a glance while still carrying emotional weight in a fast-moving environment.",
-      },
-      {
-        label: "Development",
-        body: "Displayed prominently in Times Square, the campaign amplified national awareness around mental health and reinforced the importance of open dialogue — supporting a broader effort to reduce stigma and promote understanding.",
-      },
-    ],
-    services: [
-      "Campaign concept",
-      "Out-of-home design",
-      "Messaging direction",
-      "Awareness strategy",
-    ],
-    palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
-    display: "STIGMA",
-    cover: "/work/stamp-out-stigma/card-timessquare-v2.jpg",
-    gallery: [],
-    externalUrl: "https://www.carmancreative.com/work/sos",
-    roleSummary:
-      "Led a national mental-health awareness campaign into Times Square.",
-    caseStudy: {
-      overview: [
-        { label: "Client", value: "Beacon Health Options" },
-        { label: "Role", value: "Creative lead — campaign concept, messaging, and OOH design" },
-        { label: "Year", value: "2023" },
-        { label: "Scope", value: "Awareness campaign, out-of-home creative" },
-        { label: "Deliverables", value: "Times Square activation creative" },
-      ],
-      challenge:
-        "A national mental-health awareness effort needed to cut through one of the busiest environments on earth — Times Square — and get people to treat mental health as seriously as physical health, without sensationalizing it.",
-      mandate:
-        "Create out-of-home creative that lands instantly in a fast-moving, high-noise space while carrying real emotional weight.",
-      context:
-        "A large-format, high-visibility placement with only seconds to communicate, a sensitive subject, and a broad, diverse audience moving fast.",
-      role: [
-        "Directed the campaign concept and messaging",
-        "Designed the out-of-home creative for legibility at a glance",
-      ],
-      team: [
-        "Beacon Health Options campaign stakeholders",
-        "A collaborative campaign effort",
-      ],
-      decisions: [
-        {
-          title: "Clarity over spectacle",
-          body: "Strong typography, restrained color, and honest imagery so the message reads in seconds — without tipping into sensationalism on a sensitive subject.",
-        },
-        {
-          title: "Put the message where silence usually wins",
-          body: "Placing an honest mental-health message in one of the most public spaces on earth challenges the stigma directly, in front of everyone.",
-        },
-        {
-          title: "Lead with human emotion",
-          body: "Real stories and grounded imagery over statistics — normalizing the conversation by making it human, not clinical.",
-        },
-      ],
-      outcomes: [
-        "Amplified national mental-health awareness from one of the most public stages in the world — Times Square",
-        "Reinforced a simple, hard message: mental health matters as much as physical health",
-      ],
-      reflection:
-        "Putting an honest mental-health message in Times Square was a reminder that clarity and empathy can cut through even the loudest room.",
-      work: [
-        {
-          kind: "full",
-          aspect: "4 / 3",
-          image: {
-            src: "/work/stamp-out-stigma/gallery-2-v2.jpg",
-            alt: "Stamp Out Stigma — the campaign on the Times Square screens at dusk",
-          },
-          caption:
-            "The message on the Times Square screens — honest, human, and impossible to miss in one of the loudest rooms on earth.",
-        },
-        {
-          kind: "detail",
-          image: {
-            src: "/work/stamp-out-stigma/gallery-1-v2.jpg",
-            alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
-          },
-          caption:
-            "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
-        },
-        {
-          kind: "full",
-          image: {
-            src: "/work/stamp-out-stigma/gallery-3-v2.jpg",
-            alt: "Stamp Out Stigma — Times Square at dusk",
-          },
-          caption:
-            "The placement in context — one honest message holding its own against the loudest advertising environment in the world.",
-        },
-      ],
-    },
-  },
-  {
     slug: "spikes-k9-fund",
-    num: "06",
+    num: "05",
     tier: "independent",
     title: "Spike's K9 Fund",
     client: "Spike's K9 Fund",
@@ -1675,6 +1322,359 @@ export const PROJECTS: Project[] = [
      client engagement, and the tier keeps that distinction visible rather
      than letting personal work borrow the credibility of commissioned work.
      ───────────────────────────────────────────────────────────────────── */
+  {
+    slug: "atromitos",
+    num: "06",
+    tier: "independent",
+    title: "Atrómitos",
+    client: "Atrómitos",
+    year: "",
+    category: "Website / Editorial",
+    duration: "",
+    tags: ["Web", "Editorial", "Knowledge Hub"],
+    blurb: "A website refresh and a new consolidated Knowledge Hub for Atrómitos — a woman-owned consulting firm — plus a 65-page editorial report for the Andy Hill CARE Fund.",
+    oneLiner: "Their art direction, elevated — and a Knowledge Hub that carries their expertise.",
+    brief: "Atrómitos is a woman-owned health and human services consulting firm. They came in through a referral with their own art direction already settled — they weren't looking for a redesign. So the job was to execute their direction faithfully, raise the craft inside it, and add the things that would actually move the business: real interactivity and a consolidated Knowledge Hub for their published work and webinars. The Andy Hill CARE Fund report was a separate commission.",
+    process: [],
+    services: [
+      "Web design",
+      "Knowledge Hub",
+      "Editorial / booklet design",
+    ],
+    palette: ["#0e1b2a", "#2b8fb8", "#1f3a5c", "#eef2f6"],
+    display: "ATRÓMITOS",
+    cover: "/work/atromitos/site-home-v2.jpg",
+    gallery: [],
+    roleSummary: "Website refresh + Knowledge Hub + the Andy Hill editorial report.",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Atrómitos (woman-owned consulting)" },
+        { label: "Role", value: "Web design & editorial (Carman Creative)" },
+        { label: "How it came in", value: "Referral from another client" },
+        { label: "Scope", value: "Website refresh, Knowledge Hub, Andy Hill report" },
+        { label: "Status", value: "Live — client very happy" },
+      ],
+      challenge:
+        "Atrómitos arrived with the site already laid out the way they wanted it. The art direction was theirs and it wasn't up for redesign — so the usual lever, rethinking the look, was off the table. The real problem was underneath it: their published work — articles, policy analysis, podcasts, webinars, toolkits — was scattered, and the site didn't do justice to how much expertise the firm actually produces.",
+      mandate:
+        "Execute their art direction faithfully, sharpen the craft within it, and build what the site was missing: genuine interactivity and one consolidated home for everything they publish. The Andy Hill CARE Fund report came in separately as its own commission.",
+      context:
+        "A referral from a completely unrelated client — a good sign the reputation travels. An active, engaged consulting firm that publishes constantly, with a settled visual direction of their own and clear opinions about it.",
+      role: [
+        "Took the client's art direction as the brief and built the site to it",
+        "Raised the execution — typography, spacing, and finish — inside their direction",
+        "Added interactivity the original layout didn't have",
+        "Designed and built the Knowledge Hub — one consolidated home for their articles, policy analysis, podcast, webinars, and toolkits",
+        "Designed the Andy Hill CARE Fund report — a 65-page editorial document, commissioned separately",
+      ],
+      team: [
+        "Atromitos — woman-owned consulting client",
+        "Referred by another client; a direct client relationship",
+      ],
+      decisions: [
+        {
+          title: "Serve their direction — then raise it",
+          body: "The client had settled the art direction and didn't want it reopened. I took that as the brief rather than a fight, and spent the effort where it was still mine to spend: sharper typography, better spacing and hierarchy, and a level of finish above what came in.",
+        },
+        {
+          title: "Put the value where the direction wasn't",
+          body: "If the look was fixed, the contribution had to come from what the site could do. That meant real interactivity and, above all, the Knowledge Hub — the piece that changed what the site is actually for.",
+        },
+        {
+          title: "Consolidate the expertise into one place",
+          body: "A firm that publishes this much was spreading it across formats and corners of the site. The Knowledge Hub pulls the articles, policy analysis, podcast, webinars, and practical toolkits into one home, so the depth reads at a glance instead of having to be hunted for.",
+        },
+        {
+          title: "Treat the report as real editorial",
+          body: "The Andy Hill CARE Fund piece got the full treatment — 65 pages of structured findings, numbered takeaways, section openers, and a tiered recommendation framework. A considered document, not a long memo.",
+        },
+      ],
+      outcomes: [
+        "A site built to the client's own direction, executed at a higher level of craft than what came in",
+        "The Knowledge Hub — one consolidated home for the firm's articles, policy analysis, podcast, webinars, and toolkits",
+        "The Andy Hill CARE Fund report delivered and very well received",
+        "An ongoing relationship with an active, engaged client — more work expected",
+      ],
+      reflection:
+        "Not every engagement hands you the visual direction, and this one didn't: the layout was theirs and staying. The useful lesson was where to put the effort when the look is settled — into craft inside their system, and into the Knowledge Hub, which is the piece I'd point at. It came in as a referral from an unrelated client, which tells me the work travels, and it's a relationship I expect to keep building on.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/atromitos/site-home-v2.jpg",
+            alt: "The Atrómitos homepage — “Consulting Done Fearlessly” over a lioness at sunrise",
+          },
+          caption:
+            "The site, built to the client's own art direction — executed with sharper type, spacing, and finish than what came in.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/atromitos/knowledge-hub-v2.jpg",
+            alt: "The Atrómitos Knowledge Hub — a What's New feature above cards for the podcast, articles, learning, and policy analysis",
+          },
+          caption:
+            "The Knowledge Hub — the contribution I'd point at. One home for the articles, policy analysis, podcast, webinars, and toolkits a firm this active keeps producing.",
+        },
+        {
+          kind: "detail",
+          image: {
+            src: "/work/atromitos/andyhill-cover.jpg",
+            alt: "Findings and Recommendations for the Andy Hill CARE Fund — report cover",
+          },
+          caption:
+            "A separate commission: “Findings and Recommendations for the Andy Hill CARE Fund” — 65 pages on community-based organizations and diversity in cancer clinical trials.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/atromitos/andyhill-findings.jpg",
+            alt: "Key Findings at a Glance — numbered findings with supporting detail",
+          },
+          b: {
+            src: "/work/atromitos/andyhill-divider.jpg",
+            alt: "Executive Summary section opener with photography and a colour panel",
+          },
+          labelA: "Findings at a glance",
+          labelB: "Section openers",
+          caption:
+            "Editorial structure doing the work: numbered findings a reader can scan, and section openers that give a 65-page document a rhythm.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            {
+              src: "/work/atromitos/andyhill-voices.jpg",
+              alt: "Community Voices section — themed qualitative findings",
+            },
+            {
+              src: "/work/atromitos/andyhill-framework.jpg",
+              alt: "Program design and tiered recommendation framework pages",
+            },
+            {
+              src: "/work/atromitos/andyhill-cover.jpg",
+              alt: "The Andy Hill CARE Fund report cover",
+            },
+          ],
+          caption:
+            "Inside the report — community voices, a tiered recommendation framework, and the design system holding 65 pages of dense research together.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "evermark",
+    num: "02",
+    tier: "independent",
+    // Held back: the proposal hasn't come back signed, so this isn't a client
+    // engagement to show yet. Copy is written and ready — flip this off to publish.
+    draft: true,
+    title: "EverMark",
+    client: "EverMark",
+    year: "",
+    category: "Brand & Digital",
+    duration: "",
+    tags: ["Brand", "Identity", "Web"],
+    blurb: "Identity, website, and marketing collateral for EverMark — a family-owned premium design-and-build company in PA's Lehigh Valley. In progress.",
+    oneLiner: "Helping a family builder stand out in a sea of sameness.",
+    brief: "EverMark is a family-owned, premium design-and-build company in Pennsylvania's Lehigh Valley, working to stand out in a crowded field of builders and developers. After a lot of exploration, I began building their identity — with a website, Google Business Profile, and a suite of marketing collateral to follow.",
+    process: [],
+    services: [
+      "Identity system",
+      "Web design",
+      "Marketing collateral",
+      "Google Business Profile",
+    ],
+    palette: ["#141210", "#c9a24a", "#2e2a22", "#f2efe6"],
+    display: "EVERMARK",
+    cover: "",
+    gallery: [],
+    roleSummary: "Identity, website, and collateral for a family-owned design-build brand.",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "EverMark (family-owned)" },
+        { label: "Role", value: "Brand & digital lead (Carman Creative)" },
+        { label: "Location", value: "Lehigh Valley, PA" },
+        { label: "Scope", value: "Identity, website, GBP, collateral" },
+        { label: "Status", value: "In progress — identity underway" },
+      ],
+      challenge:
+        "EverMark is a family-owned, premium design-and-build company trying to stand out in a crowded field of builders and developers. The brand has to feel genuinely premium — and unmistakably theirs — in a category where most names blur together.",
+      mandate:
+        "After a lot of exploration and conversation, I began building EverMark's identity system — and I'll be developing the website, Google Business Profile, and a full suite of marketing collateral to help them reach the potential they deserve.",
+      context:
+        "A brand-new client and a family-owned business making the decisions directly, in a design-build category where differentiation is genuinely hard and trust is everything.",
+      role: [
+        "Led the exploration and early conversations to find the positioning",
+        "Building the identity system",
+        "Developing the website (in progress)",
+        "Setting up the Google Business Profile (in progress)",
+        "Designing a suite of marketing collateral (in progress)",
+      ],
+      team: [
+        "EverMark's owners — a family-owned business",
+        "A direct client relationship",
+      ],
+      decisions: [
+        {
+          title: "Stand out in a sea of sameness",
+          body: "The core call: differentiate a premium design-build brand in a category where nearly everyone looks and sounds alike. TODO: Confirm the specific direction as the identity locks.",
+        },
+        {
+          title: "TODO: Add decisions as the work ships",
+          body: "TODO: The identity, website, and collateral choices — captured here as they're made.",
+        },
+      ],
+      outcomes: [
+        "Identity system in development; website, Google Business Profile, and collateral to follow",
+        "TODO: Add outcomes as EverMark launches",
+      ],
+      reflection: "TODO: Add a reflection as the work ships.",
+      work: [
+        {
+          kind: "full",
+          tall: true,
+          image: { src: "", alt: "EverMark identity system" },
+          caption:
+            "The identity — built to feel genuinely premium in a category where names blur together.",
+        },
+        {
+          kind: "detail",
+          image: { src: "", alt: "The EverMark mark, up close" },
+          caption: "The mark and its details.",
+        },
+        {
+          kind: "browser",
+          image: { src: "", alt: "EverMark website — in development" },
+          caption:
+            "The website in development — the digital home, Google Business Profile, and collateral to follow.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "stamp-out-stigma",
+    num: "L03",
+    tier: "leadership",
+    flagship: true,
+    title: "Stamp Out Stigma",
+    client: "Beacon Health Options",
+    year: "2023",
+    category: "Advertising / Campaign",
+    duration: "6 weeks",
+    tags: ["Campaign", "OOH", "Advertising"],
+    blurb:
+      "A national mental-health awareness campaign staged in Times Square — built to spark honest conversation and cut the stigma around mental illness.",
+    oneLiner:
+      "Mental health is just as important as physical health.",
+    brief:
+      "A national mental health awareness initiative staged in Times Square, designed to spark conversation and reduce stigma around mental illness — reinforcing that mental health matters as much as physical health, and that sharing personal stories helps others feel seen and supported.",
+    process: [
+      {
+        label: "Research",
+        body: "Research focused on public attitudes toward mental health, stigma barriers, and how large-scale awareness campaigns create emotional resonance in high-visibility environments. Insights emphasized empathy, representation, and clear messaging that could connect instantly with a broad, diverse audience.",
+      },
+      {
+        label: "Concept",
+        body: "The concept centered on visibility and honesty — using real stories and human emotion to normalize conversations around mental health. Placing the message in one of the most public spaces in the world challenged silence and encouraged people to speak openly about their experiences.",
+      },
+      {
+        label: "Design",
+        body: "Design leveraged strong typography, restrained color, and emotionally grounded imagery to communicate urgency without sensationalism. The messaging was intentionally clear and direct — understood at a glance while still carrying emotional weight in a fast-moving environment.",
+      },
+      {
+        label: "Development",
+        body: "Displayed prominently in Times Square, the campaign amplified national awareness around mental health and reinforced the importance of open dialogue — supporting a broader effort to reduce stigma and promote understanding.",
+      },
+    ],
+    services: [
+      "Campaign concept",
+      "Out-of-home design",
+      "Messaging direction",
+      "Awareness strategy",
+    ],
+    palette: ["#0e1a18", "#1f8a6d", "#cfe7da", "#f3f1ea"],
+    display: "SOS",
+    cover: "/work/stamp-out-stigma/card-timessquare-v2.jpg",
+    gallery: [],
+    externalUrl: "https://www.carmancreative.com/work/sos",
+    roleSummary:
+      "Led a national mental-health awareness campaign into Times Square.",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Beacon Health Options" },
+        { label: "Role", value: "Creative lead — campaign concept, messaging, and OOH design" },
+        { label: "Year", value: "2023" },
+        { label: "Scope", value: "Awareness campaign, out-of-home creative" },
+        { label: "Deliverables", value: "Times Square activation creative" },
+      ],
+      challenge:
+        "A national mental-health awareness effort needed to cut through one of the busiest environments on earth — Times Square — and get people to treat mental health as seriously as physical health, without sensationalizing it.",
+      mandate:
+        "Create out-of-home creative that lands instantly in a fast-moving, high-noise space while carrying real emotional weight.",
+      context:
+        "A large-format, high-visibility placement with only seconds to communicate, a sensitive subject, and a broad, diverse audience moving fast.",
+      role: [
+        "Directed the campaign concept and messaging",
+        "Designed the out-of-home creative for legibility at a glance",
+      ],
+      team: [
+        "Beacon Health Options campaign stakeholders",
+        "A collaborative campaign effort",
+      ],
+      decisions: [
+        {
+          title: "Clarity over spectacle",
+          body: "Strong typography, restrained color, and honest imagery so the message reads in seconds — without tipping into sensationalism on a sensitive subject.",
+        },
+        {
+          title: "Put the message where silence usually wins",
+          body: "Placing an honest mental-health message in one of the most public spaces on earth challenges the stigma directly, in front of everyone.",
+        },
+        {
+          title: "Lead with human emotion",
+          body: "Real stories and grounded imagery over statistics — normalizing the conversation by making it human, not clinical.",
+        },
+      ],
+      outcomes: [
+        "Amplified national mental-health awareness from one of the most public stages in the world — Times Square",
+        "Reinforced a simple, hard message: mental health matters as much as physical health",
+      ],
+      reflection:
+        "Putting an honest mental-health message in Times Square was a reminder that clarity and empathy can cut through even the loudest room.",
+      work: [
+        {
+          kind: "full",
+          aspect: "4 / 3",
+          image: {
+            src: "/work/stamp-out-stigma/gallery-2-v2.jpg",
+            alt: "Stamp Out Stigma — the campaign on the Times Square screens at dusk",
+          },
+          caption:
+            "The message on the Times Square screens — honest, human, and impossible to miss in one of the loudest rooms on earth.",
+        },
+        {
+          kind: "detail",
+          image: {
+            src: "/work/stamp-out-stigma/gallery-1-v2.jpg",
+            alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
+          },
+          caption:
+            "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
+        },
+        {
+          kind: "full",
+          image: {
+            src: "/work/stamp-out-stigma/gallery-3-v2.jpg",
+            alt: "Stamp Out Stigma — Times Square at dusk",
+          },
+          caption:
+            "The placement in context — one honest message holding its own against the loudest advertising environment in the world.",
+        },
+      ],
+    },
+  },
   {
     slug: "carman-os",
     num: "S01",
