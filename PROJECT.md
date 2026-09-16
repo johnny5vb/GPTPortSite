@@ -111,7 +111,7 @@ and `projects.ts` palettes are **data**, not chrome, and stay put.
 | `/leadership` | `LeadershipPage` | Career context: experience, what John can lead, flagship case studies, leadership proof, testimonials, philosophy, résumé/contact CTAs. Neutral in tone since the copy-deck pass — it's background, not a pitch |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
-| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 — `colony-coffee`, `atromitos`, `important-colorado`, `friends-rehab`, `special-forces-trust`, `spikes-k9-fund`; `evermark` is drafted out. **Systems S01–S03** (self-initiated, own shelf) — `carman-os`, `cqap`, `premier-friends-club`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03, display label `SOS`); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 in the owner's order — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `important-colorado`, `spikes-k9-fund`, `atromitos`; `evermark` is drafted out. **Systems S01–S03** (self-initiated, own shelf) — `premier-friends-club`, `cqap`, `carman-os`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
@@ -119,9 +119,12 @@ Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
 `secondary`); flagships add `flagship: true` + a `caseStudy` object (overview,
 challenge, mandate, context, role, team, decisions, outcomes, reflection). All
 flagship carries a real `cover`; a flagship without one falls back to the
-`display` wordmark. Covers and thumbnails present the piece **whole**
-(`object-contain`) on a **neutral** plate — never cropped, never on a colour
-wash. A `draft: true` project is written but unpublished: filtered from every
+`display` wordmark. **Thumbnails fill their 4:3 plate edge to edge (`object-cover`) since
+change #55** — the owner rejected letterbox bars; the case-study hero and the
+frames inside "The work" still present the piece whole (`object-contain`),
+so size those crops to the frame's aspect. Plates are neutral — never a colour
+wash. A project may carry a `coverVideo` (muted loop in the hero) and a work
+moment may be `kind: "video"` (full film with controls, `preload="none"`). A `draft: true` project is written but unpublished: filtered from every
 listing, no route, unreachable via `getProject`, out of the sitemap. Helpers:
 `PUBLISHED_PROJECTS`, `LEADERSHIP_PROJECTS`, `INDEPENDENT_PROJECTS`,
 `SYSTEMS_PROJECTS`, `SECONDARY_PROJECTS`, `projectsByTier`, `tierOf`. `getAdjacentProjects` stays
@@ -1147,3 +1150,63 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       the upscale. The audit script is `audit.mjs` in the session
       scratchpad — it imports Playwright from `~/frp-website-preview/
       node_modules`, since this repo has none.
+
+55. **Work section reordered, thumbnails fill, SOS.** Owner's order for the
+    independents: Colony, FRP, SFT, Important!, Spike's, Atrómitos (01–06);
+    systems: PFC, CQAP, Carman OS (S01–S03). Order is array order in
+    `projects.ts` — the blocks were physically moved and renumbered. Stamp Out
+    Stigma's `display` label is `SOS`. **Thumbnails are `object-cover`** in
+    `Work.tsx` (cards and rows) and `LeadershipPage.tsx`: the owner didn't
+    want some plates full and others letterboxed. Reverses the #31 "present
+    whole" rule for thumbnails only; frames inside case studies still contain.
+    - **Netlify Image CDN incident, 2026-09-16 12:37 UTC.** Every
+      `/_next/image` request returned 502/504 for ~40 minutes; raw files
+      served fine. Started minutes before a deploy, so it looked like the
+      deploy — it wasn't (yesterday's deploy permalink failed the same way,
+      and netlifystatus.com had the incident open). **Check
+      `https://www.netlifystatus.com/api/v2/incidents/unresolved.json`
+      before debugging blank images.** A one-line `images.unoptimized: true`
+      is the emergency fallback; it wasn't needed.
+
+56. **Four case studies re-sequenced on the owner's read** ("some of the
+    images chosen are the wrong screens"). Every new file is a new name.
+    - **PFC** recaptured from the live site (the hero changed): `home-v2` /
+      `cover-v2` (hero), `posters.jpg` (two rows of the Match Center
+      posters, cropped at the row gap by scanning for the next poster's top
+      edge), `callouts.jpg` (the season-ahead cards, "Foolish faith, kept
+      together", and "The nine" stacked as one board on the site's cream),
+      `table-v2` + `standings.jpg` as a 3:2 pair, `roster.jpg`. Gallery
+      dropped — nobody has posted in it. The standings table on `/members`
+      renders after a fetch; wait ~6 s before capturing.
+    - **FRP** re-sequenced on its most visual pages: About ("Founded in
+      1961"), Housewarming (move-in room, the family, the $100K ask),
+      Homeownership (rowhouses), Impact, GRIT. Served from `~/frp-website-
+      preview/v4` with `python3 -m http.server 8765`; the pages carry a
+      yellow "Review draft" banner and a sticky nav — both removed before
+      capture (`frpsec3.mjs` in the scratchpad: `element.screenshot()` of
+      each `<section>`, so crops are exact). `pair` moments now take an
+      optional `aspect` (default 16/10) so section crops fill their frames.
+    - **CQAP** in the owner's order: dashboard → package ready → findings →
+      clean review → approved, all full-width.
+    - **Carman OS** was untouched — "nothing showing" was the CDN incident.
+
+57. **IMPORTANT! Colorado — the video leads.** The owner supplied the Phase 3
+    materials and asked for the awareness video as the featured item. New
+    `coverVideo` on the project: `video-loop.mp4` (first 34 s of the 9/15
+    1.0× share, 1280×720, muted, crf 27, **1.1 MB**) autoplays in the
+    case-study hero; `cover-v2.jpg` (frame F02) is the Work thumbnail. New
+    work-moment kind `video`: `film-540p.mp4` (the 11 MB 540p share, 2:59)
+    with controls and `preload="none"`, poster F07 so it doesn't repeat the
+    hero. Then `film-frames.jpg` (all sixteen frames at 2880), a `gallery`
+    of the three universal social posts, the provisions flyer + walk-by
+    flyer as a 17/22 pair, the Partner Reference Guide pp. 1–2 as a pair,
+    and the nine member slides as a 3×3 sheet (PowerPoint → PDF by
+    `osascript` again, then PyMuPDF). ffmpeg is the `imageio-ffmpeg` binary
+    (`python3 -c "import imageio_ffmpeg as f; print(f.get_ffmpeg_exe())"`).
+    **The brand-system renders (wordmark anatomy, marks, palette, WCAG
+    table, Phase 2 slides, carousel) are unreferenced but still on disk** —
+    the owner asked for the new materials to replace them.
+    - **⚠ The film is Draft 5, in HCPF review as of 9/15 — not released.**
+      The caption says "in client review, Fall 2026" and Status says so. If
+      the client objects, `coverVideo` and the video moment are two deletions
+      and `cover` falls back to a still. Raised with the owner.
