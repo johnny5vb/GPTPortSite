@@ -142,7 +142,8 @@ function LeadershipCard({
           style={{ viewTransitionName: `project-${project.slug}` }}
           className="relative aspect-[4/3] rounded-lg border border-line/60 mb-6 overflow-hidden flex items-end p-3 bg-ink-2"
         >
-          {/* Flagships that have a cleared asset show it whole; the rest still
+          {/* Flagships that have a cleared asset fill the plate edge to edge
+              (object-cover, per the owner: no letterbox bars); the rest still
               carry the wordmark. */}
           {project.cover && (
             <Image
@@ -152,7 +153,7 @@ function LeadershipCard({
 
               quality={90}
               sizes="360px"
-              className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
             />
           )}
           {/* Name over a scrim so it reads on any artwork underneath. */}
@@ -224,8 +225,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
     target: ref,
     offset: ["start end", "end start"],
   });
-  // Kept inside the plate's padding: with object-contain the whole piece is
-  // visible, so a big parallax would visibly slide the artwork out of frame.
+  // Small on purpose: the artwork fills the plate (object-cover), so a big
+  // parallax would show the crop edge sliding through.
   const previewY = useTransform(scrollYProgress, [0, 1], [8, -8]);
 
   return (
@@ -290,7 +291,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 
                 quality={90}
                 sizes="320px"
-                className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </motion.div>
           ) : (

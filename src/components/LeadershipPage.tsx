@@ -192,8 +192,8 @@ export default function LeadershipPage() {
               data-cursor="open case"
               className="group rounded-xl border border-line bg-ink-2 p-6 transition-all duration-500 hover:border-line-2 hover:-translate-y-1 flex flex-col"
             >
-              {/* The piece itself, whole on a neutral plate, with the project
-                  name over a scrim so it stays legible on any artwork. */}
+              {/* The piece fills the plate edge to edge (object-cover), with the
+                  project name over a scrim so it stays legible on any artwork. */}
               <div className="relative aspect-[4/3] rounded-lg border border-line/60 bg-ink-2 mb-5 overflow-hidden">
                 {p.cover ? (
                   <Image
@@ -203,7 +203,7 @@ export default function LeadershipPage() {
 
                     quality={90}
                     sizes="(max-width: 640px) 100vw, 33vw"
-                    className="object-contain p-2 transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                 ) : null}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-3 pt-8">
