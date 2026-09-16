@@ -54,6 +54,8 @@ export type WorkMoment =
   | { kind: "browser"; image: WorkImage; caption?: string; url?: string }
   | {
       kind: "pair";
+      /** Frame ratio for both halves. Defaults to 16/10 in the renderer. */
+      aspect?: string;
       a: WorkImage;
       b: WorkImage;
       labelA?: string;
@@ -830,7 +832,7 @@ export const PROJECTS: Project[] = [
     services: ["Web design", "Brand system", "Content strategy", "Front-end build"],
     palette: ["#12283a", "#c9a24a", "#0d6b6b", "#f5f7f9"],
     display: "FRP",
-    cover: "/work/friends-rehab/v2-cover.jpg",
+    cover: "/work/friends-rehab/v3-cover.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     externalUrl: "https://friends-frp.org",
@@ -885,7 +887,7 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/friends-rehab/v2-home.jpg",
+            src: "/work/friends-rehab/v3-home.jpg",
             alt: "FRP — the new homepage: Advancing Justice. Building Futures.",
           },
           url: "friends-frp.org",
@@ -894,38 +896,65 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "full",
-          aspect: "16 / 10",
+          aspect: "16 / 9",
           image: {
-            src: "/work/friends-rehab/v2-impact.jpg",
-            alt: "FRP — the Impact page: the numbers, and where to check them",
+            src: "/work/friends-rehab/v3-about.jpg",
+            alt: "FRP — About: founded in 1961, out of a settlement house",
           },
           caption:
-            "Impact — three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
+            "About — the organisation's own story, told once and plainly: a settlement house, sixty years, and the work that came out of it.",
         },
         {
           kind: "pair",
+          aspect: "16 / 9",
           a: {
-            src: "/work/friends-rehab/v2-programs.jpg",
-            alt: "FRP — the Programs page",
+            src: "/work/friends-rehab/v3-hw-movein.jpg",
+            alt: "FRP — the Housewarming Fund: what move-in day looks like, an empty room with sun on the floor",
           },
           b: {
-            src: "/work/friends-rehab/v2-reentry.jpg",
-            alt: "FRP — the Re-entry & TLCC program page",
+            src: "/work/friends-rehab/v3-ho-renting.jpg",
+            alt: "FRP — the Homeownership Fund: renting keeps you housed, owning changes what you can pass on",
           },
-          labelA: "Programs",
-          labelB: "Re-entry",
+          labelA: "The Housewarming Fund",
+          labelB: "The Homeownership Fund",
           caption:
-            "Three programs and the pathway between them, each with its own page. Re-entry and transitional housing, shown here, is the one most visitors arrive not knowing FRP does.",
+            "Two funds, each a specific thing a gift does. The Housewarming Fund starts from the empty room a family walks into; the Homeownership Fund starts from the block they could stay on.",
         },
         {
           kind: "full",
-          aspect: "16 / 10",
+          aspect: "16 / 9",
           image: {
-            src: "/work/friends-rehab/v2-give.jpg",
-            alt: "FRP — Ways to Give",
+            src: "/work/friends-rehab/v3-hw-family.jpg",
+            alt: "FRP — the same apartment, a few weeks on: a family at home",
           },
           caption:
-            "Ways to Give — the Housewarming Fund and the Homeownership Fund, each a specific thing a gift does, rather than one general button.",
+            "The same apartment, a few weeks on. The page is built as a before and after, with the family as the after.",
+        },
+        {
+          kind: "pair",
+          aspect: "16 / 9",
+          a: {
+            src: "/work/friends-rehab/v3-hw-ask.jpg",
+            alt: "FRP — the ask: one hundred thousand dollars in year one, $1,500 furnishes a package for a family of four",
+          },
+          b: {
+            src: "/work/friends-rehab/v3-impact.jpg",
+            alt: "FRP — Impact: the numbers, and where to check them",
+          },
+          labelA: "The ask",
+          labelB: "Impact",
+          caption:
+            "The ask is a number and what it buys. Impact is three figures and a link to the annual report they come from — the numbers, and where to check them.",
+        },
+        {
+          kind: "full",
+          aspect: "2.17 / 1",
+          image: {
+            src: "/work/friends-rehab/v3-grit.jpg",
+            alt: "FRP — GRIT Workforce: graduates are looking for work in the trades",
+          },
+          caption:
+            "GRIT Workforce, written for the employer as much as the trainee — graduates finish with hands-on construction training and certifications, and FRP would like to talk.",
         },
       ],
     },
@@ -1712,7 +1741,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#f2ede4", "#c8102e", "#111111", "#6cabdd"],
     display: "PFC",
-    cover: "/work/premier-friends-club/cover.jpg",
+    cover: "/work/premier-friends-club/cover-v2.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     externalUrl: "https://premier-friends-club.netlify.app/",
@@ -1767,47 +1796,58 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/premier-friends-club/home.jpg",
-            alt: "Premier Friends Club — the collage hero and this week's fixture ticker",
+            src: "/work/premier-friends-club/home-v2.jpg",
+            alt: "Premier Friends Club — the collage hero: eight clubs, one table, no hiding",
           },
           url: "premier-friends-club.netlify.app",
           caption:
-            "The hero is a collage of all eight clubs at once — colours, crests and terraces torn together, with the week's fixtures running underneath.",
+            "The hero is a collage of all eight clubs at once — colours, crests and terraces torn together — with the week's fixtures running underneath.",
         },
         {
           kind: "full",
-          aspect: "16 / 10",
+          aspect: "1.12 / 1",
           image: {
-            src: "/work/premier-friends-club/table.jpg",
-            alt: "Premier Friends Club — the live standings table",
+            src: "/work/premier-friends-club/posters.jpg",
+            alt: "Premier Friends Club — this week's match-day posters, one per fixture, the friend named before the club",
           },
           caption:
-            "The table, ranked on points exactly as the league ranks its own — with points per game alongside, because one member plays eight more matches than everyone else.",
+            "Match-day posters, one per fixture, in the same torn-collage system as the hero. Each names the friend before the club, so a derby is between two people.",
+        },
+        {
+          kind: "full",
+          aspect: "1.07 / 1",
+          image: {
+            src: "/work/premier-friends-club/callouts.jpg",
+            alt: "Premier Friends Club — the call-outs: the season ahead, foolish faith kept together, and the nine",
+          },
+          caption:
+            "The call-outs are where the joke lives — the next friend derby (\u201cthe loser goes quiet for a week\u201d), the run-in, foolish faith kept together, and the nine badged like a squad.",
         },
         {
           kind: "pair",
+          aspect: "3 / 2",
           a: {
-            src: "/work/premier-friends-club/matches.jpg",
-            alt: "Premier Friends Club — the fixture list",
+            src: "/work/premier-friends-club/table-v2.jpg",
+            alt: "Premier Friends Club — the table, right now: games played, points banked, wins, derbies to come",
           },
           b: {
-            src: "/work/premier-friends-club/members.jpg",
-            alt: "Premier Friends Club — the member roster",
+            src: "/work/premier-friends-club/standings.jpg",
+            alt: "Premier Friends Club — the full standings, ranked on points with goal difference",
           },
-          labelA: "Matches",
-          labelB: "Members",
+          labelA: "The table, right now",
+          labelB: "Full standings",
           caption:
-            "Fixtures name the friend before the club, so a derby is between two people. The roster is the other half of the joke played straight — nine mates, badged like a squad.",
+            "Ranked on points exactly as the league ranks its own, with games played alongside — because one member plays eight more matches than everyone else. Results, table and fixtures all refresh on their own.",
         },
         {
           kind: "full",
-          aspect: "16 / 10",
+          aspect: "2 / 1",
           image: {
-            src: "/work/premier-friends-club/gallery.jpg",
-            alt: "Premier Friends Club — the gallery",
+            src: "/work/premier-friends-club/roster.jpg",
+            alt: "Premier Friends Club — the roster: nine members, eight clubs, thirty-nine games played",
           },
           caption:
-            "The gallery — years of wind-ups and wet away days, which is what the table is really keeping score of.",
+            "The Roster — nine friends, eight clubs, one table. Win three, draw one, lose nothing but face.",
         },
       ],
     },
@@ -1904,10 +1944,20 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
+            src: "/work/cqap/01-dashboard-v2.jpg",
+            alt: "CQAP — the workspace: one review active, one completed, and the standards learned so far",
+          },
+          url: "cqap.vercel.app",
+          caption:
+            "The workspace with work in it: one review in progress, one just approved and already available as a prior decision, and the standards the system has learned along the way.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
             src: "/work/cqap/02-package-ready-v2.jpg",
             alt: "CQAP — validation and context: the package is ready to review",
           },
-          url: "cqap.vercel.app",
           caption:
             "Validation before judgment. File integrity is checked and the context — brand, line of business, channel, piece type — is confirmed before anyone forms an opinion about the work.",
         },
@@ -1922,29 +1972,24 @@ export const PROJECTS: Project[] = [
             "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard — here, a Carelon Palliative Care welcome guide, two minor findings, both accepted.",
         },
         {
-          kind: "pair",
-          a: {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
             src: "/work/cqap/03-review-clean.jpg",
             alt: "CQAP — the review workspace before any findings",
           },
-          b: {
-            src: "/work/cqap/05-approved.jpg",
-            alt: "CQAP — review complete: approved, saved as a review memory",
-          },
-          labelA: "Nothing surfaced",
-          labelB: "Approved",
           caption:
-            "Left: CQAP stays quiet when the evidence isn't strong enough — the panel says so in its own words. Right: a decision becomes a record. The review is saved as a memory, its accepted findings keep their evidence, and the workspace updates.",
+            "When the evidence isn't strong enough, CQAP stays quiet — the panel says so in its own words rather than manufacturing a finding.",
         },
         {
           kind: "full",
-          aspect: "16 / 9",
+          aspect: "16 / 10",
           image: {
-            src: "/work/cqap/01-dashboard-v2.jpg",
-            alt: "CQAP — the workspace with one review active and one completed",
+            src: "/work/cqap/05-approved.jpg",
+            alt: "CQAP — review complete: approved, saved as a review memory",
           },
           caption:
-            "The workspace with work in it: one review in progress, one just approved and already available as a prior decision, and the standards the system has learned along the way.",
+            "A decision becomes a record. The review is saved as a memory, its accepted findings keep their evidence, and the workspace updates.",
         },
       ],
     },

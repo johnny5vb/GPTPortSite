@@ -691,7 +691,7 @@ function WorkMomentView({
               <Frame
                 image={c.img}
                 palette={palette}
-                aspect="16 / 10"
+                aspect={m.aspect ?? "16 / 10"}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
