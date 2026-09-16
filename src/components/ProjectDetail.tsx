@@ -146,6 +146,29 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               </span>
             )}
           </div>
+        ) : project.coverVideo ? (
+          // A muted excerpt of the piece itself, looping. Poster is the same
+          // frame the Work thumbnail uses, so the morph lands on the video.
+          <div
+            style={{
+              viewTransitionName: `project-${project.slug}`,
+              aspectRatio: project.coverAspect ?? "16 / 9",
+              maxHeight: "min(74vh, 760px)",
+            }}
+            className="relative overflow-hidden rounded-lg border border-line bg-ink-2"
+          >
+            <video
+              src={project.coverVideo.src}
+              poster={project.coverVideo.poster ?? project.cover}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={`${project.title} — excerpt, muted`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
         ) : project.cover ? (
           // Covers range from tall documents to 2:1 screenshots, so the hero
           // presents the piece whole rather than cropping everything to one ratio.
@@ -714,6 +737,30 @@ function WorkMomentView({
               sizes="(max-width: 768px) 100vw, 620px"
             />
           </div>
+        </div>
+        <Caption text={m.caption} />
+      </motion.figure>
+    );
+  }
+
+  if (m.kind === "video") {
+    return (
+      <motion.figure {...revealProps}>
+        <div
+          className="relative overflow-hidden rounded-xl border border-line bg-ink-2 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)]"
+          style={{ aspectRatio: m.aspect ?? "16 / 9" }}
+        >
+          {/* preload="none": the poster carries the frame until someone
+              presses play, so an 11 MB film costs nothing on page load. */}
+          <video
+            src={m.src}
+            poster={m.poster}
+            controls
+            playsInline
+            preload="none"
+            aria-label={m.alt}
+            className="absolute inset-0 h-full w-full object-contain bg-ink-2"
+          />
         </div>
         <Caption text={m.caption} />
       </motion.figure>

@@ -63,7 +63,9 @@ export type WorkMoment =
       caption?: string;
     }
   | { kind: "detail"; image: WorkImage; caption?: string }
-  | { kind: "gallery"; images: WorkImage[]; caption?: string };
+  | { kind: "gallery"; images: WorkImage[]; caption?: string }
+  /** A playable film with controls and sound — loads nothing until pressed. */
+  | { kind: "video"; src: string; poster: string; alt: string; aspect?: string; caption?: string };
 
 export type CaseStudy = {
   overview: { label: string; value: string }[];
@@ -109,6 +111,12 @@ export type Project = {
    * space either side. Set this to match the artwork; defaults to 16/9.
    */
   coverAspect?: string;
+  /**
+   * A muted, looping clip that replaces the cover in the case-study hero.
+   * `cover` still supplies the Work thumbnail and the poster. Keep it short
+   * (~30s), 720p, no audio — it autoplays, so it has to be light.
+   */
+  coverVideo?: { src: string; poster?: string };
   gallery: ProjectImage[];
   externalUrl?: string;
   /** Defaults to "independent" when omitted. */
@@ -1099,22 +1107,28 @@ export const PROJECTS: Project[] = [
       "Wordmark / logo",
       "Campaign design",
       "Print & digital tactics",
+      "Video",
     ],
     palette: ["#78256F", "#0067AB", "#245D38", "#f4ecf3"],
     display: "IMPORTANT!",
-    // The member-facing carousel as one square set — the campaign as the public
-    // actually meets it, rather than the deck cover.
-    cover: "/work/important-colorado/carousel-set.jpg",
-    coverAspect: "1 / 1",
+    // The awareness video is the featured piece: a frame from it is the
+    // thumbnail, a muted excerpt loops in the case-study hero (coverVideo),
+    // and the full film plays with sound as the first work moment.
+    cover: "/work/important-colorado/cover-v2.jpg",
+    coverAspect: "16 / 9",
+    coverVideo: {
+      src: "/work/important-colorado/video-loop.mp4",
+      poster: "/work/important-colorado/video-poster.jpg",
+    },
     gallery: [],
     roleSummary: "Created the 'IMPORTANT!' wordmark and campaign tactics for Health First Colorado.",
     caseStudy: {
       overview: [
         { label: "Client", value: "Health First Colorado (Colorado Medicaid)" },
         { label: "Agency", value: "Jumping Fish (agency of hire)" },
-        { label: "Role", value: "Wordmark + campaign design" },
+        { label: "Role", value: "Wordmark, campaign design, and the awareness video" },
         { label: "Reach", value: "Colorado Medicaid members, statewide" },
-        { label: "Status", value: "In progress — Phase 2 of 3 (through 2026)" },
+        { label: "Status", value: "In progress — Phase 3 of 3; video in client review" },
       ],
       challenge:
         "Health First Colorado needed to reach Medicaid members statewide with an urgent but clear message: federal changes could affect your coverage — check your benefits information. It had to cut through and be understood fast, across a broad and varied audience.",
@@ -1164,64 +1178,74 @@ export const PROJECTS: Project[] = [
         "TODO: Add a reflection once the campaign wraps — it ends with a video I plan to package here in a portfolio-worthy way.",
       work: [
         {
-          kind: "full",
-          aspect: "13 / 10",
-          image: {
-            src: "/work/important-colorado/system-at-a-glance.jpg",
-            alt: "The campaign's documents laid out together — the partner eligibility flowchart, the brand guidelines, and the Phase 2 immigrant-coverage slides",
-          },
+          kind: "video",
+          src: "/work/important-colorado/film-540p.mp4",
+          poster: "/work/important-colorado/video-poster.jpg",
+          alt: "IMPORTANT! — the member-facing awareness video on 2027 work requirements and six-month renewals",
           caption:
-            "The whole system in one view: a partner-facing eligibility flowchart, the brand guidelines that keep a hundred-plus organizations recognizable, and the Phase 2 slides on immigrant health coverage.",
+            "The awareness video — 2:59, built to play with the sound off in a waiting room, so every line of policy is on screen. Narration, animation and a licensed cast; in client review, Fall 2026.",
         },
         {
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/important-colorado/wordmark-anatomy-v2.jpg",
-            alt: "Wordmark anatomy — three lines, three jobs: IMPORTANT!, the federal-changes framing, and the program name",
+            src: "/work/important-colorado/film-frames.jpg",
+            alt: "IMPORTANT! — all sixteen frames of the awareness video",
           },
           caption:
-            "Three lines, three jobs — the dominant call, the framing beneath it, and the program name. The wordmark is the campaign's first touch on every partner-produced piece.",
+            "Sixteen frames. Why-first: what's changing, does it apply to me, what to expect, what to do now — then three actions and a sign-off.",
+        },
+        {
+          kind: "gallery",
+          images: [
+            { src: "/work/important-colorado/social-universal.jpg", alt: "IMPORTANT! — universal social post: work requirements start January 1, 2027" },
+            { src: "/work/important-colorado/social-snap.jpg", alt: "IMPORTANT! — social post: if you meet SNAP/TANF work rules, you also meet Medicaid work requirements" },
+            { src: "/work/important-colorado/social-screener.jpg", alt: "IMPORTANT! — social post: not sure if the requirements apply to you? Use the free, anonymous screening tool" },
+          ],
+          caption:
+            "Universal social posts — one message each, written to be reposted by any partner organisation without edits.",
         },
         {
           kind: "pair",
+          aspect: "17 / 22",
           a: {
-            src: "/work/important-colorado/exclamation-mark.jpg",
-            alt: "The exclamation point mark — rationale for a mark that needs no translation",
+            src: "/work/important-colorado/flyer-front.jpg",
+            alt: "IMPORTANT! — provisions flyer, front: who must comply, who does not, and what's also new in 2027",
           },
           b: {
-            src: "/work/important-colorado/three-marks.jpg",
-            alt: "Three mark variants and the rules for when each is used",
+            src: "/work/important-colorado/flyer-walkby.jpg",
+            alt: "IMPORTANT! — the walk-by flyer: the same message at poster distance",
           },
-          labelA: "The hero mark",
-          labelB: "Right mark, right context",
+          labelA: "Provisions flyer",
+          labelB: "Walk-by flyer",
           caption:
-            "A mark that reads identically in every language the campaign reaches — then governed into three variants so a hundred-plus partner organizations stay recognizable.",
+            "Two flyers for two distances — one to take home and read, one to catch from across a lobby. Same facts, same four actions, partner logo space on both.",
         },
         {
           kind: "pair",
+          aspect: "17 / 22",
           a: {
-            src: "/work/important-colorado/palette.jpg",
-            alt: "The campaign palette — deep plum, sky blue, mountain green, sunshine yellow, Colorado meadow",
+            src: "/work/important-colorado/guide-p1.jpg",
+            alt: "IMPORTANT! — Partner Reference Guide, cover: Federal Changes to Colorado's Medicaid Program, what staff need to know",
           },
           b: {
-            src: "/work/important-colorado/accessibility.jpg",
-            alt: "Approved colour pairings with contrast ratios and WCAG levels",
+            src: "/work/important-colorado/guide-p2.jpg",
+            alt: "IMPORTANT! — Partner Reference Guide, page 2: who must comply, who does not, and the SNAP/TANF note",
           },
-          labelA: "Built to be noticed",
-          labelB: "And built to be read",
+          labelA: "Partner Reference Guide",
+          labelB: "What staff need to know",
           caption:
-            "Every pairing carries its contrast ratio and WCAG level, and the brightest two colours are held back from body text — on a public-health message, legibility is the message.",
+            "The staff-side piece — a four-page reference guide with the common member questions and suggested responses, so the people members already trust can answer them.",
         },
         {
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/important-colorado/phase2-eligibility-v2.jpg",
-            alt: "Phase 2 slide — an eligibility table showing which immigration statuses may qualify for coverage",
+            src: "/work/important-colorado/member-slides.jpg",
+            alt: "IMPORTANT! — the nine-slide member presentation partners can present as their own",
           },
           caption:
-            "Phase 2, on immigrant health coverage: the hardest information in the campaign, laid out so a reader can find their own situation in one pass.",
+            "The member slides — nine slides any partner can present, with a slot for their own name and contact on the first one.",
         },
       ],
     },
