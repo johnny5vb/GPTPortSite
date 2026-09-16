@@ -1180,7 +1180,7 @@ export const PROJECTS: Project[] = [
         {
           kind: "video",
           src: "/work/important-colorado/film-540p.mp4",
-          poster: "/work/important-colorado/video-poster.jpg",
+          poster: "/work/important-colorado/film-poster.jpg",
           alt: "IMPORTANT! — the member-facing awareness video on 2027 work requirements and six-month renewals",
           caption:
             "The awareness video — 2:59, built to play with the sound off in a waiting room, so every line of policy is on screen. Narration, animation and a licensed cast; in client review, Fall 2026.",
