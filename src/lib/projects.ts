@@ -2062,7 +2062,7 @@ export const PROJECTS: Project[] = [
     services: ["Creative systems", "AI tooling", "Product design", "Front-end"],
     palette: ["#080808", "#111111", "#1cb791", "#f5f3ef"],
     display: "CARMAN OS",
-    cover: "/work/carman-os/cover.jpg",
+    cover: "/work/carman-os/cover-v2.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     externalUrl: "https://carmanos.netlify.app/",
@@ -2117,27 +2117,39 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/carman-os/home.jpg",
-            alt: "Carman OS — the four-phase model and tool stack above the prompt library",
+            src: "/work/carman-os/home-v2.jpg",
+            alt: "Carman OS — the four-phase model and tool stack above the first prompt category",
           },
+          aspect: "1.618 / 1",
           url: "carmanos.netlify.app",
           caption:
-            "The front page leads with the method, not the library — four phases on the left, the tool stack on the right, and the prompt count in the corner.",
+            "The front page leads with the method, not the library — four phases on the left, the tool stack on the right, and the first category underneath: define the direction before you design.",
+        },
+        {
+          kind: "full",
+          aspect: "1.21 / 1",
+          image: {
+            src: "/work/carman-os/library-v2.jpg",
+            alt: "Carman OS — two prompt categories: generate options and distill clarity; position yourself at a director level",
+          },
+          caption:
+            "Cards are grouped by what you are trying to do. Each names its model, says what it returns, and copies in one click — here, generating options, then positioning the work at a director level.",
+        },
+        {
+          kind: "full",
+          aspect: "0.837 / 1",
+          image: {
+            src: "/work/carman-os/library-deep-v2.jpg",
+            alt: "Carman OS — the back half of the library: scalable ideas, clear communication and scope, pushing beyond safe work, high-end visual directions",
+          },
+          caption:
+            "The back half of the library — scalable ideas, communicating clearly and protecting scope, pushing past safe work, and the Midjourney and signature-style builders for visual direction. Twenty-four prompts across the four phases.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/carman-os/library.jpg",
-            alt: "Carman OS — prompt cards grouped by category, each naming its model and its output",
-          },
-          caption:
-            "Cards are grouped by what you are trying to do. Each names its model, says what it returns, and copies in one click.",
-        },
-        {
-          kind: "detail",
-          image: {
-            src: "/work/carman-os/preview.jpg",
+            src: "/work/carman-os/preview-v2.jpg",
             alt: "Carman OS — previewing a prompt in full before copying it",
           },
           caption:
