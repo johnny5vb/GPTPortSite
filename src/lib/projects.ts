@@ -928,23 +928,23 @@ export const PROJECTS: Project[] = [
             alt: "FRP — the Housewarming Fund: what move-in day looks like, an empty room with sun on the floor",
           },
           b: {
-            src: "/work/friends-rehab/v4-ho-renting.jpg",
-            alt: "FRP — the Homeownership Fund: renting keeps you housed, owning changes what you can pass on",
+            src: "/work/friends-rehab/v4-hw-family-b.jpg",
+            alt: "FRP — the same apartment, a few weeks on: a family at home",
           },
-          labelA: "The Housewarming Fund",
-          labelB: "The Homeownership Fund",
+          labelA: "Move-in day",
+          labelB: "The same apartment, a few weeks on",
           caption:
-            "Two funds, each a specific thing a gift does. The Housewarming Fund starts from the empty room a family walks into; the Homeownership Fund starts from the block they could stay on.",
+            "The Housewarming Fund page is built as a before and after: the empty room a family walks into, and the same apartment with the family as the after.",
         },
         {
           kind: "full",
-          aspect: "16 / 9",
+          aspect: "1.646 / 1",
           image: {
-            src: "/work/friends-rehab/v4-hw-family.jpg",
-            alt: "FRP — the same apartment, a few weeks on: a family at home",
+            src: "/work/friends-rehab/v4-ho-renting.jpg",
+            alt: "FRP — the Homeownership Fund: renting keeps you housed, owning changes what you can pass on",
           },
           caption:
-            "The same apartment, a few weeks on. The page is built as a before and after, with the family as the after.",
+            "The Homeownership Fund starts from the block a family could stay on — renting keeps you housed; owning changes what you can pass on.",
         },
         {
           kind: "full",
