@@ -1232,3 +1232,23 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     full moments. **PFC audited the same way: nothing hidden, all images
     loaded — those captures stand.** `frp4.mjs` / `frp5.mjs` in the
     scratchpad are the reference scripts.
+
+59. **Carman OS recaptured under the #58 routine; CQAP audited, unchanged.**
+    Carman OS (`carmanos.netlify.app`) has no images and no reveal
+    animations (the one hidden element is an inactive toast), so the old
+    captures weren't broken — but they undersold it: the "library" frame
+    showed two of seven categories. Now: `home-v2` (front page through the
+    first category, 1.618), `library-v2` (categories two and three, 1.21),
+    `library-deep-v2` (the back four, 0.837 — trimmed to the last card row by
+    scanning for the last non-background line), `preview-v2` (the modal,
+    reopened by clicking the first "Preview"), `cover-v2`. Old files
+    deleted. **CQAP**: the public page (`cqap.vercel.app`) is a single
+    empty-state screen — "Your table is clear" — and the five review screens
+    are the owner's own logged-in captures, so there is nothing to recapture;
+    the `cover.jpg` crop of a real review stays. **FRP follow-up**: the
+    owner flagged the "same apartment" frame — a faithful capture, but the
+    site's layout leaves that row 60% empty at desktop width, so it now
+    pairs with the move-in room as the page's own before/after
+    (`v4-hw-family-b.jpg`, cropped to the room's 1.80) and Homeownership
+    stands alone. Lesson: a faithful section capture can still be the wrong
+    frame for a portfolio; compose to the content, not the section box.
