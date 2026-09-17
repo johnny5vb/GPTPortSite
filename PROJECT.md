@@ -1210,3 +1210,21 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       The caption says "in client review, Fall 2026" and Status says so. If
       the client objects, `coverVideo` and the video moment are two deletions
       and `cover` falls back to a still. Raised with the owner.
+
+58. **FRP recaptured — the screenshots had fired before the page finished.**
+    The owner saw missing photos and copy in the FRP frames. Cause: the FRP
+    site arms every `.reveal` block to opacity 0 and un-hides it on
+    intersection (3-second failsafe), the arched hero photo is a
+    `clip-path` wipe, the stats count up from zero, and photos are
+    `loading="lazy"` — the #56 captures fired at ~700 ms. Fix, now the
+    **rule for capturing any animated site**: Playwright context with
+    `reducedMotion: "reduce"` (FRP's reduced-motion path renders final
+    state instantly), strip `.is-armed`, flip `loading="lazy"` → `eager`,
+    scroll the whole page, `await` every `img.complete`, *then* shoot. The
+    home hero now carries its photo and the four-figure band (captured to
+    the band's bottom edge, 2880×2306 — `browser` moments take an `aspect`
+    now, like `pair`). GRIT's "A safe place" photo and Impact's band were
+    also missing before. Files are `v4-*`; the ask and Impact are their own
+    full moments. **PFC audited the same way: nothing hidden, all images
+    loaded — those captures stand.** `frp4.mjs` / `frp5.mjs` in the
+    scratchpad are the reference scripts.
