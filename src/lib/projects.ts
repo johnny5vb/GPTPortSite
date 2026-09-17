@@ -51,7 +51,14 @@ export type WorkMoment =
        *  composition shows uncropped instead of being forced to 16:9. */
       aspect?: string;
     }
-  | { kind: "browser"; image: WorkImage; caption?: string; url?: string }
+  | {
+      kind: "browser";
+      image: WorkImage;
+      /** Frame ratio. Defaults to 16/10 in the renderer. */
+      aspect?: string;
+      caption?: string;
+      url?: string;
+    }
   | {
       kind: "pair";
       /** Frame ratio for both halves. Defaults to 16/10 in the renderer. */
@@ -840,7 +847,7 @@ export const PROJECTS: Project[] = [
     services: ["Web design", "Brand system", "Content strategy", "Front-end build"],
     palette: ["#12283a", "#c9a24a", "#0d6b6b", "#f5f7f9"],
     display: "FRP",
-    cover: "/work/friends-rehab/v3-cover.jpg",
+    cover: "/work/friends-rehab/v4-cover.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     externalUrl: "https://friends-frp.org",
@@ -895,9 +902,10 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/friends-rehab/v3-home.jpg",
-            alt: "FRP — the new homepage: Advancing Justice. Building Futures.",
+            src: "/work/friends-rehab/v4-home.jpg",
+            alt: "FRP — the new homepage: Advancing Justice. Building Futures., with the four figures under it",
           },
+          aspect: "1.249 / 1",
           url: "friends-frp.org",
           caption:
             "The homepage says what FRP does in two sentences — housing, re-entry, trades training — under a headline that carries sixty years of Quaker practice.",
@@ -906,7 +914,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/friends-rehab/v3-about.jpg",
+            src: "/work/friends-rehab/v4-about.jpg",
             alt: "FRP — About: founded in 1961, out of a settlement house",
           },
           caption:
@@ -916,11 +924,11 @@ export const PROJECTS: Project[] = [
           kind: "pair",
           aspect: "16 / 9",
           a: {
-            src: "/work/friends-rehab/v3-hw-movein.jpg",
+            src: "/work/friends-rehab/v4-hw-movein.jpg",
             alt: "FRP — the Housewarming Fund: what move-in day looks like, an empty room with sun on the floor",
           },
           b: {
-            src: "/work/friends-rehab/v3-ho-renting.jpg",
+            src: "/work/friends-rehab/v4-ho-renting.jpg",
             alt: "FRP — the Homeownership Fund: renting keeps you housed, owning changes what you can pass on",
           },
           labelA: "The Housewarming Fund",
@@ -932,33 +940,37 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 9",
           image: {
-            src: "/work/friends-rehab/v3-hw-family.jpg",
+            src: "/work/friends-rehab/v4-hw-family.jpg",
             alt: "FRP — the same apartment, a few weeks on: a family at home",
           },
           caption:
             "The same apartment, a few weeks on. The page is built as a before and after, with the family as the after.",
         },
         {
-          kind: "pair",
-          aspect: "16 / 9",
-          a: {
-            src: "/work/friends-rehab/v3-hw-ask.jpg",
+          kind: "full",
+          aspect: "2.304 / 1",
+          image: {
+            src: "/work/friends-rehab/v4-hw-ask.jpg",
             alt: "FRP — the ask: one hundred thousand dollars in year one, $1,500 furnishes a package for a family of four",
           },
-          b: {
-            src: "/work/friends-rehab/v3-impact.jpg",
-            alt: "FRP — Impact: the numbers, and where to check them",
-          },
-          labelA: "The ask",
-          labelB: "Impact",
           caption:
-            "The ask is a number and what it buys. Impact is three figures and a link to the annual report they come from — the numbers, and where to check them.",
+            "The ask is a number and what it buys — $100K for the fund's first year, $1,500 for one family's complete package.",
+        },
+        {
+          kind: "full",
+          aspect: "1.671 / 1",
+          image: {
+            src: "/work/friends-rehab/v4-impact.jpg",
+            alt: "FRP — Impact: the numbers, and where to check them — 370 families, 1,500 returning citizens, 11 partner organizations",
+          },
+          caption:
+            "Impact — three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
         },
         {
           kind: "full",
           aspect: "2.17 / 1",
           image: {
-            src: "/work/friends-rehab/v3-grit.jpg",
+            src: "/work/friends-rehab/v4-grit.jpg",
             alt: "FRP — GRIT Workforce: graduates are looking for work in the trades",
           },
           caption:
