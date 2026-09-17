@@ -217,10 +217,12 @@ are un-numbered bands between the numbered narrative sections.
 ## Content & data
 
 ### Projects
-Single source of truth: `src/data/projects.ts`. Each project has its own
-image folder under `/public/work/<slug>/`. Friends Rehab specifically uses
-real screenshots of the existing FRP WordPress site (the user provided them
-via Finder).
+Single source of truth: `src/lib/projects.ts`. Each project has its own
+image folder under `/public/work/<slug>/`, and **every replaced image gets a
+new filename** (#50). Friends Rehab shows the **rebuilt** site (the v4 static
+build at `~/frp-website-preview/v4`, in final client review — not the old
+WordPress site). Screenshots of animated sites are captured under reduced
+motion with every reveal, counter and lazy image settled first (#58).
 
 ### Contact info (now centralized in `src/lib/profile.ts` → `PROFILE`)
 - Email: `johnbcarman@gmail.com` (kept live because it works). **TODO:**
@@ -1039,7 +1041,9 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
 
     **The rule for any new asset.** Full-bleed work moment: **≥ 2650px wide**
     (capture at 1440 CSS × 2 = 2880). Pair / detail / gallery: ≥ 1300px.
-    Cover: 2400×1800. Save masters as JPEG q92 or PNG; don't pre-shrink —
+    Cover: 2400×1800 (any ratio works since thumbnails went `object-cover`
+    in #55; frames inside case studies still contain, so crop to the frame's
+    `aspect`). Save masters as JPEG q92 or PNG; don't pre-shrink —
     the optimiser resizes and re-encodes per device, and the raw file never
     ships. `ls -lat` sorts by modified date, which macOS preserves on move;
     sort by **date added** (`mdls -name kMDItemDateAdded`) when looking for a
