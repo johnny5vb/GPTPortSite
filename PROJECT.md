@@ -1358,7 +1358,14 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     file lands, the cover is back on `card-rebrand-v2.jpg` (horizontal
     lockups, chevron). Three cover attempts have now failed (stacked cards,
     chevron strip, split screen): stop generating covers for this project
-    and wait for his. His file goes in at 2400×1800 under a **new** name. The tail of "The work" is now sales sheet +
+    and wait for his. **It landed the same day** — a two-tone composition of
+    the stacked marks, pasted into chat. Pasted images *do* reach disk now:
+    the harness saves them under the session's `images/` folder and names
+    the path in the message (`images/15.webp` here) — the #47 note that
+    attachments never reach disk is out of date. Supplied at 1672×941;
+    Photoshop 2× to 3344, then the two grounds extended top and bottom to
+    4:3 (`card-owner-v5.jpg`, 3344×2508) so the thumbnail's centre crop
+    keeps both wordmarks. The tail of "The work" is now sales sheet +
     crisis sheet (the team's Carelon Behavioral Health collateral), the
     Stationery (p110) + Posters (p113) pages as a "smallest and largest"
     pair, and the pocket folder full-width. Rejected files deleted or left

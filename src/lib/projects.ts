@@ -175,12 +175,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
     display: "CARELON REBRAND",
-    // Interim cover. The owner is composing the real one himself (the
-    // stacked-cards, chevron-strip and split-screen attempts were all
-    // rejected). Until it lands, the earlier rebrand card stays: Beacon
-    // lockup above, Carelon lockup below. Swap `cover` when his file arrives
-    // — new filename, per the cache rule.
-    cover: "/work/beacon-carelon-transformation/card-rebrand-v2.jpg",
+    // The owner's own cover: the two stacked marks on a two-tone ground,
+    // grey left, white right. Supplied at 1672×941, upscaled 2× and the two
+    // grounds extended top and bottom to 4:3 so the Work thumbnail keeps
+    // both wordmarks (a 16:9 source would have been centre-cropped).
+    cover: "/work/beacon-carelon-transformation/card-owner-v5.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
