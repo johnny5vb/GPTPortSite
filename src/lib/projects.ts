@@ -450,9 +450,9 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "full",
-          aspect: "1.244 / 1",
+          aspect: "1.321 / 1",
           image: {
-            src: "/work/creative-operations-marketing-bench/cb-configurator-flyer.jpg",
+            src: "/work/creative-operations-marketing-bench/cb-configurator-flyer-b.jpg",
             alt: "Configuring a member-facing toolkit flyer — profile, co-branding, client logo and contact fields on the right, live preview on the left",
           },
           caption:
