@@ -1291,7 +1291,15 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       (painted out — a vendor support line has no place on a portfolio). The
       Beacon-era assets (`output-*`, `client-catalog`, `template-picker` …)
       are unreferenced on disk. `~/Desktop/For Claude/mb-src/` holds the
-      extracted originals and the 2× upscales.
+      extracted originals and the 2× upscales. **Follow-up on the owner's
+      read:** the hero-only crop wasn't compelling as a thumbnail, so the
+      cover is now the *full* homepage — hero + Quick links + the Featured
+      items strip, stitched from two deck screenshots (`cb-home-full.jpg`)
+      and set on the flagship light plate with a soft shadow at 2400×1800
+      (`cb-cover-v2.jpg`, `coverAspect: "4 / 3"`). The "Next steps / coming
+      April 1" slide came out at the owner's ask; the annotated
+      "Marketing Bench overview" training slide (`cb-overview-slide.jpg`)
+      pairs with SalesHub instead.
 
 61. **Stamp Out Stigma — the real photograph leads; the generated composites
     are gone.** The page had opened *and* closed on the two AI dusk shots
