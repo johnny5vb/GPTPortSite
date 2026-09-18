@@ -357,16 +357,16 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Creative Operations & Marketing Bench",
     client: "Elevance Health / Carelon",
-    year: "2020",
+    year: "2022 — 2023",
     category: "Creative Operations",
-    duration: "2020",
+    duration: "2022 — 2023 (launched March 2023)",
     tags: ["Print on Demand", "Creative Ops", "UI"],
     blurb:
       "Rebuilding Marketing Bench as a variable print-on-demand platform — self-serve materials that took designers out of routine production entirely.",
     oneLiner:
       "Print-on-demand that runs without a designer in the loop.",
     brief:
-      "Marketing Bench let sales and leadership order branded materials and merchandise — but on the old platform every change ran through a designer and the print vendor first. As part of the Carelon rebrand, I rebuilt it as a variable print-on-demand site stakeholders could self-serve, taking designers out of routine production entirely.",
+      "Marketing Bench let sales and leadership order branded materials and merchandise — but on the old platform every change ran through a designer and the print vendor first. As part of the Carelon rebrand, I rebuilt it as a variable print-on-demand site stakeholders could self-serve — configurable brochures, flyers and capability documents that co-brand and populate themselves — taking designers out of routine production entirely. It launched to the organization in March 2023.",
     process: [],
     services: [
       "Creative operations",
@@ -376,11 +376,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1cb791", "#1f8a6d", "#f3f1ea"],
     display: "MARKETING BENCH",
-    // The platform itself, centered on the same neutral plate the other two
-    // flagships use. The annotated user-guide version still carries the
-    // walkthrough inside "The work".
-    cover: "/work/creative-operations-marketing-bench/card-platform-v2.jpg",
-    coverAspect: "4 / 3",
+    // The Carelon-era platform homepage ("Welcome to your new Marketing
+    // Bench"), from the March 2023 training deck. The Beacon-era platform
+    // survives inside "The work" as the before.
+    cover: "/work/creative-operations-marketing-bench/cb-cover.jpg",
+    coverAspect: "16 / 10",
     gallery: [],
     roleSummary:
       "Rebuilt Marketing Bench as a self-serve print-on-demand platform.",
@@ -390,7 +390,7 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Creative lead / UI design" },
         { label: "Focus", value: "Variable print-on-demand, self-serve materials" },
         { label: "Impact", value: "~60% faster turnaround / ~30% higher engagement" },
-        { label: "Timeline", value: "2020" },
+        { label: "Timeline", value: "2022 — 2023; launched to the organization March 2023" },
       ],
       challenge:
         "Marketing Bench let sales, leadership, and stakeholders order branded materials and merchandise — but the old platform routed every change through a designer: edit the layout, get it approved, hand it to the print vendor, wait for them to upload it. A designer sat in the critical path of routine production, and speed to market suffered.",
@@ -433,83 +433,88 @@ export const PROJECTS: Project[] = [
         "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials — exactly the kind of work AI is good at staying on top of.",
       work: [
         {
-          kind: "full",
-          aspect: "3 / 4",
-          image: {
+          kind: "pair",
+          aspect: "1.55 / 1",
+          a: {
             src: "/work/creative-operations-marketing-bench/platform-homepage-annotated-v2.jpg",
-            alt: "Annotated walkthrough of the Marketing Hub homepage — build a marketing folder, quick links to the resource center, stationery, sales support, and promo items",
+            alt: "The Beacon-era Marketing Bench homepage, 2019, annotated in its user guide",
           },
+          b: {
+            src: "/work/creative-operations-marketing-bench/cb-home.jpg",
+            alt: "Carelon Marketing Bench — Welcome to your new Marketing Bench, with Quick Links to every material type",
+          },
+          labelA: "Before — the 2019 platform",
+          labelB: "After — Carelon Marketing Bench, 2023",
           caption:
-            "How it was taught: the homepage annotated for the field, with “Build a Marketing Folder” as the front door and quick links into the resource center, stationery, sales support, and promo items.",
+            "The old platform was a catalogue with a designer behind it. The rebuild is a front door: quick links to every kind of material, and behind each one a form instead of a request.",
         },
         {
           kind: "full",
-          aspect: "3 / 2",
+          aspect: "1.244 / 1",
           image: {
-            src: "/work/creative-operations-marketing-bench/client-catalog-v2.jpg",
-            alt: "The customized client materials catalog, with logos for Amtrak, Baltimore City Public Schools, California, Catholic Health Initiatives and CenturyLink",
+            src: "/work/creative-operations-marketing-bench/cb-configurator-flyer.jpg",
+            alt: "Configuring a member-facing toolkit flyer — profile, co-branding, client logo and contact fields on the right, live preview on the left",
           },
           caption:
-            "The scale it had to hold: a live catalog of client-specific material — Amtrak, CVS, CenturyLink, Baltimore City Public Schools, whole states — orderable without a designer opening a file.",
+            "The moment that takes the designer out of the loop. Pick a profile, choose co-branded or not, fill the client fields — logo, program name, phone, URL — and the flyer builds itself in the preview. View proof, order, done.",
         },
         {
           kind: "pair",
+          aspect: "1.1 / 1",
           a: {
-            src: "/work/creative-operations-marketing-bench/configure-client.jpg",
-            alt: "Selecting a client from the inventory dropdown, which auto-fills logo, program name, phone and URL",
+            src: "/work/creative-operations-marketing-bench/cb-configurator-brochure.jpg",
+            alt: "Configuring the member-facing core brochure — a multi-page piece with the same field-driven configurator",
           },
           b: {
-            src: "/work/creative-operations-marketing-bench/proof-and-pdf.jpg",
-            alt: "The View Proof and Create PDF step, ending in a downloadable finished file",
+            src: "/work/creative-operations-marketing-bench/cb-configurator-capability.jpg",
+            alt: "Configuring a sales capability document — placeholder image and content areas populate from the form",
           },
-          labelA: "Pick the client",
-          labelB: "Proof, then PDF",
+          labelA: "Core brochure",
+          labelB: "Capability document",
           caption:
-            "The whole bottleneck, replaced by two steps. Choose a client and the logo, program name, phone number and URL populate across the template; view the proof, create the PDF, download a production file.",
+            "The same pattern at every scale — a multi-page member brochure and a sales capability document, each designed with intentional placeholder image and content areas so a field owner can produce it without asking anyone.",
         },
         {
           kind: "full",
-          aspect: "3 / 2",
+          aspect: "1.963 / 1",
           image: {
-            src: "/work/creative-operations-marketing-bench/output-annotated-v2.jpg",
-            alt: "A finished branded piece annotated to show which fields fill automatically and which the user sets",
+            src: "/work/creative-operations-marketing-bench/cb-configurable-table.jpg",
+            alt: "What files are configurable — a table of file types with a yes/no column and the fields each one exposes",
           },
           caption:
-            "And the piece that comes out, annotated: logo, program name, hero image, session count, contact block — every field marked as either automatic or the requester's to set. That map is what let non-designers self-serve safely.",
+            "The governance behind it. Every file type is either configurable or static, and the table says exactly which fields a configurable piece exposes — client logo, program name, URL, phone, image, disclaimer — so the brand stays governed while the production runs itself.",
         },
         {
           kind: "pair",
+          aspect: "1.5 / 1",
           a: {
-            src: "/work/creative-operations-marketing-bench/template-picker.jpg",
-            alt: "Choosing a format — digital messages, postcards, brochures, kick-it pieces",
+            src: "/work/creative-operations-marketing-bench/cb-featured.jpg",
+            alt: "Featured items — Carelon-branded stationery and translations, ordered from the same platform",
           },
           b: {
-            src: "/work/creative-operations-marketing-bench/marketing-folder.jpg",
-            alt: "The Marketing Folder catalog — collated sales materials selected and added to cart",
+            src: "/work/creative-operations-marketing-bench/cb-translations.jpg",
+            alt: "The translation request form — languages, quantities and turnaround, submitted without a designer",
           },
-          labelA: "Any format",
-          labelB: "Collated and shipped",
+          labelA: "Stationery and translations",
+          labelB: "The translation request",
           caption:
-            "Formats ran the range — digital messages, postcards, brochures, tip sheets — and a folder of them could be collated and shipped the next business day.",
+            "Beyond print: business cards and stationery, and a translation request that used to be an email thread, now a form with a price list attached.",
         },
         {
-          kind: "gallery",
-          images: [
-            {
-              src: "/work/creative-operations-marketing-bench/output-pge.jpg",
-              alt: "A client-customized EAP brochure produced from the platform templates",
-            },
-            {
-              src: "/work/creative-operations-marketing-bench/output-unitedrentals.jpg",
-              alt: "A client-branded manager resources piece produced from the platform templates",
-            },
-            {
-              src: "/work/creative-operations-marketing-bench/output-jnj.jpg",
-              alt: "A client-branded wellbeing and EAP piece produced from the platform templates",
-            },
-          ],
+          kind: "pair",
+          aspect: "1.38 / 1",
+          a: {
+            src: "/work/creative-operations-marketing-bench/cb-saleshub.jpg",
+            alt: "SalesHub — the repository for finished marketing collateral, the platform Marketing Bench sits beside",
+          },
+          b: {
+            src: "/work/creative-operations-marketing-bench/cb-next-steps.jpg",
+            alt: "Next steps — what was available at launch and what was coming April 1: sell sheets, capability sheets, state overviews, vendor materials, custom client materials",
+          },
+          labelA: "The other platform — SalesHub",
+          labelB: "Launch, and what came next",
           caption:
-            "Real output, one system: the same templates configured per client, at a volume no designer-in-the-loop process could have carried.",
+            "Two platforms with two jobs: SalesHub holds the finished collateral; Marketing Bench makes it. Launched in March 2023 with EAP core assets and monthly toolkits, with the sales capability set following in April.",
         },
       ],
     },
