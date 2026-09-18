@@ -1352,11 +1352,13 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     rejected the card-and-chevron cover ("boxes… drop shadows… the arrow
     looks cheap") and four images: the Beacon "Not feeling like yourself?"
     flyer, the Carelon paragraph style guide, and the Website (p101) and
-    Collateral (p105) guideline pages. Cover is now **`card-split-v4.jpg`**:
-    a diagonal split screen, Beacon Blue (63,180,229) left, Carelon Purple
-    (80,8,181) right — both sampled from the reversed-logo tiles in their
-    own guidelines (Beacon p6, Carelon p44) — each half carrying its white
-    logo. Nothing else on it. The tail of "The work" is now sales sheet +
+    Collateral (p105) guideline pages. A diagonal split-screen cover
+    (Beacon Blue left, Carelon Purple right, reversed logos) was built and
+    **rejected too — the owner will compose the cover himself.** Until his
+    file lands, the cover is back on `card-rebrand-v2.jpg` (horizontal
+    lockups, chevron). Three cover attempts have now failed (stacked cards,
+    chevron strip, split screen): stop generating covers for this project
+    and wait for his. His file goes in at 2400×1800 under a **new** name. The tail of "The work" is now sales sheet +
     crisis sheet (the team's Carelon Behavioral Health collateral), the
     Stationery (p110) + Posters (p113) pages as a "smallest and largest"
     pair, and the pocket folder full-width. Rejected files deleted or left
