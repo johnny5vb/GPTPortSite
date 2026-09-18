@@ -26,7 +26,7 @@ const JOBS: Job[] = [
     range: "2010 — Present",
     bullets: [
       "Lead brand, campaign, digital, and creative-operations work across a complex healthcare organization.",
-      "Served as a creative lead through the Beacon Health Options → Carelon / Elevance Health transition (2018–2020); title moved from Creative Director to Creative Manager through the restructuring.",
+      "Served as a creative lead through the Beacon Health Options → Carelon / Elevance Health transition (2022–2023); title moved from Creative Director to Creative Manager through the restructuring.",
       "Migrated ~1,500+ brand assets to the new identity across an ~85,000+ employee organization.",
       "Managed a five-person design team and directed outside agencies and vendors.",
       "Built the Marketing Bench creative-support model (2020) — ~60% faster turnaround and ~30% higher engagement.",

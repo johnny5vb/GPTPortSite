@@ -53,7 +53,7 @@ const PRINCIPLES = [
 // Verified, qualitative proof leads. Specific figures stay clearly labeled as
 // TODO until confirmed — they are not presented as facts.
 const PROOF = [
-  "Led creative through an enterprise acquisition and rebrand — Beacon Health Options → Carelon / Elevance Health (2018–2020)",
+  "Led creative through an enterprise acquisition and rebrand — Beacon Health Options → Carelon / Elevance Health (2022–2023)",
   "Migrated ~1,500+ brand assets across an ~85,000+ employee organization",
   "Built the Marketing Bench creative-support model — ~60% faster turnaround and ~30% higher engagement (2020)",
   "Reworked Workfront intake, review, and approval across ~75+ projects a month (2025)",

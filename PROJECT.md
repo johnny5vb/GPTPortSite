@@ -1269,9 +1269,10 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       Carelon Behavioral Health's system and running the 1,500-asset
       migration — not authoring the brand. The old brand-system renders
       (graphic language, photo mask, dark cover, data viz, sub-brands) are
-      unreferenced on disk. **Open question raised with the owner: the entry
-      says 2018–2020 but the poster on the page says Beacon became Carelon
-      Behavioral Health on March 1, 2023.**
+      unreferenced on disk. **Dates corrected to 2022–2023 on the owner's
+      confirmation** (the entry had said 2018–2020; the poster on the page
+      says Beacon became Carelon Behavioral Health on March 1, 2023) — in the
+      case study, the `/leadership` experience list and the `/resume` line.
     - **Marketing Bench** was showing the 2019 Beacon-era guide. It now shows
       the Carelon platform: native screenshots pulled from the deck's
       `ppt/media/` (the configurator is 3224px native; the rest went through

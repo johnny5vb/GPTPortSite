@@ -156,9 +156,9 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Beacon Health Options → Carelon",
     client: "Beacon Health Options / Carelon (Elevance Health)",
-    year: "2018 — 2020",
+    year: "2022 — 2023",
     category: "Enterprise Brand Transformation",
-    duration: "~9 months (2018–2020)",
+    duration: "~9 months (2022–2023)",
     tags: ["Enterprise", "Rebrand", "Governance"],
     blurb:
       "Leading creative through the acquisition and rebrand of a national behavioral-health organization — holding brand quality steady while the company itself changed.",
@@ -191,7 +191,7 @@ export const PROJECTS: Project[] = [
         { label: "Focus", value: "Brand transition, governance, quality control" },
         { label: "Scale", value: "~1,500+ assets / ~85,000+ employees" },
         { label: "Team", value: "Scaled to ~20 (3 in-house + freelance)" },
-        { label: "Timeline", value: "2018 — 2020 (9-month rebrand)" },
+        { label: "Timeline", value: "2022 — 2023 (9-month rebrand; Beacon became Carelon Behavioral Health March 1, 2023)" },
       ],
       challenge:
         "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work — while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
