@@ -376,11 +376,12 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e1a18", "#1cb791", "#1f8a6d", "#f3f1ea"],
     display: "MARKETING BENCH",
-    // The Carelon-era platform homepage ("Welcome to your new Marketing
-    // Bench"), from the March 2023 training deck. The Beacon-era platform
+    // The full Carelon-era homepage — hero, Quick links and the Featured
+    // items strip, stitched from the two deck screenshots — on the same
+    // light plate the other flagship covers use. The Beacon-era platform
     // survives inside "The work" as the before.
-    cover: "/work/creative-operations-marketing-bench/cb-cover.jpg",
-    coverAspect: "16 / 10",
+    cover: "/work/creative-operations-marketing-bench/cb-cover-v2.jpg",
+    coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
       "Rebuilt Marketing Bench as a self-serve print-on-demand platform.",
@@ -502,19 +503,19 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "pair",
-          aspect: "1.38 / 1",
+          aspect: "1.6 / 1",
           a: {
             src: "/work/creative-operations-marketing-bench/cb-saleshub.jpg",
             alt: "SalesHub — the repository for finished marketing collateral, the platform Marketing Bench sits beside",
           },
           b: {
-            src: "/work/creative-operations-marketing-bench/cb-next-steps.jpg",
-            alt: "Next steps — what was available at launch and what was coming April 1: sell sheets, capability sheets, state overviews, vendor materials, custom client materials",
+            src: "/work/creative-operations-marketing-bench/cb-overview-slide.jpg",
+            alt: "Marketing Bench overview — the homepage annotated for training: hero banner, quick links, featured items, search and support",
           },
           labelA: "The other platform — SalesHub",
-          labelB: "Launch, and what came next",
+          labelB: "The platform, as taught",
           caption:
-            "Two platforms with two jobs: SalesHub holds the finished collateral; Marketing Bench makes it. Launched in March 2023 with EAP core assets and monthly toolkits, with the sales capability set following in April.",
+            "Two platforms with two jobs: SalesHub holds the finished collateral; Marketing Bench makes it. And it shipped with training — the March 2023 guide walks every user through the homepage before they touch a configurator.",
         },
       ],
     },
