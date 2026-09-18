@@ -162,20 +162,24 @@ are un-numbered bands between the numbered narrative sections.
   the contour field (change #39), then the portrait layout (change #44).
 - **`Manifesto.tsx`** — Section 01. Compact interactive slider with
   auto-advance (5.5s), dot nav, prev/next/pause. Four principles.
-- **`Work.tsx`** — Section 02. Four project rows linking to `/work/[slug]`.
+- **`Work.tsx`** — Section 02. Three bands: Featured leadership work (cards,
+  count-agnostic grid), Selected independent work (rows 01–06) and Systems &
+  side projects (rows S01–S03), all linking to `/work/[slug]`. Thumbnails
+  are `object-cover` on a 4:3 plate (#55).
 - **`Showpiece.tsx`** — Section 03. Editorial image moment.
 - **`StyleGuideTalksBack.tsx`** — Section 04 on home. Accepts a `featured`
   boolean: when true, renders the "// 04 — The AI Lab" eyebrow and a green
   `LabCTA` block at the bottom that says *"Style Guide is one of four. See
   the rest."* and links to `/lab`. Without `featured` it's used standalone on
   `/lab` for one of the four systems.
-- **`Services.tsx`** — Section 05. Service rows.
+- **`Services.tsx`** — Section 06, "Practice". The four disciplines,
+  described, not offered (#41).
 - **`About.tsx`** — Section 05. The studio scene (`/brand/studio.jpg` —
   generated, not photographic; the owner's call), animated stat counters via
   `CountUp.tsx`, current roles list, tools-in-rotation pills. It used to
   repeat the hero portrait; that duplicate is gone.
-- **`ContactCTA.tsx`** — Section 07. Email button + ContactBlocks grid
-  (Studio / Hours / Social / Open for).
+- **`ContactCTA.tsx`** — Section 07. One "Email me" button on a bare
+  `mailto:` and three detail cards: Based in / Email / LinkedIn (#41).
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
   — that was removed). CC mark, copyright, connect list (Email / LinkedIn /
   Instagram / Capabilities deck), and a `// practice` block naming the
@@ -273,12 +277,13 @@ Director title; keep the transition explanation sparse and forward-looking.
 `Adobe Creative Cloud · Framer · Claude · GPT-5 · Midjourney · VS Code · Next.js`
 
 ### Locations
-**Repositioned:** "Based in Virginia Beach. Available for remote and select
-hybrid opportunities." The three-city (Virginia Beach / Philadelphia /
-Brooklyn) "studio" framing was removed as a proof point — it read as a
-freelance-agency flex. The hero meta strip now shows `Virginia Beach /
-Remote / Hybrid`. **Never** Newport Beach (early LLM hallucination). Separators
-are `/`, not `·` or `•`.
+"Based in Virginia Beach." — and nothing about availability (the earlier
+"Available for remote and select hybrid opportunities" line went with the
+neutral pass, #41). The three-city (Virginia Beach / Philadelphia / Brooklyn)
+"studio" framing was removed as a proof point — it read as a freelance-agency
+flex. The hero meta strip is `Virginia Beach / Brand / Design Systems`.
+**Never** Newport Beach (early LLM hallucination). Separators are `/`, not
+`·` or `•`.
 
 ---
 
