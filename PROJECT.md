@@ -1370,9 +1370,8 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     Stationery (p110) + Posters (p113) pages as a "smallest and largest"
     pair, and the pocket folder full-width. Rejected files deleted or left
     unreferenced (`before-beacon-flyer`, `type-system`, `card-stacked-v3`).
-    - **⚠ Netlify quota hit (2026-09-18).** The owner's Netlify plan is at
-      its limit, so **commits are held locally — do not push `origin/main`**
-      until he either buys headroom or picks the moment. Every push
-      auto-builds (#53), so holding the push is the hold. Local `main` is
-      ahead of `origin/main` by these commits; `git log origin/main..main`
-      lists what's queued.
+    - **Netlify quota hit (2026-09-18), then lifted the same day.** The
+      owner's plan ran out, so four commits were held locally (every push
+      auto-builds, #53 — holding the push is the hold); he bought credits and
+      the queue went up in one push. If it happens again: commit, don't
+      push, and `git log origin/main..main` is the queue.
