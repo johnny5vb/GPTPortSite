@@ -235,82 +235,88 @@ export const PROJECTS: Project[] = [
         "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of deliverables look overwhelming on paper, but with the right system and the right people, you chip away at it — and finishing something at that scale is its own reward. This is the project that changed how I lead.",
       work: [
         {
-          kind: "pair",
-          aspect: "16 / 10",
-          a: {
-            src: "/work/beacon-carelon-transformation/before-beacon-guidelines.jpg",
-            alt: "Beacon Health Options brand guidelines cover, in the Beacon blue identity",
-          },
-          b: {
-            src: "/work/beacon-carelon-transformation/cbg-p05c.jpg",
-            alt: "Carelon brand guidelines — our logo and name: interlocking Cs, a star formed in the centre",
-          },
-          labelA: "Before — Beacon",
-          labelB: "After — Carelon",
-          caption:
-            "One identity replaced by another. Beacon's blue gave way to Carelon: interlocking Cs for holistic care working in harmony, a star formed in the centre — and a name meaning full, complete, enduring.",
-        },
-        {
           kind: "full",
-          aspect: "1.548 / 1",
+          aspect: "2.575 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/cbg-p08c.jpg",
-            alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
+            src: "/work/beacon-carelon-transformation/transition-strip.jpg",
+            alt: "The transition in three frames: the Beacon Health Options logo, the name-change poster — Our name has changed. Our commitment has not. — and the Carelon Behavioral Health lockup",
           },
           caption:
-            "The system as it arrived — a 115-page enterprise brand guideline covering every surface at once. This is what 1,500+ Beacon assets had to become.",
+            "The whole story in three frames. Beacon Health Options; the piece that told members and partners what was happening — our name has changed, our commitment has not; and the lockup we became: Carelon Behavioral Health.",
         },
         {
           kind: "pair",
-          aspect: "1.6 / 1",
+          aspect: "1.72 / 1",
           a: {
-            src: "/work/beacon-carelon-transformation/cbg-p07c.jpg",
-            alt: "Carelon brand guidelines — the brand toolkit: logo, supergraphic, typography, colour, photography, iconography, data visualisation, illustration",
+            src: "/work/beacon-carelon-transformation/bg-logo.jpg",
+            alt: "Beacon Health Options brand guidelines — the corporate logo in its horizontal and stacked versions, positive, reversed and black",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/cbg-p48c.jpg",
-            alt: "Carelon brand guidelines — logo modifiers, including the Behavioral Health lockup",
+            src: "/work/beacon-carelon-transformation/cbg-logo-forms.jpg",
+            alt: "Carelon brand guidelines — how we use our logo: the horizontal logo, the logo with modifier, and the forms in use",
           },
-          labelA: "The toolkit",
-          labelB: "The lockup we became",
+          labelA: "Before — the Beacon logo",
+          labelB: "After — the Carelon logo",
           caption:
-            "Eight elements in the toolkit, and a family of modifiers. Beacon didn't get a new logo; it got a place in an architecture — Carelon Behavioral Health, alongside Digital Platforms, Global Solutions, Health Solutions, Insights and Rx.",
+            "The mark. Beacon's lighthouse in Beacon Blue, two versions and three colourways; Carelon's interlocking Cs, a governed family of forms with a modifier for every line of business.",
         },
         {
           kind: "pair",
           aspect: "1.45 / 1",
           a: {
-            src: "/work/beacon-carelon-transformation/cbg-p45c.jpg",
-            alt: "Carelon brand guidelines — logo sizing and clear space, with minimum sizes in print and digital",
+            src: "/work/beacon-carelon-transformation/bg-logo-sizing.jpg",
+            alt: "Beacon brand guidelines — logo size guides and clearance areas for the horizontal and stacked logos",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/cbg-p52c.jpg",
-            alt: "Carelon brand guidelines — the primary colour palette",
+            src: "/work/beacon-carelon-transformation/cbg-logo-sizing.jpg",
+            alt: "Carelon brand guidelines — logo sizing and clear space, with minimum sizes in print and digital",
           },
-          labelA: "Clear space and minimum size",
-          labelB: "Primary palette",
+          labelA: "Before — sizing and clearance",
+          labelB: "After — sizing and clear space",
           caption:
-            "The rules that matter at volume. Clear space equal to the symbol's height, minimum sizes down to 27 pixels, and a palette led by purple — the constraints every one of our templates was built to honour without anyone checking.",
+            "The rules that matter at volume. Both systems set clear space from the symbol itself and minimum sizes in print and on screen — the constraints every one of our templates had to honour without anyone checking.",
+        },
+        {
+          kind: "pair",
+          aspect: "1.5 / 1",
+          a: {
+            src: "/work/beacon-carelon-transformation/bg-color.jpg",
+            alt: "Beacon brand guidelines — the extended colour palette: Beacon Blue, Navy and Gray, with secondary and accent colours",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/cbg-color.jpg",
+            alt: "Carelon brand guidelines — the colour palette: primary purple and white, with a secondary palette of purples, cyans and greys",
+          },
+          labelA: "Before — Beacon colour",
+          labelB: "After — Carelon colour",
+          caption:
+            "Colour. Beacon ran on a calming blue with green, beige and lemon for warmth; Carelon leads with purple and builds out through cyan, turquoise and a set of greys. Every template's swatches, tints and chart colours had to move with it.",
+        },
+        {
+          kind: "pair",
+          aspect: "1.5 / 1",
+          a: {
+            src: "/work/beacon-carelon-transformation/bg-type.jpg",
+            alt: "Beacon brand guidelines — typography in use: Proxima Nova headings with Utopia body copy, on a Who we are spread",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/cbg-type.jpg",
+            alt: "Carelon brand guidelines — how we use typography: Elevance Sans across headline, intro, body and callout",
+          },
+          labelA: "Before — Proxima Nova and Utopia",
+          labelB: "After — Elevance Sans",
+          caption:
+            "Type. Beacon paired a sans for headlines with a serif for reading; Carelon set everything in one proprietary family, Elevance Sans, in sentence case. Paragraph styles across ~1,500 documents were rebuilt to that hierarchy.",
         },
         {
           kind: "full",
-          aspect: "1.672 / 1",
+          aspect: "1.804 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/cbg-p63c.jpg",
-            alt: "Carelon brand guidelines — supergraphic overview: the linear and window supergraphics drawn from the logo",
+            src: "/work/beacon-carelon-transformation/cbg-at-a-glance.jpg",
+            alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
-            "The supergraphics — two systems of line and window drawn from the mark's own geometry — are what make a Carelon page recognisable before the logo is read. Getting these right in templates was most of the work of making the brand consistent at scale.",
-        },
-        {
-          kind: "full",
-          aspect: "4 / 3",
-          image: {
-            src: "/work/beacon-carelon-transformation/card-namechange.jpg",
-            alt: "The transition poster — Our name has changed. Our commitment has not.",
-          },
-          caption:
-            "The piece that carried the whole transition in one frame: Our name has changed. Our commitment has not. Beacon members and providers saw this before anything else.",
+            "Where it all had to land. The enterprise system across every surface at once — and the target that 1,500+ Beacon pieces had to be carried into.",
         },
         {
           kind: "pair",
