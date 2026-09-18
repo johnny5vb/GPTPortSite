@@ -236,13 +236,13 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "pair",
-          aspect: "16 / 9",
+          aspect: "16 / 10",
           a: {
             src: "/work/beacon-carelon-transformation/before-beacon-guidelines.jpg",
             alt: "Beacon Health Options brand guidelines cover, in the Beacon blue identity",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/cbg-p05.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p05c.jpg",
             alt: "Carelon brand guidelines — our logo and name: interlocking Cs, a star formed in the centre",
           },
           labelA: "Before — Beacon",
@@ -252,9 +252,9 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "full",
-          aspect: "16 / 9",
+          aspect: "1.548 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/cbg-p08.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p08c.jpg",
             alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
@@ -262,13 +262,13 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "pair",
-          aspect: "16 / 9",
+          aspect: "1.6 / 1",
           a: {
-            src: "/work/beacon-carelon-transformation/cbg-p07.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p07c.jpg",
             alt: "Carelon brand guidelines — the brand toolkit: logo, supergraphic, typography, colour, photography, iconography, data visualisation, illustration",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/cbg-p48.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p48c.jpg",
             alt: "Carelon brand guidelines — logo modifiers, including the Behavioral Health lockup",
           },
           labelA: "The toolkit",
@@ -278,13 +278,13 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "pair",
-          aspect: "16 / 9",
+          aspect: "1.45 / 1",
           a: {
-            src: "/work/beacon-carelon-transformation/cbg-p45.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p45c.jpg",
             alt: "Carelon brand guidelines — logo sizing and clear space, with minimum sizes in print and digital",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/cbg-p52.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p52c.jpg",
             alt: "Carelon brand guidelines — the primary colour palette",
           },
           labelA: "Clear space and minimum size",
@@ -294,9 +294,9 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "full",
-          aspect: "16 / 9",
+          aspect: "1.672 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/cbg-p63.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-p63c.jpg",
             alt: "Carelon brand guidelines — supergraphic overview: the linear and window supergraphics drawn from the logo",
           },
           caption:
