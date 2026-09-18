@@ -1292,3 +1292,17 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       Beacon-era assets (`output-*`, `client-catalog`, `template-picker` …)
       are unreferenced on disk. `~/Desktop/For Claude/mb-src/` holds the
       extracted originals and the 2× upscales.
+
+61. **Stamp Out Stigma — the real photograph leads; the generated composites
+    are gone.** The page had opened *and* closed on the two AI dusk shots
+    (`gallery-2`/`gallery-3`, the garbled-signage ones #46 rejected for the
+    thumbnail) while the only real photograph appeared just as a card crop.
+    Now: the real daytime Times Square photo full-width (4:3), then a pair —
+    the creative beside a mid-frame crop of the placement. Both dusk files
+    deleted. **Sources are still 1080px** — only two files exist anywhere on
+    this Mac (`~/Downloads/Images/SOS Ad 1.jpg`, `SOS Times Sq Ad.jpg`, both
+    1080×810; no PSD, no originals; web search found no larger press copies)
+    — so they went through Photoshop **3×** (Preserve Details, noise 25) to
+    3240 and read soft at full width; a tight billboard crop was tried and
+    dropped because the billboard is ~265px in the source. The originals
+    (layered creative, the PR Newswire/MultiVu photo) remain the ask.
