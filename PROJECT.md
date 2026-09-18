@@ -1252,3 +1252,37 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     (`v4-hw-family-b.jpg`, cropped to the room's 1.80) and Homeownership
     stands alone. Lesson: a faithful section capture can still be the wrong
     frame for a portfolio; compose to the content, not the section box.
+
+60. **The two enterprise flagships rebuilt on the real sources.** The owner
+    supplied the full Carelon Brand Guidelines (v2.0, April 2022 — the same
+    115-page deck as `~/Downloads/Carelon_Brand_Guidelines_v2.0_20220420.pdf`)
+    and the *Carelon* Marketing Bench training deck (March 2023).
+    - **Beacon → Carelon** now runs Beacon → the system as delivered (pp. 5
+      logo and name, 8 at a glance, 7 toolkit + 48 modifiers, 45 clear space
+      + 52 palette, 63 supergraphics) → the name-change poster → the team's
+      collateral before/after → the production gallery. Pages rendered at
+      2880 then **cropped to the visual on the owner's ask**: nav icons
+      painted over with the page background, footer band dropped, the
+      title/intro column trimmed by taking the bbox of non-background pixels
+      right of 30% width (`cbg-pNNc.jpg`). **Story reframed for honesty:**
+      the identity arrived from Elevance; the claim is translating it into
+      Carelon Behavioral Health's system and running the 1,500-asset
+      migration — not authoring the brand. The old brand-system renders
+      (graphic language, photo mask, dark cover, data viz, sub-brands) are
+      unreferenced on disk. **Open question raised with the owner: the entry
+      says 2018–2020 but the poster on the page says Beacon became Carelon
+      Behavioral Health on March 1, 2023.**
+    - **Marketing Bench** was showing the 2019 Beacon-era guide. It now shows
+      the Carelon platform: native screenshots pulled from the deck's
+      `ppt/media/` (the configurator is 3224px native; the rest went through
+      Photoshop 2×), the before/after homepage pair, the three configurators
+      (flyer, brochure, capability doc), the "what files are configurable"
+      governance table and "next steps" (slide renders cropped to content),
+      stationery/translations, and SalesHub beside it. **Dates corrected to
+      2022–2023 (launched March 2023)** from the deck's own title slide.
+      Cover is the Carelon homepage (`cb-cover.jpg`, 16/10). The flyer
+      configurator lost its Safari chrome and the vendor helpdesk email/phone
+      (painted out — a vendor support line has no place on a portfolio). The
+      Beacon-era assets (`output-*`, `client-catalog`, `template-picker` …)
+      are unreferenced on disk. `~/Desktop/For Claude/mb-src/` holds the
+      extracted originals and the 2× upscales.
