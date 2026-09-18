@@ -1347,3 +1347,23 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       where the horizontal lockups left it half empty. `card-rebrand-v2.jpg`
       stays on disk, unreferenced.
 
+
+63. **Beacon → Carelon, fourth pass — and the deploy hold.** The owner
+    rejected the card-and-chevron cover ("boxes… drop shadows… the arrow
+    looks cheap") and four images: the Beacon "Not feeling like yourself?"
+    flyer, the Carelon paragraph style guide, and the Website (p101) and
+    Collateral (p105) guideline pages. Cover is now **`card-split-v4.jpg`**:
+    a diagonal split screen, Beacon Blue (63,180,229) left, Carelon Purple
+    (80,8,181) right — both sampled from the reversed-logo tiles in their
+    own guidelines (Beacon p6, Carelon p44) — each half carrying its white
+    logo. Nothing else on it. The tail of "The work" is now sales sheet +
+    crisis sheet (the team's Carelon Behavioral Health collateral), the
+    Stationery (p110) + Posters (p113) pages as a "smallest and largest"
+    pair, and the pocket folder full-width. Rejected files deleted or left
+    unreferenced (`before-beacon-flyer`, `type-system`, `card-stacked-v3`).
+    - **⚠ Netlify quota hit (2026-09-18).** The owner's Netlify plan is at
+      its limit, so **commits are held locally — do not push `origin/main`**
+      until he either buys headroom or picks the moment. Every push
+      auto-builds (#53), so holding the push is the hold. Local `main` is
+      ahead of `origin/main` by these commits; `git log origin/main..main`
+      lists what's queued.

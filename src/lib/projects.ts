@@ -175,11 +175,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
     display: "CARELON REBRAND",
-    // The two stacked marks side by side — Beacon's lighthouse, Carelon's
-    // interlocking Cs — each clipped from its own guidelines PDF, on white
-    // cards over the flagship plate. Stacked versions fill a 4:3 plate;
-    // the horizontal lockups left it half empty.
-    cover: "/work/beacon-carelon-transformation/card-stacked-v3.jpg",
+    // Split screen: Beacon Blue and Carelon Purple meeting on a diagonal,
+    // each carrying its reversed white logo — both clipped from their own
+    // guidelines PDFs, colours sampled from the same tiles. No cards, no
+    // shadows, no arrow (the owner's call).
+    cover: "/work/beacon-carelon-transformation/card-split-v4.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -322,36 +322,43 @@ export const PROJECTS: Project[] = [
           kind: "pair",
           aspect: "17 / 22",
           a: {
-            src: "/work/beacon-carelon-transformation/before-beacon-flyer.jpg",
-            alt: "Beacon Care Services member flyer — Not feeling like yourself?",
-          },
-          b: {
             src: "/work/beacon-carelon-transformation/collateral-salessheet.jpg",
             alt: "Carelon Behavioral Health sales sheet — Help members reach their full potential",
           },
-          labelA: "Before — Beacon collateral",
-          labelB: "After — Carelon Behavioral Health",
+          b: {
+            src: "/work/beacon-carelon-transformation/collateral-crisis.jpg",
+            alt: "Carelon Behavioral Health crisis capability sheet",
+          },
+          labelA: "Sales sheet",
+          labelB: "Crisis capability sheet",
           caption:
-            "The same job, rebuilt in the new system by my team: member- and market-facing collateral carried across without losing the plain language people rely on.",
+            "What the team built with it: market- and member-facing collateral for Carelon Behavioral Health, carried across from Beacon without losing the plain language people rely on.",
         },
         {
-          kind: "gallery",
-          images: [
-            {
-              src: "/work/beacon-carelon-transformation/collateral-crisis.jpg",
-              alt: "Carelon Behavioral Health crisis capability sheet",
-            },
-            {
-              src: "/work/beacon-carelon-transformation/type-system.jpg",
-              alt: "Carelon Behavioral Health paragraph style guide",
-            },
-            {
-              src: "/work/beacon-carelon-transformation/collateral-folder.jpg",
-              alt: "Carelon Behavioral Health pocket folder design",
-            },
-          ],
+          kind: "pair",
+          aspect: "1.8 / 1",
+          a: {
+            src: "/work/beacon-carelon-transformation/cbg-stationery.jpg",
+            alt: "Carelon brand guidelines — stationery: business cards and letterhead on the purple supergraphic",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/cbg-posters.jpg",
+            alt: "Carelon brand guidelines — posters in an office lobby, the supergraphic at environmental scale",
+          },
+          labelA: "Stationery",
+          labelB: "Environment",
           caption:
-            "What made ~1,500+ deliverables repeatable — the capability sheets, paragraph styles and print specs a team of twenty could all build against.",
+            "The system at its smallest and largest — a business card and a lobby wall — and the reason a template library had to hold together across every one of those sizes.",
+        },
+        {
+          kind: "full",
+          aspect: "1.462 / 1",
+          image: {
+            src: "/work/beacon-carelon-transformation/collateral-folder.jpg",
+            alt: "Carelon Behavioral Health pocket folder design",
+          },
+          caption:
+            "The pocket folder — the piece that carries everything else into a meeting, rebuilt on the new supergraphic.",
         },
       ],
     },
