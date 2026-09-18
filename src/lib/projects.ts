@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
     oneLiner:
       "Transforming an enterprise brand through organizational change.",
     brief:
-      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500+ brand assets had to move to a new identity across an ~85,000+ employee organization — without disrupting the people who depend on them. I helped lead the creative side of that transition — setting standards, building the systems, and controlling quality as the work scaled.",
+      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500+ brand assets had to move to a new identity across an ~85,000+ employee organization — without disrupting the people who depend on them. The identity itself arrived from the enterprise as a 115-page brand system. My job was the harder half: translating it into Carelon Behavioral Health's own materials, building the templates the work would run on, and controlling quality as a team of twenty produced against them.",
     process: [],
     services: [
       "Creative direction",
@@ -196,12 +196,12 @@ export const PROJECTS: Project[] = [
       challenge:
         "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work — while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
       mandate:
-        "As Creative Director, I led every part of the rebrand: the new identity and brand guidelines, the design system and templates, vendor and partner direction, merchandise, and a print-on-demand platform that had to be rebuilt from scratch.",
+        "As Creative Director, I led the transition end to end on the Beacon side: reading the enterprise brand system into Carelon Behavioral Health's design system and templates, directing vendors and partners, rebuilding merchandise, and standing up a print-on-demand platform from scratch — everything between the guidelines and a finished piece in a member's hand.",
       context:
         "Enterprise healthcare adds real constraints — compliance and legal review, accessibility requirements, legacy templates and systems, many stakeholder groups, and tight timelines. Decisions had to survive executive review while staying usable for the teams producing day-to-day work.",
       role: [
-        "Established the new brand identity and guidelines",
-        "Built the brand and design system first, then the templates the work would run on",
+        "Translated the enterprise brand system into Carelon Behavioral Health's own guidelines and application rules",
+        "Built the design system first, then the templates the work would run on",
         "Directed vendors and partners; rebuilt merchandise and the print-on-demand platform end to end",
         "Managed 3 in-house designers, a video production artist, and a team of project managers and writers",
         "Ran a near-daily cadence and a live progress dashboard to keep hundreds of deliverables on track",
@@ -215,7 +215,7 @@ export const PROJECTS: Project[] = [
       decisions: [
         {
           title: "Build the system before the assets",
-          body: "Rather than migrating piece by piece, I built the brand and design system first, then the templates — and produced against them. Slower to start, but it made ~1,500+ deliverables repeatable and consistent as volume spiked.",
+          body: "The enterprise handed us the identity — logo, palette, type, supergraphics, imagery rules. Rather than migrating piece by piece, I built the Behavioral Health design system and templates on top of it first, then produced against them. Slower to start, but it made ~1,500+ deliverables repeatable and consistent as volume spiked.",
         },
         {
           title: "Batch the work to make it finishable",
@@ -236,65 +236,104 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "pair",
+          aspect: "16 / 9",
           a: {
             src: "/work/beacon-carelon-transformation/before-beacon-guidelines.jpg",
             alt: "Beacon Health Options brand guidelines cover, in the Beacon blue identity",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/brand-architecture.jpg",
-            alt: "Carelon logo architecture — the primary mark and every line-of-business lockup",
+            src: "/work/beacon-carelon-transformation/cbg-p05.jpg",
+            alt: "Carelon brand guidelines — our logo and name: interlocking Cs, a star formed in the centre",
           },
           labelA: "Before — Beacon",
           labelB: "After — Carelon",
           caption:
-            "One identity replaced by an architecture: not a single mark, but a governed family of lockups — Behavioral Health, Digital Platforms, Global Solutions, Health Solutions, Insights, Rx.",
+            "One identity replaced by another. Beacon's blue gave way to Carelon: interlocking Cs for holistic care working in harmony, a star formed in the centre — and a name meaning full, complete, enduring.",
         },
         {
           kind: "full",
-          aspect: "3 / 2",
+          aspect: "16 / 9",
           image: {
-            src: "/work/beacon-carelon-transformation/system-graphic-language-v2.jpg",
-            alt: "The brand's graphic language — focus, progress, and connection built from the mark's geometry",
+            src: "/work/beacon-carelon-transformation/cbg-p08.jpg",
+            alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
-            "The graphic language underneath it. Focus, progress, connection — each drawn from the mark's own geometry, so a background is never decoration.",
+            "The system as it arrived — a 115-page enterprise brand guideline covering every surface at once. This is what 1,500+ Beacon assets had to become.",
         },
         {
           kind: "pair",
+          aspect: "16 / 9",
           a: {
-            src: "/work/beacon-carelon-transformation/system-photo-mask.jpg",
-            alt: "A cover template with photography masked into the shape of the Carelon mark",
+            src: "/work/beacon-carelon-transformation/cbg-p07.jpg",
+            alt: "Carelon brand guidelines — the brand toolkit: logo, supergraphic, typography, colour, photography, iconography, data visualisation, illustration",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/system-dark-cover.jpg",
-            alt: "A dark cover template using the brand's data-network imagery",
+            src: "/work/beacon-carelon-transformation/cbg-p48.jpg",
+            alt: "Carelon brand guidelines — logo modifiers, including the Behavioral Health lockup",
           },
-          labelA: "Photography, in the mark",
-          labelB: "The dark end of the range",
+          labelA: "The toolkit",
+          labelB: "The lockup we became",
           caption:
-            "The move that made it recognizable at a glance: photography masked into the mark itself — and the same system stretched to a darker, data-led register for enterprise material.",
+            "Eight elements in the toolkit, and a family of modifiers. Beacon didn't get a new logo; it got a place in an architecture — Carelon Behavioral Health, alongside Digital Platforms, Global Solutions, Health Solutions, Insights and Rx.",
         },
         {
           kind: "pair",
+          aspect: "16 / 9",
+          a: {
+            src: "/work/beacon-carelon-transformation/cbg-p45.jpg",
+            alt: "Carelon brand guidelines — logo sizing and clear space, with minimum sizes in print and digital",
+          },
+          b: {
+            src: "/work/beacon-carelon-transformation/cbg-p52.jpg",
+            alt: "Carelon brand guidelines — the primary colour palette",
+          },
+          labelA: "Clear space and minimum size",
+          labelB: "Primary palette",
+          caption:
+            "The rules that matter at volume. Clear space equal to the symbol's height, minimum sizes down to 27 pixels, and a palette led by purple — the constraints every one of our templates was built to honour without anyone checking.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 9",
+          image: {
+            src: "/work/beacon-carelon-transformation/cbg-p63.jpg",
+            alt: "Carelon brand guidelines — supergraphic overview: the linear and window supergraphics drawn from the logo",
+          },
+          caption:
+            "The supergraphics — two systems of line and window drawn from the mark's own geometry — are what make a Carelon page recognisable before the logo is read. Getting these right in templates was most of the work of making the brand consistent at scale.",
+        },
+        {
+          kind: "full",
+          aspect: "4 / 3",
+          image: {
+            src: "/work/beacon-carelon-transformation/card-namechange.jpg",
+            alt: "The transition poster — Our name has changed. Our commitment has not.",
+          },
+          caption:
+            "The piece that carried the whole transition in one frame: Our name has changed. Our commitment has not. Beacon members and providers saw this before anything else.",
+        },
+        {
+          kind: "pair",
+          aspect: "17 / 22",
           a: {
             src: "/work/beacon-carelon-transformation/before-beacon-flyer.jpg",
-            alt: "Beacon Care Services member flyer — “Not feeling like yourself?”",
+            alt: "Beacon Care Services member flyer — Not feeling like yourself?",
           },
           b: {
             src: "/work/beacon-carelon-transformation/collateral-salessheet.jpg",
-            alt: "Carelon Behavioral Health sales sheet — “Help members reach their full potential”",
+            alt: "Carelon Behavioral Health sales sheet — Help members reach their full potential",
           },
           labelA: "Before — Beacon collateral",
-          labelB: "After — Carelon collateral",
+          labelB: "After — Carelon Behavioral Health",
           caption:
-            "The same job, rebuilt in the new system: member- and market-facing collateral carried across without losing the plain language people rely on.",
+            "The same job, rebuilt in the new system by my team: member- and market-facing collateral carried across without losing the plain language people rely on.",
         },
         {
           kind: "gallery",
           images: [
             {
-              src: "/work/beacon-carelon-transformation/system-dataviz.jpg",
-              alt: "A data-visualisation layout with statistics, a US map, and charts",
+              src: "/work/beacon-carelon-transformation/collateral-crisis.jpg",
+              alt: "Carelon Behavioral Health crisis capability sheet",
             },
             {
               src: "/work/beacon-carelon-transformation/type-system.jpg",
@@ -306,7 +345,7 @@ export const PROJECTS: Project[] = [
             },
           ],
           caption:
-            "What made ~1,500+ deliverables repeatable — data layouts, paragraph styles, and print specs that a team of twenty could all build against.",
+            "What made ~1,500+ deliverables repeatable — the capability sheets, paragraph styles and print specs a team of twenty could all build against.",
         },
       ],
     },
