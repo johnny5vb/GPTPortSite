@@ -1757,29 +1757,27 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "4 / 3",
           image: {
-            src: "/work/stamp-out-stigma/gallery-2-v2.jpg",
-            alt: "Stamp Out Stigma — the campaign on the Times Square screens at dusk",
+            src: "/work/stamp-out-stigma/timessquare-day-v3.jpg",
+            alt: "Stamp Out Stigma on the Times Square screens — the 1 in 5 creative on the PR Newswire board at Seventh Avenue, with the Hard Rock and Europa Cafe signs around it",
           },
           caption:
-            "The message on the Times Square screens — honest, human, and impossible to miss in one of the loudest rooms on earth.",
+            "The real buy: the campaign on the PR Newswire screens at Seventh Avenue, one honest message holding its own in the loudest advertising environment in the world.",
         },
         {
-          kind: "detail",
-          image: {
-            src: "/work/stamp-out-stigma/gallery-1-v2.jpg",
-            alt: "Stamp Out Stigma — the campaign creative up close: 1 in 5, Talk about it",
+          kind: "pair",
+          aspect: "4 / 3",
+          a: {
+            src: "/work/stamp-out-stigma/creative-v3.jpg",
+            alt: "Stamp Out Stigma — the campaign creative: 1 in 5 U.S. adults will be affected by mental illness each year. 43.8 million people. Talk about it. Your story could change a life.",
           },
-          caption:
-            "The creative up close — “1 in 5,” and a single, direct ask: talk about it. Your story could change a life.",
-        },
-        {
-          kind: "full",
-          image: {
-            src: "/work/stamp-out-stigma/gallery-3-v2.jpg",
-            alt: "Stamp Out Stigma — Times Square at dusk",
+          b: {
+            src: "/work/stamp-out-stigma/placement-v3.jpg",
+            alt: "Stamp Out Stigma — the creative on the main screen, flanked by the campaign message on the boards above and beside it",
           },
+          labelA: "The creative",
+          labelB: "On the screen",
           caption:
-            "The placement in context — one honest message holding its own against the loudest advertising environment in the world.",
+            "The creative up close — one statistic, one face, one direct ask: talk about it. And the same frame on the screen, with the hashtags and the Beacon mark carrying it into the room.",
         },
       ],
     },
