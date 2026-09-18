@@ -1335,3 +1335,15 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       plus a 110px margin, padded back onto the page background so the margin
       holds even where content ran to the page edge. The #60 `cbg-pNNc`
       tight crops are deleted.
+    - **Follow-up on the owner's read:** the transition strip (mark → poster
+      → mark) "doesn't feel like a good visual" — retired and deleted. The
+      case study now **opens on "Our brand at a glance"** (p8, the splay of
+      finished Carelon pieces) and the **toolkit page (p7, `cbg-toolkit.jpg`)**
+      takes the later slot so nothing repeats. **Cover is
+      `card-stacked-v3.jpg`**: the two *stacked* marks — Beacon p6 tile,
+      Carelon p42 "Vertical logo" tile, both clipped by `search_for()` on
+      their captions and inset past the tile borders — on white cards over
+      the flagship plate with a chevron; stacked forms fill a 4:3 plate
+      where the horizontal lockups left it half empty. `card-rebrand-v2.jpg`
+      stays on disk, unreferenced.
+
