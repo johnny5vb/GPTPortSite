@@ -175,11 +175,12 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
     display: "CARELON REBRAND",
-    // Split screen: Beacon Blue and Carelon Purple meeting on a diagonal,
-    // each carrying its reversed white logo — both clipped from their own
-    // guidelines PDFs, colours sampled from the same tiles. No cards, no
-    // shadows, no arrow (the owner's call).
-    cover: "/work/beacon-carelon-transformation/card-split-v4.jpg",
+    // Interim cover. The owner is composing the real one himself (the
+    // stacked-cards, chevron-strip and split-screen attempts were all
+    // rejected). Until it lands, the earlier rebrand card stays: Beacon
+    // lockup above, Carelon lockup below. Swap `cover` when his file arrives
+    // — new filename, per the cache rule.
+    cover: "/work/beacon-carelon-transformation/card-rebrand-v2.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
