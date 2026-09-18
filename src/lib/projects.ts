@@ -175,11 +175,11 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#0e2a3f", "#1cb791", "#2b8fb8", "#f2f1ec"],
     display: "CARELON REBRAND",
-    // The logo-architecture spec page didn't sell the work. This cover is a
-    // composed spread of the real delivered Carelon pieces — report cover,
-    // member-facing crisis flyer, sales sheet, and print folder — so the
-    // rebrand reads as an applied system rather than a logo sheet.
-    cover: "/work/beacon-carelon-transformation/card-rebrand-v2.jpg",
+    // The two stacked marks side by side — Beacon's lighthouse, Carelon's
+    // interlocking Cs — each clipped from its own guidelines PDF, on white
+    // cards over the flagship plate. Stacked versions fill a 4:3 plate;
+    // the horizontal lockups left it half empty.
+    cover: "/work/beacon-carelon-transformation/card-stacked-v3.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
@@ -236,13 +236,13 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "full",
-          aspect: "2.575 / 1",
+          aspect: "1.804 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/transition-strip.jpg",
-            alt: "The transition in three frames: the Beacon Health Options logo, the name-change poster — Our name has changed. Our commitment has not. — and the Carelon Behavioral Health lockup",
+            src: "/work/beacon-carelon-transformation/cbg-at-a-glance.jpg",
+            alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
-            "The whole story in three frames. Beacon Health Options; the piece that told members and partners what was happening — our name has changed, our commitment has not; and the lockup we became: Carelon Behavioral Health.",
+            "Where it all had to land. The enterprise system across every surface at once — web, social, print, presentations, app — and the target that 1,500+ Beacon pieces had to be carried into.",
         },
         {
           kind: "pair",
@@ -310,13 +310,13 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "full",
-          aspect: "1.804 / 1",
+          aspect: "1.807 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/cbg-at-a-glance.jpg",
-            alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
+            src: "/work/beacon-carelon-transformation/cbg-toolkit.jpg",
+            alt: "Carelon brand guidelines — the brand toolkit: logo, supergraphic, typography, colour, photography, iconography, data visualisation and illustration",
           },
           caption:
-            "Where it all had to land. The enterprise system across every surface at once — and the target that 1,500+ Beacon pieces had to be carried into.",
+            "Eight elements in the toolkit — logo, supergraphic, type, colour, photography, iconography, data visualisation, illustration. Every one of them had a Beacon equivalent to retire, and a template to rebuild.",
         },
         {
           kind: "pair",
