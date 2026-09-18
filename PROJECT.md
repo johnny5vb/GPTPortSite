@@ -1314,3 +1314,24 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     3240 and read soft at full width; a tight billboard crop was tried and
     dropped because the billboard is ~265px in the source. The originals
     (layered creative, the PR Newswire/MultiVu photo) remain the ask.
+
+62. **Beacon → Carelon, third pass — the story as before/after.** The owner
+    found the #60 crops too tight (some cut the visual) and asked for the
+    comparison to be side by side: logo vs logo, colour vs colour, type vs
+    type, and the progression from Beacon to Carelon. Both guideline decks
+    are on disk — Beacon's (Sept 2019, 38 pp., `CC Website Materials/Beacon
+    to Carelon/Beacon/Beacon-Brand-Guidelines.pdf`) and Carelon's v2.0 — so
+    every page is a fresh 2880 render, not the owner's pasted screenshots.
+    - **Sequence:** `transition-strip.jpg` (Beacon mark → the full name-change
+      poster → the Carelon Behavioral Health lockup, three cards on the
+      flagship plate with chevrons; the marks are clipped from the PDFs by
+      `page.search_for()` on their captions, the poster is the old
+      `cover.jpg` at 1600×2473 — the `card-namechange` crop cut the copy
+      mid-sentence) → four pairs, Beacon p6/p10/p15/p20 against Carelon
+      p41/p45/p52/p59 (`bg-*` / `cbg-*`) → Carelon at a glance (p8) → the
+      collateral before/after → the production gallery.
+    - **Crop rule revised:** "generous" — footer band dropped, Carelon nav
+      painted out, then the content bbox *including title and intro column*
+      plus a 110px margin, padded back onto the page background so the margin
+      holds even where content ran to the page edge. The #60 `cbg-pNNc`
+      tight crops are deleted.
