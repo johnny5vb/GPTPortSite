@@ -20,7 +20,7 @@ export default function Work() {
       {/* Left-anchored, not a 4/8 label split — see the note in Intro.tsx. */}
       <header className="mb-16 md:mb-20">
         <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-5">
-          // 02 — Work
+          // 01 — Work
         </p>
         <div>
           <VelocityHeading className="origin-left">

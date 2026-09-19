@@ -17,11 +17,9 @@ const SERVICES: Service[] = [
     pitch:
       "Defined, documented, governed. The system that lets a team ship for years without losing the plot.",
     bullets: [
-      "Set rules for color, type, space, and motion",
-      "Component library + Storybook",
-      "Figma → code parity",
-      "A11y baked in, not bolted on",
-      "Governance + adoption playbook",
+      "Color, type, space, and motion — defined and documented",
+      "Component libraries built to be adopted",
+      "Accessibility in the system, not added after",
     ],
   },
   {
@@ -30,11 +28,9 @@ const SERVICES: Service[] = [
     pitch:
       "Strategy, mark, voice, application. The whole identity built to scale across product, marketing, and partnerships.",
     bullets: [
-      "Brand strategy & positioning",
-      "Logo / wordmark / monogram",
-      "Type & color systems",
-      "Editorial voice + naming",
-      "Launch toolkit",
+      "Strategy and positioning",
+      "Marks, type, and color systems",
+      "Voice, naming, and the launch toolkit",
     ],
   },
   {
@@ -43,24 +39,20 @@ const SERVICES: Service[] = [
     pitch:
       "Setting the standard, keeping the work honest, and helping teams do their best work.",
     bullets: [
-      "Campaign & launch direction",
-      "Team building + hiring",
+      "Campaign and launch direction",
       "Stakeholder translation",
-      "Pitch development",
-      "Critique culture",
+      "Critique that makes teams better",
     ],
   },
   {
     num: "S/04",
-    title: "AI-Native Production",
+    title: "AI-Enabled Workflow",
     pitch:
-      "Modern tools, classical taste. AI for the 80% — humans for the 20% that decides whether it's any good.",
+      "Modern tools, classical taste. AI for the repetitive work — human judgment for the part that decides whether it's any good.",
     bullets: [
-      "Concepting at 10× speed",
-      "Generative variant testing",
-      "Custom GPTs / prompt systems",
-      "Workflow & tooling design",
-      "Team enablement",
+      "Prompt systems and custom tools a team can share",
+      "Review and governance that keep output on-system",
+      "Workflow design, then enablement",
     ],
   },
 ];
@@ -71,7 +63,7 @@ export default function Services() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 06 — Practice
+            // 03 — Practice
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">

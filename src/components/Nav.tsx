@@ -15,9 +15,8 @@ import CCWordmark from "./CCWordmark";
 const links = [
   { href: "/#work", label: "Work", num: "01" },
   { href: "/leadership", label: "Leadership", num: "02" },
-  { href: "/lab", label: "AI & Systems", num: "03" },
-  { href: "/#about", label: "About", num: "04" },
-  { href: "/#contact", label: "Contact", num: "05" },
+  { href: "/#about", label: "About", num: "03" },
+  { href: "/#contact", label: "Contact", num: "04" },
 ];
 
 export default function Nav() {

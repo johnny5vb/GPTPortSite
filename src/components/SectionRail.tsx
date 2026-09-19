@@ -5,15 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const SECTIONS = [
   { id: "top", label: "Intro", num: "00" },
-  { id: "manifesto", label: "How I Lead", num: "01" },
-  { id: "work", label: "Work", num: "02" },
-  { id: "spotlight", label: "In Focus", num: "03" },
-  { id: "talks-back", label: "AI & Systems", num: "04" },
+  { id: "work", label: "Work", num: "01" },
   // Order here must follow the DOM order on the home page — About renders
   // before Services, so it carries the lower number.
-  { id: "about", label: "About", num: "05" },
-  { id: "services", label: "Practice", num: "06" },
-  { id: "contact", label: "Contact", num: "07" },
+  { id: "about", label: "About", num: "02" },
+  { id: "services", label: "Practice", num: "03" },
+  { id: "contact", label: "Contact", num: "04" },
 ];
 
 export default function SectionRail() {

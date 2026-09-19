@@ -312,14 +312,14 @@ export default function Hero() {
         </motion.div>
 
         <motion.a
-          href="#manifesto"
+          href="#work"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
           data-cursor="scroll"
           className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/70 hover:text-green"
         >
-          <span>Scroll / How I lead</span>
+          <span>Scroll / The work</span>
           <motion.span
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}

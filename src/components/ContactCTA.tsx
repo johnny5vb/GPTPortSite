@@ -49,7 +49,7 @@ export default function ContactCTA() {
           transition={{ duration: 0.8 }}
           className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-8"
         >
-          // 07 — Let&apos;s talk
+          // 04 — Let&apos;s talk
         </motion.p>
 
         <VelocityHeading className="origin-left" maxSkew={1}>

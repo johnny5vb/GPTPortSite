@@ -7,11 +7,13 @@ import { PROFILE } from "@/lib/profile";
 const NAV = [
   { href: "/#work", label: "Work" },
   { href: "/leadership", label: "Leadership" },
-  { href: "/lab", label: "AI & Systems" },
   { href: "/#about", label: "About" },
   { href: "/resume", label: "Résumé" },
   { href: PROFILE.contact.linkedin, label: "LinkedIn", external: true },
   { href: "/#contact", label: "Contact" },
+  // Side rooms: reachable, not promoted. Off the nav, out of the sitemap.
+  { href: "/lab", label: "Lab" },
+  { href: "/capabilities", label: "Capabilities" },
 ];
 
 export default function Footer() {
