@@ -236,9 +236,9 @@ export const PROJECTS: Project[] = [
       work: [
         {
           kind: "full",
-          aspect: "1.804 / 1",
+          aspect: "1.819 / 1",
           image: {
-            src: "/work/beacon-carelon-transformation/cbg-at-a-glance.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-at-a-glance-v2.jpg",
             alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
@@ -338,11 +338,11 @@ export const PROJECTS: Project[] = [
           kind: "pair",
           aspect: "1.8 / 1",
           a: {
-            src: "/work/beacon-carelon-transformation/cbg-stationery.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-stationery-v2.jpg",
             alt: "Carelon brand guidelines — stationery: business cards and letterhead on the purple supergraphic",
           },
           b: {
-            src: "/work/beacon-carelon-transformation/cbg-posters.jpg",
+            src: "/work/beacon-carelon-transformation/cbg-posters-v2.jpg",
             alt: "Carelon brand guidelines — posters in an office lobby, the supergraphic at environmental scale",
           },
           labelA: "Stationery",

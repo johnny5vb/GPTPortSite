@@ -1375,3 +1375,11 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       auto-builds, #53 — holding the push is the hold); he bought credits and
       the queue went up in one push. If it happens again: commit, don't
       push, and `git log origin/main..main` is the queue.
+    - **Crop bug, fixed:** the "generous" crop sampled the page background at
+      the *right edge, mid-height* — on "at a glance" that pixel is a tablet
+      bezel, so the nav paint-out and the padding came out purple and
+      knocked a corner off the image. Background is now sampled at (12,12),
+      and the nav paint covers only the icon cluster (W-360…W-40 × 60…220),
+      not a 420px band. Three pages were affected (at-a-glance, stationery,
+      posters) — re-rendered as `-v2` files, old ones deleted.
+
