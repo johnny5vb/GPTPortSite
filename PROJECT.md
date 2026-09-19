@@ -110,7 +110,7 @@ and `projects.ts` palettes are **data**, not chrome, and stay put.
 | `/` | `Hero, Intro, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative |
 | `/leadership` | `LeadershipPage` | Career context: experience, what John can lead, flagship case studies, leadership proof, testimonials, philosophy, résumé/contact CTAs. Neutral in tone since the copy-deck pass — it's background, not a pitch |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
-| `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — clearly status-labeled demos |
+| `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — status-labeled demos on *fictional* brands. **A side room since #64**: off the nav, out of the sitemap, linked only from the footer (like `/capabilities`). The real AI work is the Systems shelf in Work |
 | `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03, display label `SOS`); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 in the owner's order — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `important-colorado`, `spikes-k9-fund`, `atromitos`; `evermark` is drafted out. **Systems S01–S03** (self-initiated, own shelf) — `premier-friends-club`, `cqap`, `carman-os`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
@@ -134,19 +134,17 @@ Section numbers come from `SectionRail.tsx` and must stay in sync with the
 eyebrow labels inside each section component.
 
 ### Home section numbering (eyebrows)
-`Intro` (the `// John Carman` identity band — formerly `AudienceSplit`, a
-two-card Hiring John / Work With Carman Creative split) and `ResumePreview`
-are un-numbered bands between the numbered narrative sections.
+`ResumePreview` is an un-numbered band between About and Practice.
 ```
-00  Intro        (Hero)
-01  How I Lead    (Manifesto — leadership philosophy, 4 principles)
-02  Work          (Work — Featured leadership work + Selected independent work + More work)
-03  In Focus      (Showpiece)
-04  AI & Systems  (AISystemsTeaser — compact, links → /lab; big demo removed from home)
-05  About         (About)
-06  Practice      (Services — the four disciplines, described not offered)
-07  Contact       (ContactCTA — one invitation, one plain mailto)
+00  Intro     (Hero)
+01  Work      (Work — Featured leadership work + Selected independent work + Systems)
+02  About     (About)
+03  Practice  (Services — the four disciplines, described not offered)
+04  Contact   (ContactCTA — one invitation, one plain mailto)
 ```
+Retired from the home page in #64 (files kept, unimported): `Intro.tsx`,
+`Manifesto.tsx` (How I Lead — its four principles live on `/leadership` as
+"Leadership Philosophy"), `Showpiece.tsx` (In Focus), `AISystemsTeaser.tsx`.
 
 ---
 
@@ -160,33 +158,33 @@ are un-numbered bands between the numbered narrative sections.
   is the background. Neutral copy — no availability posture.
 - **`HeroMonogram.tsx`** — On disk, unimported. Superseded twice: first by
   the contour field (change #39), then the portrait layout (change #44).
-- **`Manifesto.tsx`** — Section 01. Compact interactive slider with
-  auto-advance (5.5s), dot nav, prev/next/pause. Four principles.
-- **`Work.tsx`** — Section 02. Three bands: Featured leadership work (cards,
+- **`Manifesto.tsx`** — On disk, unimported since #64. Compact interactive
+  slider of four leadership principles; the same four are on `/leadership`.
+- **`Work.tsx`** — Section 01. Three bands: Featured leadership work (cards,
   count-agnostic grid), Selected independent work (rows 01–06) and Systems &
   side projects (rows S01–S03), all linking to `/work/[slug]`. Thumbnails
   are `object-cover` on a 4:3 plate (#55).
-- **`Showpiece.tsx`** — Section 03. Editorial image moment.
-- **`StyleGuideTalksBack.tsx`** — Section 04 on home. Accepts a `featured`
-  boolean: when true, renders the "// 04 — The AI Lab" eyebrow and a green
-  `LabCTA` block at the bottom that says *"Style Guide is one of four. See
-  the rest."* and links to `/lab`. Without `featured` it's used standalone on
-  `/lab` for one of the four systems.
-- **`Services.tsx`** — Section 06, "Practice". The four disciplines,
-  described, not offered (#41).
-- **`About.tsx`** — Section 05. The studio scene (`/brand/studio.jpg` —
+- **`Showpiece.tsx`** — On disk, unimported since #64. The Colony editorial
+  moment; Colony is row 01 in Work, so it appeared twice.
+- **`StyleGuideTalksBack.tsx`** — `/lab` only now. Still accepts a `featured`
+  boolean (the home-page mode with the `LabCTA` block) but nothing passes it
+  since #64.
+- **`Services.tsx`** — Section 03, "Practice". The four disciplines,
+  described, not offered (#41); three plain bullets each since #64.
+- **`About.tsx`** — Section 02. The studio scene (`/brand/studio.jpg` —
   generated, not photographic; the owner's call), animated stat counters via
   `CountUp.tsx`, current roles list, tools-in-rotation pills. It used to
   repeat the hero portrait; that duplicate is gone.
-- **`ContactCTA.tsx`** — Section 07. One "Email me" button on a bare
+- **`ContactCTA.tsx`** — Section 04. One "Email me" button on a bare
   `mailto:` and three detail cards: Based in / Email / LinkedIn (#41).
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
   — that was removed). CC mark, copyright, connect list (Email / LinkedIn /
   Instagram / Capabilities deck), and a `// practice` block naming the
   disciplines (this replaced a `// status` availability block).
-- **`Nav.tsx`** — Top nav. Uses `MagneticNavLink` for subtle spring-physics
+- **`Nav.tsx`** — Top nav: Work / Leadership / About / Contact + Résumé
+  chip. Uses `MagneticNavLink` for subtle spring-physics
   cursor follow. Underlines the current route.
-- **`SectionRail.tsx`** — Sticky right-edge dot rail with 8 sections,
+- **`SectionRail.tsx`** — Sticky right-edge dot rail with 5 sections,
   animated active pill via `layoutId`. Each dot has an `aria-label` for the
   accessibility audit.
 - **`CustomCursor.tsx`** + **`RouteChrome.tsx`** — Cursor + route-aware
@@ -1382,4 +1380,32 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       and the nav paint covers only the icon cluster (W-360…W-40 × 60…220),
       not a 420px band. Three pages were affected (at-a-glance, stationery,
       posters) — re-rendered as `-v2` files, old ones deleted.
+
+64. **Home repositioned for employers and clients — without reading as a
+    job hunt.** Audit first (every section's copy and height on `/`, `/lab`,
+    `/leadership`): the home page was 14,068px and a third of it either
+    asserted what the case studies prove or repeated what the page had
+    already said. The owner agreed on the reader (employers *and* clients,
+    neutral enough for current colleagues and leadership) and on Colony.
+    - **Cut from home:** *How I Lead* (815px of unproven assertions, and a
+      verbatim duplicate of `/leadership`'s Leadership Philosophy);
+      *In Focus* (1,783px on Colony, which is also Work row 01 — and a
+      coffee brand spotlit under "Leadership first" mixed the message);
+      the *AI & Systems* teaser (826px). *Intro* went too: the #44 hero
+      restored the biographical paragraph the #41 Intro band had been
+      created to carry, so the two said the same thing 500px apart.
+      Result: **10,164px, five sections**, the work one scroll from the top.
+    - **The lab is a side room.** Its four demos run on fictional brands
+      (Northbound / Verso / Halcyon) and have been superseded by real AI
+      work on the Systems shelf — Atelier is a mockup of what CQAP now *is*.
+      Off the nav, out of the sitemap, linked from the footer beside
+      Capabilities; the route still serves for anyone sent the link.
+      Consistent with the "AI is third, never the lead" rule.
+    - **Practice** bullets cut from five to three per card and rewritten as
+      description ("Storybook", "Figma → code parity", "Concepting at 10×
+      speed" were agency rate-card language). Fourth card is "AI-Enabled
+      Workflow", not "AI-Native Production".
+    - Rail, nav and eyebrows renumbered 00–04; the hero scroll cue points at
+      `#work`. Components are unimported, not deleted — each is a one-line
+      re-add in `page.tsx` plus a rail entry.
 
