@@ -1580,3 +1580,35 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     - Riggs Ward is deliberately **not** on the résumé. A college internship
       twenty years into a career pulls attention away from the enterprise
       work; it is the detail for a conversation, not a line item.
+
+### Later session — each era says what it was
+
+70. **Every stint opened on the same sentence.** Creative Manager led with
+    "Lead brand, campaign, digital, and creative-operations work…" and Creative
+    Director led with "Led brand, campaign, digital, and creative-operations
+    work…" — the same list in two tenses. Three genuinely different jobs read
+    as one job with different dates. `TitleStint` gains an optional
+    **`summary`**, a single line above the bullets saying what that era *was*,
+    and the bullets were de-echoed underneath it:
+    - **Creative Manager (2023 — ):** creative lead for Carelon Behavioral
+      Health, spanning **multiple Elevance Health lines of business**.
+    - **Creative Director (2018 — 2023):** ran the creative function for a
+      national behavioral health company — team, systems, brand — then carried
+      all three through the acquisition.
+    - **Graphic Designer → Manager of Design (2010 — 2018):** came up through
+      the craft, through the 2014 merger that created Beacon.
+    - **Founder, Carman Creative:** independent practice; the client list moved
+      into the single bullet beneath it.
+
+71. **The scope grew when the title compressed — say so.** The current role
+    covers work for multiple Elevance lines of business, not Carelon alone.
+    `TRANSITION_NOTE` and the About paragraph changed from "the scope stayed
+    where it was" to "the work didn't shrink with it — today it spans multiple
+    Elevance lines of business rather than one company." This is the strongest
+    available answer to the Director → Manager question and it is simply true.
+    - **Corporate naming, verified:** Anthem, Inc. renamed itself **Elevance
+      Health** in June 2022 and reorganised into three go-to-market brands —
+      Anthem Blue Cross/BCBS, Wellpoint, and **Carelon**, which is where Beacon
+      Health Options landed. **Elevance Health is the parent; Anthem is a brand
+      within it, not the umbrella.** Do not write "under the Anthem umbrella" —
+      anyone in healthcare will catch it.

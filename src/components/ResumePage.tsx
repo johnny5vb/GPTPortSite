@@ -151,6 +151,11 @@ export default function ResumePage() {
                           {stint.range}
                         </span>
                       </div>
+                      {stint.summary && (
+                        <p className="mt-1.5 text-sm text-bone/85 leading-relaxed">
+                          {stint.summary}
+                        </p>
+                      )}
                       <ul className="mt-2 space-y-1.5">
                         {stint.bullets.map((b) => (
                           <li

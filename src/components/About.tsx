@@ -135,8 +135,8 @@ export default function About() {
                 creative lead through the transition — roughly 1,500 brand
                 assets migrated to the new identity across an organization of
                 about 85,000. The restructuring moved my title to Creative
-                Manager; the scope stayed where it was, across enterprise
-                creative, brand, workflow, and stakeholder leadership.
+                Manager; the work didn&apos;t shrink with it — today it spans
+                multiple Elevance lines of business rather than one company.
               </p>
               <p>
                 Alongside that, I run Carman Creative — brand, digital, and
