@@ -14,7 +14,8 @@ import { SCALE } from "@/lib/career";
  */
 const SUMMARY = [
   { label: "Now", value: "Creative Manager, Carelon Behavioral Health (Elevance Health)" },
-  { label: "Held", value: "Creative Director, Beacon Health Options" },
+  { label: "Held", value: "Creative Director, Beacon Health Options (2018 — 2023)" },
+  { label: "Before", value: "Graphic Designer, then Manager of Design — ValueOptions / Beacon" },
   { label: "Experience", value: `${PROFILE.yearsExperience}+ years, mostly enterprise healthcare` },
   { label: "Team", value: `${SCALE.team}-person design team, plus agencies and vendors` },
   { label: "Scale", value: `${SCALE.assets} assets migrated across an ${SCALE.orgSize}-person organization` },

@@ -260,12 +260,16 @@ clearly-labeled `TODO: Confirm` placeholders — they are **not** published as
 facts here. The old vanity stat `175+ projects shipped` was dropped.
 
 ### Employment history (About + Résumé) — corrected & non-defensive
-- **Elevance Health / Carelon — Creative Manager** — 2010 — Present, with the
-  sub-line **"Formerly Creative Director, Beacon Health Options."** The About
-  copy explains the Beacon → Carelon/Elevance transition once, plainly (title
-  moved from Creative Director to Creative Manager through the restructuring)
-  without sounding bitter. Listed **first** (enterprise experience leads).
+- **Carelon Behavioral Health (Elevance Health) — 2010 — Present.** One
+  organisation, three names, four titles (see #67): Creative Manager /
+  Carelon Behavioral Health (2023 — Present) · Creative Director / Beacon
+  Health Options (2018 — 2023) · Graphic Designer, then Manager of Design /
+  ValueOptions → Beacon Health Options (2010 — 2018). Listed **first**
+  (enterprise experience leads). The About copy explains the Beacon →
+  Carelon transition once, plainly, without sounding bitter.
 - Carman Creative — Founder — 2020 — Present
+- **Education:** Virginia Commonwealth University, BFA Graphic Design,
+  cum laude, 2008 (`EDUCATION` in `career.ts`).
 
 Jumping Fish was removed from the employment history (see #66). It is still
 named inside the Important! Colorado case study as the agency of hire, which
@@ -1536,3 +1540,45 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
 
     Both are one-line restorations if wanted — the removed Jumping Fish block
     is in this file's git history at the commit that removed it.
+
+### Later session — the full tenure, and education
+
+67. **The Elevance entry is one organisation with four titles, not one title
+    for fifteen years.** John joined **ValueOptions** in 2010 as a graphic
+    designer and worked up to Manager of Design before taking the Creative
+    Director title in October 2018. ValueOptions merged with Beacon Health
+    Strategies to form **Beacon Health Options** in 2014 (the ValueOptions
+    brand was phased out through mid-2016); Beacon became **Carelon
+    Behavioral Health** inside Elevance Health in 2023. Each stint names the
+    entity as it was called at the time, so the entry reads as one continuous
+    sixteen-year tenure through two acquisitions and three promotions rather
+    than as a flat span. This closes the eight-year gap flagged in #65.
+    - Company header is now `Carelon Behavioral Health (Elevance Health)`.
+    - **The 2010 — 2018 period is one combined stint** — "Graphic Designer,
+      then Manager of Design" — because the year the Manager title began is
+      not known. `career.ts` carries a TODO; splitting it into two stints is
+      a two-line change once the year is confirmed, and inventing the
+      boundary would have been worse than combining them.
+    - Note the résumé renders `<title> / <org>`, so an org containing its own
+      slash printed three items where two were meant. Use `→` inside an org
+      name, matching how the site writes Beacon → Carelon elsewhere.
+
+68. **Education section added to `/resume`** — Virginia Commonwealth
+    University, BFA Graphic Design, cum laude, 2008, from a new `EDUCATION`
+    constant in `career.ts`. The résumé had carried none at all, and a blank
+    education field is a hard filter on a lot of large-company applicant
+    screens.
+
+69. **⚠ Origin year is unresolved — do not treat any of these as settled.**
+    `SCALE.years` / `PROFILE.yearsExperience` is **20**, which counts from
+    2006. The hero meta strip was changed from **EST. 2005 → EST. 2006** so
+    it agrees with that count. But the degree is May 2008 and John has said
+    he started around 2007, which is 19 years, not 20. The three numbers do
+    not all reconcile.
+    - Two ways out, both fine: confirm paid design work in **2006** (common
+      for a GDes student in junior year) and everything locks; or publish
+      **no start year at all** — keep "20 years" as the round figure, drop
+      the year from the copy and drop `EST.` from the hero, so there is no
+      second number inviting subtraction.
+    - The résumé has no pre-2010 dates, so it is internally consistent under
+      either answer. The origin year appears only in the hero strip.

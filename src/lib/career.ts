@@ -54,7 +54,13 @@ export type Employer = {
  */
 export const EMPLOYERS: Employer[] = [
   {
-    company: "Elevance Health / Carelon",
+    // One organisation, three names. ValueOptions merged with Beacon Health
+    // Strategies to form Beacon Health Options in 2014 (the ValueOptions brand
+    // was phased out through mid-2016); Beacon became Carelon Behavioral
+    // Health inside Elevance Health in 2023. Each stint names the entity as it
+    // was called at the time, so the tenure reads as one continuous sixteen
+    // years through two acquisitions rather than as three separate jobs.
+    company: "Carelon Behavioral Health (Elevance Health)",
     range: "2010 — Present",
     stints: [
       {
@@ -72,8 +78,8 @@ export const EMPLOYERS: Employer[] = [
       {
         title: "Creative Director",
         org: "Beacon Health Options",
-        // October 2018 per the owner. The site states years, matching the rest
-        // of the résumé; LinkedIn needs the month, which is October 2018.
+        // October 2018. The site states years, matching the rest of the
+        // résumé; LinkedIn needs the month, which is October 2018.
         range: "2018 — 2023",
         bullets: [
           "Led brand, campaign, digital, and creative-operations work for a national behavioral health organization, and managed a five-person design team.",
@@ -82,11 +88,18 @@ export const EMPLOYERS: Employer[] = [
           "Led the Stamp Out Stigma national mental-health awareness campaign, including out-of-home placement in Times Square.",
         ],
       },
-      // TODO: The Creative Director title began in October 2018, but the tenure
-      // with this organization begins in 2010 — so the résumé now shows an
-      // eight-year stretch (2010–2018) with no title against it, which a
-      // recruiter will notice and ask about. Add the earlier title(s) and their
-      // dates here as a third stint.
+      {
+        // TODO: Split this into two stints once the year John became Manager of
+        // Design is confirmed. Stated as one span for now because the exact
+        // boundary is not known and inventing it would be worse than combining
+        // them — both titles are named, and the span is correct either way.
+        title: "Graphic Designer, then Manager of Design",
+        org: "ValueOptions → Beacon Health Options",
+        range: "2010 — 2018",
+        bullets: [
+          "Joined as a graphic designer and moved into managing design, covering brand, campaign, and production work across the business.",
+        ],
+      },
     ],
   },
   {
@@ -107,6 +120,17 @@ export const EMPLOYERS: Employer[] = [
 ];
 
 /**
+ * Education. A blank education field is a hard filter on a lot of
+ * large-company screens, and the résumé carried none at all until now.
+ */
+export const EDUCATION = {
+  school: "Virginia Commonwealth University",
+  degree: "BFA, Graphic Design",
+  honors: "cum laude",
+  year: "2008",
+} as const;
+
+/**
  * The scale numbers that qualify the work as enterprise. These belong wherever
  * the screen actually happens — the home hero, the résumé summary — not only
  * on a secondary page someone may never reach.
@@ -118,6 +142,7 @@ export const SCALE = {
   orgLabel: "Person organization",
   team: 5,
   teamLabel: "Designers led as a creative lead",
+  /** Counts from the first paid design work, during the VCU degree. */
   years: 20,
   yearsLabel: "Years leading creative & brand",
   enterpriseYears: 15,

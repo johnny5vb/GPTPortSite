@@ -3,7 +3,7 @@
 import { Link } from "next-view-transitions";
 import { ArrowUpLeft, Printer } from "lucide-react";
 import { PROFILE } from "@/lib/profile";
-import { EMPLOYERS } from "@/lib/career";
+import { EMPLOYERS, EDUCATION } from "@/lib/career";
 
 /**
  * On-page résumé. Content is grounded in verified facts and derives from
@@ -203,6 +203,25 @@ export default function ResumePage() {
               </li>
             ))}
           </ul>
+        </Section>
+
+        {/* Education. A blank education field is a hard filter on a lot of
+            large-company applicant screens; the résumé carried none at all. */}
+        <Section title="Education">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+            <div>
+              <h3 className="font-display text-xl tracking-[-0.02em] text-bone">
+                {EDUCATION.school}
+              </h3>
+              <p className="mt-0.5 text-sm text-bone/85">
+                {EDUCATION.degree}
+                <span className="text-mute"> — {EDUCATION.honors}</span>
+              </p>
+            </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-mute">
+              {EDUCATION.year}
+            </span>
+          </div>
         </Section>
 
         {/* Tools */}

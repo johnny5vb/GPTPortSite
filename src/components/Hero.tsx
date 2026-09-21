@@ -136,7 +136,7 @@ export default function Hero() {
             <span className="text-bone/55">00 /</span> Index
           </span>
           <span className="hidden sm:inline">
-            <span className="text-bone/55">EST.</span> 2005
+            <span className="text-bone/55">EST.</span> 2006
           </span>
         </motion.div>
         <motion.div
