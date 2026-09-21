@@ -215,11 +215,6 @@ export default function About() {
                         {role.range}
                       </span>
                     </div>
-                    {role.context && (
-                      <div className="mt-0.5 text-[11px] leading-snug text-mute-2 normal-case tracking-normal font-sans">
-                        {role.context}
-                      </div>
-                    )}
                     <ul className="mt-1.5 space-y-0.5">
                       {role.stints.map((stint) => (
                         <li

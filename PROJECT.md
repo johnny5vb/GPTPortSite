@@ -265,8 +265,11 @@ facts here. The old vanity stat `175+ projects shipped` was dropped.
   copy explains the Beacon → Carelon/Elevance transition once, plainly (title
   moved from Creative Director to Creative Manager through the restructuring)
   without sounding bitter. Listed **first** (enterprise experience leads).
-- Jumping Fish — Creative Director — 2014 — Present
 - Carman Creative — Founder — 2020 — Present
+
+Jumping Fish was removed from the employment history (see #66). It is still
+named inside the Important! Colorado case study as the agency of hire, which
+is a project credit rather than an employment claim.
 
 Do not hide the current Manager title; do not erase the prior Creative
 Director title; keep the transition explanation sparse and forward-looking.
@@ -1512,3 +1515,24 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     `/resume` while an earlier note in this file described them as TODO
     placeholders. They are treated as confirmed; if any is not, it belongs back
     behind a visible `TODO: Confirm`.
+
+### Later session — the employment history carries fewer roles
+
+66. **Jumping Fish removed from the employment history**, at the owner's
+    request — `career.ts`, the résumé, the About experience column and the
+    résumé-preview summary. Removing it creates **no gap**: the Elevance entry
+    runs 2010 — Present continuously, so nothing needs explaining, and the
+    entry had contributed no case studies and one unwritten bullet. It is
+    still named five times inside the Important! Colorado case study as the
+    agency of hire (`projects.ts`), which is a project credit, not an
+    employment claim; that is a separate decision.
+    - **`context` field dropped from `Employer`**, along with the
+      "Concurrent, independent" labels added earlier the same day and the
+      lines that rendered them in `ResumePage` and `About`. Naming the
+      arrangement drew more attention to it than the dates alone did.
+    - **"Recent work includes …" → "Selected work includes …"** in the Carman
+      Creative bullet. The case studies carry their own dates; "recent" added
+      a currency signal the list did not need.
+
+    Both are one-line restorations if wanted — the removed Jumping Fish block
+    is in this file's git history at the commit that removed it.

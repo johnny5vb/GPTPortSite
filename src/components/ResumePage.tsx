@@ -12,10 +12,10 @@ import { EMPLOYERS } from "@/lib/career";
  *
  * Two things deliberately do NOT render here any more:
  *
- * 1. A visible "TODO: Confirm scope, notable clients, and outcomes" bullet
- *    under Jumping Fish. Unwritten bullets now live as code comments in
- *    career.ts. A hiring manager reading a live TODO on a résumé concludes
- *    the document is unfinished, which costs more than the missing line.
+ * 1. Visible "TODO: Confirm …" bullets. Unwritten bullets live as code
+ *    comments in career.ts instead. A hiring manager reading a live TODO on a
+ *    résumé concludes the document is unfinished, which costs more than the
+ *    missing line.
  * 2. A visible "TODO: Attach an official PDF résumé" footnote. Same reason.
  *    The ask is still real — see PROFILE.resumePdf — it just belongs in the
  *    code, not on the page a recruiter is reading.
@@ -131,10 +131,6 @@ export default function ResumePage() {
                     {job.range}
                   </span>
                 </div>
-
-                {job.context && (
-                  <p className="mt-0.5 text-xs text-mute-2">{job.context}</p>
-                )}
 
                 {/* Titles held, most recent first, each with its own
                     accomplishments. Two rows here is the whole point: it shows

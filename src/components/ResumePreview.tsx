@@ -20,7 +20,7 @@ const SUMMARY = [
   { label: "Scale", value: `${SCALE.assets} assets migrated across an ${SCALE.orgSize}-person organization` },
   { label: "Leads", value: "Brand, campaigns, creative operations, teams" },
   { label: "Systems", value: "Workfront, brand governance, AI-enabled workflow" },
-  { label: "Also", value: "Founder, Carman Creative · CD, Jumping Fish" },
+  { label: "Also", value: "Founder, Carman Creative" },
 ];
 
 export default function ResumePreview() {

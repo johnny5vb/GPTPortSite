@@ -43,8 +43,6 @@ export type TitleStint = {
 export type Employer = {
   /** Organization as it is named today. */
   company: string;
-  /** Short note on how this role sits alongside the others. */
-  context?: string;
   /** Total tenure with the organization. */
   range: string;
   /** Titles held, most recent first. Two entries = a real progression. */
@@ -52,9 +50,7 @@ export type Employer = {
 };
 
 /**
- * Employment, enterprise first. Jumping Fish and Carman Creative are labeled
- * as concurrent independent practice on purpose: three roles all reading
- * "Present" with no framing looks like divided attention to a hiring manager.
+ * Employment, enterprise first.
  */
 export const EMPLOYERS: Employer[] = [
   {
@@ -94,26 +90,7 @@ export const EMPLOYERS: Employer[] = [
     ],
   },
   {
-    company: "Jumping Fish",
-    context: "Concurrent, independent",
-    range: "2014 — Present",
-    stints: [
-      {
-        title: "Creative Director",
-        range: "2014 — Present",
-        current: true,
-        bullets: [
-          "Creative direction for brand, campaign, and digital work.",
-          // TODO: Add scope, notable clients, and outcomes. Kept out of the
-          // rendered page until there is something real to say — a visible
-          // "TODO: Confirm" on a résumé reads as an unfinished document.
-        ],
-      },
-    ],
-  },
-  {
     company: "Carman Creative",
-    context: "Concurrent, independent",
     range: "2020 — Present",
     stints: [
       {
@@ -122,7 +99,7 @@ export const EMPLOYERS: Employer[] = [
         current: true,
         bullets: [
           "Independent studio: brand, identity, web, campaign, and creative-systems engagements.",
-          "Recent work includes Colony Coffee, Friends Rehabilitation Program, Health First Colorado, Special Forces Trust, and Spike's K9 Fund.",
+          "Selected work includes Colony Coffee, Friends Rehabilitation Program, Health First Colorado, Special Forces Trust, and Spike's K9 Fund.",
         ],
       },
     ],
