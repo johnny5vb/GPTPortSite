@@ -25,11 +25,11 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "John Carman — Creative Director | Carman Creative",
+    default: "John Carman — Carman Creative | Brand & Creative Direction",
     template: "%s",
   },
   description:
-    "John Carman — creative director and brand & creative-operations leader. Twenty years across enterprise brand, campaigns, design systems, and creative operations, most of it inside large healthcare organizations.",
+    "Creative direction, brand systems, and creative operations. Twenty years across enterprise brand, campaigns, and design systems, most of it inside large healthcare organizations.",
   metadataBase: new URL("https://www.carmancreative.com"),
   applicationName: "Carman Creative",
   authors: [{ name: "John Carman", url: "https://www.carmancreative.com" }],
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   publisher: "Carman Creative",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "John Carman — Creative Director | Carman Creative",
+    title: "John Carman — Carman Creative | Brand & Creative Direction",
     description:
-      "Creative director and brand & creative-operations leader. Twenty years across enterprise brand, campaigns, design systems, and creative operations.",
+      "Creative direction, brand systems, and creative operations. Twenty years across enterprise brand, campaigns, and design systems, most of it inside large healthcare organizations.",
     url: "https://www.carmancreative.com",
     siteName: "Carman Creative",
     type: "website",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Carman — Creative Director | Carman Creative",
+    title: "John Carman — Carman Creative | Brand & Creative Direction",
     description:
-      "Creative director and brand & creative-operations leader. Twenty years across enterprise brand, campaigns, design systems, and creative operations.",
+      "Creative direction, brand systems, and creative operations. Twenty years across enterprise brand, campaigns, and design systems, most of it inside large healthcare organizations.",
   },
 };
 

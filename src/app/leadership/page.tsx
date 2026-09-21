@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Creative Leadership | John Carman",
     description:
-      "Enterprise brand transformation, creative operations, and team leadership from Creative Director John Carman.",
+      "Enterprise brand transformation, creative operations, and team leadership.",
     url: "/leadership",
     type: "website",
   },

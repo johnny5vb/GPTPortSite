@@ -1472,10 +1472,20 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     - **"Download Résumé" → "View Résumé"** everywhere (About, ResumePreview,
       LeadershipPage). The button delivered a web page; the print control on
       `/resume` is what produces the file.
-    - **Metadata.** The page title was "John Carman — Carman Creative" — no
-      role, and the studio name reads as a vendor in a search result. Now
-      **"John Carman — Creative Director | Carman Creative"** across title, og
-      and twitter. Person JSON-LD gained `knowsAbout`.
+    - **Metadata names the discipline, not a title.** The page title was
+      "John Carman — Carman Creative", which says nothing about the work in a
+      search result or a pasted-link preview. It is now **"John Carman —
+      Carman Creative | Brand & Creative Direction"**, with og:title,
+      twitter:title and all three descriptions matching — those render
+      together, so softening one and leaving the others achieves nothing.
+      `/resume` went from "Résumé | John Carman, Creative Director" to
+      "Résumé | John Carman" for the same reason. **Rule: the search-visible
+      layer (titles, descriptions, link previews) describes the discipline;
+      it does not assert a present-tense personal title.** Body copy is
+      unaffected — the résumé, About and `/leadership` state the Creative
+      Director title where it is historically accurate, and the Person
+      JSON-LD still carries `jobTitle: "Creative Director"`. Person JSON-LD
+      also gained `knowsAbout`.
     - **Systems shelf** stopped apologising: "Built for myself, not for a
       client" → "Self-initiated — tools built to solve problems I kept
       hitting." CQAP and Carman OS are the strongest available proof of the
