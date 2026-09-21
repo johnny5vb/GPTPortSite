@@ -82,6 +82,11 @@ export const EMPLOYERS: Employer[] = [
         org: "Carelon Behavioral Health",
         range: "2023 — Present",
         current: true,
+        // March 2023 — the title changed the same month Beacon became Carelon
+        // Behavioral Health, which is what makes the re-level self-evident:
+        // the two dates are the same date. The site states years; LinkedIn
+        // wants the month, and it is March 2023.
+        //
         // The scope grew when the title compressed. Stated plainly, without
         // editorialising about the title — the reader can see the two stints.
         summary:
@@ -96,8 +101,9 @@ export const EMPLOYERS: Employer[] = [
       {
         title: "Creative Director",
         org: "Beacon Health Options",
-        // October 2018. The site states years, matching the rest of the
-        // résumé; LinkedIn needs the month, which is October 2018.
+        // October 2018 — March 2023, both confirmed. The site states years,
+        // matching the rest of the résumé; LinkedIn wants months, and these
+        // two meet exactly at the rebrand with no gap between them.
         range: "2018 — 2023",
         summary:
           "Ran the creative function for a national behavioral health company — the team, the systems, and the brand — then carried all three through its acquisition by Elevance Health.",
@@ -113,7 +119,8 @@ export const EMPLOYERS: Employer[] = [
         org: "Beacon Health Options",
         // ~2016 — John places it about two years before the October 2018
         // promotion to Creative Director. Year granularity matches the rest of
-        // the résumé; LinkedIn wants a month, which is still to confirm.
+        // the résumé. TODO: the month, the last date still unconfirmed — it is
+        // the only one LinkedIn still needs.
         range: "2016 — 2018",
         summary:
           "Moved from making the work to running it — took over the design team, creative review, and the intake that fed both.",

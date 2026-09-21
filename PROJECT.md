@@ -1626,8 +1626,13 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       their job is to show the climb, not to compete for attention with the
       rebrand and Marketing Bench.
     - The **2016 boundary is approximate** ("about two years before"), stated
-      at year granularity like everything else on the résumé. LinkedIn wants a
-      month for it and for the Director title's end; both are still open.
+      at year granularity like everything else on the résumé. Its **month is
+      the last date still unconfirmed** — the only one LinkedIn needs.
+    - **The Director title ended March 2023** — the same month Beacon became
+      Carelon Behavioral Health. The two dates being one date is what makes
+      the re-level self-evident; the stints meet exactly, with no gap. The
+      site states years, so nothing rendered changes; the fact is recorded in
+      `career.ts` so it is not re-asked.
     - This is the answer to the Director → Manager question working from the
       other direction: a reader who sees three promotions in thirteen years
       reads the 2023 title change as what it was — a merger re-level — without
