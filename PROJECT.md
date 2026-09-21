@@ -260,12 +260,11 @@ clearly-labeled `TODO: Confirm` placeholders — they are **not** published as
 facts here. The old vanity stat `175+ projects shipped` was dropped.
 
 ### Employment history (About + Résumé) — corrected & non-defensive
-- **Carelon Behavioral Health (Elevance Health) — 2010 — Present.** One
-  organisation, three names, four titles (see #67, #72): Creative Manager /
-  Carelon Behavioral Health (2023 — Present) · Creative Director / Beacon
-  Health Options (2018 — 2023) · Manager of Design / Beacon Health Options
-  (2016 — 2018) · Graphic Designer / ValueOptions → Beacon Health Options
-  (2010 — 2016). Listed **first**
+- **Elevance Health — 2010 — Present.** One organisation, three names, four
+  titles (see #67, #72, #73): Creative Manager (2023 — Present) · Creative
+  Director / Beacon Health Options (2018 — 2023) · Manager of Design / Beacon
+  Health Options (2016 — 2018) · Graphic Designer / ValueOptions → Beacon
+  Health Options (2010 — 2016). Listed **first**
   (enterprise experience leads). The About copy explains the Beacon →
   Carelon transition once, plainly, without sounding bitter.
 - Carman Creative — Founder — 2020 — Present
@@ -1643,3 +1642,34 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       other direction: a reader who sees three promotions in thirteen years
       reads the 2023 title change as what it was — a merger re-level — without
       anyone having to say so.
+
+### Later session — the employer is Elevance Health
+
+73. **Corrected: the current employer is Elevance Health, and the remit is all
+    lines of business.** The entry had read "Carelon Behavioral Health
+    (Elevance Health)" with the current role described as creative lead for
+    behavioral health "with work spanning multiple Elevance lines of
+    business." Both were wrong and both undersold the job. Carelon Behavioral
+    Health is **where John landed** when Beacon was acquired; the remit has
+    widened since, and he is on the **Elevance Health creative team covering
+    all lines of business**. Elevance Health is a Fortune 20 company, so this
+    is a materially larger statement of scope, not a smaller one.
+    - Company header: `Elevance Health`. The current stint's summary carries
+      the Carelon origin — *"Came in as creative lead for Carelon Behavioral
+      Health when Beacon was acquired; the remit widened from there"* — so no
+      history is lost.
+    - `TRANSITION_NOTE`, the About paragraph, the `/leadership` experience
+      list and the résumé-preview "Now" row all changed from "multiple
+      Elevance lines of business" to **all** lines of business.
+    - **The widening was gradual over the couple of years since March 2023,
+      not a second title change**, so it stays one stint with the scope stated
+      in the summary rather than being split. If it should be two entries,
+      that needs a date.
+    - The older stints still name Beacon Health Options and ValueOptions,
+      because those were the entities at the time. **`ResumePage` and `About`
+      now only render `stint.org` when it differs from the employer header** —
+      otherwise the current role printed "Creative Manager / Elevance Health"
+      directly beneath a heading that already said Elevance Health.
+    - Carelon still appears throughout `projects.ts` — the flagship case
+      studies *are* Carelon Behavioral Health work, and that is historical and
+      correct. This change is about the employment entry only.

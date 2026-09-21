@@ -135,8 +135,9 @@ export default function About() {
                 creative lead through the transition — roughly 1,500 brand
                 assets migrated to the new identity across an organization of
                 about 85,000. The restructuring moved my title to Creative
-                Manager; the work didn&apos;t shrink with it — today it spans
-                multiple Elevance lines of business rather than one company.
+                Manager; the work didn&apos;t shrink with it — I&apos;m on
+                the Elevance Health creative team now, across all lines of
+                business rather than one company.
               </p>
               <p>
                 Alongside that, I run Carman Creative — brand, digital, and
@@ -223,7 +224,7 @@ export default function About() {
                         >
                           <span className="text-sm text-mute leading-snug">
                             {stint.title}
-                            {stint.org && (
+                            {stint.org && stint.org !== role.company && (
                               <span className="text-mute-2">, {stint.org}</span>
                             )}
                           </span>

@@ -9,7 +9,7 @@ import { PROFILE } from "@/lib/profile";
 import Testimonials from "./Testimonials";
 
 const EXPERIENCE = [
-  "Creative Manager, Carelon Behavioral Health / Elevance Health (current)",
+  "Creative Manager, Elevance Health — all lines of business (current)",
   "Creative Director, Beacon Health Options — held through the 2023 Carelon transition",
   "Managed a five-person design team",
   "Executive and cross-functional stakeholder collaboration",

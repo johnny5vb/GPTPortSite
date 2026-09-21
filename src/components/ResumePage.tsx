@@ -143,7 +143,7 @@ export default function ResumePage() {
                       <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-green">
                           {stint.title}
-                          {stint.org && (
+                          {stint.org && stint.org !== job.company && (
                             <span className="text-mute"> / {stint.org}</span>
                           )}
                         </span>

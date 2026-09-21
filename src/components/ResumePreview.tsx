@@ -13,7 +13,7 @@ import { SCALE } from "@/lib/career";
  * this block cannot drift from the résumé or the About section.
  */
 const SUMMARY = [
-  { label: "Now", value: "Creative Manager, Carelon Behavioral Health (Elevance Health)" },
+  { label: "Now", value: "Creative Manager, Elevance Health — all lines of business" },
   { label: "Held", value: "Creative Director, Beacon Health Options (2018 — 2023)" },
   { label: "Before", value: "Graphic Designer, then Manager of Design — ValueOptions / Beacon" },
   { label: "Experience", value: `${PROFILE.yearsExperience}+ years, mostly enterprise healthcare` },

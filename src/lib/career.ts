@@ -75,15 +75,21 @@ export const EMPLOYERS: Employer[] = [
     //   Manager of Design     June 2016     — Sept 2018
     //   Creative Director     October 2018  — March 2023
     //   Creative Manager      March 2023    — present  (the merger re-level)
+    //
+    // EMPLOYER: Elevance Health. Not "Carelon Behavioral Health" — Carelon is
+    // where John landed when Beacon was acquired, and the remit has widened
+    // since: he is on the Elevance creative team covering all lines of
+    // business. The stints below name the entity as it was at the time, which
+    // is why the older ones still say Beacon and ValueOptions.
     // Each is its own stint so the progression is legible; collapsing them hid
     // three promotions. The site renders years; the months above are what
     // LinkedIn needs, and every boundary meets with no gap or overlap.
-    company: "Carelon Behavioral Health (Elevance Health)",
+    company: "Elevance Health",
     range: "2010 — Present",
     stints: [
       {
         title: "Creative Manager",
-        org: "Carelon Behavioral Health",
+        org: "Elevance Health",
         range: "2023 — Present",
         current: true,
         // March 2023 — the title changed the same month Beacon became Carelon
@@ -91,12 +97,16 @@ export const EMPLOYERS: Employer[] = [
         // the two dates are the same date. The site states years; LinkedIn
         // wants the month, and it is March 2023.
         //
+        // The move onto the wider Elevance team was gradual over the couple of
+        // years since, not a second title change, so it is one stint with the
+        // scope stated in the summary rather than two.
+        //
         // The scope grew when the title compressed. Stated plainly, without
         // editorialising about the title — the reader can see the two stints.
         summary:
-          "Creative lead for Carelon Behavioral Health, with work spanning multiple Elevance Health lines of business inside an ~85,000-person enterprise.",
+          "On the Elevance Health creative team, working across all lines of business inside an ~85,000-person enterprise. Came in as creative lead for Carelon Behavioral Health when Beacon was acquired; the remit widened from there.",
         bullets: [
-          "Direct brand, campaign, and digital work for behavioral health alongside projects for other Elevance lines of business.",
+          "Direct brand, campaign, and digital work across Elevance lines of business — behavioral health outward.",
           "Manage a five-person design team and direct outside agencies and production vendors.",
           "Rebuilt Workfront intake, review, and approval around ~75 projects a month (2025) — took the process apart around the pain points the team named rather than patching the existing instance.",
           "Own creative review and quality control, and build the templates, governance, and systems that hold quality steady as volume grows.",
@@ -202,4 +212,4 @@ export const SCALE = {
  * phrasing should be consistent everywhere a reader might check it.
  */
 export const TRANSITION_NOTE =
-  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — it now spans multiple Elevance lines of business rather than one company.";
+  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — I am on the Elevance Health creative team now, across all lines of business rather than one company.";
