@@ -70,10 +70,14 @@ export const EMPLOYERS: Employer[] = [
     // Carelon Behavioral Health inside Carelon in 2023. Elevance Health is the
     // parent; Anthem is a brand within it, not the umbrella.
     //
-    // Four titles across sixteen years: Graphic Designer (2010) → Manager of
-    // Design (~2016) → Creative Director (Oct 2018) → Creative Manager (2023,
-    // the merger re-level). Each is its own stint so the progression is
-    // legible; collapsing them hid three promotions.
+    // Four titles across sixteen years, all dates confirmed:
+    //   Graphic Designer      2010          — May 2016
+    //   Manager of Design     June 2016     — Sept 2018
+    //   Creative Director     October 2018  — March 2023
+    //   Creative Manager      March 2023    — present  (the merger re-level)
+    // Each is its own stint so the progression is legible; collapsing them hid
+    // three promotions. The site renders years; the months above are what
+    // LinkedIn needs, and every boundary meets with no gap or overlap.
     company: "Carelon Behavioral Health (Elevance Health)",
     range: "2010 — Present",
     stints: [
@@ -117,10 +121,11 @@ export const EMPLOYERS: Employer[] = [
       {
         title: "Manager of Design",
         org: "Beacon Health Options",
-        // ~2016 — John places it about two years before the October 2018
-        // promotion to Creative Director. Year granularity matches the rest of
-        // the résumé. TODO: the month, the last date still unconfirmed — it is
-        // the only one LinkedIn still needs.
+        // June 2016 — October 2018 (the Creative Director promotion). The
+        // month lands on the ValueOptions → Beacon brand transition, which was
+        // phased through mid-2016, so the promotion and the rename coincided.
+        // That is why the Designer stint is attributed to ValueOptions and
+        // this one to Beacon: it is not a guess, the dates line up.
         range: "2016 — 2018",
         summary:
           "Moved from making the work to running it — took over the design team, creative review, and the intake that fed both.",

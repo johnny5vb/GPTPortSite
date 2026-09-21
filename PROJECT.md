@@ -1625,9 +1625,15 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       against four for each recent role. They are eight to sixteen years old;
       their job is to show the climb, not to compete for attention with the
       rebrand and Marketing Bench.
-    - The **2016 boundary is approximate** ("about two years before"), stated
-      at year granularity like everything else on the résumé. Its **month is
-      the last date still unconfirmed** — the only one LinkedIn needs.
+    - **Every date is now confirmed.** Graphic Designer 2010 — May 2016 ·
+      Manager of Design June 2016 — Sept 2018 · Creative Director Oct 2018 —
+      March 2023 · Creative Manager March 2023 — present. The site renders
+      years; the months live in `career.ts` comments for LinkedIn. Every
+      boundary meets with no gap or overlap.
+    - **June 2016 lands on the ValueOptions → Beacon brand transition** (phased
+      through mid-2016), so the promotion and the rename coincided — which is
+      why the Designer stint is attributed to ValueOptions and the Manager
+      stint to Beacon. That attribution is now fact, not inference.
     - **The Director title ended March 2023** — the same month Beacon became
       Carelon Behavioral Health. The two dates being one date is what makes
       the re-level self-evident; the stints meet exactly, with no gap. The
