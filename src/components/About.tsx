@@ -6,42 +6,15 @@ import { Link } from "next-view-transitions";
 import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
 import CountUp from "./CountUp";
 import { PROFILE } from "@/lib/profile";
-
-type Role = {
-  company: string;
-  title: string;
-  /** Prior title at the same org, shown when a reorg changed the title. */
-  formerly?: string;
-  range: string;
-  current?: boolean;
-};
+import { EMPLOYERS } from "@/lib/career";
 
 /**
- * Employment history, most-senior / enterprise role first. The Elevance
- * entry deliberately surfaces both the current Manager title and the prior
- * Creative Director title so the career progression reads honestly.
+ * Employment history comes from `src/lib/career.ts` so this column, the
+ * résumé, the Leadership page and the LinkedIn profile all state the same
+ * titles and dates. Each employer renders its titles as separate stints —
+ * the Creative Director title is a role that was held, not a footnote under
+ * the current one.
  */
-const ROLES: Role[] = [
-  {
-    company: "Elevance Health / Carelon",
-    title: "Creative Manager",
-    formerly: "Formerly Creative Director, Beacon Health Options",
-    range: "2010 — Present",
-    current: true,
-  },
-  {
-    company: "Jumping Fish",
-    title: "Creative Director",
-    range: "2014 — Present",
-    current: true,
-  },
-  {
-    company: "Carman Creative",
-    title: "Founder",
-    range: "2020 — Present",
-    current: true,
-  },
-];
 
 const STRENGTHS = [
   "Creative direction",
@@ -133,9 +106,11 @@ export default function About() {
           </motion.h2>
 
           {/* Proof row — only numbers that are defensible from the record.
-              Enterprise-scale figures (asset counts, org headcount, monthly
-              volume) live on the Leadership page as clearly-labeled TODOs
-              until confirmed; they are not published as facts here. */}
+              The enterprise-scale figures (assets migrated, org headcount,
+              monthly volume) are published on /leadership and the résumé as
+              approximations; they live in `src/lib/career.ts` so every surface
+              states them identically. Anything still unconfirmed belongs in a
+              visible `TODO: Confirm` placeholder, never here. */}
           <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8 border-t border-line pt-6">
             <Stat to={20} suffix="+" label="Years leading creative & brand" />
             <Stat to={15} suffix="+" label="Years in enterprise healthcare creative" />
@@ -153,13 +128,15 @@ export default function About() {
                 work has to hold up under compliance, scale, and scrutiny.
               </p>
               <p>
-                I grew into creative direction leading brand, campaign, digital,
-                and creative-operations work, managing a five-person design
-                team, and serving as a creative lead through the transition of
-                Beacon Health Options into Carelon and Elevance Health. Following that
-                restructuring my title moved from Creative Director to Creative
-                Manager, while the work continued to span enterprise creative,
-                brand, workflow, and stakeholder leadership.
+                I held the Creative Director title at Beacon Health Options from
+                2018, leading brand, campaign, digital, and creative-operations work
+                and managing a five-person design team. When Beacon became
+                Carelon Behavioral Health inside Elevance Health, I was a
+                creative lead through the transition — roughly 1,500 brand
+                assets migrated to the new identity across an organization of
+                about 85,000. The restructuring moved my title to Creative
+                Manager; the scope stayed where it was, across enterprise
+                creative, brand, workflow, and stakeholder leadership.
               </p>
               <p>
                 Alongside that, I run Carman Creative — brand, digital, and
@@ -175,7 +152,7 @@ export default function About() {
                   data-cursor="resume"
                   className="group inline-flex items-center gap-2 rounded-full bg-green text-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
                 >
-                  Download Résumé
+                  View Résumé
                   <ArrowDownToLine className="h-3.5 w-3.5" />
                 </Link>
                 <a
@@ -219,35 +196,50 @@ export default function About() {
                 // experience
               </div>
               <ul className="border-t border-line">
-                {ROLES.map((role, i) => (
+                {EMPLOYERS.map((role, i) => (
                   <motion.li
                     key={role.company}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.5, delay: i * 0.05 }}
-                    className="grid grid-cols-[1fr_auto] gap-2 items-baseline py-3 border-b border-line/70"
+                    className="py-3 border-b border-line/70"
                   >
-                    <div>
-                      {/* Company and title were both mono uppercase, which gave
-                          the column ~20 shouting lines and no rank. The display
-                          face carries the employer; the role sits under it in
-                          sentence case. Only the date stays mono — it's data. */}
+                    {/* Company and title were both mono uppercase, which gave
+                        the column ~20 shouting lines and no rank. The display
+                        face carries the employer; the roles sit under it in
+                        sentence case. Only the dates stay mono — they're data. */}
+                    <div className="grid grid-cols-[1fr_auto] gap-2 items-baseline">
                       <div className="t-display-sm">{role.company}</div>
-                      <div className="mt-0.5 text-sm text-mute">
-                        {role.title}
-                      </div>
-                      {role.formerly && (
-                        <div className="mt-1 text-[11px] leading-snug text-mute-2 normal-case tracking-normal font-sans">
-                          {role.formerly}
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-right">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute text-right">
                         {role.range}
                       </span>
                     </div>
+                    {role.context && (
+                      <div className="mt-0.5 text-[11px] leading-snug text-mute-2 normal-case tracking-normal font-sans">
+                        {role.context}
+                      </div>
+                    )}
+                    <ul className="mt-1.5 space-y-0.5">
+                      {role.stints.map((stint) => (
+                        <li
+                          key={`${stint.title}-${stint.range}`}
+                          className="grid grid-cols-[1fr_auto] gap-2 items-baseline"
+                        >
+                          <span className="text-sm text-mute leading-snug">
+                            {stint.title}
+                            {stint.org && (
+                              <span className="text-mute-2">, {stint.org}</span>
+                            )}
+                          </span>
+                          {role.stints.length > 1 && (
+                            <span className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-mute-2 text-right whitespace-nowrap">
+                              {stint.range}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
                   </motion.li>
                 ))}
               </ul>

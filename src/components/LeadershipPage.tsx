@@ -9,8 +9,8 @@ import { PROFILE } from "@/lib/profile";
 import Testimonials from "./Testimonials";
 
 const EXPERIENCE = [
-  "Creative Manager, Elevance Health / Carelon (current)",
-  "Formerly Creative Director, Beacon Health Options",
+  "Creative Manager, Carelon Behavioral Health / Elevance Health (current)",
+  "Creative Director, Beacon Health Options — held through the 2023 Carelon transition",
   "Managed a five-person design team",
   "Executive and cross-functional stakeholder collaboration",
   "Agency and vendor direction",
@@ -123,7 +123,7 @@ export default function LeadershipPage() {
                 data-cursor="resume"
                 className="group inline-flex items-center gap-2 rounded-full bg-green text-ink px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
               >
-                Download Résumé
+                View Résumé
                 <ArrowDownToLine className="h-3.5 w-3.5" />
               </Link>
               <a
@@ -286,7 +286,7 @@ export default function LeadershipPage() {
               data-cursor="resume"
               className="inline-flex items-center gap-2 rounded-full bg-green text-ink px-6 py-4 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
             >
-              Download Résumé
+              View Résumé
               <ArrowDownToLine className="h-3.5 w-3.5" />
             </Link>
             <a

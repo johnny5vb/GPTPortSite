@@ -1409,3 +1409,96 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       `#work`. Components are unimported, not deleted — each is a one-line
       re-add in `page.tsx` plus a rail entry.
 
+
+### Later session — one career, stated the same way on every surface
+
+65. **The site, the résumé and the LinkedIn profile are meant to be read
+    together.** Anyone evaluating John reads one, then checks the others; any
+    drift between them in a title, a date or a number reads as carelessness.
+    The neutral posture (#41) is unchanged — the site corroborates and adds
+    depth, it does not solicit. **No availability or solicitation language was
+    added anywhere.** Every change below is positioning, hierarchy, or proof
+    placement.
+
+    **Note on this file:** the repository is public. Keep PROJECT.md to design
+    rationale. Do not record employment intentions, plans, or anything about
+    John's standing with a current or former employer here, in a commit
+    message, or anywhere else in the repo.
+
+    - **New `src/lib/career.ts`** — single source of truth for employment
+      history and the enterprise scale figures, the way `profile.ts` already
+      is for identity and contact. `About`, `ResumePage`, `ResumePreview` and
+      `Hero` all derive from it, so the four surfaces physically cannot state
+      different titles, dates or numbers. It carries a TITLE DISCIPLINE note
+      and the canonical `TRANSITION_NOTE` wording.
+    - **The title problem.** Every surface led with "Creative Manager,
+      Elevance Health / Carelon" and filed "Creative Director, Beacon Health
+      Options" as an 11px muted *Formerly* footnote — which reads as an
+      unexplained demotion. Employers now render their **titles as separate
+      stints with their own dates**: Creative Manager / Carelon Behavioral
+      Health (2023 — Present) above Creative Director / Beacon Health Options
+      (2018 — 2023). The Director title is a role that was *held*, not a
+      parenthetical. Both titles stay published; the rule against hiding the
+      Manager title is intact.
+    - **Bullets belong to the title that earned them.** The Director tenure
+      ran October 2018 — 2023 **at Beacon Health Options** (Carelon Behavioral
+      Health did not exist until the March 2023 rebrand, so the title was
+      never "Creative Director at Carelon"). The rebrand, Marketing Bench and
+      Stamp Out Stigma all fall inside it, so they sit on that stint rather
+      than on the employer, where a reader would assume they were done at the
+      Manager level. This also matches how LinkedIn attaches bullets to
+      positions, keeping the two documents identical in shape.
+    - **The About transition paragraph** was passive and led with the title
+      change ("Following that restructuring my title moved from…"). It now
+      leads with the Director title and the scale of the transition work, then
+      states the change plainly: *"The restructuring moved my title to Creative
+      Manager; the scope stayed where it was."* No invented cause — if the
+      re-leveling was org-wide, that is a stronger sentence and needs
+      confirmation first.
+    - **Scale moved to where it gets read.** The ~1,500 assets /
+      ~85,000-person org / ~60% / ~75-a-month figures existed only on
+      `/leadership` and `/resume`. The **hero proof row** traded "15+ years in
+      enterprise healthcare" — which the subline directly above already said —
+      for `~1,500 assets migrated`, so the three numbers do distinct work:
+      tenure, people led, scale. `ResumePreview` gained **Team** and **Scale**
+      rows and leads "Now / Held" rather than "Now / Formerly".
+    - **`/resume` cleaned up.** Two `TODO:` lines were rendering live on the
+      page (a "confirm scope" bullet under Jumping Fish, and the missing-PDF
+      footnote); both are code comments now. Added **carmancreative.com to the
+      résumé header** — this page becomes the forwarded PDF and the portfolio
+      link was missing entirely — plus a **Selected work** section pointing at
+      the case studies, and a summary leading with people managed and agencies
+      directed.
+    - **"Download Résumé" → "View Résumé"** everywhere (About, ResumePreview,
+      LeadershipPage). The button delivered a web page; the print control on
+      `/resume` is what produces the file.
+    - **Metadata.** The page title was "John Carman — Carman Creative" — no
+      role, and the studio name reads as a vendor in a search result. Now
+      **"John Carman — Creative Director | Carman Creative"** across title, og
+      and twitter. Person JSON-LD gained `knowsAbout`.
+    - **Systems shelf** stopped apologising: "Built for myself, not for a
+      client" → "Self-initiated — tools built to solve problems I kept
+      hitting." CQAP and Carman OS are the strongest available proof of the
+      creative-operations claim; filing them as a hobby undersold them.
+    - **`/leadership`** experience list no longer says "Formerly Creative
+      Director" — it states the role as held through the 2023 transition.
+
+    **Open, and all of it needs John, not code:** his title between 2010 and
+    2018 (the company entry runs 2010 — Present but the two stints only cover
+    2018 onward, leaving eight years with nothing against them; `career.ts`
+    carries a TODO where it goes — filling it turns the entry into a
+    progression); the end month of the Director title, for LinkedIn, March 2023
+    if it tracked the rebrand; an **Education** section, absent from the résumé
+    entirely; a reference from an **enterprise** colleague (all four published
+    testimonials are from independent client work); and
+    `john@carmancreative.com`, still unprovisioned, so the résumé header and
+    every CTA point at Gmail.
+
+    **Jumping Fish** is listed as "Creative Director — 2014 — Present" but the
+    work is occasional and project-based. "Present" overstates it. Left as-is
+    pending John's call; the accurate version is the better one.
+
+    Note: the enterprise figures are published as facts on `/leadership` and
+    `/resume` while an earlier note in this file described them as TODO
+    placeholders. They are treated as confirmed; if any is not, it belongs back
+    behind a visible `TODO: Confirm`.

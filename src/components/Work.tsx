@@ -88,7 +88,7 @@ export default function Work() {
               Systems &amp; side projects
             </h3>
             <p className="text-sm text-mute">
-              Built for myself, not for a client.
+              Self-initiated — tools built to solve problems I kept hitting.
             </p>
           </div>
           <div className="space-y-2">

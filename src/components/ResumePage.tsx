@@ -3,56 +3,27 @@
 import { Link } from "next-view-transitions";
 import { ArrowUpLeft, Printer } from "lucide-react";
 import { PROFILE } from "@/lib/profile";
-
-type Job = {
-  company: string;
-  title: string;
-  formerly?: string;
-  range: string;
-  bullets: string[];
-};
+import { EMPLOYERS } from "@/lib/career";
 
 /**
- * On-page résumé. Content is grounded in verified facts; specific enterprise
- * metrics are clearly labeled TODO until confirmed and never read as claims.
- * "Download" = browser print / save-as-PDF until an official PDF is committed
- * (see PROFILE.resumePdf).
+ * On-page résumé. Content is grounded in verified facts and derives from
+ * `src/lib/career.ts`, so it cannot drift from the About section, the
+ * Leadership page, or the LinkedIn profile kept in sync with it.
+ *
+ * Two things deliberately do NOT render here any more:
+ *
+ * 1. A visible "TODO: Confirm scope, notable clients, and outcomes" bullet
+ *    under Jumping Fish. Unwritten bullets now live as code comments in
+ *    career.ts. A hiring manager reading a live TODO on a résumé concludes
+ *    the document is unfinished, which costs more than the missing line.
+ * 2. A visible "TODO: Attach an official PDF résumé" footnote. Same reason.
+ *    The ask is still real — see PROFILE.resumePdf — it just belongs in the
+ *    code, not on the page a recruiter is reading.
+ *
+ * "Download" was also the wrong verb on every button pointing here: this is a
+ * page, and the browser print dialog is what produces the file. The buttons
+ * say "View Résumé" now, and the print control lives on this page.
  */
-const JOBS: Job[] = [
-  {
-    company: "Elevance Health / Carelon",
-    title: "Creative Manager",
-    formerly: "Formerly Creative Director, Beacon Health Options",
-    range: "2010 — Present",
-    bullets: [
-      "Lead brand, campaign, digital, and creative-operations work across a complex healthcare organization.",
-      "Served as a creative lead through the Beacon Health Options → Carelon / Elevance Health transition (2022–2023); title moved from Creative Director to Creative Manager through the restructuring.",
-      "Migrated ~1,500+ brand assets to the new identity across an ~85,000+ employee organization.",
-      "Managed a five-person design team and directed outside agencies and vendors.",
-      "Built the Marketing Bench creative-support model (2020) — ~60% faster turnaround and ~30% higher engagement.",
-      "Reworked Workfront intake, review, and approval across ~75+ projects a month (2025).",
-      "Own creative review and quality control; build templates, systems, and governance so quality scales.",
-    ],
-  },
-  {
-    company: "Jumping Fish",
-    title: "Creative Director",
-    range: "2014 — Present",
-    bullets: [
-      "Creative direction for brand, campaign, and digital work.",
-      "TODO: Confirm scope, notable clients, and outcomes.",
-    ],
-  },
-  {
-    company: "Carman Creative",
-    title: "Founder",
-    range: "2020 — Present",
-    bullets: [
-      "Independent studio: selected brand, identity, web, campaign, and creative-systems engagements.",
-      "Recent work includes Colony Coffee, Friends Rehabilitation Program, Stamp Out Stigma, Special Forces Trust, and Spike's K9 Fund.",
-    ],
-  },
-];
 
 const STRENGTHS = [
   "Creative direction",
@@ -74,8 +45,6 @@ const TOOLS = [
   "Midjourney",
   "Next.js",
 ];
-
-const isTodo = (s: string) => s.trim().toUpperCase().startsWith("TODO");
 
 export default function ResumePage() {
   return (
@@ -101,7 +70,9 @@ export default function ResumePage() {
       </div>
 
       <article className="resume-doc mx-auto max-w-[52rem]">
-        {/* Header */}
+        {/* Header. The site URL belongs here: this page becomes the PDF a
+            hiring manager forwards, and without it the portfolio is one more
+            thing they have to go looking for. */}
         <header className="border-b border-line pb-6">
           <h1 className="font-display text-[clamp(2.2rem,6vw,3.4rem)] tracking-[-0.04em] text-bone leading-none">
             {PROFILE.name}
@@ -122,25 +93,35 @@ export default function ResumePage() {
             >
               linkedin.com/in/johncarman
             </a>
+            <a
+              href="https://www.carmancreative.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-green"
+            >
+              carmancreative.com
+            </a>
           </p>
         </header>
 
-        {/* Summary */}
+        {/* Summary — leads with the title and the two things a director-level
+            screen checks first: people led and scale operated at. */}
         <Section title="Summary">
           <p className="text-bone/85 leading-relaxed">
             Creative Director and creative-operations leader with{" "}
             {PROFILE.yearsExperience} years turning complex goals into clear,
             useful, and distinctive creative work — most of it inside enterprise
-            healthcare. Experienced leading brand, campaigns, digital, and
-            creative operations; managing designers, agencies, and stakeholders;
-            and modernizing how teams work with AI.
+            healthcare. Led creative through an enterprise acquisition and
+            rebrand, manage a five-person design team, direct outside agencies
+            and vendors, and build the systems, templates, and governance that
+            let quality scale with volume.
           </p>
         </Section>
 
         {/* Experience */}
         <Section title="Experience">
-          <div className="space-y-6">
-            {JOBS.map((job) => (
+          <div className="space-y-8">
+            {EMPLOYERS.map((job) => (
               <div key={job.company}>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                   <h3 className="font-display text-xl tracking-[-0.02em] text-bone">
@@ -150,35 +131,68 @@ export default function ResumePage() {
                     {job.range}
                   </span>
                 </div>
-                <p className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.18em] text-green">
-                  {job.title}
-                </p>
-                {job.formerly && (
-                  <p className="mt-0.5 text-xs text-mute-2 italic">
-                    {job.formerly}
-                  </p>
+
+                {job.context && (
+                  <p className="mt-0.5 text-xs text-mute-2">{job.context}</p>
                 )}
-                <ul className="mt-3 space-y-1.5">
-                  {job.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5 leading-relaxed">
-                      <span className="text-green mt-1.5 shrink-0 text-[10px]">
-                        ▪
-                      </span>
-                      <span
-                        className={
-                          isTodo(b)
-                            ? "text-mute-2 italic text-sm"
-                            : "text-bone/85 text-sm"
-                        }
-                      >
-                        {b}
-                      </span>
-                    </li>
+
+                {/* Titles held, most recent first, each with its own
+                    accomplishments. Two rows here is the whole point: it shows
+                    the Creative Director title as a role that was held, with
+                    dates and with the rebrand and Marketing Bench attached to
+                    it — not as a "formerly" footnote under the current title. */}
+                <div className="mt-2 space-y-4">
+                  {job.stints.map((stint) => (
+                    <div key={`${stint.title}-${stint.range}`}>
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-green">
+                          {stint.title}
+                          {stint.org && (
+                            <span className="text-mute"> / {stint.org}</span>
+                          )}
+                        </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-mute-2">
+                          {stint.range}
+                        </span>
+                      </div>
+                      <ul className="mt-2 space-y-1.5">
+                        {stint.bullets.map((b) => (
+                          <li
+                            key={b}
+                            className="flex items-start gap-2.5 leading-relaxed"
+                          >
+                            <span className="text-green mt-1.5 shrink-0 text-[10px]">
+                              ▪
+                            </span>
+                            <span className="text-bone/85 text-sm">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
           </div>
+        </Section>
+
+        {/* Selected work — a résumé that names case studies should say where
+            to read them. */}
+        <Section title="Selected work">
+          <p className="text-sm text-bone/85 leading-relaxed">
+            Case studies for the enterprise and independent work — including the
+            Beacon → Carelon rebrand, the Marketing Bench creative-support
+            model, and the Stamp Out Stigma campaign — are at{" "}
+            <a
+              href="https://www.carmancreative.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green hover:text-green-bright"
+            >
+              carmancreative.com
+            </a>
+            .
+          </p>
         </Section>
 
         {/* Strengths */}
@@ -199,11 +213,6 @@ export default function ResumePage() {
         <Section title="Tools">
           <p className="text-sm text-bone/85">{TOOLS.join(" · ")}</p>
         </Section>
-
-        <p className="mt-10 text-xs text-mute-2 italic">
-          TODO: Attach an official PDF résumé (public/john-carman-resume.pdf);
-          the Print / Save as PDF button covers it until then.
-        </p>
       </article>
     </div>
   );

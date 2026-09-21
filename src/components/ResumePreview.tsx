@@ -4,14 +4,23 @@ import { motion } from "framer-motion";
 import { Link } from "next-view-transitions";
 import { ArrowDownToLine } from "lucide-react";
 import { PROFILE } from "@/lib/profile";
+import { SCALE } from "@/lib/career";
 
+/**
+ * The career at a glance. Order matters: a reader screening for senior
+ * creative leadership needs the scale and the people-led numbers next to the
+ * titles, not two rows below them. Figures come from `src/lib/career.ts` so
+ * this block cannot drift from the résumé or the About section.
+ */
 const SUMMARY = [
-  { label: "Now", value: "Creative Manager, Elevance Health / Carelon" },
-  { label: "Formerly", value: "Creative Director, Beacon Health Options" },
-  { label: "Also", value: "Founder, Carman Creative · CD, Jumping Fish" },
+  { label: "Now", value: "Creative Manager, Carelon Behavioral Health (Elevance Health)" },
+  { label: "Held", value: "Creative Director, Beacon Health Options" },
   { label: "Experience", value: `${PROFILE.yearsExperience}+ years, mostly enterprise healthcare` },
+  { label: "Team", value: `${SCALE.team}-person design team, plus agencies and vendors` },
+  { label: "Scale", value: `${SCALE.assets} assets migrated across an ${SCALE.orgSize}-person organization` },
   { label: "Leads", value: "Brand, campaigns, creative operations, teams" },
   { label: "Systems", value: "Workfront, brand governance, AI-enabled workflow" },
+  { label: "Also", value: "Founder, Carman Creative · CD, Jumping Fish" },
 ];
 
 export default function ResumePreview() {
@@ -35,7 +44,7 @@ export default function ResumePreview() {
                 data-cursor="resume"
                 className="group inline-flex items-center gap-2 rounded-full bg-green text-ink px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
               >
-                Download Résumé
+                View Résumé
                 <ArrowDownToLine className="h-3.5 w-3.5" />
               </Link>
             </div>

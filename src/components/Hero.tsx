@@ -14,6 +14,7 @@ import { ArrowDown, ArrowUpRight, ArrowDownToLine } from "lucide-react";
 import { Link } from "next-view-transitions";
 import HeroIsolines from "./HeroIsolines";
 import { PROFILE } from "@/lib/profile";
+import { SCALE } from "@/lib/career";
 
 /**
  * Portrait hero. Two things are deliberately combined here:
@@ -38,10 +39,17 @@ import { PROFILE } from "@/lib/profile";
  * lines measured 2.39:1 before that correction.
  */
 
+/**
+ * Three numbers, each doing different work: tenure, people led, and scale
+ * operated at. The middle slot used to read "15+ years in enterprise
+ * healthcare", which the subline directly above already says — so it cost a
+ * third of the row to repeat itself while the enterprise scale figures sat
+ * two pages deep on /leadership. Figures come from `src/lib/career.ts`.
+ */
 const PROOF = [
-  { value: "20+", label: "Years leading creative & brand" },
-  { value: "15+", label: "Years in enterprise healthcare" },
-  { value: "5", label: "Designers led as a creative lead" },
+  { value: `${SCALE.years}+`, label: SCALE.yearsLabel },
+  { value: String(SCALE.team), label: SCALE.teamLabel },
+  { value: SCALE.assets, label: SCALE.assetsLabel },
 ];
 
 export default function Hero() {

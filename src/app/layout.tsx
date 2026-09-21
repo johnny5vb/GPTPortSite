@@ -25,11 +25,11 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "John Carman — Carman Creative",
+    default: "John Carman — Creative Director | Carman Creative",
     template: "%s",
   },
   description:
-    "John Carman — creative director and founder of Carman Creative. Brand, creative direction, and design-systems work.",
+    "John Carman — creative director and brand & creative-operations leader. Twenty years across enterprise brand, campaigns, design systems, and creative operations, most of it inside large healthcare organizations.",
   metadataBase: new URL("https://www.carmancreative.com"),
   applicationName: "Carman Creative",
   authors: [{ name: "John Carman", url: "https://www.carmancreative.com" }],
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   publisher: "Carman Creative",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "John Carman — Carman Creative",
+    title: "John Carman — Creative Director | Carman Creative",
     description:
-      "John Carman — creative director and founder of Carman Creative. Brand, creative direction, and design-systems work.",
+      "Creative director and brand & creative-operations leader. Twenty years across enterprise brand, campaigns, design systems, and creative operations.",
     url: "https://www.carmancreative.com",
     siteName: "Carman Creative",
     type: "website",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Carman — Carman Creative",
+    title: "John Carman — Creative Director | Carman Creative",
     description:
-      "John Carman — creative director and founder of Carman Creative. Brand, creative direction, and design-systems work.",
+      "Creative director and brand & creative-operations leader. Twenty years across enterprise brand, campaigns, design systems, and creative operations.",
   },
 };
 
@@ -64,7 +64,16 @@ const personLd = {
   name: "John Carman",
   jobTitle: "Creative Director",
   description:
-    "Creative director and founder of Carman Creative. Twenty years across brand, creative direction, creative operations, and design systems, most of it inside large organizations.",
+    "Creative director and brand & creative-operations leader. Twenty years across brand, creative direction, creative operations, and design systems, most of it inside large healthcare organizations.",
+  knowsAbout: [
+    "Creative direction",
+    "Brand strategy and identity systems",
+    "Creative operations",
+    "Design systems",
+    "Integrated campaigns",
+    "Team leadership",
+    "AI-enabled creative workflow",
+  ],
   url: "https://www.carmancreative.com",
   address: {
     "@type": "PostalAddress",
