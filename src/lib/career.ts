@@ -69,6 +69,11 @@ export const EMPLOYERS: Employer[] = [
     // Anthem Blue Cross/BCBS, Wellpoint and Carelon — and Beacon became
     // Carelon Behavioral Health inside Carelon in 2023. Elevance Health is the
     // parent; Anthem is a brand within it, not the umbrella.
+    //
+    // Four titles across sixteen years: Graphic Designer (2010) → Manager of
+    // Design (~2016) → Creative Director (Oct 2018) → Creative Manager (2023,
+    // the merger re-level). Each is its own stint so the progression is
+    // legible; collapsing them hid three promotions.
     company: "Carelon Behavioral Health (Elevance Health)",
     range: "2010 — Present",
     stints: [
@@ -104,18 +109,27 @@ export const EMPLOYERS: Employer[] = [
         ],
       },
       {
-        // TODO: Split into two stints once the year the Manager of Design
-        // title began is confirmed. Combined for now because the boundary is
-        // not known and inventing it would be worse; both titles are named and
-        // the span is correct either way.
-        title: "Graphic Designer, then Manager of Design",
-        org: "ValueOptions → Beacon Health Options",
-        range: "2010 — 2018",
+        title: "Manager of Design",
+        org: "Beacon Health Options",
+        // ~2016 — John places it about two years before the October 2018
+        // promotion to Creative Director. Year granularity matches the rest of
+        // the résumé; LinkedIn wants a month, which is still to confirm.
+        range: "2016 — 2018",
         summary:
-          "Came up through the craft — joined ValueOptions as a designer, moved into managing the design team, and worked through the 2014 merger that created Beacon Health Options.",
+          "Moved from making the work to running it — took over the design team, creative review, and the intake that fed both.",
         bullets: [
-          "Produced and then directed brand, campaign, and production work across the business.",
-          "Took on team management, creative review, and the first of the process work that became a through-line.",
+          "Ran day-to-day creative for the design team: assignments, review, and quality across a high-volume request queue.",
+          "Started the process work that became a through-line — intake, templates, and the first governance around brand consistency.",
+        ],
+      },
+      {
+        title: "Graphic Designer",
+        org: "ValueOptions → Beacon Health Options",
+        range: "2010 — 2016",
+        summary:
+          "Joined ValueOptions producing brand, campaign, print, and member-facing work, and stayed through the 2014 merger that created Beacon Health Options.",
+        bullets: [
+          "Design and production across brand, campaign, and member communications for a national behavioral health organization.",
         ],
       },
     ],

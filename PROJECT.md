@@ -261,10 +261,11 @@ facts here. The old vanity stat `175+ projects shipped` was dropped.
 
 ### Employment history (About + Résumé) — corrected & non-defensive
 - **Carelon Behavioral Health (Elevance Health) — 2010 — Present.** One
-  organisation, three names, four titles (see #67): Creative Manager /
+  organisation, three names, four titles (see #67, #72): Creative Manager /
   Carelon Behavioral Health (2023 — Present) · Creative Director / Beacon
-  Health Options (2018 — 2023) · Graphic Designer, then Manager of Design /
-  ValueOptions → Beacon Health Options (2010 — 2018). Listed **first**
+  Health Options (2018 — 2023) · Manager of Design / Beacon Health Options
+  (2016 — 2018) · Graphic Designer / ValueOptions → Beacon Health Options
+  (2010 — 2016). Listed **first**
   (enterprise experience leads). The About copy explains the Beacon →
   Carelon transition once, plainly, without sounding bitter.
 - Carman Creative — Founder — 2020 — Present
@@ -1554,11 +1555,8 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     sixteen-year tenure through two acquisitions and three promotions rather
     than as a flat span. This closes the eight-year gap flagged in #65.
     - Company header is now `Carelon Behavioral Health (Elevance Health)`.
-    - **The 2010 — 2018 period is one combined stint** — "Graphic Designer,
-      then Manager of Design" — because the year the Manager title began is
-      not known. `career.ts` carries a TODO; splitting it into two stints is
-      a two-line change once the year is confirmed, and inventing the
-      boundary would have been worse than combining them.
+    - The 2010 — 2018 period was briefly one combined stint while the Manager
+      of Design start year was unknown; **split in #72**.
     - Note the résumé renders `<title> / <org>`, so an org containing its own
       slash printed three items where two were meant. Use `→` inside an org
       name, matching how the site writes Beacon → Carelon elsewhere.
@@ -1612,3 +1610,25 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       Health Options landed. **Elevance Health is the parent; Anthem is a brand
       within it, not the umbrella.** Do not write "under the Anthem umbrella" —
       anyone in healthcare will catch it.
+
+### Later session — the ladder, split
+
+72. **Four stints, not three.** John places the Manager of Design promotion
+    about two years before the October 2018 move to Creative Director, so the
+    combined 2010 — 2018 block splits at **~2016** — which happens to land in
+    the same window the ValueOptions brand was retired, so the Designer years
+    sit under ValueOptions and the Manager years under Beacon. The entry now
+    reads as a four-rung ladder at one employer:
+    **Graphic Designer (2010 — 2016) → Manager of Design (2016 — 2018) →
+    Creative Director (2018 — 2023) → Creative Manager (2023 — )**.
+    - The two earlier stints are deliberately **lean** — two bullets and one,
+      against four for each recent role. They are eight to sixteen years old;
+      their job is to show the climb, not to compete for attention with the
+      rebrand and Marketing Bench.
+    - The **2016 boundary is approximate** ("about two years before"), stated
+      at year granularity like everything else on the résumé. LinkedIn wants a
+      month for it and for the Director title's end; both are still open.
+    - This is the answer to the Director → Manager question working from the
+      other direction: a reader who sees three promotions in thirteen years
+      reads the 2023 title change as what it was — a merger re-level — without
+      anyone having to say so.
