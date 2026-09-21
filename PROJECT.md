@@ -1569,16 +1569,14 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     education field is a hard filter on a lot of large-company applicant
     screens.
 
-69. **⚠ Origin year is unresolved — do not treat any of these as settled.**
-    `SCALE.years` / `PROFILE.yearsExperience` is **20**, which counts from
-    2006. The hero meta strip was changed from **EST. 2005 → EST. 2006** so
-    it agrees with that count. But the degree is May 2008 and John has said
-    he started around 2007, which is 19 years, not 20. The three numbers do
-    not all reconcile.
-    - Two ways out, both fine: confirm paid design work in **2006** (common
-      for a GDes student in junior year) and everything locks; or publish
-      **no start year at all** — keep "20 years" as the round figure, drop
-      the year from the copy and drop `EST.` from the hero, so there is no
-      second number inviting subtraction.
-    - The résumé has no pre-2010 dates, so it is internally consistent under
-      either answer. The origin year appears only in the hero strip.
+69. **Origin year settled: 2006.** `SCALE.years` / `PROFILE.yearsExperience`
+    is **20**, counting from 2006 — an internship at Riggs Ward Design plus
+    paid projects for local Richmond businesses, during the VCU degree. The
+    hero meta strip reads **EST. 2006** to agree with it (it had said 2005,
+    which agreed with nothing). The 2008 degree date alongside a 2006 start is
+    the normal shape of a design career, not a contradiction.
+    - The origin year appears only in the hero strip; the résumé carries no
+      pre-2010 dates, so it is internally consistent independently.
+    - Riggs Ward is deliberately **not** on the résumé. A college internship
+      twenty years into a career pulls attention away from the enterprise
+      work; it is the detail for a conversation, not a line item.
