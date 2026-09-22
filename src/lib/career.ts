@@ -71,16 +71,35 @@ export const EMPLOYERS: Employer[] = [
     range: "2023 — Present",
     stints: [
       {
+        // SCOPE — corrected, do not narrow it again. Three things had been
+        // wrong here and each one understated or overstated the job:
+        //   1. The team is the STUDIO PRODUCTION team, and John CO-manages
+        //      ten designers. He is not its sole manager. The five-person
+        //      team he ran on his own is the Beacon/Creative Director stint
+        //      below — do not move that number up here.
+        //   2. The remit is ALL Elevance Health lines of business. It is not
+        //      behavioral health, and "behavioral health outward" framed a
+        //      whole-enterprise job as a specialty one. (Written as "Elevance
+        //      Health lines of business", which covers Anthem: Elevance is the
+        //      parent and Anthem is a brand within it — see #71. Never write
+        //      "the Anthem umbrella".)
+        //   3. John was PART OF THE TEAM that rebuilt Workfront. He did not
+        //      rebuild it. The earlier wording claimed sole authorship of a
+        //      group effort; that is the kind of thing a former colleague
+        //      would notice, and it is not what he said he did.
         title: "Creative Manager",
         range: "2023 — Present",
         current: true,
         summary:
-          "On the Elevance Health creative team, working across all lines of business inside an ~85,000-person enterprise. Came in as creative lead for Carelon Behavioral Health when Beacon was acquired; the remit widened from there.",
+          "On the Studio Production team at Elevance Health — the in-house studio serving all lines of business across an ~85,000-person enterprise, on point to produce a high volume of work accurately and on brand.",
         bullets: [
-          "Direct brand, campaign, and digital work across Elevance lines of business — behavioral health outward.",
-          "Manage a five-person design team and direct outside agencies and production vendors.",
-          "Rebuilt Workfront intake, review, and approval around ~75 projects a month (2025) — took the process apart around the pain points the team named rather than patching the existing instance.",
-          "Own creative review and quality control, and build the templates, governance, and systems that hold quality steady as volume grows.",
+          "Co-manage a team of ten designers producing brand, campaign, and digital work across every Elevance Health line of business.",
+          // TODO: Confirm the ten years runs from ~2016. If the WebbMason
+          // relationship started later, cut "across three roles" — the span is
+          // the point, and it should not be even slightly generous.
+          "Manage the relationship with WebbMason, our external production and event-support partner — a ten-year account carried across three roles.",
+          "Part of the team that rebuilt Workfront intake, review, and approval around ~75 projects a month — the group took the process apart around the pain points it named rather than patching the existing instance.",
+          "Own creative review and quality control, and build the templates, governance, and systems that hold quality and accuracy steady as volume grows.",
         ],
       },
     ],
@@ -102,6 +121,8 @@ export const EMPLOYERS: Employer[] = [
         summary:
           "Ran the creative function for a national behavioral health company — the team, the systems, and the brand — then carried all three through its acquisition by Elevance Health.",
         bullets: [
+          // Five, managed solo. This is the outright-management number and it
+          // belongs to this stint, not to the co-managed studio team above.
           "Led a five-person design team and set the creative standard across brand, campaign, and digital work.",
           "Led the creative transition through the Beacon → Carelon rebrand — ~1,500 assets rebuilt on the new identity across an ~85,000-person organization.",
           "Built Marketing Bench (2020), a self-serve platform letting field teams produce on-brand collateral without a designer in the critical path — ~60% faster turnaround, ~30% higher engagement.",
@@ -204,15 +225,18 @@ export const SCALE = {
   assetsLabel: "Brand assets migrated in an enterprise rebrand",
   orgSize: "~85,000",
   orgLabel: "Person organization",
+  /** Managed solo, as Creative Director at Beacon. The cleanest people claim. */
   team: 5,
   teamLabel: "Designers led as a creative lead",
+  /** The current Studio Production team, which John co-manages. */
+  studioTeam: 10,
   /** Counts from the first paid design work, during the VCU degree. */
   years: 20,
   yearsLabel: "Years leading creative & brand",
   enterpriseYears: 15,
   enterpriseYearsLabel: "Years in enterprise healthcare",
   throughput: "~75",
-  throughputLabel: "Projects a month through the workflow he rebuilt",
+  throughputLabel: "Projects a month through the workflow the team rebuilt",
 } as const;
 
 /**
@@ -221,4 +245,4 @@ export const SCALE = {
  * phrasing should be consistent everywhere a reader might check it.
  */
 export const TRANSITION_NOTE =
-  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023, and I led the creative transition. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — I am on the Elevance Health creative team now, across all lines of business rather than one company.";
+  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023, and I led the creative transition. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — I am on the Studio Production team at Elevance Health now, across all lines of business rather than one company.";

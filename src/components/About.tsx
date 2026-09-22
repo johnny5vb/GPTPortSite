@@ -135,9 +135,9 @@ export default function About() {
                 creative transition — roughly 1,500 brand assets migrated to the
                 new identity across an organization of about 85,000. The
                 restructuring moved my title to Creative Manager; the work
-                didn&apos;t shrink with it — I&apos;m on the Elevance Health
-                creative team now, across all lines of business rather than one
-                company.
+                didn&apos;t shrink with it — I&apos;m on the Studio Production
+                team at Elevance Health now, co-managing ten designers across
+                all lines of business rather than one company.
               </p>
               <p>
                 Alongside that, I run Carman Creative — brand, digital, and

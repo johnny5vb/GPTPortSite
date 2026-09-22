@@ -111,10 +111,12 @@ export default function ResumePage() {
             Creative Director and creative-operations leader with{" "}
             {PROFILE.yearsExperience} years turning complex goals into clear,
             useful, and distinctive creative work — most of it inside enterprise
-            healthcare. Led creative through an enterprise acquisition and
-            rebrand, manage a five-person design team, direct outside agencies
-            and vendors, and build the systems, templates, and governance that
-            let quality scale with volume.
+            healthcare. Led the creative transition through an enterprise
+            acquisition and rebrand, co-manage a ten-person studio production
+            team after running a five-person design team as Creative Director,
+            direct outside agencies and production vendors, and build the
+            systems, templates, and governance that let quality scale with
+            volume.
           </p>
         </Section>
 

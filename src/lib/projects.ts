@@ -556,7 +556,7 @@ export const PROJECTS: Project[] = [
     process: [],
     services: [
       "Workflow design",
-      "Workfront ownership",
+      "Workfront rebuild",
       "Reviews & approvals",
       "Reporting & templates",
     ],
@@ -567,12 +567,15 @@ export const PROJECTS: Project[] = [
     cover: "/work/workfront-workflow-transformation/future-state-plate.jpg",
     coverAspect: "4 / 3",
     gallery: [],
+    // John was part of the rebuild team, not its author. Kept honest even
+    // though this project is still `draft` — a claim does not get to be loose
+    // because it is unpublished.
     roleSummary:
-      "Redrew Workfront phases, batching, and intake for the creative team.",
+      "On the team that rebuilt how creative moves through Workfront.",
     caseStudy: {
       overview: [
         { label: "Organization", value: "Elevance Health / Carelon" },
-        { label: "Role", value: "Workflow / production lead" },
+        { label: "Role", value: "Creative representative on the rebuild team" },
         { label: "Platform", value: "Workfront" },
         { label: "Volume", value: "~75+ projects monthly" },
         { label: "Timeline", value: "2025" },
@@ -580,11 +583,11 @@ export const PROJECTS: Project[] = [
       challenge:
         "The legacy instance — “Single Spine,” the consolidation of five separate Workfront systems into one — drew constant complaints from writers, designers, project managers, and requesters. Phase timing was the core issue: on paper, the timeline for each task ran so long that PMs and requesters balked the moment they saw it, and rushed, haphazard jobs filled the gap. Work sat buried under numeric job codes and nested folders, and the process no longer matched how creative actually worked.",
       mandate:
-        "Rather than keep patching Single Spine, stand up a new instance from scratch — “Workfront Restart” — built around every pain point the old one had exposed. Rework how creative moves through it at ~75+ projects a month: phase timelines, batching, delegation, intake, and storage, so the timeline was realistic and the work actually moved faster.",
+        "Rather than keep patching Single Spine, the team stood up a new instance from scratch — “Workfront Restart” — built around every pain point the old one had exposed. Rework how creative moves through it at ~75+ projects a month: phase timelines, batching, delegation, intake, and storage, so the timeline was realistic and the work actually moved faster.",
       context:
         "An enterprise environment with many stakeholders and a platform in daily use — the migration had to land without stopping the work. A large cross-functional effort with many people involved; I led the creative side through both the legacy instance and the rebuild.",
       role: [
-        "Led the creative side through both instances — Single Spine and the Workfront Restart rebuild",
+        "Represented the creative side through both instances — Single Spine and the Workfront Restart rebuild",
         "Served as the point person for the creative team",
         "Sat on the workgroup committee implementing the changes and reporting to leadership",
         "Redrew the phase strategy for every type of tactic and deliverable — and for shared pieces",

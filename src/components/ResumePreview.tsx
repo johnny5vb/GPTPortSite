@@ -13,14 +13,14 @@ import { SCALE } from "@/lib/career";
  * this block cannot drift from the résumé or the About section.
  */
 const SUMMARY = [
-  { label: "Now", value: "Creative Manager, Elevance Health — all lines of business" },
+  { label: "Now", value: "Creative Manager, Elevance Health Studio Production — all lines of business" },
   { label: "Held", value: "Creative Director, Beacon Health Options (2018 — 2023)" },
   { label: "Before", value: "Graphic Designer, then Manager of Creative Services — ValueOptions → Beacon" },
   { label: "Experience", value: `${PROFILE.yearsExperience}+ years, mostly enterprise healthcare` },
-  { label: "Team", value: `${SCALE.team}-person design team, plus agencies and vendors` },
+  { label: "Team", value: `Co-manage ${SCALE.studioTeam} designers; led ${SCALE.team} as Creative Director` },
   { label: "Scale", value: `${SCALE.assets} assets migrated across an ${SCALE.orgSize}-person organization` },
   { label: "Leads", value: "Brand, campaigns, creative operations, teams" },
-  { label: "Systems", value: "Workfront, brand governance, AI-enabled workflow" },
+  { label: "Systems", value: "Workfront, brand governance, vendor management, AI-enabled workflow" },
   { label: "Also", value: "Founder, Carman Creative" },
 ];
 

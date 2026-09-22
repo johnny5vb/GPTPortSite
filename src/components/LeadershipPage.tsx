@@ -9,13 +9,14 @@ import { PROFILE } from "@/lib/profile";
 import Testimonials from "./Testimonials";
 
 const EXPERIENCE = [
-  "Creative Manager, Elevance Health — all lines of business (current)",
+  "Creative Manager, Elevance Health Studio Production — all lines of business (current)",
   "Creative Director, Beacon Health Options — held through the 2023 Carelon transition",
   "Manager of Creative Services, Beacon Health Options — team, budget, vendors, standards",
-  "Managed a five-person design team",
+  "Co-manager of a ten-person studio production team",
+  "Led a five-person design team as Creative Director",
   "Executive and cross-functional stakeholder collaboration",
-  "Agency and vendor direction",
-  "Workfront and production workflow ownership",
+  "Ten-year ownership of the WebbMason production and event-support relationship",
+  "High-volume production operations and agency direction",
   "Led the creative transition through the Beacon → Carelon rebrand",
   "Creative review and quality control",
   "Campaign and brand-system development",
@@ -57,7 +58,7 @@ const PROOF = [
   "Led creative through an enterprise acquisition and rebrand — Beacon Health Options → Carelon / Elevance Health (2022–2023)",
   "Migrated ~1,500+ brand assets across an ~85,000+ employee organization",
   "Built the Marketing Bench creative-support model — ~60% faster turnaround and ~30% higher engagement (2020)",
-  "Reworked Workfront intake, review, and approval across ~75+ projects a month (2025)",
+  "Part of the team that rebuilt Workfront intake, review, and approval across ~75+ projects a month",
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
 ];

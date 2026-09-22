@@ -261,10 +261,13 @@ facts here. The old vanity stat `175+ projects shipped` was dropped.
 
 ### Employment history (About + Résumé) — corrected & non-defensive
 Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
-- **Elevance Health — 2023 — Present.** Creative Manager, on the Elevance
-  Health creative team across **all** lines of business. Came in as creative
-  lead for Carelon Behavioral Health when Beacon was acquired; the remit
-  widened from there.
+- **Elevance Health — 2023 — Present.** Creative Manager on the **Studio
+  Production team** — the in-house studio serving **all** Elevance Health
+  lines of business, on point to produce a high volume of work accurately.
+  **Co-manages ten designers** (not sole manager, and not five — five was
+  Beacon). Owns the **WebbMason** external production and event-support
+  relationship, a ten-year account. Was **part of the team** that rebuilt
+  Workfront — not its author.
 - **Beacon Health Options — 2010 — 2023.** One company, three titles through
   one merger: Creative Director (2018 — 2023) · Manager of Creative Services
   (2016 — 2018) · Graphic Designer / ValueOptions → Beacon Health Options
@@ -1726,3 +1729,46 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     column, the résumé preview and `/leadership` physically cannot state
     different titles or dates. Verified: `tsc --noEmit` clean, `npm run build`
     clean at 23 pages.
+
+
+### Later session — the current role, as it actually is
+
+75. **Three things about the current role were wrong, and each one either
+    understated or overstated it.** The owner corrected all three; every
+    surface derives from `career.ts`, so one edit moved the site, the résumé
+    and the résumé preview together.
+    - **The team is the Studio Production team, and he co-manages ten
+      designers.** The site said he manages five. Five is real but it belongs
+      to the Beacon/Creative Director stint, where he ran the team **on his
+      own** — moving that number onto the current role both misplaced it and
+      halved the current team. `SCALE` now carries `team: 5` (solo, Director
+      era) *and* `studioTeam: 10` (co-managed, now), so no surface has to pick
+      one and guess. The hero proof row still shows **5**: it is the outright
+      -management claim and its label says "as a creative lead". The larger
+      number does more work in prose, where "co-manage" can sit next to it.
+    - **The remit is all lines of business, not behavioral health.** The
+      bullet read "across Elevance lines of business — behavioral health
+      outward", which framed a whole-enterprise job as a specialty one, and
+      the summary opened on the Carelon origin. Both are gone; the Beacon
+      entry directly below still carries that history, so nothing is lost.
+      Written as "Elevance Health lines of business", which covers Anthem —
+      Elevance is the parent, Anthem a brand within it (#71). **Never "the
+      Anthem umbrella."**
+    - **He was part of the team that rebuilt Workfront; he did not rebuild
+      it.** This was the one that mattered. `career.ts`, the `/leadership`
+      PROOF list, `SCALE.throughputLabel` ("the workflow *he* rebuilt") and
+      the drafted Workfront case study all claimed sole authorship of a group
+      effort. Corrected everywhere, the unpublished case study included — a
+      claim does not get to stay loose because it is behind a `draft` flag.
+      The case study's own reflection was already "our team banded together",
+      so the overclaim was in the labels, not the story.
+    - **WebbMason is new to the site.** Ten years owning an external
+      production and event-support relationship is creative-operations proof
+      the site simply did not carry. It is on the current stint worded as a
+      through-line ("a ten-year account carried across three roles") because
+      ten years predates the 2023 stint — with a `TODO: Confirm` on whether
+      the span really runs from ~2016. WebbMason was already named inside the
+      Marketing Bench case study as the print-on-demand vendor; that is the
+      same relationship, now credited as a relationship.
+
+    Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages.
