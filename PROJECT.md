@@ -260,16 +260,28 @@ clearly-labeled `TODO: Confirm` placeholders — they are **not** published as
 facts here. The old vanity stat `175+ projects shipped` was dropped.
 
 ### Employment history (About + Résumé) — corrected & non-defensive
-- **Elevance Health — 2010 — Present.** One organisation, three names, four
-  titles (see #67, #72, #73): Creative Manager (2023 — Present) · Creative
-  Director / Beacon Health Options (2018 — 2023) · Manager of Design / Beacon
-  Health Options (2016 — 2018) · Graphic Designer / ValueOptions → Beacon
-  Health Options (2010 — 2016). Listed **first**
-  (enterprise experience leads). The About copy explains the Beacon →
-  Carelon transition once, plainly, without sounding bitter.
+Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
+- **Elevance Health — 2023 — Present.** Creative Manager, on the Elevance
+  Health creative team across **all** lines of business. Came in as creative
+  lead for Carelon Behavioral Health when Beacon was acquired; the remit
+  widened from there.
+- **Beacon Health Options — 2010 — 2023.** One company, three titles through
+  one merger: Creative Director (2018 — 2023) · Manager of Creative Services
+  (2016 — 2018) · Graphic Designer / ValueOptions → Beacon Health Options
+  (2010 — 2016). Elevance did not employ John from 2010 — it acquired the
+  company that did; the dates butt up, so the run from 2010 is unbroken.
+  The function was named **Creative Services**, which is why the 2016 title
+  is Manager of Creative Services and not "Manager of Design."
 - Carman Creative — Founder — 2020 — Present
+- ASAP Printing & Graphics — Graphic Designer — 2009 — 2010 (deliberately
+  lean: it closes the record, nothing more).
 - **Education:** Virginia Commonwealth University, BFA Graphic Design,
   cum laude, 2008 (`EDUCATION` in `career.ts`).
+
+The About copy explains the Beacon → Carelon transition once, plainly, without
+sounding bitter — and says John **led** the creative transition, which is the
+claim the flagship case study supports. Do not weaken it back to "was a
+creative lead through" or "participated in."
 
 Jumping Fish was removed from the employment history (see #66). It is still
 named inside the Important! Colorado case study as the agency of hire, which
@@ -1673,3 +1685,44 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     - Carelon still appears throughout `projects.ts` — the flagship case
       studies *are* Carelon Behavioral Health work, and that is historical and
       correct. This change is about the employment entry only.
+
+### Later session — the ladder as it was actually named
+
+74. **The employment history is structured by employer, and each title is
+    named the way the function was named at the time.** Three corrections,
+    all of them checked against the record rather than recalled:
+    - **Two employers, not one.** Elevance Health employs John from the March
+      2023 acquisition forward; **Beacon Health Options** is its own entry for
+      2010 — 2023, because Elevance did not employ him from 2010 — it acquired
+      the company that did. The dates butt up with no gap, so a reader still
+      sees one unbroken run from 2010. This is also how LinkedIn is structured,
+      which keeps the two documents the same shape.
+    - **"Manager of Creative Services," not "Manager of Design."** The function
+      was named Creative Services at Beacon and through the early Carelon
+      years. The title had been carried as "Manager of Design" from
+      conversation; it is corrected in `career.ts`, `ResumePreview` and the
+      `/leadership` experience list, and `career.ts` now records *why* so it is
+      not re-guessed. The stint gained a real set of bullets — the in-house
+      team, the creative budget, the agency and vendor relationships, the style
+      guide and brand-compliance standards, and the merged-Beacon rollout
+      across 54 offices, 5,000 employees and 270 customers. That last one
+      carries a `TODO: Confirm the timing` comment: the merger closed in 2014,
+      before this title began in 2016, so the sentence is worded to claim the
+      **rollout**, not the merger.
+    - **"Led the creative transition," everywhere.** Four surfaces said
+      "creative lead through the transition" or, worse, "enterprise rebrand
+      *participation*" — three different strengths of the same claim, the
+      weakest of which actively undersells a program this site devotes a
+      flagship case study to. `TRANSITION_NOTE`, the About paragraph, the
+      `/leadership` experience list and the `beacon-carelon-transformation`
+      `roleSummary` now all say **led**. The case study's Role field reads
+      "Creative Director, Creative Services" — the title and the function it
+      ran, rather than a title and a softer restatement of it.
+    - **`ASAP Printing & Graphics` (2009 — 2010) added** and kept deliberately
+      lean — one summary line, no bullets. It closes the record before the
+      2010 start; it is not there to compete for attention.
+
+    Everything above derives from `src/lib/career.ts`, so the résumé, the About
+    column, the résumé preview and `/leadership` physically cannot state
+    different titles or dates. Verified: `tsc --noEmit` clean, `npm run build`
+    clean at 23 pages.

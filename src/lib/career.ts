@@ -62,47 +62,18 @@ export type Employer = {
  */
 export const EMPLOYERS: Employer[] = [
   {
-    // One organisation, three names. ValueOptions merged with Beacon Health
-    // Strategies to form Beacon Health Options in 2014 (the ValueOptions brand
-    // was phased out through mid-2016). Anthem, Inc. renamed itself Elevance
-    // Health in June 2022 and reorganised into three go-to-market brands —
-    // Anthem Blue Cross/BCBS, Wellpoint and Carelon — and Beacon became
-    // Carelon Behavioral Health inside Carelon in 2023. Elevance Health is the
-    // parent; Anthem is a brand within it, not the umbrella.
-    //
-    // Four titles across sixteen years, all dates confirmed:
-    //   Graphic Designer      2010          — May 2016
-    //   Manager of Design     June 2016     — Sept 2018
-    //   Creative Director     October 2018  — March 2023
-    //   Creative Manager      March 2023    — present  (the merger re-level)
-    //
-    // EMPLOYER: Elevance Health. Not "Carelon Behavioral Health" — Carelon is
-    // where John landed when Beacon was acquired, and the remit has widened
-    // since: he is on the Elevance creative team covering all lines of
-    // business. The stints below name the entity as it was at the time, which
-    // is why the older ones still say Beacon and ValueOptions.
-    // Each is its own stint so the progression is legible; collapsing them hid
-    // three promotions. The site renders years; the months above are what
-    // LinkedIn needs, and every boundary meets with no gap or overlap.
+    // Elevance Health employs John from the March 2023 acquisition onward.
+    // Beacon Health Options is its own employer below: Elevance did not employ
+    // him from 2010 — it acquired the company that did. LinkedIn is structured
+    // this way and it is the literally accurate version; the dates butt up, so
+    // a reader still sees an unbroken run from 2010.
     company: "Elevance Health",
-    range: "2010 — Present",
+    range: "2023 — Present",
     stints: [
       {
         title: "Creative Manager",
-        org: "Elevance Health",
         range: "2023 — Present",
         current: true,
-        // March 2023 — the title changed the same month Beacon became Carelon
-        // Behavioral Health, which is what makes the re-level self-evident:
-        // the two dates are the same date. The site states years; LinkedIn
-        // wants the month, and it is March 2023.
-        //
-        // The move onto the wider Elevance team was gradual over the couple of
-        // years since, not a second title change, so it is one stint with the
-        // scope stated in the summary rather than two.
-        //
-        // The scope grew when the title compressed. Stated plainly, without
-        // editorialising about the title — the reader can see the two stints.
         summary:
           "On the Elevance Health creative team, working across all lines of business inside an ~85,000-person enterprise. Came in as creative lead for Carelon Behavioral Health when Beacon was acquired; the remit widened from there.",
         bullets: [
@@ -112,36 +83,51 @@ export const EMPLOYERS: Employer[] = [
           "Own creative review and quality control, and build the templates, governance, and systems that hold quality steady as volume grows.",
         ],
       },
+    ],
+  },
+  {
+    // Thirteen years and three titles at one company through one merger.
+    // ValueOptions merged with Beacon Health Strategies to form Beacon Health
+    // Options in 2014; the ValueOptions brand was phased out through mid-2016,
+    // which is when John moved from designing to running creative services.
+    company: "Beacon Health Options",
+    range: "2010 — 2023",
+    stints: [
       {
         title: "Creative Director",
-        org: "Beacon Health Options",
-        // October 2018 — March 2023, both confirmed. The site states years,
-        // matching the rest of the résumé; LinkedIn wants months, and these
-        // two meet exactly at the rebrand with no gap between them.
+        // October 2018 — March 2023, the month Beacon became Carelon
+        // Behavioral Health. The title change and the rebrand are the same
+        // date, which is what makes the re-level self-evident.
         range: "2018 — 2023",
         summary:
           "Ran the creative function for a national behavioral health company — the team, the systems, and the brand — then carried all three through its acquisition by Elevance Health.",
         bullets: [
           "Led a five-person design team and set the creative standard across brand, campaign, and digital work.",
-          "Creative lead through the Beacon → Carelon rebrand — ~1,500 assets rebuilt on the new identity across an ~85,000-person organization.",
+          "Led the creative transition through the Beacon → Carelon rebrand — ~1,500 assets rebuilt on the new identity across an ~85,000-person organization.",
           "Built Marketing Bench (2020), a self-serve platform letting field teams produce on-brand collateral without a designer in the critical path — ~60% faster turnaround, ~30% higher engagement.",
           "Led Stamp Out Stigma, a national mental-health awareness campaign, including out-of-home placement in Times Square.",
         ],
       },
       {
-        title: "Manager of Design",
-        org: "Beacon Health Options",
-        // June 2016 — October 2018 (the Creative Director promotion). The
-        // month lands on the ValueOptions → Beacon brand transition, which was
-        // phased through mid-2016, so the promotion and the rename coincided.
-        // That is why the Designer stint is attributed to ValueOptions and
-        // this one to Beacon: it is not a guess, the dates line up.
+        // June 2016 — October 2018. TITLE: confirmed. The function was named
+        // Creative Services at Beacon (and in the early Carelon years), so the
+        // title is "Manager of Creative Services" — not "Manager of Design",
+        // which is how it was recalled in conversation before being checked.
+        title: "Manager of Creative Services",
         range: "2016 — 2018",
         summary:
-          "Moved from making the work to running it — took over the design team, creative review, and the intake that fed both.",
+          "Took over the creative services function — the in-house team, the budget, the vendor relationships, and the standards behind the brand.",
         bullets: [
-          "Ran day-to-day creative for the design team: assignments, review, and quality across a high-volume request queue.",
-          "Started the process work that became a through-line — intake, templates, and the first governance around brand consistency.",
+          "Managed the in-house creative team: hiring, training, design direction, and presentation support.",
+          "Owned the creative budget and the relationships with outside agencies and production vendors.",
+          "Wrote and maintained the company style guide and the brand-compliance standards behind it.",
+          // TODO: Confirm the timing on this one. John's LinkedIn attributes
+          // the merger rollout to this role, but the merger that created
+          // Beacon closed in 2014 — before this title began in 2016. The
+          // ValueOptions brand was phased out through mid-2016, so a rollout
+          // running into this period is plausible; the sentence below is
+          // worded to claim the rollout, not the merger.
+          "Rolled the merged Beacon brand out across 54 offices, 5,000 employees, and 270 customers.",
         ],
       },
       {
@@ -169,6 +155,21 @@ export const EMPLOYERS: Employer[] = [
         bullets: [
           "Selected work includes Colony Coffee, Friends Rehabilitation Program, Health First Colorado, Special Forces Trust, and Spike's K9 Fund.",
         ],
+      },
+    ],
+  },
+  {
+    // Kept short on purpose. It is seventeen years old and its job is to close
+    // the record, not to compete for attention.
+    company: "ASAP Printing & Graphics",
+    range: "2009 — 2010",
+    stints: [
+      {
+        title: "Graphic Designer",
+        range: "2009 — 2010",
+        summary:
+          "Design and production for a commercial print shop — the grounding in how a file actually becomes a printed thing.",
+        bullets: [],
       },
     ],
   },
@@ -212,4 +213,4 @@ export const SCALE = {
  * phrasing should be consistent everywhere a reader might check it.
  */
 export const TRANSITION_NOTE =
-  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — I am on the Elevance Health creative team now, across all lines of business rather than one company.";
+  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023, and I led the creative transition. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — I am on the Elevance Health creative team now, across all lines of business rather than one company.";

@@ -131,13 +131,13 @@ export default function About() {
                 I held the Creative Director title at Beacon Health Options from
                 2018, leading brand, campaign, digital, and creative-operations work
                 and managing a five-person design team. When Beacon became
-                Carelon Behavioral Health inside Elevance Health, I was a
-                creative lead through the transition — roughly 1,500 brand
-                assets migrated to the new identity across an organization of
-                about 85,000. The restructuring moved my title to Creative
-                Manager; the work didn&apos;t shrink with it — I&apos;m on
-                the Elevance Health creative team now, across all lines of
-                business rather than one company.
+                Carelon Behavioral Health inside Elevance Health, I led the
+                creative transition — roughly 1,500 brand assets migrated to the
+                new identity across an organization of about 85,000. The
+                restructuring moved my title to Creative Manager; the work
+                didn&apos;t shrink with it — I&apos;m on the Elevance Health
+                creative team now, across all lines of business rather than one
+                company.
               </p>
               <p>
                 Alongside that, I run Carman Creative — brand, digital, and

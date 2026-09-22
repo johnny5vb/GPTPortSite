@@ -11,11 +11,12 @@ import Testimonials from "./Testimonials";
 const EXPERIENCE = [
   "Creative Manager, Elevance Health — all lines of business (current)",
   "Creative Director, Beacon Health Options — held through the 2023 Carelon transition",
+  "Manager of Creative Services, Beacon Health Options — team, budget, vendors, standards",
   "Managed a five-person design team",
   "Executive and cross-functional stakeholder collaboration",
   "Agency and vendor direction",
   "Workfront and production workflow ownership",
-  "Enterprise rebrand participation (Beacon → Carelon)",
+  "Led the creative transition through the Beacon → Carelon rebrand",
   "Creative review and quality control",
   "Campaign and brand-system development",
 ];

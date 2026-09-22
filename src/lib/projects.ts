@@ -183,11 +183,11 @@ export const PROJECTS: Project[] = [
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
-      "Creative lead through an enterprise acquisition and rebrand.",
+      "Led the creative transition through an enterprise acquisition and rebrand.",
     caseStudy: {
       overview: [
         { label: "Organization", value: "Beacon Health Options → Carelon / Elevance Health" },
-        { label: "Role", value: "Creative Director / Creative lead" },
+        { label: "Role", value: "Creative Director, Creative Services" },
         { label: "Focus", value: "Brand transition, governance, quality control" },
         { label: "Scale", value: "~1,500+ assets / ~85,000+ employees" },
         { label: "Team", value: "Scaled to ~20 (3 in-house + freelance)" },
