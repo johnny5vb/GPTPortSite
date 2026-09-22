@@ -162,6 +162,17 @@ export default function About() {
                 wherever the work happens: shape the work, strengthen the team,
                 and improve how creative moves through an organization.
               </p>
+              <p>
+                Given the choice, the independent work I take on is for people
+                building something they believe in — a veteran starting a coffee
+                company, a nonprofit getting families into homes, a fund for
+                military spouses and veterans. I&apos;m drawn to problems where
+                the brand has to carry real weight, and to building systems that
+                let good work keep happening after I&apos;ve stepped away. Modern
+                tools, classical taste: I&apos;ll use whatever gets the idea
+                made — AI included — but human judgment still decides
+                what&apos;s any good.
+              </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
