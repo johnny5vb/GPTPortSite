@@ -185,7 +185,7 @@ export const EMPLOYERS: Employer[] = [
         summary:
           "Independent practice: brand, identity, web, campaign, and creative-systems work for small organizations and nonprofits.",
         bullets: [
-          "Selected work includes Colony Coffee, Friends Rehabilitation Program, Health First Colorado, Special Forces Trust, and Spike's K9 Fund.",
+          "Selected work includes Friends Rehabilitation Program, Colony Coffee, Special Forces Trust, and Spike's K9 Fund.",
         ],
       },
     ],

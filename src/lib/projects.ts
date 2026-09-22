@@ -738,143 +738,8 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    slug: "colony-coffee",
-    num: "01",
-    tier: "independent",
-    title: "Colony Coffee Co.",
-    client: "Colony Coffee — Todd Mills",
-    year: "2025",
-    category: "Coffee Brand / Packaging",
-    duration: "",
-    tags: ["Brand", "Packaging", "Label"],
-    blurb:
-      "Brand and label design for a veteran-founded coffee company built to honor American history — period-authentic label artwork, made with real attention to detail.",
-    oneLiner:
-      "A coffee brand that honors American history — authentically.",
-    brief:
-      "Colony Coffee is a veteran-founded brand built to honor America's history and the people who came before us. Founder Todd Mills wanted label artwork with a genuine historical edge — proud and patriotic, but authentic to its period, down to the smallest details.",
-    process: [
-      {
-        label: "Research",
-        body: "Research explored the specialty coffee landscape, regional competitors, and brand positioning — identifying where Colony could earn loyalty without leaning on category clichés.",
-      },
-      {
-        label: "Design",
-        body: "Design emphasized clarity, hierarchy, and restraint — creating an experience that feels credible, approachable, and easy to navigate.",
-      },
-      {
-        label: "Development",
-        body: "Digital execution emphasized simplicity, performance, and flexibility — a system the team can extend as they add SKUs, locations, and channels.",
-      },
-    ],
-    services: [
-      "Brand concept",
-      "Label & packaging design",
-      "Typography",
-      "Art direction",
-    ],
-    palette: ["#1a120a", "#c98a4b", "#e8d6b3", "#f6efe2"],
-    display: "COLONY",
-    cover: "/work/colony-coffee/lineup.jpg",
-    gallery: [],
-    externalUrl: "https://www.carmancreative.com/work/colonycoffee",
-    caseStudy: {
-      overview: [
-        { label: "Client", value: "Colony Coffee — Todd Mills" },
-        { label: "Role", value: "Brand concept & label design (Carman Creative)" },
-        { label: "Year", value: "2025" },
-        { label: "Scope", value: "Brand system, labels & packaging, business card" },
-        { label: "Status", value: "On the shelf — first batch shipped" },
-      ],
-      challenge:
-        "Todd Mills — a veteran, and genuinely passionate about coffee — wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
-      mandate:
-        "Todd came to me for a logo. But a brand this specific — built on history and authenticity — needed more than a mark. I shaped the look and feel and designed the labels themselves: the typography, the structure, and the historical direction of the artwork.",
-      context:
-        "A veteran-founded small business, a founder with a strong, specific vision and a real eye for detail, and a brand built on patriotism and history that had to feel authentic rather than costume.",
-      role: [
-        "Led ideation and concepting over a few rounds with Todd",
-        "Landed the overall look and feel and the branding system",
-        "Set the typography and the structure of the label itself",
-        "Designed the custom label artwork, packaging, and a business card",
-        "Directed the historical, period-authentic artwork approach",
-      ],
-      team: [
-        "Todd Mills — founder, veteran, and the vision behind it",
-        "A direct, hands-on collaboration between the two of us",
-      ],
-      decisions: [
-        {
-          title: "A logo wasn't enough",
-          body: "Colony came asking for a logo. A brand built this specifically on history and authenticity needed more than a mark — so we built the system: custom label artwork and packaging, plus a business card, to actually get the company off the ground.",
-        },
-        {
-          title: "Honor history without the clichés",
-          body: "A genuinely period-authentic historical edge — not generic patriotic tropes. Todd's whole point was pride done right, so the artwork had to feel true to its era, not like a costume.",
-        },
-        {
-          title: "Land the direction, then lock the label",
-          body: "A few rounds of ideation to find the look and feel, then commit the typography and structure — so the label was resolved and production-ready rather than endlessly tweaked.",
-        },
-        {
-          title: "Sweat the details Todd cared about",
-          body: "He was specific about the detail, and that's where this brand earns its authenticity — so the small decisions got the same attention as the big ones.",
-        },
-      ],
-      outcomes: [
-        "What began as a logo request became a full brand system that launched the company",
-        "Direction locked, production done — the first batch is printed, bagged, and on the shelf",
-        "The start of an ongoing relationship — more Colony work to come",
-      ],
-      reflection:
-        "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
-      work: [
-        {
-          kind: "pair",
-          a: {
-            src: "/work/colony-coffee/liberty.jpg",
-            alt: "Colony Coffee — the Liberty dark roast bag, a midnight rider with a lantern",
-          },
-          b: {
-            src: "/work/colony-coffee/founders.jpg",
-            alt: "Colony Coffee — the Founders Blend medium roast bag, the founders at a candlelit table",
-          },
-          labelA: "Liberty — dark roast",
-          labelB: "Founders Blend — medium roast",
-          caption:
-            "Two of the three, up close — “Bold enough for midnight riders” and “Balanced like the Constitution,” down to the detail Todd cared about.",
-        },
-        {
-          kind: "pair",
-          a: {
-            src: "/work/colony-coffee/on-shelf.jpg",
-            alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
-          },
-          b: {
-            src: "/work/colony-coffee/label-sheet-v2.jpg",
-            alt: "Colony Coffee — the coffee-bag label design system across three roasts",
-          },
-          labelA: "On the shelf",
-          labelB: "The concepts it came from",
-          caption:
-            "The real thing beside the work that made it — first batch printed, bagged, and on the shelf at the shop, next to the label concepts across all three roasts: heroic illustration meets colonial-era Americana.",
-        },
-        {
-          kind: "full",
-          aspect: "3 / 2",
-          image: {
-            src: "/work/colony-coffee/gallery-1.jpg",
-            alt: "Colony Coffee — brand direction and exploration board",
-          },
-          caption:
-            "Where it came from — a few rounds of direction: palettes, collateral, and the historical art the labels grew out of.",
-        },
-    ],
-    },
-  },
-  {
     slug: "friends-rehab",
-    num: "02",
+    num: "01",
     tier: "independent",
     title: "Friends Rehabilitation Program",
     client: "Friends Rehabilitation Program (FRP)",
@@ -1041,6 +906,141 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    slug: "colony-coffee",
+    num: "02",
+    tier: "independent",
+    title: "Colony Coffee Co.",
+    client: "Colony Coffee — Todd Mills",
+    year: "2025",
+    category: "Coffee Brand / Packaging",
+    duration: "",
+    tags: ["Brand", "Packaging", "Label"],
+    blurb:
+      "Brand and label design for a veteran-founded coffee company built to honor American history — period-authentic label artwork, made with real attention to detail.",
+    oneLiner:
+      "A coffee brand that honors American history — authentically.",
+    brief:
+      "Colony Coffee is a veteran-founded brand built to honor America's history and the people who came before us. Founder Todd Mills wanted label artwork with a genuine historical edge — proud and patriotic, but authentic to its period, down to the smallest details.",
+    process: [
+      {
+        label: "Research",
+        body: "Research explored the specialty coffee landscape, regional competitors, and brand positioning — identifying where Colony could earn loyalty without leaning on category clichés.",
+      },
+      {
+        label: "Design",
+        body: "Design emphasized clarity, hierarchy, and restraint — creating an experience that feels credible, approachable, and easy to navigate.",
+      },
+      {
+        label: "Development",
+        body: "Digital execution emphasized simplicity, performance, and flexibility — a system the team can extend as they add SKUs, locations, and channels.",
+      },
+    ],
+    services: [
+      "Brand concept",
+      "Label & packaging design",
+      "Typography",
+      "Art direction",
+    ],
+    palette: ["#1a120a", "#c98a4b", "#e8d6b3", "#f6efe2"],
+    display: "COLONY",
+    cover: "/work/colony-coffee/lineup.jpg",
+    gallery: [],
+    externalUrl: "https://www.carmancreative.com/work/colonycoffee",
+    caseStudy: {
+      overview: [
+        { label: "Client", value: "Colony Coffee — Todd Mills" },
+        { label: "Role", value: "Brand concept & label design (Carman Creative)" },
+        { label: "Year", value: "2025" },
+        { label: "Scope", value: "Brand system, labels & packaging, business card" },
+        { label: "Status", value: "On the shelf — first batch shipped" },
+      ],
+      challenge:
+        "Todd Mills — a veteran, and genuinely passionate about coffee — wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
+      mandate:
+        "Todd came to me for a logo. But a brand this specific — built on history and authenticity — needed more than a mark. I shaped the look and feel and designed the labels themselves: the typography, the structure, and the historical direction of the artwork.",
+      context:
+        "A veteran-founded small business, a founder with a strong, specific vision and a real eye for detail, and a brand built on patriotism and history that had to feel authentic rather than costume.",
+      role: [
+        "Led ideation and concepting over a few rounds with Todd",
+        "Landed the overall look and feel and the branding system",
+        "Set the typography and the structure of the label itself",
+        "Designed the custom label artwork, packaging, and a business card",
+        "Directed the historical, period-authentic artwork approach",
+      ],
+      team: [
+        "Todd Mills — founder, veteran, and the vision behind it",
+        "A direct, hands-on collaboration between the two of us",
+      ],
+      decisions: [
+        {
+          title: "A logo wasn't enough",
+          body: "Colony came asking for a logo. A brand built this specifically on history and authenticity needed more than a mark — so we built the system: custom label artwork and packaging, plus a business card, to actually get the company off the ground.",
+        },
+        {
+          title: "Honor history without the clichés",
+          body: "A genuinely period-authentic historical edge — not generic patriotic tropes. Todd's whole point was pride done right, so the artwork had to feel true to its era, not like a costume.",
+        },
+        {
+          title: "Land the direction, then lock the label",
+          body: "A few rounds of ideation to find the look and feel, then commit the typography and structure — so the label was resolved and production-ready rather than endlessly tweaked.",
+        },
+        {
+          title: "Sweat the details Todd cared about",
+          body: "He was specific about the detail, and that's where this brand earns its authenticity — so the small decisions got the same attention as the big ones.",
+        },
+      ],
+      outcomes: [
+        "What began as a logo request became a full brand system that launched the company",
+        "Direction locked, production done — the first batch is printed, bagged, and on the shelf",
+        "The start of an ongoing relationship — more Colony work to come",
+      ],
+      reflection:
+        "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
+      work: [
+        {
+          kind: "pair",
+          a: {
+            src: "/work/colony-coffee/liberty.jpg",
+            alt: "Colony Coffee — the Liberty dark roast bag, a midnight rider with a lantern",
+          },
+          b: {
+            src: "/work/colony-coffee/founders.jpg",
+            alt: "Colony Coffee — the Founders Blend medium roast bag, the founders at a candlelit table",
+          },
+          labelA: "Liberty — dark roast",
+          labelB: "Founders Blend — medium roast",
+          caption:
+            "Two of the three, up close — “Bold enough for midnight riders” and “Balanced like the Constitution,” down to the detail Todd cared about.",
+        },
+        {
+          kind: "pair",
+          a: {
+            src: "/work/colony-coffee/on-shelf.jpg",
+            alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
+          },
+          b: {
+            src: "/work/colony-coffee/label-sheet-v2.jpg",
+            alt: "Colony Coffee — the coffee-bag label design system across three roasts",
+          },
+          labelA: "On the shelf",
+          labelB: "The concepts it came from",
+          caption:
+            "The real thing beside the work that made it — first batch printed, bagged, and on the shelf at the shop, next to the label concepts across all three roasts: heroic illustration meets colonial-era Americana.",
+        },
+        {
+          kind: "full",
+          aspect: "3 / 2",
+          image: {
+            src: "/work/colony-coffee/gallery-1.jpg",
+            alt: "Colony Coffee — brand direction and exploration board",
+          },
+          caption:
+            "Where it came from — a few rounds of direction: palettes, collateral, and the historical art the labels grew out of.",
+        },
+    ],
+    },
+  },
+  {
     slug: "special-forces-trust",
     num: "03",
     tier: "independent",
@@ -1163,169 +1163,8 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    slug: "important-colorado",
-    num: "04",
-    tier: "independent",
-    title: "Important! Colorado",
-    client: "Health First Colorado",
-    year: "2025 — 2026",
-    category: "Public Health Campaign",
-    duration: "",
-    tags: ["Campaign", "Healthcare", "Medicaid"],
-    blurb: "The 'IMPORTANT!' wordmark and campaign tactics for Health First Colorado — telling Medicaid members to check their benefits before federal changes affect coverage. Rolling out statewide through 2026.",
-    oneLiner: "Telling Colorado's Medicaid members: check your benefits.",
-    brief: "A wide-reaching campaign for Health First Colorado — Colorado's Medicaid program — warning members that federal changes could affect their coverage, and urging them to check their benefits information. It began in late 2025 and runs through 2026. I created the 'IMPORTANT!' wordmark and am helping build the print and digital tactics that carry it.",
-    process: [],
-    services: [
-      "Wordmark / logo",
-      "Campaign design",
-      "Print & digital tactics",
-      "Video",
-    ],
-    palette: ["#78256F", "#0067AB", "#245D38", "#f4ecf3"],
-    display: "IMPORTANT!",
-    // The awareness video is the featured piece: a frame from it is the
-    // thumbnail, a muted excerpt loops in the case-study hero (coverVideo),
-    // and the full film plays with sound as the first work moment.
-    cover: "/work/important-colorado/cover-v2.jpg",
-    coverAspect: "16 / 9",
-    coverVideo: {
-      src: "/work/important-colorado/video-loop.mp4",
-      poster: "/work/important-colorado/video-poster.jpg",
-    },
-    gallery: [],
-    roleSummary: "Created the 'IMPORTANT!' wordmark and campaign tactics for Health First Colorado.",
-    caseStudy: {
-      overview: [
-        { label: "Client", value: "Health First Colorado (Colorado Medicaid)" },
-        { label: "Agency", value: "Jumping Fish (agency of hire)" },
-        { label: "Role", value: "Wordmark, campaign design, and the awareness video" },
-        { label: "Reach", value: "Colorado Medicaid members, statewide" },
-        { label: "Status", value: "In progress — Phase 3 of 3; video in client review" },
-      ],
-      challenge:
-        "Health First Colorado needed to reach Medicaid members statewide with an urgent but clear message: federal changes could affect your coverage — check your benefits information. It had to cut through and be understood fast, across a broad and varied audience.",
-      mandate:
-        "Working through Jumping Fish, help create the campaign that carries this — starting with a wordmark that could anchor everything, then the print and digital tactics that communicate the change.",
-      context:
-        "A public-health message with real stakes for members' coverage, a wide statewide audience, and a multi-phase rollout (late 2025 through 2026) spanning Jumping Fish and the Health First Colorado team.",
-      role: [
-        "Created the 'IMPORTANT! Federal Changes to Colorado's Medicaid Program' wordmark — a logo that works as a standalone graphic and as a headline across pieces",
-        "Wrote the campaign brand system: mark architecture, colour, typography, imagery, and template anatomy",
-        "Designing the print and digital tactics that communicate the change",
-        "Working with Jumping Fish (agency of hire) and the Health First Colorado team",
-      ],
-      team: [
-        "Jumping Fish — agency of hire",
-        "Health First Colorado — client team",
-      ],
-      decisions: [
-        {
-          title: "A wordmark that doubles as a headline",
-          body: "Designed 'IMPORTANT!' to work two ways — as a singular graphic mark and as the headline on graphic and print pieces — so the campaign has one recognizable anchor everywhere it shows up.",
-        },
-        {
-          title: "A mark that needs no translation",
-          body: "The audience is statewide and multilingual, so the hero mark is an oversized exclamation point — understood identically in English, Spanish, and every other language the campaign reaches. At large scale the vertical bar alone stops the eye; it works as architecture before it works as punctuation.",
-        },
-        {
-          title: "One system, 100+ partner organizations",
-          body: "Over a hundred partner organizations produce materials under this campaign. That only holds together with a governed system: three defined mark variants with rules for when each applies, so the campaign stays recognizable whether it's a state mailer or a county flyer.",
-        },
-        {
-          title: "Build accessibility into the palette, not onto it",
-          body: "Every colour pairing is specified with its contrast ratio and WCAG level, and the two brightest colours are restricted to graphic elements rather than body text. On a public-health message that people need to read under stress, legibility is the message.",
-        },
-        {
-          title: "Design for translation from the first layout",
-          body: "Spanish translation is handled downstream by the state, so templates had to be built translation-ready — copy blocks that tolerate expansion instead of layouts that break the moment the language changes.",
-        },
-      ],
-      outcomes: [
-        "A full campaign brand system — mark architecture, palette, typography, imagery direction, and template anatomy — governing 100+ partner organizations",
-        "Phase 2 shipped: member-facing social carousels, immigrant-coverage slides, and a partner eligibility flowchart",
-        "Rolling out statewide since late 2025; currently Phase 2 of 3, ending with a video",
-        "TODO: Confirm reach and response figures once the campaign completes",
-      ],
-      reflection:
-        "TODO: Add a reflection once the campaign wraps — it ends with a video I plan to package here in a portfolio-worthy way.",
-      work: [
-        {
-          kind: "video",
-          src: "/work/important-colorado/film-540p.mp4",
-          poster: "/work/important-colorado/film-poster.jpg",
-          alt: "IMPORTANT! — the member-facing awareness video on 2027 work requirements and six-month renewals",
-          caption:
-            "The awareness video — 2:59, built to play with the sound off in a waiting room, so every line of policy is on screen. Narration, animation and a licensed cast; in client review, Fall 2026.",
-        },
-        {
-          kind: "full",
-          aspect: "16 / 9",
-          image: {
-            src: "/work/important-colorado/film-frames.jpg",
-            alt: "IMPORTANT! — all sixteen frames of the awareness video",
-          },
-          caption:
-            "Sixteen frames. Why-first: what's changing, does it apply to me, what to expect, what to do now — then three actions and a sign-off.",
-        },
-        {
-          kind: "gallery",
-          images: [
-            { src: "/work/important-colorado/social-universal.jpg", alt: "IMPORTANT! — universal social post: work requirements start January 1, 2027" },
-            { src: "/work/important-colorado/social-snap.jpg", alt: "IMPORTANT! — social post: if you meet SNAP/TANF work rules, you also meet Medicaid work requirements" },
-            { src: "/work/important-colorado/social-screener.jpg", alt: "IMPORTANT! — social post: not sure if the requirements apply to you? Use the free, anonymous screening tool" },
-          ],
-          caption:
-            "Universal social posts — one message each, written to be reposted by any partner organisation without edits.",
-        },
-        {
-          kind: "pair",
-          aspect: "17 / 22",
-          a: {
-            src: "/work/important-colorado/flyer-front.jpg",
-            alt: "IMPORTANT! — provisions flyer, front: who must comply, who does not, and what's also new in 2027",
-          },
-          b: {
-            src: "/work/important-colorado/flyer-walkby.jpg",
-            alt: "IMPORTANT! — the walk-by flyer: the same message at poster distance",
-          },
-          labelA: "Provisions flyer",
-          labelB: "Walk-by flyer",
-          caption:
-            "Two flyers for two distances — one to take home and read, one to catch from across a lobby. Same facts, same four actions, partner logo space on both.",
-        },
-        {
-          kind: "pair",
-          aspect: "17 / 22",
-          a: {
-            src: "/work/important-colorado/guide-p1.jpg",
-            alt: "IMPORTANT! — Partner Reference Guide, cover: Federal Changes to Colorado's Medicaid Program, what staff need to know",
-          },
-          b: {
-            src: "/work/important-colorado/guide-p2.jpg",
-            alt: "IMPORTANT! — Partner Reference Guide, page 2: who must comply, who does not, and the SNAP/TANF note",
-          },
-          labelA: "Partner Reference Guide",
-          labelB: "What staff need to know",
-          caption:
-            "The staff-side piece — a four-page reference guide with the common member questions and suggested responses, so the people members already trust can answer them.",
-        },
-        {
-          kind: "full",
-          aspect: "16 / 9",
-          image: {
-            src: "/work/important-colorado/member-slides.jpg",
-            alt: "IMPORTANT! — the nine-slide member presentation partners can present as their own",
-          },
-          caption:
-            "The member slides — nine slides any partner can present, with a slot for their own name and contact on the first one.",
-        },
-      ],
-    },
-  },
-  {
     slug: "spikes-k9-fund",
-    num: "05",
+    num: "04",
     tier: "independent",
     title: "Spike's K9 Fund",
     client: "Spike's K9 Fund",
@@ -1450,7 +1289,7 @@ export const PROJECTS: Project[] = [
      ───────────────────────────────────────────────────────────────────── */
   {
     slug: "atromitos",
-    num: "06",
+    num: "05",
     tier: "independent",
     title: "Atrómitos",
     client: "Atrómitos",
