@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "next-view-transitions";
-import { ArrowUpLeft, ArrowDown } from "lucide-react";
+import { ArrowUpLeft, ArrowDown, ArrowUpRight } from "lucide-react";
 import DesignSystemLab from "./DesignSystemLab";
 import StyleGuideTalksBack from "./StyleGuideTalksBack";
 import CampaignFactory from "./CampaignFactory";
@@ -37,6 +37,36 @@ const SYSTEMS = [
     name: "Atelier",
     tagline: "AI creative critique",
     status: "Concept",
+  },
+];
+
+/**
+ * Real, published things — shipped and live on the open web, distinct from the
+ * concept demos below. Links open the live project. Copy here is a first draft
+ * pending the owner's own one-liners; no thumbnails yet (the build sandbox
+ * can't reach the live URLs to capture them), so each uses a branded plate.
+ */
+const SHIPPED = [
+  {
+    name: "Premier Friends Club",
+    href: "https://premier-friends-club.netlify.app",
+    status: "Live",
+    blurb: "A site designed and built for Premier Friends Club.",
+    accent: ["#0e1b2a", "#2b6f8f"],
+  },
+  {
+    name: "Carman OS",
+    href: "https://carmanos.netlify.app",
+    status: "Experiment",
+    blurb: "A personal operating system — a command center for the day and the work.",
+    accent: ["#0e1a18", "#1cb791"],
+  },
+  {
+    name: "VB Surf Pulse",
+    href: "https://vbsurfpulse.netlify.app",
+    status: "Rough cut",
+    blurb: "A Virginia Beach surf-conditions pulse — a quick read before paddling out.",
+    accent: ["#0a1729", "#2b8fb8"],
   },
 ];
 
@@ -174,6 +204,59 @@ export default function LabPage() {
             <ArrowDown className="h-3.5 w-3.5" />
           </motion.span>
         </motion.a>
+      </section>
+
+      {/* Shipped & live — real published projects, distinct from the concept
+          demos below. External links open the live project. */}
+      <section className="container-x pb-16 md:pb-24">
+        <div className="flex items-baseline justify-between border-t border-line pt-6 mb-8">
+          <h2 className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone">
+            Shipped &amp; live
+          </h2>
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
+            Built with AI / out in the world
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {SHIPPED.map((p, i) => (
+            <motion.a
+              key={p.name}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="open live"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative rounded-xl border border-line bg-ink-2 overflow-hidden hover:border-line-2 transition-colors"
+            >
+              <div
+                className="relative h-32 flex items-end p-4 border-b border-line/60"
+                style={{
+                  background: `linear-gradient(135deg, ${p.accent[0]}, ${p.accent[1]})`,
+                }}
+              >
+                <span className="font-display text-2xl tracking-[-0.03em] text-bone/95 mix-blend-screen">
+                  {p.name}
+                </span>
+                <span className="absolute top-3 right-3 font-mono text-[9px] uppercase tracking-[0.2em] text-bone/85 border border-bone/25 rounded-full px-2 py-0.5">
+                  {p.status}
+                </span>
+              </div>
+              <div className="p-5">
+                <p className="text-sm text-mute leading-relaxed min-h-[2.5rem]">
+                  {p.blurb}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-green group-hover:text-green-bright transition-colors">
+                  Open live
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </div>
+            </motion.a>
+          ))}
+        </div>
       </section>
 
       {/* Sticky system navigator */}
