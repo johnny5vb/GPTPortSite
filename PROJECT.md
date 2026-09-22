@@ -266,8 +266,9 @@ Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
   lines of business, on point to produce a high volume of work accurately.
   **Co-manages ten designers** (not sole manager, and not five — five was
   Beacon). Owns the **WebbMason** external production and event-support
-  relationship, a ten-year account. Was **part of the team** that rebuilt
-  Workfront — not its author.
+  relationship, a ten-year account that began in the Manager of Creative
+  Services era and has run continuously since. Was **part of the team** that
+  rebuilt Workfront — not its author.
 - **Beacon Health Options — 2010 — 2023.** One company, three titles through
   one merger: Creative Director (2018 — 2023) · Manager of Creative Services
   (2016 — 2018) · Graphic Designer / ValueOptions → Beacon Health Options
@@ -275,6 +276,11 @@ Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
   company that did; the dates butt up, so the run from 2010 is unbroken.
   The function was named **Creative Services**, which is why the 2016 title
   is Manager of Creative Services and not "Manager of Design."
+  **Two outside partners** sit on these stints: **Sway**, the external design
+  agency, from the Manager years through the Creative Director years, ending
+  at the 2023 Carelon rebrand; and **WebbMason**, production and event
+  support, which began here and continues today. Sway therefore belongs on
+  the Beacon stints only — never on the current role.
 - Carman Creative — Founder — 2020 — Present
 - ASAP Printing & Graphics — Graphic Designer — 2009 — 2010 (deliberately
   lean: it closes the record, nothing more).
@@ -1770,5 +1776,34 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       the span really runs from ~2016. WebbMason was already named inside the
       Marketing Bench case study as the print-on-demand vendor; that is the
       same relationship, now credited as a relationship.
+
+    Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages.
+
+
+### Later session — the outside partners get named
+
+76. **Sway and WebbMason are on the site, and the WebbMason span is
+    confirmed.** Both were doing real work behind the generic bullet "owned
+    the creative budget and the relationships with outside agencies and
+    production vendors", which named nobody and so proved nothing.
+    - **WebbMason** — production and event support — **began while John was
+      Manager of Creative Services (2016) and has run continuously since.**
+      That closes #75's `TODO: Confirm`: the ten years and the "across three
+      roles" phrasing are both literal, not generous. The bullet stays on the
+      current stint as a through-line, and the Manager stint now names it as
+      where it started.
+    - **Sway** — the external design agency — ran from the Manager years
+      through the Creative Director years and **ended at the 2023 Carelon
+      rebrand.** So it is on both Beacon stints and deliberately **not** on
+      the current role. The Creative Director bullet now reads "Led a
+      five-person design team and directed Sway, the external design agency"
+      — team *and* agency is a materially bigger statement of scope than
+      team alone, and it is the ordinary shape of a Director's remit.
+    - `/leadership` traded two vaguer lines ("Ten-year ownership of the
+      WebbMason…", "High-volume production operations and agency direction")
+      for one concrete one — "Agency and vendor direction — Sway (design) and
+      WebbMason (production, ten years)" — plus "High-volume production
+      operations" on its own. Naming the partners is the proof; the category
+      label was not.
 
     Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages.
