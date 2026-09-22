@@ -250,20 +250,22 @@ motion with every reveal, counter and lazy image settled first (#58).
 ### Stat rows — all three read from `SCALE` in `career.ts` (#77)
 There are **three** places a career figure renders, and none of them types a
 number any more:
-- **Hero proof row** — `20+` years leading creative & brand / `5` designers
-  led as a creative lead / `~1,500` brand assets migrated.
-- **About** — `20+` years / `15+` years in enterprise healthcare / `5`
-  designers.
+- **Hero proof row** — `20+` years leading creative & brand / `10` designers
+  co-managed on the studio team / `~1,500` brand assets migrated.
+- **About** — `20+` years / `15+` years in enterprise healthcare / `10`
+  designers co-managed.
 - **`/capabilities`** — the same three, plus one deck-specific fact
   (`4` AI creative-systems explorations) that is **not** a career number and
   stays hardcoded.
 
-`SCALE.team` is **5** — the Beacon team John managed solo, which is what
-"led as a creative lead" claims. `SCALE.studioTeam` is **10**, the Studio
-Production team he co-manages now, and it deliberately stays **out of every
-stat row**: a proof number with its qualifier missing is worse than a smaller
-honest one, and "co-manage" does not survive a three-word tile. The larger
-figure does its work in prose instead.
+**Every stat row shows `SCALE.studioTeam` (10), never `SCALE.team` (5)** —
+see #78. The two numbers are different claims and each keeps its own label:
+`studioTeamLabel` says **co-managed** and `teamLabel` says *led as a creative
+lead*. The 5 is the Beacon team John ran solo and it belongs in prose — the
+About paragraph, the résumé preview's Team row and the Creative Director
+stint — where the qualifier can sit beside it. **Never show either number
+without its label**: an unqualified 10 claims sole management of a shared
+team, and a bare 5 understates the current one.
 
 `CountUp` renders the **final** value in server HTML (so screen readers,
 crawlers, and no-JS visitors never see `0+`), and only counts up once the stat
@@ -1847,3 +1849,30 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     worth showing, it is worth adding to `SCALE` first.
 
     Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages.
+
+
+### Later session — the stat rows lead with the current team
+
+78. **The hero, About and `/capabilities` now show `10`, not `5`.** #75 and
+    #77 had parked the current team out of every stat row on the grounds that
+    "co-manage" would not survive a three-word tile. Rendered, it does:
+    *"10 / Designers co-managed on the studio team"* sits comfortably beside
+    *"~1,500 / Brand assets migrated in an enterprise rebrand"*, which is
+    longer. The reasoning was sound and the render disproved it.
+    - **The fix was not to change `SCALE.team`.** All three rows read from one
+      source now, and `team` is also interpolated into the résumé preview's
+      "led 5 as Creative Director" — flipping it to 10 would have claimed he
+      led ten at Beacon. The rows were repointed at `SCALE.studioTeam`
+      instead, and `studioTeamLabel` was added so the number cannot travel
+      without "co-managed" attached.
+    - **`SCALE.team` (5) is still live and still correct** — in the résumé
+      preview, the Creative Director stint ("Led a five-person design team and
+      directed Sway") and the About paragraph. The two numbers now sit one
+      scroll apart on the home page with different labels and no conflict: the
+      stat says ten co-managed today, the paragraph below says five managed
+      solo at Beacon.
+    - Reverting is one line: point the three rows back at `SCALE.team` /
+      `SCALE.teamLabel`.
+
+    Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages, and the
+    rendered strings read off the prerendered HTML rather than assumed.

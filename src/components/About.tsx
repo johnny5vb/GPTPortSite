@@ -112,12 +112,13 @@ export default function About() {
               in one place would have left the two rows quietly disagreeing —
               exactly the drift career.ts exists to prevent.
 
-              Note `SCALE.team` is 5 — the Beacon team John managed solo, as
-              the label says. The current Studio Production team he co-manages
-              is `SCALE.studioTeam` (10) and deliberately does NOT go here: a
-              proof number with its qualifier missing is worse than a smaller
-              honest one. The larger figure does its work in prose, where
-              "co-manage" can sit beside it.
+              The third stat shows `SCALE.studioTeam` (10), the Studio
+              Production team John CO-manages — and `studioTeamLabel` carries
+              that qualifier, because an unqualified 10 would claim sole
+              management of a shared team. `SCALE.team` (5) is the Beacon team
+              he ran solo; it is still correct and still published, but in
+              prose — the paragraph below, the résumé preview and the Creative
+              Director stint — where the distinction has room to be made.
 
               Enterprise-scale figures (assets migrated, org headcount, monthly
               volume) live in the same file and are published as approximations
@@ -130,7 +131,7 @@ export default function About() {
               suffix="+"
               label={SCALE.enterpriseYearsLabel}
             />
-            <Stat to={SCALE.team} label={SCALE.teamLabel} />
+            <Stat to={SCALE.studioTeam} label={SCALE.studioTeamLabel} />
           </div>
 
           <div className="mt-10 grid grid-cols-12 gap-6">

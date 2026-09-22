@@ -233,6 +233,9 @@ export const SCALE = {
   teamLabel: "Designers led as a creative lead",
   /** The current Studio Production team, which John co-manages. */
   studioTeam: 10,
+  /** Note the label carries "co-managed". The number never travels without
+   *  it — an unqualified 10 would claim sole management of a team he shares. */
+  studioTeamLabel: "Designers co-managed on the studio team",
   /** Counts from the first paid design work, during the VCU degree. */
   years: 20,
   yearsLabel: "Years leading creative & brand",

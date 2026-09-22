@@ -382,7 +382,10 @@ function Hello() {
               n={`${SCALE.enterpriseYears}+`}
               label={SCALE.enterpriseYearsLabel.toLowerCase()}
             />
-            <Fact n={String(SCALE.team)} label={SCALE.teamLabel.toLowerCase()} />
+            <Fact
+              n={String(SCALE.studioTeam)}
+              label={SCALE.studioTeamLabel.toLowerCase()}
+            />
             <Fact n="4" label="AI creative-systems explorations" />
           </div>
         </div>

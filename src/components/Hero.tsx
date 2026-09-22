@@ -48,7 +48,7 @@ import { SCALE } from "@/lib/career";
  */
 const PROOF = [
   { value: `${SCALE.years}+`, label: SCALE.yearsLabel },
-  { value: String(SCALE.team), label: SCALE.teamLabel },
+  { value: String(SCALE.studioTeam), label: SCALE.studioTeamLabel },
   { value: SCALE.assets, label: SCALE.assetsLabel },
 ];
 
