@@ -78,7 +78,7 @@ export default function SectionRail() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 8 }}
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/85 whitespace-nowrap"
+                      className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/85 whitespace-nowrap rounded-full bg-ink/90 backdrop-blur-sm px-2.5 py-1"
                     >
                       <span className="text-mute mr-1.5">{s.num}</span>
                       {s.label}
