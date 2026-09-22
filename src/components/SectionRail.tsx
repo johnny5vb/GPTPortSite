@@ -71,7 +71,7 @@ export default function SectionRail() {
               >
                 {/* Label slides in on hover or when active */}
                 <AnimatePresence>
-                  {(isHover || isActive) && (
+                  {isHover && (
                     <motion.span
                       key={`l-${s.id}`}
                       initial={{ opacity: 0, x: 8 }}
