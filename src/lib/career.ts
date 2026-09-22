@@ -94,9 +94,12 @@ export const EMPLOYERS: Employer[] = [
           "On the Studio Production team at Elevance Health — the in-house studio serving all lines of business across an ~85,000-person enterprise, on point to produce a high volume of work accurately and on brand.",
         bullets: [
           "Co-manage a team of ten designers producing brand, campaign, and digital work across every Elevance Health line of business.",
-          // TODO: Confirm the ten years runs from ~2016. If the WebbMason
-          // relationship started later, cut "across three roles" — the span is
-          // the point, and it should not be even slightly generous.
+          // CONFIRMED: the WebbMason relationship began while John was Manager
+          // of Creative Services (2016) and has run continuously since, so the
+          // ten years and the three roles are both literal. The other outside
+          // partner of that era, the design agency Sway, ended at the 2023
+          // Carelon rebrand — which is why Sway appears on the two Beacon
+          // stints below and deliberately NOT here.
           "Manage the relationship with WebbMason, our external production and event-support partner — a ten-year account carried across three roles.",
           "Part of the team that rebuilt Workfront intake, review, and approval around ~75 projects a month — the group took the process apart around the pain points it named rather than patching the existing instance.",
           "Own creative review and quality control, and build the templates, governance, and systems that hold quality and accuracy steady as volume grows.",
@@ -123,7 +126,7 @@ export const EMPLOYERS: Employer[] = [
         bullets: [
           // Five, managed solo. This is the outright-management number and it
           // belongs to this stint, not to the co-managed studio team above.
-          "Led a five-person design team and set the creative standard across brand, campaign, and digital work.",
+          "Led a five-person design team and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
           "Led the creative transition through the Beacon → Carelon rebrand — ~1,500 assets rebuilt on the new identity across an ~85,000-person organization.",
           "Built Marketing Bench (2020), a self-serve platform letting field teams produce on-brand collateral without a designer in the critical path — ~60% faster turnaround, ~30% higher engagement.",
           "Led Stamp Out Stigma, a national mental-health awareness campaign, including out-of-home placement in Times Square.",
@@ -145,7 +148,7 @@ export const EMPLOYERS: Employer[] = [
           "Took over the creative services function — the in-house team, the budget, the vendor relationships, and the standards behind the brand.",
         bullets: [
           "Managed the in-house creative team: hiring, training, design direction, and presentation support.",
-          "Owned the creative budget and the relationships with outside agencies and production vendors.",
+          "Owned the creative budget and the outside relationships that ran alongside the in-house team — Sway as the design agency, WebbMason for production and event support.",
           "Wrote and maintained the company style guide and the brand-compliance standards behind it.",
           // TIMING, resolved. These figures came from the deleted 2010 — 2018
           // catch-all entry, which spanned the 2014 merger as well as this
