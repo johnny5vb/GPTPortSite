@@ -109,10 +109,15 @@ export const EMPLOYERS: Employer[] = [
         ],
       },
       {
-        // June 2016 — October 2018. TITLE: confirmed. The function was named
-        // Creative Services at Beacon (and in the early Carelon years), so the
-        // title is "Manager of Creative Services" — not "Manager of Design",
-        // which is how it was recalled in conversation before being checked.
+        // June 2016 — September 2018. TITLE: confirmed, and worth recording
+        // how, because LinkedIn was briefly self-contradictory. It carried an
+        // old catch-all entry, "Manager of Creative Services, Aug 2010 — Oct
+        // 2018", which overlapped both the ValueOptions Graphic Designer years
+        // and a separate "Design Manager, Jun 2016 — Sep 2018". John deleted
+        // the 2010 — 2018 overlap and retitled Design Manager to Manager of
+        // Creative Services, which is the accurate version: the function was
+        // named Creative Services, and these are the dates he actually held
+        // it. Do not revert this to "Design Manager" or "Manager of Design".
         title: "Manager of Creative Services",
         range: "2016 — 2018",
         summary:
@@ -121,16 +126,19 @@ export const EMPLOYERS: Employer[] = [
           "Managed the in-house creative team: hiring, training, design direction, and presentation support.",
           "Owned the creative budget and the relationships with outside agencies and production vendors.",
           "Wrote and maintained the company style guide and the brand-compliance standards behind it.",
-          // TODO: Confirm the timing on this one. John's LinkedIn attributes
-          // the merger rollout to this role, but the merger that created
-          // Beacon closed in 2014 — before this title began in 2016. The
-          // ValueOptions brand was phased out through mid-2016, so a rollout
-          // running into this period is plausible; the sentence below is
-          // worded to claim the rollout, not the merger.
+          // TIMING, resolved. These figures came from the deleted 2010 — 2018
+          // catch-all entry, which spanned the 2014 merger as well as this
+          // role — which is why the numbers looked mis-dated. The split that
+          // makes them true: managing the two legacy brands through the
+          // merger was the Graphic Designer era (2014 — mid-2016); rolling the
+          // new Beacon brand out began when the ValueOptions brand was retired
+          // in mid-2016, which is exactly when this title started. So the
+          // bullet claims the ROLLOUT only, never the merger. Do not widen it.
           "Rolled the merged Beacon brand out across 54 offices, 5,000 employees, and 270 customers.",
         ],
       },
       {
+        // August 2010 — May 2016. Confirmed from the LinkedIn entry.
         title: "Graphic Designer",
         org: "ValueOptions → Beacon Health Options",
         range: "2010 — 2016",
