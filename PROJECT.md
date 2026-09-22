@@ -247,17 +247,31 @@ motion with every reveal, counter and lazy image settled first (#58).
   transaction is being solicited). TODO: wire Netlify Forms if a real form is
   wanted.
 
-### About stats (leadership proof — only defensible numbers)
-- `20+` years leading creative & brand
-- `15+` years in enterprise healthcare creative (2010–present)
-- `3` designers managed as a creative lead
+### Stat rows — all three read from `SCALE` in `career.ts` (#77)
+There are **three** places a career figure renders, and none of them types a
+number any more:
+- **Hero proof row** — `20+` years leading creative & brand / `5` designers
+  led as a creative lead / `~1,500` brand assets migrated.
+- **About** — `20+` years / `15+` years in enterprise healthcare / `5`
+  designers.
+- **`/capabilities`** — the same three, plus one deck-specific fact
+  (`4` AI creative-systems explorations) that is **not** a career number and
+  stays hardcoded.
 
-`CountUp` now renders the **final** value in server HTML (so screen readers,
+`SCALE.team` is **5** — the Beacon team John managed solo, which is what
+"led as a creative lead" claims. `SCALE.studioTeam` is **10**, the Studio
+Production team he co-manages now, and it deliberately stays **out of every
+stat row**: a proof number with its qualifier missing is worse than a smaller
+honest one, and "co-manage" does not survive a three-word tile. The larger
+figure does its work in prose instead.
+
+`CountUp` renders the **final** value in server HTML (so screen readers,
 crawlers, and no-JS visitors never see `0+`), and only counts up once the stat
-scrolls into view. Enterprise-scale figures (asset counts, org headcount,
-monthly volume) live on `/leadership` and the flagship case studies as
-clearly-labeled `TODO: Confirm` placeholders — they are **not** published as
-facts here. The old vanity stat `175+ projects shipped` was dropped.
+scrolls into view. The enterprise figures carry a leading `~` and are published
+as approximations, not gated behind TODOs — anything genuinely unconfirmed
+belongs behind a visible `TODO: Confirm` instead. Never write `~1,500+`: a
+tilde and a plus hedge the same number twice. The old vanity stat
+`175+ projects shipped` was dropped.
 
 ### Employment history (About + Résumé) — corrected & non-defensive
 Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
@@ -1805,5 +1819,31 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       WebbMason (production, ten years)" — plus "High-volume production
       operations" on its own. Naming the partners is the proof; the category
       label was not.
+
+    Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages.
+
+
+### Later session — every stat row on one source
+
+77. **Three stat rows existed and only one read from `career.ts`.** The hero
+    derived its figures from `SCALE`; the About row and the `/capabilities`
+    fact grid typed the same numbers by hand. Same values on screen, so
+    nothing looked wrong — but changing the team size in one place would have
+    left the other two quietly disagreeing, which is the exact drift
+    `career.ts` was created to prevent. All three now read from `SCALE`.
+    - `/capabilities` keeps one hardcoded `Fact` — "4 AI creative-systems
+      explorations" — because it counts the `/lab` demos, not a career figure.
+    - The `/leadership` PROOF list was hand-typed too, and said
+      **`~1,500+` assets** across an **`~85,000+`** organization. A tilde and
+      a plus hedge the same number twice; `SCALE` already carries the `~`, so
+      both lines now interpolate it and the `+` is gone. Same for `~75+`
+      projects a month.
+    - Two labels changed slightly by adopting the canonical `SCALE` wording:
+      "years in enterprise healthcare creative" → "years in enterprise
+      healthcare", and "designers **managed** as a creative lead" →
+      "designers **led** as a creative lead".
+
+    **The rule from here: no surface types a career number.** If a figure is
+    worth showing, it is worth adding to `SCALE` first.
 
     Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages.

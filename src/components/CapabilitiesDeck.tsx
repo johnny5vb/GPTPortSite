@@ -17,6 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import CCMark from "./CCMark";
 import { PUBLISHED_PROJECTS } from "@/lib/projects";
+import { SCALE } from "@/lib/career";
 
 const SLIDES = [
   { id: "cover", num: "01", title: "Cover" },
@@ -373,9 +374,15 @@ function Hello() {
             </em>
           </h2>
           <div className="grid grid-cols-2 gap-6 mt-8 max-w-[60ch]">
-            <Fact n="20+" label="years leading creative & brand" />
-            <Fact n="15+" label="years in enterprise healthcare creative" />
-            <Fact n="5" label="designers managed as a creative lead" />
+            {/* The three career figures read from `SCALE` in career.ts so the
+                deck cannot drift from the hero, About and the résumé. The
+                fourth is deck-specific (the /lab demos), not a career number. */}
+            <Fact n={`${SCALE.years}+`} label={SCALE.yearsLabel.toLowerCase()} />
+            <Fact
+              n={`${SCALE.enterpriseYears}+`}
+              label={SCALE.enterpriseYearsLabel.toLowerCase()}
+            />
+            <Fact n={String(SCALE.team)} label={SCALE.teamLabel.toLowerCase()} />
             <Fact n="4" label="AI creative-systems explorations" />
           </div>
         </div>

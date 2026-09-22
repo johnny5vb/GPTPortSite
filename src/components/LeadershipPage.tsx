@@ -6,6 +6,7 @@ import { Link } from "next-view-transitions";
 import { ArrowUpLeft, ArrowUpRight, ArrowDownToLine } from "lucide-react";
 import { LEADERSHIP_PROJECTS } from "@/lib/projects";
 import { PROFILE } from "@/lib/profile";
+import { SCALE } from "@/lib/career";
 import Testimonials from "./Testimonials";
 
 const EXPERIENCE = [
@@ -56,9 +57,11 @@ const PRINCIPLES = [
 // TODO until confirmed — they are not presented as facts.
 const PROOF = [
   "Led creative through an enterprise acquisition and rebrand — Beacon Health Options → Carelon / Elevance Health (2022–2023)",
-  "Migrated ~1,500+ brand assets across an ~85,000+ employee organization",
+  // A tilde and a plus together hedge the same number twice; SCALE already
+  // carries the leading "~", so the "+" comes off.
+  `Migrated ${SCALE.assets} brand assets across an ${SCALE.orgSize}-employee organization`,
   "Built the Marketing Bench creative-support model — ~60% faster turnaround and ~30% higher engagement (2020)",
-  "Part of the team that rebuilt Workfront intake, review, and approval across ~75+ projects a month",
+  `Part of the team that rebuilt Workfront intake, review, and approval across ${SCALE.throughput} projects a month`,
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
 ];

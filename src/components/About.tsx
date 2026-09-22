@@ -6,7 +6,7 @@ import { Link } from "next-view-transitions";
 import { ArrowDownToLine, ArrowUpRight } from "lucide-react";
 import CountUp from "./CountUp";
 import { PROFILE } from "@/lib/profile";
-import { EMPLOYERS } from "@/lib/career";
+import { EMPLOYERS, SCALE } from "@/lib/career";
 
 /**
  * Employment history comes from `src/lib/career.ts` so this column, the
@@ -105,16 +105,32 @@ export default function About() {
             </em>
           </motion.h2>
 
-          {/* Proof row — only numbers that are defensible from the record.
-              The enterprise-scale figures (assets migrated, org headcount,
-              monthly volume) are published on /leadership and the résumé as
-              approximations; they live in `src/lib/career.ts` so every surface
-              states them identically. Anything still unconfirmed belongs in a
+          {/* Proof row — only numbers that are defensible from the record, and
+              all three now read from `SCALE` in `src/lib/career.ts` rather than
+              being typed here. They had been hardcoded: the same values the
+              hero renders, but with no link to them, so changing the team size
+              in one place would have left the two rows quietly disagreeing —
+              exactly the drift career.ts exists to prevent.
+
+              Note `SCALE.team` is 5 — the Beacon team John managed solo, as
+              the label says. The current Studio Production team he co-manages
+              is `SCALE.studioTeam` (10) and deliberately does NOT go here: a
+              proof number with its qualifier missing is worse than a smaller
+              honest one. The larger figure does its work in prose, where
+              "co-manage" can sit beside it.
+
+              Enterprise-scale figures (assets migrated, org headcount, monthly
+              volume) live in the same file and are published as approximations
+              with a leading "~". Anything still unconfirmed belongs in a
               visible `TODO: Confirm` placeholder, never here. */}
           <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8 border-t border-line pt-6">
-            <Stat to={20} suffix="+" label="Years leading creative & brand" />
-            <Stat to={15} suffix="+" label="Years in enterprise healthcare creative" />
-            <Stat to={5} label="Designers managed as a creative lead" />
+            <Stat to={SCALE.years} suffix="+" label={SCALE.yearsLabel} />
+            <Stat
+              to={SCALE.enterpriseYears}
+              suffix="+"
+              label={SCALE.enterpriseYearsLabel}
+            />
+            <Stat to={SCALE.team} label={SCALE.teamLabel} />
           </div>
 
           <div className="mt-10 grid grid-cols-12 gap-6">
