@@ -25,7 +25,12 @@ export const TESTIMONIALS: Testimonial[] = [
       "John didn’t just design our brand—he helped bring our story to life. From our logo to our coffee bag labels, every detail feels intentional, authentic, and distinctly Colony. His ability to blend history, artistry, and modern branding gave us a look that truly stands out and connects with our customers.",
     author: "Todd Mills",
     role: "Owner, Colony Coffee Company",
-    verified: true,
+    // Held back at the owner's request (2026-10-01) — he plans to ask Todd for
+    // a newer quote when the time is right. The quote below is real and was
+    // given with permission; it is withheld, not retracted. Either flip this
+    // back to `true` to republish it, or replace the `quote` with the new one
+    // (verbatim, per the rule at the top of this file).
+    verified: false,
   },
   {
     quote:
