@@ -37,7 +37,10 @@ export const TESTIMONIALS: Testimonial[] = [
       "John has an exceptional ability to translate vision into brand. From launching my firm to evolving our marketing over the years, his work has consistently elevated our presence, credibility, and growth. He’s not just a designer—he’s a true creative partner I trust completely.",
     author: "Harry J. Brown, Esq.",
     role: "Founder, Brown Estate Planning",
-    verified: true,
+    // Retired at the owner's request (2026-10-01). A quote from Mark S. at
+    // Porchlight (real estate) is expected to take this slot — add it as its
+    // own entry with his own words; do not move this quote onto his name.
+    verified: false,
   },
   {
     quote:
