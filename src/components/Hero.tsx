@@ -47,7 +47,7 @@ import { SCALE } from "@/lib/career";
  * two pages deep on /leadership. Figures come from `src/lib/career.ts`.
  */
 const PROOF = [
-  { value: `${SCALE.years}+`, label: SCALE.yearsLabel },
+  { value: `${SCALE.years}`, label: SCALE.yearsLabel },
   { value: String(SCALE.studioTeam), label: SCALE.studioTeamLabel },
   { value: SCALE.assets, label: SCALE.assetsLabel },
 ];
@@ -167,7 +167,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="font-mono text-[11px] uppercase tracking-[0.28em] text-green mb-5"
             >
-              // {PROFILE.name} — {PROFILE.titleShort}
+              // {PROFILE.name} – {PROFILE.titleShort}
             </motion.p>
 
             <h1 className="font-display text-[clamp(2.4rem,5.6vw,5rem)] leading-[1.04] tracking-[-0.04em] text-bone">
@@ -197,8 +197,8 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.5 }}
               className="mt-7 max-w-[52ch] text-bone/85 text-base md:text-lg leading-relaxed"
             >
-              {PROFILE.yearsExperience} years leading brand, campaign, digital,
-              and creative-operations work — most of it inside enterprise
+              {PROFILE.yearsExperience} years of brand, campaign, digital and
+              creative-operations work, most of it inside enterprise
               healthcare, where the scale, the stakeholders, and the scrutiny
               are highest.
             </motion.p>
@@ -243,7 +243,7 @@ export default function Hero() {
               </div>
               <div className="absolute -bottom-3 left-4 inline-flex items-center gap-2 rounded-full border border-line-2 bg-ink px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.2em] text-bone/70">
                 <span className="h-1.5 w-1.5 rounded-full bg-green" />
-                Creative Director / Brand &amp; Ops
+                Creative direction / Brand &amp; Ops
               </div>
             </div>
           </motion.div>

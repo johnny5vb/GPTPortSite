@@ -10,13 +10,13 @@ import { SCALE } from "@/lib/career";
 import Testimonials from "./Testimonials";
 
 const EXPERIENCE = [
-  "Creative Manager, Elevance Health Studio Production — all lines of business (current)",
-  "Creative Director, Beacon Health Options — held through the 2023 Carelon transition",
-  "Manager of Creative Services, Beacon Health Options — team, budget, vendors, standards",
+  "Design Manager, Elevance Health Studio Production (all lines of business, current)",
+  "Creative Director, Beacon Health Options, held through the 2023 Carelon transition",
+  "Manager of Creative Services, Beacon Health Options: team, budget, vendors, standards",
   "Co-manager of a ten-person studio production team",
   "Led a five-person design team as Creative Director",
   "Executive and cross-functional stakeholder collaboration",
-  "Agency and vendor direction — Sway (design) and WebbMason (production, ten years)",
+  "Agency and vendor direction: Sway (design) and WebbMason (production, ten years)",
   "High-volume production operations",
   "Led the creative transition through the Beacon → Carelon rebrand",
   "Creative review and quality control",
@@ -56,11 +56,11 @@ const PRINCIPLES = [
 // Verified, qualitative proof leads. Specific figures stay clearly labeled as
 // TODO until confirmed — they are not presented as facts.
 const PROOF = [
-  "Led creative through an enterprise acquisition and rebrand — Beacon Health Options → Carelon / Elevance Health (2022–2023)",
+  "Led creative through an enterprise acquisition and rebrand: Beacon Health Options → Carelon / Elevance Health (2022–2023)",
   // A tilde and a plus together hedge the same number twice; SCALE already
   // carries the leading "~", so the "+" comes off.
   `Migrated ${SCALE.assets} brand assets across an ${SCALE.orgSize}-employee organization`,
-  "Built the Marketing Bench creative-support model — ~60% faster turnaround and ~30% higher engagement (2020)",
+  "Built the Marketing Bench creative-support model, launched March 2023",
   `Part of the team that rebuilt Workfront intake, review, and approval across ${SCALE.throughput} projects a month`,
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",

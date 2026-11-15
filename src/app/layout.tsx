@@ -25,7 +25,7 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "John Carman — Carman Creative | Brand & Creative Direction",
+    default: "John Carman, Carman Creative | Brand & Creative Direction",
     template: "%s",
   },
   description:
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   publisher: "Carman Creative",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "John Carman — Carman Creative | Brand & Creative Direction",
+    title: "John Carman, Carman Creative | Brand & Creative Direction",
     description:
       "Creative direction, brand systems, and creative operations. Twenty years across enterprise brand, campaigns, and design systems, most of it inside large healthcare organizations.",
     url: "https://www.carmancreative.com",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Carman — Carman Creative | Brand & Creative Direction",
+    title: "John Carman, Carman Creative | Brand & Creative Direction",
     description:
       "Creative direction, brand systems, and creative operations. Twenty years across enterprise brand, campaigns, and design systems, most of it inside large healthcare organizations.",
   },

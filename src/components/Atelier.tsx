@@ -66,7 +66,7 @@ type Draft = {
 const DRAFTS: Draft[] = [
   {
     id: "northbound-hero",
-    title: "Northbound — Web hero v3",
+    title: "Northbound, Web hero v3",
     meta: "Submitted by Sam, 4:21pm",
     brand: "Northbound",
     variant: "hero",
@@ -86,9 +86,9 @@ const DRAFTS: Draft[] = [
         category: "Display weight",
         notes: {
           house:
-            "Display feels 50 weight too heavy at this size. The type scale has a Light cut — try it.",
+            "Display feels 50 weight too heavy at this size. The type scale has a Light cut, try it.",
           encouraging:
-            "Headline lands. One small note: try the Light variant of the display face here — it'll breathe more at this scale.",
+            "Headline lands. One small note: try the Light variant of the display face here. It'll breathe more at this scale.",
           tough: "Too heavy. Use the Light cut. It exists for this exact size.",
         },
       },
@@ -101,7 +101,7 @@ const DRAFTS: Draft[] = [
           house:
             "Two CTAs of equal weight read as a tie. Demote 'Read more' to a link with an arrow.",
           encouraging:
-            "Love the dual CTA intent — but they currently compete. Try secondary as a text link with arrow.",
+            "Love the dual CTA intent, but they currently compete. Try secondary as a text link with arrow.",
           tough: "Pick one CTA. The other should be a link.",
         },
       },
@@ -112,7 +112,7 @@ const DRAFTS: Draft[] = [
         category: "Tone in voice",
         notes: {
           house:
-            "'Made to be used' is fine. 'Out now' is breathless. Try 'Available' instead — quieter, in voice.",
+            "'Made to be used' is fine. 'Out now' is breathless. Try 'Available' instead, quieter, in voice.",
           encouraging:
             "Almost there. 'Out now' reads louder than Northbound's tone. 'Available' is on-voice.",
           tough: "'Out now' is wrong voice. Use 'Available.'",
@@ -127,7 +127,7 @@ const DRAFTS: Draft[] = [
           house:
             "Right column has unused real estate. Consider a slim product callout or product tag here.",
           encouraging:
-            "There's a nice opportunity in that right column — a small product tag could anchor it.",
+            "There's a nice opportunity in that right column, a small product tag could anchor it.",
           tough: "Empty right column is wasted. Add a product tag.",
         },
       },
@@ -135,7 +135,7 @@ const DRAFTS: Draft[] = [
   },
   {
     id: "verso-social",
-    title: "Verso — Issue 04 launch card",
+    title: "Verso, Issue 04 launch card",
     meta: "Submitted by Jess, 11:08am",
     brand: "Verso",
     variant: "editorial",
@@ -155,7 +155,7 @@ const DRAFTS: Draft[] = [
         category: "Tracking",
         notes: {
           house:
-            "Wonk italic is tracked too tight at this size — open to -0.015em for the headline.",
+            "Wonk italic is tracked too tight at this size, open to -0.015em for the headline.",
           encouraging:
             "Headline reads great. One tweak: open the tracking a touch on the italic.",
           tough: "Tracking is too tight. Open it.",
@@ -170,7 +170,7 @@ const DRAFTS: Draft[] = [
           house:
             "Subhead is 14 words and reads like a paragraph at this size. Cut to 7 words max.",
           encouraging:
-            "Solid subhead — could be even sharper at half the length.",
+            "Solid subhead, could be even sharper at half the length.",
           tough: "Too long. Cut by half.",
         },
       },
@@ -181,7 +181,7 @@ const DRAFTS: Draft[] = [
         category: "Date stamp",
         notes: {
           house:
-            "Drop date is missing. Add a small Out 03.14 in mono in the corner — Verso uses it on every launch.",
+            "Drop date is missing. Add a small Out 03.14 in mono in the corner, Verso uses it on every launch.",
           encouraging:
             "Lovely composition. A small mono date stamp would tie it to the family.",
           tough: "Missing date stamp. Add it.",
@@ -191,7 +191,7 @@ const DRAFTS: Draft[] = [
   },
   {
     id: "halcyon-pkg",
-    title: "Halcyon — SDK packaging",
+    title: "Halcyon, SDK packaging",
     meta: "Submitted by Riv, yesterday",
     brand: "Halcyon",
     variant: "product",
@@ -211,9 +211,9 @@ const DRAFTS: Draft[] = [
         category: "Mark proportion",
         notes: {
           house:
-            "Mark is set at 1.2x — system spec is 1x at this surface area. Re-snap to spec.",
+            "Mark is set at 1.2x, system spec is 1x at this surface area. Re-snap to spec.",
           encouraging:
-            "Strong layout. The mark is just slightly oversized — snap to 1x.",
+            "Strong layout. The mark is just slightly oversized, snap to 1x.",
           tough: "Mark scale is wrong. Use 1x.",
         },
       },
@@ -226,7 +226,7 @@ const DRAFTS: Draft[] = [
           house:
             "Accent line color reads grey on this surface. Use accent-2 (#a3eaff) for visibility.",
           encouraging:
-            "Nice details. The accent line gets lost — swap to accent-2 for contrast.",
+            "Nice details. The accent line gets lost, swap to accent-2 for contrast.",
           tough: "Accent line is invisible. Swap color.",
         },
       },
@@ -237,7 +237,7 @@ const DRAFTS: Draft[] = [
         category: "Version badge",
         notes: {
           house:
-            "Halcyon's SDK packaging includes a small v-badge — missing here. Add 'v3.0' in mono.",
+            "Halcyon's SDK packaging includes a small v-badge, missing here. Add 'v3.0' in mono.",
           encouraging:
             "Tiny opportunity: add the v-badge to anchor this as 3.0.",
           tough: "Missing version. Add v3.0 badge.",
@@ -252,7 +252,7 @@ const DRAFTS: Draft[] = [
           house:
             "Tagline is bottom-aligned but eye lands top-left. Move tagline up to anchor scan path.",
           encouraging:
-            "Composition mostly works — moving the tagline up would lead the eye better.",
+            "Composition mostly works, moving the tagline up would lead the eye better.",
           tough: "Tagline is buried. Move it up.",
         },
       },
@@ -334,7 +334,7 @@ export default function Atelier() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 07 — Atelier
+            // 07 – Atelier
           </p>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
             A Carman Creative system / concept
@@ -607,7 +607,7 @@ export default function Atelier() {
 
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
             // {draft.pins.length} notes /{" "}
-            <span className="text-green">{tone}</span> tone — re-runs when
+            <span className="text-green">{tone}</span> tone, re-runs when
             either changes.
           </p>
         </div>
@@ -956,7 +956,7 @@ function ProductMock({ draft }: { draft: Draft }) {
             className="font-mono text-[10px] uppercase tracking-[0.24em]"
             style={{ color: draft.accent }}
           >
-            // Halcyon 3.0 — now in GA
+            // Halcyon 3.0 – now in GA
           </span>
           <p role="presentation"
             className="mt-3 leading-[0.95] tracking-[-0.03em]"

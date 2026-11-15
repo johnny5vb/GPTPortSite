@@ -46,10 +46,10 @@ export default function Showpiece({
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 03 — In Focus
+            // 03 – In Focus
           </p>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-            {project.year} / {project.duration} / {project.category}
+            {project.year}{project.duration ? ` / ${project.duration}` : ""} / {project.category}
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">
@@ -85,7 +85,7 @@ export default function Showpiece({
         >
           <Image
             src={project.cover}
-            alt={`${project.title} — featured`}
+            alt={`${project.title} – featured`}
             fill
 
             quality={90}
@@ -109,7 +109,7 @@ export default function Showpiece({
               // Featured
             </p>
             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-bone/85">
-              {project.title} — {project.year}
+              {project.title} – {project.year}
             </p>
           </div>
           <Link

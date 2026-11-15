@@ -16,7 +16,7 @@ import path from "node:path";
 
 export const runtime = "nodejs";
 export const alt =
-  "John Carman — Creative Director, Brand and Creative Operations Leader";
+  "John Carman, Creative Director, Brand and Creative Operations Leader";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

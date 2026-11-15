@@ -11,9 +11,8 @@ const NAV = [
   { href: "/resume", label: "Résumé" },
   { href: PROFILE.contact.linkedin, label: "LinkedIn", external: true },
   { href: "/#contact", label: "Contact" },
-  // Side rooms: reachable, not promoted. Off the nav, out of the sitemap.
-  { href: "/lab", label: "Lab" },
-  { href: "/capabilities", label: "Capabilities" },
+  // /lab and /capabilities still serve for anyone sent the link, but they are
+  // no longer linked from anywhere on the site.
 ];
 
 export default function Footer() {
@@ -33,9 +32,9 @@ export default function Footer() {
                 {PROFILE.name}
               </div>
               <div className="mt-1 font-mono uppercase tracking-[0.18em] text-mute">
-                Creative Director{" "}
-                <span className="text-green">/</span> Brand &amp; Creative
-                Operations Leader
+                Creative direction{" "}
+                <span className="text-green">/</span> Brand &amp; creative
+                operations
               </div>
               <div className="mt-2 text-mute-2 font-sans normal-case tracking-normal">
                 {PROFILE.location.base}

@@ -49,7 +49,7 @@ export default function ContactCTA() {
           transition={{ duration: 0.8 }}
           className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-8"
         >
-          // 04 — Let&apos;s talk
+          // 04 – Let&apos;s talk
         </motion.p>
 
         <VelocityHeading className="origin-left" maxSkew={1}>
@@ -69,7 +69,7 @@ export default function ContactCTA() {
         {/* One invitation */}
         <div className="mt-10 max-w-[54ch]">
           <p className="t-lede text-bone/85">
-            Brand, creative direction, design systems, or just to connect — tell
+            Brand, creative direction, design systems, or just to connect, tell
             me what you have in mind.
           </p>
           <div className="mt-8">

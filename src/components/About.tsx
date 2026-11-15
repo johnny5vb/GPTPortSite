@@ -43,7 +43,7 @@ export default function About() {
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 02 — About
+            // 02 – About
           </p>
 
           <motion.div
@@ -82,11 +82,11 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mt-6 font-display text-2xl md:text-[1.65rem] leading-[1.15] tracking-[-0.02em] text-bone"
           >
-            &ldquo;Give me a difficult brand, a complicated organization, and a
-            creative team — I&apos;ll make all three better.&rdquo;
+            &ldquo;Most of my career has been making good work possible
+            inside complicated organizations.&rdquo;
           </motion.blockquote>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-            — John Carman
+ – John Carman
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export default function About() {
               with a leading "~". Anything still unconfirmed belongs in a
               visible `TODO: Confirm` placeholder, never here. */}
           <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8 border-t border-line pt-6">
-            <Stat to={SCALE.years} suffix="+" label={SCALE.yearsLabel} />
+            <Stat to={SCALE.years} suffix="" label={SCALE.yearsLabel} />
             <Stat
               to={SCALE.enterpriseYears}
               suffix="+"
@@ -140,7 +140,7 @@ export default function About() {
                 I&apos;m a Creative Director and creative-operations leader with{" "}
                 {PROFILE.yearsExperience} years helping organizations turn
                 complex goals into clear, useful, and distinctive creative work.
-                Most of that career has been inside enterprise healthcare —
+                Most of that career has been inside enterprise healthcare,
                 where the brand is large, the stakeholders are many, and the
                 work has to hold up under compliance, scale, and scrutiny.
               </p>
@@ -149,29 +149,27 @@ export default function About() {
                 2018, leading brand, campaign, digital, and creative-operations work
                 and managing a five-person design team. When Beacon became
                 Carelon Behavioral Health inside Elevance Health, I led the
-                creative transition — roughly 1,500 brand assets migrated to the
-                new identity across an organization of about 85,000. The
-                restructuring moved my title to Creative Manager; the work
-                didn&apos;t shrink with it — I&apos;m on the Studio Production
-                team at Elevance Health now, co-managing ten designers across
-                all lines of business rather than one company.
+                creative transition: roughly 1,500 brand assets migrated to the
+                new identity across an organization of about 85,000. I&apos;m on the
+                Studio Production team at Elevance Health now, co-managing ten
+                designers across all lines of business rather than one company.
               </p>
               <p>
-                Alongside that, I run Carman Creative — brand, digital, and
-                design-systems work — and spend real time modernizing how
+                Alongside that, I run Carman Creative (brand, digital, and
+                design-systems work) and spend real time modernizing how
                 creative teams work with AI. The through-line is the same
                 wherever the work happens: shape the work, strengthen the team,
                 and improve how creative moves through an organization.
               </p>
               <p>
                 Given the choice, the independent work I take on is for people
-                building something they believe in — a veteran starting a coffee
+                building something they believe in: a veteran starting a coffee
                 company, a nonprofit getting families into homes, a fund for
                 military spouses and veterans. I&apos;m drawn to problems where
                 the brand has to carry real weight, and to building systems that
                 let good work keep happening after I&apos;ve stepped away. Modern
                 tools, classical taste: I&apos;ll use whatever gets the idea
-                made — AI included — but human judgment still decides
+                made, AI included, but human judgment still decides
                 what&apos;s any good.
               </p>
 

@@ -49,7 +49,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               transition={{ duration: 0.6 }}
               className="font-mono text-[11px] uppercase tracking-[0.22em] text-green"
             >
-              // {project.num} — {project.category}
+              // {project.num} – {project.category}
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -85,7 +85,9 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               <>
                 <Meta label="Client" value={project.client} />
                 <Meta label="Year" value={project.year} />
-                <Meta label="Duration" value={project.duration} />
+                {project.duration && (
+                  <Meta label="Duration" value={project.duration} />
+                )}
                 <Meta label="Tags" value={project.tags.join(" / ")} />
               </>
             )}
@@ -129,7 +131,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
             {project.cover ? (
               <Image
                 src={project.cover}
-                alt={`${project.title} — cover`}
+                alt={`${project.title} – cover`}
                 fill
 
                 quality={90}
@@ -165,7 +167,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
               loop
               playsInline
               preload="metadata"
-              aria-label={`${project.title} — excerpt, muted`}
+              aria-label={`${project.title} – excerpt, muted`}
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
@@ -182,7 +184,7 @@ export default function ProjectDetail({ project, prev, next }: Props) {
           >
             <Image
               src={project.cover}
-              alt={`${project.title} — cover`}
+              alt={`${project.title} – cover`}
               fill
 
               quality={90}

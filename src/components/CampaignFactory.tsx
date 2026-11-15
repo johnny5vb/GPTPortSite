@@ -43,7 +43,7 @@ const CAMPAIGNS: Campaign[] = [
     headline: "Find your line.",
     kicker: "Spring '26 trail collection",
     brief:
-      "Outdoor performance line — quietly confident, trail-tested gear for the long haul. Voice: understated, earned, never loud.",
+      "Outdoor performance line, quietly confident, trail-tested gear for the long haul. Voice: understated, earned, never loud.",
     bg: "#0c1f1a",
     surface: "#143027",
     ink: "#eef5ef",
@@ -59,9 +59,9 @@ const CAMPAIGNS: Campaign[] = [
     category: "editorial",
     productLine: "Magazine / Books / Subscription",
     headline: "Read it again.",
-    kicker: "Issue 04 — subscription drop",
+    kicker: "Issue 04, subscription drop",
     brief:
-      "Editorial publication — warm, considered, made to keep. Voice: literary, deliberate, with a hint of humor.",
+      "Editorial publication, warm, considered, made to keep. Voice: literary, deliberate, with a hint of humor.",
     bg: "#f6efe2",
     surface: "#ffffff",
     ink: "#1a1410",
@@ -79,7 +79,7 @@ const CAMPAIGNS: Campaign[] = [
     headline: "Run quieter.",
     kicker: "Halcyon 3.0 launch",
     brief:
-      "B2B observability platform — calm, technical, precise. Voice: confident, clear, never breathless about its own tech.",
+      "B2B observability platform, calm, technical, precise. Voice: confident, clear, never breathless about its own tech.",
     bg: "#06121f",
     surface: "#0f2235",
     ink: "#e8efff",
@@ -144,7 +144,7 @@ export default function CampaignFactory() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 06 — Campaign Factory
+            // 06 – Campaign Factory
           </p>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
             A Carman Creative system / concept
@@ -163,7 +163,7 @@ export default function CampaignFactory() {
             <em className="font-display-wonk text-green">a hundred cuts.</em>
           </motion.h2>
           <p className="mt-6 text-mute max-w-[60ch] leading-relaxed">
-            One campaign idea fans out to social, print, motion, and web — all
+            One campaign idea fans out to social, print, motion, and web, all
             on-brand, all in voice, all production-ready. Pick a campaign and
             watch a single concept resolve across six channels.
           </p>
@@ -336,7 +336,7 @@ export default function CampaignFactory() {
 
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
             // brand: <span className="text-green">{camp.brand}</span> / 6
-            channels / one brand file — production-ready exports in Figma,
+            channels / one brand file, production-ready exports in Figma,
             After Effects, and code.
           </p>
         </div>
@@ -551,7 +551,7 @@ function IGPortrait({ campaign }: { campaign: Campaign }) {
           className="font-mono text-[8.5px] uppercase tracking-[0.18em]"
           style={{ color: campaign.accent }}
         >
-          // {campaign.kicker.split("—")[0].trim()}
+          // {campaign.kicker.split(",")[0].trim()}
         </p>
         <p role="presentation"
           className="mt-1 leading-[1.02] tracking-[-0.025em]"
@@ -710,7 +710,7 @@ function Print({ campaign }: { campaign: Campaign }) {
         className="px-3 pt-3 font-mono text-[7.5px] uppercase tracking-[0.22em]"
         style={{ color: campaign.mute }}
       >
-        {campaign.brand} — Vol 04
+        {campaign.brand} – Vol 04
       </p>
       {/* Product showcase in the middle */}
       <div

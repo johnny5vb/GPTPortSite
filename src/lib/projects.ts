@@ -97,7 +97,7 @@ export type Project = {
   client: string;
   year: string;
   category: string;
-  duration: string;
+  duration?: string;
   tags: string[];
   blurb: string;
   /** Short tag-line shown on the project hero */
@@ -156,16 +156,16 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Beacon Health Options → Carelon",
     client: "Beacon Health Options / Carelon (Elevance Health)",
-    year: "2022 — 2023",
+    year: "2022 – 2023",
     category: "Enterprise Brand Transformation",
     duration: "~9 months (2022–2023)",
     tags: ["Enterprise", "Rebrand", "Governance"],
     blurb:
-      "Leading creative through the acquisition and rebrand of a national behavioral-health organization — holding brand quality steady while the company itself changed.",
+      "Leading creative through the acquisition and rebrand of a national behavioral-health organization, holding brand quality steady while the company itself changed.",
     oneLiner:
       "Transforming an enterprise brand through organizational change.",
     brief:
-      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500+ brand assets had to move to a new identity across an ~85,000+ employee organization — without disrupting the people who depend on them. The identity itself arrived from the enterprise as a 115-page brand system. My job was the harder half: translating it into Carelon Behavioral Health's own materials, building the templates the work would run on, and controlling quality as a team of twenty produced against them.",
+      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500+ brand assets had to move to a new identity across an ~85,000+ employee organization, without disrupting the people who depend on them. The identity itself arrived from the enterprise as a 115-page brand system. My job was the harder half: translating it into Carelon Behavioral Health's own materials, building the templates the work would run on, and controlling quality as a team of twenty produced against them.",
     process: [],
     services: [
       "Creative direction",
@@ -191,14 +191,14 @@ export const PROJECTS: Project[] = [
         { label: "Focus", value: "Brand transition, governance, quality control" },
         { label: "Scale", value: "~1,500+ assets / ~85,000+ employees" },
         { label: "Team", value: "Scaled to ~20 (3 in-house + freelance)" },
-        { label: "Timeline", value: "2022 — 2023 (9-month rebrand; Beacon became Carelon Behavioral Health March 1, 2023)" },
+        { label: "Timeline", value: "2022 – 2023 (9-month rebrand; Beacon became Carelon Behavioral Health March 1, 2023)" },
       ],
       challenge:
-        "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work — while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
+        "An acquisition meant a national behavioral-health brand had to migrate to a new identity across a very large body of existing work, while the audience (members, providers, and internal teams) kept relying on those materials every day. The risk wasn't just visual inconsistency; it was eroding trust during a period of organizational uncertainty.",
       mandate:
-        "As Creative Director, I led the transition end to end on the Beacon side: reading the enterprise brand system into Carelon Behavioral Health's design system and templates, directing vendors and partners, rebuilding merchandise, and standing up a print-on-demand platform from scratch — everything between the guidelines and a finished piece in a member's hand.",
+        "As Creative Director, I led the transition end to end on the Beacon side: reading the enterprise brand system into Carelon Behavioral Health's design system and templates, directing vendors and partners, rebuilding merchandise, and standing up a print-on-demand platform from scratch, everything between the guidelines and a finished piece in a member's hand.",
       context:
-        "Enterprise healthcare adds real constraints — compliance and legal review, accessibility requirements, legacy templates and systems, many stakeholder groups, and tight timelines. Decisions had to survive executive review while staying usable for the teams producing day-to-day work.",
+        "Enterprise healthcare adds real constraints, compliance and legal review, accessibility requirements, legacy templates and systems, many stakeholder groups, and tight timelines. Decisions had to survive executive review while staying usable for the teams producing day-to-day work.",
       role: [
         "Translated the enterprise brand system into Carelon Behavioral Health's own guidelines and application rules",
         "Built the design system first, then the templates the work would run on",
@@ -210,16 +210,16 @@ export const PROJECTS: Project[] = [
         "3 in-house designers",
         "A video production artist",
         "Project managers and writers",
-        "Creative Circle freelancers — the team scaled to ~20 people across the year",
+        "Creative Circle freelancers, the team scaled to ~20 people across the year",
       ],
       decisions: [
         {
           title: "Build the system before the assets",
-          body: "The enterprise handed us the identity — logo, palette, type, supergraphics, imagery rules. Rather than migrating piece by piece, I built the Behavioral Health design system and templates on top of it first, then produced against them. Slower to start, but it made ~1,500+ deliverables repeatable and consistent as volume spiked.",
+          body: "The enterprise handed us the identity, logo, palette, type, supergraphics, imagery rules. Rather than migrating piece by piece, I built the Behavioral Health design system and templates on top of it first, then produced against them. Slower to start, but it made ~1,500+ deliverables repeatable and consistent as volume spiked.",
         },
         {
           title: "Batch the work to make it finishable",
-          body: "Hundreds of deliverables are overwhelming as one list, so we batched them by type of piece, client, and product and worked through them in waves — steady, measurable progress instead of drift.",
+          body: "Hundreds of deliverables are overwhelming as one list, so we batched them by type of piece, client, and product and worked through them in waves, steady, measurable progress instead of drift.",
         },
         {
           title: "Scale the team, and keep it in sync",
@@ -232,79 +232,79 @@ export const PROJECTS: Project[] = [
         "The full rebrand delivered in ~9 months with a team that scaled to ~20",
       ],
       reflection:
-        "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of deliverables look overwhelming on paper, but with the right system and the right people, you chip away at it — and finishing something at that scale is its own reward. This is the project that changed how I lead.",
+        "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of deliverables look overwhelming on paper, but with the right system and the right people, you chip away at it, and finishing something at that scale is its own reward. This is the project that changed how I lead.",
       work: [
         {
           kind: "full",
           aspect: "1.819 / 1",
           image: {
             src: "/work/beacon-carelon-transformation/cbg-at-a-glance-v2.jpg",
-            alt: "Carelon brand guidelines — the brand at a glance: web, social, print, presentations and app, all on one system",
+            alt: "Carelon brand guidelines, the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
-            "Where it all had to land. The enterprise system across every surface at once — web, social, print, presentations, app — and the target that 1,500+ Beacon pieces had to be carried into.",
+            "Where it all had to land. The enterprise system across every surface at once, web, social, print, presentations, app, and the target that 1,500+ Beacon pieces had to be carried into.",
         },
         {
           kind: "pair",
           aspect: "1.72 / 1",
           a: {
             src: "/work/beacon-carelon-transformation/bg-logo.jpg",
-            alt: "Beacon Health Options brand guidelines — the corporate logo in its horizontal and stacked versions, positive, reversed and black",
+            alt: "Beacon Health Options brand guidelines, the corporate logo in its horizontal and stacked versions, positive, reversed and black",
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-logo-forms.jpg",
-            alt: "Carelon brand guidelines — how we use our logo: the horizontal logo, the logo with modifier, and the forms in use",
+            alt: "Carelon brand guidelines, how we use our logo: the horizontal logo, the logo with modifier, and the forms in use",
           },
-          labelA: "Before — the Beacon logo",
-          labelB: "After — the Carelon logo",
+          labelA: "Before, the Beacon logo",
+          labelB: "After, the Carelon logo",
           caption:
-            "The mark. Beacon's lighthouse in Beacon Blue, two versions and three colourways; Carelon's interlocking Cs, a governed family of forms with a modifier for every line of business.",
+            "The mark. Beacon's lighthouse in Beacon Blue, two versions and three colorways; Carelon's interlocking Cs, a governed family of forms with a modifier for every line of business.",
         },
         {
           kind: "pair",
           aspect: "1.45 / 1",
           a: {
             src: "/work/beacon-carelon-transformation/bg-logo-sizing.jpg",
-            alt: "Beacon brand guidelines — logo size guides and clearance areas for the horizontal and stacked logos",
+            alt: "Beacon brand guidelines, logo size guides and clearance areas for the horizontal and stacked logos",
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-logo-sizing.jpg",
-            alt: "Carelon brand guidelines — logo sizing and clear space, with minimum sizes in print and digital",
+            alt: "Carelon brand guidelines, logo sizing and clear space, with minimum sizes in print and digital",
           },
-          labelA: "Before — sizing and clearance",
-          labelB: "After — sizing and clear space",
+          labelA: "Before, sizing and clearance",
+          labelB: "After, sizing and clear space",
           caption:
-            "The rules that matter at volume. Both systems set clear space from the symbol itself and minimum sizes in print and on screen — the constraints every one of our templates had to honour without anyone checking.",
+            "The rules that matter at volume. Both systems set clear space from the symbol itself and minimum sizes in print and on screen, the constraints every one of our templates had to honour without anyone checking.",
         },
         {
           kind: "pair",
           aspect: "1.5 / 1",
           a: {
             src: "/work/beacon-carelon-transformation/bg-color.jpg",
-            alt: "Beacon brand guidelines — the extended colour palette: Beacon Blue, Navy and Gray, with secondary and accent colours",
+            alt: "Beacon brand guidelines, the extended color palette: Beacon Blue, Navy and Gray, with secondary and accent colors",
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-color.jpg",
-            alt: "Carelon brand guidelines — the colour palette: primary purple and white, with a secondary palette of purples, cyans and greys",
+            alt: "Carelon brand guidelines, the color palette: primary purple and white, with a secondary palette of purples, cyans and greys",
           },
-          labelA: "Before — Beacon colour",
-          labelB: "After — Carelon colour",
+          labelA: "Before, Beacon color",
+          labelB: "After, Carelon color",
           caption:
-            "Colour. Beacon ran on a calming blue with green, beige and lemon for warmth; Carelon leads with purple and builds out through cyan, turquoise and a set of greys. Every template's swatches, tints and chart colours had to move with it.",
+            "Color. Beacon ran on a calming blue with green, beige and lemon for warmth; Carelon leads with purple and builds out through cyan, turquoise and a set of greys. Every template's swatches, tints and chart colors had to move with it.",
         },
         {
           kind: "pair",
           aspect: "1.5 / 1",
           a: {
             src: "/work/beacon-carelon-transformation/bg-type.jpg",
-            alt: "Beacon brand guidelines — typography in use: Proxima Nova headings with Utopia body copy, on a Who we are spread",
+            alt: "Beacon brand guidelines, typography in use: Proxima Nova headings with Utopia body copy, on a Who we are spread",
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-type.jpg",
-            alt: "Carelon brand guidelines — how we use typography: Elevance Sans across headline, intro, body and callout",
+            alt: "Carelon brand guidelines, how we use typography: Elevance Sans across headline, intro, body and callout",
           },
-          labelA: "Before — Proxima Nova and Utopia",
-          labelB: "After — Elevance Sans",
+          labelA: "Before, Proxima Nova and Utopia",
+          labelB: "After, Elevance Sans",
           caption:
             "Type. Beacon paired a sans for headlines with a serif for reading; Carelon set everything in one proprietary family, Elevance Sans, in sentence case. Paragraph styles across ~1,500 documents were rebuilt to that hierarchy.",
         },
@@ -313,17 +313,17 @@ export const PROJECTS: Project[] = [
           aspect: "1.807 / 1",
           image: {
             src: "/work/beacon-carelon-transformation/cbg-toolkit.jpg",
-            alt: "Carelon brand guidelines — the brand toolkit: logo, supergraphic, typography, colour, photography, iconography, data visualisation and illustration",
+            alt: "Carelon brand guidelines, the brand toolkit: logo, supergraphic, typography, color, photography, iconography, data visualisation and illustration",
           },
           caption:
-            "Eight elements in the toolkit — logo, supergraphic, type, colour, photography, iconography, data visualisation, illustration. Every one of them had a Beacon equivalent to retire, and a template to rebuild.",
+            "Eight elements in the toolkit, logo, supergraphic, type, color, photography, iconography, data visualisation, illustration. Every one of them had a Beacon equivalent to retire, and a template to rebuild.",
         },
         {
           kind: "pair",
           aspect: "17 / 22",
           a: {
             src: "/work/beacon-carelon-transformation/collateral-salessheet.jpg",
-            alt: "Carelon Behavioral Health sales sheet — Help members reach their full potential",
+            alt: "Carelon Behavioral Health sales sheet, Help members reach their full potential",
           },
           b: {
             src: "/work/beacon-carelon-transformation/collateral-crisis.jpg",
@@ -339,16 +339,16 @@ export const PROJECTS: Project[] = [
           aspect: "1.8 / 1",
           a: {
             src: "/work/beacon-carelon-transformation/cbg-stationery-v2.jpg",
-            alt: "Carelon brand guidelines — stationery: business cards and letterhead on the purple supergraphic",
+            alt: "Carelon brand guidelines, stationery: business cards and letterhead on the purple supergraphic",
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-posters-v2.jpg",
-            alt: "Carelon brand guidelines — posters in an office lobby, the supergraphic at environmental scale",
+            alt: "Carelon brand guidelines, posters in an office lobby, the supergraphic at environmental scale",
           },
           labelA: "Stationery",
           labelB: "Environment",
           caption:
-            "The system at its smallest and largest — a business card and a lobby wall — and the reason a template library had to hold together across every one of those sizes.",
+            "The system at its smallest and largest, a business card and a lobby wall, and the reason a template library had to hold together across every one of those sizes.",
         },
         {
           kind: "full",
@@ -358,7 +358,7 @@ export const PROJECTS: Project[] = [
             alt: "Carelon Behavioral Health pocket folder design",
           },
           caption:
-            "The pocket folder — the piece that carries everything else into a meeting, rebuilt on the new supergraphic.",
+            "The pocket folder, the piece that carries everything else into a meeting, rebuilt on the new supergraphic.",
         },
       ],
     },
@@ -370,16 +370,16 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Creative Operations & Marketing Bench",
     client: "Elevance Health / Carelon",
-    year: "2022 — 2023",
+    year: "2022 – 2023",
     category: "Creative Operations",
-    duration: "2022 — 2023 (launched March 2023)",
+    duration: "2022 – 2023 (launched March 2023)",
     tags: ["Print on Demand", "Creative Ops", "UI"],
     blurb:
-      "Rebuilding Marketing Bench as a variable print-on-demand platform — self-serve materials that took designers out of routine production entirely.",
+      "Rebuilding Marketing Bench as a variable print-on-demand platform: self-serve materials that took designers out of routine production entirely.",
     oneLiner:
       "Print-on-demand that runs without a designer in the loop.",
     brief:
-      "Marketing Bench let sales and leadership order branded materials and merchandise — but on the old platform every change ran through a designer and the print vendor first. As part of the Carelon rebrand, I rebuilt it as a variable print-on-demand site stakeholders could self-serve — configurable brochures, flyers and capability documents that co-brand and populate themselves — taking designers out of routine production entirely. It launched to the organization in March 2023.",
+      "Marketing Bench let sales and leadership order branded materials and merchandise, but on the old platform every change ran through a designer and the print vendor first. As part of the Carelon rebrand, I rebuilt it as a variable print-on-demand site stakeholders could self-serve: configurable brochures, flyers and capability documents that co-brand and populate themselves, taking designers out of routine production entirely. It launched to the organization in March 2023.",
     process: [],
     services: [
       "Creative operations",
@@ -403,13 +403,12 @@ export const PROJECTS: Project[] = [
         { label: "Organization", value: "Elevance Health / Carelon (with WebbMason)" },
         { label: "Role", value: "Creative lead / UI design" },
         { label: "Focus", value: "Variable print-on-demand, self-serve materials" },
-        { label: "Impact", value: "~60% faster turnaround / ~30% higher engagement" },
-        { label: "Timeline", value: "2022 — 2023; launched to the organization March 2023" },
+        { label: "Timeline", value: "2022 – 2023; launched to the organization March 2023" },
       ],
       challenge:
-        "Marketing Bench let sales, leadership, and stakeholders order branded materials and merchandise — but the old platform routed every change through a designer: edit the layout, get it approved, hand it to the print vendor, wait for them to upload it. A designer sat in the critical path of routine production, and speed to market suffered.",
+        "Marketing Bench let sales, leadership, and stakeholders order branded materials and merchandise, but the old platform routed every change through a designer: edit the layout, get it approved, hand it to the print vendor, wait for them to upload it. A designer sat in the critical path of routine production, and speed to market suffered.",
       mandate:
-        "The Carelon rebrand was the opening to rebuild Marketing Bench as a proper variable print-on-demand site — materials intentionally designed with placeholder image and content areas that stakeholders could self-serve across clients, products, and purposes, with no designer in the loop.",
+        "The Carelon rebrand was the opening to rebuild Marketing Bench as a proper variable print-on-demand site: materials intentionally designed with placeholder image and content areas that stakeholders could self-serve across clients, products, and purposes, with no designer in the loop.",
       context:
         "An enterprise environment, an external print vendor (WebbMason) whose print-on-demand capability was still light, funding to secure with leadership, and a live audience of sales and leadership already relying on the tool.",
       role: [
@@ -420,18 +419,18 @@ export const PROJECTS: Project[] = [
         "Secured funding for the refresh with leadership and kept the work on track",
       ],
       team: [
-        "In-house designers — led the rebranding and production work",
-        "WebbMason — print-on-demand vendor",
-        "Leadership and stakeholders — funding and sponsorship",
+        "In-house designers, led the rebranding and production work",
+        "WebbMason, print-on-demand vendor",
+        "Leadership and stakeholders, funding and sponsorship",
       ],
       decisions: [
         {
           title: "Design the designer out of the loop",
-          body: "Built materials with intentional placeholder image and content areas so stakeholders could self-serve across clients and products — replacing the edit → approve → hand-off → upload chain that used to need a designer for every change.",
+          body: "Built materials with intentional placeholder image and content areas so stakeholders could self-serve across clients and products, replacing the edit → approve → hand-off → upload chain that used to need a designer for every change.",
         },
         {
           title: "Free designers for the work that matters",
-          body: "The point wasn't more output from the team — it was removing routine production from designers' plates so their bandwidth went to projects that actually moved the business.",
+          body: "The point wasn't more output from the team. It was removing routine production from designers' plates so their bandwidth went to projects that actually moved the business.",
         },
         {
           title: "Own the vendor relationship, don't hold it at arm's length",
@@ -439,12 +438,12 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "Eliminated a designer bottleneck and production-level work, cutting turnaround ~60%",
-        "Adopted across the organization — sales, leadership, and stakeholders all used it (~30% higher engagement)",
+        "Eliminated a designer bottleneck and the production-level work that came with it",
+        "Adopted across the organization: sales, leadership, and stakeholders all used it",
         "Became WebbMason's flagship print-on-demand case, used to sell their platform to other companies",
       ],
       reflection:
-        "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials — exactly the kind of work AI is good at staying on top of.",
+        "What I'd change: use AI to automate and track the site's contents and publishing. There's real organizational overhead in uploading, updating, running maintenance cycles, and sunsetting older materials, exactly the kind of work AI is good at staying on top of.",
       work: [
         {
           kind: "pair",
@@ -455,59 +454,59 @@ export const PROJECTS: Project[] = [
           },
           b: {
             src: "/work/creative-operations-marketing-bench/cb-home.jpg",
-            alt: "Carelon Marketing Bench — Welcome to your new Marketing Bench, with Quick Links to every material type",
+            alt: "Carelon Marketing Bench, Welcome to your new Marketing Bench, with Quick Links to every material type",
           },
-          labelA: "Before — the 2019 platform",
-          labelB: "After — Carelon Marketing Bench, 2023",
+          labelA: "Before, the 2019 platform",
+          labelB: "After, Carelon Marketing Bench, 2023",
           caption:
-            "The old platform was a catalogue with a designer behind it. The rebuild is a front door: quick links to every kind of material, and behind each one a form instead of a request.",
+            "The old platform was a catalog with a designer behind it. The rebuild is a front door: quick links to every kind of material, and behind each one a form instead of a request.",
         },
         {
           kind: "full",
           aspect: "1.321 / 1",
           image: {
             src: "/work/creative-operations-marketing-bench/cb-configurator-flyer-b.jpg",
-            alt: "Configuring a member-facing toolkit flyer — profile, co-branding, client logo and contact fields on the right, live preview on the left",
+            alt: "Configuring a member-facing toolkit flyer, profile, co-branding, client logo and contact fields on the right, live preview on the left",
           },
           caption:
-            "The moment that takes the designer out of the loop. Pick a profile, choose co-branded or not, fill the client fields — logo, program name, phone, URL — and the flyer builds itself in the preview. View proof, order, done.",
+            "The moment that takes the designer out of the loop. Pick a profile, choose co-branded or not, fill the client fields, logo, program name, phone, URL, and the flyer builds itself in the preview. View proof, order, done.",
         },
         {
           kind: "pair",
           aspect: "1.1 / 1",
           a: {
             src: "/work/creative-operations-marketing-bench/cb-configurator-brochure.jpg",
-            alt: "Configuring the member-facing core brochure — a multi-page piece with the same field-driven configurator",
+            alt: "Configuring the member-facing core brochure, a multi-page piece with the same field-driven configurator",
           },
           b: {
             src: "/work/creative-operations-marketing-bench/cb-configurator-capability.jpg",
-            alt: "Configuring a sales capability document — placeholder image and content areas populate from the form",
+            alt: "Configuring a sales capability document, placeholder image and content areas populate from the form",
           },
           labelA: "Core brochure",
           labelB: "Capability document",
           caption:
-            "The same pattern at every scale — a multi-page member brochure and a sales capability document, each designed with intentional placeholder image and content areas so a field owner can produce it without asking anyone.",
+            "The same pattern at every scale, a multi-page member brochure and a sales capability document, each designed with intentional placeholder image and content areas so a field owner can produce it without asking anyone.",
         },
         {
           kind: "full",
           aspect: "1.963 / 1",
           image: {
             src: "/work/creative-operations-marketing-bench/cb-configurable-table.jpg",
-            alt: "What files are configurable — a table of file types with a yes/no column and the fields each one exposes",
+            alt: "What files are configurable, a table of file types with a yes/no column and the fields each one exposes",
           },
           caption:
-            "The governance behind it. Every file type is either configurable or static, and the table says exactly which fields a configurable piece exposes — client logo, program name, URL, phone, image, disclaimer — so the brand stays governed while the production runs itself.",
+            "The governance behind it. Every file type is either configurable or static, and the table says exactly which fields a configurable piece exposes, client logo, program name, URL, phone, image, disclaimer, so the brand stays governed while the production runs itself.",
         },
         {
           kind: "pair",
           aspect: "1.5 / 1",
           a: {
             src: "/work/creative-operations-marketing-bench/cb-featured.jpg",
-            alt: "Featured items — Carelon-branded stationery and translations, ordered from the same platform",
+            alt: "Featured items, Carelon-branded stationery and translations, ordered from the same platform",
           },
           b: {
             src: "/work/creative-operations-marketing-bench/cb-translations.jpg",
-            alt: "The translation request form — languages, quantities and turnaround, submitted without a designer",
+            alt: "The translation request form, languages, quantities and turnaround, submitted without a designer",
           },
           labelA: "Stationery and translations",
           labelB: "The translation request",
@@ -519,23 +518,23 @@ export const PROJECTS: Project[] = [
           aspect: "1.6 / 1",
           a: {
             src: "/work/creative-operations-marketing-bench/cb-saleshub.jpg",
-            alt: "SalesHub — the repository for finished marketing collateral, the platform Marketing Bench sits beside",
+            alt: "SalesHub, the repository for finished marketing collateral, the platform Marketing Bench sits beside",
           },
           b: {
             src: "/work/creative-operations-marketing-bench/cb-overview-slide.jpg",
-            alt: "Marketing Bench overview — the homepage annotated for training: hero banner, quick links, featured items, search and support",
+            alt: "Marketing Bench overview, the homepage annotated for training: hero banner, quick links, featured items, search and support",
           },
-          labelA: "The other platform — SalesHub",
+          labelA: "The other platform, SalesHub",
           labelB: "The platform, as taught",
           caption:
-            "Two platforms with two jobs: SalesHub holds the finished collateral; Marketing Bench makes it. And it shipped with training — the March 2023 guide walks every user through the homepage before they touch a configurator.",
+            "Two platforms with two jobs: SalesHub holds the finished collateral; Marketing Bench makes it. And it shipped with training, the March 2023 guide walks every user through the homepage before they touch a configurator.",
         },
       ],
     },
   },
   {
     slug: "workfront-workflow-transformation",
-    num: "L04",
+    num: "L05",
     tier: "leadership",
     flagship: true,
     // Pulled from the site while a stronger third leadership example is
@@ -548,7 +547,7 @@ export const PROJECTS: Project[] = [
     duration: "2025",
     tags: ["Workfront", "Workflow", "Ops"],
     blurb:
-      "Reworking how creative moves through Workfront at ~75+ projects a month — realistic phase timelines, smarter batching, and intake that finally made sense.",
+      "Reworking how creative moves through Workfront at ~75+ projects a month, realistic phase timelines, smarter batching, and intake that finally made sense.",
     oneLiner:
       "Realistic timelines, faster work, fewer rush jobs.",
     brief:
@@ -581,28 +580,28 @@ export const PROJECTS: Project[] = [
         { label: "Timeline", value: "2025" },
       ],
       challenge:
-        "The legacy instance — “Single Spine,” the consolidation of five separate Workfront systems into one — drew constant complaints from writers, designers, project managers, and requesters. Phase timing was the core issue: on paper, the timeline for each task ran so long that PMs and requesters balked the moment they saw it, and rushed, haphazard jobs filled the gap. Work sat buried under numeric job codes and nested folders, and the process no longer matched how creative actually worked.",
+        "The legacy instance, “Single Spine,” the consolidation of five separate Workfront systems into one, drew constant complaints from writers, designers, project managers, and requesters. Phase timing was the core issue: on paper, the timeline for each task ran so long that PMs and requesters balked the moment they saw it, and rushed, haphazard jobs filled the gap. Work sat buried under numeric job codes and nested folders, and the process no longer matched how creative actually worked.",
       mandate:
-        "Rather than keep patching Single Spine, the team stood up a new instance from scratch — “Workfront Restart” — built around every pain point the old one had exposed. Rework how creative moves through it at ~75+ projects a month: phase timelines, batching, delegation, intake, and storage, so the timeline was realistic and the work actually moved faster.",
+        "Rather than keep patching Single Spine, the team stood up a new instance from scratch, “Workfront Restart”, built around every pain point the old one had exposed. Rework how creative moves through it at ~75+ projects a month: phase timelines, batching, delegation, intake, and storage, so the timeline was realistic and the work actually moved faster.",
       context:
-        "An enterprise environment with many stakeholders and a platform in daily use — the migration had to land without stopping the work. A large cross-functional effort with many people involved; I led the creative side through both the legacy instance and the rebuild.",
+        "An enterprise environment with many stakeholders and a platform in daily use, the migration had to land without stopping the work. A large cross-functional effort with many people involved; I led the creative side through both the legacy instance and the rebuild.",
       role: [
-        "Represented the creative side through both instances — Single Spine and the Workfront Restart rebuild",
+        "Represented the creative side through both instances, Single Spine and the Workfront Restart rebuild",
         "Served as the point person for the creative team",
         "Sat on the workgroup committee implementing the changes and reporting to leadership",
-        "Redrew the phase strategy for every type of tactic and deliverable — and for shared pieces",
+        "Redrew the phase strategy for every type of tactic and deliverable, and for shared pieces",
         "Reworked how work was batched, delegated to designers and writers, and shared across tasks",
         "Changed intake and what it captured, server file storage, and how VPOD (Marketing Bench) materials were handled",
       ],
       team: [
-        "Creative team — writers and designers",
+        "Creative team, writers and designers",
         "Project managers and requesters",
         "Workgroup committee and leadership",
       ],
       decisions: [
         {
           title: "Fix the phase timelines that scared everyone off",
-          body: "The task-by-task timeline was so long on paper that PMs and requesters balked immediately. We analyzed the overall timeline for every tactic and deliverable and drew a new phase strategy per piece type — a realistic timeline people could actually trust.",
+          body: "The task-by-task timeline was so long on paper that PMs and requesters balked immediately. We analyzed the overall timeline for every tactic and deliverable and drew a new phase strategy per piece type, a realistic timeline people could actually trust.",
         },
         {
           title: "Batch, delegate, and share tasks",
@@ -610,28 +609,28 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Restart rather than keep patching",
-          body: "Single Spine had consolidated five Workfront systems into one, but the problems ran deeper than configuration. We captured every pain point across intake, management, and execution, then stood up a new instance from scratch built around them — a restart rather than another round of fixes on a foundation nobody trusted.",
+          body: "Single Spine had consolidated five Workfront systems into one, but the problems ran deeper than configuration. We captured every pain point across intake, management, and execution, then stood up a new instance from scratch built around them, a restart rather than another round of fixes on a foundation nobody trusted.",
         },
         {
           title: "Change everything the workflow touched",
-          body: "Not just the phases — intake and what it captured, how files were stored on the server, and how variable print-on-demand materials were handled, so the efficiency held end to end.",
+          body: "Not just the phases, intake and what it captured, how files were stored on the server, and how variable print-on-demand materials were handled, so the efficiency held end to end.",
         },
       ],
       outcomes: [
         "Faster speed to market and time savings the business felt and appreciated",
         "Fewer haphazard 'rush' jobs coming through the queue",
         "A realistic timeline PMs and requesters would actually trust",
-        "Shipped as a staged launch — MVP in January 2026, full launch that April",
+        "Shipped as a staged launch, MVP in January 2026, full launch that April",
       ],
       reflection:
-        "What it taught me: the best process fixes come from the people doing the work. Our team banded together to name every pain point across intake, management, and execution, then broke the process down and rebuilt it — improving it tremendously. With Workfront redesigned and relaunched, the team is working far more efficiently and communicating more effectively. Make the system honest and the work and the people both move better.",
+        "What it taught me: the best process fixes come from the people doing the work. Our team banded together to name every pain point across intake, management, and execution, then broke the process down and rebuilt it, improving it tremendously. With Workfront redesigned and relaunched, the team is working far more efficiently and communicating more effectively. Make the system honest and the work and the people both move better.",
       work: [
         {
           kind: "full",
           aspect: "4 / 3",
           image: {
             src: "/work/workfront-workflow-transformation/legacy-model-change.jpg",
-            alt: "Process model change — from independent planning and development to coordinated planning and development",
+            alt: "Process model change, from independent planning and development to coordinated planning and development",
           },
           caption:
             "The transformation in one frame: from an “attack and fend for self” model, where every team planned independently, to coordinated planning against shared resources.",
@@ -640,11 +639,11 @@ export const PROJECTS: Project[] = [
           kind: "pair",
           a: {
             src: "/work/workfront-workflow-transformation/legacy-file-chaos.jpg",
-            alt: "Single Spine file management — deeply nested folders under numeric job codes",
+            alt: "Single Spine file management, deeply nested folders under numeric job codes",
           },
           b: {
             src: "/work/workfront-workflow-transformation/restart-phases.jpg",
-            alt: "Workfront Restart — a task template with per-phase durations, ready-to-start flags, and staged reviewers",
+            alt: "Workfront Restart, a task template with per-phase durations, ready-to-start flags, and staged reviewers",
           },
           labelA: "Single Spine",
           labelB: "Workfront Restart",
@@ -656,20 +655,20 @@ export const PROJECTS: Project[] = [
           aspect: "4 / 3",
           image: {
             src: "/work/workfront-workflow-transformation/legacy-process-flow.jpg",
-            alt: "The six-phase creative process — portfolio planning through reporting and optimization",
+            alt: "The six-phase creative process, portfolio planning through reporting and optimization",
           },
           caption:
-            "The spine of it — six phases from portfolio planning to reporting, with creative carrying a role in almost every one. Redrawing where creative actually belonged is what made the timelines honest.",
+            "The spine of it, six phases from portfolio planning to reporting, with creative carrying a role in almost every one. Redrawing where creative actually belonged is what made the timelines honest.",
         },
         {
           kind: "full",
           aspect: "16 / 9",
           image: {
             src: "/work/workfront-workflow-transformation/process-enablers.jpg",
-            alt: "Process and system enablers — marketing map, standard operating procedures, and microlearning videos, beside an end-to-end workflow map with per-role hours",
+            alt: "Process and system enablers, marketing map, standard operating procedures, and microlearning videos, beside an end-to-end workflow map with per-role hours",
           },
           caption:
-            "A new instance is only half of it. The end-to-end marketing map put every phase, duration, and role in one view — down to the hours each role carries — with desk-level SOPs and short microlearning videos so the process could be taught, not just published.",
+            "A new instance is only half of it. The end-to-end marketing map put every phase, duration, and role in one view, down to the hours each role carries, with desk-level SOPs and short microlearning videos so the process could be taught, not just published.",
         },
         {
           kind: "pair",
@@ -684,14 +683,14 @@ export const PROJECTS: Project[] = [
           labelA: "Who picks it up",
           labelB: "Who signs it off",
           caption:
-            "In the running system: a task can be pointed at a designer, a writer, or both — and review became three visible stages with named approvers instead of a thread nobody could track.",
+            "In the running system: a task can be pointed at a designer, a writer, or both, and review became three visible stages with named approvers instead of a thread nobody could track.",
         },
         {
           kind: "full",
           aspect: "16 / 9",
           image: {
             src: "/work/workfront-workflow-transformation/task-reviews-training.jpg",
-            alt: "Training page — how to complete Workfront tasks with reviews, including the percent-complete convention tied to review stages",
+            alt: "Training page, how to complete Workfront tasks with reviews, including the percent-complete convention tied to review stages",
           },
           caption:
             "The rule people actually needed: percent complete tied to review stages, not to how someone felt about their progress. Tasks that start when work starts and close when it ends are what make duration data honest enough to plan against.",
@@ -709,11 +708,11 @@ export const PROJECTS: Project[] = [
             },
             {
               src: "/work/workfront-workflow-transformation/restart-timeline.jpg",
-              alt: "Launch milestone graphic — MVP launched January 2026, full launch April 2026",
+              alt: "Launch milestone graphic, MVP launched January 2026, full launch April 2026",
             },
           ],
           caption:
-            "The everyday surface: one place to see what's ready to start, templates carrying real durations and planned hours, and a staged launch the team could track — MVP in January, full launch in April.",
+            "The everyday surface: one place to see what's ready to start, templates carrying real durations and planned hours, and a staged launch the team could track, MVP in January, full launch in April.",
         },
         {
           kind: "full",
@@ -723,13 +722,13 @@ export const PROJECTS: Project[] = [
             alt: "Restart milestones and Q3 planning work on a timeline, beside a list of the challenges still ahead",
           },
           caption:
-            "Run as a change program, not a software install: business process mapping, technical build, user testing, training, and a communications arc feeding two launches — with the hard parts named out loud rather than buried.",
+            "Run as a change program, not a software install: business process mapping, technical build, user testing, training, and a communications arc feeding two launches, with the hard parts named out loud rather than buried.",
         },
         {
           kind: "detail",
           image: {
             src: "/work/workfront-workflow-transformation/restart-poster.jpg",
-            alt: "Internal campaign poster — Workfront That Works",
+            alt: "Internal campaign poster, Workfront That Works",
           },
           caption:
             "Adoption is a creative problem too. “Workfront That Works” gave a systems migration something people could rally to.",
@@ -745,17 +744,17 @@ export const PROJECTS: Project[] = [
     client: "Friends Rehabilitation Program (FRP)",
     year: "2025–2026",
     category: "Nonprofit / Web Design",
-    duration: "Two phases — refresh, then rebuild",
+    duration: "Two phases, refresh, then rebuild",
     tags: ["Web", "Brand", "Nonprofit"],
     blurb:
-      "A new website for a sixty-year-old Quaker housing nonprofit in Philadelphia — homeless services, re-entry, trades training — built to make the mission legible and giving easy.",
+      "A new website for a sixty-year-old Quaker housing nonprofit in Philadelphia, homeless services, re-entry, trades training, built to make the mission legible and giving easy.",
     oneLiner: "Advancing justice. Building futures.",
     brief:
       "FRP has helped Philadelphians get into stable housing and stay there since 1961. The first pass gave them a calmer, clearer site. The rebuild goes further: a proper editorial identity on the web, programs explained plainly, and a giving experience that works as hard as the mission does.",
     process: [
       {
         label: "Say what FRP actually does",
-        body: "Homeless services, re-entry and transitional housing, and GRIT workforce training — three programs and the pathway between them, named on every page so no visitor has to guess.",
+        body: "Homeless services, re-entry and transitional housing, and GRIT workforce training, three programs and the pathway between them, named on every page so no visitor has to guess.",
       },
       {
         label: "An identity, not a template",
@@ -767,7 +766,7 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "Show the numbers, and the source",
-        body: "The Impact page leads with three figures and a link to the annual report they come from — the short version, and where to check it.",
+        body: "The Impact page leads with three figures and a link to the annual report they come from, the short version, and where to check it.",
       },
     ],
     services: ["Web design", "Brand system", "Content strategy", "Front-end build"],
@@ -783,16 +782,16 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Design and build (Carman Creative)" },
         { label: "Year", value: "2025–2026" },
         { label: "Scope", value: "Identity on the web, twelve pages, giving experience" },
-        { label: "Status", value: "In final review with FRP's team — launch to follow" },
+        { label: "Status", value: "In final review with FRP's team, launch to follow" },
       ],
       challenge:
-        "A Quaker nonprofit that has served Philadelphia since 1961, with a name that no longer describes the work: FRP runs homeless services, re-entry and transitional housing, and trades training, not rehabilitation. The old site was calm and maintainable but it didn't say any of that clearly, and it made giving an afterthought. Visitors — donors, partners, people looking for help — had to work out what the organization did before they could act.",
+        "A Quaker nonprofit that has served Philadelphia since 1961, with a name that no longer describes the work: FRP runs homeless services, re-entry and transitional housing, and trades training, not rehabilitation. The old site was calm and maintainable but it didn't say any of that clearly, and it made giving an afterthought. Visitors, donors, partners, people looking for help, had to work out what the organization did before they could act.",
       mandate:
         "Rebuild the site so the mission is legible in one screen, the three programs and the pathway between them are plain, and giving is a first-class experience with specific things to give to.",
       context:
         "A second engagement, following the first refresh. A mission-driven client with limited technical capacity and a sixty-year story worth telling well. The work is in final review with FRP's team.",
       role: [
-        "Reframed the site around what FRP does — housing, re-entry, workforce — rather than what its name says",
+        "Reframed the site around what FRP does, housing, re-entry, workforce, rather than what its name says",
         "Designed the identity on the web: navy and gold, a serif display face, the arched photography",
         "Structured twelve pages across About, Programs, Ways to Give, Impact and Contact",
         "Wrote and shaped the copy so each program and each fund reads plainly",
@@ -810,7 +809,7 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Give to something specific",
-          body: "A general donate button is easy to ignore. The Housewarming Fund and the Homeownership Fund each get a page, a story and an ask — so a gift has a shape, and a donor knows what it does.",
+          body: "A general donate button is easy to ignore. The Housewarming Fund and the Homeownership Fund each get a page, a story and an ask, so a gift has a shape, and a donor knows what it does.",
         },
         {
           title: "Numbers with a source",
@@ -823,39 +822,39 @@ export const PROJECTS: Project[] = [
         "The first refresh remains live at friends-frp.org until cutover",
       ],
       reflection:
-        "The first pass fixed how the site felt. This one fixed what it said. The biggest move wasn't visual — it was putting homeless services, re-entry and trades training in the first screen, because a visitor who has to work out what you do won't stay long enough to give.",
+        "The first pass fixed how the site felt. This one fixed what it said. The biggest move wasn't visual. It was putting homeless services, re-entry and trades training in the first screen, because a visitor who has to work out what you do won't stay long enough to give.",
       work: [
         {
           kind: "browser",
           image: {
             src: "/work/friends-rehab/v4-home.jpg",
-            alt: "FRP — the new homepage: Advancing Justice. Building Futures., with the four figures under it",
+            alt: "FRP, the new homepage: Advancing Justice. Building Futures., with the four figures under it",
           },
           aspect: "1.249 / 1",
           url: "friends-frp.org",
           caption:
-            "The homepage says what FRP does in two sentences — housing, re-entry, trades training — under a headline that carries sixty years of Quaker practice.",
+            "The homepage says what FRP does in two sentences, housing, re-entry, trades training, under a headline that carries sixty years of Quaker practice.",
         },
         {
           kind: "full",
           aspect: "16 / 9",
           image: {
             src: "/work/friends-rehab/v4-about.jpg",
-            alt: "FRP — About: founded in 1961, out of a settlement house",
+            alt: "FRP, About: founded in 1961, out of a settlement house",
           },
           caption:
-            "About — the organisation's own story, told once and plainly: a settlement house, sixty years, and the work that came out of it.",
+            "About, the organization's own story, told once and plainly: a settlement house, sixty years, and the work that came out of it.",
         },
         {
           kind: "pair",
           aspect: "16 / 9",
           a: {
             src: "/work/friends-rehab/v4-hw-movein.jpg",
-            alt: "FRP — the Housewarming Fund: what move-in day looks like, an empty room with sun on the floor",
+            alt: "FRP, the Housewarming Fund: what move-in day looks like, an empty room with sun on the floor",
           },
           b: {
             src: "/work/friends-rehab/v4-hw-family-b.jpg",
-            alt: "FRP — the same apartment, a few weeks on: a family at home",
+            alt: "FRP, the same apartment, a few weeks on: a family at home",
           },
           labelA: "Move-in day",
           labelB: "The same apartment, a few weeks on",
@@ -867,40 +866,40 @@ export const PROJECTS: Project[] = [
           aspect: "1.646 / 1",
           image: {
             src: "/work/friends-rehab/v4-ho-renting.jpg",
-            alt: "FRP — the Homeownership Fund: renting keeps you housed, owning changes what you can pass on",
+            alt: "FRP, the Homeownership Fund: renting keeps you housed, owning changes what you can pass on",
           },
           caption:
-            "The Homeownership Fund starts from the block a family could stay on — renting keeps you housed; owning changes what you can pass on.",
+            "The Homeownership Fund starts from the block a family could stay on, renting keeps you housed; owning changes what you can pass on.",
         },
         {
           kind: "full",
           aspect: "2.304 / 1",
           image: {
             src: "/work/friends-rehab/v4-hw-ask.jpg",
-            alt: "FRP — the ask: one hundred thousand dollars in year one, $1,500 furnishes a package for a family of four",
+            alt: "FRP, the ask: one hundred thousand dollars in year one, $1,500 furnishes a package for a family of four",
           },
           caption:
-            "The ask is a number and what it buys — $100K for the fund's first year, $1,500 for one family's complete package.",
+            "The ask is a number and what it buys, $100K for the fund's first year, $1,500 for one family's complete package.",
         },
         {
           kind: "full",
           aspect: "1.671 / 1",
           image: {
             src: "/work/friends-rehab/v4-impact.jpg",
-            alt: "FRP — Impact: the numbers, and where to check them — 370 families, 1,500 returning citizens, 11 partner organizations",
+            alt: "FRP, Impact: the numbers, and where to check them, 370 families, 1,500 returning citizens, 11 partner organizations",
           },
           caption:
-            "Impact — three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
+            "Impact, three figures and a link to the annual report they come from. The headline says it: the numbers, and where to check them.",
         },
         {
           kind: "full",
           aspect: "2.17 / 1",
           image: {
             src: "/work/friends-rehab/v4-grit.jpg",
-            alt: "FRP — GRIT Workforce: graduates are looking for work in the trades",
+            alt: "FRP, GRIT Workforce: graduates are looking for work in the trades",
           },
           caption:
-            "GRIT Workforce, written for the employer as much as the trainee — graduates finish with hands-on construction training and certifications, and FRP would like to talk.",
+            "GRIT Workforce, written for the employer as much as the trainee, graduates finish with hands-on construction training and certifications, and FRP would like to talk.",
         },
       ],
     },
@@ -910,29 +909,29 @@ export const PROJECTS: Project[] = [
     num: "02",
     tier: "independent",
     title: "Colony Coffee Co.",
-    client: "Colony Coffee — Todd Mills",
+    client: "Colony Coffee, Todd Mills",
     year: "2025",
     category: "Coffee Brand / Packaging",
     duration: "",
     tags: ["Brand", "Packaging", "Label"],
     blurb:
-      "Brand and label design for a veteran-founded coffee company built to honor American history — period-authentic label artwork, made with real attention to detail.",
+      "Brand and label design for a veteran-founded coffee company built to honor American history, period-authentic label artwork, made with real attention to detail.",
     oneLiner:
-      "A coffee brand that honors American history — authentically.",
+      "A coffee brand that honors American history, authentically.",
     brief:
-      "Colony Coffee is a veteran-founded brand built to honor America's history and the people who came before us. Founder Todd Mills wanted label artwork with a genuine historical edge — proud and patriotic, but authentic to its period, down to the smallest details.",
+      "Colony Coffee is a veteran-founded brand built to honor America's history and the people who came before us. Founder Todd Mills wanted label artwork with a genuine historical edge, proud and patriotic, but authentic to its period, down to the smallest details.",
     process: [
       {
         label: "Research",
-        body: "Research explored the specialty coffee landscape, regional competitors, and brand positioning — identifying where Colony could earn loyalty without leaning on category clichés.",
+        body: "Research explored the specialty coffee landscape, regional competitors, and brand positioning, identifying where Colony could earn loyalty without leaning on category clichés.",
       },
       {
         label: "Design",
-        body: "Design emphasized clarity, hierarchy, and restraint — creating an experience that feels credible, approachable, and easy to navigate.",
+        body: "Design emphasized clarity, hierarchy, and restraint, creating an experience that feels credible, approachable, and easy to navigate.",
       },
       {
         label: "Development",
-        body: "Digital execution emphasized simplicity, performance, and flexibility — a system the team can extend as they add SKUs, locations, and channels.",
+        body: "Digital execution emphasized simplicity, performance, and flexibility, a system the team can extend as they add SKUs, locations, and channels.",
       },
     ],
     services: [
@@ -948,16 +947,16 @@ export const PROJECTS: Project[] = [
     externalUrl: "https://www.carmancreative.com/work/colonycoffee",
     caseStudy: {
       overview: [
-        { label: "Client", value: "Colony Coffee — Todd Mills" },
+        { label: "Client", value: "Colony Coffee, Todd Mills" },
         { label: "Role", value: "Brand concept & label design (Carman Creative)" },
         { label: "Year", value: "2025" },
         { label: "Scope", value: "Brand system, labels & packaging, business card" },
-        { label: "Status", value: "On the shelf — first batch shipped" },
+        { label: "Status", value: "On the shelf, first batch shipped" },
       ],
       challenge:
-        "Todd Mills — a veteran, and genuinely passionate about coffee — wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
+        "Todd Mills, a veteran, and genuinely passionate about coffee, wanted a real creative edge in a crowded space. His vision: a brand that honors America's history and the people who came before us, with label artwork that carries a genuine historical edge while staying authentic to its period. He cared deeply about the details.",
       mandate:
-        "Todd came to me for a logo. But a brand this specific — built on history and authenticity — needed more than a mark. I shaped the look and feel and designed the labels themselves: the typography, the structure, and the historical direction of the artwork.",
+        "Todd came to me for a logo. But a brand this specific, built on history and authenticity, needed more than a mark. I shaped the look and feel and designed the labels themselves: the typography, the structure, and the historical direction of the artwork.",
       context:
         "A veteran-founded small business, a founder with a strong, specific vision and a real eye for detail, and a brand built on patriotism and history that had to feel authentic rather than costume.",
       role: [
@@ -968,74 +967,74 @@ export const PROJECTS: Project[] = [
         "Directed the historical, period-authentic artwork approach",
       ],
       team: [
-        "Todd Mills — founder, veteran, and the vision behind it",
+        "Todd Mills, founder, veteran, and the vision behind it",
         "A direct, hands-on collaboration between the two of us",
       ],
       decisions: [
         {
           title: "A logo wasn't enough",
-          body: "Colony came asking for a logo. A brand built this specifically on history and authenticity needed more than a mark — so we built the system: custom label artwork and packaging, plus a business card, to actually get the company off the ground.",
+          body: "Colony came asking for a logo. A brand built this specifically on history and authenticity needed more than a mark, so we built the system: custom label artwork and packaging, plus a business card, to actually get the company off the ground.",
         },
         {
           title: "Honor history without the clichés",
-          body: "A genuinely period-authentic historical edge — not generic patriotic tropes. Todd's whole point was pride done right, so the artwork had to feel true to its era, not like a costume.",
+          body: "A genuinely period-authentic historical edge, not generic patriotic tropes. Todd's whole point was pride done right, so the artwork had to feel true to its era, not like a costume.",
         },
         {
           title: "Land the direction, then lock the label",
-          body: "A few rounds of ideation to find the look and feel, then commit the typography and structure — so the label was resolved and production-ready rather than endlessly tweaked.",
+          body: "A few rounds of ideation to find the look and feel, then commit the typography and structure, so the label was resolved and production-ready rather than endlessly tweaked.",
         },
         {
           title: "Sweat the details Todd cared about",
-          body: "He was specific about the detail, and that's where this brand earns its authenticity — so the small decisions got the same attention as the big ones.",
+          body: "He was specific about the detail, and that's where this brand earns its authenticity, so the small decisions got the same attention as the big ones.",
         },
       ],
       outcomes: [
         "What began as a logo request became a full brand system that launched the company",
-        "Direction locked, production done — the first batch is printed, bagged, and on the shelf",
-        "The start of an ongoing relationship — more Colony work to come",
+        "Direction locked, production done, the first batch is printed, bagged, and on the shelf",
+        "The start of an ongoing relationship, more Colony work to come",
       ],
       reflection:
-        "This one's personal — a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
+        "This one's personal, a small business honoring the country and the people who came before us. I'm genuinely excited to try the coffee, and proud to have helped shape something Todd cares this much about. We look forward to working with Colony for years to come.",
       work: [
         {
           kind: "pair",
           a: {
             src: "/work/colony-coffee/liberty.jpg",
-            alt: "Colony Coffee — the Liberty dark roast bag, a midnight rider with a lantern",
+            alt: "Colony Coffee, the Liberty dark roast bag, a midnight rider with a lantern",
           },
           b: {
             src: "/work/colony-coffee/founders.jpg",
-            alt: "Colony Coffee — the Founders Blend medium roast bag, the founders at a candlelit table",
+            alt: "Colony Coffee, the Founders Blend medium roast bag, the founders at a candlelit table",
           },
-          labelA: "Liberty — dark roast",
-          labelB: "Founders Blend — medium roast",
+          labelA: "Liberty, dark roast",
+          labelB: "Founders Blend, medium roast",
           caption:
-            "Two of the three, up close — “Bold enough for midnight riders” and “Balanced like the Constitution,” down to the detail Todd cared about.",
+            "Two of the three, up close, “Bold enough for midnight riders” and “Balanced like the Constitution,” down to the detail Todd cared about.",
         },
         {
           kind: "pair",
           a: {
             src: "/work/colony-coffee/on-shelf.jpg",
-            alt: "Colony Coffee — the printed bags, all three roasts, on the shelf at the shop",
+            alt: "Colony Coffee, the printed bags, all three roasts, on the shelf at the shop",
           },
           b: {
             src: "/work/colony-coffee/label-sheet-v2.jpg",
-            alt: "Colony Coffee — the coffee-bag label design system across three roasts",
+            alt: "Colony Coffee, the coffee-bag label design system across three roasts",
           },
           labelA: "On the shelf",
           labelB: "The concepts it came from",
           caption:
-            "The real thing beside the work that made it — first batch printed, bagged, and on the shelf at the shop, next to the label concepts across all three roasts: heroic illustration meets colonial-era Americana.",
+            "The real thing beside the work that made it, first batch printed, bagged, and on the shelf at the shop, next to the label concepts across all three roasts: heroic illustration meets colonial-era Americana.",
         },
         {
           kind: "full",
           aspect: "3 / 2",
           image: {
             src: "/work/colony-coffee/gallery-1.jpg",
-            alt: "Colony Coffee — brand direction and exploration board",
+            alt: "Colony Coffee, brand direction and exploration board",
           },
           caption:
-            "Where it came from — a few rounds of direction: palettes, collateral, and the historical art the labels grew out of.",
+            "Where it came from, a few rounds of direction: palettes, collateral, and the historical art the labels grew out of.",
         },
     ],
     },
@@ -1051,7 +1050,7 @@ export const PROJECTS: Project[] = [
     duration: "",
     tags: ["Brand", "Web", "Merch"],
     blurb:
-      "A brand refresh, a better website, branded merchandise, and an events platform for Special Forces Trust — a fund supporting military spouses and veterans.",
+      "A brand refresh, a better website, branded merchandise, and an events platform for Special Forces Trust, a fund supporting military spouses and veterans.",
     oneLiner:
       "Giving back to the military community and their families.",
     brief:
@@ -1084,9 +1083,9 @@ export const PROJECTS: Project[] = [
     display: "SFT",
     cover: "/work/special-forces-trust/cover.png",
     gallery: [
-      { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT — refreshed homepage" },
-      { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT — Supporting Our Quiet Professionals" },
-      { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT — ways to give back and branded gear" },
+      { src: "/work/special-forces-trust/gallery-3.png", alt: "SFT, refreshed homepage" },
+      { src: "/work/special-forces-trust/gallery-2.png", alt: "SFT, Supporting Our Quiet Professionals" },
+      { src: "/work/special-forces-trust/gallery-1.png", alt: "SFT, ways to give back and branded gear" },
     ],
     externalUrl: "https://www.carmancreative.com/work/sft",
     caseStudy: {
@@ -1098,11 +1097,11 @@ export const PROJECTS: Project[] = [
         { label: "Status", value: "Delivered" },
       ],
       challenge:
-        "Special Forces Trust supports military spouses and veterans through fundraising and events. They needed a refreshed brand and a better website — and a clearer way for veterans to engage with and get involved in the events the fund hosts.",
+        "Special Forces Trust supports military spouses and veterans through fundraising and events. They needed a refreshed brand and a better website, and a clearer way for veterans to engage with and get involved in the events the fund hosts.",
       mandate:
         "Refresh the brand and rebuild the experience: a stronger logo and identity, a better website, branded merchandise, and a platform that makes it easy for veterans and supporters to take part.",
       context:
-        "A mission-driven fund serving the military community, where the work has to feel respectful and credible — and genuinely easy for people to show up for.",
+        "A mission-driven fund serving the military community, where the work has to feel respectful and credible, and genuinely easy for people to show up for.",
       role: [
         "Refreshed the logo and branding",
         "Rebuilt the website with a better approach",
@@ -1110,7 +1109,7 @@ export const PROJECTS: Project[] = [
         "Built a better platform for veterans to engage and join the events",
       ],
       team: [
-        "Special Forces Trust — client",
+        "Special Forces Trust, client",
         "A direct client relationship",
       ],
       decisions: [
@@ -1120,7 +1119,7 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Make getting involved the easy part",
-          body: "Built the platform around helping veterans engage with and get into the events — because participation is the whole point of the fund.",
+          body: "Built the platform around helping veterans engage with and get into the events, because participation is the whole point of the fund.",
         },
       ],
       outcomes: [
@@ -1134,30 +1133,30 @@ export const PROJECTS: Project[] = [
           kind: "browser",
           image: {
             src: "/work/special-forces-trust/gallery-3.png",
-            alt: "Special Forces Trust website — Supporting Warriors and their Families, with a How We Help section",
+            alt: "Special Forces Trust website, Supporting Warriors and their Families, with a How We Help section",
           },
           caption:
-            "The refreshed site — “Supporting Warriors and their Families, Honoring Veterans,” with clear paths to donate, get involved, and request support.",
+            "The refreshed site, “Supporting Warriors and their Families, Honoring Veterans,” with clear paths to donate, get involved, and request support.",
         },
         {
           kind: "full",
           aspect: "2 / 1",
           image: {
             src: "/work/special-forces-trust/gallery-2.png",
-            alt: "Special Forces Trust — the Supporting Our Quiet Professionals section",
+            alt: "Special Forces Trust, the Supporting Our Quiet Professionals section",
           },
           caption:
-            "“Supporting Our Quiet Professionals” — the mission told plainly, carried by the community's own photography.",
+            "“Supporting Our Quiet Professionals”, the mission told plainly, carried by the community's own photography.",
         },
         {
           kind: "full",
           aspect: "2 / 1",
           image: {
             src: "/work/special-forces-trust/gallery-1.png",
-            alt: "Special Forces Trust — Ways to give back, with branded SFT gear",
+            alt: "Special Forces Trust, Ways to give back, with branded SFT gear",
           },
           caption:
-            "Ways to give back — branded SFT gear, where every purchase helps fund the events and services the Trust provides.",
+            "Ways to give back, branded SFT gear, where every purchase helps fund the events and services the Trust provides.",
         },
       ],
     },
@@ -1173,11 +1172,11 @@ export const PROJECTS: Project[] = [
     duration: "",
     tags: ["Web", "Nonprofit", "Collateral"],
     blurb:
-      "The website and collateral that got Spike's K9 Fund off the ground — a local Norfolk/VB nonprofit founded by a retired special-ops veteran on a mission to protect and rehome service dogs.",
+      "The website and collateral that got Spike's K9 Fund off the ground, a local Norfolk/VB nonprofit founded by a retired special-ops veteran on a mission to protect and rehome service dogs.",
     oneLiner:
-      "A dog saved his life — now he's saving theirs.",
+      "A dog saved his life, now he's saving theirs.",
     brief:
-      "Spike's K9 Fund is a Norfolk/Virginia Beach nonprofit founded by Jim Hatch — a retired special-ops veteran whose life was saved by a dog. He's on a mission to protect service dogs and help rehome them when they retire, and to build a space where dog lovers can support the work. I created their website and collateral and helped get them off the ground.",
+      "Spike's K9 Fund is a Norfolk/Virginia Beach nonprofit founded by Jim Hatch, a retired special-ops veteran whose life was saved by a dog. He's on a mission to protect service dogs and help rehome them when they retire, and to build a space where dog lovers can support the work. I created their website and collateral and helped get them off the ground.",
     process: [
       {
         label: "Research",
@@ -1185,7 +1184,7 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "Concept",
-        body: "The concept focused on a clear, organized digital experience that balances emotional connection with operational clarity — showcasing the mission and tangible impact while making critical actions like donating, applying for assistance, or learning about programs immediately visible.",
+        body: "The concept focused on a clear, organized digital experience that balances emotional connection with operational clarity, showcasing the mission and tangible impact while making critical actions like donating, applying for assistance, or learning about programs immediately visible.",
       },
       {
         label: "Design",
@@ -1205,23 +1204,23 @@ export const PROJECTS: Project[] = [
     display: "SPIKE'S",
     cover: "/work/spikes-k9-fund/cover.png",
     gallery: [
-      { src: "/work/spikes-k9-fund/gallery-1.png", alt: "Spike's K9 Fund — About Spike's" },
-      { src: "/work/spikes-k9-fund/gallery-2.png", alt: "Spike's K9 Fund — the K9 Spike story" },
-      { src: "/work/spikes-k9-fund/gallery-3.png", alt: "Spike's K9 Fund — the online shop" },
+      { src: "/work/spikes-k9-fund/gallery-1.png", alt: "Spike's K9 Fund, About Spike's" },
+      { src: "/work/spikes-k9-fund/gallery-2.png", alt: "Spike's K9 Fund, the K9 Spike story" },
+      { src: "/work/spikes-k9-fund/gallery-3.png", alt: "Spike's K9 Fund, the online shop" },
     ],
     externalUrl: "https://www.carmancreative.com/work/spikes",
     caseStudy: {
       overview: [
-        { label: "Client", value: "Spike's K9 Fund — Jim Hatch" },
+        { label: "Client", value: "Spike's K9 Fund, Jim Hatch" },
         { label: "Role", value: "Website & collateral (Carman Creative)" },
         { label: "Location", value: "Norfolk / Virginia Beach" },
         { label: "Scope", value: "Website, collateral, launch" },
-        { label: "Status", value: "Launched — off the ground" },
+        { label: "Status", value: "Launched, off the ground" },
       ],
       challenge:
-        "Jim Hatch — a retired special-ops veteran whose life was saved by a dog — wanted to protect service dogs and help rehome them when they retire, and to give dog lovers a real place to support the mission. Spike's needed a home online and the materials to get off the ground.",
+        "Jim Hatch, a retired special-ops veteran whose life was saved by a dog, wanted to protect service dogs and help rehome them when they retire, and to give dog lovers a real place to support the mission. Spike's needed a home online and the materials to get off the ground.",
       mandate:
-        "Create the website and collateral to launch Spike's — a clear, welcoming platform that carries Jim's mission and makes it easy for supporters to show up.",
+        "Create the website and collateral to launch Spike's, a clear, welcoming platform that carries Jim's mission and makes it easy for supporters to show up.",
       context:
         "A brand-new, founder-driven nonprofit with a deeply personal mission, local to the Norfolk/Virginia Beach area, that needed to look credible and established from day one.",
       role: [
@@ -1230,13 +1229,13 @@ export const PROJECTS: Project[] = [
         "Helped get the organization off the ground",
       ],
       team: [
-        "Jim Hatch — founder, retired special ops",
+        "Jim Hatch, founder, retired special ops",
         "A direct client relationship",
       ],
       decisions: [
         {
           title: "Lead with the mission and the dogs",
-          body: "Jim's story — a dog saved his life — is the heart of it, so the platform puts the mission and the dogs front and center rather than burying them under nonprofit boilerplate.",
+          body: "Jim's story, a dog saved his life, is the heart of it, so the platform puts the mission and the dogs front and center rather than burying them under nonprofit boilerplate.",
         },
         {
           title: "Make it easy for dog lovers to show up",
@@ -1248,36 +1247,36 @@ export const PROJECTS: Project[] = [
         "A platform and space for dog lovers to support the mission",
       ],
       reflection:
-        "I don't work with Spike's anymore, but I loved this one — a local mission with real heart, led by someone who lived it. I was stoked to help Jim get it started.",
+        "I don't work with Spike's anymore, but I loved this one, a local mission with real heart, led by someone who lived it. I was stoked to help Jim get it started.",
       work: [
         {
           kind: "browser",
           image: {
             src: "/work/spikes-k9-fund/gallery-1.png",
-            alt: "Spike's K9 Fund website — About Spike's, founder Jim Hatch's story and a working dog",
+            alt: "Spike's K9 Fund website, About Spike's, founder Jim Hatch's story and a working dog",
           },
           caption:
-            "The site that got Spike's off the ground — Jim Hatch's story and the working dogs at the heart of it, mission front and center.",
+            "The site that got Spike's off the ground, Jim Hatch's story and the working dogs at the heart of it, mission front and center.",
         },
         {
           kind: "full",
           aspect: "2 / 1",
           image: {
             src: "/work/spikes-k9-fund/gallery-2.png",
-            alt: "Spike's K9 Fund — the K9 Spike story section",
+            alt: "Spike's K9 Fund, the K9 Spike story section",
           },
           caption:
-            "K9 Spike — the founder's first working dog, the partner who saved his life, and the fund's namesake.",
+            "K9 Spike, the founder's first working dog, the partner who saved his life, and the fund's namesake.",
         },
         {
           kind: "full",
           aspect: "2 / 1",
           image: {
             src: "/work/spikes-k9-fund/gallery-3.png",
-            alt: "Spike's K9 Fund — the online shop of branded products",
+            alt: "Spike's K9 Fund, the online shop of branded products",
           },
           caption:
-            "The shop — branded collateral and merch that give supporters an easy way to show up for the mission.",
+            "The shop, branded collateral and merch that give supporters an easy way to show up for the mission.",
         },
       ],
     },
@@ -1297,9 +1296,9 @@ export const PROJECTS: Project[] = [
     category: "Website / Editorial",
     duration: "",
     tags: ["Web", "Editorial", "Knowledge Hub"],
-    blurb: "A website refresh and a new consolidated Knowledge Hub for Atrómitos — a woman-owned consulting firm — plus a 65-page editorial report for the Andy Hill CARE Fund.",
-    oneLiner: "Their art direction, elevated — and a Knowledge Hub that carries their expertise.",
-    brief: "Atrómitos is a woman-owned health and human services consulting firm. They came in through a referral with their own art direction already settled — they weren't looking for a redesign. So the job was to execute their direction faithfully, raise the craft inside it, and add the things that would actually move the business: real interactivity and a consolidated Knowledge Hub for their published work and webinars. The Andy Hill CARE Fund report was a separate commission.",
+    blurb: "A website refresh and a new consolidated Knowledge Hub for Atrómitos, a woman-owned consulting firm, plus a 65-page editorial report for the Andy Hill CARE Fund.",
+    oneLiner: "Their art direction, elevated, and a Knowledge Hub that carries their expertise.",
+    brief: "Atrómitos is a woman-owned health and human services consulting firm. They came in through a referral with their own art direction already settled, they weren't looking for a redesign. So the job was to execute their direction faithfully, raise the craft inside it, and add the things that would actually move the business: real interactivity and a consolidated Knowledge Hub for their published work and webinars. The Andy Hill CARE Fund report was a separate commission.",
     process: [],
     services: [
       "Web design",
@@ -1317,33 +1316,33 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Web design & editorial (Carman Creative)" },
         { label: "How it came in", value: "Referral from another client" },
         { label: "Scope", value: "Website refresh, Knowledge Hub, Andy Hill report" },
-        { label: "Status", value: "Live — client very happy" },
+        { label: "Status", value: "Live, client very happy" },
       ],
       challenge:
-        "Atrómitos arrived with the site already laid out the way they wanted it. The art direction was theirs and it wasn't up for redesign — so the usual lever, rethinking the look, was off the table. The real problem was underneath it: their published work — articles, policy analysis, podcasts, webinars, toolkits — was scattered, and the site didn't do justice to how much expertise the firm actually produces.",
+        "Atrómitos arrived with the site already laid out the way they wanted it. The art direction was theirs and it wasn't up for redesign, so the usual lever, rethinking the look, was off the table. The real problem was underneath it: their published work, articles, policy analysis, podcasts, webinars, toolkits, was scattered, and the site didn't do justice to how much expertise the firm actually produces.",
       mandate:
         "Execute their art direction faithfully, sharpen the craft within it, and build what the site was missing: genuine interactivity and one consolidated home for everything they publish. The Andy Hill CARE Fund report came in separately as its own commission.",
       context:
-        "A referral from a completely unrelated client — a good sign the reputation travels. An active, engaged consulting firm that publishes constantly, with a settled visual direction of their own and clear opinions about it.",
+        "A referral from a completely unrelated client, a good sign the reputation travels. An active, engaged consulting firm that publishes constantly, with a settled visual direction of their own and clear opinions about it.",
       role: [
         "Took the client's art direction as the brief and built the site to it",
-        "Raised the execution — typography, spacing, and finish — inside their direction",
+        "Raised the execution, typography, spacing, and finish, inside their direction",
         "Added interactivity the original layout didn't have",
-        "Designed and built the Knowledge Hub — one consolidated home for their articles, policy analysis, podcast, webinars, and toolkits",
-        "Designed the Andy Hill CARE Fund report — a 65-page editorial document, commissioned separately",
+        "Designed and built the Knowledge Hub, one consolidated home for their articles, policy analysis, podcast, webinars, and toolkits",
+        "Designed the Andy Hill CARE Fund report, a 65-page editorial document, commissioned separately",
       ],
       team: [
-        "Atromitos — woman-owned consulting client",
+        "Atromitos, woman-owned consulting client",
         "Referred by another client; a direct client relationship",
       ],
       decisions: [
         {
-          title: "Serve their direction — then raise it",
+          title: "Serve their direction, then raise it",
           body: "The client had settled the art direction and didn't want it reopened. I took that as the brief rather than a fight, and spent the effort where it was still mine to spend: sharper typography, better spacing and hierarchy, and a level of finish above what came in.",
         },
         {
           title: "Put the value where the direction wasn't",
-          body: "If the look was fixed, the contribution had to come from what the site could do. That meant real interactivity and, above all, the Knowledge Hub — the piece that changed what the site is actually for.",
+          body: "If the look was fixed, the contribution had to come from what the site could do. That meant real interactivity and, above all, the Knowledge Hub, the piece that changed what the site is actually for.",
         },
         {
           title: "Consolidate the expertise into one place",
@@ -1351,55 +1350,55 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Treat the report as real editorial",
-          body: "The Andy Hill CARE Fund piece got the full treatment — 65 pages of structured findings, numbered takeaways, section openers, and a tiered recommendation framework. A considered document, not a long memo.",
+          body: "The Andy Hill CARE Fund piece got the full treatment, 65 pages of structured findings, numbered takeaways, section openers, and a tiered recommendation framework. A considered document, not a long memo.",
         },
       ],
       outcomes: [
         "A site built to the client's own direction, executed at a higher level of craft than what came in",
-        "The Knowledge Hub — one consolidated home for the firm's articles, policy analysis, podcast, webinars, and toolkits",
+        "The Knowledge Hub, one consolidated home for the firm's articles, policy analysis, podcast, webinars, and toolkits",
         "The Andy Hill CARE Fund report delivered and very well received",
-        "An ongoing relationship with an active, engaged client — more work expected",
+        "An ongoing relationship with an active, engaged client, more work expected",
       ],
       reflection:
-        "Not every engagement hands you the visual direction, and this one didn't: the layout was theirs and staying. The useful lesson was where to put the effort when the look is settled — into craft inside their system, and into the Knowledge Hub, which is the piece I'd point at. It came in as a referral from an unrelated client, which tells me the work travels, and it's a relationship I expect to keep building on.",
+        "Not every engagement hands you the visual direction, and this one didn't: the layout was theirs and staying. The useful lesson was where to put the effort when the look is settled, into craft inside their system, and into the Knowledge Hub, which is the piece I'd point at. It came in as a referral from an unrelated client, which tells me the work travels, and it's a relationship I expect to keep building on.",
       work: [
         {
           kind: "browser",
           image: {
             src: "/work/atromitos/site-home-v2.jpg",
-            alt: "The Atrómitos homepage — “Consulting Done Fearlessly” over a lioness at sunrise",
+            alt: "The Atrómitos homepage, “Consulting Done Fearlessly” over a lioness at sunrise",
           },
           caption:
-            "The site, built to the client's own art direction — executed with sharper type, spacing, and finish than what came in.",
+            "The site, built to the client's own art direction, executed with sharper type, spacing, and finish than what came in.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
             src: "/work/atromitos/knowledge-hub-v2.jpg",
-            alt: "The Atrómitos Knowledge Hub — a What's New feature above cards for the podcast, articles, learning, and policy analysis",
+            alt: "The Atrómitos Knowledge Hub, a What's New feature above cards for the podcast, articles, learning, and policy analysis",
           },
           caption:
-            "The Knowledge Hub — the contribution I'd point at. One home for the articles, policy analysis, podcast, webinars, and toolkits a firm this active keeps producing.",
+            "The Knowledge Hub, the contribution I'd point at. One home for the articles, policy analysis, podcast, webinars, and toolkits a firm this active keeps producing.",
         },
         {
           kind: "detail",
           image: {
             src: "/work/atromitos/andyhill-cover.jpg",
-            alt: "Findings and Recommendations for the Andy Hill CARE Fund — report cover",
+            alt: "Findings and Recommendations for the Andy Hill CARE Fund, report cover",
           },
           caption:
-            "A separate commission: “Findings and Recommendations for the Andy Hill CARE Fund” — 65 pages on community-based organizations and diversity in cancer clinical trials.",
+            "A separate commission: “Findings and Recommendations for the Andy Hill CARE Fund”, 65 pages on community-based organizations and diversity in cancer clinical trials.",
         },
         {
           kind: "pair",
           a: {
             src: "/work/atromitos/andyhill-findings.jpg",
-            alt: "Key Findings at a Glance — numbered findings with supporting detail",
+            alt: "Key Findings at a Glance, numbered findings with supporting detail",
           },
           b: {
             src: "/work/atromitos/andyhill-divider.jpg",
-            alt: "Executive Summary section opener with photography and a colour panel",
+            alt: "Executive Summary section opener with photography and a color panel",
           },
           labelA: "Findings at a glance",
           labelB: "Section openers",
@@ -1411,7 +1410,7 @@ export const PROJECTS: Project[] = [
           images: [
             {
               src: "/work/atromitos/andyhill-voices.jpg",
-              alt: "Community Voices section — themed qualitative findings",
+              alt: "Community Voices section, themed qualitative findings",
             },
             {
               src: "/work/atromitos/andyhill-framework.jpg",
@@ -1423,7 +1422,7 @@ export const PROJECTS: Project[] = [
             },
           ],
           caption:
-            "Inside the report — community voices, a tiered recommendation framework, and the design system holding 65 pages of dense research together.",
+            "Inside the report, community voices, a tiered recommendation framework, and the design system holding 65 pages of dense research together.",
         },
       ],
     },
@@ -1441,9 +1440,9 @@ export const PROJECTS: Project[] = [
     category: "Brand & Digital",
     duration: "",
     tags: ["Brand", "Identity", "Web"],
-    blurb: "Identity, website, and marketing collateral for EverMark — a family-owned premium design-and-build company in PA's Lehigh Valley. In progress.",
+    blurb: "Identity, website, and marketing collateral for EverMark, a family-owned premium design-and-build company in PA's Lehigh Valley. In progress.",
     oneLiner: "Helping a family builder stand out in a sea of sameness.",
-    brief: "EverMark is a family-owned, premium design-and-build company in Pennsylvania's Lehigh Valley, working to stand out in a crowded field of builders and developers. After a lot of exploration, I began building their identity — with a website, Google Business Profile, and a suite of marketing collateral to follow.",
+    brief: "EverMark is a family-owned, premium design-and-build company in Pennsylvania's Lehigh Valley, working to stand out in a crowded field of builders and developers. After a lot of exploration, I began building their identity, with a website, Google Business Profile, and a suite of marketing collateral to follow.",
     process: [],
     services: [
       "Identity system",
@@ -1462,12 +1461,12 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Brand & digital lead (Carman Creative)" },
         { label: "Location", value: "Lehigh Valley, PA" },
         { label: "Scope", value: "Identity, website, GBP, collateral" },
-        { label: "Status", value: "In progress — identity underway" },
+        { label: "Status", value: "In progress, identity underway" },
       ],
       challenge:
-        "EverMark is a family-owned, premium design-and-build company trying to stand out in a crowded field of builders and developers. The brand has to feel genuinely premium — and unmistakably theirs — in a category where most names blur together.",
+        "EverMark is a family-owned, premium design-and-build company trying to stand out in a crowded field of builders and developers. The brand has to feel genuinely premium, and unmistakably theirs, in a category where most names blur together.",
       mandate:
-        "After a lot of exploration and conversation, I began building EverMark's identity system — and I'll be developing the website, Google Business Profile, and a full suite of marketing collateral to help them reach the potential they deserve.",
+        "After a lot of exploration and conversation, I began building EverMark's identity system, and I'll be developing the website, Google Business Profile, and a full suite of marketing collateral to help them reach the potential they deserve.",
       context:
         "A brand-new client and a family-owned business making the decisions directly, in a design-build category where differentiation is genuinely hard and trust is everything.",
       role: [
@@ -1478,7 +1477,7 @@ export const PROJECTS: Project[] = [
         "Designing a suite of marketing collateral (in progress)",
       ],
       team: [
-        "EverMark's owners — a family-owned business",
+        "EverMark's owners, a family-owned business",
         "A direct client relationship",
       ],
       decisions: [
@@ -1488,7 +1487,7 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "TODO: Add decisions as the work ships",
-          body: "TODO: The identity, website, and collateral choices — captured here as they're made.",
+          body: "TODO: The identity, website, and collateral choices, captured here as they're made.",
         },
       ],
       outcomes: [
@@ -1502,7 +1501,7 @@ export const PROJECTS: Project[] = [
           tall: true,
           image: { src: "", alt: "EverMark identity system" },
           caption:
-            "The identity — built to feel genuinely premium in a category where names blur together.",
+            "The identity, built to feel genuinely premium in a category where names blur together.",
         },
         {
           kind: "detail",
@@ -1511,9 +1510,9 @@ export const PROJECTS: Project[] = [
         },
         {
           kind: "browser",
-          image: { src: "", alt: "EverMark website — in development" },
+          image: { src: "", alt: "EverMark website, in development" },
           caption:
-            "The website in development — the digital home, Google Business Profile, and collateral to follow.",
+            "The website in development, the digital home, Google Business Profile, and collateral to follow.",
         },
       ],
     },
@@ -1525,16 +1524,15 @@ export const PROJECTS: Project[] = [
     flagship: true,
     title: "Stamp Out Stigma",
     client: "Beacon Health Options",
-    year: "2023",
+    year: "2018",
     category: "Advertising / Campaign",
-    duration: "6 weeks",
     tags: ["Campaign", "OOH", "Advertising"],
     blurb:
-      "A national mental-health awareness campaign staged in Times Square — built to spark honest conversation and cut the stigma around mental illness.",
+      "A national mental-health awareness campaign staged in Times Square, built to spark honest conversation and cut the stigma around mental illness.",
     oneLiner:
       "Mental health is just as important as physical health.",
     brief:
-      "A national mental health awareness initiative staged in Times Square, designed to spark conversation and reduce stigma around mental illness — reinforcing that mental health matters as much as physical health, and that sharing personal stories helps others feel seen and supported.",
+      "A national mental health awareness initiative staged in Times Square, designed to spark conversation and reduce stigma around mental illness, reinforcing that mental health matters as much as physical health, and that sharing personal stories helps others feel seen and supported.",
     process: [
       {
         label: "Research",
@@ -1542,15 +1540,15 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "Concept",
-        body: "The concept centered on visibility and honesty — using real stories and human emotion to normalize conversations around mental health. Placing the message in one of the most public spaces in the world challenged silence and encouraged people to speak openly about their experiences.",
+        body: "The concept centered on visibility and honesty, using real stories and human emotion to normalize conversations around mental health. Placing the message in one of the most public spaces in the world challenged silence and encouraged people to speak openly about their experiences.",
       },
       {
         label: "Design",
-        body: "Design leveraged strong typography, restrained color, and emotionally grounded imagery to communicate urgency without sensationalism. The messaging was intentionally clear and direct — understood at a glance while still carrying emotional weight in a fast-moving environment.",
+        body: "Design leveraged strong typography, restrained color, and emotionally grounded imagery to communicate urgency without sensationalism. The messaging was intentionally clear and direct, understood at a glance while still carrying emotional weight in a fast-moving environment.",
       },
       {
         label: "Development",
-        body: "Displayed prominently in Times Square, the campaign amplified national awareness around mental health and reinforced the importance of open dialogue — supporting a broader effort to reduce stigma and promote understanding.",
+        body: "Displayed prominently in Times Square, the campaign amplified national awareness around mental health and reinforced the importance of open dialogue, supporting a broader effort to reduce stigma and promote understanding.",
       },
     ],
     services: [
@@ -1569,13 +1567,13 @@ export const PROJECTS: Project[] = [
     caseStudy: {
       overview: [
         { label: "Client", value: "Beacon Health Options" },
-        { label: "Role", value: "Creative lead — campaign concept, messaging, and OOH design" },
-        { label: "Year", value: "2023" },
+        { label: "Role", value: "Creative lead, campaign concept, messaging, and OOH design" },
+        { label: "Year", value: "2018" },
         { label: "Scope", value: "Awareness campaign, out-of-home creative" },
         { label: "Deliverables", value: "Times Square activation creative" },
       ],
       challenge:
-        "A national mental-health awareness effort needed to cut through one of the busiest environments on earth — Times Square — and get people to treat mental health as seriously as physical health, without sensationalizing it.",
+        "A national mental-health awareness effort needed to cut through one of the busiest environments on earth, Times Square, and get people to treat mental health as seriously as physical health, without sensationalizing it.",
       mandate:
         "Create out-of-home creative that lands instantly in a fast-moving, high-noise space while carrying real emotional weight.",
       context:
@@ -1591,7 +1589,7 @@ export const PROJECTS: Project[] = [
       decisions: [
         {
           title: "Clarity over spectacle",
-          body: "Strong typography, restrained color, and honest imagery so the message reads in seconds — without tipping into sensationalism on a sensitive subject.",
+          body: "Strong typography, restrained color, and honest imagery so the message reads in seconds, without tipping into sensationalism on a sensitive subject.",
         },
         {
           title: "Put the message where silence usually wins",
@@ -1599,11 +1597,11 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Lead with human emotion",
-          body: "Real stories and grounded imagery over statistics — normalizing the conversation by making it human, not clinical.",
+          body: "Real stories and grounded imagery over statistics, normalizing the conversation by making it human, not clinical.",
         },
       ],
       outcomes: [
-        "Amplified national mental-health awareness from one of the most public stages in the world — Times Square",
+        "Amplified national mental-health awareness from one of the most public stages in the world, Times Square",
         "Reinforced a simple, hard message: mental health matters as much as physical health",
       ],
       reflection:
@@ -1614,7 +1612,7 @@ export const PROJECTS: Project[] = [
           aspect: "4 / 3",
           image: {
             src: "/work/stamp-out-stigma/timessquare-day-v3.jpg",
-            alt: "Stamp Out Stigma on the Times Square screens — the 1 in 5 creative on the PR Newswire board at Seventh Avenue, with the Hard Rock and Europa Cafe signs around it",
+            alt: "Stamp Out Stigma on the Times Square screens, the 1 in 5 creative on the PR Newswire board at Seventh Avenue, with the Hard Rock and Europa Cafe signs around it",
           },
           caption:
             "The real buy: the campaign on the PR Newswire screens at Seventh Avenue, one honest message holding its own in the loudest advertising environment in the world.",
@@ -1624,187 +1622,39 @@ export const PROJECTS: Project[] = [
           aspect: "4 / 3",
           a: {
             src: "/work/stamp-out-stigma/creative-v3.jpg",
-            alt: "Stamp Out Stigma — the campaign creative: 1 in 5 U.S. adults will be affected by mental illness each year. 43.8 million people. Talk about it. Your story could change a life.",
+            alt: "Stamp Out Stigma, the campaign creative: 1 in 5 U.S. adults will be affected by mental illness each year. 43.8 million people. Talk about it. Your story could change a life.",
           },
           b: {
             src: "/work/stamp-out-stigma/placement-v3.jpg",
-            alt: "Stamp Out Stigma — the creative on the main screen, flanked by the campaign message on the boards above and beside it",
+            alt: "Stamp Out Stigma, the creative on the main screen, flanked by the campaign message on the boards above and beside it",
           },
           labelA: "The creative",
           labelB: "On the screen",
           caption:
-            "The creative up close — one statistic, one face, one direct ask: talk about it. And the same frame on the screen, with the hashtags and the Beacon mark carrying it into the room.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "premier-friends-club",
-    num: "S01",
-    tier: "systems",
-    title: "Premier Friends Club",
-    client: "Self-initiated",
-    year: "2026",
-    category: "Editorial / Product",
-    duration: "2026–27 season",
-    tags: ["Editorial", "Identity", "Product"],
-    blurb:
-      "Nine friends, eight Premier League clubs, one table. An editorial sports brand built over a fixture feed that keeps its own results, standings and derbies up to date all season.",
-    oneLiner: "Eight clubs. One table. No hiding.",
-    brief:
-      "Nine friends, each committed to a different club, and a group chat that never stops arguing about who is actually having the better season. The site settles it: every league result each friend's club posts is banked as their points, in one table that runs to the final day.",
-    process: [
-      {
-        label: "A real brand, not a joke",
-        body: "Crest, wordmark, motto and an editorial voice. The premise is funny; treating it seriously is what makes it land.",
-      },
-      {
-        label: "The table is the product",
-        body: "Standings ranked on points, mirroring the league table they follow — so the format is instantly legible to anyone who follows football.",
-      },
-      {
-        label: "It runs itself",
-        body: "Results, standings and fixtures refresh on their own across a 38-game season, so the site stays current with no one tending it.",
-      },
-    ],
-    services: [
-      "Brand identity",
-      "Editorial design",
-      "Product design",
-      "Front-end",
-    ],
-    palette: ["#f2ede4", "#c8102e", "#111111", "#6cabdd"],
-    display: "PFC",
-    cover: "/work/premier-friends-club/cover-v2.jpg",
-    coverAspect: "4 / 3",
-    gallery: [],
-    externalUrl: "https://premier-friends-club.netlify.app/",
-    caseStudy: {
-      overview: [
-        { label: "Project", value: "Self-initiated" },
-        { label: "Role", value: "Brand, design, build" },
-        { label: "Year", value: "2026" },
-        { label: "Scope", value: "Identity, editorial design, live standings site" },
-        { label: "Season", value: "2026–27 — runs to 30 May 2027" },
-      ],
-      challenge:
-        "A running argument among nine friends with no way to settle it. Everyone remembers their own good weekends and forgets the bad ones, and a group chat has no memory. The problem is not really software — it is that bragging rights need a scoreboard nobody can dispute.",
-      mandate:
-        "Give the argument a table. Make it look like something worth taking seriously, and make it keep itself current for a whole season without anyone maintaining it.",
-      context:
-        "A personal project, built for nine friends. Fratres Stulta Fides — foolish faith, kept together.",
-      role: [
-        "Created the identity — crest, wordmark, motto and editorial voice",
-        "Art-directed the collage hero from club colours, crests and terrace imagery",
-        "Designed the table, fixture ticker, member roster and gallery",
-        "Built the site and wired it to a fixture feed so results and standings update themselves",
-        "Wrote the copy, including the per-fixture derby lines",
-      ],
-      team: ["Self-initiated — brand, design and build by John Carman"],
-      decisions: [
-        {
-          title: "Treat it like a real competition",
-          body: "Serif headlines, a proper crest, a Latin motto, an editorial voice that reports the standings straight. Playing it deadpan is what makes the joke work — a site that winked at itself would have been funny once and boring by October.",
-        },
-        {
-          title: "Follow the league's own format",
-          body: "Points, ranked exactly as the Premier League table ranks them. Nobody has to learn a scoring system, and no one can argue with the maths.",
-        },
-        {
-          title: "Name the friend, not just the club",
-          body: "Fixtures read 'Thomas Evan Hicks · Liverpool vs Eric Moreno · Fulham'. When two friends' clubs meet it becomes a derby with a name attached, which is the part everyone actually cares about.",
-        },
-        {
-          title: "Handle the asymmetry honestly",
-          body: "One friend's club plays 46 games to everyone else's 38. Rather than hide it or fudge the maths, the site says so on the front page and shows points per game alongside the total.",
-        },
-      ],
-      outcomes: [
-        "Live for the 2026–27 season, updating itself through to 30 May 2027",
-        "Nine members, eight clubs, and 41 friend derbies still to come at the time of writing",
-        "The argument now has a table, which has settled nothing and improved everything",
-      ],
-      reflection:
-        "Small, self-imposed briefs are where I try the things client work is too cautious for — in this case a heavy collage treatment and a completely deadpan editorial voice on an absurd premise. It also had to run unattended for ten months, which is a stricter constraint than most client sites face and a good discipline.",
-      work: [
-        {
-          kind: "browser",
-          image: {
-            src: "/work/premier-friends-club/home-v2.jpg",
-            alt: "Premier Friends Club — the collage hero: eight clubs, one table, no hiding",
-          },
-          url: "premier-friends-club.netlify.app",
-          caption:
-            "The hero is a collage of all eight clubs at once — colours, crests and terraces torn together — with the week's fixtures running underneath.",
-        },
-        {
-          kind: "full",
-          aspect: "1.12 / 1",
-          image: {
-            src: "/work/premier-friends-club/posters.jpg",
-            alt: "Premier Friends Club — this week's match-day posters, one per fixture, the friend named before the club",
-          },
-          caption:
-            "Match-day posters, one per fixture, in the same torn-collage system as the hero. Each names the friend before the club, so a derby is between two people.",
-        },
-        {
-          kind: "full",
-          aspect: "1.07 / 1",
-          image: {
-            src: "/work/premier-friends-club/callouts.jpg",
-            alt: "Premier Friends Club — the call-outs: the season ahead, foolish faith kept together, and the nine",
-          },
-          caption:
-            "The call-outs are where the joke lives — the next friend derby (\u201cthe loser goes quiet for a week\u201d), the run-in, foolish faith kept together, and the nine badged like a squad.",
-        },
-        {
-          kind: "pair",
-          aspect: "3 / 2",
-          a: {
-            src: "/work/premier-friends-club/table-v2.jpg",
-            alt: "Premier Friends Club — the table, right now: games played, points banked, wins, derbies to come",
-          },
-          b: {
-            src: "/work/premier-friends-club/standings.jpg",
-            alt: "Premier Friends Club — the full standings, ranked on points with goal difference",
-          },
-          labelA: "The table, right now",
-          labelB: "Full standings",
-          caption:
-            "Ranked on points exactly as the league ranks its own, with games played alongside — because one member plays eight more matches than everyone else. Results, table and fixtures all refresh on their own.",
-        },
-        {
-          kind: "full",
-          aspect: "2 / 1",
-          image: {
-            src: "/work/premier-friends-club/roster.jpg",
-            alt: "Premier Friends Club — the roster: nine members, eight clubs, thirty-nine games played",
-          },
-          caption:
-            "The Roster — nine friends, eight clubs, one table. Win three, draw one, lose nothing but face.",
+            "The creative up close, one statistic, one face, one direct ask: talk about it. And the same frame on the screen, with the hashtags and the Beacon mark carrying it into the room.",
         },
       ],
     },
   },
   {
     slug: "cqap",
-    num: "S02",
-    tier: "systems",
+    num: "L04",
+    tier: "leadership",
     title: "CQAP",
     client: "Self-initiated prototype",
     year: "2026",
     category: "Product / Creative Operations",
-    duration: "In progress — Alpha",
+    duration: "In progress, Alpha",
     tags: ["Brand Governance", "Creative Operations", "Product"],
     blurb:
-      "A Creative Quality Assurance Platform — a working prototype for reviewing creative against brand standards, where every completed review leaves behind a decision the next one can reuse.",
+      "A Creative Quality Assurance Platform: a working prototype for reviewing creative against brand standards, where every completed review leaves behind a decision the next one can reuse.",
     oneLiner: "Review once. Decide once. Reuse the decision.",
     brief:
-      "Creative review at enterprise scale is where quality is won or lost, and it is almost always run out of inboxes and memory. CQAP is a prototype for the alternative: a structured review that captures the reasoning, not just the verdict.",
+      "Creative review at enterprise scale is where quality is won or lost, and it is almost always run out of inboxes and memory. CQAP is a prototype for the alternative: a structured review that captures the reasoning, not just the verdict. CQAP checks a piece against a library of brand and production standards and returns each finding with the rule it cites. A reviewer accepts, edits or dismisses every finding, and those decisions are saved for the next review.",
     process: [
       {
         label: "Structured intake",
-        body: "Work enters classified by brand, line of business, channel and piece type — so a review starts already knowing which standards apply.",
+        body: "Work enters classified by brand, line of business, channel and piece type, so a review starts already knowing which standards apply.",
       },
       {
         label: "Reviews that leave a trace",
@@ -1832,27 +1682,27 @@ export const PROJECTS: Project[] = [
         { label: "Project", value: "Self-initiated prototype" },
         { label: "Role", value: "Concept, product design, build" },
         { label: "Year", value: "2026" },
-        { label: "Status", value: "Alpha — working prototype, not a shipped product" },
-        { label: "Stack", value: "Next.js, deployed on Vercel" },
+        { label: "Status", value: "Alpha, working prototype, not a shipped product" },
+        { label: "Stack", value: "Built with ChatGPT and Claude. Next.js, deployed on Vercel." },
       ],
       challenge:
-        "In a large organisation, the same creative question gets answered again and again. Someone decides how a template should version, or which identity a piece of collateral carries — and that decision lives in an email thread until the person who made it moves on. Reviewers spend their time re-deciding settled questions instead of catching the things that actually matter.",
+        "In a large organization, the same creative question gets answered again and again. Someone decides how a template should version, or which identity a piece of collateral carries, and that decision lives in an email thread until the person who made it moves on. Reviewers spend their time re-deciding settled questions instead of catching the things that actually matter.",
       mandate:
         "Prototype a review tool where the reasoning survives the review: classify work on the way in, capture the decision on the way out, and make both searchable.",
       context:
-        "Built on my own time as a prototype, out of years of running creative review at volume. The screens show a real review pass on a real piece — a Carelon Palliative Care welcome guide — from package validation through to an approved decision.",
+        "Built on my own time as a prototype, out of years of running creative review at volume. The screens show a real review pass on a real piece (a member welcome guide), from package validation through to an approved decision.",
       role: [
         "Framed the problem as institutional memory rather than workflow speed",
-        "Designed the review model — classify on intake, capture the decision on completion",
+        "Designed the review model, classify on intake, capture the decision on completion",
         "Designed the workspace, the searchable intelligence layer and the memory view",
         "Built the prototype in Next.js",
         "Wrote the product language, including the measurement principle below",
       ],
-      team: ["Self-initiated — concept, design and build by John Carman"],
+      team: ["Self-initiated, concept, design and build by John Carman"],
       decisions: [
         {
           title: "Memory is the product",
-          body: "The obvious version of this tool is a faster approval queue. The useful version is one where a completed review becomes a reusable record — 'Decisions that can be reused' is the actual heading on the memory view, because that is the thing worth building.",
+          body: "The obvious version of this tool is a faster approval queue. The useful version is one where a completed review becomes a reusable record, 'Decisions that can be reused' is the actual heading on the memory view, because that is the thing worth building.",
         },
         {
           title: "Classify on the way in",
@@ -1860,7 +1710,7 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Measure the system, never the reviewer",
-          body: "The Impact view states it in the interface: these metrics describe organisational activity, not individual reviewer productivity. A governance tool that becomes a surveillance tool stops getting honest input, and that has to be a stated principle rather than a good intention.",
+          body: "The Impact view states it in the interface: these metrics describe organizational activity, not individual reviewer productivity. A governance tool that becomes a surveillance tool stops getting honest input, and that has to be a stated principle rather than a good intention.",
         },
         {
           title: "Approved work becomes reference",
@@ -1868,18 +1718,18 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "A working Alpha with the full loop in place — package validation, a review workspace with placed findings, a decision that becomes a reusable record",
+        "A working Alpha with the full loop in place: package validation, a review workspace with placed findings, a decision that becomes a reusable record",
         "A stated measurement principle that keeps the tool pointed at the system rather than at people",
-        "TODO: Confirm — no pilot, adoption or outcome data yet; this is a prototype and is presented as one",
+        "It's an alpha. I use it in my own review work, and it hasn't been piloted with a wider team yet, so there's no adoption data to report.",
       ],
       reflection:
-        "Building it clarified what I had been doing manually for years. The hard part of creative review was never the reviewing — it was that the reasoning evaporated the moment the job closed, so the same ground got re-covered every quarter. Once memory became the product rather than a feature, most of the other design questions answered themselves.",
+        "Building it clarified what I had been doing manually for years. The hard part of creative review was never the reviewing. It was that the reasoning evaporated the moment the job closed, so the same ground got re-covered every quarter. Once memory became the product rather than a feature, most of the other design questions answered themselves.",
       work: [
         {
           kind: "browser",
           image: {
             src: "/work/cqap/01-dashboard-v2.jpg",
-            alt: "CQAP — the workspace: one review active, one completed, and the standards learned so far",
+            alt: "CQAP, the workspace: one review active, one completed, and the standards learned so far",
           },
           url: "cqap.vercel.app",
           caption:
@@ -1890,37 +1740,37 @@ export const PROJECTS: Project[] = [
           aspect: "16 / 10",
           image: {
             src: "/work/cqap/02-package-ready-v2.jpg",
-            alt: "CQAP — validation and context: the package is ready to review",
+            alt: "CQAP, validation and context: the package is ready to review",
           },
           caption:
-            "Validation before judgment. File integrity is checked and the context — brand, line of business, channel, piece type — is confirmed before anyone forms an opinion about the work.",
+            "Validation before judgment. File integrity is checked and the context, brand, line of business, channel, piece type, is confirmed before anyone forms an opinion about the work.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
             src: "/work/cqap/04-review-findings-v2.jpg",
-            alt: "CQAP — the review workspace with two reviewer findings accepted",
+            alt: "CQAP, the review workspace with two reviewer findings accepted",
           },
           caption:
-            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard — here, a Carelon Palliative Care welcome guide, two minor findings, both accepted.",
+            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard, here, a member welcome guide, two minor findings, both accepted.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
             src: "/work/cqap/03-review-clean.jpg",
-            alt: "CQAP — the review workspace before any findings",
+            alt: "CQAP, the review workspace before any findings",
           },
           caption:
-            "When the evidence isn't strong enough, CQAP stays quiet — the panel says so in its own words rather than manufacturing a finding.",
+            "When the evidence isn't strong enough, CQAP stays quiet, the panel says so in its own words rather than manufacturing a finding.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
             src: "/work/cqap/05-approved.jpg",
-            alt: "CQAP — review complete: approved, saved as a review memory",
+            alt: "CQAP, review complete: approved, saved as a review memory",
           },
           caption:
             "A decision becomes a record. The review is saved as a memory, its accepted findings keep their evidence, and the workspace updates.",
@@ -1929,8 +1779,157 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    slug: "premier-friends-club",
+    num: "S01",
+    tier: "systems",
+    title: "Premier Friends Club",
+    client: "Self-initiated",
+    year: "2026",
+    category: "Editorial / Product",
+    duration: "2026–27 season",
+    tags: ["Editorial", "Identity", "Product"],
+    blurb:
+      "Nine friends, eight Premier League clubs, one table. An editorial sports brand built over a fixture feed that keeps its own results, standings and derbies up to date all season.",
+    oneLiner: "Eight clubs. One table. No hiding.",
+    brief:
+      "Nine friends, each committed to a different club, and a group chat that never stops arguing about who is actually having the better season. The site settles it: every league result each friend's club posts is banked as their points, in one table that runs to the final day.",
+    process: [
+      {
+        label: "A real brand, not a joke",
+        body: "Crest, wordmark, motto and an editorial voice. The premise is funny; treating it seriously is what makes it land.",
+      },
+      {
+        label: "The table is the product",
+        body: "Standings ranked on points, mirroring the league table they follow, so the format is instantly legible to anyone who follows football.",
+      },
+      {
+        label: "It runs itself",
+        body: "Results, standings and fixtures refresh on their own across a 38-game season, so the site stays current with no one tending it.",
+      },
+    ],
+    services: [
+      "Brand identity",
+      "Editorial design",
+      "Product design",
+      "Front-end",
+    ],
+    palette: ["#f2ede4", "#c8102e", "#111111", "#6cabdd"],
+    display: "PFC",
+    cover: "/work/premier-friends-club/cover-v2.jpg",
+    coverAspect: "4 / 3",
+    gallery: [],
+    externalUrl: "https://premier-friends-club.netlify.app/",
+    caseStudy: {
+      overview: [
+        { label: "Project", value: "Self-initiated" },
+        { label: "Role", value: "Brand, design, build" },
+        { label: "Year", value: "2026" },
+        { label: "Scope", value: "Identity, editorial design, live standings site" },
+        { label: "Season", value: "2026–27, runs to 30 May 2027" },
+      ],
+      challenge:
+        "A running argument among nine friends with no way to settle it. Everyone remembers their own good weekends and forgets the bad ones, and a group chat has no memory. The problem is not really software. It is that bragging rights need a scoreboard nobody can dispute.",
+      mandate:
+        "Give the argument a table. Make it look like something worth taking seriously, and make it keep itself current for a whole season without anyone maintaining it.",
+      context:
+        "A personal project, built for nine friends. Fratres Stulta Fides, foolish faith, kept together.",
+      role: [
+        "Created the identity, crest, wordmark, motto and editorial voice",
+        "Art-directed the collage hero from club colors, crests and terrace imagery",
+        "Designed the table, fixture ticker, member roster and gallery",
+        "Built the site and wired it to a fixture feed so results and standings update themselves",
+        "Wrote the copy, including the per-fixture derby lines",
+      ],
+      team: ["Self-initiated, brand, design and build by John Carman"],
+      decisions: [
+        {
+          title: "Treat it like a real competition",
+          body: "Serif headlines, a proper crest, a Latin motto, an editorial voice that reports the standings straight. Playing it deadpan is what makes the joke work, a site that winked at itself would have been funny once and boring by October.",
+        },
+        {
+          title: "Follow the league's own format",
+          body: "Points, ranked exactly as the Premier League table ranks them. Nobody has to learn a scoring system, and no one can argue with the maths.",
+        },
+        {
+          title: "Name the friend, not just the club",
+          body: "Fixtures read 'Thomas Evan Hicks · Liverpool vs Eric Moreno · Fulham'. When two friends' clubs meet it becomes a derby with a name attached, which is the part everyone actually cares about.",
+        },
+        {
+          title: "Handle the asymmetry honestly",
+          body: "One friend's club plays 46 games to everyone else's 38. Rather than hide it or fudge the maths, the site says so on the front page and shows points per game alongside the total.",
+        },
+      ],
+      outcomes: [
+        "Live for the 2026–27 season, updating itself through to 30 May 2027",
+        "Nine members, eight clubs, and 41 friend derbies still to come at the time of writing",
+        "The argument now has a table, which has settled nothing and improved everything",
+      ],
+      reflection:
+        "Small, self-imposed briefs are where I try the things client work is too cautious for, in this case a heavy collage treatment and a completely deadpan editorial voice on an absurd premise. It also had to run unattended for ten months, which is a stricter constraint than most client sites face and a good discipline.",
+      work: [
+        {
+          kind: "browser",
+          image: {
+            src: "/work/premier-friends-club/home-v2.jpg",
+            alt: "Premier Friends Club, the collage hero: eight clubs, one table, no hiding",
+          },
+          url: "premier-friends-club.netlify.app",
+          caption:
+            "The hero is a collage of all eight clubs at once, colors, crests and terraces torn together, with the week's fixtures running underneath.",
+        },
+        {
+          kind: "full",
+          aspect: "1.12 / 1",
+          image: {
+            src: "/work/premier-friends-club/posters.jpg",
+            alt: "Premier Friends Club, this week's match-day posters, one per fixture, the friend named before the club",
+          },
+          caption:
+            "Match-day posters, one per fixture, in the same torn-collage system as the hero. Each names the friend before the club, so a derby is between two people.",
+        },
+        {
+          kind: "full",
+          aspect: "1.07 / 1",
+          image: {
+            src: "/work/premier-friends-club/callouts.jpg",
+            alt: "Premier Friends Club, the call-outs: the season ahead, foolish faith kept together, and the nine",
+          },
+          caption:
+            "The call-outs are where the joke lives, the next friend derby (\u201cthe loser goes quiet for a week\u201d), the run-in, foolish faith kept together, and the nine badged like a squad.",
+        },
+        {
+          kind: "pair",
+          aspect: "3 / 2",
+          a: {
+            src: "/work/premier-friends-club/table-v2.jpg",
+            alt: "Premier Friends Club, the table, right now: games played, points banked, wins, derbies to come",
+          },
+          b: {
+            src: "/work/premier-friends-club/standings.jpg",
+            alt: "Premier Friends Club, the full standings, ranked on points with goal difference",
+          },
+          labelA: "The table, right now",
+          labelB: "Full standings",
+          caption:
+            "Ranked on points exactly as the league ranks its own, with games played alongside, because one member plays eight more matches than everyone else. Results, table and fixtures all refresh on their own.",
+        },
+        {
+          kind: "full",
+          aspect: "2 / 1",
+          image: {
+            src: "/work/premier-friends-club/roster.jpg",
+            alt: "Premier Friends Club, the roster: nine members, eight clubs, thirty-nine games played",
+          },
+          caption:
+            "The Roster, nine friends, eight clubs, one table. Win three, draw one, lose nothing but face.",
+        },
+      ],
+    },
+  },
+  
+  {
     slug: "carman-os",
-    num: "S03",
+    num: "S02",
     tier: "systems",
     title: "Carman OS",
     client: "Self-initiated",
@@ -1939,14 +1938,14 @@ export const PROJECTS: Project[] = [
     duration: "Ongoing",
     tags: ["AI Systems", "Creative Operations", "Product"],
     blurb:
-      "A working operating system for creative practice — 24 prompts organised by the four phases every project moves through, each routed to the model that actually handles it best.",
+      "A working operating system for creative practice, 24 prompts organized by the four phases every project moves through, each routed to the model that actually handles it best.",
     oneLiner: "The method, made operational.",
     brief:
-      "Most prompt collections are a folder of clever one-offs. Carman OS is the opposite: a method first, a library second. Every project moves through Define, Explore, Build, Refine — and each prompt is filed against the phase it serves and the model best suited to run it.",
+      "Most prompt collections are a folder of clever one-offs. Carman OS is the opposite: a method first, a library second. Every project moves through Define, Explore, Build, Refine, and each prompt is filed against the phase it serves and the model best suited to run it.",
     process: [
       {
         label: "The four phases",
-        body: "Define, Explore, Build, Refine. The structure is the point — it puts a prompt in the hands of someone who knows which part of the problem they are in.",
+        body: "Define, Explore, Build, Refine. The structure is the point. It puts a prompt in the hands of someone who knows which part of the problem they are in.",
       },
       {
         label: "Right tool, right job",
@@ -1954,7 +1953,7 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "Written to be used",
-        body: "Each card says what the prompt returns before you copy it — three stronger directions, a message hierarchy, a five-section case study — so the library is browsable by outcome.",
+        body: "Each card says what the prompt returns before you copy it, three stronger directions, a message hierarchy, a five-section case study, so the library is browsable by outcome.",
       },
     ],
     services: ["Creative systems", "AI tooling", "Product design", "Front-end"],
@@ -1973,27 +1972,27 @@ export const PROJECTS: Project[] = [
         { label: "Library", value: "24 prompts across 8 categories" },
       ],
       challenge:
-        "Teams adopt AI one clever prompt at a time. What they end up with is a folder of tricks nobody else can use — no shared idea of when a prompt applies, no agreement on which model to point it at, and no way to tell a genuinely useful one from a novelty. The knowledge stays trapped with whoever wrote it.",
+        "Teams adopt AI one clever prompt at a time. What they end up with is a folder of tricks nobody else can use, no shared idea of when a prompt applies, no agreement on which model to point it at, and no way to tell a genuinely useful one from a novelty. The knowledge stays trapped with whoever wrote it.",
       mandate:
         "Turn a personal way of working into something structured enough to hand to someone else: a method that says where you are in a project, and a library filed against it.",
       context:
-        "Built on my own time, out of my own practice — the prompts are the ones I actually use for client work, portfolio writing, campaign development and critique.",
+        "Built on my own time, out of my own practice, the prompts are the ones I actually use for client work, portfolio writing, campaign development and critique.",
       role: [
-        "Defined the four-phase model the whole system is organised around",
+        "Defined the four-phase model the whole system is organized around",
         "Wrote and tested every prompt in the library",
         "Assigned each prompt to the model that handles it best, and said so on the card",
         "Designed and built the interface, including search, category filtering and copy-to-clipboard",
         "Wrote the card copy so each prompt states its output before you use it",
       ],
-      team: ["Self-initiated — concept, writing, design and build by John Carman"],
+      team: ["Self-initiated, concept, writing, design and build by John Carman"],
       decisions: [
         {
           title: "A method, not a folder",
-          body: "The four phases come first and the prompts hang off them. It means the library answers 'where am I in this project?' before it answers 'what should I type?' — which is the question that actually determines whether a prompt helps.",
+          body: "The four phases come first and the prompts hang off them. It means the library answers 'where am I in this project?' before it answers 'what should I type?' – which is the question that actually determines whether a prompt helps.",
         },
         {
           title: "Name the model on every card",
-          body: "Thinking, building, research and visualising go to different models because they genuinely differ. Putting the routing on the card removes the most common failure — a good prompt run somewhere it was never built for.",
+          body: "Thinking, building, research and visualising go to different models because they genuinely differ. Putting the routing on the card removes the most common failure, a good prompt run somewhere it was never built for.",
         },
         {
           title: "Say what it returns",
@@ -2001,57 +2000,57 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Prompts that push, not just produce",
-          body: "A whole category exists to make the work harder — Design Push asks for one uncomfortable direction, Final Critique returns the unsoftened senior review. AI is easiest to use as a shortcut to the safe answer, and the library deliberately resists that.",
+          body: "A whole category exists to make the work harder, Design Push asks for one uncomfortable direction, Final Critique returns the unsoftened senior review. AI is easiest to use as a shortcut to the safe answer, and the library deliberately resists that.",
         },
       ],
       outcomes: [
         "24 prompts live across strategy, synthesis, portfolio, build, brand and campaign, client communication, critique and visual exploration",
         "A four-phase model that makes the library teachable rather than personal",
-        "In everyday use in my own practice — the case-study and portfolio prompts wrote parts of this site",
+        "In everyday use in my own practice, the case-study and portfolio prompts wrote parts of this site",
       ],
       reflection:
-        "The useful part was never the prompts. It was being forced to name the phases and admit which model I actually reach for and why. Writing that down turned a set of habits into something I can hand to another designer — and the parts that were hardest to write down turned out to be the parts that were vaguest in my own head.",
+        "The useful part was never the prompts. It was being forced to name the phases and admit which model I actually reach for and why. Writing that down turned a set of habits into something I can hand to another designer, and the parts that were hardest to write down turned out to be the parts that were vaguest in my own head.",
       work: [
         {
           kind: "browser",
           image: {
             src: "/work/carman-os/home-v2.jpg",
-            alt: "Carman OS — the four-phase model and tool stack above the first prompt category",
+            alt: "Carman OS, the four-phase model and tool stack above the first prompt category",
           },
           aspect: "1.618 / 1",
           url: "carmanos.netlify.app",
           caption:
-            "The front page leads with the method, not the library — four phases on the left, the tool stack on the right, and the first category underneath: define the direction before you design.",
+            "The front page leads with the method, not the library, four phases on the left, the tool stack on the right, and the first category underneath: define the direction before you design.",
         },
         {
           kind: "full",
           aspect: "1.21 / 1",
           image: {
             src: "/work/carman-os/library-v2.jpg",
-            alt: "Carman OS — two prompt categories: generate options and distill clarity; position yourself at a director level",
+            alt: "Carman OS, two prompt categories: generate options and distill clarity; position yourself at a director level",
           },
           caption:
-            "Cards are grouped by what you are trying to do. Each names its model, says what it returns, and copies in one click — here, generating options, then positioning the work at a director level.",
+            "Cards are grouped by what you are trying to do. Each names its model, says what it returns, and copies in one click. Here, generating options, then positioning the work at a director level.",
         },
         {
           kind: "full",
           aspect: "0.837 / 1",
           image: {
             src: "/work/carman-os/library-deep-v2.jpg",
-            alt: "Carman OS — the back half of the library: scalable ideas, clear communication and scope, pushing beyond safe work, high-end visual directions",
+            alt: "Carman OS, the back half of the library: scalable ideas, clear communication and scope, pushing beyond safe work, high-end visual directions",
           },
           caption:
-            "The back half of the library — scalable ideas, communicating clearly and protecting scope, pushing past safe work, and the Midjourney and signature-style builders for visual direction. Twenty-four prompts across the four phases.",
+            "The back half of the library, scalable ideas, communicating clearly and protecting scope, pushing past safe work, and the Midjourney and signature-style builders for visual direction. Twenty-four prompts across the four phases.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
             src: "/work/carman-os/preview-v2.jpg",
-            alt: "Carman OS — previewing a prompt in full before copying it",
+            alt: "Carman OS, previewing a prompt in full before copying it",
           },
           caption:
-            "Preview before you copy. The prompt is readable in full — the library is meant to be learned from, not just pasted out of.",
+            "Preview before you copy. The prompt is readable in full, the library is meant to be learned from, not just pasted out of.",
         },
       ],
     },

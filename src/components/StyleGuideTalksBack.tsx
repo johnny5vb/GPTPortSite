@@ -86,7 +86,7 @@ const PROMPTS: Prompt[] = [
     id: "hero",
     user: "Show me a homepage hero in this voice.",
     reply:
-      "Three composition options — all on-brand, all in voice. Picked typography, layout, and accent placement that match your brand.",
+      "Three composition options, all on-brand, all in voice. Picked typography, layout, and accent placement that match your brand.",
   },
   {
     id: "social",
@@ -173,12 +173,12 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
             {featured
-              ? "// 04 — The AI Lab"
-              : "// 05 — Style Guide That Talks Back"}
+              ? "// 04, The AI Lab"
+              : "// 05, Style Guide That Talks Back"}
           </p>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
             {featured
-              ? "Featured system — one of four in the lab"
+              ? "Featured system, one of four in the lab"
               : "A Carman Creative system / in beta"}
           </p>
         </div>
@@ -196,7 +196,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
           </motion.h2>
           <p className="mt-6 text-mute max-w-[58ch] leading-relaxed">
             A brand bible designers can talk to. Ask for a hero, a social card,
-            or a typeset headline — get on-system outputs in seconds. Every
+            or a typeset headline, get on-system outputs in seconds. Every
             answer is constrained to your colors, your type, your voice.
           </p>
         </div>
@@ -432,7 +432,7 @@ export default function StyleGuideTalksBack({ featured = false }: Props) {
 
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-mute">
             // brand: <span className="text-green">{brand.name}</span> / prompt:{" "}
-            <span className="text-bone">{prompt.id}</span> — outputs
+            <span className="text-bone">{prompt.id}</span> – outputs
             re-generate when either changes.
           </p>
         </div>

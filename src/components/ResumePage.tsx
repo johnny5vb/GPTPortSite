@@ -110,7 +110,7 @@ export default function ResumePage() {
           <p className="text-bone/85 leading-relaxed">
             Creative Director and creative-operations leader with{" "}
             {PROFILE.yearsExperience} years turning complex goals into clear,
-            useful, and distinctive creative work — most of it inside enterprise
+            useful, and distinctive creative work, most of it inside enterprise
             healthcare. Led the creative transition through an enterprise
             acquisition and rebrand, co-manage a ten-person studio production
             team after running a five-person design team as Creative Director,
@@ -183,9 +183,9 @@ export default function ResumePage() {
             to read them. */}
         <Section title="Selected work">
           <p className="text-sm text-bone/85 leading-relaxed">
-            Case studies for the enterprise and independent work — including the
+            Case studies for the enterprise and independent work, including the
             Beacon → Carelon rebrand, the Marketing Bench creative-support
-            model, and the Stamp Out Stigma campaign — are at{" "}
+            model, and the Stamp Out Stigma campaign, are at{" "}
             <a
               href="https://www.carmancreative.com"
               target="_blank"
@@ -222,7 +222,7 @@ export default function ResumePage() {
               </h3>
               <p className="mt-0.5 text-sm text-bone/85">
                 {EDUCATION.degree}
-                <span className="text-mute"> — {EDUCATION.honors}</span>
+                <span className="text-mute"> – {EDUCATION.honors}</span>
               </p>
             </div>
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-mute">

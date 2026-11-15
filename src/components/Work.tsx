@@ -20,7 +20,7 @@ export default function Work() {
       {/* Left-anchored, not a 4/8 label split — see the note in Intro.tsx. */}
       <header className="mb-16 md:mb-20">
         <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-5">
-          // 01 — Work
+          // 01 – Work
         </p>
         <div>
           <VelocityHeading className="origin-left">
@@ -57,11 +57,14 @@ export default function Work() {
           Leadership overview <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-      {/* Column count follows the number of published flagships, so pulling one
-          down doesn't leave a hole in the row. */}
+      {/* Column count follows the number of published flagships, so adding or
+          pulling one doesn't leave a hole in the row: four lays out 2x2, three
+          goes 3-up, anything else falls back to two. */}
       <div
         className={`grid grid-cols-1 gap-4 md:gap-6 ${
-          LEADERSHIP_PROJECTS.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2"
+          LEADERSHIP_PROJECTS.length % 3 === 0
+            ? "md:grid-cols-3"
+            : "md:grid-cols-2"
         }`}
       >
         {LEADERSHIP_PROJECTS.map((p, i) => (
@@ -88,7 +91,7 @@ export default function Work() {
               Systems &amp; side projects
             </h3>
             <p className="text-sm text-mute">
-              Self-initiated — tools built to solve problems I kept hitting.
+              Self-initiated, tools built to solve problems I kept hitting.
             </p>
           </div>
           <div className="space-y-2">
@@ -270,7 +273,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             {project.client && !project.client.startsWith("TODO")
               ? project.client
               : project.category}
-            {project.year ? ` — ${project.year}` : ""}
+            {project.year ? ` – ${project.year}` : ""}
           </p>
         </div>
 

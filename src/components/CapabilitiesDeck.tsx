@@ -279,9 +279,9 @@ function Slide({
       {/* Slide marker */}
       <div className="absolute top-20 left-[max(1.25rem,4vw)] right-[max(1.25rem,4vw)] flex items-baseline justify-between font-mono text-[10px] uppercase tracking-[0.22em]">
         <span className="text-green">
-          // {num} — {label}
+          // {num} – {label}
         </span>
-        <span className="text-mute">Carman / Creative — 2026</span>
+        <span className="text-mute">Carman / Creative, 2026</span>
       </div>
 
       <div className="flex-1 flex flex-col justify-center">{children}</div>
@@ -305,7 +305,7 @@ function Cover() {
             transition={{ duration: 0.8 }}
             className="font-mono text-[11px] uppercase tracking-[0.28em] text-green mb-8"
           >
-            // Capabilities Deck — 2026
+            // Capabilities Deck – 2026
           </motion.div>
           <h1 className="font-display text-[clamp(3.4rem,9vw,9rem)] leading-[1.02] tracking-[-0.045em] text-bone">
             Creative leadership,
@@ -377,7 +377,7 @@ function Hello() {
             {/* The three career figures read from `SCALE` in career.ts so the
                 deck cannot drift from the hero, About and the résumé. The
                 fourth is deck-specific (the /lab demos), not a career number. */}
-            <Fact n={`${SCALE.years}+`} label={SCALE.yearsLabel.toLowerCase()} />
+            <Fact n={`${SCALE.years}`} label={SCALE.yearsLabel.toLowerCase()} />
             <Fact
               n={`${SCALE.enterpriseYears}+`}
               label={SCALE.enterpriseYearsLabel.toLowerCase()}
@@ -548,7 +548,7 @@ function TalksBack() {
           </h2>
           <p className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[52ch]">
             An AI-native brand bible. Designers ask, &ldquo;show me a hero in
-            this voice&rdquo; — and get on-system outputs in your colors and type,
+            this voice&rdquo; and get on-system outputs in your colors and type,
             every time.
           </p>
         </div>
@@ -570,7 +570,7 @@ function TalksBack() {
                   </span>
                 </div>
                 <p className="text-[13px] leading-snug text-bone/85">
-                  Three options — all on-brand, all in voice.
+                  Three options, all on-brand, all in voice.
                 </p>
                 <div className="mt-2 grid grid-cols-3 gap-1.5">
                   {[0, 1, 2].map((i) => (
@@ -609,7 +609,7 @@ function Factory() {
             <em className="font-display-wonk text-green">Factory.</em>
           </h2>
           <p className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[52ch]">
-            One campaign idea fans out to social, print, motion, and web —
+            One campaign idea fans out to social, print, motion, and web,
             all on-brand, all in voice, all production-ready.
           </p>
           <div className="mt-6 flex items-center gap-2 flex-wrap font-mono text-[10px] uppercase tracking-[0.22em]">
@@ -676,7 +676,7 @@ function Atelier() {
             // AI Lab / Concept
           </p>
           <h2 className="font-display text-[clamp(2.4rem,6vw,5.4rem)] leading-[1.05] tracking-[-0.04em] text-bone">
-            Atelier — a senior
+            Atelier, a senior
             <br />
             <em className="font-display-wonk text-green">eye on every draft.</em>
           </h2>
@@ -779,7 +779,7 @@ function Work() {
                 {p.title}
               </h3>
               <p className="mt-1 font-mono text-[9.5px] uppercase tracking-[0.22em] text-mute">
-                {p.year} / {p.duration}
+                {p.year}{p.duration ? ` / ${p.duration}` : ""}
               </p>
             </div>
           </div>
@@ -799,7 +799,7 @@ function Process() {
     {
       num: "II.",
       title: "Design systems, not screens.",
-      body: "Brand rules, components, governance — work that scales without me.",
+      body: "Brand rules, components, governance, work that scales without me.",
     },
     {
       num: "III.",
@@ -841,21 +841,21 @@ function Engagement() {
       tagline: "A defined scope, shipped",
       detail:
         "Best for: launches, identity refreshes, single-channel campaigns. Fixed scope, clear timeline, weekly check-ins.",
-      duration: "4 — 12 weeks",
+      duration: "4, 12 weeks",
     },
     {
       label: "Retainer",
       tagline: "Steady creative direction",
       detail:
         "Best for: scaling teams, ongoing brand work, multi-channel programs. Monthly engagement, embedded in the team.",
-      duration: "3 — 12 months",
+      duration: "3, 12 months",
     },
     {
       label: "Fractional CD",
       tagline: "Senior eye, part-time",
       detail:
         "Best for: startups without a full-time CD, or teams needing a strategic upgrade. Two days a week.",
-      duration: "6 — 18 months",
+      duration: "6, 18 months",
     },
   ];
   return (
@@ -917,7 +917,7 @@ function Contact() {
           </h2>
           <p className="mt-8 text-bone/85 text-lg leading-relaxed max-w-[48ch]">
             Brand identity, web design, packaging, or an AI-powered creative
-            system — start with a short note about what you&apos;re building.
+            system, start with a short note about what you&apos;re building.
           </p>
           <div className="mt-10 flex items-center flex-wrap gap-4">
             <a

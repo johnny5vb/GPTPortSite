@@ -11,7 +11,7 @@ import { ArrowUpRight } from "lucide-react";
 const CATEGORIES = [
   {
     k: "Creative exploration",
-    d: "Concepts, visual prototyping, campaign territories — faster iteration, tighter direction.",
+    d: "Concepts, visual prototyping, campaign territories, faster iteration, tighter direction.",
   },
   {
     k: "Creative operations",
@@ -29,7 +29,7 @@ export default function AISystemsTeaser() {
       <div className="grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 04 — AI &amp; Creative Systems
+            // 04 – AI &amp; Creative Systems
           </p>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
             A leadership tool, not a substitute for judgment

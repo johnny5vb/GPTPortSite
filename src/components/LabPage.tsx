@@ -94,7 +94,7 @@ export default function LabPage() {
               transition={{ duration: 0.6 }}
               className="font-mono text-[11px] uppercase tracking-[0.22em] text-green"
             >
-              // The Lab — AI Playground
+              // The Lab – AI Playground
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -122,7 +122,7 @@ export default function LabPage() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="mt-6 text-bone/85 text-lg leading-relaxed max-w-[58ch]"
             >
-              This is my playground — a corner of the site where AI tools and
+              This is my playground, a corner of the site where AI tools and
               agents live so I, and you, can actually play with them. Some are
               genuinely useful, some are pure experiments. Human judgment still
               decides what&apos;s any good.
@@ -134,7 +134,7 @@ export default function LabPage() {
               className="mt-4 text-mute leading-relaxed max-w-[58ch]"
             >
               Each one is interactive and labeled by how far along it actually
-              is — from concept to prototype to something I really use. Poke at
+              is, from concept to prototype to something I really use. Poke at
               them; see how the brand rules flow. More will move in over time.
             </motion.p>
 
@@ -237,7 +237,7 @@ export default function LabPage() {
               <em className="font-display-wonk text-green">tell me what to build next.</em>
             </h2>
             <p className="mt-6 text-bone/85 leading-relaxed max-w-[52ch]">
-              This corner is for experiments — mine, and more to come. If one
+              This corner is for experiments, mine, and more to come. If one
               sparks an idea, or you want to see something live here, I&apos;d
               love to hear it.
             </p>

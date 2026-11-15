@@ -27,7 +27,7 @@ const THEMES: Theme[] = [
     id: "carman",
     name: "Carman",
     category: "editorial",
-    blurb: "House theme — dark, editorial, signature green.",
+    blurb: "House theme, dark, editorial, signature green.",
     bg: "#0c0b09",
     surface: "#141414",
     ink: "#f5f3ef",
@@ -41,7 +41,7 @@ const THEMES: Theme[] = [
     id: "atlas",
     name: "Atlas",
     category: "outdoor",
-    blurb: "DTC retail — warm sand, terracotta heat.",
+    blurb: "DTC retail, warm sand, terracotta heat.",
     bg: "#fdf6ee",
     surface: "#ffffff",
     ink: "#1c1410",
@@ -55,7 +55,7 @@ const THEMES: Theme[] = [
     id: "reservoir",
     name: "Reservoir",
     category: "b2b",
-    blurb: "Connected product — deep cobalt, aqua signal.",
+    blurb: "Connected product, deep cobalt, aqua signal.",
     bg: "#06121f",
     surface: "#0f2235",
     ink: "#e8efff",
@@ -69,7 +69,7 @@ const THEMES: Theme[] = [
     id: "wonk",
     name: "Wonk",
     category: "editorial",
-    blurb: "Editorial maximalism — ink black, citron pop.",
+    blurb: "Editorial maximalism, ink black, citron pop.",
     bg: "#0c0c0a",
     surface: "#161612",
     ink: "#fdfaf3",
@@ -138,7 +138,7 @@ export default function DesignSystemLab() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 04 — Brand-in-a-Day OS
+            // 04 – Brand-in-a-Day OS
           </p>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
             A Carman Creative system / live demo
@@ -160,7 +160,7 @@ export default function DesignSystemLab() {
             Brand-in-a-Day OS turns one brand file into everything else. Start with
             a brief, end the same day with that file, a type system, mark
             sketches, a component library, and on-brand social cuts. Drag the
-            controls below — every component you see comes off that one file.
+            controls below, every component you see comes off that one file.
             That&apos;s the leverage.
           </p>
         </div>
@@ -336,7 +336,7 @@ export default function DesignSystemLab() {
                   style={{ marginTop: "0.75rem", fontSize: "1.05rem", lineHeight: 1.5 }}
                 >
                   Body / 17. Designed for confidence and clarity. Every rule flows
-                  from a single source — palette, type, radii, spacing — and
+                  from a single source, palette, type, radii, spacing, and
                   every component snaps to it.
                 </p>
                 <p
@@ -485,7 +485,7 @@ export default function DesignSystemLab() {
                       lineHeight: 1.55,
                     }}
                   >
-                    Rules here cascade into every component — buttons, type,
+                    Rules here cascade into every component, buttons, type,
                     spacing, even motion. Change one value, the brand stays
                     intact across 200 screens.
                   </p>
@@ -552,7 +552,7 @@ export default function DesignSystemLab() {
             >
               // theme: <span className="text-green">{theme.name}</span> / radius:{" "}
               <span className="text-bone">{radius.label}</span> / density:{" "}
-              <span className="text-bone">{density.label}</span> — same
+              <span className="text-bone">{density.label}</span> – same
               components, different brand.
             </motion.p>
           </AnimatePresence>

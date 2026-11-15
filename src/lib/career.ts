@@ -10,7 +10,7 @@
  *
  * TITLE DISCIPLINE — read before editing.
  * John held the Creative Director title at Beacon Health Options. The Carelon
- * acquisition re-leveled the title to Creative Manager; the scope did not
+ * acquisition re-leveled the title to Design Manager; the scope did not
  * change. Both facts are published, and the Director title is shown as a role
  * that was *held* (its own stint, with dates) rather than as a "formerly"
  * footnote under the current title. Do not hide the Manager title, and do not
@@ -68,7 +68,7 @@ export const EMPLOYERS: Employer[] = [
     // this way and it is the literally accurate version; the dates butt up, so
     // a reader still sees an unbroken run from 2010.
     company: "Elevance Health",
-    range: "2023 — Present",
+    range: "2023 – Present",
     stints: [
       {
         // SCOPE — corrected, do not narrow it again. Three things had been
@@ -87,11 +87,11 @@ export const EMPLOYERS: Employer[] = [
         //      rebuild it. The earlier wording claimed sole authorship of a
         //      group effort; that is the kind of thing a former colleague
         //      would notice, and it is not what he said he did.
-        title: "Creative Manager",
-        range: "2023 — Present",
+        title: "Design Manager",
+        range: "2023 – Present",
         current: true,
         summary:
-          "On the Studio Production team at Elevance Health — the in-house studio serving all lines of business across an ~85,000-person enterprise, on point to produce a high volume of work accurately and on brand.",
+          "On the Studio Production team at Elevance Health, the in-house studio serving all lines of business across an ~85,000-person enterprise, on point to produce a high volume of work accurately and on brand.",
         bullets: [
           "Co-manage a team of ten designers producing brand, campaign, and digital work across every Elevance Health line of business.",
           // CONFIRMED: the WebbMason relationship began while John was Manager
@@ -100,9 +100,11 @@ export const EMPLOYERS: Employer[] = [
           // partner of that era, the design agency Sway, ended at the 2023
           // Carelon rebrand — which is why Sway appears on the two Beacon
           // stints below and deliberately NOT here.
-          "Manage the relationship with WebbMason, our external production and event-support partner — a ten-year account carried across three roles.",
-          "Part of the team that rebuilt Workfront intake, review, and approval around ~75 projects a month — the group took the process apart around the pain points it named rather than patching the existing instance.",
+          "Manage the relationship with WebbMason, our external production and event-support partner, a ten-year account carried across three roles.",
+          "Part of the team that rebuilt Workfront intake, review, and approval around ~75 projects a month. The group took the process apart around the pain points it named rather than patching the existing instance.",
           "Own creative review and quality control, and build the templates, governance, and systems that hold quality and accuracy steady as volume grows.",
+          "Lead the push for AI in the studio's creative work, moving generative tools into live production and carrying that across the wider creative organization.",
+          "Built CQAP, a creative QA tool that checks work against our standards library and returns each finding with the rule it cites.",
         ],
       },
     ],
@@ -113,22 +115,22 @@ export const EMPLOYERS: Employer[] = [
     // Options in 2014; the ValueOptions brand was phased out through mid-2016,
     // which is when John moved from designing to running creative services.
     company: "Beacon Health Options",
-    range: "2010 — 2023",
+    range: "2010 – 2023",
     stints: [
       {
         title: "Creative Director",
         // October 2018 — March 2023, the month Beacon became Carelon
         // Behavioral Health. The title change and the rebrand are the same
         // date, which is what makes the re-level self-evident.
-        range: "2018 — 2023",
+        range: "2018 – 2023",
         summary:
-          "Ran the creative function for a national behavioral health company — the team, the systems, and the brand — then carried all three through its acquisition by Elevance Health.",
+          "Ran the creative function for a national behavioral health company (the team, the systems, and the brand), then carried all three through its acquisition by Elevance Health.",
         bullets: [
           // Five, managed solo. This is the outright-management number and it
           // belongs to this stint, not to the co-managed studio team above.
           "Led a five-person design team and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
-          "Led the creative transition through the Beacon → Carelon rebrand — ~1,500 assets rebuilt on the new identity across an ~85,000-person organization.",
-          "Built Marketing Bench (2020), a self-serve platform letting field teams produce on-brand collateral without a designer in the critical path — ~60% faster turnaround, ~30% higher engagement.",
+          "Led the Beacon to Carelon rebrand team, which grew to about 20 people (in-house designers, a video artist, project managers, writers and freelancers) and rebuilt about 1,500 assets.",
+          "Rebuilt Marketing Bench as a self-serve print-on-demand platform during the Carelon rebrand, so sales and field teams could build and order on-brand materials without a designer in the loop. Launched March 2023.",
           "Led Stamp Out Stigma, a national mental-health awareness campaign, including out-of-home placement in Times Square.",
         ],
       },
@@ -143,12 +145,12 @@ export const EMPLOYERS: Employer[] = [
         // named Creative Services, and these are the dates he actually held
         // it. Do not revert this to "Design Manager" or "Manager of Design".
         title: "Manager of Creative Services",
-        range: "2016 — 2018",
+        range: "2016 – 2018",
         summary:
-          "Took over the creative services function — the in-house team, the budget, the vendor relationships, and the standards behind the brand.",
+          "Took over the creative services function: the in-house team, the budget, the vendor relationships, and the standards behind the brand.",
         bullets: [
           "Managed the in-house creative team: hiring, training, design direction, and presentation support.",
-          "Owned the creative budget and the outside relationships that ran alongside the in-house team — Sway as the design agency, WebbMason for production and event support.",
+          "Owned the creative budget and the outside relationships that ran alongside the in-house team: Sway as the design agency, WebbMason for production and event support.",
           "Wrote and maintained the company style guide and the brand-compliance standards behind it.",
           // TIMING, resolved. These figures came from the deleted 2010 — 2018
           // catch-all entry, which spanned the 2014 merger as well as this
@@ -165,7 +167,7 @@ export const EMPLOYERS: Employer[] = [
         // August 2010 — May 2016. Confirmed from the LinkedIn entry.
         title: "Graphic Designer",
         org: "ValueOptions → Beacon Health Options",
-        range: "2010 — 2016",
+        range: "2010 – 2016",
         summary:
           "Joined ValueOptions producing brand, campaign, print, and member-facing work, and stayed through the 2014 merger that created Beacon Health Options.",
         bullets: [
@@ -176,11 +178,11 @@ export const EMPLOYERS: Employer[] = [
   },
   {
     company: "Carman Creative",
-    range: "2020 — Present",
+    range: "2006 – Present",
     stints: [
       {
         title: "Founder",
-        range: "2020 — Present",
+        range: "2006 – Present",
         current: true,
         summary:
           "Independent practice: brand, identity, web, campaign, and creative-systems work for small organizations and nonprofits.",
@@ -194,13 +196,13 @@ export const EMPLOYERS: Employer[] = [
     // Kept short on purpose. It is seventeen years old and its job is to close
     // the record, not to compete for attention.
     company: "ASAP Printing & Graphics",
-    range: "2009 — 2010",
+    range: "2009 – 2010",
     stints: [
       {
         title: "Graphic Designer",
-        range: "2009 — 2010",
+        range: "2009 – 2010",
         summary:
-          "Design and production for a commercial print shop — the grounding in how a file actually becomes a printed thing.",
+          "Design and production for a commercial print shop: the grounding in how a file actually becomes a printed thing.",
         bullets: [],
       },
     ],
@@ -238,7 +240,7 @@ export const SCALE = {
   studioTeamLabel: "Designers co-managed on the studio team",
   /** Counts from the first paid design work, during the VCU degree. */
   years: 20,
-  yearsLabel: "Years leading creative & brand",
+  yearsLabel: "Years in creative & brand",
   enterpriseYears: 15,
   enterpriseYearsLabel: "Years in enterprise healthcare",
   throughput: "~75",
@@ -251,4 +253,4 @@ export const SCALE = {
  * phrasing should be consistent everywhere a reader might check it.
  */
 export const TRANSITION_NOTE =
-  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023, and I led the creative transition. The restructuring moved my title from Creative Director to Creative Manager; the work did not shrink with it — I am on the Studio Production team at Elevance Health now, across all lines of business rather than one company.";
+  "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023, and I led the creative transition. The restructuring moved my title from Creative Director to Design Manager; the work did not shrink with it. I am on the Studio Production team at Elevance Health now, across all lines of business rather than one company.";

@@ -19,7 +19,7 @@ const LABS: Lab[] = [
   {
     num: "L/03",
     status: "Concept",
-    title: "Atelier — AI Creative Critique",
+    title: "Atelier, AI Creative Critique",
     tagline: "A senior eye on every draft",
     pitch:
       "A custom GPT trained on the system and your house point-of-view. Reviews work-in-progress, writes feedback in your CD voice, catches drift before it ships.",
@@ -38,7 +38,7 @@ const LABS: Lab[] = [
     title: "Campaign Factory",
     tagline: "One concept, a hundred cuts",
     pitch:
-      "Single campaign idea fans out to social, print, motion, and web — all on tokens, all production-ready. Built for teams that need to ship at scale without losing the system.",
+      "Single campaign idea fans out to social, print, motion, and web, all on tokens, all production-ready. Built for teams that need to ship at scale without losing the system.",
     bullets: [
       "Generative variant explorer",
       "On-brand by construction",
@@ -72,7 +72,7 @@ export default function AILab() {
           </h3>
           <p className="mt-4 text-mute max-w-[52ch] leading-relaxed">
             Extensions of the OS into ongoing creative work. Available as
-            pilots for the right team — get in touch and we&apos;ll scope one.
+            pilots for the right team, get in touch and we&apos;ll scope one.
           </p>
         </div>
       </div>

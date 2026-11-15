@@ -17,7 +17,7 @@ const SERVICES: Service[] = [
     pitch:
       "Defined, documented, governed. The system that lets a team ship for years without losing the plot.",
     bullets: [
-      "Color, type, space, and motion — defined and documented",
+      "Color, type, space, and motion, defined and documented",
       "Component libraries built to be adopted",
       "Accessibility in the system, not added after",
     ],
@@ -48,7 +48,7 @@ const SERVICES: Service[] = [
     num: "S/04",
     title: "AI-Enabled Workflow",
     pitch:
-      "Modern tools, classical taste. AI for the repetitive work — human judgment for the part that decides whether it's any good.",
+      "Modern tools, classical taste. AI for the repetitive work, human judgment for the part that decides whether it's any good.",
     bullets: [
       "Prompt systems and custom tools a team can share",
       "Review and governance that keep output on-system",
@@ -63,7 +63,7 @@ export default function Services() {
       <header className="grid grid-cols-12 gap-6 mb-12 md:mb-16">
         <div className="col-span-12 md:col-span-4">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
-            // 03 — Practice
+            // 03 – Practice
           </p>
         </div>
         <div className="col-span-12 md:col-span-8">
@@ -79,7 +79,7 @@ export default function Services() {
           </motion.h2>
           <p className="mt-6 text-mute max-w-[54ch] leading-relaxed">
             Brand, digital, and creative-systems work. Four shapes it usually
-            takes — most projects pull from two or three at once.
+            takes, most projects pull from two or three at once.
           </p>
         </div>
       </header>

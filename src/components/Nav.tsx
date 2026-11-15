@@ -52,7 +52,7 @@ export default function Nav() {
           href={pathname === "/" ? "#top" : "/"}
           className="flex items-center gap-3 group py-3"
           data-cursor="home"
-          aria-label="Carman Creative — home"
+          aria-label="Carman Creative, home"
         >
           <motion.span
             initial={{ scale: 0.6, opacity: 0 }}

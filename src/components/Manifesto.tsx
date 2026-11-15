@@ -26,13 +26,13 @@ const PRINCIPLES = [
     mark: "I.",
     title: "Give clear direction.",
     em: "Business goals become briefs teams can act on.",
-    note: "I translate strategy into focused briefs, useful feedback, and decisions people can move on — not vague reactions.",
+    note: "I translate strategy into focused briefs, useful feedback, and decisions people can move on, not vague reactions.",
   },
   {
     mark: "II.",
     title: "Protect the idea.",
     em: "Keep the work strategically focused under pressure.",
-    note: "Executive feedback, compliance, timelines, competing priorities — I keep the idea intact while navigating all of it.",
+    note: "Executive feedback, compliance, timelines, competing priorities, I keep the idea intact while navigating all of it.",
   },
   {
     mark: "III.",
@@ -44,7 +44,7 @@ const PRINCIPLES = [
     mark: "IV.",
     title: "Improve the system.",
     em: "Fix the friction that slows good work down.",
-    note: "Workflows, templates, governance, and tools that make quality repeatable and fast — so good work isn't heroic.",
+    note: "Workflows, templates, governance, and tools that make quality repeatable and fast, so good work isn't heroic.",
   },
 ];
 
@@ -95,7 +95,7 @@ export default function Manifesto() {
       {/* Left-anchored, not a 4/8 label split — see the note in Intro.tsx. */}
       <header className="mb-10 md:mb-12">
         <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-5">
-          // 01 — How I Lead
+          // 01 – How I Lead
         </p>
         <div>
           <motion.h2

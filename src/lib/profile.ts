@@ -38,7 +38,7 @@ export const PROFILE = {
 
   /** What the practice does. Descriptive, not an offer. */
   practice: "Brand, creative direction, and design systems",
-  practiceLine: "Carman Creative — brand, creative direction, and design systems.",
+  practiceLine: "Carman Creative: brand, creative direction, and design systems.",
 
   contact: {
     /**
