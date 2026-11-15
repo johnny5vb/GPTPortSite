@@ -110,8 +110,8 @@ and `projects.ts` palettes are **data**, not chrome, and stay put.
 | `/` | `Hero, Intro, Manifesto, Work, Showpiece, AISystemsTeaser, About, ResumePreview, Services, ContactCTA, Footer` | The main narrative |
 | `/leadership` | `LeadershipPage` | Career context: experience, what John can lead, flagship case studies, leadership proof, testimonials, philosophy, résumé/contact CTAs. Neutral in tone since the copy-deck pass — it's background, not a pitch |
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
-| `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — status-labeled demos on *fictional* brands. **A side room since #64**: off the nav, out of the sitemap, linked only from the footer (like `/capabilities`). The real AI work is the Systems shelf in Work |
-| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03, display label `SOS`); `workfront-workflow-transformation` (L04) is drafted out. Independent 01–06 in the owner's order — `colony-coffee`, `friends-rehab`, `special-forces-trust`, `important-colorado`, `spikes-k9-fund`, `atromitos`; `evermark` is drafted out. **Systems S01–S03** (self-initiated, own shelf) — `premier-friends-club`, `cqap`, `carman-os`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
+| `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — status-labeled demos on *fictional* brands. **Unlinked since #79**: off the nav, out of the sitemap, and no longer in the footer either. The route still serves for anyone sent the link. The real AI work is the Systems shelf in Work |
+| `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03, display label `SOS`), **`cqap` (L04, promoted off the systems shelf in #79)**; `workfront-workflow-transformation` (L05) is drafted out. Independent 01–05 — `friends-rehab`, `colony-coffee`, `special-forces-trust`, `spikes-k9-fund`, `atromitos`; `evermark` is drafted out. **`important-colorado` was removed from the array outright** (not drafted), though its 33 files remain under `public/work/important-colorado/`. **Systems S01–S02** (self-initiated, own shelf) — `premier-friends-club`, `carman-os`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
 | `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
@@ -179,7 +179,7 @@ Retired from the home page in #64 (files kept, unimported): `Intro.tsx`,
   `mailto:` and three detail cards: Based in / Email / LinkedIn (#41).
 - **`Footer.tsx`** — Functional footer row only (no closing wordmark moment
   — that was removed). CC mark, copyright, connect list (Email / LinkedIn /
-  Instagram / Capabilities deck), and a `// practice` block naming the
+  Instagram), and a `// practice` block naming the
   disciplines (this replaced a `// status` availability block).
 - **`Nav.tsx`** — Top nav: Work / Leadership / About / Contact + Résumé
   chip. Uses `MagneticNavLink` for subtle spring-physics
@@ -221,7 +221,8 @@ Retired from the home page in #64 (files kept, unimported): `Intro.tsx`,
 ### Projects
 Single source of truth: `src/lib/projects.ts`. Each project has its own
 image folder under `/public/work/<slug>/`, and **every replaced image gets a
-new filename** (#50). Friends Rehab shows the **rebuilt** site (the v4 static
+new filename** (#50). `duration` is **optional** (#79) — Stamp Out Stigma
+carries none, and the three surfaces that render it guard on it. Friends Rehab shows the **rebuilt** site (the v4 static
 build at `~/frp-website-preview/v4`, in final client review — not the old
 WordPress site). Screenshots of animated sites are captured under reduced
 motion with every reveal, counter and lazy image settled first (#58).
@@ -234,7 +235,8 @@ motion with every reveal, counter and lazy image settled first (#58).
   target is recorded as `PROFILE.contact.emailPreferredTodo`.
 - LinkedIn: `https://www.linkedin.com/in/johncarman/`
 - Instagram: `https://www.instagram.com/jbcarms` (display `@jbcarms`)
-- Capabilities deck: linked in Footer as `/capabilities`
+- Capabilities deck: `/capabilities` is **not linked from anywhere** (#79).
+  Share the URL directly. Same for `/lab`.
 
 ### Positioning strips (no availability anywhere)
 - Contact section strip: `Carman Creative / Brand / Creative direction /
@@ -250,9 +252,9 @@ motion with every reveal, counter and lazy image settled first (#58).
 ### Stat rows — all three read from `SCALE` in `career.ts` (#77)
 There are **three** places a career figure renders, and none of them types a
 number any more:
-- **Hero proof row** — `20+` years leading creative & brand / `10` designers
+- **Hero proof row** — `20` years in creative & brand / `10` designers
   co-managed on the studio team / `~1,500` brand assets migrated.
-- **About** — `20+` years / `15+` years in enterprise healthcare / `10`
+- **About** — `20` years / `15+` years in enterprise healthcare / `10`
   designers co-managed.
 - **`/capabilities`** — the same three, plus one deck-specific fact
   (`4` AI creative-systems explorations) that is **not** a career number and
@@ -277,7 +279,8 @@ tilde and a plus hedge the same number twice. The old vanity stat
 
 ### Employment history (About + Résumé) — corrected & non-defensive
 Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
-- **Elevance Health — 2023 — Present.** Creative Manager on the **Studio
+- **Elevance Health — 2023 — Present.** **Design Manager** (renamed from
+  Creative Manager in #79) on the **Studio
   Production team** — the in-house studio serving **all** Elevance Health
   lines of business, on point to produce a high volume of work accurately.
   **Co-manages ten designers** (not sole manager, and not five — five was
@@ -297,7 +300,8 @@ Four employers in `career.ts`, enterprise first (see #67, #72, #73, #74):
   at the 2023 Carelon rebrand; and **WebbMason**, production and event
   support, which began here and continues today. Sway therefore belongs on
   the Beacon stints only — never on the current role.
-- Carman Creative — Founder — 2020 — Present
+- Carman Creative — Founder — 2006 — Present (was 2020; corrected in #79
+  to match the `EST. 2006` hero strip and `SCALE.years`)
 - ASAP Printing & Graphics — Graphic Designer — 2009 — 2010 (deliberately
   lean: it closes the record, nothing more).
 - **Education:** Virginia Commonwealth University, BFA Graphic Design,
@@ -412,6 +416,21 @@ fresh.
   constraint established with the user.
 - **Do not** delete `/capabilities` route content. It's intentionally
   unlinked from the main nav but kept reachable for sharing.
+- **Do not** write an em dash in visible copy (#79). Date ranges use an en
+  dash with single spaces (`2023 – Present`); in sentences use a comma,
+  period, colon or parentheses. Code comments are exempt. The one live
+  exception is a verbatim testimonial — a quote keeps the speaker's own
+  punctuation, because altering it misquotes a real person.
+- **Do not** use British spellings in visible copy. US spelling throughout
+  (organization, color, catalog). Comments are exempt.
+- **Do not** show real client work inside a CQAP screenshot (#79). The
+  review screens must run on a fictional demo piece. Renaming the piece in
+  the caption does nothing while the proof, the logo and the job identifiers
+  are legible in the image.
+- **Do not** record anything about John's employment situation in this
+  repository — PROJECT.md, commit messages, branch names or code comments.
+  The repo is public. This rule was set in #65 and a branch name and commit
+  message breached it in #79; the history is published and was left alone.
 
 ---
 
@@ -1876,3 +1895,80 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
 
     Verified: `tsc --noEmit` clean, `npm run build` clean at 23 pages, and the
     rendered strings read off the prerendered HTML rather than assumed.
+
+### Later session — a copy and confidentiality pass
+
+79. **A content pass across every surface, then the CQAP screens rebuilt on
+    demo data.** Three commits, all shipped together. The site had been
+    carrying a few things that were either stale, unprovable, or not ours to
+    publish.
+    - **Title.** The Elevance role is **Design Manager**, not Creative
+      Manager, on every surface (`career.ts` drives all four). The About
+      paragraph lost the sentence that existed only to explain the title
+      change — it drew attention to the re-level rather than to the work, and
+      the stint dates already tell that story.
+    - **Carman Creative starts 2006**, not 2020, which finally agrees with
+      the `EST. 2006` hero strip and `SCALE.years`.
+    - **Unprovable numbers removed.** The `~60% faster turnaround` and
+      `~30% higher engagement` claims came out of the Leadership page, the
+      Marketing Bench case study and the résumé. The case study's **Impact
+      overview row held both and was deleted rather than left half-empty**.
+      Marketing Bench is now described by what it did — a self-serve
+      print-on-demand platform, launched March 2023 — which needs no metric.
+    - **Stamp Out Stigma is 2018** (project field *and* the flagship
+      template's own `caseStudy.overview` Year row, which is a second place
+      the year is typed — check both). Its `6 weeks` duration is gone, so
+      `duration` became optional and `ProjectDetail`, `CapabilitiesDeck` and
+      `Showpiece` now guard on it.
+    - **CQAP promoted to the featured leadership band as L04**, off the
+      systems shelf. This cuts against the #45 rationale for the systems tier
+      (self-initiated work shouldn't borrow a client engagement's
+      credibility) and is the owner's call; the card still reads
+      "Self-initiated prototype". Carman OS became S02, and the drafted-out
+      Workfront moved to **L05** so two projects don't share L04. `Work.tsx`
+      grids four leadership cards as **2×2** (`length % 3 === 0 ? 3 : 2`),
+      which is why adding a fifth would want another look.
+    - **Em dashes swept from visible copy**, 439 of them. The rule and its
+      one exception are in the "do not" list. Three traps: a mechanical
+      comma is wrong wherever the dash introduced a **list** (a colon reads
+      right) or a **second independent clause** (a period does), so the
+      résumé, About, Leadership, hero and the three named case studies were
+      hand-corrected afterwards; the `// 01 — Work` **eyebrows are literal
+      JSX text nodes beginning with `//`**, so a comment-aware sweep skips
+      them and they need doing by hand; and `CampaignFactory` **split a data
+      string on an em dash**, so the sweep silently broke it (repointed to
+      the comma). Testimonials were reverted — see the rule.
+    - **CQAP screens rebuilt on demo data.** The five review screens and the
+      cover showed a real member welcome guide: client logo, headline, member
+      photograph and internal job identifiers, all legible. Replaced by
+      driving the live app with a **fictional Northwind Health guide** built
+      for the purpose (two pages, rendered to PDF with Playwright, plus a
+      matching .docx so the package-validation check still passes), demo
+      context, and two reviewer findings written and accepted. New filenames
+      (`*-demo.jpg`), old files **deleted**, and the copy corrected to say
+      the screens show a sample piece rather than a real review.
+    - **Capture note.** CQAP keeps state **client-side only** — a second
+      browser shows an empty workspace while the first holds an open review
+      — so the run leaves no record in the app, and headless Playwright
+      cannot be pointed at a session created elsewhere. The whole flow has to
+      run inside the capturing browser. Browser-extension screenshots come
+      back at CSS-pixel size (1512×715 here), well under the #48 rule, so
+      Playwright at `deviceScaleFactor: 2` is the only path to 2880.
+    - **A cover must be cropped, never resized, to change aspect.** Squeezing
+      a 1.6 capture into 4:3 distorts the type visibly; crop a 2400×1800
+      window out of the 2880×1800 frame instead.
+
+    **Deployment note:** the live host is the **apex**, `carmancreative.com`;
+    `www` 301s to it. Verifying with `curl` against `www` without `-L`
+    returns a 51-byte redirect body, so every "clean" grep passes
+    meaninglessly. Always follow redirects when checking the live site.
+
+    **Still outstanding, and not a code change in this repo:** the CQAP
+    prototype at `cqap.vercel.app` serves its Creative Intelligence library
+    publicly, and that library renders a real enterprise brand architecture.
+    The case study prints the URL as a chrome label. Gate or seed that app
+    with demo data before pointing anyone at it.
+
+    Verified: `tsc --noEmit` clean, `npm run build` clean at 22 pages, eslint
+    at 71 problems (the pre-existing `// eyebrow` convention, unchanged), and
+    the live apex checked for every swept term after deploy.
