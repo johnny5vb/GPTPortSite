@@ -1673,7 +1673,7 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#f8f9fb", "#1b2a4a", "#2563eb", "#ffffff"],
     display: "CQAP",
-    cover: "/work/cqap/cover.jpg",
+    cover: "/work/cqap/cover-demo.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     externalUrl: "https://cqap.vercel.app/",
@@ -1690,7 +1690,7 @@ export const PROJECTS: Project[] = [
       mandate:
         "Prototype a review tool where the reasoning survives the review: classify work on the way in, capture the decision on the way out, and make both searchable.",
       context:
-        "Built on my own time as a prototype, out of years of running creative review at volume. The screens show a real review pass on a real piece (a member welcome guide), from package validation through to an approved decision.",
+        "Built on my own time as a prototype, out of years of running creative review at volume. The screens show a full review pass on a sample piece, a fictional member welcome guide, from package validation through to a recorded decision.",
       role: [
         "Framed the problem as institutional memory rather than workflow speed",
         "Designed the review model, classify on intake, capture the decision on completion",
@@ -1728,18 +1728,18 @@ export const PROJECTS: Project[] = [
         {
           kind: "browser",
           image: {
-            src: "/work/cqap/01-dashboard-v2.jpg",
-            alt: "CQAP, the workspace: one review active, one completed, and the standards learned so far",
+            src: "/work/cqap/01-dashboard-demo.jpg",
+            alt: "CQAP, the workspace: a completed review available as a prior decision, with the Creative Intelligence library below",
           },
           url: "cqap.vercel.app",
           caption:
-            "The workspace with work in it: one review in progress, one just approved and already available as a prior decision, and the standards the system has learned along the way.",
+            "The workspace with work in it: a review just completed and already available as a prior decision, above the library of brands, standards, references and decisions the system reads from.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/cqap/02-package-ready-v2.jpg",
+            src: "/work/cqap/02-package-ready-demo.jpg",
             alt: "CQAP, validation and context: the package is ready to review",
           },
           caption:
@@ -1749,17 +1749,17 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/cqap/04-review-findings-v2.jpg",
+            src: "/work/cqap/04-review-findings-demo.jpg",
             alt: "CQAP, the review workspace with two reviewer findings accepted",
           },
           caption:
-            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard, here, a member welcome guide, two minor findings, both accepted.",
+            "The review workspace. Findings are placed on the proof as numbered markers and written up on the right, each tied to a supporting standard, here, a sample member welcome guide with two minor findings, both accepted.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/cqap/03-review-clean.jpg",
+            src: "/work/cqap/03-review-clean-demo.jpg",
             alt: "CQAP, the review workspace before any findings",
           },
           caption:
@@ -1769,8 +1769,8 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/cqap/05-approved.jpg",
-            alt: "CQAP, review complete: approved, saved as a review memory",
+            src: "/work/cqap/05-approved-demo.jpg",
+            alt: "CQAP, review complete: approved with changes, saved as a review memory",
           },
           caption:
             "A decision becomes a record. The review is saved as a memory, its accepted findings keep their evidence, and the workspace updates.",
