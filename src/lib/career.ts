@@ -74,7 +74,7 @@ export const EMPLOYERS: Employer[] = [
         // SCOPE — corrected, do not narrow it again. Three things had been
         // wrong here and each one understated or overstated the job:
         //   1. The team is the STUDIO PRODUCTION team, and John CO-manages
-        //      ten designers. He is not its sole manager. The five-person
+        //      ten designers. He is not its sole manager. The four-person
         //      team he ran on his own is the Beacon/Creative Director stint
         //      below — do not move that number up here.
         //   2. The remit is ALL Elevance Health lines of business. It is not
@@ -128,7 +128,7 @@ export const EMPLOYERS: Employer[] = [
         bullets: [
           // Five, managed solo. This is the outright-management number and it
           // belongs to this stint, not to the co-managed studio team above.
-          "Led a five-person design team and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
+          "Led a four-person design team and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
           "Led the Beacon to Carelon rebrand team, which grew to about 20 people (in-house designers, a video artist, project managers, writers and freelancers) and rebuilt about 1,500 assets.",
           "Rebuilt Marketing Bench as a self-serve print-on-demand platform during the Carelon rebrand, so sales and field teams could build and order on-brand materials without a designer in the loop. Launched March 2023.",
           "Led Stamp Out Stigma, a national mental-health awareness campaign, including out-of-home placement in Times Square.",
@@ -236,7 +236,7 @@ export const SCALE = {
   orgSize: "~85,000",
   orgLabel: "Person organization",
   /** Managed solo, as Creative Director at Beacon. The cleanest people claim. */
-  team: 5,
+  team: 4,
   teamLabel: "Designers led as a creative lead",
   /** The current Studio Production team, which John co-manages. */
   studioTeam: 10,

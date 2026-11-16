@@ -275,10 +275,12 @@ number any more:
   enterprise years, studio team, and assets migrated. The old fourth fact
   counted the `/lab` demos and went with those slides.
 
-**Every stat row shows `SCALE.studioTeam` (10), never `SCALE.team` (5)** —
+**Every stat row shows `SCALE.studioTeam` (10), never `SCALE.team` (4)** —
 see #78. The two numbers are different claims and each keeps its own label:
 `studioTeamLabel` says **co-managed** and `teamLabel` says *led as a creative
-lead*. The 5 is the Beacon team John ran solo and it belongs in prose — the
+lead*. The 4 is the Beacon team John ran solo (corrected from 5 in #84: the
+team was five people *including him*, so four designers reported) and it
+belongs in prose — the
 About paragraph, the résumé preview's Team row and the Creative Director
 stint — where the qualifier can sit beside it. **Never show either number
 without its label**: an unqualified 10 claims sole management of a shared
@@ -2106,3 +2108,17 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       and the deck cannot drift from the hero, About and the résumé.
     - `/lab` itself is unchanged and still serves; it is simply no longer
       quoted inside the deck.
+
+84. **The Beacon team figure was off by one, and the error was structural.**
+    `SCALE.team` was 5 and every surface said "five-person design team". The
+    team reached **five people including John**, so **four designers reported
+    to him**. Corrected in `career.ts` (`team: 4`) and in the four places that
+    spelled it out in prose: the About paragraph, the résumé summary, the
+    `/leadership` experience list, and the Creative Director stint bullet.
+    - **Two counts now coexist and must not be collapsed:** the team *grew*
+      from one person to five (John plus four), and he *led* four designers.
+      The `/leadership` proof line states both in one sentence so a reader
+      never has to reconcile a 5 against a 4.
+    - `SCALE.studioTeam` (10, co-managed, current) is untouched. The #78 rule
+      stands: every stat row shows the 10 with its "co-managed" label, and the
+      smaller number lives in prose where the qualifier can sit beside it.

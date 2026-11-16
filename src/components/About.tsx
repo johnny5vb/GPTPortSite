@@ -116,7 +116,7 @@ export default function About() {
               The third stat shows `SCALE.studioTeam` (10), the Studio
               Production team John CO-manages — and `studioTeamLabel` carries
               that qualifier, because an unqualified 10 would claim sole
-              management of a shared team. `SCALE.team` (5) is the Beacon team
+              management of a shared team. `SCALE.team` (4) is the Beacon team
               he ran solo; it is still correct and still published, but in
               prose — the paragraph below, the résumé preview and the Creative
               Director stint — where the distinction has room to be made.
@@ -148,7 +148,7 @@ export default function About() {
               <p>
                 I held the Creative Director title at Beacon Health Options from
                 2018, leading brand, campaign, digital, and creative-operations work
-                and managing a five-person design team. When Beacon became
+                and managing a four-person design team. When Beacon became
                 Carelon Behavioral Health inside Elevance Health, I led the
                 creative transition: roughly 1,500 brand assets migrated to the
                 new identity across an organization of about 85,000. The remit
