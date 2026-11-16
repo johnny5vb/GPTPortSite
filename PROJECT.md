@@ -127,7 +127,7 @@ and `projects.ts` palettes are **data**, not chrome, and stay put.
 | `/resume` | `ResumePage` | Print-friendly on-page résumé ("Print / Save as PDF"). No PDF committed yet — `PROFILE.resumePdf` is `null` with a TODO |
 | `/lab` | `LabPage` (renders all 4 AI systems with sticky tab nav) | AI & Creative Systems — status-labeled demos on *fictional* brands. **Unlinked since #79**: off the nav, out of the sitemap, and no longer in the footer either. The route still serves for anyone sent the link. The real AI work is the Systems shelf in Work |
 | `/work/[slug]` | `ProjectDetail` (branches: flagship leadership template vs. standard client layout) | Leadership flagships — `beacon-carelon-transformation` (L01), `creative-operations-marketing-bench` (L02), `stamp-out-stigma` (L03, display label `SOS`), **`cqap` (L04, promoted off the systems shelf in #79)**; `workfront-workflow-transformation` (L05) is drafted out. Independent 01–05 — `friends-rehab`, `colony-coffee`, `special-forces-trust`, `spikes-k9-fund`, `atromitos`; `evermark` is drafted out. **`important-colorado` was removed from the array outright** (not drafted), though its 33 files remain under `public/work/important-colorado/`. **Systems S01–S02** (self-initiated, own shelf) — `premier-friends-club`, `carman-os`. **No `secondary` project exists any more** — the tier and its helper stay in the code, but `harrison-bounds` and `beacon-van` are gone |
-| `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck (linked from Footer for sharing) |
+| `/capabilities` | `CapabilitiesDeck` | Snap-scrolling capabilities deck, **six slides since #83** (cover, hello, services, selected work, process, contact). Unlinked from the site since #79; share the URL directly |
 
 Project data is sourced from `src/lib/projects.ts` (note: **`src/lib/`**, not
 `src/data/`). Each project carries a `tier` (`leadership` / `independent` / `systems` /
@@ -271,9 +271,9 @@ number any more:
   co-managed on the studio team / `~1,500` brand assets migrated.
 - **About** — `20` years / `15+` years in enterprise healthcare / `10`
   designers co-managed.
-- **`/capabilities`** — the same three, plus one deck-specific fact
-  (`4` AI creative-systems explorations) that is **not** a career number and
-  stays hardcoded.
+- **`/capabilities`** — four figures, all from `SCALE` since #83: years,
+  enterprise years, studio team, and assets migrated. The old fourth fact
+  counted the `/lab` demos and went with those slides.
 
 **Every stat row shows `SCALE.studioTeam` (10), never `SCALE.team` (5)** —
 see #78. The two numbers are different claims and each keeps its own label:
@@ -2084,3 +2084,25 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       nothing else needed touching. **The deck is now ten slides and
       describes the work without offering terms for it** — the same posture
       the rest of the site took in #41.
+
+83. **The four AI Lab slides came out of the capabilities deck.** With the
+    engagement slide already gone (#82), four of the deck's ten slides were
+    `/lab` demos — Brand-in-a-Day OS, Style Guide That Talks Back, Campaign
+    Factory, Atelier — all running on the fictional brands (Northbound /
+    Verso / Halcyon). #64 had already demoted `/lab` itself as superseded by
+    the real AI work on the Systems shelf, so the deck was giving 40% of its
+    length to invented clients while CQAP and Carman OS sat in Work.
+    **The deck is six slides now:** cover, hello, services, selected work,
+    process, contact. Shorter, and every slide points at real work.
+    - The four slide components lived **inside** `CapabilitiesDeck.tsx` (they
+      are not the `/lab` components, which are separate and untouched), so
+      removing them took 298 lines with no effect on `/lab`. Seven lucide
+      icons went unused with them and were trimmed; the deck imports
+      `ArrowUpRight` and `Printer` now.
+    - **The Hello fact grid had a trap.** Its fourth tile read "4 AI
+      creative-systems explorations" and counted exactly these slides, so
+      cutting them would have left a stale number in a 2x2 grid. It now
+      reads `SCALE.assets`, which means **all four tiles come from `SCALE`**
+      and the deck cannot drift from the hero, About and the résumé.
+    - `/lab` itself is unchanged and still serves; it is simply no longer
+      quoted inside the deck.
