@@ -397,7 +397,7 @@ export const PROJECTS: Project[] = [
     coverAspect: "4 / 3",
     gallery: [],
     roleSummary:
-      "Rebuilt Marketing Bench as a self-serve print-on-demand platform.",
+      "Rebuilt Marketing Bench so sales and field teams could build and order on-brand materials without waiting on a designer.",
     caseStudy: {
       overview: [
         { label: "Organization", value: "Elevance Health / Carelon (with WebbMason)" },

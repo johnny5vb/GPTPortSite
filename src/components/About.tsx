@@ -150,9 +150,10 @@ export default function About() {
                 and managing a five-person design team. When Beacon became
                 Carelon Behavioral Health inside Elevance Health, I led the
                 creative transition: roughly 1,500 brand assets migrated to the
-                new identity across an organization of about 85,000. I&apos;m on the
-                Studio Production team at Elevance Health now, co-managing ten
-                designers across all lines of business rather than one company.
+                new identity across an organization of about 85,000. The remit
+                widened from there: I&apos;m on the Studio Production team at
+                Elevance Health now, co-managing ten designers across every
+                line of business rather than one company.
               </p>
               <p>
                 Alongside that, I run Carman Creative (brand, digital, and

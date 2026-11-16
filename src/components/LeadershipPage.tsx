@@ -60,7 +60,7 @@ const PROOF = [
   // A tilde and a plus together hedge the same number twice; SCALE already
   // carries the leading "~", so the "+" comes off.
   `Migrated ${SCALE.assets} brand assets across an ${SCALE.orgSize}-employee organization`,
-  "Built the Marketing Bench creative-support model, launched March 2023",
+  "Built the Marketing Bench creative-support model so sales and field teams could produce on-brand materials without waiting on a designer, launched March 2023",
   `Part of the team that rebuilt Workfront intake, review, and approval across ${SCALE.throughput} projects a month`,
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
