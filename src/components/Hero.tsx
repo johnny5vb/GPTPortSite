@@ -236,7 +236,7 @@ export default function Hero() {
                     browser. Bump the suffix whenever the crop changes. */}
                 <Image
                   src="/brand/portrait-hero-v3.jpg"
-                  alt="John Carman, Creative Director"
+                  alt="John Carman"
                   fill
                   sizes="(max-width: 1024px) 640px, 900px"
                   priority

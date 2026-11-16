@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
     oneLiner:
       "Transforming an enterprise brand through organizational change.",
     brief:
-      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500+ brand assets had to move to a new identity across an ~85,000+ employee organization, without disrupting the people who depend on them. The identity itself arrived from the enterprise as a 115-page brand system. My job was the harder half: translating it into Carelon Behavioral Health's own materials, building the templates the work would run on, and controlling quality as a team of twenty produced against them.",
+      "When Beacon Health Options was acquired and folded into Carelon and Elevance Health, roughly 1,500 brand assets had to move to a new identity, without disrupting the people who depend on them. The identity itself arrived from the enterprise as a 115-page brand system. My job was the harder half: translating it into Carelon Behavioral Health's own materials, building the templates the work would run on, and controlling quality as a team of twenty produced against them.",
     process: [],
     services: [
       "Creative direction",
@@ -189,7 +189,7 @@ export const PROJECTS: Project[] = [
         { label: "Organization", value: "Beacon Health Options → Carelon / Elevance Health" },
         { label: "Role", value: "Creative Director, Creative Services" },
         { label: "Focus", value: "Brand transition, governance, quality control" },
-        { label: "Scale", value: "~1,500+ assets / ~85,000+ employees" },
+        { label: "Scale", value: "~1,500 assets rebranded, Beacon to Carelon" },
         { label: "Team", value: "Scaled to ~20 (3 in-house + freelance)" },
         { label: "Timeline", value: "2022 – 2023 (9-month rebrand; Beacon became Carelon Behavioral Health March 1, 2023)" },
       ],
@@ -227,7 +227,7 @@ export const PROJECTS: Project[] = [
         },
       ],
       outcomes: [
-        "~1,500+ brand assets migrated to the new identity across the organization",
+        "~1,500 brand assets rebranded to the new identity",
         "Merchandise and the print-on-demand platform rebuilt end to end",
         "The full rebrand delivered in ~9 months with a team that scaled to ~20",
       ],
@@ -2080,7 +2080,11 @@ export function projectsByTier(tier: ProjectTier): Project[] {
   return PUBLISHED_PROJECTS.filter((p) => tierOf(p) === tier);
 }
 
-export const LEADERSHIP_PROJECTS = projectsByTier("leadership");
+/** CQAP leads: the AI-enabled work is the strongest current proof, so it sits
+ *  first; the rest keep their file order. */
+export const LEADERSHIP_PROJECTS = [...projectsByTier("leadership")].sort(
+  (a, b) => Number(b.slug === "cqap") - Number(a.slug === "cqap"),
+);
 export const INDEPENDENT_PROJECTS = projectsByTier("independent");
 export const SYSTEMS_PROJECTS = projectsByTier("systems");
 export const SECONDARY_PROJECTS = projectsByTier("secondary");

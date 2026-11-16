@@ -2122,3 +2122,22 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     - `SCALE.studioTeam` (10, co-managed, current) is untouched. The #78 rule
       stands: every stat row shows the 10 with its "co-managed" label, and the
       smaller number lives in prose where the qualifier can sit beside it.
+
+85. **Title label is now "Creative leader"; the 1,500 figure no longer rides on
+    the 85,000 headcount (Nov 16 2026).** Decided with John while aligning the
+    site and LinkedIn before a round of executive conversations. Supersedes #81.
+    - `PROFILE.titleShort`, `titleLine`, the hero eyebrow, About and résumé
+      openers, JSON-LD `jobTitle` and the OG image now say "Creative leader".
+      "Creative Director" stays where it is a matter of record: the Beacon
+      2018 to 2023 stint and Founder & Creative Director of Carman Creative.
+      LinkedIn headline uses the same wording.
+    - The rebrand is **~1,500 assets rebranded from Beacon to Carelon** on every
+      surface. "Migrated" and the pairing with ~85,000 employees are gone, and
+      the case study's "1,500+" is now "~1,500".
+    - Marketing Bench: John led the design and managed the rebuild of the
+      Beacon version into the Carelon-branded platform (added functionality,
+      a BI dashboard for metrics and analytics, more self-service for sales).
+    - The rebrand team of about 20 stands (roughly ten designers plus writers,
+      project managers and others). LinkedIn now says so too.
+    - Work page: CQAP leads the featured leadership work, and the Systems &
+      side projects shelf sits above the independent work.

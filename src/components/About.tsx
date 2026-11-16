@@ -138,7 +138,7 @@ export default function About() {
           <div className="mt-10 grid grid-cols-12 gap-6">
             <div className="col-span-12 md:col-span-7 space-y-5 text-bone/85 leading-relaxed">
               <p>
-                I&apos;m a Creative Director and creative-operations leader with{" "}
+                I&apos;m a creative leader across brand, creative direction, and creative operations, with{" "}
                 {PROFILE.yearsExperience} years helping organizations turn
                 complex goals into clear, useful, and distinctive creative work.
                 Most of that career has been inside enterprise healthcare,
@@ -150,8 +150,8 @@ export default function About() {
                 2018, leading brand, campaign, digital, and creative-operations work
                 and managing a four-person design team. When Beacon became
                 Carelon Behavioral Health inside Elevance Health, I led the
-                creative transition: roughly 1,500 brand assets migrated to the
-                new identity across an organization of about 85,000. The remit
+                creative transition: roughly 1,500 brand assets rebranded to the
+                new identity. The remit
                 widened from there: I&apos;m on the Studio Production team at
                 Elevance Health now, co-managing ten designers across every
                 line of business rather than one company.

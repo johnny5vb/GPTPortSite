@@ -72,16 +72,6 @@ export default function Work() {
         ))}
       </div>
 
-      {/* Selected independent work */}
-      <h3 className="mt-20 mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-bone border-t border-line pt-6">
-        Selected independent work
-      </h3>
-      <div className="space-y-2">
-        {INDEPENDENT_PROJECTS.map((p, i) => (
-          <ProjectRow key={p.slug} project={p} index={i} />
-        ))}
-      </div>
-
       {/* Systems & side projects — self-initiated. Kept on their own shelf so
           nothing built for myself reads as a client engagement. */}
       {SYSTEMS_PROJECTS.length > 0 && (
@@ -101,6 +91,16 @@ export default function Work() {
           </div>
         </>
       )}
+
+      {/* Selected independent work */}
+      <h3 className="mt-20 mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-bone border-t border-line pt-6">
+        Selected independent work
+      </h3>
+      <div className="space-y-2">
+        {INDEPENDENT_PROJECTS.map((p, i) => (
+          <ProjectRow key={p.slug} project={p} index={i} />
+        ))}
+      </div>
 
       {/* Secondary / smaller production work */}
       {SECONDARY_PROJECTS.length > 0 && (

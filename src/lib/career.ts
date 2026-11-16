@@ -126,11 +126,11 @@ export const EMPLOYERS: Employer[] = [
         summary:
           "Ran the creative function for a national behavioral health company (the team, the systems, and the brand), then carried all three through its acquisition by Elevance Health.",
         bullets: [
-          // Five, managed solo. This is the outright-management number and it
+          // Four, managed solo. This is the outright-management number and it
           // belongs to this stint, not to the co-managed studio team above.
           "Led a four-person design team and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
           "Led the Beacon to Carelon rebrand team, which grew to about 20 people (in-house designers, a video artist, project managers, writers and freelancers) and rebuilt about 1,500 assets.",
-          "Rebuilt Marketing Bench as a self-serve print-on-demand platform during the Carelon rebrand, so sales and field teams could build and order on-brand materials without a designer in the loop. Launched March 2023.",
+          "Led the design and managed the rebuild of Marketing Bench from the Beacon version into the Carelon-branded self-serve print-on-demand platform, adding functionality, a BI dashboard for metrics and analytics, and more self-service for sales and field teams. Launched March 2023.",
           "Led Stamp Out Stigma, a national mental-health awareness campaign, including out-of-home placement in Times Square.",
         ],
       },
@@ -232,7 +232,7 @@ export const EDUCATION = {
  */
 export const SCALE = {
   assets: "~1,500",
-  assetsLabel: "Brand assets migrated in an enterprise rebrand",
+  assetsLabel: "Brand assets rebranded from Beacon to Carelon",
   orgSize: "~85,000",
   orgLabel: "Person organization served",
   /** Managed solo, as Creative Director at Beacon. The cleanest people claim. */

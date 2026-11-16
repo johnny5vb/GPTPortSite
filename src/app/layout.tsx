@@ -65,9 +65,9 @@ const personLd = {
   // Anchored to Carman Creative, where the title is current and his own
   // (see career.ts). The employment history states Design Manager at
   // Elevance separately, so this does not contradict the record.
-  jobTitle: "Creative Director",
+  jobTitle: "Creative leader",
   description:
-    "Creative Director and brand & creative-operations leader. Twenty years across brand, creative direction, creative operations, and design systems, most of it inside large healthcare organizations.",
+    "Creative leader in brand and creative operations. Twenty years across brand, creative direction, creative operations, and design systems, most of it inside large healthcare organizations.",
   knowsAbout: [
     "Creative direction",
     "Brand strategy and identity systems",

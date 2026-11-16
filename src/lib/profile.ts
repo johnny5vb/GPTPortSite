@@ -10,8 +10,8 @@
  * solicit. Don't reintroduce "open to", "available for", or "seeking" copy
  * without an explicit decision to reposition again.
  *
- * Positioning hierarchy (do not reorder without intent): John is a Creative
- * Director first, a brand + creative-operations leader second, and an
+ * Positioning hierarchy (do not reorder without intent): John is a creative
+ * leader first, a brand + creative-operations leader second, and an
  * AI-enabled strategist third.
  */
 
@@ -20,19 +20,20 @@ export const PROFILE = {
 
   /** Ordered, most-senior-first. The site leads with roles[0]. */
   titles: [
-    "Creative Director",
+    "Creative leader",
     "Brand & creative operations",
     "AI-enabled creative strategy",
   ],
 
-  /** THE RULE (#81): title form wherever it labels John, discipline form
-   *  ("creative direction") only inside a list of practice areas, which is
-   *  the hero chip, the footer line and the "// what I do" strip. The title
-   *  is anchored to Carman Creative, where he is Founder & Creative
-   *  Director, true and present tense. Elevance stays Design Manager. */
-  titleShort: "Creative Director",
+  /** THE RULE (Nov 16 2026, supersedes #81): the label is "Creative leader".
+   *  It describes the work and is true of every role held, so it needs no
+   *  title to defend. "Creative Director" appears only as a title that was
+   *  held (Beacon 2018 to 2023) and as Founder & Creative Director of
+   *  Carman Creative. Elevance stays Design Manager. LinkedIn headline uses
+   *  the same wording. */
+  titleShort: "Creative leader",
   /** Two-line positioning used in the footer + résumé header. */
-  titleLine: "Creative Director / Brand and creative operations",
+  titleLine: "Creative leader / Brand and creative operations",
 
   yearsExperience: 20,
 

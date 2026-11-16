@@ -18,7 +18,7 @@ const SUMMARY = [
   { label: "Before", value: "Graphic Designer, then Manager of Creative Services, ValueOptions → Beacon" },
   { label: "Experience", value: `${PROFILE.yearsExperience}+ years, mostly enterprise healthcare` },
   { label: "Team", value: `Co-manage ${SCALE.studioTeam} designers; led ${SCALE.team} as Creative Director` },
-  { label: "Scale", value: `${SCALE.assets} assets migrated across an ${SCALE.orgSize}-person organization` },
+  { label: "Scale", value: `${SCALE.assets} assets rebranded, Beacon to Carelon` },
   { label: "Leads", value: "Brand, campaigns, creative operations, teams" },
   { label: "Systems", value: "Workfront, brand governance, vendor management, AI-enabled workflow" },
   { label: "Also", value: "Founder, Carman Creative" },
