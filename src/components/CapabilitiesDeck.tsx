@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import CCMark from "./CCMark";
 import { PUBLISHED_PROJECTS } from "@/lib/projects";
 import { SCALE } from "@/lib/career";
+import { PROFILE } from "@/lib/profile";
 
 const SLIDES = [
   { id: "cover", num: "01", title: "Cover" },
@@ -315,10 +316,10 @@ function Cover() {
             </em>
           </h1>
           <p className="mt-10 font-mono text-[12px] uppercase tracking-[0.28em] text-mute">
-            John Carman / Creative Director
+            {PROFILE.name} / {PROFILE.titleShort}
           </p>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-bone/85">
-            Virginia Beach / Remote / Select hybrid
+            Virginia Beach / Brand / Design systems
           </p>
         </div>
         <div className="hidden md:block col-span-4">
@@ -359,7 +360,7 @@ function Hello() {
             />
           </motion.div>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-            John Carman / Creative Director &amp; Brand Operations
+            {PROFILE.name} / {PROFILE.titleShort}
           </p>
         </div>
         <div className="col-span-12 md:col-span-8 space-y-5">
@@ -921,11 +922,11 @@ function Contact() {
           </p>
           <div className="mt-10 flex items-center flex-wrap gap-4">
             <a
-              href="mailto:johnbcarman@gmail.com?subject=Project%20inquiry"
+              href={`mailto:${PROFILE.contact.email}`}
               data-cursor="email"
               className="inline-flex items-center gap-3 rounded-full bg-green text-ink px-7 py-5 font-mono text-[12px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
             >
-              johnbcarman@gmail.com
+              {PROFILE.contact.email}
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <Link
@@ -940,12 +941,18 @@ function Contact() {
         </div>
         <div className="col-span-12 md:col-span-5 grid grid-cols-2 gap-4">
           {[
-            { l: "Based in", v: "Virginia Beach\nRemote / Hybrid" },
-            { l: "Hours", v: "Mon–Fri\n9a–6p EST" },
-            { l: "Social", v: "@jbcarms\nlinkedin.com/in/johncarman" },
+            { l: "Based in", v: PROFILE.location.base },
+            { l: "Portfolio", v: "carmancreative.com" },
             {
-              l: "Open for",
-              v: "Retainer / Project\nFractional CD",
+              l: "Social",
+              v: `${PROFILE.contact.instagramHandle}\nlinkedin.com/in/johncarman`,
+            },
+            {
+              // Was "Open for / Retainer, Project, Fractional CD", highlighted.
+              // That is the solicitation posture the rest of the site dropped
+              // in #41; the deck was never swept because it imported nothing.
+              l: "Practice",
+              v: PROFILE.practice,
               hl: true,
             },
           ].map((b) => (

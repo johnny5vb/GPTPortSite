@@ -434,6 +434,12 @@ fresh.
   constraint established with the user.
 - **Do not** delete `/capabilities` route content. It's intentionally
   unlinked from the main nav but kept reachable for sharing.
+- **Do not** assume `/capabilities` was covered by a site-wide copy sweep.
+  It imported nothing from `profile.ts` until #82 and so missed the #41
+  neutral pass entirely, keeping "Open for / Retainer, Project, Fractional
+  CD", "Remote / Select hybrid" and a pre-filled mailto for a year. It reads
+  from `PROFILE` now; check it by name whenever positioning or contact
+  changes.
 - **Do not** write an em dash in visible copy (#79). Date ranges use an en
   dash with single spaces (`2023 – Present`); in sentences use a comma,
   period, colon or parentheses. Code comments are exempt. The one live
@@ -2049,3 +2055,29 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       pointing at a company John owns.
     - Also kept from #80: the `·` separator stays gone from the résumé tools
       list and the deck's slide counter.
+
+82. **The capabilities deck still had the pre-#41 sales posture.** Checking
+    one credit on `/capabilities` turned up the reason it never got swept:
+    **the deck imported nothing from `profile.ts`** — every name, title,
+    email and location was hard-coded — so #41's neutral pass and every
+    positioning change since went around it. #41's own note that
+    "`/capabilities` lost its availability sentence" was true of one
+    sentence and nothing else.
+    - **Removed:** a *highlighted* contact card reading "Open for /
+      Retainer, Project, Fractional CD"; "Virginia Beach / Remote / Select
+      hybrid" on the cover; "Remote / Hybrid" and "Hours / Mon-Fri 9a-6p
+      EST" in the contact grid; and `?subject=Project%20inquiry` on the
+      mailto, which the contact rule forbids.
+    - **Replaced with** neutral cards that read from `PROFILE`: Based in,
+      Portfolio, Social, and Practice (the emphasised card now carries the
+      disciplines rather than an offer).
+    - **Both deck credits** now render `{PROFILE.name} / {PROFILE.titleShort}`,
+      so they follow the #81 rule automatically instead of drifting. The
+      slide-02 credit had read "Creative Director & Brand Operations", a
+      third variant of the title that existed nowhere else.
+    - **Left alone, because it is an editorial call and not a stray phrase:**
+      slide 10, "How to work with me", with Project / Retainer / Fractional
+      CD tiers. A capabilities deck is a document you hand to someone, so an
+      engagement slide is structural; but it is the one place on the site
+      that still offers services in the second person. Decide it deliberately
+      rather than letting it sit by default.
