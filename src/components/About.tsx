@@ -20,6 +20,7 @@ const STRENGTHS = [
   "Creative direction",
   "Brand strategy & systems",
   "Team leadership & critique",
+  "Hiring & developing talent",
   "Stakeholder communication",
   "Creative operations",
   "Digital experience",
