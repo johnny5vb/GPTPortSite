@@ -7,7 +7,7 @@ import path from "node:path";
  * when previewing a shared link to the site root.
  *
  * Minimal layout: stacked Carman Creative wordmark centered above the
- * positioning line ("Creative Director / creative operations leader.")
+ * positioning line ("Creative direction / brand & creative operations.")
  * set in Fraunces to match the home page typography.
  *
  * Uses Node runtime so we can read the Fraunces TTFs from /public/fonts at
@@ -16,7 +16,7 @@ import path from "node:path";
 
 export const runtime = "nodejs";
 export const alt =
-  "John Carman, Creative Director, Brand and Creative Operations Leader";
+  "John Carman, Carman Creative: brand, creative direction, and design systems";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -69,9 +69,9 @@ export default async function Image() {
             textAlign: "center",
           }}
         >
-          <span style={{ color: "#f6f2ea" }}>Creative Director /</span>
+          <span style={{ color: "#f6f2ea" }}>Creative direction /</span>
           <span style={{ color: "#3b9a7e", fontStyle: "italic" }}>
-            creative operations leader.
+            brand &amp; creative operations.
           </span>
         </div>
       </div>

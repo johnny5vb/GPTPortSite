@@ -137,7 +137,7 @@ export default function About() {
           <div className="mt-10 grid grid-cols-12 gap-6">
             <div className="col-span-12 md:col-span-7 space-y-5 text-bone/85 leading-relaxed">
               <p>
-                I&apos;m a Creative Director and creative-operations leader with{" "}
+                I work in creative direction and creative operations, with{" "}
                 {PROFILE.yearsExperience} years helping organizations turn
                 complex goals into clear, useful, and distinctive creative work.
                 Most of that career has been inside enterprise healthcare,

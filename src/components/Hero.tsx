@@ -230,7 +230,7 @@ export default function Hero() {
                     browser. Bump the suffix whenever the crop changes. */}
                 <Image
                   src="/brand/portrait-hero-v3.jpg"
-                  alt="John Carman, Creative Director"
+                  alt="John Carman"
                   fill
                   sizes="(max-width: 1024px) 640px, 900px"
                   priority
@@ -314,8 +314,8 @@ export default function Hero() {
         >
           <div className="text-bone/55">// what I do</div>
           <div className="mt-2 text-bone/80">
-            Creative Director / Brand &amp; Creative Operations Leader /
-            AI-Enabled Strategist
+            Creative direction / Brand &amp; creative operations /
+            AI-enabled workflow
           </div>
         </motion.div>
 

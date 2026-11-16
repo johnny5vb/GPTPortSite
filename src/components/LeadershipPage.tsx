@@ -97,7 +97,7 @@ export default function LeadershipPage() {
               transition={{ duration: 0.6, delay: 0.05 }}
               className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute"
             >
-              {PROFILE.titleShort} · {PROFILE.yearsExperience} years
+              {PROFILE.titleShort} / {PROFILE.yearsExperience} years
             </motion.p>
           </div>
           <div className="col-span-12 md:col-span-8">

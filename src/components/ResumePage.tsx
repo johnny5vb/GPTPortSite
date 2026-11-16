@@ -108,7 +108,7 @@ export default function ResumePage() {
             screen checks first: people led and scale operated at. */}
         <Section title="Summary">
           <p className="text-bone/85 leading-relaxed">
-            Creative Director and creative-operations leader with{" "}
+            Creative direction and creative operations, with{" "}
             {PROFILE.yearsExperience} years turning complex goals into clear,
             useful, and distinctive creative work, most of it inside enterprise
             healthcare. Led the creative transition through an enterprise
@@ -233,7 +233,7 @@ export default function ResumePage() {
 
         {/* Tools */}
         <Section title="Tools">
-          <p className="text-sm text-bone/85">{TOOLS.join(" · ")}</p>
+          <p className="text-sm text-bone/85">{TOOLS.join(" / ")}</p>
         </Section>
       </article>
     </div>

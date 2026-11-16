@@ -20,15 +20,18 @@ export const PROFILE = {
 
   /** Ordered, most-senior-first. The site leads with roles[0]. */
   titles: [
-    "Creative Director",
-    "Brand & Creative Operations Leader",
-    "AI-Enabled Creative Strategist",
+    "Creative direction",
+    "Brand & creative operations",
+    "AI-enabled creative strategy",
   ],
 
-  /** Short label used in tight spaces (nav, footer, meta). */
-  titleShort: "Creative Director",
+  /** Short label used in tight spaces (nav, footer, meta). Names the
+   *  discipline, never a present-tense personal title: John holds Design
+   *  Manager today and held Creative Director through 2023, so asserting
+   *  either here would date the site or contradict the resume. */
+  titleShort: "Creative direction",
   /** Two-line positioning used in the footer + résumé header. */
-  titleLine: "Creative Director · Brand and Creative Operations Leader",
+  titleLine: "Creative direction / Brand and creative operations",
 
   yearsExperience: 20,
 

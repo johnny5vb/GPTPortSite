@@ -21,7 +21,13 @@ replaced. `/leadership` and `/resume` remain, linked and neutral in tone, as
 career context for anyone who goes looking. The positioning hierarchy is
 still: (1) Creative Director, (2) Brand & Creative Operations Leader,
 (3) AI-Enabled Creative Strategist — AI is a supporting advantage, never the
-lead.
+lead. **Since #80 the site names these as disciplines, not as present-tense
+personal titles**: `PROFILE.titleShort` is "Creative direction", not
+"Creative Director". John holds Design Manager today and held Creative
+Director through 2023, so asserting either in chrome would either date the
+site or contradict the résumé. "Creative Director" survives only where it is
+historically true — the Beacon stint, the case-study roles, the résumé's
+"Held" row.
 
 The product is a single-page narrative on `/` plus deeper subpages: a
 **Leadership** page (`/leadership`), a print-friendly **Résumé** (`/resume`),
@@ -399,6 +405,10 @@ fresh.
   employment-first rule — see change #41.)
 - **Do not** lead with "AI Strategist." AI is the third descriptor, a
   supporting advantage — never the headline.
+- **Do not** assert a present-tense personal title in chrome, metadata or
+  structured data (#80). Name the discipline. The Person JSON-LD carries
+  **no `jobTitle`** for this reason; an earlier pass (#65) kept
+  `jobTitle: "Creative Director"` and that decision is reversed.
 - **Do not** publish unverified metrics as facts. Gate them behind visible
   `TODO: Confirm` placeholders (muted italic) until John confirms them.
 - **Do not** ship `john@carmancreative.com` until the mailbox is provisioned —
@@ -1972,3 +1982,35 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     Verified: `tsc --noEmit` clean, `npm run build` clean at 22 pages, eslint
     at 71 problems (the pre-existing `// eyebrow` convention, unchanged), and
     the live apex checked for every swept term after deploy.
+
+80. **"Creative Director" removed as a present-tense claim.** A follow-up read
+    of the live site asked which surfaces still assert the title John no
+    longer holds. There were more than the four first found, because most
+    read from `PROFILE.titleShort` / `titleLine` rather than hard-coding it.
+    Changed: `profile.ts` (`titles[]`, `titleShort` → "Creative direction",
+    `titleLine` → "Creative direction / Brand and creative operations"), the
+    Hero "what I do" strip and the portrait `alt`, the résumé summary's
+    opening line, the About paragraph's opening line, the capabilities deck's
+    cover and closing credits, the OG image's **alt and the line drawn into
+    the image itself**, and the Person JSON-LD (`jobTitle` dropped, the
+    description reworded).
+    - **It survives where it is historically true** and should stay there:
+      the Beacon 2018–2023 stint in `career.ts`, the case-study `role` fields,
+      the résumé's "Held" row and its "as Creative Director" clause, and the
+      About sentence that says the title was held from 2018.
+    - **The `·` separator went with it** in the two places it still rendered:
+      the résumé's tools list and the capabilities deck's slide counter. Both
+      now use `/`, per the standing rule. Still outstanding and deliberately
+      untouched: the `d0.00 · r4` spec readouts inside the `/lab` demo
+      mockups, and a Premier Friends Club caption that **quotes** the real
+      site's fixture formatting — changing that one would misquote the source.
+    - Four smaller gaps from the same read were fixed just before this: CQAP
+      had joined the leadership tier without a `roleSummary`, so its card on
+      `/leadership` rendered the title twice and no description; that page's
+      grid still assumed three cards; the footer had no space after its
+      slash; and `visualisation` had survived the spelling sweep twice on the
+      Beacon → Carelon page.
+
+    **A verification note.** Checking the live site for `It's an alpha` found
+    nothing while the line was plainly there: the apostrophe renders as
+    `&#x27;`. Grep the HTML for an entity-safe fragment, or unescape first.

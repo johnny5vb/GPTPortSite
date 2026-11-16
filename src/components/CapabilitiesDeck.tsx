@@ -240,7 +240,7 @@ function DeckChrome({
             <span className="text-bone">{String(i + 1).padStart(2, "0")}</span>
             <span className="text-mute mx-1.5">/</span>
             <span>{String(total).padStart(2, "0")}</span>
-            <span className="mx-3 text-mute">·</span>
+            <span className="mx-3 text-mute">/</span>
             <span>{SLIDES[i]?.title}</span>
           </div>
           <div className="hidden md:flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-mute pointer-events-auto">
@@ -315,7 +315,7 @@ function Cover() {
             </em>
           </h1>
           <p className="mt-10 font-mono text-[12px] uppercase tracking-[0.28em] text-mute">
-            John Carman / Creative Director
+            John Carman / Creative direction
           </p>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-bone/85">
             Virginia Beach / Remote / Select hybrid
@@ -359,7 +359,7 @@ function Hello() {
             />
           </motion.div>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-            John Carman / Creative Director &amp; Brand Operations Leader
+            John Carman / Creative direction &amp; brand operations
           </p>
         </div>
         <div className="col-span-12 md:col-span-8 space-y-5">

@@ -62,9 +62,11 @@ const personLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "John Carman",
-  jobTitle: "Creative Director",
+  // No jobTitle. Structured data is the most literal place to assert a
+  // present-tense title, and the one most likely to be read back at John;
+  // the description carries the discipline instead.
   description:
-    "Creative director and brand & creative-operations leader. Twenty years across brand, creative direction, creative operations, and design systems, most of it inside large healthcare organizations.",
+    "Brand, creative direction, creative operations, and design systems. Twenty years across enterprise brand and campaign work, most of it inside large healthcare organizations.",
   knowsAbout: [
     "Creative direction",
     "Brand strategy and identity systems",
