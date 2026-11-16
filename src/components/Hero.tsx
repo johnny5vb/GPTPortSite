@@ -46,17 +46,16 @@ import { SCALE } from "@/lib/career";
  * third of the row to repeat itself while the enterprise scale figures sat
  * two pages deep on /leadership. Figures come from `src/lib/career.ts`.
  */
-/* One operation, read left to right: the team, what it ships, who it serves.
-   The old row was 20 years / 10 designers / ~1,500 assets, which measured
-   time, people and objects: three units with no relationship, so it read as
-   a list of figures rather than an argument. The years also repeated the
-   subline directly above it. These three share a subject and escalate in
-   scope, and the middle one is the headline's own claim ("the systems that
-   make it repeatable") stated as a number. */
+/* Read left to right: the team, what it ships each month, what it shipped at
+   peak. All three are work John and his teams produced, which is the point:
+   an earlier version closed on the employer's headcount (~85,000), and that
+   is the company's scale rather than his. The years came out because the
+   subline directly above already opens with them. The middle figure is the
+   headline's own claim ("the systems that make it repeatable") as a number. */
 const PROOF = [
   { value: String(SCALE.studioTeam), label: SCALE.studioTeamLabel },
   { value: SCALE.throughput, label: SCALE.throughputLabel },
-  { value: SCALE.orgSize, label: SCALE.orgLabel },
+  { value: SCALE.assets, label: SCALE.assetsLabel },
 ];
 
 export default function Hero() {
