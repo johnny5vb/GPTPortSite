@@ -234,7 +234,7 @@ export const SCALE = {
   assets: "~1,500",
   assetsLabel: "Brand assets migrated in an enterprise rebrand",
   orgSize: "~85,000",
-  orgLabel: "Person organization",
+  orgLabel: "Person organization served",
   /** Managed solo, as Creative Director at Beacon. The cleanest people claim. */
   team: 4,
   teamLabel: "Designers led as a creative lead",
@@ -249,7 +249,7 @@ export const SCALE = {
   enterpriseYears: 15,
   enterpriseYearsLabel: "Years in enterprise healthcare",
   throughput: "~75",
-  throughputLabel: "Projects a month through the workflow the team rebuilt",
+  throughputLabel: "Projects a month",
 } as const;
 
 /**
