@@ -20,18 +20,19 @@ export const PROFILE = {
 
   /** Ordered, most-senior-first. The site leads with roles[0]. */
   titles: [
-    "Creative direction",
+    "Creative Director",
     "Brand & creative operations",
     "AI-enabled creative strategy",
   ],
 
-  /** Short label used in tight spaces (nav, footer, meta). Names the
-   *  discipline, never a present-tense personal title: John holds Design
-   *  Manager today and held Creative Director through 2023, so asserting
-   *  either here would date the site or contradict the resume. */
-  titleShort: "Creative direction",
+  /** THE RULE (#81): title form wherever it labels John, discipline form
+   *  ("creative direction") only inside a list of practice areas, which is
+   *  the hero chip, the footer line and the "// what I do" strip. The title
+   *  is anchored to Carman Creative, where he is Founder & Creative
+   *  Director, true and present tense. Elevance stays Design Manager. */
+  titleShort: "Creative Director",
   /** Two-line positioning used in the footer + résumé header. */
-  titleLine: "Creative direction / Brand and creative operations",
+  titleLine: "Creative Director / Brand and creative operations",
 
   yearsExperience: 20,
 

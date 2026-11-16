@@ -315,7 +315,7 @@ function Cover() {
             </em>
           </h1>
           <p className="mt-10 font-mono text-[12px] uppercase tracking-[0.28em] text-mute">
-            John Carman / Creative direction
+            John Carman / Creative Director
           </p>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.28em] text-bone/85">
             Virginia Beach / Remote / Select hybrid
@@ -359,7 +359,7 @@ function Hello() {
             />
           </motion.div>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-            John Carman / Creative direction &amp; brand operations
+            John Carman / Creative Director &amp; Brand Operations
           </p>
         </div>
         <div className="col-span-12 md:col-span-8 space-y-5">

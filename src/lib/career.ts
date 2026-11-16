@@ -181,7 +181,12 @@ export const EMPLOYERS: Employer[] = [
     range: "2006 – Present",
     stints: [
       {
-        title: "Founder",
+        // The anchor for the "Creative Director" positioning used across the
+        // site. It is true, present tense, and his own practice: he directs
+        // the creative on every engagement here. Elevance stays Design
+        // Manager and Beacon stays Creative Director (2018-2023), so nothing
+        // on the site contradicts the LinkedIn record.
+        title: "Founder & Creative Director",
         range: "2006 – Present",
         current: true,
         summary:

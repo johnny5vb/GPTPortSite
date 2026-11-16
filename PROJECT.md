@@ -21,13 +21,22 @@ replaced. `/leadership` and `/resume` remain, linked and neutral in tone, as
 career context for anyone who goes looking. The positioning hierarchy is
 still: (1) Creative Director, (2) Brand & Creative Operations Leader,
 (3) AI-Enabled Creative Strategist — AI is a supporting advantage, never the
-lead. **Since #80 the site names these as disciplines, not as present-tense
-personal titles**: `PROFILE.titleShort` is "Creative direction", not
-"Creative Director". John holds Design Manager today and held Creative
-Director through 2023, so asserting either in chrome would either date the
-site or contradict the résumé. "Creative Director" survives only where it is
-historically true — the Beacon stint, the case-study roles, the résumé's
-"Held" row.
+lead.
+
+**The "Creative Director" rule (#81), settled — do not re-litigate.** The
+term states the *level* John works at, and it is anchored to a current,
+verifiable role: he is **Founder & Creative Director of Carman Creative**
+(2006 — Present), where he directs the creative on every engagement. So:
+**title form ("Creative Director") wherever it labels John** — the hero
+kicker, the résumé header and summary, the About opening, `/leadership`,
+the capabilities credits, the OG image, `PROFILE.titleShort` / `titleLine`,
+and the Person JSON-LD `jobTitle`. **Discipline form ("creative direction")
+only inside a list of practice areas** — the hero chip, the footer line and
+the "// what I do" strip, which the owner specifically worded that way.
+The employment history is untouched and exact: **Elevance is Design
+Manager**, Beacon is Creative Director (2018 — 2023). Nothing on the site
+contradicts the LinkedIn record, because the title points at his own
+practice rather than at an employer.
 
 The product is a single-page narrative on `/` plus deeper subpages: a
 **Leadership** page (`/leadership`), a print-friendly **Résumé** (`/resume`),
@@ -405,10 +414,9 @@ fresh.
   employment-first rule — see change #41.)
 - **Do not** lead with "AI Strategist." AI is the third descriptor, a
   supporting advantage — never the headline.
-- **Do not** assert a present-tense personal title in chrome, metadata or
-  structured data (#80). Name the discipline. The Person JSON-LD carries
-  **no `jobTitle`** for this reason; an earlier pass (#65) kept
-  `jobTitle: "Creative Director"` and that decision is reversed.
+- **Do not** attach "Creative Director" to **Elevance**, and do not strip it
+  from the site either (#81). It is anchored to Carman Creative, where it is
+  current and true. See the rule above the stack for which form goes where.
 - **Do not** publish unverified metrics as facts. Gate them behind visible
   `TODO: Confirm` placeholders (muted italic) until John confirms them.
 - **Do not** ship `john@carmancreative.com` until the mailbox is provisioned —
@@ -2014,3 +2022,30 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     **A verification note.** Checking the live site for `It's an alpha` found
     nothing while the line was plainly there: the apostrophe renders as
     `&#x27;`. Grep the HTML for an entity-safe fragment, or unescape first.
+
+81. **"Creative Director" restored, and given something true to point at.**
+    #80 stripped the term from every present-tense position. That was an
+    over-correction, and the owner said why: the term states the **level** he
+    works at, and he does not want to read as a graphic designer when the
+    work — his own, his clients', and his past enterprise role — is creative
+    direction.
+    - **The fix was an anchor, not a hedge.** The Carman Creative stint is
+      now **"Founder & Creative Director" (2006 — Present)**. He founded the
+      practice and directs the creative on Colony, Friends Rehab, Special
+      Forces Trust and Spike's, so the title is current, verifiable and his
+      own. #80's reasoning ("asserting it contradicts the résumé") was only
+      true while the term floated free; attached to Elevance it would be
+      wrong, attached to his own practice it is simply accurate.
+    - **One rule, applied everywhere** (the owner asked for consistency):
+      title form where it labels him, discipline form inside a list of
+      practice areas. The three discipline strips are the hero chip, the
+      footer line and the "// what I do" strip — the ones he reworded
+      himself. Everything else carries the title, including the Person
+      JSON-LD `jobTitle`, restored after #80 removed it.
+    - **The employment history did not move and must not.** Elevance is
+      **Design Manager**; Beacon is Creative Director (2018 — 2023). The
+      separation is the whole point: a reader cross-referencing LinkedIn
+      finds the titles matching exactly, and the Creative Director claim
+      pointing at a company John owns.
+    - Also kept from #80: the `·` separator stays gone from the résumé tools
+      list and the deck's slide counter.

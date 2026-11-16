@@ -108,7 +108,7 @@ export default function ResumePage() {
             screen checks first: people led and scale operated at. */}
         <Section title="Summary">
           <p className="text-bone/85 leading-relaxed">
-            Creative direction and creative operations, with{" "}
+            Creative Director and creative-operations leader with{" "}
             {PROFILE.yearsExperience} years turning complex goals into clear,
             useful, and distinctive creative work, most of it inside enterprise
             healthcare. Led the creative transition through an enterprise
