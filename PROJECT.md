@@ -2075,9 +2075,12 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       so they follow the #81 rule automatically instead of drifting. The
       slide-02 credit had read "Creative Director & Brand Operations", a
       third variant of the title that existed nowhere else.
-    - **Left alone, because it is an editorial call and not a stray phrase:**
-      slide 10, "How to work with me", with Project / Retainer / Fractional
-      CD tiers. A capabilities deck is a document you hand to someone, so an
-      engagement slide is structural; but it is the one place on the site
-      that still offers services in the second person. Decide it deliberately
-      rather than letting it sit by default.
+    - **Slide 10, "How to work with me", was cut** at the owner's call. It
+      offered Project / Retainer / Fractional CD tiers with "Best for"
+      framing, and it was the last place on the site selling services in the
+      second person. The `Engagement()` component is deleted outright rather
+      than left unimported, the `SLIDES` index lost its entry, and Get In
+      Touch renumbered 11 to 10. The counter reads `SLIDES.length`, so
+      nothing else needed touching. **The deck is now ten slides and
+      describes the work without offering terms for it** — the same posture
+      the rest of the site took in #41.

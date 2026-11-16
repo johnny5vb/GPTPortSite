@@ -30,8 +30,7 @@ const SLIDES = [
   { id: "atelier", num: "07", title: "Atelier" },
   { id: "work", num: "08", title: "Selected Work" },
   { id: "process", num: "09", title: "Process" },
-  { id: "engagement", num: "10", title: "Engagement" },
-  { id: "contact", num: "11", title: "Get In Touch" },
+  { id: "contact", num: "10", title: "Get In Touch" },
 ];
 
 export default function CapabilitiesDeck() {
@@ -106,7 +105,6 @@ export default function CapabilitiesDeck() {
         <Atelier />
         <Work />
         <Process />
-        <Engagement />
         <Contact />
       </div>
 
@@ -835,75 +833,9 @@ function Process() {
   );
 }
 
-function Engagement() {
-  const tiers = [
-    {
-      label: "Project",
-      tagline: "A defined scope, shipped",
-      detail:
-        "Best for: launches, identity refreshes, single-channel campaigns. Fixed scope, clear timeline, weekly check-ins.",
-      duration: "4, 12 weeks",
-    },
-    {
-      label: "Retainer",
-      tagline: "Steady creative direction",
-      detail:
-        "Best for: scaling teams, ongoing brand work, multi-channel programs. Monthly engagement, embedded in the team.",
-      duration: "3, 12 months",
-    },
-    {
-      label: "Fractional CD",
-      tagline: "Senior eye, part-time",
-      detail:
-        "Best for: startups without a full-time CD, or teams needing a strategic upgrade. Two days a week.",
-      duration: "6, 18 months",
-    },
-  ];
-  return (
-    <Slide id="engagement" num="10" label="Engagement">
-      <h2 className="font-display text-[clamp(2.2rem,5.4vw,4.4rem)] leading-[1.05] tracking-[-0.04em] text-bone mb-10">
-        How to <em className="font-display-wonk text-green">work with me.</em>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-line border border-line rounded-lg overflow-hidden">
-        {tiers.map((t, i) => (
-          <div
-            key={t.label}
-            className={`bg-ink p-6 md:p-8 flex flex-col gap-4 ${
-              i === 1 ? "border-y-2 border-green/40" : ""
-            }`}
-          >
-            <div className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-mute">
-                / 0{i + 1}
-              </span>
-              {i === 1 && (
-                <span className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-green">
-                  most common
-                </span>
-              )}
-            </div>
-            <h3 className="font-display text-2xl md:text-3xl leading-[1.05] tracking-[-0.03em] text-bone">
-              {t.label}
-            </h3>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-green">
-              {t.tagline}
-            </p>
-            <p className="text-bone/80 leading-relaxed text-sm flex-1">
-              {t.detail}
-            </p>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/85 border-t border-line pt-3">
-              {t.duration}
-            </p>
-          </div>
-        ))}
-      </div>
-    </Slide>
-  );
-}
-
 function Contact() {
   return (
-    <Slide id="contact" num="11" label="Get In Touch">
+    <Slide id="contact" num="10" label="Get In Touch">
       <div className="grid grid-cols-12 gap-6 md:gap-10 items-center">
         <div className="col-span-12 md:col-span-7">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-6">
