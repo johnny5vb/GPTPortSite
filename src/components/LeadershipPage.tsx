@@ -15,7 +15,7 @@ const EXPERIENCE = [
   "Manager of Creative Services, Beacon Health Options: team, budget, vendors, standards",
   "Co-manager of a ten-person studio production team",
   "Led a five-person design team as Creative Director",
-  "Hiring, onboarding, and developing designers",
+  "Hiring, onboarding, and developing designers, five hired across those teams",
   "Managing teams at both ends of the scale, solo and shared",
   "Liaison between the creative team and leadership",
   "Executive and cross-functional stakeholder collaboration",
@@ -66,6 +66,8 @@ const PROOF = [
   `Migrated ${SCALE.assets} brand assets across an ${SCALE.orgSize}-employee organization`,
   "Built the Marketing Bench creative-support model so sales and field teams could produce on-brand materials without waiting on a designer, launched March 2023",
   `Part of the team that rebuilt Workfront intake, review, and approval across ${SCALE.throughput} projects a month`,
+  "Grew the Beacon creative team from one person to five",
+  "Mentored an intern into a full-time junior designer, now a senior designer at the company twelve years on",
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
 ];
