@@ -15,8 +15,9 @@ const SLIDES = [
   { id: "hello", num: "02", title: "Hello" },
   { id: "services", num: "03", title: "Services" },
   { id: "work", num: "04", title: "Selected Work" },
-  { id: "process", num: "05", title: "Process" },
-  { id: "contact", num: "06", title: "Get In Touch" },
+  { id: "cqap", num: "05", title: "CQAP" },
+  { id: "process", num: "06", title: "Process" },
+  { id: "contact", num: "07", title: "Get In Touch" },
 ];
 
 export default function CapabilitiesDeck() {
@@ -86,6 +87,7 @@ export default function CapabilitiesDeck() {
         <Hello />
         <Services />
         <Work />
+        <Cqap />
         <Process />
         <Contact />
       </div>
@@ -475,6 +477,73 @@ function Work() {
   );
 }
 
+function Cqap() {
+  // Every claim here is lifted from the case study in projects.ts rather than
+  // written for the deck, so the two cannot drift. The alpha line stays: the
+  // tool has no pilot data and the deck must not imply otherwise.
+  const held = [
+    ["Humans decide.", "A reviewer accepts, edits or dismisses every finding."],
+    ["Evidence, always.", "Each finding returns with the rule it cites."],
+    ["Memory is the product.", "A decision is saved for the next review."],
+  ];
+  return (
+    <Slide id="cqap" num="05" label="CQAP">
+      <div className="grid grid-cols-12 gap-6 md:gap-10 items-center flex-1">
+        <div className="col-span-12 md:col-span-7">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-line bg-ink-2">
+            <Image
+              src="/work/cqap/04-review-findings-demo.jpg"
+              alt="CQAP, the review workspace: findings placed on the proof and written up on the right"
+              fill
+              quality={90}
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="object-cover object-left-top"
+            />
+          </div>
+        </div>
+        <div className="col-span-12 md:col-span-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green">
+            // Built, not pitched
+          </p>
+          <h2 className="mt-4 font-display text-[clamp(2rem,4.4vw,3.6rem)] leading-[1.04] tracking-[-0.04em] text-bone">
+            Review once.{" "}
+            <em className="font-display-wonk text-green">
+              Reuse the decision.
+            </em>
+          </h2>
+          <p className="mt-5 text-bone/85 leading-relaxed">
+            CQAP checks a piece against a library of brand and production
+            standards and returns each finding with the rule it cites.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {held.map(([t, b]) => (
+              <li key={t} className="flex items-start gap-3">
+                <span className="text-green mt-1.5 shrink-0">↳</span>
+                <span className="leading-relaxed">
+                  <span className="text-bone">{t}</span>{" "}
+                  <span className="text-mute">{b}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-mute-2 leading-relaxed">
+            Alpha. Built with ChatGPT and Claude, running on Vercel. Used in my
+            own review work, not yet piloted with a wider team.
+          </p>
+          <Link
+            href="/work/cqap"
+            data-cursor="open case"
+            className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/80 hover:text-green border border-line rounded-full px-5 py-3 transition-colors"
+          >
+            Read the case study
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
+    </Slide>
+  );
+}
+
 function Process() {
   const principles = [
     {
@@ -499,7 +568,7 @@ function Process() {
     },
   ];
   return (
-    <Slide id="process" num="05" label="Process">
+    <Slide id="process" num="06" label="Process">
       <h2 className="font-display text-[clamp(2.2rem,5.4vw,4.4rem)] leading-[1.05] tracking-[-0.04em] text-bone mb-10">
         Four <em className="font-display-wonk text-green">principles.</em>
       </h2>
@@ -522,7 +591,7 @@ function Process() {
 
 function Contact() {
   return (
-    <Slide id="contact" num="06" label="Get In Touch">
+    <Slide id="contact" num="07" label="Get In Touch">
       <div className="grid grid-cols-12 gap-6 md:gap-10 items-center">
         <div className="col-span-12 md:col-span-7">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-green mb-6">
