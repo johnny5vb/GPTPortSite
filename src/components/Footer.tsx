@@ -33,8 +33,8 @@ export default function Footer() {
               </div>
               <div className="mt-1 font-mono uppercase tracking-[0.18em] text-mute">
                 Creative direction{" "}
-                <span className="text-green">/</span> Brand &amp; creative
-                operations
+                <span className="text-green">/</span>{" "}
+                Brand &amp; creative operations
               </div>
               <div className="mt-2 text-mute-2 font-sans normal-case tracking-normal">
                 {PROFILE.location.base}

@@ -187,7 +187,9 @@ export default function LeadershipPage() {
       >
         <div
           className={`grid grid-cols-1 gap-4 md:gap-6 ${
-            LEADERSHIP_PROJECTS.length >= 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"
+            LEADERSHIP_PROJECTS.length % 3 === 0
+              ? "sm:grid-cols-3"
+              : "sm:grid-cols-2"
           }`}
         >
           {LEADERSHIP_PROJECTS.map((p) => (

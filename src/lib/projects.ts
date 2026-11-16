@@ -313,10 +313,10 @@ export const PROJECTS: Project[] = [
           aspect: "1.807 / 1",
           image: {
             src: "/work/beacon-carelon-transformation/cbg-toolkit.jpg",
-            alt: "Carelon brand guidelines, the brand toolkit: logo, supergraphic, typography, color, photography, iconography, data visualisation and illustration",
+            alt: "Carelon brand guidelines, the brand toolkit: logo, supergraphic, typography, color, photography, iconography, data visualization and illustration",
           },
           caption:
-            "Eight elements in the toolkit, logo, supergraphic, type, color, photography, iconography, data visualisation, illustration. Every one of them had a Beacon equivalent to retire, and a template to rebuild.",
+            "Eight elements in the toolkit, logo, supergraphic, type, color, photography, iconography, data visualization, illustration. Every one of them had a Beacon equivalent to retire, and a template to rebuild.",
         },
         {
           kind: "pair",
@@ -1673,6 +1673,10 @@ export const PROJECTS: Project[] = [
     ],
     palette: ["#f8f9fb", "#1b2a4a", "#2563eb", "#ffffff"],
     display: "CQAP",
+    // The leadership card renders roleSummary; without it the card showed the
+    // title twice and no description. Same line the home row carries.
+    roleSummary:
+      "Built a review tool where every finding cites the rule behind it and each decision is saved for the next review.",
     cover: "/work/cqap/cover-demo.jpg",
     coverAspect: "4 / 3",
     gallery: [],
