@@ -171,6 +171,7 @@ export const EMPLOYERS: Employer[] = [
           "Joined ValueOptions producing brand, campaign, print, and member-facing work, and stayed through the 2014 merger that created Beacon Health Options.",
         bullets: [
           "Design and production across brand, campaign, and member communications for a national behavioral health organization.",
+          "Worked through the ValueOptions to Beacon merger, the first of several brand transitions at this company.",
         ],
       },
     ],
