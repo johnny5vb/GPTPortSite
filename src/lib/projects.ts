@@ -1631,7 +1631,7 @@ export const PROJECTS: Project[] = [
           labelA: "The creative",
           labelB: "On the screen",
           caption:
-            "The creative up close, one statistic, one face, one direct ask: talk about it. And the same frame on the screen, with the hashtags and the Beacon mark carrying it into the room.",
+            "The creative up close, one statistic, one face, one direct ask: talk about it. And the same frame on the screen, with the hashtags and the Beacon mark carrying it into the room. Source: National Institute of Mental Health and SAMHSA. The creative carries the figure published when the campaign ran. NIMH now reports more than 1 in 5 U.S. adults, about 23.1 percent.",
         },
       ],
     },
