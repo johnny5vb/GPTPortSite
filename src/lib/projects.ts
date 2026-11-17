@@ -301,12 +301,12 @@ export const PROJECTS: Project[] = [
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-type.jpg",
-            alt: "Carelon brand guidelines, how we use typography: Elevance Sans across headline, intro, body and callout",
+            alt: "Carelon brand guidelines, how we use typography: one family across headline, intro, body and callout",
           },
           labelA: "Before, Proxima Nova and Utopia",
-          labelB: "After, Elevance Sans",
+          labelB: "After, a single proprietary family",
           caption:
-            "Type. Beacon paired a sans for headlines with a serif for reading; Carelon set everything in one proprietary family, Elevance Sans, in sentence case. Paragraph styles across ~1,500 documents were rebuilt to that hierarchy.",
+            "Type. Beacon paired a sans for headlines with a serif for reading; Carelon set everything in one proprietary family, in sentence case. Paragraph styles across ~1,500 documents were rebuilt to that hierarchy.",
         },
         {
           kind: "full",
