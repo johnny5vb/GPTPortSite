@@ -444,9 +444,11 @@ fresh.
   changes.
 - **Do not** write an em dash in visible copy (#79). Date ranges use an en
   dash with single spaces (`2023 – Present`); in sentences use a comma,
-  period, colon or parentheses. Code comments are exempt. The one live
-  exception is a verbatim testimonial — a quote keeps the speaker's own
-  punctuation, because altering it misquotes a real person.
+  period, colon or parentheses. Code comments are exempt. **There is no
+  longer a testimonial exception** (#86): the owner asked for the one
+  remaining em dash, in the Brenda W. quote, to become a comma, so the rule
+  is now absolute. Any future change to a published quote is still his call
+  to make and not one to make on his behalf.
 - **Do not** use British spellings in visible copy. US spelling throughout
   (organization, color, catalog). Comments are exempt.
 - **Do not** show real client work inside a CQAP screenshot (#79). The
@@ -2139,5 +2141,61 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
       a BI dashboard for metrics and analytics, more self-service for sales).
     - The rebrand team of about 20 stands (roughly ten designers plus writers,
       project managers and others). LinkedIn now says so too.
-    - Work page: CQAP leads the featured leadership work, and the Systems &
-      side projects shelf sits above the independent work.
+    - Work page: the Systems & side projects shelf sits above the independent
+      work. CQAP briefly led the featured leadership band too; **that was
+      reverted in #86** because the sort fought the numbering.
+
+86. **A copy and confidentiality pass, and three bugs it turned up.** Worked
+    from a written list, on a branch, then merged.
+    - **CQAP is self-initiated and says so.** Its bullet moved off the
+      Elevance job and onto Carman Creative, worded as built on John's own
+      time to support the reviews he was running there and designed to work
+      at any organization. The `/leadership` band heading went from "Programs
+      led start to finish." to **"Programs led, and tools built."**, and the
+      card carries a **Self-initiated** badge driven off `client`, so any
+      future self-initiated entry gets it automatically. "our standards
+      library" lost the "our" everywhere.
+    - **Beacon team wording settled:** a five-person creative team, four
+      designers and creatives reporting. `SCALE.team` stays 4. The case
+      study's Team field reads "Scaled to about 20 (a core team of 5, plus
+      freelancers)".
+    - **"deliverables" and "1,500+" are gone**; the Beacon case says assets
+      and about 1,500. Also honour to honor, greys to grays, visualising to
+      visualizing, maths to math, and friends' names on Premier Friends Club
+      cut to first name and last initial.
+    - **The Stamp Out Stigma statistic is sourced.** NIMH and SAMHSA, worded
+      as published when the campaign ran: the creative shows 43.8 million,
+      which was the figure then, while NIMH now reports about 23.1 percent.
+      Citing today's number against a 2018 piece would have contradicted the
+      billboard in the image directly above it.
+
+    **Three bugs, none of them in the list.**
+    1. **The footer shipped no year.** It came from `useState("")` plus an
+       effect, so the prerendered HTML read "© John Carman" and only filled
+       in after hydration: a no-JS visitor and any crawler saw the gap. The
+       previous wording had the same hole. Computed at render now.
+    2. **The leadership band had two orders.** A sort hoisted CQAP to the
+       front of `LEADERSHIP_PROJECTS` while `getAdjacentProjects` read
+       `projectsByTier` (file order), so the cards rendered **L04, L01, L02,
+       L03** and disagreed with their own prev/next links. The sort is gone.
+       **If a card ever needs to lead, move it in the array** so both readers
+       see the same order.
+    3. Checking a term by `grep` on the *source* is not the same as checking
+       the render. The card order above looked right in `projects.ts` and was
+       wrong on the page.
+
+    **On showing a former employer's material, decided by looking rather than
+    by category.** An initial pass flagged all ten Marketing Bench screens as
+    internal tooling and proposed pulling them. Opening them showed that was
+    wrong: the configurator is a branded ordering portal customising a
+    member-facing flyer with every client field empty, and SalesHub is a
+    library of sell sheets and capability sheets, all externally distributed
+    material. **Showing a platform you built is showing your work.** Two
+    strings did come out, by painting over them and saving under new
+    filenames: three named third-party vendors in the configurable-files
+    table, and an internal job code in the configurator breadcrumb. The
+    proprietary typeface is no longer named anywhere; Beacon's retail faces
+    stay named, since those are publicly licensed. The Beacon guideline pages
+    stay: a public brand's public identity.
+    **The rule: judge the artifact by what is legible in it, not by where it
+    lived.**
