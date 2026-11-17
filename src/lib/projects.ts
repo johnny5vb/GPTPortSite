@@ -465,7 +465,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "1.321 / 1",
           image: {
-            src: "/work/creative-operations-marketing-bench/cb-configurator-flyer-b.jpg",
+            src: "/work/creative-operations-marketing-bench/cb-configurator-flyer-c.jpg",
             alt: "Configuring a member-facing toolkit flyer, profile, co-branding, client logo and contact fields on the right, live preview on the left",
           },
           caption:
@@ -491,7 +491,7 @@ export const PROJECTS: Project[] = [
           kind: "full",
           aspect: "1.963 / 1",
           image: {
-            src: "/work/creative-operations-marketing-bench/cb-configurable-table.jpg",
+            src: "/work/creative-operations-marketing-bench/cb-configurable-table-v2.jpg",
             alt: "What files are configurable, a table of file types with a yes/no column and the fields each one exposes",
           },
           caption:
