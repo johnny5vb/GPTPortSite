@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import CCMark from "./CCMark";
 import { PROFILE } from "@/lib/profile";
 
@@ -16,9 +15,10 @@ const NAV = [
 ];
 
 export default function Footer() {
-  const [year, setYear] = useState<string>("");
-
-  useEffect(() => setYear(new Date().getFullYear().toString()), []);
+  // Computed at render, not in an effect. The effect version left the year
+  // out of the server HTML entirely, so the prerendered page, a no-JS
+  // visitor and any crawler all read "© John Carman" with no year.
+  const year = new Date().getFullYear();
 
   return (
     <footer className="relative rule-top overflow-hidden">
