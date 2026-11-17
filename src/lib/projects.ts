@@ -2080,11 +2080,11 @@ export function projectsByTier(tier: ProjectTier): Project[] {
   return PUBLISHED_PROJECTS.filter((p) => tierOf(p) === tier);
 }
 
-/** CQAP leads: the AI-enabled work is the strongest current proof, so it sits
- *  first; the rest keep their file order. */
-export const LEADERSHIP_PROJECTS = [...projectsByTier("leadership")].sort(
-  (a, b) => Number(b.slug === "cqap") - Number(a.slug === "cqap"),
-);
+/** File order, which is L01 to L04. A sort once hoisted CQAP to the front,
+ *  but `getAdjacentProjects` reads `projectsByTier` (file order), so the
+ *  cards and the prev/next links disagreed and the numbers rendered L04,
+ *  L01, L02, L03. One order, defined in one place. */
+export const LEADERSHIP_PROJECTS = projectsByTier("leadership");
 export const INDEPENDENT_PROJECTS = projectsByTier("independent");
 export const SYSTEMS_PROJECTS = projectsByTier("systems");
 export const SECONDARY_PROJECTS = projectsByTier("secondary");
