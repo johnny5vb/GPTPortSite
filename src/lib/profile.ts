@@ -60,13 +60,19 @@ export const PROFILE = {
   },
 
   /**
-   * Résumé. No PDF is committed yet, so the site points at the on-page,
-   * print-friendly résumé at /resume.
-   * TODO: Add public/john-carman-resume.pdf and set `resumePdf`, then point
-   * the download buttons at it.
+   * Résumé. `resumeHref` stays the on-page version: it is the one that reads
+   * well on a phone and carries live links.
+   *
+   * `resumePdf` is a real file now, printed from /resume itself so the two can
+   * never say different things. Regenerate it whenever career.ts changes:
+   *   npm run build && npx next start -p 8899
+   *   chrome --headless --no-pdf-header-footer \
+   *     --print-to-pdf=public/john-carman-resume.pdf http://localhost:8899/resume
+   * A recruiter or an applicant-tracking system that asks for a file wants a
+   * file, not a URL and an instruction to press Cmd-P.
    */
   resumeHref: "/resume",
-  resumePdf: null as string | null,
+  resumePdf: "/john-carman-resume.pdf" as string | null,
 } as const;
 
 export type Profile = typeof PROFILE;

@@ -26,10 +26,15 @@ const STRENGTHS = [
   "Digital experience",
   "Campaign development",
   "AI-enabled workflow",
+  "AI-enabled video development",
 ];
 
 const STACK = [
   "Adobe Creative Cloud",
+  // Named separately from Creative Cloud on purpose. Video is a format
+  // people screen for explicitly, and a reader scanning for it will not
+  // expand "Adobe Creative Cloud" into the applications inside it.
+  "Premiere Pro",
   "Figma",
   "Workfront",
   "Claude",
@@ -141,7 +146,8 @@ export default function About() {
                 I&apos;m a creative leader across brand, creative direction, and creative operations, with{" "}
                 {PROFILE.yearsExperience} years helping organizations turn
                 complex goals into clear, useful, and distinctive creative work.
-                Most of that career has been inside enterprise healthcare,
+                Most of that career has been inside enterprise healthcare, and{" "}
+                {SCALE.behavioralYears} of those years in behavioral health,
                 where the brand is large, the stakeholders are many, and the
                 work has to hold up under compliance, scale, and scrutiny.
               </p>

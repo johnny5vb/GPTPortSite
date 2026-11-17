@@ -207,7 +207,7 @@ export const EMPLOYERS: Employer[] = [
         range: "2006 – Present",
         current: true,
         summary:
-          "Independent practice: brand, identity, web, campaign, and creative-systems work for small organizations and nonprofits.",
+          "Independent practice: brand, identity, web, campaign, and creative-systems work for small organizations and nonprofits. More than 30 clients since 2006, across retail, hospitality, real estate, legal, financial services, education, and nonprofits.",
         bullets: [
           "Selected work includes Friends Rehabilitation Program, Colony Coffee, Special Forces Trust, and Spike's K9 Fund.",
           // Built on his own time, so it belongs here and not under Elevance.
@@ -267,8 +267,25 @@ export const SCALE = {
   yearsLabel: "Years in creative & brand",
   enterpriseYears: 15,
   enterpriseYearsLabel: "Years in enterprise healthcare",
+  /**
+   * Behavioral health specifically: ValueOptions 2010, through Beacon Health
+   * Options, to the Carelon Behavioral Health rebrand in 2023. A narrower and
+   * far more specific claim than `enterpriseYears`, and the one that matters
+   * to anyone in that field, so it gets its own figure rather than hiding
+   * inside "enterprise healthcare". Stamp Out Stigma sits inside this span.
+   */
+  behavioralYears: 13,
+  behavioralYearsLabel: "Years in behavioral health",
   throughput: "~75",
   throughputLabel: "Projects a month",
+  /**
+   * Carman Creative's client count since 2006, John's own conservative figure.
+   * It is the breadth claim the case studies cannot make on their own: the
+   * site shows six engagements, so a reader would otherwise size the practice
+   * at six. Published with a "+" and no sector counted twice.
+   */
+  clients: "30+",
+  clientsLabel: "Clients served through Carman Creative",
 } as const;
 
 /**

@@ -33,7 +33,11 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      // `no-print` rather than relying on a bare `header` rule in the print
+      // stylesheet: /resume uses a semantic <header> for the résumé's own
+      // masthead, and a blanket rule was hiding the name and contact block
+      // from every printed copy.
+      className={`no-print fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled ? "py-3" : "py-5"
       }`}
     >

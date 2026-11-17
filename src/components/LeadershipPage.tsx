@@ -36,6 +36,7 @@ const CAN_LEAD = [
   "Brand systems",
   "Content design",
   "AI-enabled creative workflows",
+  "AI-enabled video development",
 ];
 
 const PRINCIPLES = [
@@ -62,14 +63,21 @@ const PRINCIPLES = [
 const PROOF = [
   "Led creative through an enterprise acquisition and rebrand: Beacon Health Options → Carelon / Elevance Health (2022–2023)",
   // A tilde and a plus together hedge the same number twice; SCALE already
-  // carries the leading "~", so the "+" comes off.
-  `Migrated ${SCALE.assets} brand assets across an ${SCALE.orgSize}-employee organization`,
+  // carries the leading "~", so the "+" comes off. "Rebranded", not
+  // "migrated", and no longer paired with the ~85,000 headcount: the asset
+  // count is the claim, and hanging it on an org size John is leaving made it
+  // read as borrowed scale. See change #85.
+  `Rebranded ${SCALE.assets} brand assets from Beacon to Carelon`,
   "Built the Marketing Bench creative-support model so sales and field teams could produce on-brand materials without waiting on a designer, launched March 2023",
   `Part of the team that rebuilt Workfront intake, review, and approval across ${SCALE.throughput} projects a month`,
   "Grew the Beacon creative team from one person to five, with four designers and creatives reporting to me",
   "Mentored an intern into a full-time junior designer, now a senior designer at the company twelve years on",
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
+  // Breadth, which the case studies cannot show on their own: the site
+  // publishes six Carman Creative engagements, so without this line a reader
+  // sizes twenty years of independent practice at six clients.
+  `${SCALE.clients} clients through Carman Creative since 2006, across retail, hospitality, real estate, legal, financial services, education, and nonprofits`,
 ];
 
 const isTodo = (s: string) => s.trim().toUpperCase().startsWith("TODO");

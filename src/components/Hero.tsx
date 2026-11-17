@@ -205,8 +205,9 @@ export default function Hero() {
             >
               {PROFILE.yearsExperience} years of brand, campaign, digital and
               creative-operations work, most of it inside enterprise
-              healthcare, where the scale, the stakeholders, and the scrutiny
-              are highest.
+              healthcare and {SCALE.behavioralYears} of those years in
+              behavioral health, where the scale, the stakeholders, and the
+              scrutiny are highest.
             </motion.p>
           </div>
 

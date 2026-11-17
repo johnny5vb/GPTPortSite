@@ -1,9 +1,9 @@
 "use client";
 
 import { Link } from "next-view-transitions";
-import { ArrowUpLeft, Printer } from "lucide-react";
+import { ArrowUpLeft, Printer, Download } from "lucide-react";
 import { PROFILE } from "@/lib/profile";
-import { EMPLOYERS, EDUCATION } from "@/lib/career";
+import { EMPLOYERS, EDUCATION, SCALE } from "@/lib/career";
 
 /**
  * On-page résumé. Content is grounded in verified facts and derives from
@@ -59,14 +59,31 @@ export default function ResumePage() {
           <ArrowUpLeft className="h-3.5 w-3.5" />
           back to home
         </Link>
-        <button
-          onClick={() => window.print()}
-          data-cursor="print"
-          className="inline-flex items-center gap-2 rounded-full bg-green text-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
-        >
-          Print / Save as PDF
-          <Printer className="h-3.5 w-3.5" />
-        </button>
+        {/* Two paths on purpose. The PDF is the one a recruiter or an
+            applicant-tracking system actually wants: a file, attachable
+            without being asked to press Cmd-P first. Print stays for anyone
+            who would rather make their own. */}
+        <div className="flex items-center gap-3">
+          {PROFILE.resumePdf && (
+            <a
+              href={PROFILE.resumePdf}
+              download
+              data-cursor="download"
+              className="inline-flex items-center gap-2 rounded-full bg-green text-ink px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:bg-green-bright transition-colors"
+            >
+              Download PDF
+              <Download className="h-3.5 w-3.5" />
+            </a>
+          )}
+          <button
+            onClick={() => window.print()}
+            data-cursor="print"
+            className="inline-flex items-center gap-2 rounded-full border border-line text-bone/80 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] hover:border-green hover:text-green transition-colors"
+          >
+            Print
+            <Printer className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
 
       <article className="resume-doc mx-auto max-w-[52rem]">
@@ -111,7 +128,8 @@ export default function ResumePage() {
             Creative leader across brand, creative direction, and creative operations, with{" "}
             {PROFILE.yearsExperience} years turning complex goals into clear,
             useful, and distinctive creative work, most of it inside enterprise
-            healthcare. Led the creative transition through an enterprise
+            healthcare and {SCALE.behavioralYears} of those years in behavioral
+            health. Led the creative transition through an enterprise
             acquisition and rebrand, co-manage a ten-person studio production
             team after running a five-person creative team (four designers
             and creatives reporting to me) as Creative Director,

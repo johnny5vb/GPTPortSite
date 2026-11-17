@@ -364,12 +364,28 @@ html.lenis body {
    Strip site chrome and force a clean light document so the /resume page
    prints as a proper one/two-page résumé. */
 @media print {
-  /* Hide global chrome + decorative overlays */
-  header,
+  /* Hide global chrome + decorative overlays.
+     NOT a bare `header` rule: /resume is the one page built to be printed,
+     and its masthead (name, title, email, carmancreative.com) is a semantic
+     <header>. Hiding every header printed the résumé with no name on it.
+     The site nav carries `.no-print` instead.
+
+     `.skip-link` is parked off-screen with a transform, which print layout
+     does not honour, so it landed as a green pill in the middle of the
+     printed page. */
   aside,
+  .skip-link,
   .no-print,
   .noise-fixed::before {
     display: none !important;
+  }
+
+  /* The root sets `color-scheme: dark`, which makes the browser paint the
+     print canvas its own dark default (#121212). That showed as a black
+     frame in the page margins, outside the white body box, on every printed
+     or saved-as-PDF copy. The page is white in print; say so. */
+  :root {
+    color-scheme: light;
   }
 
   html,
