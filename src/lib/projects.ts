@@ -190,7 +190,7 @@ export const PROJECTS: Project[] = [
         { label: "Role", value: "Creative Director, Creative Services" },
         { label: "Focus", value: "Brand transition, governance, quality control" },
         { label: "Scale", value: "~1,500 assets rebranded, Beacon to Carelon" },
-        { label: "Team", value: "Scaled to ~20 (3 in-house + freelance)" },
+        { label: "Team", value: "Scaled to about 20 (a core team of 5, plus freelancers)" },
         { label: "Timeline", value: "2022 – 2023 (9-month rebrand; Beacon became Carelon Behavioral Health March 1, 2023)" },
       ],
       challenge:
@@ -203,23 +203,23 @@ export const PROJECTS: Project[] = [
         "Translated the enterprise brand system into Carelon Behavioral Health's own guidelines and application rules",
         "Built the design system first, then the templates the work would run on",
         "Directed vendors and partners; rebuilt merchandise and the print-on-demand platform end to end",
-        "Managed 3 in-house designers, a video production artist, and a team of project managers and writers",
-        "Ran a near-daily cadence and a live progress dashboard to keep hundreds of deliverables on track",
+        "Four designers and creatives reported to me (including a video production artist), working alongside project managers and writers",
+        "Ran a near-daily cadence and a live progress dashboard to keep hundreds of assets on track",
       ],
       team: [
-        "3 in-house designers",
-        "A video production artist",
-        "Project managers and writers",
+        "Four designers and creatives reporting to me",
+        "A video production artist on that team",
+        "Project managers and writers alongside",
         "Creative Circle freelancers, the team scaled to ~20 people across the year",
       ],
       decisions: [
         {
           title: "Build the system before the assets",
-          body: "The enterprise handed us the identity, logo, palette, type, supergraphics, imagery rules. Rather than migrating piece by piece, I built the Behavioral Health design system and templates on top of it first, then produced against them. Slower to start, but it made ~1,500+ deliverables repeatable and consistent as volume spiked.",
+          body: "The enterprise handed us the identity, logo, palette, type, supergraphics, imagery rules. Rather than migrating piece by piece, I built the Behavioral Health design system and templates on top of it first, then produced against them. Slower to start, but it made about 1,500 assets repeatable and consistent as volume spiked.",
         },
         {
           title: "Batch the work to make it finishable",
-          body: "Hundreds of deliverables are overwhelming as one list, so we batched them by type of piece, client, and product and worked through them in waves, steady, measurable progress instead of drift.",
+          body: "Hundreds of assets are overwhelming as one list, so we batched them by type of piece, client, and product and worked through them in waves, steady, measurable progress instead of drift.",
         },
         {
           title: "Scale the team, and keep it in sync",
@@ -232,7 +232,7 @@ export const PROJECTS: Project[] = [
         "The full rebrand delivered in ~9 months with a team that scaled to ~20",
       ],
       reflection:
-        "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of deliverables look overwhelming on paper, but with the right system and the right people, you chip away at it, and finishing something at that scale is its own reward. This is the project that changed how I lead.",
+        "What I'd change: stand up a single shared project-management system from day one so everyone stays on the same page and can see progress. What it taught me: hundreds of assets look overwhelming on paper, but with the right system and the right people, you chip away at it, and finishing something at that scale is its own reward. This is the project that changed how I lead.",
       work: [
         {
           kind: "full",
@@ -242,7 +242,7 @@ export const PROJECTS: Project[] = [
             alt: "Carelon brand guidelines, the brand at a glance: web, social, print, presentations and app, all on one system",
           },
           caption:
-            "Where it all had to land. The enterprise system across every surface at once, web, social, print, presentations, app, and the target that 1,500+ Beacon pieces had to be carried into.",
+            "Where it all had to land. The enterprise system across every surface at once, web, social, print, presentations, app, and the target that about 1,500 Beacon assets had to be carried into.",
         },
         {
           kind: "pair",
@@ -274,7 +274,7 @@ export const PROJECTS: Project[] = [
           labelA: "Before, sizing and clearance",
           labelB: "After, sizing and clear space",
           caption:
-            "The rules that matter at volume. Both systems set clear space from the symbol itself and minimum sizes in print and on screen, the constraints every one of our templates had to honour without anyone checking.",
+            "The rules that matter at volume. Both systems set clear space from the symbol itself and minimum sizes in print and on screen, the constraints every one of our templates had to honor without anyone checking.",
         },
         {
           kind: "pair",
@@ -285,12 +285,12 @@ export const PROJECTS: Project[] = [
           },
           b: {
             src: "/work/beacon-carelon-transformation/cbg-color.jpg",
-            alt: "Carelon brand guidelines, the color palette: primary purple and white, with a secondary palette of purples, cyans and greys",
+            alt: "Carelon brand guidelines, the color palette: primary purple and white, with a secondary palette of purples, cyans and grays",
           },
           labelA: "Before, Beacon color",
           labelB: "After, Carelon color",
           caption:
-            "Color. Beacon ran on a calming blue with green, beige and lemon for warmth; Carelon leads with purple and builds out through cyan, turquoise and a set of greys. Every template's swatches, tints and chart colors had to move with it.",
+            "Color. Beacon ran on a calming blue with green, beige and lemon for warmth; Carelon leads with purple and builds out through cyan, turquoise and a set of grays. Every template's swatches, tints and chart colors had to move with it.",
         },
         {
           kind: "pair",
@@ -1596,8 +1596,8 @@ export const PROJECTS: Project[] = [
           body: "Placing an honest mental-health message in one of the most public spaces on earth challenges the stigma directly, in front of everyone.",
         },
         {
-          title: "Lead with human emotion",
-          body: "Real stories and grounded imagery over statistics, normalizing the conversation by making it human, not clinical.",
+          title: "One clear statistic, carried by real stories and grounded imagery",
+          body: "A single number does the work of establishing scale, then real stories and grounded imagery carry it, normalizing the conversation by making it human rather than clinical.",
         },
       ],
       outcomes: [
@@ -1650,7 +1650,7 @@ export const PROJECTS: Project[] = [
       "A Creative Quality Assurance Platform: a working prototype for reviewing creative against brand standards, where every completed review leaves behind a decision the next one can reuse.",
     oneLiner: "Review once. Decide once. Reuse the decision.",
     brief:
-      "Creative review at enterprise scale is where quality is won or lost, and it is almost always run out of inboxes and memory. CQAP is a prototype for the alternative: a structured review that captures the reasoning, not just the verdict. CQAP checks a piece against a library of brand and production standards and returns each finding with the rule it cites. A reviewer accepts, edits or dismisses every finding, and those decisions are saved for the next review.",
+      "Creative review at enterprise scale is where quality is won or lost, and it is almost always run out of inboxes and memory. CQAP is a prototype for the alternative: a structured review that captures the reasoning, not just the verdict. CQAP checks a piece against a library of brand and production standards and returns each finding with the rule it cites. A reviewer accepts, edits or dismisses every finding, and those decisions are saved for the next review. I built it on my own time to support the creative reviews I was running at Elevance, and designed it to work at any organization.",
     process: [
       {
         label: "Structured intake",
@@ -1852,15 +1852,15 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Follow the league's own format",
-          body: "Points, ranked exactly as the Premier League table ranks them. Nobody has to learn a scoring system, and no one can argue with the maths.",
+          body: "Points, ranked exactly as the Premier League table ranks them. Nobody has to learn a scoring system, and no one can argue with the math.",
         },
         {
           title: "Name the friend, not just the club",
-          body: "Fixtures read 'Thomas Evan Hicks · Liverpool vs Eric Moreno · Fulham'. When two friends' clubs meet it becomes a derby with a name attached, which is the part everyone actually cares about.",
+          body: "Fixtures read 'Thomas H. / Liverpool vs Eric M. / Fulham'. When two friends' clubs meet it becomes a derby with a name attached, which is the part everyone actually cares about.",
         },
         {
           title: "Handle the asymmetry honestly",
-          body: "One friend's club plays 46 games to everyone else's 38. Rather than hide it or fudge the maths, the site says so on the front page and shows points per game alongside the total.",
+          body: "One friend's club plays 46 games to everyone else's 38. Rather than hide it or fudge the math, the site says so on the front page and shows points per game alongside the total.",
         },
       ],
       outcomes: [
@@ -1953,7 +1953,7 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "Right tool, right job",
-        body: "Thinking routes to ChatGPT, building to Claude, research to Gemini, visualising to Midjourney. The tool stack is stated on the front page rather than assumed.",
+        body: "Thinking routes to ChatGPT, building to Claude, research to Gemini, visualizing to Midjourney. The tool stack is stated on the front page rather than assumed.",
       },
       {
         label: "Written to be used",
@@ -1996,7 +1996,7 @@ export const PROJECTS: Project[] = [
         },
         {
           title: "Name the model on every card",
-          body: "Thinking, building, research and visualising go to different models because they genuinely differ. Putting the routing on the card removes the most common failure, a good prompt run somewhere it was never built for.",
+          body: "Thinking, building, research and visualizing go to different models because they genuinely differ. Putting the routing on the card removes the most common failure, a good prompt run somewhere it was never built for.",
         },
         {
           title: "Say what it returns",

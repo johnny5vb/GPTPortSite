@@ -51,7 +51,7 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "John’s work is always fresh and engaging. He designs thoughtful brand work and continually refines it—and he’s also a great videographer. If you want to work with a true professional, give him a call.",
+      "John’s work is always fresh and engaging. He designs thoughtful brand work and continually refines it, and he’s also a great videographer. If you want to work with a true professional, give him a call.",
     author: "Brenda W.",
     role: "Senior Communications Specialist",
     verified: true,

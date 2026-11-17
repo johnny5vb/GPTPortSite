@@ -504,7 +504,7 @@ export default function DesignSystemLab() {
                       style={{ color: theme.mute }}
                       className="font-mono text-[10px] uppercase tracking-[0.2em]"
                     >
-                      Adoption
+                      Adoption <span style={{ opacity: 0.7 }}>/ sample data</span>
                     </span>
                     <span
                       style={{ color: theme.accent, fontFamily: theme.display }}
@@ -933,6 +933,12 @@ function SampleDashboard({ theme, radius, density }: SampleProps) {
           }}
         >
           $48.2k
+        </div>
+        <div
+          style={{ color: theme.mute }}
+          className="font-mono text-[9px] uppercase tracking-[0.18em]"
+        >
+          Sample data
         </div>
 
         {/* Bar chart */}

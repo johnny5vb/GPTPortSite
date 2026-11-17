@@ -40,7 +40,7 @@ export default function Footer() {
                 {PROFILE.location.base}
               </div>
               <div className="mt-3 text-mute font-mono uppercase tracking-[0.18em] text-[10px]">
-                © {year} / All rights reserved
+                © {year} John Carman. All rights reserved.
               </div>
             </div>
           </div>

@@ -113,7 +113,8 @@ export default function ResumePage() {
             useful, and distinctive creative work, most of it inside enterprise
             healthcare. Led the creative transition through an enterprise
             acquisition and rebrand, co-manage a ten-person studio production
-            team after running a four-person design team as Creative Director,
+            team after running a five-person creative team (four designers
+            and creatives reporting to me) as Creative Director,
             direct outside agencies and production vendors, and build the
             systems, templates, and governance that let quality scale with
             volume.

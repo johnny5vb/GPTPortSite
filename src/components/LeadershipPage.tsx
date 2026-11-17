@@ -14,7 +14,7 @@ const EXPERIENCE = [
   "Creative Director, Beacon Health Options, held through the 2023 Carelon transition",
   "Manager of Creative Services, Beacon Health Options: team, budget, vendors, standards",
   "Co-manager of a ten-person studio production team",
-  "Led a four-person design team as Creative Director",
+  "Led a five-person creative team as Creative Director, four designers and creatives reporting to me",
   "Hiring, onboarding, and developing designers, five hired across those teams",
   "Managing teams at both ends of the scale, solo and shared",
   "Liaison between the creative team and leadership",
@@ -66,7 +66,7 @@ const PROOF = [
   `Migrated ${SCALE.assets} brand assets across an ${SCALE.orgSize}-employee organization`,
   "Built the Marketing Bench creative-support model so sales and field teams could produce on-brand materials without waiting on a designer, launched March 2023",
   `Part of the team that rebuilt Workfront intake, review, and approval across ${SCALE.throughput} projects a month`,
-  "Grew the Beacon creative team from one person to five, four designers reporting to me",
+  "Grew the Beacon creative team from one person to five, with four designers and creatives reporting to me",
   "Mentored an intern into a full-time junior designer, now a senior designer at the company twelve years on",
   "Owned creative review and quality control across high-volume output",
   "Built templates, systems, and governance so quality scaled with the team",
@@ -189,7 +189,7 @@ export default function LeadershipPage() {
           changes as examples are curated in and out. */}
       <Block
         eyebrow="Featured leadership work"
-        heading="Programs led start to finish."
+        heading="Programs led, and tools built."
       >
         <div
           className={`grid grid-cols-1 gap-4 md:gap-6 ${
@@ -225,6 +225,11 @@ export default function LeadershipPage() {
                   </span>
                 </div>
               </div>
+              {p.client.startsWith("Self-initiated") ? (
+                <span className="mb-2 inline-flex self-start rounded-full border border-line-2 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-mute-2">
+                  Self-initiated
+                </span>
+              ) : null}
               <h3 className="font-display text-xl leading-[1.1] tracking-[-0.03em] text-bone group-hover:text-green transition-colors">
                 {p.title}
               </h3>

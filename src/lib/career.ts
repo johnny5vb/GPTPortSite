@@ -74,7 +74,7 @@ export const EMPLOYERS: Employer[] = [
         // SCOPE — corrected, do not narrow it again. Three things had been
         // wrong here and each one understated or overstated the job:
         //   1. The team is the STUDIO PRODUCTION team, and John CO-manages
-        //      ten designers. He is not its sole manager. The four-person
+        //      ten designers. He is not its sole manager. The five-person
         //      team he ran on his own is the Beacon/Creative Director stint
         //      below — do not move that number up here.
         //   2. The remit is ALL Elevance Health lines of business. It is not
@@ -104,7 +104,6 @@ export const EMPLOYERS: Employer[] = [
           "Part of the team that rebuilt Workfront intake, review, and approval around ~75 projects a month. The group took the process apart around the pain points it named rather than patching the existing instance.",
           "Own creative review and quality control, and build the templates, governance, and systems that hold quality and accuracy steady as volume grows.",
           "Lead the push for AI in the studio's creative work, moving generative tools into live production and carrying that across the wider creative organization.",
-          "Built CQAP, a creative QA tool that checks work against our standards library and returns each finding with the rule it cites.",
         ],
       },
     ],
@@ -128,7 +127,7 @@ export const EMPLOYERS: Employer[] = [
         bullets: [
           // Four, managed solo. This is the outright-management number and it
           // belongs to this stint, not to the co-managed studio team above.
-          "Led a four-person design team and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
+          "Led a five-person creative team (four designers and creatives reporting to me) and directed Sway, the external design agency, setting the creative standard across brand, campaign, and digital work.",
           "Led the Beacon to Carelon rebrand team, which grew to about 20 people (in-house designers, a video artist, project managers, writers and freelancers) and rebuilt about 1,500 assets.",
           "Led the design and managed the rebuild of Marketing Bench from the Beacon version into the Carelon-branded self-serve print-on-demand platform, adding functionality, a BI dashboard for metrics and analytics, and more self-service for sales and field teams. Launched March 2023.",
           "Led Stamp Out Stigma, a national mental-health awareness campaign, including out-of-home placement in Times Square.",
@@ -193,6 +192,8 @@ export const EMPLOYERS: Employer[] = [
           "Independent practice: brand, identity, web, campaign, and creative-systems work for small organizations and nonprofits.",
         bullets: [
           "Selected work includes Friends Rehabilitation Program, Colony Coffee, Special Forces Trust, and Spike's K9 Fund.",
+          // Built on his own time, so it belongs here and not under Elevance.
+          "Built CQAP on my own time, a creative QA prototype designed to support the creative reviews I ran at Elevance and to work at any organization. It checks work against a brand standards library and cites the rule behind each finding.",
         ],
       },
     ],

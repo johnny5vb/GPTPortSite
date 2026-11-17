@@ -17,7 +17,7 @@ const SUMMARY = [
   { label: "Held", value: "Creative Director, Beacon Health Options (2018 – 2023)" },
   { label: "Before", value: "Graphic Designer, then Manager of Creative Services, ValueOptions → Beacon" },
   { label: "Experience", value: `${PROFILE.yearsExperience}+ years, mostly enterprise healthcare` },
-  { label: "Team", value: `Co-manage ${SCALE.studioTeam} designers; led ${SCALE.team} as Creative Director` },
+  { label: "Team", value: `Co-manage ${SCALE.studioTeam} designers; led a five-person creative team at Beacon (${SCALE.team} reporting)` },
   { label: "Scale", value: `${SCALE.assets} assets rebranded, Beacon to Carelon` },
   { label: "Leads", value: "Brand, campaigns, creative operations, teams" },
   { label: "Systems", value: "Workfront, brand governance, vendor management, AI-enabled workflow" },

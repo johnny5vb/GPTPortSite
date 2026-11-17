@@ -78,7 +78,7 @@ export default function LabPage() {
       {/* Page header */}
       <section className="container-x pt-28 md:pt-32 pb-12">
         <Link
-          href="/#talks-back"
+          href="/"
           data-cursor="back"
           className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-mute hover:text-green transition-colors"
         >
