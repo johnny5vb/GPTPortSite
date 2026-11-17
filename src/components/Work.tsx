@@ -57,12 +57,15 @@ export default function Work() {
           Leadership overview <ArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-      {/* Column count follows the number of published flagships, so adding or
-          pulling one doesn't leave a hole in the row: four lays out 2x2, three
-          goes 3-up, anything else falls back to two. */}
+      {/* Column count follows the number of published flagships: three or six
+          go 3-up, four lays out 2x2, and five or more go 3-up as well. Five is
+          the awkward case, no column count divides it, and 3-up leaves one gap
+          on the second row, which reads far better than 2-up leaving a single
+          half-width card stranded on a third row. The card plate is a fixed
+          4/3, so widening the odd card to span is not an option. */}
       <div
         className={`grid grid-cols-1 gap-4 md:gap-6 ${
-          LEADERSHIP_PROJECTS.length % 3 === 0
+          LEADERSHIP_PROJECTS.length % 3 === 0 || LEADERSHIP_PROJECTS.length >= 5
             ? "md:grid-cols-3"
             : "md:grid-cols-2"
         }`}

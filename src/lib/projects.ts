@@ -534,7 +534,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "workfront-workflow-transformation",
-    num: "L05",
+    num: "L06",
     tier: "leadership",
     flagship: true,
     // Pulled from the site while a stronger third leadership example is
@@ -1778,6 +1778,174 @@ export const PROJECTS: Project[] = [
           },
           caption:
             "A decision becomes a record. The review is saved as a memory, its accepted findings keep their evidence, and the workspace updates.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "pathway-dental",
+    num: "L05",
+    tier: "leadership",
+    title: "Pathway",
+    client: "Self-initiated prototype",
+    year: "2026",
+    category: "Product / Clinical Education",
+    duration: "In progress, working prototype",
+    tags: ["Product", "Design Systems", "AI-Enabled Workflow"],
+    blurb:
+      "A treatment-planning app for dental students: sixteen gated steps from pre-flight screening to faculty sign-off, with Claude generating the practice patients and a logic check reading the plan against itself.",
+    oneLiner: "Plan the case. Check the logic. Get it cleared.",
+    brief:
+      "A dental student planning a case has to hold the whole thing in their head at once: the medical history, six radiographs, the findings, the sequence, what the patient can afford, and whether any of it contradicts anything else. Faculty catch the contradictions, but only at review, which is late. Pathway is a prototype for doing it in order: a sixteen-step run that will not let a student plan before faculty clear the screening, checks the finished plan against itself before it becomes a fee sheet, and gives faculty a rubric to grade against. Claude writes the practice patients, so a student can run a complex case on a Tuesday instead of waiting for one to walk into the clinic.",
+    process: [
+      {
+        label: "Gated, not freeform",
+        body: "Six screening steps, faculty clearance, five planning phases, then the logic check. Each step locks until the one before it is complete, so the sequence is the teaching.",
+      },
+      {
+        label: "Synthetic patients on demand",
+        body: "Claude writes a case file, history, medications, chart and findings, that agrees with the clinic's six sample radiographs. Case level and emphasis are selectable, so practice can target a weakness.",
+      },
+      {
+        label: "The plan argues with itself",
+        body: "A rule layer reads the finished plan for contradictions, a direct restoration on an endodontically treated molar, disease control scheduled after definitive treatment, before it can go to faculty.",
+      },
+    ],
+    services: [
+      "Product design",
+      "Design systems",
+      "Clinical workflow",
+      "Front-end",
+    ],
+    palette: ["#eff3f6", "#0d1b2a", "#0e6b7d", "#ffffff"],
+    display: "PATHWAY",
+    roleSummary:
+      "Built a gated treatment-planning app where Claude writes the practice patients and the plan is checked against itself before faculty see it.",
+    // A crop into the odontogram rather than the whole screen shrunk onto a
+    // plate (see change #46): a full UI screenshot turns to mush at card
+    // size, and the chart is the one shape here that still reads at 366px.
+    // Deliberately not reusing a work-moment image, so the hero and the first
+    // moment are different pictures.
+    cover: "/work/pathway-dental/cover.jpg",
+    coverAspect: "4 / 3",
+    gallery: [],
+    caseStudy: {
+      overview: [
+        { label: "Project", value: "Self-initiated prototype" },
+        { label: "Role", value: "Concept, product design, build" },
+        { label: "Year", value: "2026" },
+        {
+          label: "Status",
+          value: "Working prototype, not piloted in a clinic",
+        },
+        { label: "Stack", value: "Built with Claude. Responsive for desktop, iPad and phone." },
+      ],
+      challenge:
+        "Treatment planning is where a dental student either learns to think in sequence or learns to guess. The information arrives all at once and in no particular order, and the usual tools, a paper checklist and whatever the clinic's record system does, impose none. Mistakes surface at faculty review, after the student has already committed to a plan, which is the most expensive moment to find them and the worst moment to learn from them.",
+      mandate:
+        "Prototype a planning tool that enforces the order, catches contradictions before faculty do, and can generate as many practice cases as a student wants to run.",
+      context:
+        "Built on my own time. Every patient in it is synthetic: the records carry SYN- identifiers, the cases are generated or authored for teaching, and the radiographs are the clinic's sample films. No real patient data is involved anywhere in the application or in these screens.",
+      role: [
+        "Framed the problem as sequence and clearance rather than record keeping",
+        "Designed the sixteen-step model, six screening steps, faculty clearance, five planning phases, logic check, fee sheet, approval",
+        "Designed the three roles, student, faculty and patient, each with its own view of the same case",
+        "Designed the odontogram with findings, existing and planned layers, and Universal and FDI numbering",
+        "Wrote the logic-check rules and the faculty rubric",
+        "Built the prototype, responsive from desktop down to a phone at the chair",
+      ],
+      team: ["Self-initiated, concept, design and build by John Carman"],
+      decisions: [
+        {
+          title: "Lock the steps",
+          body: "A student cannot open Phase 1 until faculty clear the screening. It would have been easier to let everything be editable at once, and it would have taught nothing, the order is the curriculum, so the interface enforces it rather than suggesting it.",
+        },
+        {
+          title: "Generate the patient, not the answer",
+          body: "Claude writes the case file, and faculty get a case key marked as a reference, not a verdict. An AI that grades the student would be a different and much worse product; this one just makes it possible to practise a complex case on demand.",
+        },
+        {
+          title: "Check the plan, not the student",
+          body: "The logic check flags contradictions in the plan and says why, citing the clinical reason. It never scores anyone. Grading belongs to the faculty rubric, where a person signs their name to it.",
+        },
+        {
+          title: "The patient sees the money",
+          body: "A patient view and a running estimate against the fee schedule sit alongside the clinical plan, phased across benefit years. Sequencing decisions have a cost to the patient, and hiding that from the student until the fee sheet teaches the wrong lesson.",
+        },
+      ],
+      outcomes: [
+        "A working prototype with the full sixteen-step loop: screening, faculty clearance, five planning phases, logic check, fee sheet with patient signature, faculty approval",
+        "Three role views, student, faculty and patient, over one case record, usable on desktop, iPad or a phone at the chair",
+        "A faculty rubric with a four-level scale and approve, modify or return, signed and timestamped",
+        "It's a prototype. No students or faculty have run a real session in it, so there is no adoption or outcome data to report.",
+      ],
+      reflection:
+        "I built this to see whether the thing I keep doing in creative operations, putting a decision in a sequence so the reasoning survives it, holds up in a field I have no training in. It mostly did. The piece that surprised me was the logic check: writing the rules forced the plan to be legible to software, which is a harder constraint than making it legible to a reviewer, and it made the rest of the interface simpler.",
+      work: [
+        {
+          // Not a `browser` moment: that kind renders an address-bar label,
+          // and this prototype has no public URL to put in it.
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/pathway-dental/01-start-session-desktop.png",
+            alt: "Pathway, Start a session: generate an AI practice patient, or resume a clinic patient",
+          },
+          caption:
+            "Where a session begins. A student generates a practice patient at a chosen case level and emphasis, or picks up a real clinic appointment, and the sequence is stated on the page so nobody has to learn it from a handout.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/pathway-dental/03-radiology-desktop.png",
+            alt: "Pathway, step 2: six radiographs on file, with the later steps locked",
+          },
+          caption:
+            "Step 2 of the screening. Six films on file, each read and recorded by the student, with every later step visibly locked until this one is done. One bitewing is flagged as past the usual twelve to twenty-four month window.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/pathway-dental/04-treatment-phase-desktop.png",
+            alt: "Pathway, Phase 4: the odontogram with findings, existing work and planned treatment layered on one chart",
+          },
+          caption:
+            "The odontogram carries three layers at once, what was found, what is already there, and what is planned, in Universal or FDI numbering. Selecting a tooth brings up its findings and the films that show them.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/pathway-dental/05-logic-check-desktop.png",
+            alt: "Pathway, the final logic check: the plan read against itself, with one open contradiction",
+          },
+          caption:
+            "The plan checked against itself before it becomes a fee sheet. One open flag here: a direct restoration on an endodontically treated molar, with the clinical reason given rather than just a warning. Beside it, the patient's share phased across benefit years.",
+        },
+        {
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/pathway-dental/06-faculty-review-desktop.png",
+            alt: "Pathway, the faculty view: a queue of decisions and a rubric for the submitted plan",
+          },
+          caption:
+            "The faculty side. Clearances come first, because a student cannot plan until the screening is cleared, then submitted plans with a four-level rubric, a faculty-only case key, and approve, modify or return. The decision is signed and timestamped.",
+        },
+        {
+          // One composed image rather than a pair: the phone is a 0.54
+          // portrait and the iPad a 1.37 landscape, and a pair shares one
+          // frame ratio, so one of them would have floated in empty space.
+          kind: "full",
+          aspect: "16 / 10",
+          image: {
+            src: "/work/pathway-dental/chairside.jpg",
+            alt: "Pathway at the chair: the odontogram on an iPad beside the medical screening step on a phone",
+          },
+          caption:
+            "The same sixteen steps at the chair. The phone carries the screening one step at a time; the iPad gives the chart enough room to work on. Faculty clear and approve from their own device.",
         },
       ],
     },
