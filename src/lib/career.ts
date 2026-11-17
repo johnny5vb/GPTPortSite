@@ -90,8 +90,25 @@ export const EMPLOYERS: Employer[] = [
         title: "Design Manager",
         range: "2023 – Present",
         current: true,
+        // THE FIRST SENTENCE IS LOAD-BEARING — do not delete it as a
+        // "scope-narrowing opener". This entry is read FIRST on every
+        // surface (LinkedIn is reverse-chronological, and so is the résumé),
+        // so a reader meets "Design Manager" before they ever reach the
+        // Creative Director stint below it, and with nothing to explain the
+        // order it reads as a demotion. Naming the acquisition inside the
+        // current entry lets the reader resolve it on the spot.
+        //
+        // Note the difference from the version #75 removed: that one opened
+        // on "creative lead for Carelon Behavioral Health", which framed a
+        // whole-enterprise job as a behavioral-health specialty. This names
+        // the ACQUISITION and the PRIOR TITLE, then states the full remit in
+        // the next sentence. It adds history without narrowing scope.
+        //
+        // It is deliberately NOT an explanation of the title change. No
+        // "restructuring", no "the work did not shrink". Stating the fact
+        // argues the point; defending it concedes it.
         summary:
-          "On the Studio Production team at Elevance Health, the in-house studio serving all lines of business across an ~85,000-person enterprise, on point to produce a high volume of work accurately and on brand.",
+          "Came to Elevance Health through its acquisition of Beacon Health Options, where I was Creative Director. Now on the Studio Production team, the in-house studio serving all lines of business across an ~85,000-person enterprise, on point to produce a high volume of work accurately and on brand.",
         bullets: [
           "Co-manage a team of ten designers producing brand, campaign, and digital work across every Elevance Health line of business.",
           // CONFIRMED: the WebbMason relationship began while John was Manager
@@ -255,9 +272,19 @@ export const SCALE = {
 } as const;
 
 /**
- * The transition, stated once. Every surface that explains the title change
- * should use this wording or a close variant — the fact is verifiable, so the
- * phrasing should be consistent everywhere a reader might check it.
+ * The transition, stated once.
+ *
+ * DELIBERATELY RENDERED NOWHERE. Kept as the canonical phrasing if the facts
+ * are ever needed in conversation or a cover letter, but no surface should
+ * import it: explaining the Director → Manager change in the site's own voice
+ * draws attention to the re-level instead of the work, and a reader who is not
+ * already suspicious is handed a reason to be. The job this note used to do is
+ * now done by the Elevance stint's first sentence, which names the acquisition
+ * and the prior title as plain biography and lets the reader conclude for
+ * themselves. The dates already corroborate it: Creative Director ends March
+ * 2023 and Design Manager begins March 2023, the month Beacon became Carelon.
+ *
+ * If you are about to render this, read the Elevance stint comment first.
  */
 export const TRANSITION_NOTE =
   "Beacon Health Options became Carelon Behavioral Health inside Elevance Health in 2023, and I led the creative transition. The restructuring moved my title from Creative Director to Design Manager; the work did not shrink with it. I am on the Studio Production team at Elevance Health now, across all lines of business rather than one company.";
