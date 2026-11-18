@@ -2123,119 +2123,120 @@ export const PROJECTS: Project[] = [
     duration: "Ongoing",
     tags: ["AI Systems", "Creative Operations", "Product"],
     blurb:
-      "A working operating system for creative practice, 24 prompts organized by the four phases every project moves through, each routed to the model that actually handles it best.",
+      "A working operating system for creative practice: 72 prompts filed by the four phases every project moves through, from the first client email to the motion handoff, each routed to the model that handles it best.",
     oneLiner: "The method, made operational.",
     brief:
-      "Most prompt collections are a folder of clever one-offs. Carman OS is the opposite: a method first, a library second. Every project moves through Define, Explore, Build, Refine, and each prompt is filed against the phase it serves and the model best suited to run it.",
+      "Most prompt collections are a folder of clever one-offs. Carman OS is the opposite: a method first, a library second. Every project moves through Define, Explore, Build, Refine, and each prompt is filed against the stage it serves, the model best suited to run it, and the prompt that should come next.",
     process: [
       {
         label: "The four phases",
-        body: "Define, Explore, Build, Refine. The structure is the point. It puts a prompt in the hands of someone who knows which part of the problem they are in.",
+        body: "Define, Explore, Build, Refine, with ten shelves underneath: synthesis, ideation, execution, image, video, motion, critique, and the client, voice and portfolio work that happens any time. A Start here index finds the prompt by what just happened.",
       },
       {
         label: "Right tool, right job",
-        body: "Thinking routes to ChatGPT, building to Claude, research to Gemini, visualizing to Midjourney. The tool stack is stated on the front page rather than assumed.",
+        body: "Thinking routes to ChatGPT, building to Claude, research to Gemini, visualizing to Higgsfield. Image and video prompts are written in a chat model and pasted into the Higgsfield model they name.",
       },
       {
-        label: "Written to be used",
-        body: "Each card says what the prompt returns before you copy it, three stronger directions, a message hierarchy, a five-section case study, so the library is browsable by outcome.",
+        label: "Built to be plugged in",
+        body: "Set the project once, client, audience, goal, constraints and brand voice, and every prompt you copy carries it. Pasted material sits in labeled blocks at the top and the task comes last, the one format that works across all three models.",
       },
     ],
     services: ["Creative systems", "AI tooling", "Product design", "Front-end"],
-    palette: ["#080808", "#111111", "#1cb791", "#f5f3ef"],
+    palette: ["#0e1b2c", "#152740", "#f4c95d", "#e6eef6"],
     display: "CARMAN OS",
-    cover: "/work/carman-os/cover-v2.jpg",
+    cover: "/work/carman-os/cover-v3.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     externalUrl: "https://carmanos.netlify.app/",
     caseStudy: {
       overview: [
         { label: "Project", value: "Self-initiated" },
-        { label: "Role", value: "Concept, design, build" },
+        { label: "Role", value: "Concept, method, direction" },
         { label: "Year", value: "2026" },
         { label: "Scope", value: "Creative method, prompt library, web app" },
-        { label: "Library", value: "24 prompts across 8 categories" },
+        { label: "Library", value: "72 prompts on 10 shelves" },
       ],
       challenge:
         "Teams adopt AI one clever prompt at a time. What they end up with is a folder of tricks nobody else can use, no shared idea of when a prompt applies, no agreement on which model to point it at, and no way to tell a genuinely useful one from a novelty. The knowledge stays trapped with whoever wrote it.",
       mandate:
         "Turn a personal way of working into something structured enough to hand to someone else: a method that says where you are in a project, and a library filed against it.",
       context:
-        "Built on my own time, out of my own practice, the prompts are the ones I actually use for client work, portfolio writing, campaign development and critique.",
+        "Built on my own time, out of my own practice. The first version held the 24 prompts I reached for most. The second, in November 2026, audited those against the model makers' own prompting guides and recent research on AI ideation, then grew the library to cover a whole project, including video and motion graphics.",
       role: [
-        "Defined the four-phase model the whole system is organized around",
-        "Wrote and tested every prompt in the library",
+        "Defined the four-phase model and the ten shelves the library is organized around",
+        "Audited the original prompts against current prompting guidance and set the one format every prompt follows",
+        "Directed the expansion to 72 prompts, including image, video and motion graphics",
         "Assigned each prompt to the model that handles it best, and said so on the card",
-        "Designed and built the interface, including search, category filtering and copy-to-clipboard",
-        "Wrote the card copy so each prompt states its output before you use it",
+        "Directed the interface: saved project context, Start here, search, pins and preview",
       ],
-      team: ["Self-initiated, concept, writing, design and build by John Carman"],
+      team: ["Self-initiated. Concept, method and direction by John Carman; prompts and interface built with Claude"],
       decisions: [
         {
           title: "A method, not a folder",
-          body: "The four phases come first and the prompts hang off them. It means the library answers 'where am I in this project?' before it answers 'what should I type?' – which is the question that actually determines whether a prompt helps.",
+          body: "The four phases come first and the prompts hang off them. It means the library answers 'where am I in this project?' before it answers 'what should I type?', which is the question that actually determines whether a prompt helps. Start here goes one step further and answers 'what just happened?'",
         },
         {
           title: "Name the model on every card",
           body: "Thinking, building, research and visualizing go to different models because they genuinely differ. Putting the routing on the card removes the most common failure, a good prompt run somewhere it was never built for.",
         },
         {
-          title: "Say what it returns",
-          body: "Every card states its output up front: three territories with names and taglines, a message hierarchy with proof, a five-section case study in director voice. You choose by the shape of the result rather than by reading the prompt.",
+          title: "Set the project once",
+          body: "The client, audience, goal, constraints and brand voice are saved once and filled into every prompt you copy. Retyping context is where people cut corners, and a prompt without context is where generic output comes from.",
         },
         {
           title: "Prompts that push, not just produce",
-          body: "A whole category exists to make the work harder, Design Push asks for one uncomfortable direction, Final Critique returns the unsoftened senior review. AI is easiest to use as a shortcut to the safe answer, and the library deliberately resists that.",
+          body: "A whole shelf exists to make the work harder. Push past the safe idea names the obvious versions and rules them out; Senior review ranks problems by severity and is meant to run in a fresh chat, because a model reviewing its own work tends to approve it. And because the models converge on the same ideas, a Draw button brings in randomness from outside.",
         },
       ],
       outcomes: [
-        "24 prompts live across strategy, synthesis, portfolio, build, brand and campaign, client communication, critique and visual exploration",
-        "A four-phase model that makes the library teachable rather than personal",
-        "In everyday use in my own practice, the case-study and portfolio prompts wrote parts of this site",
+        "72 prompts live across ten shelves, from synthesizing a client thread to motion graphics handoff",
+        "A four-phase model and a Start here index that make the library teachable rather than personal",
+        "One format for every prompt, with the project context filled in automatically",
+        "In everyday use in my own practice; the case-study and portfolio prompts wrote parts of this site",
       ],
       reflection:
-        "The useful part was never the prompts. It was being forced to name the phases and admit which model I actually reach for and why. Writing that down turned a set of habits into something I can hand to another designer, and the parts that were hardest to write down turned out to be the parts that were vaguest in my own head.",
+        "The useful part was never the prompts. It was being forced to name the phases and admit which model I actually reach for and why. Writing that down turned a set of habits into something I can hand to another designer, and the parts that were hardest to write down turned out to be the parts that were vaguest in my own head. The second version taught the same lesson at a larger scale: the prompts only got better once each one had to say when to use it and what to run next.",
       work: [
         {
           kind: "browser",
           image: {
-            src: "/work/carman-os/home-v2.jpg",
-            alt: "Carman OS, the four-phase model and tool stack above the first prompt category",
+            src: "/work/carman-os/home-v3.jpg",
+            alt: "Carman OS, the four-phase method and model routing above the Start here index",
           },
           aspect: "1.618 / 1",
           url: "carmanos.netlify.app",
           caption:
-            "The front page leads with the method, not the library, four phases on the left, the tool stack on the right, and the first category underneath: define the direction before you design.",
+            "The front page still leads with the method. Underneath it, Start here finds the right prompt by what just happened: a new project, a long client thread, a pile of content, a call.",
         },
         {
           kind: "full",
           aspect: "1.21 / 1",
           image: {
-            src: "/work/carman-os/library-v2.jpg",
-            alt: "Carman OS, two prompt categories: generate options and distill clarity; position yourself at a director level",
+            src: "/work/carman-os/library-v3.jpg",
+            alt: "Carman OS, fifteen situations in the Start here index above the Synthesize shelf, with a project set and three pinned prompts",
           },
           caption:
-            "Cards are grouped by what you are trying to do. Each names its model, says what it returns, and copies in one click. Here, generating options, then positioning the work at a director level.",
+            "Fifteen situations, each pointing to the prompts to run in order. The rail groups the ten shelves under the four phases, and the project in the top bar is the context every copied prompt will carry.",
         },
         {
           kind: "full",
-          aspect: "0.837 / 1",
+          aspect: "0.91 / 1",
           image: {
-            src: "/work/carman-os/library-deep-v2.jpg",
-            alt: "Carman OS, the back half of the library: scalable ideas, clear communication and scope, pushing beyond safe work, high-end visual directions",
+            src: "/work/carman-os/library-deep-v3.jpg",
+            alt: "Carman OS, the Video and Motion shelves, with prompts routed from Claude or ChatGPT to Higgsfield",
           },
           caption:
-            "The back half of the library, scalable ideas, communicating clearly and protecting scope, pushing past safe work, and the Midjourney and signature-style builders for visual direction. Twenty-four prompts across the four phases.",
+            "Video and Motion are new in version two: scripts and shot lists, single and multi-shot prompts written for Higgsfield's models, then motion language, style frames, storyboards and kinetic type, through to After Effects expressions and a developer handoff spec.",
         },
         {
           kind: "full",
           aspect: "16 / 10",
           image: {
-            src: "/work/carman-os/preview-v2.jpg",
-            alt: "Carman OS, previewing a prompt in full before copying it",
+            src: "/work/carman-os/preview-v3.jpg",
+            alt: "Carman OS, previewing the Client thread decoder with the project context already filled in",
           },
           caption:
-            "Preview before you copy. The prompt is readable in full, the library is meant to be learned from, not just pasted out of.",
+            "Preview before you copy. The saved project fills in at the top, the highlighted brackets show where your material goes, and the task comes last, so the same prompt works in Claude, ChatGPT or Gemini.",
         },
       ],
     },

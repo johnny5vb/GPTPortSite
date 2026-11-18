@@ -2199,3 +2199,28 @@ session (`framer-motion`, `lenis`, `next-view-transitions` already present).
     stay: a public brand's public identity.
     **The rule: judge the artifact by what is legible in it, not by where it
     lived.**
+
+87. **Carman OS case study rewritten for version two (2026-11-18).** The
+    live tool (`carmanos.netlify.app`, source in `~/Developer/carman-os`) was
+    rebuilt: Cyanotype palette, 72 prompts on ten shelves under the four
+    phases, a Start here index, saved project context filled into every
+    copied prompt, and new Image, Video and Motion shelves routed to
+    Higgsfield. **Midjourney is gone from the tool and the case study** — the
+    owner no longer uses it. (About and Résumé still list it in their tool
+    stacks; left for the owner to decide.)
+    - Copy: blurb, brief, process, overview, role, team, decisions, outcomes,
+      reflection and every caption rewritten. **The team line is honest about
+      how v2 was made:** "Concept, method and direction by John Carman;
+      prompts and interface built with Claude." Role verbs moved from
+      "wrote / designed and built" to "defined / audited / directed".
+    - Palette swatches now the tool's own: `#0e1b2c #152740 #f4c95d #e6eef6`.
+    - Frames recaptured as `*-v3.jpg` (v2 files deleted) at 1440 CSS × 2,
+      from the live site, by driving headless Chrome over CDP directly — no
+      Playwright on this Mac. `home-v3` 1.618, `library-v3` 1.21 (Start here +
+      Synthesize, with a demo project and pins set), `library-deep-v3` 0.91
+      (Video + Motion, viewport height chosen so it ends on the last full card
+      row), `preview-v3` 16/10 (drawer with the project context filled in),
+      `cover-v3` 2400×1800. The demo project ("Summer reading push", "A city
+      library system") is placeholder data, not a client.
+    - **Gotcha:** `sips -c` crops from the centre whatever `--cropOffset`
+      says; to trim a frame, recapture at the right viewport height instead.
