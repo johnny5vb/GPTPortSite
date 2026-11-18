@@ -1821,12 +1821,16 @@ export const PROJECTS: Project[] = [
     display: "PATHWAY",
     roleSummary:
       "Built a gated treatment-planning app where Claude writes the practice patients and the plan is checked against itself before faculty see it.",
-    // A crop into the odontogram rather than the whole screen shrunk onto a
-    // plate (see change #46): a full UI screenshot turns to mush at card
-    // size, and the chart is the one shape here that still reads at 366px.
-    // Deliberately not reusing a work-moment image, so the hero and the first
-    // moment are different pictures.
-    cover: "/work/pathway-dental/cover.jpg",
+    // A crop into the 3D dentition rather than the whole screen shrunk onto a
+    // plate (see change #46): a full UI screenshot turns to mush at card size.
+    // This replaces a crop of the 2D odontogram, which put the same chart on
+    // the thumbnail AND in the work sequence. The rendered arch is the one
+    // shape here that survives 366px, and the Chart / 3D / List toggle stays
+    // legible in the crop, so the card says what it is. Source is the supplied
+    // detail export (1492px) trimmed to 4:3 and upscaled 2x in Photoshop with
+    // Preserve Details 2.0, per change #49: the flagship hero renders this at
+    // ~1013 CSS px, so it needs ~2030px to stay sharp at 2x.
+    cover: "/work/pathway-dental/cover-3d.jpg",
     coverAspect: "4 / 3",
     gallery: [],
     caseStudy: {
@@ -1850,7 +1854,7 @@ export const PROJECTS: Project[] = [
         "Framed the problem as sequence and clearance rather than record keeping",
         "Designed the sixteen-step model, six screening steps, faculty clearance, five planning phases, logic check, fee sheet, approval",
         "Designed the three roles, student, faculty and patient, each with its own view of the same case",
-        "Designed the odontogram with findings, existing and planned layers, and Universal and FDI numbering",
+        "Designed the dentition in two readings, a layered odontogram and a 3D model, both carrying findings, existing work and planned treatment, in Universal and FDI numbering",
         "Wrote the logic-check rules and the faculty rubric",
         "Built the prototype, responsive from desktop down to a phone at the chair",
       ],
@@ -1905,14 +1909,23 @@ export const PROJECTS: Project[] = [
             "Step 2 of the screening. Six films on file, each read and recorded by the student, with every later step visibly locked until this one is done. One bitewing is flagged as past the usual twelve to twenty-four month window.",
         },
         {
-          kind: "full",
+          // One case, two readings. Both screens are the same 2880x1800
+          // capture of Phase 4, so the halves share a frame ratio exactly and
+          // the pair reads as a toggle rather than as two unrelated pictures.
+          kind: "pair",
           aspect: "16 / 10",
-          image: {
+          a: {
             src: "/work/pathway-dental/04-treatment-phase-desktop.png",
-            alt: "Pathway, Phase 4: the odontogram with findings, existing work and planned treatment layered on one chart",
+            alt: "Pathway, Phase 4 in Chart view: the odontogram with findings, existing work and planned treatment layered on one chart",
           },
+          b: {
+            src: "/work/pathway-dental/04b-3d-model-desktop.png",
+            alt: "Pathway, Phase 4 in 3D view: the same case on a rendered dentition, each tooth pinned with its status",
+          },
+          labelA: "Chart",
+          labelB: "3D",
           caption:
-            "The odontogram carries three layers at once, what was found, what is already there, and what is planned, in Universal or FDI numbering. Selecting a tooth brings up its findings and the films that show them.",
+            "The same mouth, read two ways. The chart carries three layers at once, what was found, what is already there, and what is planned, in Universal or FDI numbering. The 3D view puts the same statuses on a rendered dentition, pinned per tooth and keyed by color, and turns to 3/4, front, maxillary, mandibular, right or left. A chart is faster to audit; the model is faster to understand, and it is the one a patient can follow. Selecting a tooth in either brings up its findings and the films that show them.",
         },
         {
           kind: "full",
